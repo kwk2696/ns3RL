@@ -4,7 +4,6 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <ctime> 
-#include <zmq.hpp>
 
 #include "ns3/core-module.h"
 #include "ns3/point-to-point-module.h"
@@ -12,6 +11,8 @@
 #include "ns3/applications-module.h"
 #include "ns3/traffic-control-module.h"
 #include "ns3/queue.h"
+
+#include "ns3/opengym-module.h"
 
 using namespace ns3;
 
@@ -242,9 +243,9 @@ int main (int argc, char ** argv)
 	/*----- ZMQ Connect -----*/
 	NS_LOG_INFO("ZMQ Connect");
 	//std::string connectAddr = "tcp://localhost:5050";
-//	zmq::context_t m_zmq_context (1);
-	//zmq::socket_t m_zmq_socket (m_zmq_context, ZMQ_REQ);
-	//zmq_connect ((void*)m_zmq_socket
+	Ptr<OpenGymInterface> openGymInterface;
+	openGymInterface->Init ();
+
 	/*-----	Create Nodes -----*/
 	NS_LOG_INFO("Create Nodes.");
 	NodeContainer n0, n1, n2;

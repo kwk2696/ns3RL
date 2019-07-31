@@ -19,7 +19,7 @@ OpenGymInterface::GetTypeId (void) {
 }
 
 OpenGymInterface::OpenGymInterface (uint32_t port)
-	:m_port(port) {
+	:m_port(port), m_context (1), m_socket (m_context, ZMQ_REQ) {
 }
 
 OpenGymInterface::~OpenGymInterface () {
@@ -27,19 +27,16 @@ OpenGymInterface::~OpenGymInterface () {
 
 bool
 OpenGymInterface::Init () {
-	std::cout << "check0" << std::endl;
 
-	std::string connectAddr = "tcp://localhost:5555";
-	
-	std::cout << "check1" <<std::endl;
-	
-	void *context = (void*)zmq_ctx_new ();
-	void *requester = zmq_socket (context, ZMQ_REQ);
-	int retval  = zmq_connect(requester, "tcp://locakhost:5555");
-	std::cout << retval << std::endl;
-	//zmq_connect ((void*)m_socket, connectAddr.c_str());
-  retval = zmq_send(requester, "hello", 6, 0);
-	std::cout << retval << std::endl;
+	m_socket.connect ("tcp://localhost:5050");
+	zmq::message_t request(5);
+	memcpy (request.data(), "Hello", 5);
+	m_socket.send (request);
+
+	zmq::message_t reply;
+	m_socket.recv (&reply);
+	std::cout << "recv" << std::endl;
+
 	return true;
 }
 
