@@ -1,0 +1,69 @@
+Waf: Entering directory `/home/kwk2696/ns3/ns-allinone-3.28/ns-3.28/build'
+Waf: Leaving directory `/home/kwk2696/ns3/ns-allinone-3.28/ns-3.28/build'
+Build commands will be stored in build/compile_commands.json
+'build' finished successfully (1.858s)
+ enqueue : queueID-0x1ea1ab0 packetID-0x1e9b4f0
+ dequeue : queueID-0x1ea1ab0 packetID-0x1e9b4f0
+0x1ea1ab0 empty
+ enqueue : queueID-0x1ea2530 packetID-0x1eb4fb0
+ dequeue : queueID-0x1ea2530 packetID-0x1eb4fb0
+0x1ea2530 empty
+ enqueue : queueID-0x1ea2ad0 packetID-0x1eb4fb0
+ dequeue : queueID-0x1ea2ad0 packetID-0x1eb4fb0
+0x1ea2ad0 empty
+ enqueue : queueID-0x1ea1ff0 packetID-0x1eb5020
+ dequeue : queueID-0x1ea1ff0 packetID-0x1eb5020
+0x1ea1ff0 empty
+ enqueue : queueID-0x1ea1ab0 packetID-0x1eb58a0
+ dequeue : queueID-0x1ea1ab0 packetID-0x1eb58a0
+ enqueue : queueID-0x1ea1ab0 packetID-0x1eb5ae0
+ dequeue : queueID-0x1ea1ab0 packetID-0x1eb5ae0
+0x1ea1ab0 empty
+ enqueue : queueID-0x1ea2530 packetID-0x1eb5020
+ dequeue : queueID-0x1ea2530 packetID-0x1eb5020
+0x1ea2530 empty
+ enqueue : queueID-0x1ea2530 packetID-0x1eb5ae0
+ dequeue : queueID-0x1ea2530 packetID-0x1eb5ae0
+0x1ea2530 empty
+ enqueue : queueID-0x1ea2ad0 packetID-0x1eb5910
+ dequeue : queueID-0x1ea2ad0 packetID-0x1eb5910
+0x1ea2ad0 empty
+ enqueue : queueID-0x1ea1ff0 packetID-0x1e9af70
+ dequeue : queueID-0x1ea1ff0 packetID-0x1e9af70
+0x1ea1ff0 empty
+ enqueue : queueID-0x1ea1ab0 packetID-0x1eb5a70
+ dequeue : queueID-0x1ea1ab0 packetID-0x1eb5a70
+0x1ea1ab0 empty
+ enqueue : queueID-0x1ea2530 packetID-0x1e9af70
+ dequeue : queueID-0x1ea2530 packetID-0x1e9af70
+0x1ea2530 empty
+ enqueue : queueID-0x1ea2ad0 packetID-0x1e9af70
+ dequeue : queueID-0x1ea2ad0 packetID-0x1e9af70
+0x1ea2ad0 empty
+ enqueue : queueID-0x1ea1ff0 packetID-0x1eb5a70
+ dequeue : queueID-0x1ea1ff0 packetID-0x1eb5a70
+0x1ea1ff0 empty
+ enqueue : queueID-0x1ea1ab0 packetID-0x1eb5a70
+ dequeue : queueID-0x1ea1ab0 packetID-0x1eb5a70
+ enqueue : queueID-0x1ea2ad0 packetID-0x1e9af70
+ dequeue : queueID-0x1ea2ad0 packetID-0x1e9af70
+0x1ea1ab0 empty
+0x1ea2ad0 empty
+ enqueue : queueID-0x1ea2530 packetID-0x1eb5ae0
+ dequeue : queueID-0x1ea2530 packetID-0x1eb5ae0
+ enqueue : queueID-0x1ea1ff0 packetID-0x1eb5a70
+ dequeue : queueID-0x1ea1ff0 packetID-0x1eb5a70
+0x1ea2530 empty
+0x1ea1ff0 empty
+ enqueue : queueID-0x1ea2ad0 packetID-0x1eb4fb0
+ dequeue : queueID-0x1ea2ad0 packetID-0x1eb4fb0
+ enqueue : queueID-0x1ea1ab0 packetID-0x1e9af70
+ dequeue : queueID-0x1ea1ab0 packetID-0x1e9af70
+0x1ea2ad0 empty
+0x1ea1ab0 empty
+ enqueue : queueID-0x1ea1ff0 packetID-0x1ea5a20
+ dequeue : queueID-0x1ea1ff0 packetID-0x1ea5a20
+ enqueue : queueID-0x1ea2530 packetID-0x1eb4fb0
+ dequeue : queueID-0x1ea2530 packetID-0x1eb4fb0
+0x1ea1ff0 empty
+0x1ea2530 empty
