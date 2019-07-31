@@ -10,13 +10,14 @@ class OpenGymInterface : public Object {
 public: 
 	static TypeId GetTypeId (void);
 
-	OpenGymInterface (uint32_t port=5050);
+	OpenGymInterface (uint32_t port=5555);
 	virtual ~OpenGymInterface ();
-
+	
+	bool Init ();
 private: 
 	uint32_t m_port;
-	zmq::context_t m_zmq_context;
-	zmq::socket_t m_zmq_socket;
+	//zmq::context_t m_context;
+	//zmq::socket_t m_socket;
 };
 
 }
