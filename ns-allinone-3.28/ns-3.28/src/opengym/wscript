@@ -13,6 +13,7 @@ def configure(conf):
 def build(bld):
     module = bld.create_ns3_module('opengym', ['core'])
     module.source = [
+				'model/opengym-interface.cc',
         'model/opengym.cc',
         'helper/opengym-helper.cc',
         ]
@@ -25,6 +26,7 @@ def build(bld):
     headers = bld(features='ns3header')
     headers.module = 'opengym'
     headers.source = [
+				'model/opengym-interface.h',
         'model/opengym.h',
         'helper/opengym-helper.h',
         ]
