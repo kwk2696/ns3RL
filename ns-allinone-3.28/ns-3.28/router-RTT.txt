@@ -1,4 +1,0 @@
-/NodeList/0/ApplicationList/1/$ns3::V4Ping/Rtt=20 ms
-/NodeList/0/ApplicationList/1/$ns3::V4Ping/Rtt=20 ms
-/NodeList/0/ApplicationList/1/$ns3::V4Ping/Rtt=20 ms
-/NodeList/0/ApplicationList/1/$ns3::V4Ping/Rtt=20 ms

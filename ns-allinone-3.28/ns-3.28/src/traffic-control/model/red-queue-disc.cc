@@ -235,6 +235,10 @@ TypeId RedQueueDisc::GetTypeId (void)
                    BooleanValue (true),
                    MakeBooleanAccessor (&RedQueueDisc::m_useHardDrop),
                    MakeBooleanChecker ())
+	.AddTraceSource ("Test", 
+							 "Test",
+							 MakeTraceSourceAccessor (&RedQueueDisc::m_trace),
+							 "ns3::Test")			   
   ;
 
   return tid;
@@ -861,7 +865,7 @@ Ptr<QueueDiscItem>
 RedQueueDisc::DoDequeue (void)
 {
   NS_LOG_FUNCTION (this);
-
+	m_trace(this);
   if (GetInternalQueue (0)->IsEmpty ())
     {
       NS_LOG_LOGIC ("Queue empty");

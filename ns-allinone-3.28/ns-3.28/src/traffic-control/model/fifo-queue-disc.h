@@ -56,6 +56,9 @@ private:
   virtual Ptr<const QueueDiscItem> DoPeek (void);
   virtual bool CheckConfig (void);
   virtual void InitializeParams (void);
+
+protected: 
+	TracedCallback<Ptr<FifoQueueDisc>> m_trace;
 };
 
 } // namespace ns3

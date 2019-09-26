@@ -1,0 +1,70 @@
+Waf: Entering directory `/home/kwk2696/ns3/ns-allinone-3.28/ns-3.28/build'
+Waf: Leaving directory `/home/kwk2696/ns3/ns-allinone-3.28/ns-3.28/build'
+Build commands will be stored in build/compile_commands.json
+'build' finished successfully (1.892s)
+step: 1
+Total Bytes App Recieved: 61412352bytes
+
+Flow 1 (10.1.1.1 -> 10.2.1.2)
+  Tx Packets: 19995
+  Tx Bytes:   21510528
+  Rx Packets: 19995
+  Rx Bytes:   21510528
+  Throughput: 17.1058 Mbps
+  Goodput: 48.8369 Mbps
+  First Packet Rx: 0.130001sec
+  Last Packet Rx: 10.19sec
+Flow 2 (10.1.2.1 -> 10.2.1.2)
+  Tx Packets: 19995
+  Tx Bytes:   21510528
+  Rx Packets: 19995
+  Rx Bytes:   21510528
+  Throughput: 17.1058 Mbps
+  First Packet Rx: 0.130001sec
+  Last Packet Rx: 10.19sec
+Flow 3 (10.1.3.1 -> 10.2.1.2)
+  Tx Packets: 19995
+  Tx Bytes:   21510528
+  Rx Packets: 19995
+  Rx Bytes:   21510528
+  Throughput: 17.1058 Mbps
+  First Packet Rx: 0.130002sec
+  Last Packet Rx: 10.19sec
+Flow 4 (10.2.1.2 -> 10.1.1.1)
+  Tx Packets: 9998
+  Tx Bytes:   519900
+  Rx Packets: 9998
+  Rx Bytes:   519900
+  Throughput: 0.41592 Mbps
+  First Packet Rx: 0.160002sec
+  Last Packet Rx: 10.16sec
+Flow 5 (10.2.1.2 -> 10.1.2.1)
+  Tx Packets: 9998
+  Tx Bytes:   519900
+  Rx Packets: 9998
+  Rx Bytes:   519900
+  Throughput: 0.41592 Mbps
+  First Packet Rx: 0.160002sec
+  Last Packet Rx: 10.16sec
+Flow 6 (10.2.1.2 -> 10.1.3.1)
+  Tx Packets: 9998
+  Tx Bytes:   519900
+  Rx Packets: 9998
+  Rx Bytes:   519900
+  Throughput: 0.41592 Mbps
+  First Packet Rx: 0.160003sec
+  Last Packet Rx: 10.16sec
+th total RX: 61412352
+
+Packets/Bytes received: 59985 / 64531584
+Packets/Bytes enqueued: 59985 / 64531584
+Packets/Bytes dequeued: 59985 / 64531584
+Packets/Bytes requeued: 0 / 0
+Packets/Bytes dropped: 0 / 0
+Packets/Bytes dropped before enqueue: 0 / 0
+Packets/Bytes dropped after dequeue: 0 / 0
+Packets/Bytes sent: 59985 / 64531584
+Packets/Bytes marked: 0 / 0
+
+step: 2
+Interrupted 

@@ -246,6 +246,7 @@ void OnOffApplication::ScheduleNextTx ()
       Time nextTime (Seconds (bits /
                               static_cast<double>(m_cbrRate.GetBitRate ()))); // Time till next packet
       NS_LOG_LOGIC ("nextTime = " << nextTime);
+			std::cout << "nextTime = " << nextTime << std::endl;
       m_sendEvent = Simulator::Schedule (nextTime,
                                          &OnOffApplication::SendPacket, this);
     }
@@ -273,15 +274,15 @@ void OnOffApplication::ScheduleStopEvent ()
   m_startStopEvent = Simulator::Schedule (onInterval, &OnOffApplication::StopSending, this);
 }
 
-
 void OnOffApplication::SendPacket ()
 {
   NS_LOG_FUNCTION (this);
-
+	
   NS_ASSERT (m_sendEvent.IsExpired ());
   Ptr<Packet> packet = Create<Packet> (m_pktSize);
   m_txTrace (packet);
   m_socket->Send (packet);
+	std::cout << "Send Time: " << Simulator::Now ().GetSeconds () << std::endl;
   m_totBytes += m_pktSize;
   if (InetSocketAddress::IsMatchingType (m_peer))
     {
@@ -291,6 +292,11 @@ void OnOffApplication::SendPacket ()
                    << InetSocketAddress::ConvertFrom(m_peer).GetIpv4 ()
                    << " port " << InetSocketAddress::ConvertFrom (m_peer).GetPort ()
                    << " total Tx " << m_totBytes << " bytes");
+
+		 std::cout << "OnOff: " << packet->GetSize () << "   "  << m_totBytes << "  " << Simulator::Now ().GetSeconds () << std::endl;
+		 
+		 //m_c += 1;
+		// std::cout << "Count: " << m_c << std::endl;
     }
   else if (Inet6SocketAddress::IsMatchingType (m_peer))
     {

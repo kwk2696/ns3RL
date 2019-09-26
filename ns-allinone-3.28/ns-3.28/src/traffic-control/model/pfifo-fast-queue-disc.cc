@@ -90,10 +90,11 @@ PfifoFastQueueDisc::DoEnqueue (Ptr<QueueDiscItem> item)
     }
 
   uint32_t band = prio2band[priority & 0x0f];
-
+	//std::cout << band << std::endl;
   bool retval = GetInternalQueue (band)->Enqueue (item);
-
-  // If Queue::Enqueue fails, QueueDisc::DropBeforeEnqueue is called by the
+	//std::cout << "[" << GetInternalQueue(0)->GetNPackets() << " " << GetInternalQueue(1)->GetNPackets() << "  " << GetInternalQueue(2)->GetNPackets()<< "]" << std::endl;
+	
+	// If Queue::Enqueue fails, QueueDisc::DropBeforeEnqueue is called by the
   // internal queue because QueueDisc::AddInternalQueue sets the trace callback
 
   if (!retval)

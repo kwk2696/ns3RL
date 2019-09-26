@@ -1,0 +1,14 @@
+RttAvg=0.000278393 sec
+RttAvg=0.0018544 sec
+RttAvg=0.0018112 sec
+RttAvg=0.0018112 sec
+RttAvg=0.0018112 sec
+RttAvg=0.0018112 sec
+RttAvg=0.0018112 sec
+RttAvg=0.0018112 sec
+RttAvg=0.0018112 sec
+RttAvg=0.0018112 sec
+RttAvg=0.0018112 sec
+RttAvg=0.0018112 sec
+RttAvg=0.0018112 sec
+RttAvg=0.156273 sec

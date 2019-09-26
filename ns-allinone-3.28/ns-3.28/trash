@@ -1,0 +1,9797 @@
+Waf: Entering directory `/home/kwk2696/ns3/ns-allinone-3.28/ns-3.28/build'
+[ 975/2805] Compiling scratch/p1_round.cc
+[2723/2805] Linking build/scratch/p1_round
+Waf: Leaving directory `/home/kwk2696/ns3/ns-allinone-3.28/ns-3.28/build'
+Build commands will be stored in build/compile_commands.json
+'build' finished successfully (5.063s)
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,1]
+action: 2
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[0,0,0]
+action: 2
+[1,0,0]
+action: 0
+[0,0,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[0,0,0]
+action: 2
+[1,0,0]
+action: 0
+[0,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,0]
+action: 1
+[0,0,1]
+action: 2
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,0]
+action: 0
+[1,0,0]
+action: 0
+[0,1,0]
+action: 1
+[0,0,0]
+action: 1
+[1,0,0]
+action: 0
+[0,1,1]
+action: 2
+[1,1,0]
+action: 0
+[0,1,0]
+action: 1
+[1,1,0]
+action: 0
+[0,1,0]
+action: 1
+[1,0,0]
+action: 0
+[0,0,1]
+action: 2
+[1,1,0]
+action: 0
+[1,1,0]
+action: 1
+[1,1,0]
+action: 0
+[1,1,0]
+action: 0
+[0,1,1]
+action: 2
+[1,2,0]
+action: 0
+[1,2,0]
+action: 1
+[1,1,0]
+action: 0
+[1,2,0]
+action: 0
+[0,2,0]
+action: 1
+[1,1,1]
+action: 2
+[1,2,0]
+action: 0
+[1,2,0]
+action: 1
+[1,1,0]
+action: 0
+[1,2,0]
+action: 0
+[0,2,1]
+action: 2
+[1,2,0]
+action: 0
+[0,3,0]
+action: 1
+[1,2,0]
+action: 0
+[0,3,0]
+action: 1
+[1,2,1]
+action: 2
+[1,2,0]
+action: 0
+[1,3,0]
+action: 1
+[1,2,0]
+action: 0
+[1,2,0]
+action: 0
+[1,2,1]
+action: 2
+[2,3,0]
+action: 0
+[1,3,0]
+action: 1
+[2,3,0]
+action: 0
+[1,3,0]
+action: 0
+[1,3,1]
+action: 2
+[2,4,0]
+action: 0
+[1,4,0]
+action: 1
+[2,3,0]
+action: 0
+[1,4,0]
+action: 0
+[1,4,1]
+action: 2
+[1,5,0]
+action: 0
+[0,5,0]
+action: 1
+[1,4,0]
+action: 0
+[0,5,0]
+action: 1
+[1,4,1]
+action: 2
+[1,5,0]
+action: 0
+[1,5,0]
+action: 1
+[2,4,0]
+action: 0
+[1,4,1]
+action: 2
+[2,5,0]
+action: 0
+[2,5,0]
+action: 1
+[2,4,0]
+action: 0
+[2,5,0]
+action: 0
+[1,5,1]
+action: 2
+[2,5,0]
+action: 0
+[1,6,0]
+action: 1
+[2,5,0]
+action: 0
+[1,5,0]
+action: 0
+[1,5,0]
+action: 0
+[1,6,1]
+action: 2
+[1,6,0]
+action: 0
+[1,6,0]
+action: 1
+[1,6,0]
+action: 0
+[1,6,0]
+action: 0
+[1,7,1]
+action: 2
+[2,7,0]
+action: 0
+[2,7,0]
+action: 1
+[2,7,0]
+action: 0
+[2,7,0]
+action: 0
+[1,7,1]
+action: 2
+[2,8,0]
+action: 0
+[1,8,0]
+action: 1
+[2,7,0]
+action: 0
+[2,8,0]
+action: 0
+[2,8,1]
+action: 2
+[2,8,0]
+action: 0
+[2,9,0]
+action: 1
+[2,8,0]
+action: 0
+[2,8,0]
+action: 0
+[2,9,0]
+action: 0
+[1,9,1]
+action: 2
+[2,9,0]
+action: 0
+[2,10,0]
+action: 1
+[2,9,0]
+action: 0
+[2,10,1]
+action: 2
+[3,10,0]
+action: 0
+[2,10,0]
+action: 1
+[3,10,0]
+action: 0
+[2,10,0]
+action: 0
+[2,10,1]
+action: 2
+[3,11,0]
+action: 0
+[2,11,0]
+action: 1
+[3,10,0]
+action: 0
+[3,11,0]
+action: 0
+[3,11,0]
+action: 0
+[2,11,1]
+action: 2
+[3,12,0]
+action: 0
+[2,12,0]
+action: 1
+[3,11,0]
+action: 0
+[2,12,1]
+action: 2
+[3,12,0]
+action: 0
+[2,12,0]
+action: 1
+[3,11,0]
+action: 0
+[3,12,0]
+action: 0
+[2,12,0]
+action: 0
+[2,13,1]
+action: 2
+[3,13,0]
+action: 0
+[2,13,0]
+action: 1
+[3,13,0]
+action: 0
+[2,13,1]
+action: 2
+[3,13,0]
+action: 0
+[3,14,0]
+action: 1
+[3,13,0]
+action: 0
+[3,13,0]
+action: 0
+[3,14,1]
+action: 2
+[4,14,0]
+action: 0
+[3,14,0]
+action: 1
+[3,14,0]
+action: 0
+[3,14,0]
+action: 0
+[3,14,1]
+action: 2
+[4,15,0]
+action: 0
+[3,15,0]
+action: 1
+[4,14,0]
+action: 0
+[3,15,0]
+action: 0
+[3,15,1]
+action: 2
+[4,15,0]
+action: 0
+[3,16,0]
+action: 1
+[4,15,0]
+action: 0
+[3,16,0]
+action: 0
+[3,16,1]
+action: 2
+[3,16,0]
+action: 0
+[3,17,0]
+action: 1
+[3,16,0]
+action: 0
+[3,16,0]
+action: 0
+[3,17,0]
+action: 0
+[2,17,1]
+action: 2
+[3,17,0]
+action: 0
+[2,18,0]
+action: 1
+[3,17,0]
+action: 0
+[2,17,0]
+action: 0
+[2,18,1]
+action: 2
+[3,18,0]
+action: 0
+[2,18,0]
+action: 1
+[3,18,0]
+action: 0
+[2,18,0]
+action: 0
+[2,18,1]
+action: 2
+[2,18,0]
+action: 0
+[2,19,0]
+action: 1
+[2,18,0]
+action: 0
+[2,19,0]
+action: 0
+[1,19,1]
+action: 2
+[2,19,0]
+action: 0
+[1,20,0]
+action: 1
+[2,19,0]
+action: 0
+[2,19,0]
+action: 0
+[2,19,1]
+action: 2
+[2,20,0]
+action: 0
+[2,20,0]
+action: 1
+[3,19,0]
+action: 0
+[2,20,0]
+action: 0
+[1,20,0]
+action: 0
+[1,20,1]
+action: 2
+[2,21,0]
+action: 0
+[1,21,0]
+action: 1
+[2,21,0]
+action: 0
+[1,21,0]
+action: 0
+[1,21,1]
+action: 2
+[2,22,0]
+action: 0
+[1,22,0]
+action: 1
+[2,21,0]
+action: 0
+[2,22,0]
+action: 0
+[1,22,1]
+action: 2
+[2,22,0]
+action: 0
+[1,23,0]
+action: 1
+[2,22,0]
+action: 0
+[1,22,0]
+action: 0
+[1,23,0]
+action: 0
+[1,23,1]
+action: 2
+[1,23,0]
+action: 0
+[1,24,0]
+action: 1
+[2,23,0]
+action: 0
+[1,23,0]
+action: 0
+[1,24,1]
+action: 2
+[1,24,0]
+action: 0
+[0,24,0]
+action: 1
+[1,24,0]
+action: 0
+[1,24,0]
+action: 0
+[0,24,1]
+action: 2
+[1,25,0]
+action: 0
+[0,25,0]
+action: 1
+[1,24,0]
+action: 0
+[0,25,1]
+action: 2
+[1,25,0]
+action: 0
+[0,26,0]
+action: 1
+[1,25,0]
+action: 0
+[0,25,0]
+action: 1
+[1,25,0]
+action: 0
+[0,25,1]
+action: 2
+[1,26,0]
+action: 0
+[0,26,0]
+action: 1
+[1,25,0]
+action: 0
+[0,26,0]
+action: 1
+[1,25,0]
+action: 0
+[1,25,1]
+action: 2
+[1,26,0]
+action: 0
+[1,26,0]
+action: 1
+[1,25,0]
+action: 0
+[1,26,0]
+action: 0
+[0,26,1]
+action: 2
+[1,26,0]
+action: 0
+[1,27,0]
+action: 1
+[1,26,0]
+action: 0
+[1,26,0]
+action: 0
+[0,27,0]
+action: 1
+[1,26,1]
+action: 2
+[2,27,0]
+action: 0
+[1,27,0]
+action: 1
+[2,26,0]
+action: 0
+[2,27,0]
+action: 0
+[1,27,1]
+action: 2
+[2,27,0]
+action: 0
+[1,28,0]
+action: 1
+[2,27,0]
+action: 0
+[2,27,0]
+action: 0
+[1,28,0]
+action: 0
+[1,28,1]
+action: 2
+[1,28,0]
+action: 0
+[1,29,0]
+action: 1
+[1,28,0]
+action: 0
+[1,28,0]
+action: 0
+[1,29,1]
+action: 2
+[1,29,0]
+action: 0
+[1,29,0]
+action: 1
+[1,29,0]
+action: 0
+[1,29,0]
+action: 0
+[1,30,0]
+action: 0
+[0,30,1]
+action: 2
+[1,30,0]
+action: 0
+[1,31,0]
+action: 1
+[1,30,0]
+action: 0
+[1,30,1]
+action: 2
+[1,31,0]
+action: 0
+[1,31,0]
+action: 1
+[2,31,0]
+action: 0
+[2,31,0]
+action: 0
+[1,31,1]
+action: 2
+[2,32,0]
+action: 0
+[1,32,0]
+action: 1
+[2,32,0]
+action: 0
+[1,32,0]
+action: 0
+[1,32,1]
+action: 2
+[1,33,0]
+action: 0
+[1,33,0]
+action: 1
+[1,33,0]
+action: 0
+[1,33,0]
+action: 0
+[1,33,0]
+action: 0
+[0,34,1]
+action: 2
+[1,34,0]
+action: 0
+[0,34,0]
+action: 1
+[1,33,0]
+action: 0
+[0,34,0]
+action: 1
+[1,33,1]
+action: 2
+[2,34,0]
+action: 0
+[1,34,0]
+action: 1
+[2,33,0]
+action: 0
+[1,34,0]
+action: 0
+[0,34,1]
+action: 2
+[1,35,0]
+action: 0
+[0,35,0]
+action: 1
+[1,34,0]
+action: 0
+[1,35,0]
+action: 0
+[0,35,1]
+action: 2
+[1,35,0]
+action: 0
+[0,36,0]
+action: 1
+[1,35,0]
+action: 0
+[0,36,0]
+action: 1
+[1,35,1]
+action: 2
+[1,35,0]
+action: 0
+[1,36,0]
+action: 1
+[1,35,0]
+action: 0
+[1,36,0]
+action: 0
+[1,36,1]
+action: 2
+[1,36,0]
+action: 0
+[0,37,0]
+action: 1
+[1,36,0]
+action: 0
+[0,36,0]
+action: 1
+[1,36,1]
+action: 2
+[1,36,0]
+action: 0
+[1,36,0]
+action: 1
+[2,36,0]
+action: 0
+[1,36,1]
+action: 2
+[2,36,0]
+action: 0
+[2,37,0]
+action: 1
+[2,36,0]
+action: 0
+[2,37,0]
+action: 0
+[2,37,1]
+action: 2
+[2,37,0]
+action: 0
+[2,38,0]
+action: 1
+[2,37,0]
+action: 0
+[2,37,0]
+action: 0
+[1,37,1]
+action: 2
+[2,38,0]
+action: 0
+[2,38,0]
+action: 1
+[2,38,0]
+action: 0
+[2,38,0]
+action: 0
+[1,38,1]
+action: 2
+[2,39,0]
+action: 0
+[1,39,0]
+action: 1
+[2,38,0]
+action: 0
+[1,39,0]
+action: 0
+[1,39,1]
+action: 2
+[2,39,0]
+action: 0
+[1,40,0]
+action: 1
+[2,39,0]
+action: 0
+[1,39,0]
+action: 0
+[1,40,1]
+action: 2
+[1,40,0]
+action: 0
+[0,40,0]
+action: 1
+[1,40,0]
+action: 0
+[0,40,0]
+action: 1
+[1,39,1]
+action: 2
+[2,39,0]
+action: 0
+[1,40,0]
+action: 1
+[2,39,0]
+action: 0
+[1,40,0]
+action: 0
+[1,40,0]
+action: 0
+[1,40,1]
+action: 2
+[1,41,0]
+action: 0
+[1,41,0]
+action: 1
+[1,40,0]
+action: 0
+[1,40,0]
+action: 0
+[0,41,0]
+action: 1
+[1,40,1]
+action: 2
+[2,40,0]
+action: 0
+[1,41,0]
+action: 1
+[2,40,0]
+action: 0
+[1,41,0]
+action: 0
+[1,41,1]
+action: 2
+[1,41,0]
+action: 0
+[1,41,0]
+action: 1
+[2,41,0]
+action: 0
+[1,41,0]
+action: 0
+[1,42,1]
+action: 2
+[2,42,0]
+action: 0
+[1,42,0]
+action: 1
+[2,42,0]
+action: 0
+[1,42,0]
+action: 0
+[1,42,1]
+action: 2
+[1,43,0]
+action: 0
+[1,43,0]
+action: 1
+[2,43,0]
+action: 0
+[1,43,1]
+action: 2
+[2,43,0]
+action: 0
+[1,44,0]
+action: 1
+[2,43,0]
+action: 0
+[1,43,0]
+action: 0
+[1,44,0]
+action: 0
+[0,44,1]
+action: 2
+[1,44,0]
+action: 0
+[0,45,0]
+action: 1
+[1,44,0]
+action: 0
+[0,44,0]
+action: 1
+[1,44,1]
+action: 2
+[2,44,0]
+action: 0
+[1,44,0]
+action: 1
+[2,44,0]
+action: 0
+[1,44,0]
+action: 0
+[1,44,1]
+action: 2
+[1,45,0]
+action: 0
+[1,45,0]
+action: 1
+[2,44,0]
+action: 0
+[1,45,0]
+action: 0
+[1,45,1]
+action: 2
+[1,45,0]
+action: 0
+[1,46,0]
+action: 1
+[1,45,0]
+action: 0
+[1,45,0]
+action: 0
+[0,46,0]
+action: 1
+[1,45,1]
+action: 2
+[2,45,0]
+action: 0
+[1,46,0]
+action: 1
+[2,45,0]
+action: 0
+[1,45,0]
+action: 0
+[0,46,1]
+action: 2
+[1,46,0]
+action: 0
+[0,46,0]
+action: 1
+[1,46,0]
+action: 0
+[0,46,0]
+action: 1
+[1,45,1]
+action: 2
+[1,46,0]
+action: 0
+[1,46,0]
+action: 1
+[2,45,0]
+action: 0
+[1,46,1]
+action: 2
+[1,46,0]
+action: 0
+[1,46,0]
+action: 1
+[2,46,0]
+action: 0
+[1,46,0]
+action: 0
+[1,47,1]
+action: 2
+[1,47,0]
+action: 0
+[1,47,0]
+action: 1
+[1,47,0]
+action: 0
+[1,47,0]
+action: 0
+[1,47,0]
+action: 0
+[0,48,1]
+action: 2
+[1,48,0]
+action: 0
+[1,49,0]
+action: 1
+[1,48,0]
+action: 0
+[1,48,0]
+action: 0
+[0,48,1]
+action: 2
+[1,49,0]
+action: 0
+[0,49,0]
+action: 1
+[1,48,0]
+action: 0
+[0,49,0]
+action: 1
+[1,48,1]
+action: 2
+[1,48,0]
+action: 0
+[1,49,0]
+action: 1
+[2,48,0]
+action: 0
+[1,48,0]
+action: 0
+[1,48,1]
+action: 2
+[1,49,0]
+action: 0
+[1,49,0]
+action: 1
+[1,49,0]
+action: 0
+[1,49,0]
+action: 0
+[0,49,1]
+action: 2
+[1,50,0]
+action: 0
+[0,50,0]
+action: 1
+[1,49,0]
+action: 0
+[1,49,0]
+action: 0
+[0,50,1]
+action: 2
+[1,50,0]
+action: 0
+[0,51,0]
+action: 1
+[1,50,0]
+action: 0
+[0,50,0]
+action: 1
+[1,49,1]
+action: 2
+[1,50,0]
+action: 0
+[1,50,0]
+action: 1
+[1,49,0]
+action: 0
+[1,50,0]
+action: 0
+[1,50,1]
+action: 2
+[2,50,0]
+action: 0
+[1,51,0]
+action: 1
+[2,50,0]
+action: 0
+[2,50,0]
+action: 0
+[1,51,1]
+action: 2
+[2,51,0]
+action: 0
+[1,52,0]
+action: 1
+[1,51,0]
+action: 0
+[1,51,0]
+action: 0
+[1,52,1]
+action: 2
+[1,52,0]
+action: 0
+[1,52,0]
+action: 1
+[1,51,0]
+action: 0
+[1,52,0]
+action: 0
+[0,52,1]
+action: 2
+[1,53,0]
+action: 0
+[0,53,0]
+action: 1
+[1,52,0]
+action: 0
+[0,53,0]
+action: 1
+[1,52,1]
+action: 2
+[2,52,0]
+action: 0
+[1,53,0]
+action: 1
+[2,52,0]
+action: 0
+[1,52,0]
+action: 0
+[1,53,0]
+action: 0
+[1,53,1]
+action: 2
+[1,53,0]
+action: 0
+[1,54,0]
+action: 1
+[2,53,0]
+action: 0
+[1,54,1]
+action: 2
+[2,54,0]
+action: 0
+[1,54,0]
+action: 1
+[2,54,0]
+action: 0
+[1,54,0]
+action: 0
+[1,54,1]
+action: 2
+[1,55,0]
+action: 0
+[1,55,0]
+action: 1
+[1,54,0]
+action: 0
+[1,55,0]
+action: 0
+[1,55,1]
+action: 2
+[1,55,0]
+action: 0
+[1,56,0]
+action: 1
+[1,55,0]
+action: 0
+[1,55,0]
+action: 0
+[1,56,0]
+action: 0
+[0,56,1]
+action: 2
+[1,56,0]
+action: 0
+[0,57,0]
+action: 1
+[1,56,0]
+action: 0
+[0,56,0]
+action: 1
+[1,56,1]
+action: 2
+[1,56,0]
+action: 0
+[1,56,0]
+action: 1
+[1,56,0]
+action: 0
+[1,56,0]
+action: 0
+[0,56,1]
+action: 2
+[1,57,0]
+action: 0
+[1,57,0]
+action: 1
+[1,56,0]
+action: 0
+[0,57,0]
+action: 1
+[1,56,1]
+action: 2
+[1,56,0]
+action: 0
+[1,57,0]
+action: 1
+[1,56,0]
+action: 0
+[1,56,0]
+action: 0
+[1,56,0]
+action: 0
+[0,57,1]
+action: 2
+[1,57,0]
+action: 0
+[0,58,0]
+action: 1
+[1,57,0]
+action: 0
+[0,57,1]
+action: 2
+[1,58,0]
+action: 0
+[1,58,0]
+action: 1
+[1,58,0]
+action: 0
+[1,58,0]
+action: 0
+[0,58,0]
+action: 1
+[1,58,1]
+action: 2
+[2,58,0]
+action: 0
+[1,58,0]
+action: 1
+[2,58,0]
+action: 0
+[2,58,0]
+action: 0
+[1,58,1]
+action: 2
+[1,59,0]
+action: 0
+[1,59,0]
+action: 1
+[2,58,0]
+action: 0
+[1,59,0]
+action: 0
+[1,59,1]
+action: 2
+[2,60,0]
+action: 0
+[2,60,0]
+action: 1
+[2,59,0]
+action: 0
+[2,60,0]
+action: 0
+[1,60,1]
+action: 2
+[2,60,0]
+action: 0
+[2,61,0]
+action: 1
+[2,60,0]
+action: 0
+[2,60,0]
+action: 0
+[1,61,1]
+action: 2
+[2,61,0]
+action: 0
+[1,62,0]
+action: 1
+[2,61,0]
+action: 0
+[1,61,0]
+action: 0
+[1,62,1]
+action: 2
+[1,62,0]
+action: 0
+[1,62,0]
+action: 1
+[1,61,0]
+action: 0
+[1,62,0]
+action: 0
+[0,62,0]
+action: 1
+[1,61,1]
+action: 2
+[2,62,0]
+action: 0
+[1,62,0]
+action: 1
+[2,61,0]
+action: 0
+[1,62,0]
+action: 0
+[1,62,1]
+action: 2
+[2,63,0]
+action: 0
+[1,63,0]
+action: 1
+[2,62,0]
+action: 0
+[1,63,0]
+action: 0
+[1,63,1]
+action: 2
+[1,63,0]
+action: 0
+[1,64,0]
+action: 1
+[2,63,0]
+action: 0
+[1,63,0]
+action: 0
+[1,64,0]
+action: 0
+[0,64,1]
+action: 2
+[1,64,0]
+action: 0
+[0,65,0]
+action: 1
+[1,64,0]
+action: 0
+[0,65,0]
+action: 1
+[1,64,1]
+action: 2
+[1,64,0]
+action: 0
+[1,64,0]
+action: 1
+[1,64,0]
+action: 0
+[1,64,0]
+action: 0
+[0,65,1]
+action: 2
+[1,65,0]
+action: 0
+[1,65,0]
+action: 1
+[1,65,0]
+action: 0
+[0,65,0]
+action: 1
+[1,64,1]
+action: 2
+[1,65,0]
+action: 0
+[1,65,0]
+action: 1
+[2,64,0]
+action: 0
+[1,64,0]
+action: 0
+[1,65,1]
+action: 2
+[1,65,0]
+action: 0
+[1,66,0]
+action: 1
+[1,65,0]
+action: 0
+[1,65,0]
+action: 0
+[0,65,1]
+action: 2
+[1,66,0]
+action: 0
+[1,66,0]
+action: 1
+[2,65,0]
+action: 0
+[1,66,0]
+action: 0
+[0,66,1]
+action: 2
+[1,66,0]
+action: 0
+[1,67,0]
+action: 1
+[1,66,0]
+action: 0
+[1,66,0]
+action: 0
+[0,66,1]
+action: 2
+[1,67,0]
+action: 0
+[0,67,0]
+action: 1
+[1,67,0]
+action: 0
+[1,67,0]
+action: 0
+[0,67,1]
+action: 2
+[1,68,0]
+action: 0
+[0,68,0]
+action: 1
+[1,67,0]
+action: 0
+[0,68,0]
+action: 1
+[1,67,1]
+action: 2
+[2,67,0]
+action: 0
+[2,68,0]
+action: 1
+[2,67,0]
+action: 0
+[2,67,0]
+action: 0
+[2,68,1]
+action: 2
+[2,68,0]
+action: 0
+[2,69,0]
+action: 1
+[2,68,0]
+action: 0
+[2,68,0]
+action: 0
+[1,69,1]
+action: 2
+[2,69,0]
+action: 0
+[2,69,0]
+action: 1
+[2,69,0]
+action: 0
+[2,69,0]
+action: 0
+[1,69,0]
+action: 0
+[1,70,1]
+action: 2
+[1,70,0]
+action: 0
+[1,70,0]
+action: 1
+[1,70,0]
+action: 0
+[1,70,0]
+action: 0
+[1,70,1]
+action: 2
+[2,71,0]
+action: 0
+[1,71,0]
+action: 1
+[2,70,0]
+action: 0
+[1,70,0]
+action: 0
+[1,71,1]
+action: 2
+[2,71,0]
+action: 0
+[1,71,0]
+action: 1
+[2,71,0]
+action: 0
+[2,71,0]
+action: 0
+[1,71,0]
+action: 0
+[1,72,1]
+action: 2
+[1,72,0]
+action: 0
+[1,72,0]
+action: 1
+[2,72,0]
+action: 0
+[1,72,0]
+action: 0
+[1,72,1]
+action: 2
+[1,73,0]
+action: 0
+[1,73,0]
+action: 1
+[2,73,0]
+action: 0
+[1,73,0]
+action: 0
+[1,73,1]
+action: 2
+[2,74,0]
+action: 0
+[2,74,0]
+action: 1
+[2,73,0]
+action: 0
+[2,74,0]
+action: 0
+[1,74,1]
+action: 2
+[2,74,0]
+action: 0
+[1,75,0]
+action: 1
+[2,74,0]
+action: 0
+[2,74,0]
+action: 0
+[1,75,1]
+action: 2
+[2,75,0]
+action: 0
+[2,75,0]
+action: 1
+[2,75,0]
+action: 0
+[2,75,0]
+action: 0
+[2,76,1]
+action: 2
+[2,76,0]
+action: 0
+[1,76,0]
+action: 1
+[2,76,0]
+action: 0
+[2,76,0]
+action: 0
+[1,76,0]
+action: 0
+[1,77,1]
+action: 2
+[1,77,0]
+action: 0
+[1,78,0]
+action: 1
+[2,77,0]
+action: 0
+[1,77,0]
+action: 0
+[0,78,1]
+action: 2
+[1,78,0]
+action: 0
+[1,78,0]
+action: 1
+[1,77,0]
+action: 0
+[1,78,0]
+action: 0
+[0,78,1]
+action: 2
+[1,79,0]
+action: 0
+[0,79,0]
+action: 1
+[1,78,0]
+action: 0
+[1,78,0]
+action: 0
+[0,79,1]
+action: 2
+[1,79,0]
+action: 0
+[0,79,0]
+action: 1
+[1,79,0]
+action: 0
+[0,79,0]
+action: 1
+[1,78,0]
+action: 0
+[0,79,1]
+action: 2
+[1,79,0]
+action: 0
+[0,80,0]
+action: 1
+[1,79,0]
+action: 0
+[1,79,1]
+action: 2
+[1,80,0]
+action: 0
+[1,80,0]
+action: 1
+[2,79,0]
+action: 0
+[1,80,0]
+action: 0
+[1,80,0]
+action: 0
+[1,80,1]
+action: 2
+[1,81,0]
+action: 0
+[0,81,0]
+action: 1
+[1,80,0]
+action: 0
+[0,81,0]
+action: 1
+[1,80,1]
+action: 2
+[1,80,0]
+action: 0
+[1,81,0]
+action: 1
+[1,80,0]
+action: 0
+[1,81,0]
+action: 0
+[1,81,1]
+action: 2
+[2,81,0]
+action: 0
+[1,82,0]
+action: 1
+[2,81,0]
+action: 0
+[2,82,0]
+action: 0
+[1,82,0]
+action: 0
+[1,82,1]
+action: 2
+[1,83,0]
+action: 0
+[1,83,0]
+action: 1
+[1,83,0]
+action: 0
+[1,83,1]
+action: 2
+[1,83,0]
+action: 0
+[1,84,0]
+action: 1
+[2,83,0]
+action: 0
+[1,83,0]
+action: 0
+[1,84,1]
+action: 2
+[1,84,0]
+action: 0
+[1,84,0]
+action: 1
+[1,84,0]
+action: 0
+[1,84,0]
+action: 0
+[1,84,1]
+action: 2
+[1,85,0]
+action: 0
+[1,85,0]
+action: 1
+[1,84,0]
+action: 0
+[1,85,0]
+action: 0
+[0,85,1]
+action: 2
+[1,85,0]
+action: 0
+[0,86,0]
+action: 1
+[1,85,0]
+action: 0
+[1,85,0]
+action: 0
+[0,86,1]
+action: 2
+[1,86,0]
+action: 0
+[1,86,0]
+action: 1
+[1,86,0]
+action: 0
+[1,86,0]
+action: 0
+[0,86,1]
+action: 2
+[1,87,0]
+action: 0
+[0,87,0]
+action: 1
+[0,86,0]
+action: 1
+[1,86,0]
+action: 0
+[1,86,0]
+action: 0
+[1,86,1]
+action: 2
+[1,87,0]
+action: 0
+[1,87,0]
+action: 1
+[1,86,0]
+action: 0
+[1,87,0]
+action: 0
+[1,87,1]
+action: 2
+[1,87,0]
+action: 0
+[1,88,0]
+action: 1
+[2,87,0]
+action: 0
+[1,87,0]
+action: 0
+[1,88,1]
+action: 2
+[1,88,0]
+action: 0
+[1,89,0]
+action: 1
+[2,88,0]
+action: 0
+[2,88,0]
+action: 0
+[1,89,1]
+action: 2
+[2,89,0]
+action: 0
+[1,89,0]
+action: 1
+[2,89,0]
+action: 0
+[1,89,0]
+action: 0
+[1,89,0]
+action: 0
+[0,90,1]
+action: 2
+[1,90,0]
+action: 0
+[1,91,0]
+action: 1
+[2,90,0]
+action: 0
+[1,90,0]
+action: 0
+[1,91,0]
+action: 0
+[0,91,1]
+action: 2
+[1,91,0]
+action: 0
+[0,92,0]
+action: 1
+[1,91,0]
+action: 0
+[0,91,0]
+action: 1
+[1,91,1]
+action: 2
+[1,91,0]
+action: 0
+[0,91,0]
+action: 1
+[1,91,0]
+action: 0
+[1,91,0]
+action: 0
+[1,91,0]
+action: 0
+[1,92,1]
+action: 2
+[1,92,0]
+action: 0
+[1,92,0]
+action: 1
+[2,92,0]
+action: 0
+[1,92,0]
+action: 0
+[1,92,1]
+action: 2
+[1,93,0]
+action: 0
+[1,93,0]
+action: 1
+[2,92,0]
+action: 0
+[1,93,1]
+action: 2
+[2,93,0]
+action: 0
+[1,93,0]
+action: 1
+[2,92,0]
+action: 0
+[1,93,0]
+action: 0
+[1,93,0]
+action: 0
+[1,93,1]
+action: 2
+[1,94,0]
+action: 0
+[1,94,0]
+action: 1
+[2,93,0]
+action: 0
+[1,94,0]
+action: 0
+[1,94,0]
+action: 0
+[0,94,1]
+action: 2
+[1,95,0]
+action: 0
+[1,95,0]
+action: 1
+[2,94,0]
+action: 0
+[1,95,0]
+action: 0
+[1,95,1]
+action: 2
+[1,96,0]
+action: 0
+[1,96,0]
+action: 1
+[1,95,0]
+action: 0
+[1,95,1]
+action: 2
+[1,96,0]
+action: 0
+[1,96,0]
+action: 1
+[1,96,0]
+action: 0
+[1,96,0]
+action: 0
+[0,96,1]
+action: 2
+[1,97,0]
+action: 0
+[0,97,0]
+action: 1
+[1,96,0]
+action: 0
+[0,97,0]
+action: 1
+[1,96,0]
+action: 0
+[1,96,1]
+action: 2
+[1,97,0]
+action: 0
+[1,97,0]
+action: 1
+[2,97,0]
+action: 0
+[1,97,0]
+action: 0
+[1,97,0]
+action: 0
+[0,97,1]
+action: 2
+[1,98,0]
+action: 0
+[0,98,0]
+action: 1
+[1,98,0]
+action: 0
+[0,98,0]
+action: 1
+[1,97,1]
+action: 2
+[1,98,0]
+action: 0
+[1,98,0]
+action: 1
+[2,97,0]
+action: 0
+[1,98,0]
+action: 0
+[1,98,0]
+action: 0
+[0,98,1]
+action: 2
+[1,99,0]
+action: 0
+[0,99,0]
+action: 1
+[1,98,0]
+action: 0
+[1,99,0]
+action: 0
+[0,99,1]
+action: 2
+[1,99,0]
+action: 0
+[0,100,0]
+action: 1
+[1,99,0]
+action: 0
+[1,99,0]
+action: 0
+[0,100,1]
+action: 2
+[1,100,0]
+action: 0
+[0,100,0]
+action: 1
+[1,100,0]
+action: 0
+[0,100,0]
+action: 1
+[1,100,1]
+action: 2
+[2,100,0]
+action: 0
+[1,100,0]
+action: 1
+[2,99,0]
+action: 0
+[2,100,0]
+action: 0
+[1,100,0]
+action: 0
+[1,101,1]
+action: 2
+[1,101,0]
+action: 0
+[1,101,0]
+action: 1
+[2,101,0]
+action: 0
+[1,101,0]
+action: 0
+[1,101,1]
+action: 2
+[2,101,0]
+action: 0
+[2,102,0]
+action: 1
+[2,101,0]
+action: 0
+[2,101,0]
+action: 0
+[2,102,0]
+action: 0
+[1,102,1]
+action: 2
+[2,102,0]
+action: 0
+[1,103,0]
+action: 1
+[2,102,0]
+action: 0
+[2,103,0]
+action: 0
+[2,103,1]
+action: 2
+[2,103,0]
+action: 0
+[2,104,0]
+action: 1
+[2,103,0]
+action: 0
+[2,104,0]
+action: 0
+[2,104,1]
+action: 2
+[2,104,0]
+action: 0
+[2,105,0]
+action: 1
+[2,104,0]
+action: 0
+[2,104,0]
+action: 0
+[1,105,1]
+action: 2
+[2,105,0]
+action: 0
+[1,106,0]
+action: 1
+[2,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,1]
+action: 2
+[2,106,0]
+action: 0
+[1,106,0]
+action: 1
+[2,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,1]
+action: 2
+[2,106,0]
+action: 0
+[1,106,0]
+action: 1
+[2,105,0]
+action: 0
+[2,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,1]
+action: 2
+[2,105,0]
+action: 0
+[1,106,0]
+action: 1
+[2,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,1]
+action: 2
+[2,105,0]
+action: 0
+[1,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,106,1]
+action: 2
+[2,106,0]
+action: 0
+[1,106,0]
+action: 1
+[2,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,106,1]
+action: 2
+[2,106,0]
+action: 0
+[1,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,1]
+action: 2
+[1,106,0]
+action: 0
+[1,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,106,0]
+action: 0
+[0,106,0]
+action: 1
+[1,105,1]
+action: 2
+[2,106,0]
+action: 0
+[1,106,0]
+action: 1
+[2,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,1]
+action: 2
+[1,106,0]
+action: 0
+[1,106,0]
+action: 1
+[2,105,0]
+action: 0
+[1,106,0]
+action: 0
+[1,106,1]
+action: 2
+[1,106,0]
+action: 0
+[1,107,0]
+action: 1
+[1,106,0]
+action: 0
+[1,106,0]
+action: 0
+[0,106,1]
+action: 2
+[1,106,0]
+action: 0
+[0,106,0]
+action: 1
+[1,106,0]
+action: 0
+[0,106,0]
+action: 1
+[1,105,0]
+action: 0
+[0,106,1]
+action: 2
+[1,106,0]
+action: 0
+[1,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[0,106,1]
+action: 2
+[1,106,0]
+action: 0
+[0,106,0]
+action: 1
+[1,106,0]
+action: 0
+[0,106,0]
+action: 1
+[1,105,0]
+action: 0
+[0,105,1]
+action: 2
+[1,106,0]
+action: 0
+[1,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[0,105,1]
+action: 2
+[0,105,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 1
+[1,104,0]
+action: 0
+[1,105,0]
+action: 0
+[0,105,1]
+action: 2
+[1,105,0]
+action: 0
+[0,105,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[0,105,0]
+action: 1
+[1,104,1]
+action: 2
+[1,104,0]
+action: 0
+[1,104,0]
+action: 1
+[1,103,0]
+action: 0
+[1,103,0]
+action: 0
+[0,104,1]
+action: 2
+[1,104,0]
+action: 0
+[0,104,0]
+action: 1
+[1,103,0]
+action: 0
+[0,103,0]
+action: 1
+[1,103,0]
+action: 0
+[0,103,1]
+action: 2
+[1,103,0]
+action: 0
+[0,103,0]
+action: 1
+[1,102,0]
+action: 0
+[0,102,0]
+action: 1
+[1,102,1]
+action: 2
+[1,102,0]
+action: 0
+[1,102,0]
+action: 1
+[1,102,0]
+action: 0
+[1,102,0]
+action: 0
+[0,102,1]
+action: 2
+[1,102,0]
+action: 0
+[0,102,0]
+action: 1
+[1,101,0]
+action: 0
+[1,102,0]
+action: 0
+[0,102,1]
+action: 2
+[1,102,0]
+action: 0
+[0,102,0]
+action: 1
+[1,101,0]
+action: 0
+[0,102,0]
+action: 1
+[1,101,1]
+action: 2
+[2,101,0]
+action: 0
+[1,101,0]
+action: 1
+[2,100,0]
+action: 0
+[2,100,0]
+action: 0
+[1,101,0]
+action: 0
+[0,101,1]
+action: 2
+[1,101,0]
+action: 0
+[1,101,0]
+action: 1
+[2,100,0]
+action: 0
+[1,100,0]
+action: 0
+[1,101,1]
+action: 2
+[1,101,0]
+action: 0
+[1,101,0]
+action: 1
+[1,101,0]
+action: 0
+[1,101,0]
+action: 0
+[1,101,1]
+action: 2
+[2,101,0]
+action: 0
+[1,101,0]
+action: 1
+[2,100,0]
+action: 0
+[2,100,0]
+action: 0
+[2,101,1]
+action: 2
+[3,101,0]
+action: 0
+[2,101,0]
+action: 1
+[3,101,0]
+action: 0
+[3,101,0]
+action: 0
+[3,101,1]
+action: 2
+[3,102,0]
+action: 0
+[3,102,0]
+action: 1
+[3,101,0]
+action: 0
+[3,101,0]
+action: 0
+[2,101,1]
+action: 2
+[3,102,0]
+action: 0
+[2,102,0]
+action: 1
+[3,101,0]
+action: 0
+[2,101,0]
+action: 0
+[2,101,0]
+action: 0
+[1,102,1]
+action: 2
+[2,102,0]
+action: 0
+[1,102,0]
+action: 1
+[2,101,0]
+action: 0
+[1,101,0]
+action: 0
+[1,101,1]
+action: 2
+[2,102,0]
+action: 0
+[1,102,0]
+action: 1
+[2,101,0]
+action: 0
+[2,102,0]
+action: 0
+[1,102,0]
+action: 0
+[1,102,1]
+action: 2
+[2,103,0]
+action: 0
+[1,103,0]
+action: 1
+[1,102,0]
+action: 0
+[1,103,0]
+action: 0
+[1,103,1]
+action: 2
+[1,103,0]
+action: 0
+[1,104,0]
+action: 1
+[1,103,0]
+action: 0
+[1,104,0]
+action: 0
+[1,104,1]
+action: 2
+[1,104,0]
+action: 0
+[1,104,0]
+action: 1
+[1,103,0]
+action: 0
+[1,104,0]
+action: 0
+[1,104,1]
+action: 2
+[1,104,0]
+action: 0
+[1,104,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[0,105,1]
+action: 2
+[1,105,0]
+action: 0
+[0,105,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[0,104,0]
+action: 1
+[1,104,1]
+action: 2
+[1,104,0]
+action: 0
+[1,104,0]
+action: 1
+[2,104,0]
+action: 0
+[1,104,0]
+action: 0
+[1,104,1]
+action: 2
+[2,105,0]
+action: 0
+[1,105,0]
+action: 1
+[2,104,0]
+action: 0
+[2,105,1]
+action: 2
+[2,105,0]
+action: 0
+[2,105,0]
+action: 1
+[3,105,0]
+action: 0
+[2,105,0]
+action: 0
+[2,105,0]
+action: 0
+[1,106,1]
+action: 2
+[2,106,0]
+action: 0
+[2,106,0]
+action: 1
+[2,106,0]
+action: 0
+[2,106,0]
+action: 0
+[1,106,1]
+action: 2
+[2,107,0]
+action: 0
+[1,107,0]
+action: 1
+[2,106,0]
+action: 0
+[1,106,0]
+action: 0
+[1,106,0]
+action: 0
+[1,106,1]
+action: 2
+[1,107,0]
+action: 0
+[1,107,0]
+action: 1
+[1,107,0]
+action: 0
+[0,107,0]
+action: 1
+[1,106,1]
+action: 2
+[2,107,0]
+action: 0
+[1,107,0]
+action: 1
+[2,106,0]
+action: 0
+[1,106,1]
+action: 2
+[2,106,0]
+action: 0
+[2,107,0]
+action: 1
+[2,106,0]
+action: 0
+[2,106,0]
+action: 0
+[2,106,1]
+action: 2
+[2,106,0]
+action: 0
+[2,106,0]
+action: 1
+[2,106,0]
+action: 0
+[2,106,0]
+action: 0
+[1,106,1]
+action: 2
+[2,106,0]
+action: 0
+[1,106,0]
+action: 1
+[2,106,0]
+action: 0
+[1,106,0]
+action: 0
+[1,106,1]
+action: 2
+[2,106,0]
+action: 0
+[2,106,0]
+action: 1
+[2,105,0]
+action: 0
+[2,106,0]
+action: 0
+[1,106,1]
+action: 2
+[2,106,0]
+action: 0
+[1,107,0]
+action: 1
+[1,106,0]
+action: 0
+[1,106,0]
+action: 0
+[0,106,0]
+action: 1
+[1,105,1]
+action: 2
+[1,105,0]
+action: 0
+[1,105,0]
+action: 1
+[2,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,1]
+action: 2
+[1,105,0]
+action: 0
+[1,105,0]
+action: 1
+[1,104,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[0,105,1]
+action: 2
+[1,105,0]
+action: 0
+[0,105,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,1]
+action: 2
+[1,105,0]
+action: 0
+[1,105,0]
+action: 1
+[1,104,0]
+action: 0
+[1,105,1]
+action: 2
+[1,105,0]
+action: 0
+[1,105,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,1]
+action: 2
+[1,105,0]
+action: 0
+[1,105,0]
+action: 1
+[2,104,0]
+action: 0
+[1,104,0]
+action: 0
+[1,105,0]
+action: 0
+[0,105,1]
+action: 2
+[1,105,0]
+action: 0
+[1,105,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[1,105,1]
+action: 2
+[1,105,0]
+action: 0
+[1,106,0]
+action: 1
+[1,105,0]
+action: 0
+[0,105,0]
+action: 1
+[1,105,1]
+action: 2
+[2,105,0]
+action: 0
+[1,105,0]
+action: 1
+[2,104,0]
+action: 0
+[1,105,0]
+action: 0
+[0,105,1]
+action: 2
+[1,105,0]
+action: 0
+[1,105,0]
+action: 1
+[1,104,0]
+action: 0
+[1,105,0]
+action: 0
+[0,105,1]
+action: 2
+[1,105,0]
+action: 0
+[0,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[0,105,1]
+action: 2
+[1,105,0]
+action: 0
+[0,105,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[0,105,1]
+action: 2
+[1,105,0]
+action: 0
+[0,105,0]
+action: 1
+[1,105,0]
+action: 0
+[0,105,0]
+action: 1
+[1,104,0]
+action: 0
+[0,104,1]
+action: 2
+[1,104,0]
+action: 0
+[0,104,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[0,104,1]
+action: 2
+[1,105,0]
+action: 0
+[0,105,0]
+action: 1
+[1,104,0]
+action: 0
+[0,105,0]
+action: 1
+[1,104,1]
+action: 2
+[1,104,0]
+action: 0
+[1,105,0]
+action: 1
+[2,104,0]
+action: 0
+[1,104,1]
+action: 2
+[2,104,0]
+action: 0
+[1,104,0]
+action: 1
+[2,103,0]
+action: 0
+[2,103,0]
+action: 0
+[1,104,1]
+action: 2
+[2,104,0]
+action: 0
+[1,104,0]
+action: 1
+[2,104,0]
+action: 0
+[2,104,0]
+action: 0
+[1,104,1]
+action: 2
+[2,104,0]
+action: 0
+[1,104,0]
+action: 1
+[2,104,0]
+action: 0
+[1,104,0]
+action: 0
+[1,104,1]
+action: 2
+[1,104,0]
+action: 0
+[1,104,0]
+action: 1
+[2,104,0]
+action: 0
+[1,104,0]
+action: 0
+[1,104,1]
+action: 2
+[2,105,0]
+action: 0
+[1,105,0]
+action: 1
+[2,104,0]
+action: 0
+[2,104,0]
+action: 0
+[1,104,0]
+action: 0
+[1,105,1]
+action: 2
+[1,105,0]
+action: 0
+[1,105,0]
+action: 1
+[2,104,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,1]
+action: 2
+[1,105,0]
+action: 0
+[0,105,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[0,105,1]
+action: 2
+[1,105,0]
+action: 0
+[1,105,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[0,104,0]
+action: 1
+[1,104,1]
+action: 2
+[1,104,0]
+action: 0
+[1,104,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[0,104,1]
+action: 2
+[0,104,0]
+action: 1
+[1,103,0]
+action: 0
+[1,103,0]
+action: 1
+[1,102,0]
+action: 0
+[1,103,0]
+action: 0
+[1,103,1]
+action: 2
+[2,103,0]
+action: 0
+[1,104,0]
+action: 1
+[2,103,0]
+action: 0
+[1,103,0]
+action: 0
+[1,103,1]
+action: 2
+[1,103,0]
+action: 0
+[1,104,0]
+action: 1
+[1,103,0]
+action: 0
+[0,103,1]
+action: 2
+[1,104,0]
+action: 0
+[1,104,0]
+action: 1
+[2,103,0]
+action: 0
+[1,104,0]
+action: 0
+[1,104,1]
+action: 2
+[2,104,0]
+action: 0
+[1,104,0]
+action: 1
+[2,103,0]
+action: 0
+[1,103,0]
+action: 0
+[1,104,0]
+action: 0
+[0,104,1]
+action: 2
+[1,104,0]
+action: 0
+[1,104,0]
+action: 1
+[1,103,0]
+action: 0
+[1,103,0]
+action: 0
+[0,104,1]
+action: 2
+[1,104,0]
+action: 0
+[0,104,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[0,104,0]
+action: 1
+[1,103,1]
+action: 2
+[1,103,0]
+action: 0
+[1,104,0]
+action: 1
+[1,103,0]
+action: 0
+[1,103,0]
+action: 0
+[1,104,1]
+action: 2
+[1,104,0]
+action: 0
+[1,104,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[0,104,1]
+action: 2
+[1,104,0]
+action: 0
+[0,104,0]
+action: 1
+[1,103,0]
+action: 0
+[0,104,0]
+action: 1
+[1,103,1]
+action: 2
+[2,103,0]
+action: 0
+[1,104,0]
+action: 1
+[2,103,0]
+action: 0
+[2,104,0]
+action: 0
+[2,104,1]
+action: 2
+[2,104,0]
+action: 0
+[2,105,0]
+action: 1
+[3,104,0]
+action: 0
+[2,104,0]
+action: 0
+[2,104,0]
+action: 0
+[1,104,1]
+action: 2
+[2,105,0]
+action: 0
+[2,105,0]
+action: 1
+[2,104,0]
+action: 0
+[1,104,0]
+action: 0
+[1,104,1]
+action: 2
+[1,104,0]
+action: 0
+[1,105,0]
+action: 1
+[2,104,0]
+action: 0
+[1,104,0]
+action: 0
+[1,104,1]
+action: 2
+[1,104,0]
+action: 0
+[1,105,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[0,105,0]
+action: 1
+[1,104,1]
+action: 2
+[2,104,0]
+action: 0
+[1,104,0]
+action: 1
+[2,103,0]
+action: 0
+[2,103,0]
+action: 0
+[2,104,1]
+action: 2
+[2,104,0]
+action: 0
+[1,104,0]
+action: 1
+[2,103,0]
+action: 0
+[2,103,0]
+action: 0
+[1,103,1]
+action: 2
+[1,103,0]
+action: 0
+[1,104,0]
+action: 1
+[1,103,0]
+action: 0
+[1,103,0]
+action: 0
+[0,104,1]
+action: 2
+[1,104,0]
+action: 0
+[0,104,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[0,104,1]
+action: 2
+[1,105,0]
+action: 0
+[0,105,0]
+action: 1
+[1,104,0]
+action: 0
+[0,104,0]
+action: 1
+[1,103,0]
+action: 0
+[0,104,1]
+action: 2
+[1,104,0]
+action: 0
+[1,104,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[0,104,1]
+action: 2
+[1,105,0]
+action: 0
+[1,105,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[1,104,1]
+action: 2
+[1,104,0]
+action: 0
+[1,105,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[0,105,0]
+action: 1
+[1,104,1]
+action: 2
+[2,104,0]
+action: 0
+[1,104,0]
+action: 1
+[1,103,0]
+action: 0
+[1,104,0]
+action: 0
+[0,104,1]
+action: 2
+[1,104,0]
+action: 0
+[1,104,0]
+action: 1
+[1,103,0]
+action: 0
+[1,103,1]
+action: 2
+[2,103,0]
+action: 0
+[2,104,0]
+action: 1
+[3,103,0]
+action: 0
+[2,103,0]
+action: 0
+[2,103,0]
+action: 0
+[1,103,1]
+action: 2
+[2,103,0]
+action: 0
+[1,104,0]
+action: 1
+[2,103,0]
+action: 0
+[1,103,0]
+action: 0
+[1,104,0]
+action: 0
+[1,104,1]
+action: 2
+[1,104,0]
+action: 0
+[1,105,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,1]
+action: 2
+[1,105,0]
+action: 0
+[1,105,0]
+action: 1
+[2,104,0]
+action: 0
+[1,104,0]
+action: 0
+[1,104,1]
+action: 2
+[2,104,0]
+action: 0
+[1,105,0]
+action: 1
+[2,104,0]
+action: 0
+[1,104,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,1]
+action: 2
+[1,105,0]
+action: 0
+[1,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,1]
+action: 2
+[1,106,0]
+action: 0
+[1,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[0,105,1]
+action: 2
+[1,106,0]
+action: 0
+[0,106,0]
+action: 1
+[1,105,0]
+action: 0
+[0,105,0]
+action: 1
+[1,104,1]
+action: 2
+[2,104,0]
+action: 0
+[1,105,0]
+action: 1
+[2,104,0]
+action: 0
+[2,104,0]
+action: 0
+[1,104,0]
+action: 0
+[1,104,1]
+action: 2
+[1,105,0]
+action: 0
+[0,105,0]
+action: 1
+[1,104,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,1]
+action: 2
+[1,106,0]
+action: 0
+[1,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,1]
+action: 2
+[1,106,0]
+action: 0
+[1,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[0,105,1]
+action: 2
+[1,105,0]
+action: 0
+[1,106,0]
+action: 1
+[2,105,0]
+action: 0
+[1,105,0]
+action: 0
+[0,106,1]
+action: 2
+[1,106,0]
+action: 0
+[1,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[0,106,1]
+action: 2
+[1,106,0]
+action: 0
+[1,106,0]
+action: 1
+[1,106,0]
+action: 0
+[1,106,0]
+action: 0
+[1,106,0]
+action: 0
+[1,107,1]
+action: 2
+[1,107,0]
+action: 0
+[1,107,0]
+action: 1
+[1,106,0]
+action: 0
+[1,106,1]
+action: 2
+[2,107,0]
+action: 0
+[1,107,0]
+action: 1
+[2,106,0]
+action: 0
+[2,106,0]
+action: 0
+[1,106,1]
+action: 2
+[2,106,0]
+action: 0
+[1,107,0]
+action: 1
+[1,106,0]
+action: 0
+[1,106,0]
+action: 0
+[0,107,0]
+action: 1
+[1,106,1]
+action: 2
+[1,106,0]
+action: 0
+[1,107,0]
+action: 1
+[2,106,0]
+action: 0
+[1,106,0]
+action: 0
+[0,106,1]
+action: 2
+[1,107,0]
+action: 0
+[1,107,0]
+action: 1
+[1,106,0]
+action: 0
+[1,107,0]
+action: 0
+[1,107,1]
+action: 2
+[2,107,0]
+action: 0
+[1,107,0]
+action: 1
+[2,106,0]
+action: 0
+[1,106,0]
+action: 0
+[1,106,1]
+action: 2
+[1,106,0]
+action: 0
+[1,107,0]
+action: 1
+[2,106,0]
+action: 0
+[1,106,0]
+action: 0
+[1,106,0]
+action: 0
+[0,106,1]
+action: 2
+[1,106,0]
+action: 0
+[1,107,0]
+action: 1
+[1,106,0]
+action: 0
+[1,106,0]
+action: 0
+[1,107,1]
+action: 2
+[1,107,0]
+action: 0
+[1,107,0]
+action: 1
+[1,106,0]
+action: 0
+[1,106,0]
+action: 0
+[1,106,0]
+action: 0
+[0,107,1]
+action: 2
+[1,107,0]
+action: 0
+[0,107,0]
+action: 1
+[1,106,0]
+action: 0
+[0,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,106,1]
+action: 2
+[1,106,0]
+action: 0
+[1,106,0]
+action: 1
+[2,106,0]
+action: 0
+[2,106,0]
+action: 0
+[1,106,1]
+action: 2
+[2,106,0]
+action: 0
+[1,106,0]
+action: 1
+[2,105,0]
+action: 0
+[1,106,0]
+action: 0
+[1,106,1]
+action: 2
+[2,106,0]
+action: 0
+[1,107,0]
+action: 1
+[2,106,0]
+action: 0
+[1,106,0]
+action: 0
+[1,107,0]
+action: 0
+[0,107,1]
+action: 2
+[0,107,0]
+action: 1
+[1,106,0]
+action: 0
+[1,106,0]
+action: 1
+[2,105,0]
+action: 0
+[1,106,1]
+action: 2
+[2,106,0]
+action: 0
+[1,106,0]
+action: 1
+[2,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,1]
+action: 2
+[1,106,0]
+action: 0
+[1,106,0]
+action: 1
+[2,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,1]
+action: 2
+[2,105,0]
+action: 0
+[1,106,0]
+action: 1
+[2,105,0]
+action: 0
+[2,105,0]
+action: 0
+[2,106,1]
+action: 2
+[2,106,0]
+action: 0
+[2,106,0]
+action: 1
+[2,105,0]
+action: 0
+[2,105,0]
+action: 0
+[2,105,0]
+action: 0
+[1,106,1]
+action: 2
+[2,106,0]
+action: 0
+[1,106,0]
+action: 1
+[2,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,1]
+action: 2
+[2,106,0]
+action: 0
+[1,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[0,106,1]
+action: 2
+[1,106,0]
+action: 0
+[1,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[0,105,1]
+action: 2
+[1,106,0]
+action: 0
+[1,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,106,0]
+action: 0
+[0,106,0]
+action: 1
+[1,105,1]
+action: 2
+[2,105,0]
+action: 0
+[1,106,0]
+action: 1
+[2,105,0]
+action: 0
+[1,106,0]
+action: 0
+[1,106,1]
+action: 2
+[2,106,0]
+action: 0
+[1,106,0]
+action: 1
+[2,105,0]
+action: 0
+[2,105,0]
+action: 0
+[1,106,0]
+action: 0
+[1,106,1]
+action: 2
+[1,106,0]
+action: 0
+[1,107,0]
+action: 1
+[1,106,0]
+action: 0
+[1,106,0]
+action: 0
+[0,106,1]
+action: 2
+[1,106,0]
+action: 0
+[1,106,0]
+action: 1
+[1,106,0]
+action: 0
+[1,106,0]
+action: 0
+[0,106,1]
+action: 2
+[1,106,0]
+action: 0
+[1,106,0]
+action: 1
+[1,106,0]
+action: 0
+[1,106,0]
+action: 0
+[0,106,1]
+action: 2
+[1,106,0]
+action: 0
+[0,106,0]
+action: 1
+[1,106,0]
+action: 0
+[0,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,1]
+action: 2
+[1,105,0]
+action: 0
+[1,105,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[0,105,1]
+action: 2
+[1,106,0]
+action: 0
+[1,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[0,106,1]
+action: 2
+[1,106,0]
+action: 0
+[0,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[0,105,1]
+action: 2
+[0,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,1]
+action: 2
+[1,105,0]
+action: 0
+[1,105,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[0,105,1]
+action: 2
+[1,105,0]
+action: 0
+[1,105,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[0,105,0]
+action: 1
+[1,105,1]
+action: 2
+[1,105,0]
+action: 0
+[1,105,0]
+action: 1
+[2,104,0]
+action: 0
+[1,104,0]
+action: 0
+[0,104,1]
+action: 2
+[1,105,0]
+action: 0
+[1,105,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[0,104,1]
+action: 2
+[1,105,0]
+action: 0
+[0,105,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[0,104,0]
+action: 1
+[1,103,1]
+action: 2
+[1,104,0]
+action: 0
+[1,104,0]
+action: 1
+[1,103,0]
+action: 0
+[0,103,0]
+action: 1
+[1,102,1]
+action: 2
+[1,103,0]
+action: 0
+[1,103,0]
+action: 1
+[2,102,0]
+action: 0
+[1,102,0]
+action: 0
+[1,102,0]
+action: 0
+[0,103,1]
+action: 2
+[1,103,0]
+action: 0
+[0,103,0]
+action: 1
+[1,102,0]
+action: 0
+[1,102,0]
+action: 0
+[0,102,1]
+action: 2
+[0,103,0]
+action: 1
+[1,102,0]
+action: 0
+[1,102,0]
+action: 1
+[1,102,0]
+action: 0
+[1,102,1]
+action: 2
+[1,102,0]
+action: 0
+[1,103,0]
+action: 1
+[1,102,0]
+action: 0
+[1,102,0]
+action: 0
+[0,103,0]
+action: 1
+[1,102,1]
+action: 2
+[1,102,0]
+action: 0
+[1,102,0]
+action: 1
+[1,101,0]
+action: 0
+[1,101,0]
+action: 0
+[0,102,1]
+action: 2
+[1,102,0]
+action: 0
+[0,102,0]
+action: 1
+[1,101,0]
+action: 0
+[1,101,0]
+action: 0
+[0,102,0]
+action: 1
+[1,101,1]
+action: 2
+[2,101,0]
+action: 0
+[1,101,0]
+action: 1
+[2,100,0]
+action: 0
+[1,101,0]
+action: 0
+[1,101,1]
+action: 2
+[1,101,0]
+action: 0
+[1,101,0]
+action: 1
+[1,100,0]
+action: 0
+[1,100,0]
+action: 0
+[0,101,0]
+action: 1
+[1,100,1]
+action: 2
+[1,100,0]
+action: 0
+[1,100,0]
+action: 1
+[2,99,0]
+action: 0
+[1,99,0]
+action: 0
+[1,100,1]
+action: 2
+[2,100,0]
+action: 0
+[1,100,0]
+action: 1
+[1,100,0]
+action: 0
+[1,100,0]
+action: 0
+[0,100,1]
+action: 2
+[1,100,0]
+action: 0
+[1,101,0]
+action: 1
+[1,100,0]
+action: 0
+[1,101,0]
+action: 0
+[0,101,0]
+action: 1
+[1,100,1]
+action: 2
+[1,100,0]
+action: 0
+[1,100,0]
+action: 1
+[2,99,0]
+action: 0
+[2,100,1]
+action: 2
+[2,100,0]
+action: 0
+[2,100,0]
+action: 1
+[2,99,0]
+action: 0
+[2,99,0]
+action: 0
+[1,100,0]
+action: 0
+[1,100,1]
+action: 2
+[2,100,0]
+action: 0
+[1,101,0]
+action: 1
+[2,100,0]
+action: 0
+[1,100,0]
+action: 0
+[1,101,1]
+action: 2
+[2,101,0]
+action: 0
+[2,101,0]
+action: 1
+[2,100,0]
+action: 0
+[1,100,0]
+action: 0
+[1,101,0]
+action: 0
+[1,101,1]
+action: 2
+[1,101,0]
+action: 0
+[1,102,0]
+action: 1
+[2,101,0]
+action: 0
+[1,101,1]
+action: 2
+[2,102,0]
+action: 0
+[1,102,0]
+action: 1
+[2,101,0]
+action: 0
+[1,101,0]
+action: 0
+[1,101,0]
+action: 0
+[1,102,1]
+action: 2
+[2,102,0]
+action: 0
+[1,102,0]
+action: 1
+[2,102,0]
+action: 0
+[1,102,0]
+action: 0
+[1,102,1]
+action: 2
+[1,103,0]
+action: 0
+[1,103,0]
+action: 1
+[2,102,0]
+action: 0
+[1,103,0]
+action: 0
+[1,103,1]
+action: 2
+[2,103,0]
+action: 0
+[1,104,0]
+action: 1
+[2,103,0]
+action: 0
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[0,104,1]
+action: 2
+[1,104,0]
+action: 0
+[0,104,0]
+action: 1
+[1,103,0]
+action: 0
+[1,103,1]
+action: 2
+[1,104,0]
+action: 0
+[1,104,0]
+action: 1
+[1,103,0]
+action: 0
+[1,103,0]
+action: 0
+[0,103,0]
+action: 1
+[1,103,1]
+action: 2
+[2,103,0]
+action: 0
+[1,104,0]
+action: 1
+[2,103,0]
+action: 0
+[1,103,0]
+action: 0
+[1,103,1]
+action: 2
+[1,104,0]
+action: 0
+[1,104,0]
+action: 1
+[1,103,0]
+action: 0
+[1,104,0]
+action: 0
+[1,104,1]
+action: 2
+[2,104,0]
+action: 0
+[1,105,0]
+action: 1
+[2,104,0]
+action: 0
+[1,104,0]
+action: 0
+[1,105,1]
+action: 2
+[2,105,0]
+action: 0
+[1,105,0]
+action: 1
+[2,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,1]
+action: 2
+[1,106,0]
+action: 0
+[1,106,0]
+action: 1
+[1,105,0]
+action: 0
+[0,105,0]
+action: 1
+[1,104,1]
+action: 2
+[1,104,0]
+action: 0
+[1,105,0]
+action: 1
+[2,104,0]
+action: 0
+[2,104,0]
+action: 0
+[1,105,1]
+action: 2
+[2,105,0]
+action: 0
+[1,106,0]
+action: 1
+[2,105,0]
+action: 0
+[2,105,0]
+action: 0
+[1,105,1]
+action: 2
+[2,105,0]
+action: 0
+[1,106,0]
+action: 1
+[2,105,0]
+action: 0
+[2,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,1]
+action: 2
+[2,106,0]
+action: 0
+[1,106,0]
+action: 1
+[2,105,0]
+action: 0
+[1,106,0]
+action: 0
+[1,106,1]
+action: 2
+[2,106,0]
+action: 0
+[1,107,0]
+action: 1
+[2,106,0]
+action: 0
+[1,106,0]
+action: 0
+[1,106,1]
+action: 2
+[1,106,0]
+action: 0
+[1,107,0]
+action: 1
+[1,106,0]
+action: 0
+[1,106,0]
+action: 0
+[0,106,0]
+action: 1
+[1,105,1]
+action: 2
+[2,106,0]
+action: 0
+[1,106,0]
+action: 1
+[2,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,1]
+action: 2
+[2,105,0]
+action: 0
+[1,106,0]
+action: 1
+[2,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,1]
+action: 2
+[1,105,0]
+action: 0
+[1,105,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[0,105,1]
+action: 2
+[1,106,0]
+action: 0
+[0,106,0]
+action: 1
+[1,105,0]
+action: 0
+[0,105,0]
+action: 1
+[1,104,1]
+action: 2
+[1,104,0]
+action: 0
+[1,105,0]
+action: 1
+[2,104,0]
+action: 0
+[1,104,0]
+action: 0
+[0,104,1]
+action: 2
+[1,104,0]
+action: 0
+[1,104,0]
+action: 1
+[2,104,0]
+action: 0
+[1,104,0]
+action: 0
+[1,104,1]
+action: 2
+[1,104,0]
+action: 0
+[1,104,0]
+action: 1
+[1,103,0]
+action: 0
+[1,104,0]
+action: 0
+[1,104,1]
+action: 2
+[1,104,0]
+action: 0
+[1,104,0]
+action: 1
+[1,103,0]
+action: 0
+[1,103,0]
+action: 0
+[0,104,1]
+action: 2
+[1,104,0]
+action: 0
+[0,104,0]
+action: 1
+[1,104,0]
+action: 0
+[0,104,0]
+action: 1
+[1,103,1]
+action: 2
+[2,104,0]
+action: 0
+[2,104,0]
+action: 1
+[3,103,0]
+action: 0
+[2,103,0]
+action: 0
+[1,104,0]
+action: 0
+[1,104,1]
+action: 2
+[2,104,0]
+action: 0
+[1,105,0]
+action: 1
+[2,104,0]
+action: 0
+[2,104,0]
+action: 0
+[1,104,1]
+action: 2
+[2,104,0]
+action: 0
+[1,105,0]
+action: 1
+[2,104,0]
+action: 0
+[2,104,0]
+action: 0
+[1,104,1]
+action: 2
+[2,104,0]
+action: 0
+[1,105,0]
+action: 1
+[2,104,0]
+action: 0
+[2,104,0]
+action: 0
+[1,104,1]
+action: 2
+[2,104,0]
+action: 0
+[1,104,0]
+action: 1
+[2,103,0]
+action: 0
+[1,104,0]
+action: 0
+[1,104,1]
+action: 2
+[1,104,0]
+action: 0
+[1,105,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[0,105,1]
+action: 2
+[1,105,0]
+action: 0
+[0,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[0,105,0]
+action: 1
+[1,104,1]
+action: 2
+[1,104,0]
+action: 0
+[1,105,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[1,104,1]
+action: 2
+[1,104,0]
+action: 0
+[1,105,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[0,104,1]
+action: 2
+[1,104,0]
+action: 0
+[1,104,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[0,104,1]
+action: 2
+[1,104,0]
+action: 0
+[0,104,0]
+action: 1
+[1,103,0]
+action: 0
+[1,104,0]
+action: 0
+[0,104,1]
+action: 2
+[1,105,0]
+action: 0
+[0,105,0]
+action: 1
+[1,104,0]
+action: 0
+[0,105,0]
+action: 1
+[1,104,1]
+action: 2
+[1,104,0]
+action: 0
+[1,104,0]
+action: 1
+[1,103,0]
+action: 0
+[1,104,0]
+action: 0
+[0,104,0]
+action: 1
+[1,103,1]
+action: 2
+[2,103,0]
+action: 0
+[1,103,0]
+action: 1
+[2,102,0]
+action: 0
+[1,102,0]
+action: 0
+[1,103,1]
+action: 2
+[2,103,0]
+action: 0
+[2,103,0]
+action: 1
+[2,103,0]
+action: 0
+[1,103,0]
+action: 0
+[1,104,1]
+action: 2
+[2,104,0]
+action: 0
+[1,104,0]
+action: 1
+[2,104,0]
+action: 0
+[1,104,0]
+action: 0
+[1,104,1]
+action: 2
+[2,104,0]
+action: 0
+[1,105,0]
+action: 1
+[2,104,0]
+action: 0
+[2,104,0]
+action: 0
+[2,104,0]
+action: 0
+[1,104,1]
+action: 2
+[2,104,0]
+action: 0
+[1,105,0]
+action: 1
+[2,104,0]
+action: 0
+[2,104,0]
+action: 0
+[2,104,1]
+action: 2
+[2,104,0]
+action: 0
+[1,105,0]
+action: 1
+[2,104,0]
+action: 0
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[1,105,1]
+action: 2
+[1,105,0]
+action: 0
+[0,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,1]
+action: 2
+[2,106,0]
+action: 0
+[2,106,0]
+action: 1
+[3,105,0]
+action: 0
+[2,105,0]
+action: 0
+[2,105,0]
+action: 0
+[2,105,1]
+action: 2
+[2,105,0]
+action: 0
+[2,106,0]
+action: 1
+[3,105,0]
+action: 0
+[2,105,0]
+action: 0
+[1,105,1]
+action: 2
+[2,105,0]
+action: 0
+[1,106,0]
+action: 1
+[2,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,1]
+action: 2
+[2,105,0]
+action: 0
+[1,105,0]
+action: 1
+[2,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,1]
+action: 2
+[1,105,0]
+action: 0
+[1,106,0]
+action: 1
+[2,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,1]
+action: 2
+[2,106,0]
+action: 0
+[1,106,0]
+action: 1
+[2,105,0]
+action: 0
+[2,105,0]
+action: 0
+[1,105,1]
+action: 2
+[2,105,0]
+action: 0
+[1,105,0]
+action: 1
+[2,105,0]
+action: 0
+[2,105,0]
+action: 0
+[2,105,0]
+action: 0
+[1,106,1]
+action: 2
+[2,106,0]
+action: 0
+[1,106,0]
+action: 1
+[2,106,0]
+action: 0
+[2,106,0]
+action: 0
+[1,106,1]
+action: 2
+[2,107,0]
+action: 0
+[1,107,0]
+action: 1
+[1,106,0]
+action: 0
+[1,106,0]
+action: 0
+[0,106,1]
+action: 2
+[1,106,0]
+action: 0
+[0,107,0]
+action: 1
+[1,106,0]
+action: 0
+[1,106,0]
+action: 0
+[0,106,0]
+action: 1
+[1,105,1]
+action: 2
+[2,105,0]
+action: 0
+[1,106,0]
+action: 1
+[2,105,0]
+action: 0
+[2,105,1]
+action: 2
+[2,106,0]
+action: 0
+[1,106,0]
+action: 1
+[2,106,0]
+action: 0
+[1,106,0]
+action: 0
+[1,106,0]
+action: 0
+[1,107,1]
+action: 2
+[1,107,0]
+action: 0
+[1,107,0]
+action: 1
+[2,106,0]
+action: 0
+[2,107,1]
+action: 2
+[2,107,0]
+action: 0
+[1,107,0]
+action: 1
+[2,107,0]
+action: 0
+[1,107,0]
+action: 0
+[1,107,1]
+action: 2
+[2,107,0]
+action: 0
+[1,107,0]
+action: 1
+[2,107,0]
+action: 0
+[2,107,0]
+action: 0
+[1,107,0]
+action: 0
+[1,107,1]
+action: 2
+[1,107,0]
+action: 0
+[0,107,0]
+action: 1
+[1,107,0]
+action: 0
+[0,107,0]
+action: 1
+[1,106,1]
+action: 2
+[1,106,0]
+action: 0
+[1,106,0]
+action: 1
+[2,106,0]
+action: 0
+[1,106,0]
+action: 0
+[1,106,1]
+action: 2
+[2,106,0]
+action: 0
+[1,107,0]
+action: 1
+[2,106,0]
+action: 0
+[1,106,0]
+action: 0
+[1,106,0]
+action: 0
+[1,106,1]
+action: 2
+[1,106,0]
+action: 0
+[1,107,0]
+action: 1
+[1,106,0]
+action: 0
+[1,106,0]
+action: 0
+[0,106,1]
+action: 2
+[0,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,1]
+action: 2
+[1,105,0]
+action: 0
+[1,105,0]
+action: 1
+[2,104,0]
+action: 0
+[2,105,0]
+action: 0
+[1,105,1]
+action: 2
+[1,105,0]
+action: 0
+[1,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[0,105,0]
+action: 1
+[1,104,1]
+action: 2
+[2,104,0]
+action: 0
+[1,105,0]
+action: 1
+[2,104,0]
+action: 0
+[1,104,1]
+action: 2
+[2,104,0]
+action: 0
+[1,105,0]
+action: 1
+[2,104,0]
+action: 0
+[2,104,0]
+action: 0
+[1,104,0]
+action: 0
+[1,104,1]
+action: 2
+[1,104,0]
+action: 0
+[0,104,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[0,104,1]
+action: 2
+[1,105,0]
+action: 0
+[0,105,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[0,104,1]
+action: 2
+[1,104,0]
+action: 0
+[0,105,0]
+action: 1
+[1,104,0]
+action: 0
+[0,104,0]
+action: 1
+[1,103,1]
+action: 2
+[1,103,0]
+action: 0
+[1,104,0]
+action: 1
+[1,103,0]
+action: 0
+[1,103,0]
+action: 0
+[0,103,1]
+action: 2
+[1,103,0]
+action: 0
+[1,103,0]
+action: 1
+[1,103,0]
+action: 0
+[1,103,0]
+action: 0
+[0,103,0]
+action: 1
+[1,102,1]
+action: 2
+[1,102,0]
+action: 0
+[1,102,0]
+action: 1
+[1,102,0]
+action: 0
+[1,102,0]
+action: 0
+[0,102,1]
+action: 2
+[1,103,0]
+action: 0
+[1,103,0]
+action: 1
+[1,102,0]
+action: 0
+[1,103,0]
+action: 0
+[0,103,1]
+action: 2
+[1,104,0]
+action: 0
+[0,104,0]
+action: 1
+[1,103,0]
+action: 0
+[0,103,0]
+action: 1
+[1,102,1]
+action: 2
+[2,102,0]
+action: 0
+[1,103,0]
+action: 1
+[2,102,0]
+action: 0
+[1,102,0]
+action: 0
+[1,102,1]
+action: 2
+[2,102,0]
+action: 0
+[1,103,0]
+action: 1
+[2,102,0]
+action: 0
+[1,102,0]
+action: 0
+[1,102,1]
+action: 2
+[2,102,0]
+action: 0
+[1,103,0]
+action: 1
+[2,102,0]
+action: 0
+[1,102,0]
+action: 0
+[1,102,1]
+action: 2
+[1,102,0]
+action: 0
+[1,102,0]
+action: 1
+[1,102,0]
+action: 0
+[1,102,0]
+action: 0
+[1,102,1]
+action: 2
+[1,103,0]
+action: 0
+[1,103,0]
+action: 1
+[1,102,0]
+action: 0
+[1,103,0]
+action: 0
+[0,103,1]
+action: 2
+[1,103,0]
+action: 0
+[1,104,0]
+action: 1
+[1,103,0]
+action: 0
+[1,103,0]
+action: 0
+[0,103,0]
+action: 1
+[1,102,1]
+action: 2
+[2,102,0]
+action: 0
+[1,103,0]
+action: 1
+[2,102,0]
+action: 0
+[1,102,0]
+action: 0
+[1,102,1]
+action: 2
+[1,102,0]
+action: 0
+[1,103,0]
+action: 1
+[1,102,0]
+action: 0
+[1,102,0]
+action: 0
+[0,103,1]
+action: 2
+[0,103,0]
+action: 1
+[1,102,0]
+action: 0
+[1,103,0]
+action: 1
+[1,102,0]
+action: 0
+[1,102,1]
+action: 2
+[2,102,0]
+action: 0
+[1,102,0]
+action: 1
+[2,102,0]
+action: 0
+[1,102,0]
+action: 0
+[1,102,1]
+action: 2
+[2,102,0]
+action: 0
+[1,103,0]
+action: 1
+[2,102,0]
+action: 0
+[2,102,0]
+action: 0
+[1,103,1]
+action: 2
+[2,103,0]
+action: 0
+[1,103,0]
+action: 1
+[2,103,0]
+action: 0
+[2,103,0]
+action: 0
+[1,103,0]
+action: 0
+[1,103,1]
+action: 2
+[2,103,0]
+action: 0
+[1,103,0]
+action: 1
+[2,103,0]
+action: 0
+[1,103,0]
+action: 0
+[1,103,1]
+action: 2
+[2,103,0]
+action: 0
+[1,103,0]
+action: 1
+[2,102,0]
+action: 0
+[1,103,0]
+action: 0
+[1,103,0]
+action: 0
+[1,103,1]
+action: 2
+[2,104,0]
+action: 0
+[1,104,0]
+action: 1
+[2,103,0]
+action: 0
+[2,104,0]
+action: 0
+[1,104,1]
+action: 2
+[2,105,0]
+action: 0
+[2,105,0]
+action: 1
+[2,104,0]
+action: 0
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[1,104,1]
+action: 2
+[1,105,0]
+action: 0
+[1,105,0]
+action: 1
+[2,105,0]
+action: 0
+[1,105,0]
+action: 0
+[0,105,1]
+action: 2
+[1,106,0]
+action: 0
+[1,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[0,105,1]
+action: 2
+[0,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,1]
+action: 2
+[1,104,0]
+action: 0
+[1,105,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[0,105,1]
+action: 2
+[1,105,0]
+action: 0
+[0,105,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[0,105,1]
+action: 2
+[0,105,0]
+action: 1
+[1,104,0]
+action: 0
+[0,105,0]
+action: 1
+[1,104,0]
+action: 0
+[0,104,1]
+action: 2
+[1,105,0]
+action: 0
+[0,105,0]
+action: 1
+[1,104,0]
+action: 0
+[0,104,0]
+action: 1
+[1,103,1]
+action: 2
+[2,103,0]
+action: 0
+[1,104,0]
+action: 1
+[2,103,0]
+action: 0
+[1,103,0]
+action: 0
+[1,103,1]
+action: 2
+[1,103,0]
+action: 0
+[1,103,0]
+action: 1
+[1,103,0]
+action: 0
+[1,103,0]
+action: 0
+[1,103,1]
+action: 2
+[1,103,0]
+action: 0
+[1,103,0]
+action: 1
+[1,103,0]
+action: 0
+[1,103,0]
+action: 0
+[0,103,0]
+action: 1
+[1,103,1]
+action: 2
+[1,103,0]
+action: 0
+[0,103,0]
+action: 1
+[1,103,0]
+action: 0
+[1,103,0]
+action: 0
+[0,103,1]
+action: 2
+[1,104,0]
+action: 0
+[0,104,0]
+action: 1
+[1,103,0]
+action: 0
+[0,103,1]
+action: 2
+[1,103,0]
+action: 0
+[0,103,0]
+action: 1
+[1,103,0]
+action: 0
+[0,103,0]
+action: 1
+[1,102,0]
+action: 0
+[0,103,1]
+action: 2
+[1,103,0]
+action: 0
+[0,103,0]
+action: 1
+[1,103,0]
+action: 0
+[0,103,0]
+action: 1
+[1,102,1]
+action: 2
+[1,102,0]
+action: 0
+[1,102,0]
+action: 1
+[1,101,0]
+action: 0
+[1,102,0]
+action: 0
+[0,102,0]
+action: 1
+[1,101,1]
+action: 2
+[2,102,0]
+action: 0
+[1,102,0]
+action: 1
+[2,101,0]
+action: 0
+[2,101,0]
+action: 0
+[1,101,1]
+action: 2
+[2,101,0]
+action: 0
+[1,102,0]
+action: 1
+[1,101,0]
+action: 0
+[1,101,0]
+action: 0
+[1,101,1]
+action: 2
+[1,101,0]
+action: 0
+[1,102,0]
+action: 1
+[2,101,0]
+action: 0
+[1,101,0]
+action: 0
+[1,101,1]
+action: 2
+[2,101,0]
+action: 0
+[1,101,0]
+action: 1
+[2,100,0]
+action: 0
+[1,101,0]
+action: 0
+[1,101,1]
+action: 2
+[1,101,0]
+action: 0
+[1,102,0]
+action: 1
+[1,101,0]
+action: 0
+[1,101,0]
+action: 0
+[1,101,1]
+action: 2
+[1,101,0]
+action: 0
+[1,101,0]
+action: 1
+[2,100,0]
+action: 0
+[1,100,0]
+action: 0
+[1,101,0]
+action: 0
+[0,101,1]
+action: 2
+[1,101,0]
+action: 0
+[0,102,0]
+action: 1
+[1,101,0]
+action: 0
+[0,101,1]
+action: 2
+[1,101,0]
+action: 0
+[0,101,0]
+action: 1
+[1,100,0]
+action: 0
+[0,101,0]
+action: 1
+[1,100,1]
+action: 2
+[1,100,0]
+action: 0
+[1,101,0]
+action: 1
+[1,100,0]
+action: 0
+[1,101,0]
+action: 0
+[1,101,1]
+action: 2
+[1,101,0]
+action: 0
+[1,101,0]
+action: 1
+[1,100,0]
+action: 0
+[1,100,0]
+action: 0
+[0,101,1]
+action: 2
+[1,101,0]
+action: 0
+[0,101,0]
+action: 1
+[1,101,0]
+action: 0
+[0,101,0]
+action: 1
+[1,100,0]
+action: 0
+[0,101,1]
+action: 2
+[1,101,0]
+action: 0
+[1,101,0]
+action: 1
+[2,101,0]
+action: 0
+[1,101,1]
+action: 2
+[2,102,0]
+action: 0
+[2,102,0]
+action: 1
+[2,101,0]
+action: 0
+[2,102,0]
+action: 0
+[2,102,1]
+action: 2
+[2,102,0]
+action: 0
+[2,102,0]
+action: 1
+[2,101,0]
+action: 0
+[2,101,0]
+action: 0
+[1,102,1]
+action: 2
+[2,102,0]
+action: 0
+[1,102,0]
+action: 1
+[2,101,0]
+action: 0
+[2,101,0]
+action: 0
+[2,102,1]
+action: 2
+[2,102,0]
+action: 0
+[2,102,0]
+action: 1
+[2,102,0]
+action: 0
+[2,102,0]
+action: 0
+[1,103,1]
+action: 2
+[2,103,0]
+action: 0
+[2,103,0]
+action: 1
+[2,102,0]
+action: 0
+[2,102,0]
+action: 0
+[1,102,1]
+action: 2
+[2,102,0]
+action: 0
+[2,103,0]
+action: 1
+[3,102,0]
+action: 0
+[3,102,0]
+action: 0
+[2,103,1]
+action: 2
+[3,103,0]
+action: 0
+[2,103,0]
+action: 1
+[3,103,0]
+action: 0
+[2,103,0]
+action: 0
+[2,103,0]
+action: 0
+[1,104,1]
+action: 2
+[2,104,0]
+action: 0
+[1,104,0]
+action: 1
+[2,103,0]
+action: 0
+[2,104,1]
+action: 2
+[2,104,0]
+action: 0
+[2,104,0]
+action: 1
+[3,104,0]
+action: 0
+[2,104,0]
+action: 0
+[2,105,0]
+action: 0
+[1,105,1]
+action: 2
+[2,105,0]
+action: 0
+[2,106,0]
+action: 1
+[3,105,0]
+action: 0
+[2,105,0]
+action: 0
+[2,106,1]
+action: 2
+[2,106,0]
+action: 0
+[2,106,0]
+action: 1
+[2,105,0]
+action: 0
+[2,105,1]
+action: 2
+[2,105,0]
+action: 0
+[1,106,0]
+action: 1
+[2,105,0]
+action: 0
+[2,105,0]
+action: 0
+[2,105,0]
+action: 0
+[1,105,1]
+action: 2
+[2,105,0]
+action: 0
+[2,106,0]
+action: 1
+[2,105,0]
+action: 0
+[2,106,0]
+action: 0
+[1,106,1]
+action: 2
+[2,106,0]
+action: 0
+[1,106,0]
+action: 1
+[2,105,0]
+action: 0
+[2,105,0]
+action: 0
+[2,106,1]
+action: 2
+[2,106,0]
+action: 0
+[2,106,0]
+action: 1
+[2,105,0]
+action: 0
+[2,105,0]
+action: 0
+[1,106,1]
+action: 2
+[2,106,0]
+action: 0
+[1,106,0]
+action: 1
+[2,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,1]
+action: 2
+[1,106,0]
+action: 0
+[1,106,0]
+action: 1
+[2,105,0]
+action: 0
+[1,106,0]
+action: 0
+[1,106,1]
+action: 2
+[2,107,0]
+action: 0
+[1,107,0]
+action: 1
+[1,106,0]
+action: 0
+[1,107,0]
+action: 0
+[1,107,1]
+action: 2
+[1,107,0]
+action: 0
+[1,107,0]
+action: 1
+[1,106,0]
+action: 0
+[0,107,0]
+action: 1
+[1,106,0]
+action: 0
+[1,106,1]
+action: 2
+[2,107,0]
+action: 0
+[1,107,0]
+action: 1
+[1,106,0]
+action: 0
+[1,107,0]
+action: 0
+[0,107,1]
+action: 2
+[1,107,0]
+action: 0
+[1,107,0]
+action: 1
+[2,106,0]
+action: 0
+[1,106,0]
+action: 0
+[1,107,0]
+action: 0
+[0,107,1]
+action: 2
+[1,107,0]
+action: 0
+[0,107,0]
+action: 1
+[1,106,0]
+action: 0
+[1,106,0]
+action: 0
+[0,107,0]
+action: 1
+[1,106,1]
+action: 2
+[1,106,0]
+action: 0
+[1,107,0]
+action: 1
+[1,106,0]
+action: 0
+[1,106,0]
+action: 0
+[0,106,1]
+action: 2
+[1,106,0]
+action: 0
+[0,106,0]
+action: 1
+[1,106,0]
+action: 0
+[1,106,0]
+action: 0
+[0,106,0]
+action: 1
+[1,106,1]
+action: 2
+[1,106,0]
+action: 0
+[1,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[0,105,1]
+action: 2
+[1,106,0]
+action: 0
+[0,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[0,105,1]
+action: 2
+[1,105,0]
+action: 0
+[1,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[0,105,1]
+action: 2
+[1,105,0]
+action: 0
+[0,105,0]
+action: 1
+[1,104,0]
+action: 0
+[1,105,0]
+action: 0
+[0,105,1]
+action: 2
+[1,105,0]
+action: 0
+[1,106,0]
+action: 1
+[2,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,1]
+action: 2
+[1,105,0]
+action: 0
+[1,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,1]
+action: 2
+[1,105,0]
+action: 0
+[1,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[0,106,0]
+action: 1
+[1,105,1]
+action: 2
+[2,105,0]
+action: 0
+[2,105,0]
+action: 1
+[2,104,0]
+action: 0
+[2,105,0]
+action: 0
+[2,105,1]
+action: 2
+[2,105,0]
+action: 0
+[1,105,0]
+action: 1
+[2,104,0]
+action: 0
+[2,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,1]
+action: 2
+[1,105,0]
+action: 0
+[0,105,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,1]
+action: 2
+[1,105,0]
+action: 0
+[1,105,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[0,105,0]
+action: 1
+[1,104,1]
+action: 2
+[2,104,0]
+action: 0
+[1,104,0]
+action: 1
+[2,103,0]
+action: 0
+[1,103,0]
+action: 0
+[1,104,1]
+action: 2
+[2,104,0]
+action: 0
+[1,104,0]
+action: 1
+[2,103,0]
+action: 0
+[1,103,0]
+action: 0
+[1,104,0]
+action: 0
+[0,104,1]
+action: 2
+[1,104,0]
+action: 0
+[0,105,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[0,105,1]
+action: 2
+[1,105,0]
+action: 0
+[1,105,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[0,105,0]
+action: 1
+[1,104,1]
+action: 2
+[2,104,0]
+action: 0
+[2,104,0]
+action: 1
+[2,103,0]
+action: 0
+[1,104,0]
+action: 0
+[1,104,1]
+action: 2
+[2,104,0]
+action: 0
+[1,104,0]
+action: 1
+[2,103,0]
+action: 0
+[2,104,0]
+action: 0
+[2,104,1]
+action: 2
+[2,104,0]
+action: 0
+[2,105,0]
+action: 1
+[2,104,0]
+action: 0
+[2,104,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,1]
+action: 2
+[1,105,0]
+action: 0
+[1,105,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[0,104,1]
+action: 2
+[1,105,0]
+action: 0
+[1,105,0]
+action: 1
+[1,104,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,1]
+action: 2
+[2,105,0]
+action: 0
+[1,106,0]
+action: 1
+[2,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,106,0]
+action: 0
+[1,106,1]
+action: 2
+[1,106,0]
+action: 0
+[1,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,106,0]
+action: 0
+[0,106,1]
+action: 2
+[0,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,1]
+action: 2
+[1,105,0]
+action: 0
+[1,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[0,105,1]
+action: 2
+[1,105,0]
+action: 0
+[0,105,0]
+action: 1
+[1,105,0]
+action: 0
+[0,105,0]
+action: 1
+[1,104,1]
+action: 2
+[2,104,0]
+action: 0
+[1,104,0]
+action: 1
+[2,104,0]
+action: 0
+[1,104,0]
+action: 0
+[1,104,1]
+action: 2
+[2,105,0]
+action: 0
+[1,105,0]
+action: 1
+[2,104,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,1]
+action: 2
+[2,105,0]
+action: 0
+[1,105,0]
+action: 1
+[2,104,0]
+action: 0
+[1,104,0]
+action: 0
+[1,105,0]
+action: 0
+[0,105,1]
+action: 2
+[1,105,0]
+action: 0
+[0,105,0]
+action: 1
+[1,104,0]
+action: 0
+[0,104,0]
+action: 1
+[1,104,1]
+action: 2
+[1,104,0]
+action: 0
+[1,104,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[1,104,1]
+action: 2
+[1,105,0]
+action: 0
+[1,105,0]
+action: 1
+[1,104,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[0,105,1]
+action: 2
+[1,105,0]
+action: 0
+[0,105,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[0,105,1]
+action: 2
+[1,105,0]
+action: 0
+[1,105,0]
+action: 1
+[2,104,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,1]
+action: 2
+[1,105,0]
+action: 0
+[1,105,0]
+action: 1
+[2,104,0]
+action: 0
+[1,104,0]
+action: 0
+[1,105,1]
+action: 2
+[1,105,0]
+action: 0
+[1,105,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[0,105,0]
+action: 1
+[1,105,1]
+action: 2
+[2,105,0]
+action: 0
+[1,105,0]
+action: 1
+[2,104,0]
+action: 0
+[1,104,0]
+action: 0
+[1,104,1]
+action: 2
+[2,105,0]
+action: 0
+[1,105,0]
+action: 1
+[2,104,0]
+action: 0
+[2,105,0]
+action: 0
+[1,105,1]
+action: 2
+[2,105,0]
+action: 0
+[1,105,0]
+action: 1
+[2,104,0]
+action: 0
+[2,104,0]
+action: 0
+[1,104,0]
+action: 0
+[0,104,1]
+action: 2
+[1,105,0]
+action: 0
+[0,105,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[0,104,0]
+action: 1
+[1,104,1]
+action: 2
+[1,104,0]
+action: 0
+[1,104,0]
+action: 1
+[1,103,0]
+action: 0
+[1,104,0]
+action: 0
+[0,104,1]
+action: 2
+[1,104,0]
+action: 0
+[0,104,0]
+action: 1
+[1,103,0]
+action: 0
+[0,104,0]
+action: 1
+[1,103,1]
+action: 2
+[1,103,0]
+action: 0
+[1,103,0]
+action: 1
+[2,102,0]
+action: 0
+[1,102,0]
+action: 0
+[1,102,1]
+action: 2
+[1,103,0]
+action: 0
+[1,103,0]
+action: 1
+[2,102,0]
+action: 0
+[1,103,0]
+action: 0
+[1,103,0]
+action: 0
+[0,103,1]
+action: 2
+[1,104,0]
+action: 0
+[1,104,0]
+action: 1
+[1,103,0]
+action: 0
+[1,104,0]
+action: 0
+[0,104,1]
+action: 2
+[1,104,0]
+action: 0
+[1,105,0]
+action: 1
+[1,104,0]
+action: 0
+[0,104,0]
+action: 1
+[1,104,0]
+action: 0
+[0,104,1]
+action: 2
+[1,104,0]
+action: 0
+[0,104,0]
+action: 1
+[1,103,0]
+action: 0
+[1,103,0]
+action: 0
+[0,104,1]
+action: 2
+[0,104,0]
+action: 1
+[1,103,0]
+action: 0
+[1,104,0]
+action: 1
+[1,103,0]
+action: 0
+[0,103,1]
+action: 2
+[1,103,0]
+action: 0
+[1,103,0]
+action: 1
+[1,102,0]
+action: 0
+[1,103,0]
+action: 0
+[1,103,1]
+action: 2
+[1,103,0]
+action: 0
+[1,104,0]
+action: 1
+[2,103,0]
+action: 0
+[1,103,0]
+action: 0
+[1,104,0]
+action: 0
+[1,104,1]
+action: 2
+[1,104,0]
+action: 0
+[1,104,0]
+action: 1
+[1,103,0]
+action: 0
+[1,104,0]
+action: 0
+[0,104,1]
+action: 2
+[1,104,0]
+action: 0
+[1,104,0]
+action: 1
+[1,103,0]
+action: 0
+[1,103,0]
+action: 0
+[1,104,1]
+action: 2
+[1,104,0]
+action: 0
+[1,104,0]
+action: 1
+[2,103,0]
+action: 0
+[1,103,0]
+action: 0
+[1,104,1]
+action: 2
+[1,104,0]
+action: 0
+[1,104,0]
+action: 1
+[2,103,0]
+action: 0
+[1,103,1]
+action: 2
+[1,103,0]
+action: 0
+[1,104,0]
+action: 1
+[2,103,0]
+action: 0
+[1,103,0]
+action: 0
+[1,103,1]
+action: 2
+[1,103,0]
+action: 0
+[1,103,0]
+action: 1
+[2,103,0]
+action: 0
+[1,103,0]
+action: 0
+[1,104,0]
+action: 0
+[0,104,1]
+action: 2
+[1,104,0]
+action: 0
+[0,105,0]
+action: 1
+[1,104,0]
+action: 0
+[0,104,1]
+action: 2
+[1,105,0]
+action: 0
+[1,105,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[0,104,1]
+action: 2
+[1,104,0]
+action: 0
+[0,105,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[0,104,0]
+action: 1
+[1,103,1]
+action: 2
+[1,103,0]
+action: 0
+[1,104,0]
+action: 1
+[1,103,0]
+action: 0
+[1,103,0]
+action: 0
+[0,104,0]
+action: 1
+[1,103,1]
+action: 2
+[1,103,0]
+action: 0
+[1,104,0]
+action: 1
+[2,103,0]
+action: 0
+[1,103,0]
+action: 0
+[1,103,1]
+action: 2
+[1,103,0]
+action: 0
+[0,104,0]
+action: 1
+[1,103,0]
+action: 0
+[1,104,0]
+action: 0
+[0,104,1]
+action: 2
+[1,104,0]
+action: 0
+[0,105,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[0,104,1]
+action: 2
+[1,105,0]
+action: 0
+[0,105,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[0,104,1]
+action: 2
+[1,104,0]
+action: 0
+[0,105,0]
+action: 1
+[0,104,0]
+action: 1
+[1,103,0]
+action: 0
+[1,103,1]
+action: 2
+[2,103,0]
+action: 0
+[1,104,0]
+action: 1
+[2,103,0]
+action: 0
+[1,103,0]
+action: 0
+[1,104,0]
+action: 0
+[0,104,1]
+action: 2
+[1,104,0]
+action: 0
+[0,105,0]
+action: 1
+[1,104,0]
+action: 0
+[0,104,0]
+action: 1
+[1,103,1]
+action: 2
+[2,103,0]
+action: 0
+[1,103,0]
+action: 1
+[2,103,0]
+action: 0
+[1,103,0]
+action: 0
+[1,103,1]
+action: 2
+[1,104,0]
+action: 0
+[1,104,0]
+action: 1
+[2,103,0]
+action: 0
+[1,104,0]
+action: 0
+[1,104,1]
+action: 2
+[2,104,0]
+action: 0
+[1,105,0]
+action: 1
+[2,104,0]
+action: 0
+[1,104,0]
+action: 0
+[1,104,1]
+action: 2
+[1,104,0]
+action: 0
+[1,105,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[1,104,1]
+action: 2
+[2,104,0]
+action: 0
+[1,104,0]
+action: 1
+[2,104,0]
+action: 0
+[2,104,0]
+action: 0
+[1,104,0]
+action: 0
+[1,104,1]
+action: 2
+[1,104,0]
+action: 0
+[1,104,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,1]
+action: 2
+[1,104,0]
+action: 0
+[1,104,0]
+action: 1
+[2,103,0]
+action: 0
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[0,104,1]
+action: 2
+[1,105,0]
+action: 0
+[1,105,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[0,104,1]
+action: 2
+[1,104,0]
+action: 0
+[0,105,0]
+action: 1
+[1,104,0]
+action: 0
+[0,104,0]
+action: 1
+[1,103,0]
+action: 0
+[1,103,1]
+action: 2
+[2,104,0]
+action: 0
+[1,104,0]
+action: 1
+[2,103,0]
+action: 0
+[1,104,0]
+action: 0
+[1,104,1]
+action: 2
+[1,104,0]
+action: 0
+[1,104,0]
+action: 1
+[1,103,0]
+action: 0
+[1,103,0]
+action: 0
+[1,104,0]
+action: 0
+[0,104,1]
+action: 2
+[1,104,0]
+action: 0
+[1,105,0]
+action: 1
+[1,104,0]
+action: 0
+[0,104,0]
+action: 1
+[1,104,1]
+action: 2
+[2,104,0]
+action: 0
+[1,105,0]
+action: 1
+[2,104,0]
+action: 0
+[2,104,0]
+action: 0
+[2,105,0]
+action: 0
+[1,105,1]
+action: 2
+[2,105,0]
+action: 0
+[1,105,0]
+action: 1
+[2,104,0]
+action: 0
+[2,104,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,1]
+action: 2
+[2,105,0]
+action: 0
+[1,105,0]
+action: 1
+[2,104,0]
+action: 0
+[2,104,0]
+action: 0
+[1,105,1]
+action: 2
+[2,105,0]
+action: 0
+[2,105,0]
+action: 1
+[2,104,0]
+action: 0
+[2,104,0]
+action: 0
+[1,104,1]
+action: 2
+[2,104,0]
+action: 0
+[2,105,0]
+action: 1
+[2,104,0]
+action: 0
+[2,105,0]
+action: 0
+[2,105,0]
+action: 0
+[1,105,1]
+action: 2
+[2,105,0]
+action: 0
+[2,106,0]
+action: 1
+[2,105,0]
+action: 0
+[2,105,0]
+action: 0
+[1,106,1]
+action: 2
+[2,106,0]
+action: 0
+[1,106,0]
+action: 1
+[2,105,0]
+action: 0
+[2,106,0]
+action: 0
+[1,106,1]
+action: 2
+[2,106,0]
+action: 0
+[2,107,0]
+action: 1
+[2,106,0]
+action: 0
+[2,106,0]
+action: 0
+[1,107,1]
+action: 2
+[2,107,0]
+action: 0
+[1,107,0]
+action: 1
+[2,106,0]
+action: 0
+[1,106,0]
+action: 0
+[1,106,0]
+action: 0
+[0,107,1]
+action: 2
+[1,107,0]
+action: 0
+[0,107,0]
+action: 1
+[1,107,0]
+action: 0
+[1,107,0]
+action: 0
+[0,107,1]
+action: 2
+[1,107,0]
+action: 0
+[0,107,0]
+action: 1
+[1,106,0]
+action: 0
+[0,107,0]
+action: 1
+[1,106,1]
+action: 2
+[2,106,0]
+action: 0
+[1,106,0]
+action: 1
+[2,105,0]
+action: 0
+[1,106,0]
+action: 0
+[1,106,1]
+action: 2
+[2,106,0]
+action: 0
+[1,106,0]
+action: 1
+[2,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,106,1]
+action: 2
+[1,106,0]
+action: 0
+[1,106,0]
+action: 1
+[1,106,0]
+action: 0
+[1,106,0]
+action: 0
+[0,106,0]
+action: 1
+[1,105,1]
+action: 2
+[1,105,0]
+action: 0
+[1,105,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[0,105,1]
+action: 2
+[1,105,0]
+action: 0
+[1,105,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[0,106,0]
+action: 1
+[1,105,1]
+action: 2
+[1,105,0]
+action: 0
+[1,105,0]
+action: 1
+[2,104,0]
+action: 0
+[1,105,1]
+action: 2
+[2,105,0]
+action: 0
+[2,105,0]
+action: 1
+[2,104,0]
+action: 0
+[2,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,1]
+action: 2
+[1,105,0]
+action: 0
+[1,105,0]
+action: 1
+[2,104,0]
+action: 0
+[1,104,0]
+action: 0
+[1,104,1]
+action: 2
+[2,104,0]
+action: 0
+[1,105,0]
+action: 1
+[2,104,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,1]
+action: 2
+[1,106,0]
+action: 0
+[1,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,106,0]
+action: 0
+[1,106,1]
+action: 2
+[1,106,0]
+action: 0
+[1,106,0]
+action: 1
+[2,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,106,1]
+action: 2
+[1,106,0]
+action: 0
+[1,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[0,106,1]
+action: 2
+[1,106,0]
+action: 0
+[1,106,0]
+action: 1
+[2,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,106,1]
+action: 2
+[1,106,0]
+action: 0
+[1,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[0,106,1]
+action: 2
+[1,106,0]
+action: 0
+[0,106,0]
+action: 1
+[1,105,0]
+action: 0
+[0,105,0]
+action: 1
+[1,104,1]
+action: 2
+[2,105,0]
+action: 0
+[1,105,0]
+action: 1
+[2,104,0]
+action: 0
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[0,105,1]
+action: 2
+[1,105,0]
+action: 0
+[1,105,0]
+action: 1
+[1,104,0]
+action: 0
+[1,105,0]
+action: 0
+[0,105,1]
+action: 2
+[1,105,0]
+action: 0
+[0,105,0]
+action: 1
+[1,104,0]
+action: 0
+[0,104,0]
+action: 1
+[1,103,1]
+action: 2
+[2,104,0]
+action: 0
+[1,104,0]
+action: 1
+[2,103,0]
+action: 0
+[2,103,0]
+action: 0
+[1,103,1]
+action: 2
+[2,103,0]
+action: 0
+[1,104,0]
+action: 1
+[2,103,0]
+action: 0
+[1,103,0]
+action: 0
+[1,104,1]
+action: 2
+[2,104,0]
+action: 0
+[1,105,0]
+action: 1
+[2,104,0]
+action: 0
+[1,104,0]
+action: 0
+[1,105,1]
+action: 2
+[2,105,0]
+action: 0
+[2,105,0]
+action: 1
+[2,104,0]
+action: 0
+[2,104,0]
+action: 0
+[1,104,0]
+action: 0
+[1,105,1]
+action: 2
+[2,105,0]
+action: 0
+[1,105,0]
+action: 1
+[2,105,0]
+action: 0
+[2,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,106,1]
+action: 2
+[2,106,0]
+action: 0
+[1,106,0]
+action: 1
+[2,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,1]
+action: 2
+[1,105,0]
+action: 0
+[1,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,106,1]
+action: 2
+[1,106,0]
+action: 0
+[1,106,0]
+action: 1
+[1,106,0]
+action: 0
+[1,106,0]
+action: 0
+[0,106,1]
+action: 2
+[1,107,0]
+action: 0
+[1,107,0]
+action: 1
+[1,106,0]
+action: 0
+[1,106,0]
+action: 0
+[0,106,1]
+action: 2
+[1,106,0]
+action: 0
+[1,107,0]
+action: 1
+[1,106,0]
+action: 0
+[1,106,0]
+action: 0
+[0,107,1]
+action: 2
+[1,107,0]
+action: 0
+[1,107,0]
+action: 1
+[1,106,0]
+action: 0
+[1,106,0]
+action: 0
+[1,106,1]
+action: 2
+[1,107,0]
+action: 0
+[1,107,0]
+action: 1
+[1,106,0]
+action: 0
+[1,106,0]
+action: 0
+[0,106,0]
+action: 1
+[1,105,1]
+action: 2
+[1,106,0]
+action: 0
+[1,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[0,105,1]
+action: 2
+[1,105,0]
+action: 0
+[0,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[0,105,0]
+action: 1
+[1,104,1]
+action: 2
+[1,105,0]
+action: 0
+[1,105,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[1,104,1]
+action: 2
+[1,105,0]
+action: 0
+[1,105,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[0,105,0]
+action: 1
+[1,104,1]
+action: 2
+[1,104,0]
+action: 0
+[1,105,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[1,105,1]
+action: 2
+[2,105,0]
+action: 0
+[1,105,0]
+action: 1
+[2,104,0]
+action: 0
+[1,104,0]
+action: 0
+[1,104,1]
+action: 2
+[1,105,0]
+action: 0
+[1,105,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[0,104,0]
+action: 1
+[1,103,1]
+action: 2
+[2,104,0]
+action: 0
+[1,104,0]
+action: 1
+[2,103,0]
+action: 0
+[2,104,1]
+action: 2
+[2,104,0]
+action: 0
+[2,104,0]
+action: 1
+[2,104,0]
+action: 0
+[2,104,0]
+action: 0
+[1,105,1]
+action: 2
+[2,105,0]
+action: 0
+[1,105,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[0,104,0]
+action: 1
+[1,104,1]
+action: 2
+[2,104,0]
+action: 0
+[1,104,0]
+action: 1
+[2,103,0]
+action: 0
+[1,103,0]
+action: 0
+[1,103,1]
+action: 2
+[1,103,0]
+action: 0
+[1,104,0]
+action: 1
+[1,103,0]
+action: 0
+[1,103,0]
+action: 0
+[0,103,1]
+action: 2
+[1,103,0]
+action: 0
+[0,103,0]
+action: 1
+[1,103,0]
+action: 0
+[0,103,0]
+action: 1
+[1,102,1]
+action: 2
+[1,103,0]
+action: 0
+[1,103,0]
+action: 1
+[1,102,0]
+action: 0
+[1,102,0]
+action: 0
+[0,102,1]
+action: 2
+[1,103,0]
+action: 0
+[0,103,0]
+action: 1
+[1,102,0]
+action: 0
+[0,102,0]
+action: 1
+[1,101,1]
+action: 2
+[2,101,0]
+action: 0
+[1,102,0]
+action: 1
+[2,101,0]
+action: 0
+[1,101,0]
+action: 0
+[1,101,1]
+action: 2
+[2,101,0]
+action: 0
+[2,102,0]
+action: 1
+[2,101,0]
+action: 0
+[2,101,0]
+action: 0
+[2,101,1]
+action: 2
+[2,102,0]
+action: 0
+[2,102,0]
+action: 1
+[2,101,0]
+action: 0
+[2,101,0]
+action: 0
+[2,101,1]
+action: 2
+[2,101,0]
+action: 0
+[2,102,0]
+action: 1
+[2,101,0]
+action: 0
+[2,101,0]
+action: 0
+[1,101,1]
+action: 2
+[2,101,0]
+action: 0
+[2,101,0]
+action: 1
+[2,101,0]
+action: 0
+[2,101,0]
+action: 0
+[2,102,1]
+action: 2
+[2,102,0]
+action: 0
+[1,102,0]
+action: 1
+[2,102,0]
+action: 0
+[2,102,0]
+action: 0
+[1,102,1]
+action: 2
+[2,102,0]
+action: 0
+[1,102,0]
+action: 1
+[2,101,0]
+action: 0
+[1,102,0]
+action: 0
+[1,102,1]
+action: 2
+[1,102,0]
+action: 0
+[1,102,0]
+action: 1
+[1,102,0]
+action: 0
+[1,102,0]
+action: 0
+[1,102,1]
+action: 2
+[1,103,0]
+action: 0
+[1,103,0]
+action: 1
+[1,103,0]
+action: 0
+[1,103,0]
+action: 0
+[0,103,0]
+action: 1
+[1,103,1]
+action: 2
+[1,103,0]
+action: 0
+[1,103,0]
+action: 1
+[2,103,0]
+action: 0
+[1,103,0]
+action: 0
+[1,103,1]
+action: 2
+[2,103,0]
+action: 0
+[1,103,0]
+action: 1
+[2,103,0]
+action: 0
+[2,103,0]
+action: 0
+[2,103,1]
+action: 2
+[2,103,0]
+action: 0
+[1,103,0]
+action: 1
+[2,102,0]
+action: 0
+[1,103,0]
+action: 0
+[1,103,1]
+action: 2
+[1,103,0]
+action: 0
+[1,104,0]
+action: 1
+[1,103,0]
+action: 0
+[1,103,0]
+action: 0
+[0,104,0]
+action: 1
+[1,103,1]
+action: 2
+[1,103,0]
+action: 0
+[1,104,0]
+action: 1
+[1,103,0]
+action: 0
+[1,103,0]
+action: 0
+[0,103,1]
+action: 2
+[1,103,0]
+action: 0
+[0,103,0]
+action: 1
+[1,103,0]
+action: 0
+[0,103,0]
+action: 1
+[1,102,1]
+action: 2
+[1,103,0]
+action: 0
+[1,103,0]
+action: 1
+[1,102,0]
+action: 0
+[1,103,0]
+action: 0
+[0,103,0]
+action: 1
+[1,102,1]
+action: 2
+[1,102,0]
+action: 0
+[1,102,0]
+action: 1
+[1,102,0]
+action: 0
+[1,102,0]
+action: 0
+[0,102,1]
+action: 2
+[1,102,0]
+action: 0
+[1,102,0]
+action: 1
+[2,101,0]
+action: 0
+[1,102,0]
+action: 0
+[1,102,0]
+action: 0
+[1,102,1]
+action: 2
+[1,103,0]
+action: 0
+[1,103,0]
+action: 1
+[2,102,0]
+action: 0
+[1,103,0]
+action: 0
+[1,103,1]
+action: 2
+[1,103,0]
+action: 0
+[1,104,0]
+action: 1
+[1,103,0]
+action: 0
+[1,103,0]
+action: 0
+[0,104,1]
+action: 2
+[1,104,0]
+action: 0
+[0,105,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[0,104,1]
+action: 2
+[1,105,0]
+action: 0
+[0,105,0]
+action: 1
+[1,104,0]
+action: 0
+[0,104,0]
+action: 1
+[1,103,0]
+action: 0
+[0,103,1]
+action: 2
+[1,104,0]
+action: 0
+[1,104,0]
+action: 1
+[1,103,0]
+action: 0
+[1,103,0]
+action: 0
+[0,103,1]
+action: 2
+[1,103,0]
+action: 0
+[0,104,0]
+action: 1
+[1,103,0]
+action: 0
+[0,103,0]
+action: 1
+[1,102,1]
+action: 2
+[1,102,0]
+action: 0
+[1,103,0]
+action: 1
+[1,102,0]
+action: 0
+[1,102,0]
+action: 0
+[0,103,1]
+action: 2
+[1,103,0]
+action: 0
+[0,103,0]
+action: 1
+[1,102,0]
+action: 0
+[1,102,0]
+action: 0
+[0,102,1]
+action: 2
+[1,103,0]
+action: 0
+[0,103,0]
+action: 1
+[1,102,0]
+action: 0
+[0,102,0]
+action: 1
+[1,101,0]
+action: 0
+[0,102,1]
+action: 2
+[1,102,0]
+action: 0
+[0,102,0]
+action: 1
+[1,101,0]
+action: 0
+[0,101,1]
+action: 2
+[1,101,0]
+action: 0
+[0,102,0]
+action: 1
+[1,101,0]
+action: 0
+[1,102,0]
+action: 0
+[0,102,0]
+action: 1
+[1,101,1]
+action: 2
+[2,102,0]
+action: 0
+[1,102,0]
+action: 1
+[2,101,0]
+action: 0
+[1,101,0]
+action: 0
+[1,101,1]
+action: 2
+[2,101,0]
+action: 0
+[1,102,0]
+action: 1
+[2,101,0]
+action: 0
+[1,101,0]
+action: 0
+[1,102,1]
+action: 2
+[2,102,0]
+action: 0
+[1,102,0]
+action: 1
+[2,101,0]
+action: 0
+[1,101,0]
+action: 0
+[1,101,1]
+action: 2
+[2,102,0]
+action: 0
+[1,102,0]
+action: 1
+[2,101,0]
+action: 0
+[2,102,0]
+action: 0
+[1,102,1]
+action: 2
+[1,103,0]
+action: 0
+[1,103,0]
+action: 1
+[1,102,0]
+action: 0
+[1,102,1]
+action: 2
+[2,102,0]
+action: 0
+[1,103,0]
+action: 1
+[2,102,0]
+action: 0
+[1,102,0]
+action: 0
+[1,103,1]
+action: 2
+[1,103,0]
+action: 0
+[1,103,0]
+action: 1
+[2,103,0]
+action: 0
+[2,103,0]
+action: 0
+[1,103,1]
+action: 2
+[2,104,0]
+action: 0
+[2,104,0]
+action: 1
+[2,103,0]
+action: 0
+[2,104,0]
+action: 0
+[1,104,0]
+action: 0
+[1,104,1]
+action: 2
+[1,104,0]
+action: 0
+[1,104,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,1]
+action: 2
+[1,104,0]
+action: 0
+[1,104,0]
+action: 1
+[1,103,0]
+action: 0
+[1,103,0]
+action: 0
+[0,104,0]
+action: 1
+[1,103,1]
+action: 2
+[1,103,0]
+action: 0
+[1,103,0]
+action: 1
+[1,102,0]
+action: 0
+[1,103,0]
+action: 0
+[0,103,1]
+action: 2
+[1,103,0]
+action: 0
+[1,103,0]
+action: 1
+[1,102,0]
+action: 0
+[1,102,0]
+action: 0
+[1,103,0]
+action: 0
+[0,103,1]
+action: 2
+[1,103,0]
+action: 0
+[0,103,0]
+action: 1
+[1,103,0]
+action: 0
+[0,103,0]
+action: 1
+[1,103,1]
+action: 2
+[1,103,0]
+action: 0
+[1,103,0]
+action: 1
+[2,102,0]
+action: 0
+[1,103,0]
+action: 0
+[0,103,1]
+action: 2
+[1,103,0]
+action: 0
+[0,103,0]
+action: 1
+[1,102,0]
+action: 0
+[1,103,0]
+action: 0
+[1,103,0]
+action: 0
+[0,103,1]
+action: 2
+[1,104,0]
+action: 0
+[0,104,0]
+action: 1
+[1,103,0]
+action: 0
+[1,104,0]
+action: 0
+[1,104,1]
+action: 2
+[1,104,0]
+action: 0
+[1,105,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[1,104,1]
+action: 2
+[1,104,0]
+action: 0
+[1,104,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[0,104,1]
+action: 2
+[1,105,0]
+action: 0
+[0,105,0]
+action: 1
+[1,104,0]
+action: 0
+[0,105,0]
+action: 1
+[1,104,0]
+action: 0
+[0,104,1]
+action: 2
+[1,104,0]
+action: 0
+[1,104,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[1,104,1]
+action: 2
+[1,105,0]
+action: 0
+[1,105,0]
+action: 1
+[1,104,0]
+action: 0
+[1,105,0]
+action: 0
+[0,105,1]
+action: 2
+[1,105,0]
+action: 0
+[1,105,0]
+action: 1
+[2,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[0,105,1]
+action: 2
+[1,106,0]
+action: 0
+[0,106,0]
+action: 1
+[1,105,0]
+action: 0
+[0,105,0]
+action: 1
+[1,104,1]
+action: 2
+[2,105,0]
+action: 0
+[1,105,0]
+action: 1
+[2,104,0]
+action: 0
+[2,104,0]
+action: 0
+[2,104,1]
+action: 2
+[2,104,0]
+action: 0
+[2,105,0]
+action: 1
+[3,104,0]
+action: 0
+[3,104,0]
+action: 0
+[2,105,1]
+action: 2
+[3,105,0]
+action: 0
+[3,105,0]
+action: 1
+[3,104,0]
+action: 0
+[3,104,0]
+action: 0
+[2,104,0]
+action: 0
+[2,105,1]
+action: 2
+[2,105,0]
+action: 0
+[2,105,0]
+action: 1
+[3,104,0]
+action: 0
+[2,104,0]
+action: 0
+[2,105,1]
+action: 2
+[3,105,0]
+action: 0
+[2,105,0]
+action: 1
+[3,104,0]
+action: 0
+[3,104,0]
+action: 0
+[2,104,1]
+action: 2
+[3,105,0]
+action: 0
+[2,105,0]
+action: 1
+[3,104,0]
+action: 0
+[2,105,0]
+action: 0
+[2,105,1]
+action: 2
+[2,105,0]
+action: 0
+[2,105,0]
+action: 1
+[2,104,0]
+action: 0
+[2,105,0]
+action: 0
+[2,105,1]
+action: 2
+[2,106,0]
+action: 0
+[2,106,0]
+action: 1
+[2,105,0]
+action: 0
+[2,105,0]
+action: 0
+[2,105,0]
+action: 0
+[1,105,1]
+action: 2
+[2,105,0]
+action: 0
+[1,106,0]
+action: 1
+[2,105,0]
+action: 0
+[2,105,0]
+action: 0
+[1,106,0]
+action: 0
+[1,106,1]
+action: 2
+[1,106,0]
+action: 0
+[1,107,0]
+action: 1
+[1,106,0]
+action: 0
+[1,107,0]
+action: 0
+[0,107,1]
+action: 2
+[1,107,0]
+action: 0
+[1,107,0]
+action: 1
+[1,106,0]
+action: 0
+[1,106,0]
+action: 0
+[0,107,1]
+action: 2
+[1,107,0]
+action: 0
+[0,107,0]
+action: 1
+[1,106,0]
+action: 0
+[0,106,0]
+action: 1
+[1,105,1]
+action: 2
+[1,105,0]
+action: 0
+[1,106,0]
+action: 1
+[2,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[0,105,1]
+action: 2
+[1,106,0]
+action: 0
+[1,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,106,0]
+action: 0
+[0,106,1]
+action: 2
+[0,106,0]
+action: 1
+[1,105,0]
+action: 0
+[0,105,0]
+action: 1
+[1,104,0]
+action: 0
+[1,105,1]
+action: 2
+[1,105,0]
+action: 0
+[1,105,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[0,105,1]
+action: 2
+[1,106,0]
+action: 0
+[1,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[0,105,1]
+action: 2
+[1,106,0]
+action: 0
+[1,106,0]
+action: 1
+[2,105,0]
+action: 0
+[1,106,0]
+action: 0
+[0,106,1]
+action: 2
+[1,106,0]
+action: 0
+[1,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,106,1]
+action: 2
+[1,106,0]
+action: 0
+[1,106,0]
+action: 1
+[1,106,0]
+action: 0
+[1,106,0]
+action: 0
+[0,106,1]
+action: 2
+[1,107,0]
+action: 0
+[1,107,0]
+action: 1
+[1,106,0]
+action: 0
+[1,106,0]
+action: 0
+[1,106,1]
+action: 2
+[1,107,0]
+action: 0
+[1,107,0]
+action: 1
+[1,106,0]
+action: 0
+[1,106,0]
+action: 0
+[1,106,1]
+action: 2
+[2,106,0]
+action: 0
+[1,107,0]
+action: 1
+[2,106,0]
+action: 0
+[2,106,0]
+action: 0
+[1,106,0]
+action: 0
+[0,106,1]
+action: 2
+[1,106,0]
+action: 0
+[1,107,0]
+action: 1
+[1,106,0]
+action: 0
+[1,106,0]
+action: 0
+[0,106,1]
+action: 2
+[1,107,0]
+action: 0
+[0,107,0]
+action: 1
+[1,106,0]
+action: 0
+[1,106,0]
+action: 0
+[0,106,1]
+action: 2
+[1,107,0]
+action: 0
+[0,107,0]
+action: 1
+[1,106,0]
+action: 0
+[1,106,0]
+action: 0
+[0,106,1]
+action: 2
+[0,106,0]
+action: 1
+[1,106,0]
+action: 0
+[1,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[0,106,1]
+action: 2
+[1,106,0]
+action: 0
+[0,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,106,1]
+action: 2
+[1,106,0]
+action: 0
+[1,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,1]
+action: 2
+[1,105,0]
+action: 0
+[1,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[0,105,1]
+action: 2
+[1,105,0]
+action: 0
+[1,105,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,1]
+action: 2
+[1,105,0]
+action: 0
+[1,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,106,0]
+action: 0
+[0,106,1]
+action: 2
+[1,106,0]
+action: 0
+[1,107,0]
+action: 1
+[1,106,0]
+action: 0
+[1,106,0]
+action: 0
+[0,106,1]
+action: 2
+[1,106,0]
+action: 0
+[0,106,0]
+action: 1
+[1,106,0]
+action: 0
+[0,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,1]
+action: 2
+[1,105,0]
+action: 0
+[1,105,0]
+action: 1
+[1,105,0]
+action: 0
+[0,105,0]
+action: 1
+[1,105,1]
+action: 2
+[1,105,0]
+action: 0
+[1,106,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[0,105,1]
+action: 2
+[1,105,0]
+action: 0
+[1,106,0]
+action: 1
+[2,105,0]
+action: 0
+[1,105,0]
+action: 0
+[1,105,1]
+action: 2
+[1,105,0]
+action: 0
+[1,105,0]
+action: 1
+[1,105,0]
+action: 0
+[1,105,0]
+action: 0
+[0,105,1]
+action: 2
+[1,105,0]
+action: 0
+[0,106,0]
+action: 1
+[1,105,0]
+action: 0
+[0,105,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,1]
+action: 2
+[2,105,0]
+action: 0
+[1,105,0]
+action: 1
+[2,104,0]
+action: 0
+[1,104,0]
+action: 0
+[1,104,1]
+action: 2
+[1,104,0]
+action: 0
+[1,105,0]
+action: 1
+[1,104,0]
+action: 0
+[1,104,0]
+action: 0
+[1,104,1]
+action: 2
+[2,106,1]
+action: 0
+[1,106,1]
+action: 1
+[1,105,1]
+action: 2
+[1,105,0]
+action: 0
+[0,105,0]
+action: 1
+[0,104,0]
+action: 1
+[0,103,0]
+action: 1
+[0,102,0]
+action: 1
+[0,101,0]
+action: 1
+[0,100,0]
+action: 1
+[0,99,0]
+action: 1
+[0,98,0]
+action: 1
+[0,97,0]
+action: 1
+[0,96,0]
+action: 1
+[0,95,0]
+action: 1
+[0,94,0]
+action: 1
+[0,93,0]
+action: 1
+[0,92,0]
+action: 1
+[0,91,0]
+action: 1
+[0,90,0]
+action: 1
+[0,89,0]
+action: 1
+[0,88,0]
+action: 1
+[0,87,0]
+action: 1
+[0,86,0]
+action: 1
+[0,85,0]
+action: 1
+[0,84,0]
+action: 1
+[0,83,0]
+action: 1
+[0,82,0]
+action: 1
+[0,81,0]
+action: 1
+[0,80,0]
+action: 1
+[0,79,0]
+action: 1
+[0,78,0]
+action: 1
+[0,77,0]
+action: 1
+[0,76,0]
+action: 1
+[0,75,0]
+action: 1
+[0,74,0]
+action: 1
+[0,73,0]
+action: 1
+[0,72,0]
+action: 1
+[0,71,0]
+action: 1
+[0,70,0]
+action: 1
+[0,69,0]
+action: 1
+[0,68,0]
+action: 1
+[0,67,0]
+action: 1
+[0,66,0]
+action: 1
+[0,65,0]
+action: 1
+[0,64,0]
+action: 1
+[0,63,0]
+action: 1
+[0,62,0]
+action: 1
+[0,61,0]
+action: 1
+[0,60,0]
+action: 1
+[0,59,0]
+action: 1
+[0,58,0]
+action: 1
+[0,57,0]
+action: 1
+[0,56,0]
+action: 1
+[0,55,0]
+action: 1
+[0,54,0]
+action: 1
+[0,53,0]
+action: 1
+[0,52,0]
+action: 1
+[0,51,0]
+action: 1
+[0,50,0]
+action: 1
+[0,49,0]
+action: 1
+[0,48,0]
+action: 1
+[0,47,0]
+action: 1
+[0,46,0]
+action: 1
+[0,45,0]
+action: 1
+[0,44,0]
+action: 1
+[0,43,0]
+action: 1
+[0,42,0]
+action: 1
+[0,41,0]
+action: 1
+[0,40,0]
+action: 1
+[0,39,0]
+action: 1
+[0,38,0]
+action: 1
+[0,37,0]
+action: 1
+[0,36,0]
+action: 1
+[0,35,0]
+action: 1
+[0,34,0]
+action: 1
+[0,33,0]
+action: 1
+[0,32,0]
+action: 1
+[0,31,0]
+action: 1
+[0,30,0]
+action: 1
+[0,29,0]
+action: 1
+[0,28,0]
+action: 1
+[0,27,0]
+action: 1
+[0,26,0]
+action: 1
+[0,25,0]
+action: 1
+[0,24,0]
+action: 1
+[0,23,0]
+action: 1
+[0,22,0]
+action: 1
+[0,21,0]
+action: 1
+[0,20,0]
+action: 1
+[0,19,0]
+action: 1
+[0,18,0]
+action: 1
+[0,17,0]
+action: 1
+[0,16,0]
+action: 1
+[0,15,0]
+action: 1
+[0,14,0]
+action: 1
+[0,13,0]
+action: 1
+[0,12,0]
+action: 1
+[0,11,0]
+action: 1
+[0,10,0]
+action: 1
+[0,9,0]
+action: 1
+[0,8,0]
+action: 1
+[0,7,0]
+action: 1
+[0,6,0]
+action: 1
+[0,5,0]
+action: 1
+[1,4,1]
+action: 2
+[1,4,0]
+action: 0
+[0,4,0]
+action: 1
+[0,3,0]
+action: 1
+[0,2,0]
+action: 1
+[0,1,0]
+action: 1
+[0,0,0]
+action: 1
+[0,1,0]
+action: 1
+Total Bytes App Recieved: 4960256bytes
+
+Flow 1 (10.1.1.1 -> 10.2.1.2)
+  Tx Packets: 2678
+  Tx Bytes:   2877436
+  Rx Packets: 2678
+  Rx Bytes:   2877436
+  Throughput: 5.51226 Mbps
+  First Packet Rx: 0.100093sec
+  Last Packet Rx: 4.27614sec
+Flow 2 (10.1.2.1 -> 10.2.1.2)
+  Tx Packets: 1283
+  Tx Bytes:   1376416
+  Rx Packets: 1283
+  Rx Bytes:   1376416
+  Throughput: 2.63504 Mbps
+  First Packet Rx: 0.100139sec
+  Last Packet Rx: 4.27895sec
+Flow 3 (10.1.3.1 -> 10.2.1.2)
+  Tx Packets: 895
+  Tx Bytes:   958928
+  Rx Packets: 895
+  Rx Bytes:   958928
+  Throughput: 1.83706 Mbps
+  First Packet Rx: 0.100186sec
+  Last Packet Rx: 4.2761sec
+Flow 4 (10.2.1.2 -> 10.1.1.1)
+  Tx Packets: 2676
+  Tx Bytes:   139156
+  Rx Packets: 2676
+  Rx Bytes:   139156
+  Throughput: 0.272264 Mbps
+  First Packet Rx: 0.100186sec
+  Last Packet Rx: 4.18904sec
+Flow 5 (10.2.1.2 -> 10.1.2.1)
+  Tx Packets: 1281
+  Tx Bytes:   66616
+  Rx Packets: 1281
+  Rx Bytes:   66616
+  Throughput: 0.127537 Mbps
+  First Packet Rx: 0.100232sec
+  Last Packet Rx: 4.27886sec
+Flow 6 (10.2.1.2 -> 10.1.3.1)
+  Tx Packets: 893
+  Tx Bytes:   46440
+  Rx Packets: 893
+  Rx Bytes:   46440
+  Throughput: 0.0908647 Mbps
+  First Packet Rx: 0.100278sec
+  Last Packet Rx: 4.189sec
+
+Packets/Bytes received: 4856 / 5212780
+Packets/Bytes enqueued: 4856 / 5212780
+Packets/Bytes dequeued: 4856 / 5212780
+Packets/Bytes requeued: 0 / 0
+Packets/Bytes dropped: 0 / 0
+Packets/Bytes dropped before enqueue: 0 / 0
+Packets/Bytes dropped after dequeue: 0 / 0
+Packets/Bytes sent: 4856 / 5212780
+Packets/Bytes marked: 0 / 0
+

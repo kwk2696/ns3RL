@@ -1,0 +1,108 @@
+Waf: Entering directory `/home/kwk2696/ns3/ns-allinone-3.28/ns-3.28/build'
+[2384/2801] Compiling scratch/p1_rtt_rl.cc
+[2717/2801] Linking build/scratch/p1_rtt_rl
+Waf: Leaving directory `/home/kwk2696/ns3/ns-allinone-3.28/ns-3.28/build'
+Build commands will be stored in build/compile_commands.json
+'build' finished successfully (5.742s)
+simulation count: 1
+0.000275196 RTT = 0 ms
+0.100253 RTT = 100 ms
+0.100322 RTT = 100 ms
+1.11831 RTT = 118 ms
+1.11838 RTT = 118 ms
+1.11931 RTT = 119 ms
+2.10778 RTT = 107 ms
+2.10785 RTT = 107 ms
+2.10878 RTT = 108 ms
+3.10751 RTT = 107 ms
+3.10758 RTT = 107 ms
+3.10937 RTT = 109 ms
+4.10724 RTT = 107 ms
+4.10731 RTT = 107 ms
+4.1091 RTT = 109 ms
+5.10783 RTT = 107 ms
+5.1079 RTT = 107 ms
+5.10883 RTT = 108 ms
+6.10756 RTT = 107 ms
+6.10763 RTT = 107 ms
+6.10942 RTT = 109 ms
+7.10728 RTT = 107 ms
+7.10735 RTT = 107 ms
+7.10828 RTT = 108 ms
+8.10788 RTT = 107 ms
+8.10794 RTT = 107 ms
+8.10888 RTT = 108 ms
+9.1076 RTT = 107 ms
+9.10767 RTT = 107 ms
+9.10947 RTT = 109 ms
+--------------End True-------------
+10.1073 RTT = 107 ms
+10.1074 RTT = 107 ms
+10.1083 RTT = 108 ms
+11.0003 RTT = 0 ms
+11.0003 RTT = 0 ms
+11.0004 RTT = 0 ms
+Total Bytes App Recieved: 11999232bytes
+
+Flow 1 (10.1.1.1 -> 10.2.1.2)
+  Tx Packets: 11433
+  Tx Bytes:   12297816
+  Rx Packets: 11433
+  Rx Bytes:   12297816
+  Throughput: 9.7321 Mbps
+  First Packet Rx: 0.10023sec
+  Last Packet Rx: 10.2093sec
+Flow 2 (10.1.2.1 -> 10.2.1.2)
+  Tx Packets: 80
+  Tx Bytes:   83012
+  Rx Packets: 50
+  Rx Bytes:   51756
+  Throughput: 0.626736 Mbps
+  First Packet Rx: 1.12095sec
+  Last Packet Rx: 1.78159sec
+Flow 3 (10.1.3.1 -> 10.2.1.2)
+  Tx Packets: 369
+  Tx Bytes:   393976
+  Rx Packets: 243
+  Rx Bytes:   259424
+  Throughput: 2.03345 Mbps
+  First Packet Rx: 0.100277sec
+  Last Packet Rx: 1.1209sec
+Flow 4 (10.2.1.2 -> 10.1.1.1)
+  Tx Packets: 5717
+  Tx Bytes:   297288
+  Rx Packets: 5717
+  Rx Bytes:   297288
+  Throughput: 0.235269 Mbps
+  First Packet Rx: 0.100346sec
+  Last Packet Rx: 10.2092sec
+Flow 5 (10.2.1.2 -> 10.1.3.1)
+  Tx Packets: 123
+  Tx Bytes:   6400
+  Rx Packets: 123
+  Rx Bytes:   6400
+  Throughput: 0.00469738 Mbps
+  First Packet Rx: 0.100392sec
+  Last Packet Rx: 11.0001sec
+Flow 6 (10.2.1.2 -> 10.1.2.1)
+  Tx Packets: 27
+  Tx Bytes:   1408
+  Rx Packets: 27
+  Rx Bytes:   1408
+  Throughput: 0.00114019 Mbps
+  First Packet Rx: 1.12104sec
+  Last Packet Rx: 11.0001sec
+
+Packets/Bytes received: 11918 / 12777828
+Packets/Bytes enqueued: 11912 / 12772396
+Packets/Bytes dequeued: 11762 / 12612020
+Packets/Bytes requeued: 0 / 0
+Packets/Bytes dropped: 6 / 5432
+Packets/Bytes dropped before enqueue: 6 / 5432
+  Dropped by internal queue: 6 / 5432
+Packets/Bytes dropped after dequeue: 0 / 0
+Packets/Bytes sent: 11762 / 12612020
+Packets/Bytes marked: 0 / 0
+
+simulation count: 2
+Interrupted 

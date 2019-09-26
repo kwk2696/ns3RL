@@ -1,0 +1,54 @@
+Waf: Entering directory `/home/kwk2696/ns3/ns-allinone-3.28/ns-3.28/build'
+Waf: Leaving directory `/home/kwk2696/ns3/ns-allinone-3.28/ns-3.28/build'
+Build commands will be stored in build/compile_commands.json
+'build' finished successfully (1.919s)
+simulation count: 1
+0.000275196 RTT = 0 ms
+--------------End True-------------
+Total Bytes App Recieved: 11999232bytes
+
+Flow 1 (10.1.1.1 -> 10.2.1.2)
+  Tx Packets: 3
+  Tx Bytes:   168
+  Rx Packets: 0
+  Rx Bytes:   0
+  Throughput: -nan Mbps
+  First Packet Rx: 0sec
+  Last Packet Rx: 0sec
+Flow 2 (10.1.2.1 -> 10.2.1.2)
+  Tx Packets: 11722
+  Tx Bytes:   12608780
+  Rx Packets: 11722
+  Rx Bytes:   12608780
+  Throughput: 9.97778 Mbps
+  First Packet Rx: 0.100093sec
+  Last Packet Rx: 10.2096sec
+Flow 3 (10.1.3.1 -> 10.2.1.2)
+  Tx Packets: 3
+  Tx Bytes:   168
+  Rx Packets: 0
+  Rx Bytes:   0
+  Throughput: -nan Mbps
+  First Packet Rx: 0sec
+  Last Packet Rx: 0sec
+Flow 4 (10.2.1.2 -> 10.1.2.1)
+  Tx Packets: 5861
+  Tx Bytes:   304776
+  Rx Packets: 5861
+  Rx Bytes:   304776
+  Throughput: 0.241184 Mbps
+  First Packet Rx: 0.100186sec
+  Last Packet Rx: 10.2095sec
+
+Packets/Bytes received: 11764 / 12612140
+Packets/Bytes enqueued: 11764 / 12612140
+Packets/Bytes dequeued: 11723 / 12608864
+Packets/Bytes requeued: 0 / 0
+Packets/Bytes dropped: 0 / 0
+Packets/Bytes dropped before enqueue: 0 / 0
+Packets/Bytes dropped after dequeue: 0 / 0
+Packets/Bytes sent: 11723 / 12608864
+Packets/Bytes marked: 0 / 0
+
+simulation count: 2
+Interrupted 

@@ -705,7 +705,7 @@ QueueDisc::DropBeforeEnqueue (Ptr<const QueueDiscItem> item, const char* reason)
 {
   NS_LOG_FUNCTION (this << item << reason);
 	 
-	std::cout << this << " Drop Before Enqueue" << std::endl;
+//	std::cout << this << " Drop Before Enqueue" << std::endl;
 
   m_stats.nTotalDroppedPackets++;
   m_stats.nTotalDroppedBytes += item->GetSize ();

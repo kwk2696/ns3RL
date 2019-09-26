@@ -242,7 +242,8 @@ protected:
    * \brief Dispose of the object
    */
   virtual void DoDispose (void);
-
+	TracedCallback<Ptr<RedQueueDisc>> m_trace;
+	
 private:
   virtual bool DoEnqueue (Ptr<QueueDiscItem> item);
   virtual Ptr<QueueDiscItem> DoDequeue (void);

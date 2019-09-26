@@ -450,6 +450,12 @@ public:
    * \return the threshold
    */
   uint32_t GetRetxThresh (void) const { return m_retxThresh; }
+	
+	/**
+	 * \brief kwk Get Tcp CongestionOps
+	 * \return TcpCongestionOps
+	 */
+	Ptr<TcpCongestionOps> GetTcpCongestionOps (void) { return m_congestionControl; } 
 
   /**
    * \brief Callback pointer for cWnd trace chaining
@@ -550,6 +556,14 @@ public:
    */
   typedef void (* TcpTxRxTracedCallback)(const Ptr<const Packet> packet, const TcpHeader& header,
                                          const Ptr<const TcpSocketBase> socket);
+
+	std::map <SequenceNumber32, int64_t> _rttHistory;
+	std::map <SequenceNumber32, float> _sendTime;
+	float _rttMax = 0;
+	float _rttMin = 0;
+	float _rttAvg = 0;
+	float _rttCur = 0;
+	uint16_t  _tag;
 
 protected:
   // Implementing ns3::TcpSocket -- Attribute get/set
@@ -1238,6 +1252,8 @@ protected:
   TracedCallback<Ptr<const Packet>, const TcpHeader&,
                  Ptr<const TcpSocketBase> > m_rxTrace; //!< Trace of received packets
 
+	TracedCallback <Ptr<const Packet>, const TcpHeader&, Ptr<TcpSocketBase> > m_seqTrace;
+	TracedCallback <Ptr<const Packet>, const TcpHeader&, Ptr<TcpSocketBase> > m_ackTrace;
   // Pacing related variable
   Timer m_pacingTimer {Timer::REMOVE_ON_DESTROY}; //!< Pacing Event
 

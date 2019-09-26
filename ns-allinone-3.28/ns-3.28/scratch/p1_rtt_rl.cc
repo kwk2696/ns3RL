@@ -417,7 +417,7 @@ static void RxTracer (Ptr<const Packet> p, const TcpHeader& h, Ptr<TcpSocketBase
 	
 }
 
-
+float info_n[3] = {0};
 uint32_t m_SYN = 0;
 static void QueueDiscTracer (Ptr<MfifoQueueDisc> mfq) {
 	if(m_end) return;
@@ -433,6 +433,10 @@ static void QueueDiscTracer (Ptr<MfifoQueueDisc> mfq) {
 	uint32_t info[3];
 	mfq->GetQueueInfo (info);
 	
+	for(uint32_t i = 0; i < 3; i++) {
+		info_n[i] = info[i] / 120.0;
+	}
+
 	// float rewardTimeout = 0;
 	// for(uint32_t i = 0; i < 3; i++) {
 		// if(m_recvTime[i] - Simulator::Now() .GetSeconds () >= 1.0) rewardTimeout -= 100;
@@ -446,13 +450,14 @@ static void QueueDiscTracer (Ptr<MfifoQueueDisc> mfq) {
 	// std::cout << "thr: " << m_rewardThr[0] << " : " << m_rewardThr[1] << " : " << m_rewardThr[2] << std::endl;
 	// std::cout << "rtt: " << m_rewardRtt[0] << " : " << m_rewardRtt[1] << " : " << m_rewardRtt[2] << std::endl;
 
-	// reward += mfq->GetReward ();
-	
+	if (mfq->GetReward () == -100) {
+		reward -= 1;
+	}
 	// float reward = mfq->GetReward ();
 	
-	std::string message = "{\"state0\":" + std::to_string(info[0]) 
-						+ ",\"state1\":" + std::to_string(info[1])
-						+ ",\"state2\":" + std::to_string(info[2])
+	std::string message = "{\"state0\":" + std::to_string(info_n[0]) 
+						+ ",\"state1\":" + std::to_string(info_n[1])
+						+ ",\"state2\":" + std::to_string(info_n[2])
 						+ ",\"reward\":" + std::to_string(reward) + "}";							
 	
 	for (uint32_t i = 0; i < 3; i++) {

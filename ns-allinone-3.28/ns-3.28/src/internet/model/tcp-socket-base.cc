@@ -201,7 +201,15 @@ TcpSocketBase::GetTypeId (void)
                      "Receive tcp packet from IP protocol",
                      MakeTraceSourceAccessor (&TcpSocketBase::m_rxTrace),
                      "ns3::TcpSocketBase::TcpTxRxTracedCallback")
-  ;
+		.AddTraceSource ("RecordTx", 
+										 "Record Tx Time of packet",
+										 MakeTraceSourceAccessor (&TcpSocketBase::m_seqTrace),
+										 "ns3::TcpSocketBase::RttTxTracedCallback")
+		.AddTraceSource ("RecordRx",
+										 "Record Rx Time of acked packet",
+										 MakeTraceSourceAccessor (&TcpSocketBase::m_ackTrace),
+										 "ns3::TcpSocketBase::RttRxTracedCallback")
+		;
   return tid;
 }
 
@@ -360,10 +368,13 @@ TcpSocketBase::TcpSocketBase (const TcpSocketBase& sock)
     m_isFirstPartialAck (sock.m_isFirstPartialAck),
     m_txTrace (sock.m_txTrace),
     m_rxTrace (sock.m_rxTrace),
+		m_seqTrace (sock.m_seqTrace),
+		m_ackTrace (sock.m_ackTrace),
     m_pacingTimer (Timer::REMOVE_ON_DESTROY)
 {
   NS_LOG_FUNCTION (this);
   NS_LOG_LOGIC ("Invoked the copy constructor");
+	
   // Copy the rtt estimator if it is set
   if (sock.m_rtt)
     {
@@ -1186,6 +1197,7 @@ TcpSocketBase::DoForwardUp (Ptr<Packet> packet, const Address &fromAddress,
     }
 
   m_rxTrace (packet, tcpHeader, this);
+	m_ackTrace (packet, tcpHeader, this);
 
   if (tcpHeader.GetFlags () & TcpHeader::SYN)
     {
@@ -1301,6 +1313,7 @@ TcpSocketBase::DoForwardUp (Ptr<Packet> packet, const Address &fromAddress,
           h.SetWindowSize (AdvertisedWindowSize ());
           AddOptions (h);
           m_txTrace (p, h, this);
+					m_seqTrace (p, h, this);
           m_tcp->SendPacket (p, h, toAddress, fromAddress, m_boundnetdevice);
         }
       break;
@@ -2430,6 +2443,7 @@ TcpSocketBase::SendEmptyPacket (uint8_t flags)
     }
 
   m_txTrace (p, header, this);
+	m_seqTrace (p,header, this);
 
   if (m_endPoint != nullptr)
     {
@@ -2728,6 +2742,7 @@ TcpSocketBase::SendDataPacket (SequenceNumber32 seq, uint32_t maxSize, bool with
     }
 
   m_txTrace (p, header, this);
+	m_seqTrace (p, header, this);
 
   if (m_endPoint)
     {
@@ -2756,6 +2771,7 @@ TcpSocketBase::SendDataPacket (SequenceNumber32 seq, uint32_t maxSize, bool with
     }
   // Update highTxMark
   m_tcb->m_highTxMark = std::max (seq + sz, m_tcb->m_highTxMark.Get ());
+
   return sz;
 }
 
@@ -2772,6 +2788,7 @@ TcpSocketBase::UpdateRttHistory (const SequenceNumber32 &seq, uint32_t sz,
     }
   else
     { // This is a retransmit, find in list and mark as re-tx
+
       for (std::deque<RttHistory>::iterator i = m_history.begin (); i != m_history.end (); ++i)
         {
           if ((seq >= i->seq) && (seq < (i->seq + SequenceNumber32 (i->count))))
@@ -2899,6 +2916,7 @@ TcpSocketBase::SendPendingData (bool withAck)
                         " total unAck: " << UnAckDataCount () <<
                         " sent seq " << m_tcb->m_nextTxSequence <<
                         " size " << sz);
+					
           ++nPacketsSent;
           if (m_tcb->m_pacing)
             {
@@ -2941,6 +2959,7 @@ TcpSocketBase::SendPendingData (bool withAck)
     {
       NS_LOG_DEBUG ("SendPendingData no segments sent");
     }
+//	std::cout << this << ": " << nPacketsSent << std::endl;
   return nPacketsSent;
 }
 
@@ -3021,7 +3040,6 @@ TcpSocketBase::ReceivedData (Ptr<Packet> p, const TcpHeader& tcpHeader)
   NS_LOG_FUNCTION (this << tcpHeader);
   NS_LOG_DEBUG ("Data segment, seq=" << tcpHeader.GetSequenceNumber () <<
                 " pkt size=" << p->GetSize () );
-
   // Put into Rx buffer
   SequenceNumber32 expectedSeq = m_rxBuffer->NextRxSequence ();
   if (!m_rxBuffer->Add (p, tcpHeader))
@@ -3093,6 +3111,7 @@ TcpSocketBase::EstimateRtt (const TcpHeader& tcpHeader)
   if (!m_history.empty ())
     {
       RttHistory& h = m_history.front ();
+			
       if (!h.retx && ackSeq >= (h.seq + SequenceNumber32 (h.count)))
         { // Ok to use this sample
           if (m_timestampEnabled && tcpHeader.HasOption (TcpOption::TS))
@@ -3125,7 +3144,9 @@ TcpSocketBase::EstimateRtt (const TcpHeader& tcpHeader)
       // RFC 6298, clause 2.4
       m_rto = Max (m_rtt->GetEstimate () + Max (m_clockGranularity, m_rtt->GetVariation () * 4), m_minRto);
       m_lastRtt = m_rtt->GetEstimate ();
+			//std::cout << this << ": " << m_lastRtt << std::endl;
       m_tcb->m_minRtt = m_lastRtt.Get () < m_tcb->m_minRtt ? m_lastRtt.Get () : m_tcb->m_minRtt;
+			//std::cout << this << ": " << m_tcb->m_minRtt << std::endl;
       NS_LOG_INFO (this << m_lastRtt << m_tcb->m_minRtt);
     }
 }
@@ -3355,6 +3376,7 @@ TcpSocketBase::PersistTimeout ()
   AddOptions (tcpHeader);
 
   m_txTrace (p, tcpHeader, this);
+	m_seqTrace (p, tcpHeader, this);
 
   if (m_endPoint != nullptr)
     {

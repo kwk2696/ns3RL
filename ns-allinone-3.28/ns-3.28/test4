@@ -1,0 +1,1055 @@
+Waf: Entering directory `/home/kwk2696/ns3/ns-allinone-3.28/ns-3.28/build'
+[2201/2801] Compiling src/traffic-control/model/queuedisc-rl.cc
+[2456/2801] Linking build/libns3.28-traffic-control-debug.so
+[2464/2801] Linking build/libns3.28-traffic-control-test-debug.so
+[2469/2801] Linking build/libns3.28-internet-debug.so
+[2488/2801] Linking build/libns3.28-csma-layout-debug.so
+[2490/2801] Linking build/examples/ipv6/ns3.28-test-ipv6-debug
+[2490/2801] Linking build/libns3.28-wimax-debug.so
+[2492/2801] Linking build/examples/socket/ns3.28-socket-options-ipv4-debug
+[2491/2801] Linking build/libns3.28-dsdv-debug.so
+[2493/2801] Linking build/libns3.28-nix-vector-routing-debug.so
+[2494/2801] Linking build/libns3.28-tap-bridge-debug.so
+[2495/2801] Linking build/libns3.28-flow-monitor-debug.so
+[2496/2801] Linking build/src/uan/examples/ns3.28-uan-ipv6-example-debug
+[2497/2801] Linking build/libns3.28-olsr-debug.so
+[2498/2801] Linking build/examples/socket/ns3.28-socket-bound-static-routing-debug
+[2499/2801] Linking build/libns3.28-sixlowpan-debug.so
+[2500/2801] Linking build/libns3.28-internet-test-debug.so
+[2503/2801] Linking build/examples/socket/ns3.28-socket-options-ipv6-debug
+[2503/2801] Linking build/libns3.28-point-to-point-layout-debug.so
+[2504/2801] Linking build/libns3.28-applications-debug.so
+[2506/2801] Linking build/src/uan/examples/ns3.28-uan-raw-example-debug
+[2509/2801] Linking build/libns3.28-internet-apps-debug.so
+[2515/2801] Linking build/examples/stats/ns3.28-wifi-example-sim-debug
+[2515/2801] Linking build/src/uan/examples/ns3.28-uan-ipv4-example-debug
+[2515/2801] Linking build/examples/wireless/ns3.28-wifi-simple-interference-debug
+[2516/2801] Linking build/examples/wireless/ns3.28-wifi-simple-adhoc-debug
+[2516/2801] Linking build/examples/wireless/ns3.28-wifi-clear-channel-cmu-debug
+[2519/2801] Linking build/libns3.28-dsr-debug.so
+[2523/2801] Linking build/examples/energy/ns3.28-energy-model-example-debug
+[2523/2801] Linking build/examples/wireless/ns3.28-wifi-simple-infra-debug
+[2523/2801] Linking build/examples/energy/ns3.28-energy-model-with-harvesting-example-debug
+[2525/2801] Linking build/libns3.28-mesh-debug.so
+[2536/2801] Linking build/libns3.28-aodv-debug.so
+[2538/2801] Linking build/libns3.28-wave-debug.so
+[2543/2801] Linking build/libns3.28-visualizer-debug.so
+[2547/2801] Linking build/libns3.28-sixlowpan-test-debug.so
+[2548/2801] Linking build/src/uan/examples/ns3.28-uan-6lowpan-example-debug
+[2549/2801] Linking build/libns3.28-dsdv-test-debug.so
+[2550/2801] Linking build/src/tap-bridge/examples/ns3.28-tap-wifi-virtual-machine-debug
+[2552/2801] Linking build/src/tap-bridge/examples/ns3.28-tap-csma-debug
+[2552/2801] Linking build/src/tap-bridge/examples/ns3.28-tap-csma-virtual-machine-debug
+[2553/2801] Linking build/examples/wireless/ns3.28-wifi-simple-adhoc-grid-debug
+[2554/2801] Linking build/libns3.28-olsr-test-debug.so
+[2555/2801] Linking build/src/olsr/examples/ns3.28-olsr-hna-debug
+[2556/2801] Linking build/libns3.28-flow-monitor-test-debug.so
+[2560/2801] Linking build/src/fd-net-device/examples/ns3.28-fd-tap-ping-debug
+[2560/2801] Linking build/examples/ipv6/ns3.28-wsn-ping6-debug
+[2561/2801] Linking build/libns3.28-internet-apps-test-debug.so
+[2562/2801] Linking build/src/sixlowpan/examples/ns3.28-example-sixlowpan-debug
+[2563/2801] Linking build/examples/routing/ns3.28-simple-routing-ping6-debug
+[2562/2801] Linking build/src/fd-net-device/examples/ns3.28-dummy-network-debug
+[2564/2801] Linking build/examples/ipv6/ns3.28-fragmentation-ipv6-two-MTU-debug
+[2566/2801] Linking build/src/fd-net-device/examples/ns3.28-realtime-dummy-network-debug
+[2565/2801] Linking build/src/sixlowpan/examples/ns3.28-example-ping-lr-wpan-debug
+[2566/2801] Linking build/examples/ipv6/ns3.28-fragmentation-ipv6-debug
+[2567/2801] Linking build/examples/ipv6/ns3.28-loose-routing-ipv6-debug
+[2568/2801] Linking build/examples/ipv6/ns3.28-ping6-debug
+[2569/2801] Linking build/examples/ipv6/ns3.28-radvd-two-prefix-debug
+[2570/2801] Linking build/src/fd-net-device/examples/ns3.28-fd-emu-ping-debug
+[2572/2801] Linking build/examples/ipv6/ns3.28-radvd-debug
+[2572/2801] Linking build/examples/routing/ns3.28-rip-simple-network-debug
+[2573/2801] Linking build/src/fd-net-device/examples/ns3.28-fd-tap-ping6-debug
+[2574/2801] Linking build/examples/routing/ns3.28-ripng-simple-network-debug
+[2575/2801] Linking build/examples/ipv6/ns3.28-icmpv6-redirect-debug
+[2577/2801] Linking build/src/csma/examples/ns3.28-csma-packet-socket-debug
+[2579/2801] Linking build/examples/wireless/ns3.28-wifi-aggregation-debug
+[2580/2801] Linking build/examples/tutorial/ns3.28-first-debug
+[2579/2801] Linking build/src/mpi/examples/ns3.28-nms-p2p-nix-distributed-debug
+[2581/2801] Linking build/examples/naming/ns3.28-object-names-debug
+[2582/2801] Linking build/src/internet-apps/examples/ns3.28-dhcp-example-debug
+[2582/2801] Linking build/src/csma/examples/ns3.28-csma-multicast-debug
+[2584/2801] Linking build/examples/tutorial/ns3.28-fifth-debug
+[2584/2801] Linking build/examples/routing/ns3.28-global-routing-multi-switch-plus-router-debug
+[2585/2801] Linking build/src/internet/examples/ns3.28-main-simple-debug
+[2586/2801] Linking build/src/bridge/examples/ns3.28-csma-bridge-one-hop-debug
+[2587/2801] Linking build/src/spectrum/examples/ns3.28-adhoc-aloha-ideal-phy-debug
+[2588/2801] Linking build/examples/routing/ns3.28-global-injection-slash32-debug
+[2589/2801] Linking build/examples/traffic-control/ns3.28-tbf-example-debug
+[2590/2801] Linking build/examples/tcp/ns3.28-tcp-nsc-zoo-debug
+[2591/2801] Linking build/examples/error-model/ns3.28-simple-error-model-debug
+[2592/2801] Linking build/examples/realtime/ns3.28-realtime-udp-echo-debug
+[2593/2801] Linking build/examples/tcp/ns3.28-tcp-bulk-send-debug
+[2594/2801] Linking build/examples/tcp/ns3.28-tcp-nsc-lfn-debug
+[2595/2801] Linking build/src/csma/examples/ns3.28-csma-ping-debug
+[2596/2801] Linking build/src/traffic-control/examples/ns3.28-red-vs-ared-debug
+[2597/2801] Linking build/examples/wireless/ns3.28-simple-ht-hidden-stations-debug
+[2599/2801] Linking build/src/traffic-control/examples/ns3.28-codel-vs-pfifo-basic-test-debug
+[2599/2801] Linking build/examples/tcp/ns3.28-tcp-pacing-debug
+[2601/2801] Linking build/examples/wireless/ns3.28-power-adaptation-distance-debug
+[2601/2801] Linking build/examples/routing/ns3.28-dynamic-global-routing-debug
+[2602/2801] Linking build/examples/wireless/ns3.28-wifi-spectrum-saturation-example-debug
+[2603/2801] Linking build/examples/wireless/ns3.28-80211n-mimo-debug
+[2604/2801] Linking build/src/uan/examples/ns3.28-uan-rc-example-debug
+[2605/2801] Linking build/src/csma/examples/ns3.28-csma-raw-ip-socket-debug
+[2607/2801] Linking build/src/nix-vector-routing/examples/ns3.28-nms-p2p-nix-debug
+[2607/2801] Linking build/src/csma/examples/ns3.28-csma-one-subnet-debug
+[2608/2801] Linking build/src/fd-net-device/examples/ns3.28-realtime-fd2fd-onoff-debug
+[2609/2801] Linking build/src/virtual-net-device/examples/ns3.28-virtual-net-device-debug
+[2610/2801] Linking build/examples/tutorial/ns3.28-sixth-debug
+[2611/2801] Linking build/examples/routing/ns3.28-simple-alternate-routing-debug
+[2612/2801] Linking build/examples/tutorial/ns3.28-third-debug
+[2613/2801] Linking build/examples/tutorial/ns3.28-second-debug
+[2614/2801] Linking build/src/traffic-control/examples/ns3.28-adaptive-red-tests-debug
+[2615/2801] Linking build/src/spectrum/examples/ns3.28-adhoc-aloha-ideal-phy-with-microwave-oven-debug
+[2616/2801] Linking build/libns3.28-lte-debug.so
+[2617/2801] Linking build/examples/traffic-control/ns3.28-traffic-control-debug
+[2618/2801] Linking build/examples/udp-client-server/ns3.28-udp-client-server-debug
+[2619/2801] Linking build/src/dsdv/examples/ns3.28-dsdv-manet-debug
+[2621/2801] Linking build/examples/traffic-control/ns3.28-red-vs-fengadaptive-debug
+[2624/2801] Linking build/libns3.28-applications-test-debug.so
+[2624/2801] Linking build/examples/wireless/ns3.28-wifi-blockack-debug
+[2625/2801] Linking build/examples/tcp/ns3.28-tcp-nsc-comparison-debug
+[2625/2801] Linking build/examples/wireless/ns3.28-mixed-network-debug
+[2625/2801] Linking build/examples/socket/ns3.28-socket-bound-tcp-static-routing-debug
+[2626/2801] Linking build/src/mpi/examples/ns3.28-third-distributed-debug
+[2627/2801] Linking build/examples/tcp/ns3.28-tcp-star-server-debug
+[2628/2801] Linking build/examples/wireless/ns3.28-vht-wifi-network-debug
+[2629/2801] Linking build/examples/wireless/ns3.28-he-wifi-network-debug
+[2630/2801] Linking build/examples/wireless/ns3.28-wifi-sleep-debug
+[2631/2801] Linking build/src/traffic-control/examples/ns3.28-codel-vs-pfifo-asymmetric-debug
+[2632/2801] Linking build/examples/wireless/ns3.28-wifi-spectrum-per-interference-debug
+[2633/2801] Linking build/examples/wireless/ns3.28-wifi-backward-compatibility-debug
+[2634/2801] Linking build/examples/wireless/ns3.28-wifi-tcp-debug
+[2635/2801] Linking build/examples/wireless/ns3.28-wifi-adhoc-debug
+[2636/2801] Linking build/examples/routing/ns3.28-mixed-global-routing-debug
+[2637/2801] Linking build/examples/routing/ns3.28-static-routing-slash32-debug
+[2638/2801] Linking build/src/olsr/examples/ns3.28-simple-point-to-point-olsr-debug
+[2639/2801] Linking build/examples/traffic-control/ns3.28-red-vs-nlred-debug
+[2640/2801] Linking build/examples/tcp/ns3.28-tcp-pcap-nanosec-example-debug
+[2642/2801] Linking build/examples/wireless/ns3.28-wifi-timing-attributes-debug
+[2642/2801] Linking build/examples/wireless/ns3.28-wifi-hidden-terminal-debug
+[2643/2801] Linking build/src/fd-net-device/examples/ns3.28-fd-emu-udp-echo-debug
+[2644/2801] Linking build/src/fd-net-device/examples/ns3.28-fd-emu-onoff-debug
+[2645/2801] Linking build/src/csma-layout/examples/ns3.28-csma-star-debug
+[2646/2801] Linking build/examples/wireless/ns3.28-wifi-spectrum-per-example-debug
+[2647/2801] Linking build/examples/wireless/ns3.28-multirate-debug
+[2648/2801] Linking build/src/spectrum/examples/ns3.28-adhoc-aloha-ideal-phy-matrix-propagation-loss-model-debug
+[2649/2801] Linking build/src/mpi/examples/ns3.28-simple-distributed-debug
+[2650/2801] Linking build/examples/traffic-control/ns3.28-queue-discs-benchmark-debug
+[2651/2801] Linking build/examples/wireless/ns3.28-wifi-multi-tos-debug
+[2652/2801] Linking build/examples/wireless/ns3.28-wifi-wired-bridging-debug
+[2653/2801] Linking build/examples/wireless/ns3.28-ht-wifi-network-debug
+[2654/2801] Linking build/src/traffic-control/examples/ns3.28-pfifo-vs-red-debug
+[2655/2801] Linking build/src/mpi/examples/ns3.28-simple-distributed-empty-node-debug
+[2656/2801] Linking build/examples/routing/ns3.28-simple-global-routing-debug
+[2657/2801] Linking build/examples/routing/ns3.28-global-routing-slash32-debug
+[2658/2801] Linking build/src/topology-read/examples/ns3.28-topology-example-sim-debug
+[2659/2801] Linking build/examples/tcp/ns3.28-tcp-large-transfer-debug
+[2660/2801] Linking build/src/traffic-control/examples/ns3.28-pie-example-debug
+[2661/2801] Linking build/src/fd-net-device/examples/ns3.28-fd2fd-onoff-debug
+[2662/2801] Linking build/examples/tutorial/ns3.28-seventh-debug
+[2663/2801] Linking build/examples/wireless/ns3.28-80211e-txop-debug
+[2664/2801] Linking build/examples/wireless/ns3.28-power-adaptation-interference-debug
+[2665/2801] Linking build/src/traffic-control/examples/ns3.28-red-tests-debug
+[2666/2801] Linking build/src/uan/examples/ns3.28-uan-cw-example-debug
+[2667/2801] Linking build/src/csma/examples/ns3.28-csma-broadcast-debug
+[2668/2801] Linking build/examples/tcp/ns3.28-tcp-variants-comparison-debug
+[2669/2801] Linking build/src/nix-vector-routing/examples/ns3.28-nix-simple-debug
+[2670/2801] Linking build/examples/udp/ns3.28-udp-echo-debug
+[2671/2801] Linking build/src/tap-bridge/examples/ns3.28-tap-wifi-dumbbell-debug
+[2672/2801] Linking build/examples/wireless/ns3.28-wifi-ap-debug
+[2673/2801] Linking build/examples/wireless/ns3.28-rate-adaptation-distance-debug
+[2674/2801] Linking build/src/bridge/examples/ns3.28-csma-bridge-debug
+[2675/2801] Linking build/examples/udp-client-server/ns3.28-udp-trace-client-server-debug
+[2676/2801] Linking build/libns3.28-aodv-test-debug.so
+[2677/2801] Linking build/src/aodv/examples/ns3.28-aodv-debug
+[2678/2801] Linking build/src/wave/examples/ns3.28-wave-simple-80211p-debug
+[2679/2801] Linking build/libns3.28-wave-test-debug.so
+[2680/2801] Linking build/src/wave/examples/ns3.28-wave-simple-device-debug
+[2681/2801] Linking build/libns3.28-mesh-test-debug.so
+[2682/2801] Linking build/src/mesh/examples/ns3.28-mesh-debug
+[2683/2801] Linking build/examples/routing/ns3.28-manet-routing-compare-debug
+[2684/2801] Linking build/libns3.28-dsr-test-debug.so
+[2685/2801] Linking build/src/dsr/examples/ns3.28-dsr-debug
+[2686/2801] Linking build/src/wave/examples/ns3.28-vanet-routing-compare-debug
+[2687/2801] Linking build/src/wimax/examples/ns3.28-wimax-multicast-debug
+[2688/2801] Linking build/src/wimax/examples/ns3.28-wimax-simple-debug
+[2689/2801] Linking build/libns3.28-wimax-test-debug.so
+[2690/2801] Linking build/src/wimax/examples/ns3.28-wimax-ipv4-debug
+[2691/2801] Linking build/src/lte/examples/ns3.28-lena-simple-epc-debug
+[2694/2801] Linking build/src/lte/examples/ns3.28-lena-cqi-threshold-debug
+[2695/2801] Linking build/src/lte/examples/ns3.28-lena-ipv6-ue-rh-debug
+[2696/2801] Linking build/src/lte/examples/ns3.28-lena-simple-epc-emu-debug
+[2696/2801] Linking build/src/lte/examples/ns3.28-lena-x2-handover-debug
+[2696/2801] Linking build/src/lte/examples/ns3.28-lena-profiling-debug
+[2697/2801] Linking build/libns3.28-netanim-debug.so
+[2701/2801] Linking build/src/lte/examples/ns3.28-lena-uplink-power-control-debug
+[2700/2801] Linking build/src/lte/examples/ns3.28-lena-simple-debug
+[2703/2801] Linking build/src/lte/examples/ns3.28-lena-ipv6-ue-ue-debug
+[2702/2801] Linking build/src/lte/examples/ns3.28-lena-rlc-traces-debug
+[2703/2801] Linking build/src/lte/examples/ns3.28-lena-pathloss-traces-debug
+[2703/2801] Linking build/src/lte/examples/ns3.28-lena-fading-debug
+[2704/2801] Linking build/src/lte/examples/ns3.28-lena-deactivate-bearer-debug
+[2707/2801] Linking build/libns3.28-lte-test-debug.so
+[2708/2801] Linking build/src/lte/examples/ns3.28-lena-intercell-interference-debug
+[2709/2801] Linking build/src/lte/examples/ns3.28-lena-distributed-ffr-debug
+[2710/2801] Linking build/src/lte/examples/ns3.28-lena-rem-debug
+[2710/2801] Linking build/src/lte/examples/ns3.28-lena-x2-handover-measures-debug
+[2710/2801] Linking build/src/lte/examples/ns3.28-lena-dual-stripe-debug
+[2713/2801] Linking build/src/lte/examples/ns3.28-lena-frequency-reuse-debug
+[2712/2801] Linking build/src/lte/examples/ns3.28-lena-rem-sector-antenna-debug
+[2714/2801] Linking build/src/lte/examples/ns3.28-lena-ipv6-addr-conf-debug
+[2714/2801] Linking build/libns3.28-test-debug.so
+[2715/2801] Linking build/libns3.28-test-test-debug.so
+[2716/2801] Linking build/bindings/python/ns/mobility.so
+[2719/2801] Linking build/src/netanim/examples/ns3.28-resources-counters-debug
+[2720/2801] Linking build/bindings/python/ns/flow_monitor.so
+[2721/2801] Linking build/scratch/ns3_topology
+[2721/2801] Linking build/scratch/p1_rtt_rl
+[2724/2801] Linking build/bindings/python/ns/spectrum.so
+[2724/2801] Linking build/scratch/test2
+[2724/2801] Linking build/bindings/python/ns/lr_wpan.so
+[2724/2801] Linking build/src/netanim/examples/ns3.28-star-animation-debug
+[2726/2801] Linking build/bindings/python/ns/mesh.so
+[2727/2801] Linking build/bindings/python/ns/visualizer.so
+[2729/2801] Linking build/bindings/python/ns/traffic_control.so
+[2730/2801] Linking build/scratch/test9
+[2730/2801] Linking build/bindings/python/ns/internet.so
+[2730/2801] Linking build/bindings/python/ns/point_to_point.so
+[2732/2801] Linking build/examples/tcp/ns3.28-star-debug
+[2732/2801] Linking build/libns3.28-netanim-test-debug.so
+[2736/2801] Linking build/utils/ns3.28-print-introspected-doxygen-debug
+[2736/2801] Linking build/bindings/python/ns/dsr.so
+[2736/2801] Linking build/bindings/python/ns/lte.so
+[2738/2801] Linking build/bindings/python/ns/virtual_net_device.so
+[2739/2801] Linking build/scratch/test
+[2739/2801] Linking build/scratch/test3
+[2739/2801] Linking build/bindings/python/ns/energy.so
+[2741/2801] Linking build/bindings/python/ns/antenna.so
+[2742/2801] Linking build/bindings/python/ns/mpi.so
+[2744/2801] Linking build/bindings/python/ns/internet_apps.so
+[2745/2801] Linking build/bindings/python/ns/point_to_point_layout.so
+[2746/2801] Linking build/examples/wireless/ns3.28-mixed-wired-wireless-debug
+[2747/2801] Linking build/bindings/python/ns/applications.so
+[2747/2801] Linking build/scratch/callbacktest
+[2747/2801] Linking build/bindings/python/ns/wave.so
+[2752/2801] Linking build/bindings/python/ns/sixlowpan.so
+[2752/2801] Linking build/src/netanim/examples/ns3.28-colors-link-description-debug
+[2753/2801] Linking build/bindings/python/ns/aodv.so
+[2752/2801] Linking build/scratch/ns3_topology_dumble3
+[2753/2801] Linking build/examples/matrix-topology/ns3.28-matrix-topology-debug
+[2753/2801] Linking build/bindings/python/ns/stats.so
+[2754/2801] Linking build/bindings/python/ns/olsr.so
+[2756/2801] Linking build/bindings/python/ns/dsdv.so
+[2756/2801] Linking build/bindings/python/ns/csma_layout.so
+[2757/2801] Linking build/bindings/python/ns/propagation.so
+[2758/2801] Linking build/src/netanim/examples/ns3.28-grid-animation-debug
+[2759/2801] Linking build/scratch/udp
+[2760/2801] Linking build/src/netanim/examples/ns3.28-dumbbell-animation-debug
+[2761/2801] Linking build/bindings/python/ns/topology_read.so
+[2762/2801] Linking build/bindings/python/ns/_core.so
+[2763/2801] Linking build/scratch/router_client
+[2764/2801] Linking build/scratch/test6
+[2765/2801] Linking build/scratch/router-2
+[2766/2801] Linking build/scratch/router-1
+[2767/2801] Linking build/bindings/python/ns/buildings.so
+[2768/2801] Linking build/scratch/p1_red
+[2769/2801] Linking build/scratch/p1_rl
+[2770/2801] Linking build/bindings/python/ns/wimax.so
+[2771/2801] Linking build/bindings/python/ns/uan.so
+[2772/2801] Linking build/bindings/python/ns/tap_bridge.so
+[2773/2801] Linking build/bindings/python/ns/csma.so
+[2774/2801] Linking build/bindings/python/ns/nix_vector_routing.so
+[2775/2801] Linking build/scratch/test7
+[2776/2801] Linking build/src/netanim/examples/ns3.28-wireless-animation-debug
+[2777/2801] Linking build/scratch/ns3_topology_dumble
+[2778/2801] Linking build/scratch/ns3_topology_dumble2
+[2779/2801] Linking build/scratch/scratch-simulator
+[2781/2801] Linking build/bindings/python/ns/config_store.so
+[2781/2801] Linking build/bindings/python/ns/wifi.so
+[2782/2801] Linking build/bindings/python/ns/bridge.so
+[2783/2801] Linking build/src/netanim/examples/ns3.28-uan-animation-debug
+[2784/2801] Linking build/scratch/subdir/subdir
+[2785/2801] Linking build/scratch/test5
+[2786/2801] Linking build/scratch/p1_rtt
+[2787/2801] Linking build/bindings/python/ns/network.so
+[2788/2801] Linking build/bindings/python/ns/fd_net_device.so
+[2789/2801] Linking build/scratch/test4
+[2790/2801] Linking build/utils/ns3.28-test-runner-debug
+Waf: Leaving directory `/home/kwk2696/ns3/ns-allinone-3.28/ns-3.28/build'
+Build commands will be stored in build/compile_commands.json
+'build' finished successfully (19.611s)
+
+model name : netw_model_333_yes_0.5_test4.pkl
+step: 1
+-----------end----------
+Total Bytes App Recieved: 60318720bytes
+
+Flow 1 (10.1.1.1 -> 10.2.1.2)
+  Tx Packets: 19657
+  Tx Bytes:   21146840
+  Rx Packets: 19656
+  Rx Bytes:   21146788
+  Throughput: 16.9174 Mbps
+  First Packet Rx: 0.130001sec
+  Last Packet Rx: 10.13sec
+Flow 2 (10.1.2.1 -> 10.2.1.2)
+  Tx Packets: 19641
+  Tx Bytes:   21129624
+  Rx Packets: 19641
+  Rx Bytes:   21129624
+  Throughput: 16.8029 Mbps
+  First Packet Rx: 0.130001sec
+  Last Packet Rx: 10.19sec
+Flow 3 (10.1.3.1 -> 10.2.1.2)
+  Tx Packets: 19619
+  Tx Bytes:   21105952
+  Rx Packets: 19618
+  Rx Bytes:   21105900
+  Throughput: 16.8847 Mbps
+  First Packet Rx: 0.130002sec
+  Last Packet Rx: 10.13sec
+Flow 4 (10.2.1.2 -> 10.1.2.1)
+  Tx Packets: 9821
+  Tx Bytes:   510696
+  Rx Packets: 9821
+  Rx Bytes:   510696
+  Throughput: 0.408556 Mbps
+  First Packet Rx: 0.160002sec
+  Last Packet Rx: 10.16sec
+Flow 5 (10.2.1.2 -> 10.1.1.1)
+  Tx Packets: 9829
+  Tx Bytes:   511112
+  Rx Packets: 9829
+  Rx Bytes:   511112
+  Throughput: 0.408889 Mbps
+  First Packet Rx: 0.160003sec
+  Last Packet Rx: 10.16sec
+Flow 6 (10.2.1.2 -> 10.1.3.1)
+  Tx Packets: 9810
+  Tx Bytes:   510124
+  Rx Packets: 9810
+  Rx Bytes:   510124
+  Throughput: 0.408099 Mbps
+  First Packet Rx: 0.160003sec
+  Last Packet Rx: 10.16sec
+th total RX: 60318720
+
+Packets/Bytes received: 58917 / 63382416
+Packets/Bytes enqueued: 58917 / 63382416
+Packets/Bytes dequeued: 58915 / 63382312
+Packets/Bytes requeued: 0 / 0
+Packets/Bytes dropped: 0 / 0
+Packets/Bytes dropped before enqueue: 0 / 0
+Packets/Bytes dropped after dequeue: 0 / 0
+Packets/Bytes sent: 58915 / 63382312
+Packets/Bytes marked: 0 / 0
+
+step: 2
+-----------end----------
+Total Bytes App Recieved: 60435456bytes
+
+Flow 1 (10.1.1.1 -> 10.2.1.2)
+  Tx Packets: 19629
+  Tx Bytes:   21116712
+  Rx Packets: 19629
+  Rx Bytes:   21116712
+  Throughput: 16.7926 Mbps
+  First Packet Rx: 0.130001sec
+  Last Packet Rx: 10.19sec
+Flow 2 (10.1.2.1 -> 10.2.1.2)
+  Tx Packets: 19740
+  Tx Bytes:   21235124
+  Rx Packets: 19737
+  Rx Bytes:   21234968
+  Throughput: 16.988 Mbps
+  First Packet Rx: 0.130001sec
+  Last Packet Rx: 10.13sec
+Flow 3 (10.1.3.1 -> 10.2.1.2)
+  Tx Packets: 19663
+  Tx Bytes:   21153296
+  Rx Packets: 19662
+  Rx Bytes:   21153244
+  Throughput: 17.0247 Mbps
+  First Packet Rx: 0.190004sec
+  Last Packet Rx: 10.13sec
+Flow 4 (10.2.1.2 -> 10.1.2.1)
+  Tx Packets: 9870
+  Tx Bytes:   513244
+  Rx Packets: 9870
+  Rx Bytes:   513244
+  Throughput: 0.377733 Mbps
+  First Packet Rx: 0.160002sec
+  Last Packet Rx: 11.03sec
+Flow 5 (10.2.1.2 -> 10.1.1.1)
+  Tx Packets: 9815
+  Tx Bytes:   510384
+  Rx Packets: 9815
+  Rx Bytes:   510384
+  Throughput: 0.408307 Mbps
+  First Packet Rx: 0.160003sec
+  Last Packet Rx: 10.16sec
+Flow 6 (10.2.1.2 -> 10.1.3.1)
+  Tx Packets: 9832
+  Tx Bytes:   511268
+  Rx Packets: 9832
+  Rx Bytes:   511268
+  Throughput: 0.411483 Mbps
+  First Packet Rx: 0.220005sec
+  Last Packet Rx: 10.16sec
+th total RX: 60435456
+
+Packets/Bytes received: 59032 / 63505132
+Packets/Bytes enqueued: 59032 / 63505132
+Packets/Bytes dequeued: 59028 / 63504924
+Packets/Bytes requeued: 0 / 0
+Packets/Bytes dropped: 0 / 0
+Packets/Bytes dropped before enqueue: 0 / 0
+Packets/Bytes dropped after dequeue: 0 / 0
+Packets/Bytes sent: 59028 / 63504924
+Packets/Bytes marked: 0 / 0
+
+step: 3
+-----------end----------
+Total Bytes App Recieved: 60554240bytes
+
+Flow 1 (10.1.1.1 -> 10.2.1.2)
+  Tx Packets: 19738
+  Tx Bytes:   21232972
+  Rx Packets: 19735
+  Rx Bytes:   21232816
+  Throughput: 17.0349 Mbps
+  First Packet Rx: 0.130002sec
+  Last Packet Rx: 10.1015sec
+Flow 2 (10.1.2.1 -> 10.2.1.2)
+  Tx Packets: 19754
+  Tx Bytes:   21250188
+  Rx Packets: 19751
+  Rx Bytes:   21250032
+  Throughput: 17.0487 Mbps
+  First Packet Rx: 0.130001sec
+  Last Packet Rx: 10.1014sec
+Flow 3 (10.1.3.1 -> 10.2.1.2)
+  Tx Packets: 19657
+  Tx Bytes:   21146840
+  Rx Packets: 19657
+  Rx Bytes:   21146840
+  Throughput: 16.8166 Mbps
+  First Packet Rx: 0.130001sec
+  Last Packet Rx: 10.19sec
+Flow 4 (10.2.1.2 -> 10.1.2.1)
+  Tx Packets: 9877
+  Tx Bytes:   513608
+  Rx Packets: 9877
+  Rx Bytes:   513608
+  Throughput: 0.378 Mbps
+  First Packet Rx: 0.160002sec
+  Last Packet Rx: 11.03sec
+Flow 5 (10.2.1.2 -> 10.1.3.1)
+  Tx Packets: 9829
+  Tx Bytes:   511112
+  Rx Packets: 9829
+  Rx Bytes:   511112
+  Throughput: 0.40889 Mbps
+  First Packet Rx: 0.160003sec
+  Last Packet Rx: 10.16sec
+Flow 6 (10.2.1.2 -> 10.1.1.1)
+  Tx Packets: 9869
+  Tx Bytes:   513192
+  Rx Packets: 9869
+  Rx Bytes:   513192
+  Throughput: 0.377694 Mbps
+  First Packet Rx: 0.160003sec
+  Last Packet Rx: 11.03sec
+th total RX: 60554240
+
+Packets/Bytes received: 59149 / 63630000
+Packets/Bytes enqueued: 59149 / 63630000
+Packets/Bytes dequeued: 59143 / 63629688
+Packets/Bytes requeued: 0 / 0
+Packets/Bytes dropped: 0 / 0
+Packets/Bytes dropped before enqueue: 0 / 0
+Packets/Bytes dropped after dequeue: 0 / 0
+Packets/Bytes sent: 59143 / 63629688
+Packets/Bytes marked: 0 / 0
+
+step: 4
+-----------end----------
+Total Bytes App Recieved: 60847104bytes
+
+Flow 1 (10.1.1.1 -> 10.2.1.2)
+  Tx Packets: 19847
+  Tx Bytes:   21351280
+  Rx Packets: 19846
+  Rx Bytes:   21351228
+  Throughput: 17.081 Mbps
+  First Packet Rx: 0.130001sec
+  Last Packet Rx: 10.13sec
+Flow 2 (10.1.2.1 -> 10.2.1.2)
+  Tx Packets: 19799
+  Tx Bytes:   21299632
+  Rx Packets: 19798
+  Rx Bytes:   21299580
+  Throughput: 17.0397 Mbps
+  First Packet Rx: 0.130001sec
+  Last Packet Rx: 10.13sec
+Flow 3 (10.1.3.1 -> 10.2.1.2)
+  Tx Packets: 19787
+  Tx Bytes:   21286720
+  Rx Packets: 19787
+  Rx Bytes:   21286720
+  Throughput: 17.0294 Mbps
+  First Packet Rx: 0.190004sec
+  Last Packet Rx: 10.19sec
+Flow 4 (10.2.1.2 -> 10.1.1.1)
+  Tx Packets: 9924
+  Tx Bytes:   516052
+  Rx Packets: 9924
+  Rx Bytes:   516052
+  Throughput: 0.412842 Mbps
+  First Packet Rx: 0.160002sec
+  Last Packet Rx: 10.16sec
+Flow 5 (10.2.1.2 -> 10.1.2.1)
+  Tx Packets: 9900
+  Tx Bytes:   514804
+  Rx Packets: 9900
+  Rx Bytes:   514804
+  Throughput: 0.411843 Mbps
+  First Packet Rx: 0.160003sec
+  Last Packet Rx: 10.16sec
+Flow 6 (10.2.1.2 -> 10.1.3.1)
+  Tx Packets: 9894
+  Tx Bytes:   514492
+  Rx Packets: 9894
+  Rx Bytes:   514492
+  Throughput: 0.414078 Mbps
+  First Packet Rx: 0.220005sec
+  Last Packet Rx: 10.16sec
+th total RX: 60847104
+
+Packets/Bytes received: 59433 / 63937632
+Packets/Bytes enqueued: 59433 / 63937632
+Packets/Bytes dequeued: 59431 / 63937528
+Packets/Bytes requeued: 0 / 0
+Packets/Bytes dropped: 0 / 0
+Packets/Bytes dropped before enqueue: 0 / 0
+Packets/Bytes dropped after dequeue: 0 / 0
+Packets/Bytes sent: 59431 / 63937528
+Packets/Bytes marked: 0 / 0
+
+step: 5
+-----------end----------
+Total Bytes App Recieved: 60865536bytes
+
+Flow 1 (10.1.1.1 -> 10.2.1.2)
+  Tx Packets: 19801
+  Tx Bytes:   21301784
+  Rx Packets: 19801
+  Rx Bytes:   21301784
+  Throughput: 16.9398 Mbps
+  First Packet Rx: 0.130001sec
+  Last Packet Rx: 10.19sec
+Flow 2 (10.1.2.1 -> 10.2.1.2)
+  Tx Packets: 19853
+  Tx Bytes:   21357736
+  Rx Packets: 19852
+  Rx Bytes:   21357684
+  Throughput: 17.0861 Mbps
+  First Packet Rx: 0.130001sec
+  Last Packet Rx: 10.13sec
+Flow 3 (10.1.3.1 -> 10.2.1.2)
+  Tx Packets: 19798
+  Tx Bytes:   21297532
+  Rx Packets: 19795
+  Rx Bytes:   21297376
+  Throughput: 17.0874 Mbps
+  First Packet Rx: 0.130002sec
+  Last Packet Rx: 10.101sec
+Flow 4 (10.2.1.2 -> 10.1.1.1)
+  Tx Packets: 9901
+  Tx Bytes:   514856
+  Rx Packets: 9901
+  Rx Bytes:   514856
+  Throughput: 0.411885 Mbps
+  First Packet Rx: 0.160002sec
+  Last Packet Rx: 10.16sec
+Flow 5 (10.2.1.2 -> 10.1.2.1)
+  Tx Packets: 9927
+  Tx Bytes:   516208
+  Rx Packets: 9927
+  Rx Bytes:   516208
+  Throughput: 0.412966 Mbps
+  First Packet Rx: 0.160003sec
+  Last Packet Rx: 10.16sec
+Flow 6 (10.2.1.2 -> 10.1.3.1)
+  Tx Packets: 9899
+  Tx Bytes:   514752
+  Rx Packets: 9899
+  Rx Bytes:   514752
+  Throughput: 0.378842 Mbps
+  First Packet Rx: 0.160003sec
+  Last Packet Rx: 11.03sec
+th total RX: 60865536
+
+Packets/Bytes received: 59452 / 63957052
+Packets/Bytes enqueued: 59452 / 63957052
+Packets/Bytes dequeued: 59448 / 63956844
+Packets/Bytes requeued: 0 / 0
+Packets/Bytes dropped: 0 / 0
+Packets/Bytes dropped before enqueue: 0 / 0
+Packets/Bytes dropped after dequeue: 0 / 0
+Packets/Bytes sent: 59448 / 63956844
+Packets/Bytes marked: 0 / 0
+
+step: 6
+-----------end----------
+Total Bytes App Recieved: 60855296bytes
+
+Flow 1 (10.1.1.1 -> 10.2.1.2)
+  Tx Packets: 19825
+  Tx Bytes:   21327608
+  Rx Packets: 19825
+  Rx Bytes:   21327608
+  Throughput: 16.9603 Mbps
+  First Packet Rx: 0.130001sec
+  Last Packet Rx: 10.19sec
+Flow 2 (10.1.2.1 -> 10.2.1.2)
+  Tx Packets: 19798
+  Tx Bytes:   21297532
+  Rx Packets: 19795
+  Rx Bytes:   21297376
+  Throughput: 17.0873 Mbps
+  First Packet Rx: 0.130001sec
+  Last Packet Rx: 10.1011sec
+Flow 3 (10.1.3.1 -> 10.2.1.2)
+  Tx Packets: 19820
+  Tx Bytes:   21321204
+  Rx Packets: 19817
+  Rx Bytes:   21321048
+  Throughput: 17.1598 Mbps
+  First Packet Rx: 0.190003sec
+  Last Packet Rx: 10.13sec
+Flow 4 (10.2.1.2 -> 10.1.1.1)
+  Tx Packets: 9913
+  Tx Bytes:   515480
+  Rx Packets: 9913
+  Rx Bytes:   515480
+  Throughput: 0.412384 Mbps
+  First Packet Rx: 0.160002sec
+  Last Packet Rx: 10.16sec
+Flow 5 (10.2.1.2 -> 10.1.2.1)
+  Tx Packets: 9899
+  Tx Bytes:   514752
+  Rx Packets: 9899
+  Rx Bytes:   514752
+  Throughput: 0.378842 Mbps
+  First Packet Rx: 0.160003sec
+  Last Packet Rx: 11.03sec
+Flow 6 (10.2.1.2 -> 10.1.3.1)
+  Tx Packets: 9910
+  Tx Bytes:   515324
+  Rx Packets: 9910
+  Rx Bytes:   515324
+  Throughput: 0.381368 Mbps
+  First Packet Rx: 0.220005sec
+  Last Packet Rx: 11.03sec
+th total RX: 60855296
+
+Packets/Bytes received: 59443 / 63946344
+Packets/Bytes enqueued: 59443 / 63946344
+Packets/Bytes dequeued: 59437 / 63946032
+Packets/Bytes requeued: 0 / 0
+Packets/Bytes dropped: 0 / 0
+Packets/Bytes dropped before enqueue: 0 / 0
+Packets/Bytes dropped after dequeue: 0 / 0
+Packets/Bytes sent: 59437 / 63946032
+Packets/Bytes marked: 0 / 0
+
+step: 7
+-----------end----------
+Total Bytes App Recieved: 60967936bytes
+
+Flow 1 (10.1.1.1 -> 10.2.1.2)
+  Tx Packets: 19889
+  Tx Bytes:   21396472
+  Rx Packets: 19888
+  Rx Bytes:   21396420
+  Throughput: 17.1171 Mbps
+  First Packet Rx: 0.130001sec
+  Last Packet Rx: 10.13sec
+Flow 2 (10.1.2.1 -> 10.2.1.2)
+  Tx Packets: 19829
+  Tx Bytes:   21331912
+  Rx Packets: 19828
+  Rx Bytes:   21331860
+  Throughput: 17.0655 Mbps
+  First Packet Rx: 0.130001sec
+  Last Packet Rx: 10.13sec
+Flow 3 (10.1.3.1 -> 10.2.1.2)
+  Tx Packets: 19833
+  Tx Bytes:   21336216
+  Rx Packets: 19833
+  Rx Bytes:   21336216
+  Throughput: 17.069 Mbps
+  First Packet Rx: 0.190003sec
+  Last Packet Rx: 10.19sec
+Flow 4 (10.2.1.2 -> 10.1.1.1)
+  Tx Packets: 9945
+  Tx Bytes:   517144
+  Rx Packets: 9945
+  Rx Bytes:   517144
+  Throughput: 0.413715 Mbps
+  First Packet Rx: 0.160002sec
+  Last Packet Rx: 10.16sec
+Flow 5 (10.2.1.2 -> 10.1.2.1)
+  Tx Packets: 9915
+  Tx Bytes:   515584
+  Rx Packets: 9915
+  Rx Bytes:   515584
+  Throughput: 0.412467 Mbps
+  First Packet Rx: 0.160003sec
+  Last Packet Rx: 10.16sec
+Flow 6 (10.2.1.2 -> 10.1.3.1)
+  Tx Packets: 9917
+  Tx Bytes:   515688
+  Rx Packets: 9917
+  Rx Bytes:   515688
+  Throughput: 0.415041 Mbps
+  First Packet Rx: 0.220005sec
+  Last Packet Rx: 10.16sec
+th total RX: 60967936
+
+Packets/Bytes received: 59551 / 64064600
+Packets/Bytes enqueued: 59551 / 64064600
+Packets/Bytes dequeued: 59549 / 64064496
+Packets/Bytes requeued: 0 / 0
+Packets/Bytes dropped: 0 / 0
+Packets/Bytes dropped before enqueue: 0 / 0
+Packets/Bytes dropped after dequeue: 0 / 0
+Packets/Bytes sent: 59549 / 64064496
+Packets/Bytes marked: 0 / 0
+
+step: 8
+-----------end----------
+Total Bytes App Recieved: 60974080bytes
+
+Flow 1 (10.1.1.1 -> 10.2.1.2)
+  Tx Packets: 19829
+  Tx Bytes:   21331912
+  Rx Packets: 19829
+  Rx Bytes:   21331912
+  Throughput: 16.9637 Mbps
+  First Packet Rx: 0.130001sec
+  Last Packet Rx: 10.19sec
+Flow 2 (10.1.2.1 -> 10.2.1.2)
+  Tx Packets: 19885
+  Tx Bytes:   21392168
+  Rx Packets: 19884
+  Rx Bytes:   21392116
+  Throughput: 17.1137 Mbps
+  First Packet Rx: 0.130001sec
+  Last Packet Rx: 10.13sec
+Flow 3 (10.1.3.1 -> 10.2.1.2)
+  Tx Packets: 19844
+  Tx Bytes:   21347028
+  Rx Packets: 19841
+  Rx Bytes:   21346872
+  Throughput: 17.2304 Mbps
+  First Packet Rx: 0.190004sec
+  Last Packet Rx: 10.1012sec
+Flow 4 (10.2.1.2 -> 10.1.2.1)
+  Tx Packets: 9943
+  Tx Bytes:   517040
+  Rx Packets: 9943
+  Rx Bytes:   517040
+  Throughput: 0.413632 Mbps
+  First Packet Rx: 0.160002sec
+  Last Packet Rx: 10.16sec
+Flow 5 (10.2.1.2 -> 10.1.1.1)
+  Tx Packets: 9915
+  Tx Bytes:   515584
+  Rx Packets: 9915
+  Rx Bytes:   515584
+  Throughput: 0.412467 Mbps
+  First Packet Rx: 0.160003sec
+  Last Packet Rx: 10.16sec
+Flow 6 (10.2.1.2 -> 10.1.3.1)
+  Tx Packets: 9922
+  Tx Bytes:   515948
+  Rx Packets: 9922
+  Rx Bytes:   515948
+  Throughput: 0.38183 Mbps
+  First Packet Rx: 0.220005sec
+  Last Packet Rx: 11.03sec
+th total RX: 60974080
+
+Packets/Bytes received: 59558 / 64071108
+Packets/Bytes enqueued: 59558 / 64071108
+Packets/Bytes dequeued: 59554 / 64070900
+Packets/Bytes requeued: 0 / 0
+Packets/Bytes dropped: 0 / 0
+Packets/Bytes dropped before enqueue: 0 / 0
+Packets/Bytes dropped after dequeue: 0 / 0
+Packets/Bytes sent: 59554 / 64070900
+Packets/Bytes marked: 0 / 0
+
+step: 9
+-----------end----------
+Total Bytes App Recieved: 61078528bytes
+
+Flow 1 (10.1.1.1 -> 10.2.1.2)
+  Tx Packets: 19969
+  Tx Bytes:   21482552
+  Rx Packets: 19968
+  Rx Bytes:   21482500
+  Throughput: 17.186 Mbps
+  First Packet Rx: 0.130001sec
+  Last Packet Rx: 10.13sec
+Flow 2 (10.1.2.1 -> 10.2.1.2)
+  Tx Packets: 19843
+  Tx Bytes:   21346976
+  Rx Packets: 19842
+  Rx Bytes:   21346924
+  Throughput: 17.1806 Mbps
+  First Packet Rx: 0.190004sec
+  Last Packet Rx: 10.13sec
+Flow 3 (10.1.3.1 -> 10.2.1.2)
+  Tx Packets: 19847
+  Tx Bytes:   21351280
+  Rx Packets: 19847
+  Rx Bytes:   21351280
+  Throughput: 16.9791 Mbps
+  First Packet Rx: 0.130001sec
+  Last Packet Rx: 10.19sec
+Flow 4 (10.2.1.2 -> 10.1.1.1)
+  Tx Packets: 9985
+  Tx Bytes:   519224
+  Rx Packets: 9985
+  Rx Bytes:   519224
+  Throughput: 0.415379 Mbps
+  First Packet Rx: 0.160002sec
+  Last Packet Rx: 10.16sec
+Flow 5 (10.2.1.2 -> 10.1.3.1)
+  Tx Packets: 9924
+  Tx Bytes:   516052
+  Rx Packets: 9924
+  Rx Bytes:   516052
+  Throughput: 0.412842 Mbps
+  First Packet Rx: 0.160003sec
+  Last Packet Rx: 10.16sec
+Flow 6 (10.2.1.2 -> 10.1.2.1)
+  Tx Packets: 9922
+  Tx Bytes:   515948
+  Rx Packets: 9922
+  Rx Bytes:   515948
+  Throughput: 0.41525 Mbps
+  First Packet Rx: 0.220005sec
+  Last Packet Rx: 10.16sec
+th total RX: 61078528
+
+Packets/Bytes received: 59659 / 64180808
+Packets/Bytes enqueued: 59659 / 64180808
+Packets/Bytes dequeued: 59657 / 64180704
+Packets/Bytes requeued: 0 / 0
+Packets/Bytes dropped: 0 / 0
+Packets/Bytes dropped before enqueue: 0 / 0
+Packets/Bytes dropped after dequeue: 0 / 0
+Packets/Bytes sent: 59657 / 64180704
+Packets/Bytes marked: 0 / 0
+
+step: 10
+-----------end----------
+Total Bytes App Recieved: 61340672bytes
+
+Flow 1 (10.1.1.1 -> 10.2.1.2)
+  Tx Packets: 19967
+  Tx Bytes:   21480400
+  Rx Packets: 19966
+  Rx Bytes:   21480348
+  Throughput: 17.1843 Mbps
+  First Packet Rx: 0.130001sec
+  Last Packet Rx: 10.13sec
+Flow 2 (10.1.2.1 -> 10.2.1.2)
+  Tx Packets: 19975
+  Tx Bytes:   21489008
+  Rx Packets: 19974
+  Rx Bytes:   21488956
+  Throughput: 17.1912 Mbps
+  First Packet Rx: 0.130001sec
+  Last Packet Rx: 10.13sec
+Flow 3 (10.1.3.1 -> 10.2.1.2)
+  Tx Packets: 19973
+  Tx Bytes:   21486856
+  Rx Packets: 19973
+  Rx Bytes:   21486856
+  Throughput: 17.087 Mbps
+  First Packet Rx: 0.130002sec
+  Last Packet Rx: 10.19sec
+Flow 4 (10.2.1.2 -> 10.1.1.1)
+  Tx Packets: 9984
+  Tx Bytes:   519172
+  Rx Packets: 9984
+  Rx Bytes:   519172
+  Throughput: 0.415338 Mbps
+  First Packet Rx: 0.160002sec
+  Last Packet Rx: 10.16sec
+Flow 5 (10.2.1.2 -> 10.1.2.1)
+  Tx Packets: 9988
+  Tx Bytes:   519380
+  Rx Packets: 9988
+  Rx Bytes:   519380
+  Throughput: 0.415504 Mbps
+  First Packet Rx: 0.160003sec
+  Last Packet Rx: 10.16sec
+Flow 6 (10.2.1.2 -> 10.1.3.1)
+  Tx Packets: 9987
+  Tx Bytes:   519328
+  Rx Packets: 9987
+  Rx Bytes:   519328
+  Throughput: 0.415462 Mbps
+  First Packet Rx: 0.160003sec
+  Last Packet Rx: 10.16sec
+th total RX: 61340672
+
+Packets/Bytes received: 59915 / 64456264
+Packets/Bytes enqueued: 59915 / 64456264
+Packets/Bytes dequeued: 59913 / 64456160
+Packets/Bytes requeued: 0 / 0
+Packets/Bytes dropped: 0 / 0
+Packets/Bytes dropped before enqueue: 0 / 0
+Packets/Bytes dropped after dequeue: 0 / 0
+Packets/Bytes sent: 59913 / 64456160
+Packets/Bytes marked: 0 / 0
+
+step: 11
+-----------end----------
+Total Bytes App Recieved: 61275136bytes
+
+Flow 1 (10.1.1.1 -> 10.2.1.2)
+  Tx Packets: 19979
+  Tx Bytes:   21493312
+  Rx Packets: 19978
+  Rx Bytes:   21493260
+  Throughput: 17.1946 Mbps
+  First Packet Rx: 0.130001sec
+  Last Packet Rx: 10.13sec
+Flow 2 (10.1.2.1 -> 10.2.1.2)
+  Tx Packets: 19975
+  Tx Bytes:   21489008
+  Rx Packets: 19974
+  Rx Bytes:   21488956
+  Throughput: 17.1912 Mbps
+  First Packet Rx: 0.130001sec
+  Last Packet Rx: 10.13sec
+Flow 3 (10.1.3.1 -> 10.2.1.2)
+  Tx Packets: 19897
+  Tx Bytes:   21405080
+  Rx Packets: 19897
+  Rx Bytes:   21405080
+  Throughput: 17.0219 Mbps
+  First Packet Rx: 0.130002sec
+  Last Packet Rx: 10.19sec
+Flow 4 (10.2.1.2 -> 10.1.2.1)
+  Tx Packets: 9988
+  Tx Bytes:   519380
+  Rx Packets: 9988
+  Rx Bytes:   519380
+  Throughput: 0.415504 Mbps
+  First Packet Rx: 0.160002sec
+  Last Packet Rx: 10.16sec
+Flow 5 (10.2.1.2 -> 10.1.1.1)
+  Tx Packets: 9990
+  Tx Bytes:   519484
+  Rx Packets: 9990
+  Rx Bytes:   519484
+  Throughput: 0.415587 Mbps
+  First Packet Rx: 0.160003sec
+  Last Packet Rx: 10.16sec
+Flow 6 (10.2.1.2 -> 10.1.3.1)
+  Tx Packets: 9949
+  Tx Bytes:   517352
+  Rx Packets: 9949
+  Rx Bytes:   517352
+  Throughput: 0.413882 Mbps
+  First Packet Rx: 0.160003sec
+  Last Packet Rx: 10.16sec
+th total RX: 61275136
+
+Packets/Bytes received: 59851 / 64387400
+Packets/Bytes enqueued: 59851 / 64387400
+Packets/Bytes dequeued: 59849 / 64387296
+Packets/Bytes requeued: 0 / 0
+Packets/Bytes dropped: 0 / 0
+Packets/Bytes dropped before enqueue: 0 / 0
+Packets/Bytes dropped after dequeue: 0 / 0
+Packets/Bytes sent: 59849 / 64387296
+Packets/Bytes marked: 0 / 0
+
+step: 12
+-----------end----------
+Total Bytes App Recieved: 61400064bytes
+
+Flow 1 (10.1.1.1 -> 10.2.1.2)
+  Tx Packets: 19991
+  Tx Bytes:   21506224
+  Rx Packets: 19990
+  Rx Bytes:   21506172
+  Throughput: 17.2049 Mbps
+  First Packet Rx: 0.130001sec
+  Last Packet Rx: 10.13sec
+Flow 2 (10.1.2.1 -> 10.2.1.2)
+  Tx Packets: 19991
+  Tx Bytes:   21506224
+  Rx Packets: 19990
+  Rx Bytes:   21506172
+  Throughput: 17.2049 Mbps
+  First Packet Rx: 0.130001sec
+  Last Packet Rx: 10.13sec
+Flow 3 (10.1.3.1 -> 10.2.1.2)
+  Tx Packets: 19991
+  Tx Bytes:   21506224
+  Rx Packets: 19991
+  Rx Bytes:   21506224
+  Throughput: 17.1024 Mbps
+  First Packet Rx: 0.130002sec
+  Last Packet Rx: 10.19sec
+Flow 4 (10.2.1.2 -> 10.1.1.1)
+  Tx Packets: 9996
+  Tx Bytes:   519796
+  Rx Packets: 9996
+  Rx Bytes:   519796
+  Throughput: 0.415837 Mbps
+  First Packet Rx: 0.160002sec
+  Last Packet Rx: 10.16sec
+Flow 5 (10.2.1.2 -> 10.1.2.1)
+  Tx Packets: 9996
+  Tx Bytes:   519796
+  Rx Packets: 9996
+  Rx Bytes:   519796
+  Throughput: 0.415837 Mbps
+  First Packet Rx: 0.160003sec
+  Last Packet Rx: 10.16sec
+Flow 6 (10.2.1.2 -> 10.1.3.1)
+  Tx Packets: 9996
+  Tx Bytes:   519796
+  Rx Packets: 9996
+  Rx Bytes:   519796
+  Throughput: 0.415837 Mbps
+  First Packet Rx: 0.160003sec
+  Last Packet Rx: 10.16sec
+th total RX: 61400064
+
+Packets/Bytes received: 59973 / 64518672
+Packets/Bytes enqueued: 59973 / 64518672
+Packets/Bytes dequeued: 59971 / 64518568
+Packets/Bytes requeued: 0 / 0
+Packets/Bytes dropped: 0 / 0
+Packets/Bytes dropped before enqueue: 0 / 0
+Packets/Bytes dropped after dequeue: 0 / 0
+Packets/Bytes sent: 59971 / 64518568
+Packets/Bytes marked: 0 / 0
+
+step: 13
+Interrupted 

@@ -1,0 +1,776 @@
+Waf: Entering directory `/home/kwk2696/ns3/ns-allinone-3.28/ns-3.28/build'
+Waf: Leaving directory `/home/kwk2696/ns3/ns-allinone-3.28/ns-3.28/build'
+Build commands will be stored in build/compile_commands.json
+'build' finished successfully (1.912s)
+
+model: netw_model_333_yes_0.5.pkl
+step: 1
+-----------end----------
+Total Bytes App Recieved: 60265472bytes
+
+Flow 1 (10.1.1.1 -> 10.2.1.2)
+  Tx Packets: 19653
+  Tx Bytes:   21142536
+  Rx Packets: 19652
+  Rx Bytes:   21142484
+  Throughput: 16.914 Mbps
+  First Packet Rx: 0.130001sec
+  Last Packet Rx: 10.13sec
+Flow 2 (10.1.2.1 -> 10.2.1.2)
+  Tx Packets: 19675
+  Tx Bytes:   21166208
+  Rx Packets: 19674
+  Rx Bytes:   21166156
+  Throughput: 16.9329 Mbps
+  First Packet Rx: 0.130001sec
+  Last Packet Rx: 10.13sec
+Flow 3 (10.1.3.1 -> 10.2.1.2)
+  Tx Packets: 19537
+  Tx Bytes:   21017720
+  Rx Packets: 19537
+  Rx Bytes:   21017720
+  Throughput: 16.8142 Mbps
+  First Packet Rx: 0.190004sec
+  Last Packet Rx: 10.19sec
+Flow 4 (10.2.1.2 -> 10.1.2.1)
+  Tx Packets: 9838
+  Tx Bytes:   511580
+  Rx Packets: 9838
+  Rx Bytes:   511580
+  Throughput: 0.409264 Mbps
+  First Packet Rx: 0.160002sec
+  Last Packet Rx: 10.16sec
+Flow 5 (10.2.1.2 -> 10.1.1.1)
+  Tx Packets: 9827
+  Tx Bytes:   511008
+  Rx Packets: 9827
+  Rx Bytes:   511008
+  Throughput: 0.408806 Mbps
+  First Packet Rx: 0.160003sec
+  Last Packet Rx: 10.16sec
+Flow 6 (10.2.1.2 -> 10.1.3.1)
+  Tx Packets: 9769
+  Tx Bytes:   507992
+  Rx Packets: 9769
+  Rx Bytes:   507992
+  Throughput: 0.408846 Mbps
+  First Packet Rx: 0.220005sec
+  Last Packet Rx: 10.16sec
+th total RX: 60265472
+
+Packets/Bytes received: 58865 / 63326464
+Packets/Bytes enqueued: 58865 / 63326464
+Packets/Bytes dequeued: 58863 / 63326360
+Packets/Bytes requeued: 0 / 0
+Packets/Bytes dropped: 0 / 0
+Packets/Bytes dropped before enqueue: 0 / 0
+Packets/Bytes dropped after dequeue: 0 / 0
+Packets/Bytes sent: 58863 / 63326360
+Packets/Bytes marked: 0 / 0
+
+step: 2
+-----------end----------
+Total Bytes App Recieved: 60355584bytes
+
+Flow 1 (10.1.1.1 -> 10.2.1.2)
+  Tx Packets: 19667
+  Tx Bytes:   21157600
+  Rx Packets: 19666
+  Rx Bytes:   21157548
+  Throughput: 16.926 Mbps
+  First Packet Rx: 0.130001sec
+  Last Packet Rx: 10.13sec
+Flow 2 (10.1.2.1 -> 10.2.1.2)
+  Tx Packets: 19661
+  Tx Bytes:   21151144
+  Rx Packets: 19661
+  Rx Bytes:   21151144
+  Throughput: 16.82 Mbps
+  First Packet Rx: 0.130001sec
+  Last Packet Rx: 10.19sec
+Flow 3 (10.1.3.1 -> 10.2.1.2)
+  Tx Packets: 19626
+  Tx Bytes:   21112460
+  Rx Packets: 19623
+  Rx Bytes:   21112304
+  Throughput: 16.9918 Mbps
+  First Packet Rx: 0.190025sec
+  Last Packet Rx: 10.13sec
+Flow 4 (10.2.1.2 -> 10.1.2.1)
+  Tx Packets: 9831
+  Tx Bytes:   511216
+  Rx Packets: 9831
+  Rx Bytes:   511216
+  Throughput: 0.408973 Mbps
+  First Packet Rx: 0.160002sec
+  Last Packet Rx: 10.16sec
+Flow 5 (10.2.1.2 -> 10.1.1.1)
+  Tx Packets: 9834
+  Tx Bytes:   511372
+  Rx Packets: 9834
+  Rx Bytes:   511372
+  Throughput: 0.409097 Mbps
+  First Packet Rx: 0.160003sec
+  Last Packet Rx: 10.16sec
+Flow 6 (10.2.1.2 -> 10.1.3.1)
+  Tx Packets: 9813
+  Tx Bytes:   510280
+  Rx Packets: 9813
+  Rx Bytes:   510280
+  Throughput: 0.377636 Mbps
+  First Packet Rx: 0.220026sec
+  Last Packet Rx: 11.03sec
+th total RX: 60355584
+
+Packets/Bytes received: 58954 / 63421204
+Packets/Bytes enqueued: 58954 / 63421204
+Packets/Bytes dequeued: 58950 / 63420996
+Packets/Bytes requeued: 0 / 0
+Packets/Bytes dropped: 0 / 0
+Packets/Bytes dropped before enqueue: 0 / 0
+Packets/Bytes dropped after dequeue: 0 / 0
+Packets/Bytes sent: 58950 / 63420996
+Packets/Bytes marked: 0 / 0
+
+step: 3
+-----------end----------
+Total Bytes App Recieved: 60513280bytes
+
+Flow 1 (10.1.1.1 -> 10.2.1.2)
+  Tx Packets: 19733
+  Tx Bytes:   21228616
+  Rx Packets: 19733
+  Rx Bytes:   21228616
+  Throughput: 16.8816 Mbps
+  First Packet Rx: 0.130001sec
+  Last Packet Rx: 10.19sec
+Flow 2 (10.1.2.1 -> 10.2.1.2)
+  Tx Packets: 19689
+  Tx Bytes:   21181272
+  Rx Packets: 19688
+  Rx Bytes:   21181220
+  Throughput: 17.0473 Mbps
+  First Packet Rx: 0.190004sec
+  Last Packet Rx: 10.13sec
+Flow 3 (10.1.3.1 -> 10.2.1.2)
+  Tx Packets: 19686
+  Tx Bytes:   21177020
+  Rx Packets: 19683
+  Rx Bytes:   21176864
+  Throughput: 17.093 Mbps
+  First Packet Rx: 0.190003sec
+  Last Packet Rx: 10.1014sec
+Flow 4 (10.2.1.2 -> 10.1.1.1)
+  Tx Packets: 9867
+  Tx Bytes:   513088
+  Rx Packets: 9867
+  Rx Bytes:   513088
+  Throughput: 0.41047 Mbps
+  First Packet Rx: 0.160002sec
+  Last Packet Rx: 10.16sec
+Flow 5 (10.2.1.2 -> 10.1.3.1)
+  Tx Packets: 9843
+  Tx Bytes:   511840
+  Rx Packets: 9843
+  Rx Bytes:   511840
+  Throughput: 0.37879 Mbps
+  First Packet Rx: 0.220005sec
+  Last Packet Rx: 11.03sec
+Flow 6 (10.2.1.2 -> 10.1.2.1)
+  Tx Packets: 9845
+  Tx Bytes:   511944
+  Rx Packets: 9845
+  Rx Bytes:   511944
+  Throughput: 0.412027 Mbps
+  First Packet Rx: 0.220005sec
+  Last Packet Rx: 10.16sec
+th total RX: 60513280
+
+Packets/Bytes received: 59108 / 63586908
+Packets/Bytes enqueued: 59108 / 63586908
+Packets/Bytes dequeued: 59104 / 63586700
+Packets/Bytes requeued: 0 / 0
+Packets/Bytes dropped: 0 / 0
+Packets/Bytes dropped before enqueue: 0 / 0
+Packets/Bytes dropped after dequeue: 0 / 0
+Packets/Bytes sent: 59104 / 63586700
+Packets/Bytes marked: 0 / 0
+
+step: 4
+-----------end----------
+Total Bytes App Recieved: 60910592bytes
+
+Flow 1 (10.1.1.1 -> 10.2.1.2)
+  Tx Packets: 19887
+  Tx Bytes:   21394320
+  Rx Packets: 19886
+  Rx Bytes:   21394268
+  Throughput: 17.1154 Mbps
+  First Packet Rx: 0.130001sec
+  Last Packet Rx: 10.13sec
+Flow 2 (10.1.2.1 -> 10.2.1.2)
+  Tx Packets: 19777
+  Tx Bytes:   21275960
+  Rx Packets: 19777
+  Rx Bytes:   21275960
+  Throughput: 16.9192 Mbps
+  First Packet Rx: 0.130002sec
+  Last Packet Rx: 10.19sec
+Flow 3 (10.1.3.1 -> 10.2.1.2)
+  Tx Packets: 19832
+  Tx Bytes:   21334116
+  Rx Packets: 19829
+  Rx Bytes:   21333960
+  Throughput: 17.0672 Mbps
+  First Packet Rx: 0.130001sec
+  Last Packet Rx: 10.13sec
+Flow 4 (10.2.1.2 -> 10.1.3.1)
+  Tx Packets: 9916
+  Tx Bytes:   515636
+  Rx Packets: 9916
+  Rx Bytes:   515636
+  Throughput: 0.379493 Mbps
+  First Packet Rx: 0.160002sec
+  Last Packet Rx: 11.03sec
+Flow 5 (10.2.1.2 -> 10.1.1.1)
+  Tx Packets: 9944
+  Tx Bytes:   517092
+  Rx Packets: 9944
+  Rx Bytes:   517092
+  Throughput: 0.413673 Mbps
+  First Packet Rx: 0.160003sec
+  Last Packet Rx: 10.16sec
+Flow 6 (10.2.1.2 -> 10.1.2.1)
+  Tx Packets: 9889
+  Tx Bytes:   514232
+  Rx Packets: 9889
+  Rx Bytes:   514232
+  Throughput: 0.411385 Mbps
+  First Packet Rx: 0.160003sec
+  Last Packet Rx: 10.16sec
+th total RX: 60910592
+
+Packets/Bytes received: 59496 / 64004396
+Packets/Bytes enqueued: 59496 / 64004396
+Packets/Bytes dequeued: 59492 / 64004188
+Packets/Bytes requeued: 0 / 0
+Packets/Bytes dropped: 0 / 0
+Packets/Bytes dropped before enqueue: 0 / 0
+Packets/Bytes dropped after dequeue: 0 / 0
+Packets/Bytes sent: 59492 / 64004188
+Packets/Bytes marked: 0 / 0
+
+step: 5
+-----------end----------
+Total Bytes App Recieved: 60871680bytes
+
+Flow 1 (10.1.1.1 -> 10.2.1.2)
+  Tx Packets: 19807
+  Tx Bytes:   21308240
+  Rx Packets: 19806
+  Rx Bytes:   21308188
+  Throughput: 17.0466 Mbps
+  First Packet Rx: 0.130001sec
+  Last Packet Rx: 10.13sec
+Flow 2 (10.1.2.1 -> 10.2.1.2)
+  Tx Packets: 19853
+  Tx Bytes:   21357736
+  Rx Packets: 19853
+  Rx Bytes:   21357736
+  Throughput: 16.9843 Mbps
+  First Packet Rx: 0.130001sec
+  Last Packet Rx: 10.19sec
+Flow 3 (10.1.3.1 -> 10.2.1.2)
+  Tx Packets: 19798
+  Tx Bytes:   21297532
+  Rx Packets: 19795
+  Rx Bytes:   21297376
+  Throughput: 17.19 Mbps
+  First Packet Rx: 0.190004sec
+  Last Packet Rx: 10.1015sec
+Flow 4 (10.2.1.2 -> 10.1.2.1)
+  Tx Packets: 9927
+  Tx Bytes:   516208
+  Rx Packets: 9927
+  Rx Bytes:   516208
+  Throughput: 0.412966 Mbps
+  First Packet Rx: 0.160002sec
+  Last Packet Rx: 10.16sec
+Flow 5 (10.2.1.2 -> 10.1.1.1)
+  Tx Packets: 9904
+  Tx Bytes:   515012
+  Rx Packets: 9904
+  Rx Bytes:   515012
+  Throughput: 0.41201 Mbps
+  First Packet Rx: 0.160003sec
+  Last Packet Rx: 10.16sec
+Flow 6 (10.2.1.2 -> 10.1.3.1)
+  Tx Packets: 9899
+  Tx Bytes:   514752
+  Rx Packets: 9899
+  Rx Bytes:   514752
+  Throughput: 0.380945 Mbps
+  First Packet Rx: 0.220005sec
+  Last Packet Rx: 11.03sec
+th total RX: 60871680
+
+Packets/Bytes received: 59458 / 63963508
+Packets/Bytes enqueued: 59458 / 63963508
+Packets/Bytes dequeued: 59454 / 63963300
+Packets/Bytes requeued: 0 / 0
+Packets/Bytes dropped: 0 / 0
+Packets/Bytes dropped before enqueue: 0 / 0
+Packets/Bytes dropped after dequeue: 0 / 0
+Packets/Bytes sent: 59454 / 63963300
+Packets/Bytes marked: 0 / 0
+
+step: 6
+-----------end----------
+Total Bytes App Recieved: 61156352bytes
+
+Flow 1 (10.1.1.1 -> 10.2.1.2)
+  Tx Packets: 19941
+  Tx Bytes:   21452424
+  Rx Packets: 19940
+  Rx Bytes:   21452372
+  Throughput: 17.1619 Mbps
+  First Packet Rx: 0.130001sec
+  Last Packet Rx: 10.13sec
+Flow 2 (10.1.2.1 -> 10.2.1.2)
+  Tx Packets: 19929
+  Tx Bytes:   21439512
+  Rx Packets: 19928
+  Rx Bytes:   21439460
+  Throughput: 17.1516 Mbps
+  First Packet Rx: 0.130001sec
+  Last Packet Rx: 10.13sec
+Flow 3 (10.1.3.1 -> 10.2.1.2)
+  Tx Packets: 19865
+  Tx Bytes:   21370648
+  Rx Packets: 19865
+  Rx Bytes:   21370648
+  Throughput: 16.9945 Mbps
+  First Packet Rx: 0.130002sec
+  Last Packet Rx: 10.19sec
+Flow 4 (10.2.1.2 -> 10.1.1.1)
+  Tx Packets: 9971
+  Tx Bytes:   518496
+  Rx Packets: 9971
+  Rx Bytes:   518496
+  Throughput: 0.414797 Mbps
+  First Packet Rx: 0.160002sec
+  Last Packet Rx: 10.16sec
+Flow 5 (10.2.1.2 -> 10.1.2.1)
+  Tx Packets: 9965
+  Tx Bytes:   518184
+  Rx Packets: 9965
+  Rx Bytes:   518184
+  Throughput: 0.414547 Mbps
+  First Packet Rx: 0.160003sec
+  Last Packet Rx: 10.16sec
+Flow 6 (10.2.1.2 -> 10.1.3.1)
+  Tx Packets: 9933
+  Tx Bytes:   516520
+  Rx Packets: 9933
+  Rx Bytes:   516520
+  Throughput: 0.413216 Mbps
+  First Packet Rx: 0.160003sec
+  Last Packet Rx: 10.16sec
+th total RX: 61156352
+
+Packets/Bytes received: 59735 / 64262584
+Packets/Bytes enqueued: 59735 / 64262584
+Packets/Bytes dequeued: 59733 / 64262480
+Packets/Bytes requeued: 0 / 0
+Packets/Bytes dropped: 0 / 0
+Packets/Bytes dropped before enqueue: 0 / 0
+Packets/Bytes dropped after dequeue: 0 / 0
+Packets/Bytes sent: 59733 / 64262480
+Packets/Bytes marked: 0 / 0
+
+step: 7
+-----------end----------
+Total Bytes App Recieved: 61256704bytes
+
+Flow 1 (10.1.1.1 -> 10.2.1.2)
+  Tx Packets: 19947
+  Tx Bytes:   21458880
+  Rx Packets: 19946
+  Rx Bytes:   21458828
+  Throughput: 17.1671 Mbps
+  First Packet Rx: 0.130001sec
+  Last Packet Rx: 10.13sec
+Flow 2 (10.1.2.1 -> 10.2.1.2)
+  Tx Packets: 19929
+  Tx Bytes:   21439512
+  Rx Packets: 19928
+  Rx Bytes:   21439460
+  Throughput: 17.1516 Mbps
+  First Packet Rx: 0.130002sec
+  Last Packet Rx: 10.13sec
+Flow 3 (10.1.3.1 -> 10.2.1.2)
+  Tx Packets: 19957
+  Tx Bytes:   21469640
+  Rx Packets: 19957
+  Rx Bytes:   21469640
+  Throughput: 17.0733 Mbps
+  First Packet Rx: 0.130001sec
+  Last Packet Rx: 10.19sec
+Flow 4 (10.2.1.2 -> 10.1.1.1)
+  Tx Packets: 9974
+  Tx Bytes:   518652
+  Rx Packets: 9974
+  Rx Bytes:   518652
+  Throughput: 0.414922 Mbps
+  First Packet Rx: 0.160002sec
+  Last Packet Rx: 10.16sec
+Flow 5 (10.2.1.2 -> 10.1.3.1)
+  Tx Packets: 9979
+  Tx Bytes:   518912
+  Rx Packets: 9979
+  Rx Bytes:   518912
+  Throughput: 0.41513 Mbps
+  First Packet Rx: 0.160003sec
+  Last Packet Rx: 10.16sec
+Flow 6 (10.2.1.2 -> 10.1.2.1)
+  Tx Packets: 9965
+  Tx Bytes:   518184
+  Rx Packets: 9965
+  Rx Bytes:   518184
+  Throughput: 0.414547 Mbps
+  First Packet Rx: 0.160003sec
+  Last Packet Rx: 10.16sec
+th total RX: 61256704
+
+Packets/Bytes received: 59833 / 64368032
+Packets/Bytes enqueued: 59833 / 64368032
+Packets/Bytes dequeued: 59831 / 64367928
+Packets/Bytes requeued: 0 / 0
+Packets/Bytes dropped: 0 / 0
+Packets/Bytes dropped before enqueue: 0 / 0
+Packets/Bytes dropped after dequeue: 0 / 0
+Packets/Bytes sent: 59831 / 64367928
+Packets/Bytes marked: 0 / 0
+
+step: 8
+-----------end----------
+Total Bytes App Recieved: 61211648bytes
+
+Flow 1 (10.1.1.1 -> 10.2.1.2)
+  Tx Packets: 19971
+  Tx Bytes:   21484704
+  Rx Packets: 19970
+  Rx Bytes:   21484652
+  Throughput: 17.1877 Mbps
+  First Packet Rx: 0.130001sec
+  Last Packet Rx: 10.13sec
+Flow 2 (10.1.2.1 -> 10.2.1.2)
+  Tx Packets: 19969
+  Tx Bytes:   21482552
+  Rx Packets: 19968
+  Rx Bytes:   21482500
+  Throughput: 17.186 Mbps
+  First Packet Rx: 0.130001sec
+  Last Packet Rx: 10.13sec
+Flow 3 (10.1.3.1 -> 10.2.1.2)
+  Tx Packets: 19849
+  Tx Bytes:   21353432
+  Rx Packets: 19849
+  Rx Bytes:   21353432
+  Throughput: 17.0827 Mbps
+  First Packet Rx: 0.190004sec
+  Last Packet Rx: 10.19sec
+Flow 4 (10.2.1.2 -> 10.1.1.1)
+  Tx Packets: 9986
+  Tx Bytes:   519276
+  Rx Packets: 9986
+  Rx Bytes:   519276
+  Throughput: 0.415421 Mbps
+  First Packet Rx: 0.160002sec
+  Last Packet Rx: 10.16sec
+Flow 5 (10.2.1.2 -> 10.1.2.1)
+  Tx Packets: 9985
+  Tx Bytes:   519224
+  Rx Packets: 9985
+  Rx Bytes:   519224
+  Throughput: 0.415379 Mbps
+  First Packet Rx: 0.160003sec
+  Last Packet Rx: 10.16sec
+Flow 6 (10.2.1.2 -> 10.1.3.1)
+  Tx Packets: 9925
+  Tx Bytes:   516104
+  Rx Packets: 9925
+  Rx Bytes:   516104
+  Throughput: 0.415375 Mbps
+  First Packet Rx: 0.220005sec
+  Last Packet Rx: 10.16sec
+th total RX: 61211648
+
+Packets/Bytes received: 59789 / 64320688
+Packets/Bytes enqueued: 59789 / 64320688
+Packets/Bytes dequeued: 59787 / 64320584
+Packets/Bytes requeued: 0 / 0
+Packets/Bytes dropped: 0 / 0
+Packets/Bytes dropped before enqueue: 0 / 0
+Packets/Bytes dropped after dequeue: 0 / 0
+Packets/Bytes sent: 59787 / 64320584
+Packets/Bytes marked: 0 / 0
+
+step: 9
+-----------end----------
+Total Bytes App Recieved: 61039616bytes
+
+Flow 1 (10.1.1.1 -> 10.2.1.2)
+  Tx Packets: 19949
+  Tx Bytes:   21461032
+  Rx Packets: 19948
+  Rx Bytes:   21460980
+  Throughput: 17.1688 Mbps
+  First Packet Rx: 0.130001sec
+  Last Packet Rx: 10.13sec
+Flow 2 (10.1.2.1 -> 10.2.1.2)
+  Tx Packets: 19841
+  Tx Bytes:   21344824
+  Rx Packets: 19841
+  Rx Bytes:   21344824
+  Throughput: 16.974 Mbps
+  First Packet Rx: 0.130001sec
+  Last Packet Rx: 10.19sec
+Flow 3 (10.1.3.1 -> 10.2.1.2)
+  Tx Packets: 19832
+  Tx Bytes:   21334116
+  Rx Packets: 19829
+  Rx Bytes:   21333960
+  Throughput: 17.1168 Mbps
+  First Packet Rx: 0.130002sec
+  Last Packet Rx: 10.101sec
+Flow 4 (10.2.1.2 -> 10.1.1.1)
+  Tx Packets: 9975
+  Tx Bytes:   518704
+  Rx Packets: 9975
+  Rx Bytes:   518704
+  Throughput: 0.414963 Mbps
+  First Packet Rx: 0.160002sec
+  Last Packet Rx: 10.16sec
+Flow 5 (10.2.1.2 -> 10.1.2.1)
+  Tx Packets: 9921
+  Tx Bytes:   515896
+  Rx Packets: 9921
+  Rx Bytes:   515896
+  Throughput: 0.412717 Mbps
+  First Packet Rx: 0.160003sec
+  Last Packet Rx: 10.16sec
+Flow 6 (10.2.1.2 -> 10.1.3.1)
+  Tx Packets: 9916
+  Tx Bytes:   515636
+  Rx Packets: 9916
+  Rx Bytes:   515636
+  Throughput: 0.379493 Mbps
+  First Packet Rx: 0.160003sec
+  Last Packet Rx: 11.03sec
+th total RX: 61039616
+
+Packets/Bytes received: 59622 / 64139972
+Packets/Bytes enqueued: 59622 / 64139972
+Packets/Bytes dequeued: 59618 / 64139764
+Packets/Bytes requeued: 0 / 0
+Packets/Bytes dropped: 0 / 0
+Packets/Bytes dropped before enqueue: 0 / 0
+Packets/Bytes dropped after dequeue: 0 / 0
+Packets/Bytes sent: 59618 / 64139764
+Packets/Bytes marked: 0 / 0
+
+step: 10
+-----------end----------
+Total Bytes App Recieved: 61363200bytes
+
+Flow 1 (10.1.1.1 -> 10.2.1.2)
+  Tx Packets: 19971
+  Tx Bytes:   21484704
+  Rx Packets: 19970
+  Rx Bytes:   21484652
+  Throughput: 17.1877 Mbps
+  First Packet Rx: 0.130001sec
+  Last Packet Rx: 10.13sec
+Flow 2 (10.1.2.1 -> 10.2.1.2)
+  Tx Packets: 19979
+  Tx Bytes:   21493312
+  Rx Packets: 19979
+  Rx Bytes:   21493312
+  Throughput: 17.0921 Mbps
+  First Packet Rx: 0.130001sec
+  Last Packet Rx: 10.19sec
+Flow 3 (10.1.3.1 -> 10.2.1.2)
+  Tx Packets: 19988
+  Tx Bytes:   21501972
+  Rx Packets: 19985
+  Rx Bytes:   21501816
+  Throughput: 17.2508 Mbps
+  First Packet Rx: 0.130002sec
+  Last Packet Rx: 10.1014sec
+Flow 4 (10.2.1.2 -> 10.1.1.1)
+  Tx Packets: 9986
+  Tx Bytes:   519276
+  Rx Packets: 9986
+  Rx Bytes:   519276
+  Throughput: 0.415421 Mbps
+  First Packet Rx: 0.160002sec
+  Last Packet Rx: 10.16sec
+Flow 5 (10.2.1.2 -> 10.1.2.1)
+  Tx Packets: 9990
+  Tx Bytes:   519484
+  Rx Packets: 9990
+  Rx Bytes:   519484
+  Throughput: 0.415587 Mbps
+  First Packet Rx: 0.160003sec
+  Last Packet Rx: 10.16sec
+Flow 6 (10.2.1.2 -> 10.1.3.1)
+  Tx Packets: 9994
+  Tx Bytes:   519692
+  Rx Packets: 9994
+  Rx Bytes:   519692
+  Throughput: 0.382478 Mbps
+  First Packet Rx: 0.160003sec
+  Last Packet Rx: 11.03sec
+th total RX: 61363200
+
+Packets/Bytes received: 59938 / 64479988
+Packets/Bytes enqueued: 59938 / 64479988
+Packets/Bytes dequeued: 59934 / 64479780
+Packets/Bytes requeued: 0 / 0
+Packets/Bytes dropped: 0 / 0
+Packets/Bytes dropped before enqueue: 0 / 0
+Packets/Bytes dropped after dequeue: 0 / 0
+Packets/Bytes sent: 59934 / 64479780
+Packets/Bytes marked: 0 / 0
+
+step: 11
+-----------end----------
+Total Bytes App Recieved: 61074432bytes
+
+Flow 1 (10.1.1.1 -> 10.2.1.2)
+  Tx Packets: 19953
+  Tx Bytes:   21465336
+  Rx Packets: 19952
+  Rx Bytes:   21465284
+  Throughput: 17.1722 Mbps
+  First Packet Rx: 0.130001sec
+  Last Packet Rx: 10.13sec
+Flow 2 (10.1.2.1 -> 10.2.1.2)
+  Tx Packets: 19727
+  Tx Bytes:   21222160
+  Rx Packets: 19726
+  Rx Bytes:   21222108
+  Throughput: 16.9777 Mbps
+  First Packet Rx: 0.130001sec
+  Last Packet Rx: 10.13sec
+Flow 3 (10.1.3.1 -> 10.2.1.2)
+  Tx Packets: 19975
+  Tx Bytes:   21489008
+  Rx Packets: 19975
+  Rx Bytes:   21489008
+  Throughput: 17.0887 Mbps
+  First Packet Rx: 0.130002sec
+  Last Packet Rx: 10.19sec
+Flow 4 (10.2.1.2 -> 10.1.1.1)
+  Tx Packets: 9977
+  Tx Bytes:   518808
+  Rx Packets: 9977
+  Rx Bytes:   518808
+  Throughput: 0.415046 Mbps
+  First Packet Rx: 0.160002sec
+  Last Packet Rx: 10.16sec
+Flow 5 (10.2.1.2 -> 10.1.2.1)
+  Tx Packets: 9864
+  Tx Bytes:   512932
+  Rx Packets: 9864
+  Rx Bytes:   512932
+  Throughput: 0.410346 Mbps
+  First Packet Rx: 0.160003sec
+  Last Packet Rx: 10.16sec
+Flow 6 (10.2.1.2 -> 10.1.3.1)
+  Tx Packets: 9988
+  Tx Bytes:   519380
+  Rx Packets: 9988
+  Rx Bytes:   519380
+  Throughput: 0.415504 Mbps
+  First Packet Rx: 0.160003sec
+  Last Packet Rx: 10.16sec
+th total RX: 61074432
+
+Packets/Bytes received: 59655 / 64176504
+Packets/Bytes enqueued: 59655 / 64176504
+Packets/Bytes dequeued: 59653 / 64176400
+Packets/Bytes requeued: 0 / 0
+Packets/Bytes dropped: 0 / 0
+Packets/Bytes dropped before enqueue: 0 / 0
+Packets/Bytes dropped after dequeue: 0 / 0
+Packets/Bytes sent: 59653 / 64176400
+Packets/Bytes marked: 0 / 0
+
+step: 12
+-----------end----------
+Total Bytes App Recieved: 61309952bytes
+
+Flow 1 (10.1.1.1 -> 10.2.1.2)
+  Tx Packets: 19923
+  Tx Bytes:   21433056
+  Rx Packets: 19922
+  Rx Bytes:   21433004
+  Throughput: 17.1464 Mbps
+  First Packet Rx: 0.130001sec
+  Last Packet Rx: 10.13sec
+Flow 2 (10.1.2.1 -> 10.2.1.2)
+  Tx Packets: 19967
+  Tx Bytes:   21480400
+  Rx Packets: 19966
+  Rx Bytes:   21480348
+  Throughput: 17.1843 Mbps
+  First Packet Rx: 0.130001sec
+  Last Packet Rx: 10.13sec
+Flow 3 (10.1.3.1 -> 10.2.1.2)
+  Tx Packets: 19995
+  Tx Bytes:   21510528
+  Rx Packets: 19995
+  Rx Bytes:   21510528
+  Throughput: 17.1058 Mbps
+  First Packet Rx: 0.130002sec
+  Last Packet Rx: 10.19sec
+Flow 4 (10.2.1.2 -> 10.1.1.1)
+  Tx Packets: 9962
+  Tx Bytes:   518028
+  Rx Packets: 9962
+  Rx Bytes:   518028
+  Throughput: 0.414422 Mbps
+  First Packet Rx: 0.160002sec
+  Last Packet Rx: 10.16sec
+Flow 5 (10.2.1.2 -> 10.1.2.1)
+  Tx Packets: 9984
+  Tx Bytes:   519172
+  Rx Packets: 9984
+  Rx Bytes:   519172
+  Throughput: 0.415338 Mbps
+  First Packet Rx: 0.160003sec
+  Last Packet Rx: 10.16sec
+Flow 6 (10.2.1.2 -> 10.1.3.1)
+  Tx Packets: 9998
+  Tx Bytes:   519900
+  Rx Packets: 9998
+  Rx Bytes:   519900
+  Throughput: 0.41592 Mbps
+  First Packet Rx: 0.160003sec
+  Last Packet Rx: 10.16sec
+th total RX: 61309952
+
+Packets/Bytes received: 59885 / 64423984
+Packets/Bytes enqueued: 59885 / 64423984
+Packets/Bytes dequeued: 59883 / 64423880
+Packets/Bytes requeued: 0 / 0
+Packets/Bytes dropped: 0 / 0
+Packets/Bytes dropped before enqueue: 0 / 0
+Packets/Bytes dropped after dequeue: 0 / 0
+Packets/Bytes sent: 59883 / 64423880
+Packets/Bytes marked: 0 / 0
+
+step: 13
+Interrupted 

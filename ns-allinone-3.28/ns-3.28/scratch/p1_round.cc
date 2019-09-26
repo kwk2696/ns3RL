@@ -372,9 +372,9 @@ static void QueueDiscTracer (Ptr<MfifoQueueDisc> mfq) {
 	uint32_t info[3];
 	mfq->GetQueueInfo (info);
 	
-	// std::cout << "[" << info[0] << "," << info[1] << "," << info[2] << "]" << std::endl;
+	std::cout << "[" << info[0] << "," << info[1] << "," << info[2] << "]" << std::endl;
 	uint32_t action = RoundRobin (info);
-	// std::cout << "action: " << action << std::endl;
+	std::cout << "action: " << action << std::endl;
 
 	mfq->SetAction (action);
 }

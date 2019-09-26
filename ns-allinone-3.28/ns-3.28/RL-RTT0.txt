@@ -1,0 +1,2 @@
+RttAvg=0.000185595 sec
+RttAvg=0.387686 sec

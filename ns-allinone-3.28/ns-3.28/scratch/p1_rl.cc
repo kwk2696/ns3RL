@@ -1,6 +1,7 @@
 #include <string.h>
 #include <cstdlib>
 #include <ctime> 
+#include <list>
 
 #include "ns3/core-module.h"
 #include "ns3/point-to-point-module.h"
@@ -14,23 +15,28 @@
 #include "ns3/flow-monitor-module.h"
 #include "ns3/opengym-module.h"
 
-using namespace ns3;
 
+using namespace ns3;
 NS_LOG_COMPONENT_DEFINE ("Project");
 
-static void QueueDiscEnqueueTracer (Ptr<MfifoQueueDisc>);
-static void QueueDiscDequeueTracer (Ptr<MfifoQueueDisc>);
-static void QueueDiscRewardTracer (Ptr<MfifoQueueDisc>);
-
+int m_segsize = 1024;
+bool m_end = false;
 Ptr<OpenGymInterface> openGymInterface;
-uint8_t g_end  = 0;
-std::ofstream rttFile("router-RTT.txt");
+std::ofstream rttFile0("RL-RTT0.txt");
+std::ofstream rttFile1("RL-RTT1.txt");
+std::ofstream rttFile2("RL-RTT2.txt");
+
+static void TxTracer (Ptr<const Packet>, const TcpHeader&, Ptr<TcpSocketBase>);
+static void RxTracer (Ptr<const Packet>, const TcpHeader&, Ptr<TcpSocketBase>);
+static void QueueDiscTracer (Ptr<MfifoQueueDisc>);
+void Record (uint32_t, float);
+uint32_t Reward (uint32_t []); 
 
 static void PingRtt (std::string context, Time rtt)
 { 
   std::cout << Simulator::Now (). GetSeconds() << " RTT = " << rtt.GetMilliSeconds () << " ms" << std::endl;
-  rttFile << context << "=" << rtt.GetMilliSeconds () << " ms" << std::endl;
 }
+
 class ClientApp : public Application 
 {
 public:
@@ -38,7 +44,7 @@ public:
 	virtual ~ClientApp();
 
 	static TypeId GetTypeId (void);
-	void Setup (Ptr<Socket> socket, Address address, uint32_t packetSize, uint32_t nPackets, DataRate dataRate);
+	void Setup (Ptr<Socket> socket, Address address, uint32_t packetSize, uint32_t nPackets, DataRate dataRate, bool random, uint32_t ranRate);
 
 private:
 	virtual void StartApplication (void);
@@ -53,19 +59,25 @@ private:
 	uint32_t		m_nPackets;
 	DataRate		m_dataRate;
 	EventId			m_sendEvent;
-	bool				m_running;
+	bool			m_running;
+	bool			m_random;
+	uint32_t		m_ranRate;
 	uint32_t		m_packetsSent;
+	uint32_t	 	m_totBytes;
 };
 
 ClientApp::ClientApp ()
-	: m_socket(0),
-	  m_peer (),
+	: 	m_socket(0),
+		m_peer (),
 		m_packetSize (0),
 		m_nPackets (0),
 		m_dataRate (0),
 		m_sendEvent (),
 		m_running (false),
-		m_packetsSent (0)
+		m_random (false),
+		m_ranRate (0),
+		m_packetsSent (0),
+		m_totBytes (0)
 {
 }
 
@@ -83,12 +95,14 @@ TypeId ClientApp::GetTypeId (void) {
 }
 
 void
-ClientApp::Setup (Ptr<Socket> socket, Address address, uint32_t packetSize, uint32_t nPackets, DataRate dataRate) {
+ClientApp::Setup (Ptr<Socket> socket, Address address, uint32_t packetSize, uint32_t nPackets, DataRate dataRate, bool random, uint32_t ranRate) {
 	m_socket = socket;
 	m_peer = address;
 	m_packetSize = packetSize;
 	m_nPackets = nPackets;
 	m_dataRate = dataRate;
+	m_random = random;
+	m_ranRate = ranRate; 
 }
 
 void
@@ -119,40 +133,49 @@ void
 ClientApp::SendPacket (void) {
 	Ptr<Packet> packet = Create<Packet> (m_packetSize);
 	m_socket->Send (packet);
+	m_totBytes += packet->GetSize ();
 
-	if(++m_packetsSent < m_nPackets) {
+	if (m_nPackets == 0 || ++m_packetsSent < m_nPackets) {
 		ScheduleTx ();
+	} else {
+		std::cout << "stop 0" << std::endl;
+		StopApplication ();
 	}
 }
 
 void
 ClientApp::ScheduleTx (void) {
 	if (m_running) {
-		//uint32_t bits = m_packetSize * 8;
-		//Time tNext (Seconds (bits / static_cast<double> (m_dataRate.GetBitRate ())));
-		Time tNext (MilliSeconds (std::rand() % 5 + 1));
-		//std::cout << "term: " << tNext << std::endl;
-		m_sendEvent = Simulator::Schedule (tNext, &ClientApp::SendPacket, this);
+		if (m_random) {
+			Time tNext (NanoSeconds ((std::rand() % 1000000 + m_ranRate))); //1000000
+			m_sendEvent = Simulator::Schedule (tNext, &ClientApp::SendPacket, this);
+		}	
+		else {
+			uint32_t bits = m_packetSize * 8;
+			Time tNext (Seconds (bits / static_cast<double> (m_dataRate.GetBitRate ())));
+			m_sendEvent = Simulator::Schedule (tNext, &ClientApp::SendPacket, this);
+		}
+		// std::cout << "tNext: " << tNext << std::endl;
 	}
 }
 
+
 int main (int argc, char ** argv)
 {
+
 	LogComponentEnable ("Project", LOG_LEVEL_INFO);
-	//LogComponentEnable ("TcpSocketBase", LOG_LEVEL_ALL);
-	//LogComponentEnable ("PointToPointNetDevice", LOG_LEVEL_ALL);
-	//LogComponentEnable ("QueueDisc", LOG_LEVEL_ALL);
-	//LogComponentEnable ("TcpTxBuffer", LOG_LEVEL_ALL);	
-	//LogComponentEnable ("DropTailQueue", LOG_LEVEL_ALL);
-	while (1) {
-	g_end = 0;
+
 	std::srand ((unsigned int) (std::time(NULL)));
-	/*----- ZMQ Connect -----*/
-	NS_LOG_INFO("ZMQ Connect");
-    
-	/*----- Error Model -----*/
-	NS_LOG_INFO("Error Model");
+	uint32_t sim_time = 4;
+	bool ascii_enable = true;
+	bool ping_enable = false;
+	// uint32_t sim_count = 1;	
+	NS_LOG_INFO("This is RL Algorithm");
 	
+
+	// m_end = false;
+	// std::cout << "simulation count: " << sim_count << std::endl;
+	// sim_count ++;
 	/*-----	Create Nodes -----*/
 	NS_LOG_INFO("Create Nodes.");
 	NodeContainer n0, n1, n2, n3, n4;
@@ -172,15 +195,15 @@ int main (int argc, char ** argv)
 	/*-----	Create Channels	------*/
 	NS_LOG_INFO("Create Channels.");
 	PointToPointHelper bottleNeckLink;
-	bottleNeckLink.SetDeviceAttribute ("DataRate", StringValue ("20Mbps")); //DataRate
-	bottleNeckLink.SetChannelAttribute ("Delay", TimeValue (MilliSeconds (20))); //Propagation Delay
+	bottleNeckLink.SetDeviceAttribute ("DataRate", StringValue ("10Mbps")); //DataRate
+	bottleNeckLink.SetChannelAttribute ("Delay", TimeValue (MilliSeconds (0))); //Propagation Delay
 	//bottleNeckLink.SetQueue ("ns3::DropTailQueue", "MaxSize", StringValue ("1p"));
 	
 	NetDeviceContainer deviceBottleneckLink = bottleNeckLink.Install (n3n4);
 	
 	PointToPointHelper accessLink;
 	accessLink.SetDeviceAttribute ("DataRate", StringValue ("10Mbps"));
-	accessLink.SetChannelAttribute ("Delay", TimeValue (MilliSeconds (10)));
+	accessLink.SetChannelAttribute ("Delay", TimeValue (MilliSeconds (0)));
 	//accessLink.SetQueue ("ns3::DropTailQueue", "MaxSize", StringValue ("1p"));
 	
 	NetDeviceContainer deviceAccessLink0 = accessLink.Install (n0n3);
@@ -198,10 +221,8 @@ int main (int argc, char ** argv)
 	tchFifo.SetRootQueueDisc ("MfifoQueueDisc", "MaxSize", StringValue ("120p"));
 	QueueDiscContainer qdisc = tchFifo.Install (deviceBottleneckLink);
 	Ptr<QueueDisc> q = qdisc.Get (0);
-	Ptr<MfifoQueueDisc> mfq = DynamicCast<MfifoQueueDisc> (q);
-	mfq->TraceConnectWithoutContext ("QueueWeight", MakeCallback (&QueueDiscEnqueueTracer));
-	mfq->TraceConnectWithoutContext ("GetAction", MakeCallback (&QueueDiscDequeueTracer));
-	mfq->TraceConnectWithoutContext ("SendReward", MakeCallback (&QueueDiscRewardTracer));
+	Ptr<MfifoQueueDisc> mfq = DynamicCast<MfifoQueueDisc> (q);	
+	mfq->TraceConnectWithoutContext ("GetAction", MakeCallback (&QueueDiscTracer));
 	
 	/*------ Assign IP4 Address -----*/
 	NS_LOG_INFO ("Assign IP4 Addresses.");
@@ -222,7 +243,7 @@ int main (int argc, char ** argv)
 	/*----- Create Routes ------*/
 	NS_LOG_INFO ("Create Routes.");
 	Ipv4GlobalRoutingHelper::PopulateRoutingTables ();
-
+	
 	/*----- Create Server ------*/
 	NS_LOG_INFO ("Create Server");
 	uint16_t serverPort = 8080;
@@ -231,50 +252,55 @@ int main (int argc, char ** argv)
 	ApplicationContainer serverApps;
 	serverApps.Add (packetSinkHelper.Install (n4));
 	serverApps.Start (Seconds(0.));
-	serverApps.Stop (Seconds(10.));
-
+	serverApps.Stop (Seconds(sim_time + 1));
+	
 	/*----- Create Client ------*/
 	NS_LOG_INFO ("Create Client");
 	std::vector <uint8_t> tosValues = {0x28, 0xb8, 0x70}; //AC_BE, AC_BK, AC_VI
+	std::vector <std::string> dataRate = {"10Mbps", "6Mbps", "4Mbps"};
+	std::vector <uint32_t> ranRate = {1000000, 2000000, 4000000};
+	Config::SetDefault ("ns3::TcpSocket::SegmentSize", UintegerValue (m_segsize));
+	Config::SetDefault ("ns3::TcpSocket::DelAckCount", UintegerValue (1));
 	for (uint32_t i = 0; i < 3; ++i) {
 		InetSocketAddress serverAddress (serverInterfaces.GetAddress (1), serverPort);
-		// serverAddress.SetTos (tosValues.at(i));
-		// Ptr<Socket> clientSocket = Socket::CreateSocket (clientNodes.Get(i), tid);
-		// Ptr<ClientApp> clientApps = CreateObject <ClientApp> ();
-		// clientApps->Setup (clientSocket, serverAddress, 1448, 400, DataRate ("300Mbps"));
-		// clientNodes.Get (i)->AddApplication (clientApps);
-		
-		// clientApps->SetStartTime (Seconds (1.));
-		// clientApps->SetStopTime (Seconds (9.));
-		
-		// Address serverAddress (InetSocketAddress (serverInterfaces.GetAddress (1), serverPort));
 		serverAddress.SetTos (tosValues.at(i));
-		OnOffHelper onoff ("ns3::TcpSocketFactory", serverAddress);
-		onoff.SetAttribute ("PacketSize", UintegerValue (1448));
-		onoff.SetAttribute ("DataRate", StringValue ("50Mbps")); //bit/s
-		ApplicationContainer clientApps = onoff.Install (clientNodes.Get (i));
+		Ptr<Socket> clientSocket = Socket::CreateSocket (clientNodes.Get(i), tid);
+		Ptr<TcpSocket> _tcpsocket = DynamicCast<TcpSocket> (clientSocket);
+		Ptr<TcpSocketBase> _tcpsocketbase = DynamicCast<TcpSocketBase> (_tcpsocket);
+		_tcpsocketbase->TraceConnectWithoutContext ("RecordTx", MakeCallback (&TxTracer));
+		_tcpsocketbase->TraceConnectWithoutContext ("RecordRx", MakeCallback (&RxTracer));
+		_tcpsocketbase->_tag = i;
 
-		clientApps.Start (Seconds (1.));
-		clientApps.Stop (Seconds(9.));
+		Ptr<ClientApp> clientApps = CreateObject <ClientApp> ();
+		clientApps->Setup (clientSocket, serverAddress, m_segsize, 13, DataRate (dataRate.at(i)), true, ranRate.at(i));
+		clientNodes.Get (i)->AddApplication (clientApps);
+		
+		clientApps->SetStartTime (Seconds (0.1));
+		clientApps->SetStopTime (Seconds (sim_time + 0.1));
 	}
 	
-	/*----- Configure ping -----*/
-	V4PingHelper ping = V4PingHelper (serverInterfaces.GetAddress(1));
-	ping.Install (n0);
-	ping.Install (n1);
-	ping.Install (n2);
-	Config::Connect ("/NodeList/*/ApplicationList/*/$ns3::V4Ping/Rtt", MakeCallback (&PingRtt));
-	
+	// /*----- Configure ping -----*/
+	if (ping_enable) {
+		V4PingHelper ping = V4PingHelper (serverInterfaces.GetAddress(1));
+		ping.Install (n0);
+		ping.Install (n1);
+		ping.Install (n2);
+		Config::Connect ("/NodeList/*/ApplicationList/*/$ns3::V4Ping/Rtt", MakeCallback (&PingRtt));
+	}
+
 	/*----- Ascii Tracer -----*/
-	NS_LOG_INFO ("Tracer Enable");
-	AsciiTraceHelper ascii;
-	//p2p.EnableAsciiAll (ascii.CreateFileStream ("ns3_topology.tr"));
-	bottleNeckLink.EnablePcapAll ("ns3_topology");
+	// NS_LOG_INFO ("Tracer Enable");
+	if (ascii_enable) {
+		AsciiTraceHelper ascii;
+		// p2p.EnableAsciiAll (ascii.CreateFileStream ("ns3_topology.tr"));
+		bottleNeckLink.EnablePcapAll ("p1_Round");
+	}
 	
 	/*----- Create FlowMonitor -----*/
 	FlowMonitorHelper flowmon;
 	Ptr<FlowMonitor> monitor = flowmon.InstallAll ();
-	Simulator::Stop (Seconds(10.1));
+	
+	Simulator::Stop (Seconds(sim_time + 2));
 	
 	NS_LOG_INFO ("Run Simulation");
 	Simulator::Run ();
@@ -296,70 +322,184 @@ int main (int argc, char ** argv)
 		std::cout << "  Rx Packets: " << i->second.rxPackets << "\n";
 		std::cout << "  Rx Bytes:   " << i->second.rxBytes << "\n";
 		std::cout << "  Throughput: " << i->second.rxBytes * 8.0 / (i->second.timeLastRxPacket.GetSeconds () - i->second.timeFirstRxPacket.GetSeconds ()) / 1000000 << " Mbps\n";
-		if(t.sourceAddress == "10.1.1.1"){
-			std::cout << "  Goodput: "    << sink1->GetTotalRx() * 8.0 / (i->second.timeLastRxPacket.GetSeconds () - i->second.timeFirstRxPacket.GetSeconds ()) / 1000000 << " Mbps\n";
-	  }
 		std::cout << "  First Packet Rx: " << i->second.timeFirstRxPacket.GetSeconds() << "sec\n";
 		std::cout << "  Last Packet Rx: " << i->second.timeLastRxPacket.GetSeconds() << "sec\n";
     }
 	
 	/*----- QueueDisc Stats -----*/
 	QueueDisc::Stats st = qdisc.Get (0)->GetStats ();
-	std::cout << st << std::endl;
-
-	/*----- Total Rx Counts -----*/
-	uint32_t totalRx = DynamicCast<PacketSink> (serverApps.Get (0))->GetTotalRx();
-	std::cout << "th total RX: " << totalRx << std::endl;
-	
+	std::cout << st << std::endl;	
 	
 	Simulator::Destroy ();
 	
 	NS_LOG_INFO ("Done.");
+}
+
+std::list<float> m_queue0; 
+std::list<float> m_queue1;
+std::list<float> m_queue2;
+
+static void TxTracer (Ptr<const Packet> p, const TcpHeader& h, Ptr<TcpSocketBase> s) {
+	uint8_t flags = h.GetFlags ();
+	bool hasSyn = flags & TcpHeader::SYN;
+	bool hasFin = flags & TcpHeader::FIN;
+	
+	SequenceNumber32 sq = h.GetSequenceNumber ();
+	
+	if (hasSyn || (!hasFin && p->GetSize ())) {
+		if (hasSyn) s->_sendTime.insert(std::make_pair (sq+1, Simulator::Now ().GetSeconds ()));
+		else s->_sendTime.insert(std::make_pair (sq+p->GetSize (), Simulator::Now ().GetSeconds ()));
+		if(s->_tag == 0) { 
+			if(hasSyn) std::cout << sq+1 << std::endl;
+			else std::cout << sq+p->GetSize () << std::endl;
+			std::cout << Simulator::Now ().GetSeconds () << std::endl;
+		}
 	}
 }
 
-static void QueueDiscEnqueueTracer (Ptr<MfifoQueueDisc> queuedisc) {
-	uint32_t info[3];
-	queuedisc->GetQueueInfo (info);
+
+float m_rewardRtt[3] = {0};
+static void RxTracer (Ptr<const Packet> p, const TcpHeader& h, Ptr<TcpSocketBase> s) {
+	uint8_t flags = h.GetFlags ();
+	// bool hasSyn = flags & TcpHeader::SYN;
+	bool hasFin = flags & TcpHeader::FIN;
 	
-	//std::cout << info[0] << info[1] << info[2] << std::endl;
+	SequenceNumber32 ack = h.GetAckNumber ();	
+	
+	// if (s->_tag == 0) {
+		// for (auto it = s->_sendTime.begin (); it != s->_sendTime.end (); it++) {
+			// std::cout << s->_tag << ": " <<  it -> first << " : " << it -> second << std::endl;
+		// }
+	// }
+	
+	if(!hasFin) {
+		s->_rttCur = Simulator::Now ().GetSeconds () - s->_sendTime.find (ack) -> second;
+		
+		s->_rttMax = (s->_rttCur > s->_rttMax) ? s->_rttCur : s->_rttMax;
+		if(s->_rttMin == 0) s->_rttMin = s->_rttCur;
+		else s->_rttMin = (s->_rttCur < s->_rttMin) ? s->_rttCur : s->_rttMin; 
+		
+		if(s->_rttAvg == 0) s->_rttAvg = s->_rttCur;
+		else s->_rttAvg = 0.875 * s->_rttAvg + 0.125 * s->_rttCur;
+		
+		if (s->_rttMax == s->_rttMin) m_rewardRtt[s->_tag] = 0;
+		else m_rewardRtt[s->_tag] = (s->_rttMax - s->_rttMin) / (s->_rttMax - s->_rttAvg);
+	
+		/* print RTT file */ 
+		if (s->_tag == 0) rttFile0 << "RttAvg" << "=" << s->_rttAvg << " sec" << std::endl;
+		else if (s->_tag == 1) rttFile1 << "RttAvg" << "=" << s->_rttAvg << " sec" << std::endl;
+		else rttFile2 << "RttAvg" << "=" << s->_rttCur << " sec" << std::endl;
+		
+		Record(s->_tag, s->_rttCur);
+		s->_sendTime.erase (ack);
+	}	
 }
 
-static void QueueDiscDequeueTracer (Ptr<MfifoQueueDisc> queuedisc) {
-	if (g_end == 1) return;
+float info_n[3] = {0};
+uint32_t m_SYN = 0;
+uint32_t reward = 0;
+static void QueueDiscTracer (Ptr<MfifoQueueDisc> mfq) {
+		
+	if(m_SYN < 3) { //3개의 SYN은 통과시키기 위함
+		mfq->SetAction (m_SYN);
+		m_SYN++;
+		return;
+	}
 	
 	uint32_t info[3];
-	queuedisc->GetQueueInfo (info);
+	mfq->GetQueueInfo (info);
 	
-	//std::cout << info[0] << info[1] << info[2] << std::endl;
-	
+	// std::cout << "[" << info[0] << "," << info[1] << "," << info[2] << "]" << std::endl;
+	// uint32_t action = Reward (info);
+	// std::cout << "action: " << action << std::endl;
 
-	/* snd observation to .py*/
-	openGymInterface->SendObservation (info, 3);
+	// mfq->SetAction (action);
 	
-	/* snd end to .py */
-	if(Simulator::Now ().GetSeconds () >= 59.1) {
-		openGymInterface->SendEnd (1);
-		g_end = 1;
-		std::cout << "---------------Send Last---------------" << std::endl;
+	/*
+	if(m_end) return;
+	
+	if(m_SYN < 3) { //3개의 SYN은 통과시키기 위함
+		mfq->SetAction (m_SYN);
+		m_SYN++;
+		return;
+	}
+	
+	uint32_t info[3];
+	mfq->GetQueueInfo (info);
+	
+	for(uint32_t i = 0; i < 3; i++) {
+		info_n[i] = info[i] / 120.0;
+	}
+	
+	if (mfq->GetReward () == -100) {
+		reward -= 1;
+	}
+	
+	std::string message = "{\"state0\":" + std::to_string(info_n[0]) 
+						+ ",\"state1\":" + std::to_string(info_n[1])
+						+ ",\"state2\":" + std::to_string(info_n[2])
+						+ ",\"reward\":" + std::to_string(reward) + "}";
+	
+	*/
+	/* send obs & reward to .py *//*
+	openGymInterface->Send(message);
+	
+	if(Simulator::Now ().GetSeconds () >= 4.1) {
+		m_end = true;
+	}*/
+	
+	/* send end to .py *//*
+	if(m_end) {
+		std::cout << "--------------End True-------------"<<std::endl;
+		openGymInterface->SendEnd(1);
 		return;
 	}
 	else {
-		openGymInterface->SendEnd (0);
+		openGymInterface->SendEnd(0);
 	}
-	
-	/* recv action form .py */
+		
 	uint32_t action = openGymInterface->SetAction ();
-	
-	/* snd action to queuedisc */
-	queuedisc->SetAction (action);
+	mfq->SetAction (action);
+	reward = info[action];
+	*/
 }
 
-static void QueueDiscRewardTracer (Ptr<MfifoQueueDisc> queuedisc) {
-	if (g_end == 1) return; 
+void Record (uint32_t tag, float rtt) {
+	if(tag==0) {
+		if(m_queue0.size() != 10) {
+			m_queue0.push_back (rtt);
+		}
+		else {
+			m_queue0.pop_front ();
+			m_queue0.push_back (rtt);
+		}
+	}
+	else if(tag==1) {
+		if(m_queue1.size() != 10) {
+			m_queue1.push_back (rtt);
+		}
+		else {
+			m_queue1.pop_front ();
+			m_queue1.push_back (rtt);
+		}
+	}
+	else {
+		if(m_queue2.size() != 10) {
+			m_queue2.push_back (rtt);
+		}
+		else {
+			m_queue2.pop_front ();
+			m_queue2.push_back (rtt);
+		}
+	}
 	
-	int reward = queuedisc->GetReward();
-		
-	/* snd reward to .py */
-	openGymInterface->SendReward (reward);
+	// std::cout << "start" << std::endl;
+	// for (auto it = m_queue0.begin (); it != m_queue0.end (); it++) {
+		// std::cout << *it << std::endl;
+	// }
+}
+uint32_t Reward (uint32_t info[]) {
+if(info[0] >= info[1] && info[0] >= info[2]) return 0;
+	else if (info[1] >= info[0] && info[1] >= info[2]) return 1;
+	else return 2;
 }

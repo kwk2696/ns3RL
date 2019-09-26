@@ -24,6 +24,7 @@
 #include "ns3/drop-tail-queue.h"
 #include "ns3/net-device-queue-interface.h"
 
+#include "ns3/simulator.h"
 namespace ns3 {
 
 NS_LOG_COMPONENT_DEFINE ("FifoQueueDisc");
@@ -42,6 +43,10 @@ TypeId FifoQueueDisc::GetTypeId (void)
                    MakeQueueSizeAccessor (&QueueDisc::SetMaxSize,
                                           &QueueDisc::GetMaxSize),
                    MakeQueueSizeChecker ())
+	.AddTraceSource ("Test", 
+							 "Test",
+							 MakeTraceSourceAccessor (&FifoQueueDisc::m_trace),
+							 "ns3::Test")
   ;
   return tid;
 }
@@ -69,11 +74,11 @@ FifoQueueDisc::DoEnqueue (Ptr<QueueDiscItem> item)
 	if (GetCurrentSize () + item > GetMaxSize ())
     {
       NS_LOG_LOGIC ("Queue full -- dropping pkt");
-			std::cout << "Disc DropBefore Enqueue: queueID-" << this <<  std::endl;
+			//std::cout << "Disc DropBefore Enqueue: queueID-" << this <<  std::endl;
       DropBeforeEnqueue (item, LIMIT_EXCEEDED_DROP);
       return false;
     }
-
+//	std::cout << "En: " << Simulator::Now ().GetMilliSeconds () << " ";
   bool retval = GetInternalQueue (0)->Enqueue (item);
 
   // If Queue::Enqueue fails, QueueDisc::DropBeforeEnqueue is called by the
@@ -89,7 +94,9 @@ Ptr<QueueDiscItem>
 FifoQueueDisc::DoDequeue (void)
 {
   NS_LOG_FUNCTION (this);
-	
+	m_trace(this);
+	//std::cout << GetInternalQueue (0)-> GetCurrentSize (). GetValue () << " ";
+//	std::cout << "De: " << Simulator::Now ().GetMilliSeconds () << " ";
   Ptr<QueueDiscItem> item = GetInternalQueue (0)->Dequeue ();
 	
 	if(item) {

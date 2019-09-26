@@ -547,7 +547,7 @@ TcpL4Protocol::SendPacketV4 (Ptr<Packet> packet, const TcpHeader &outgoing,
                                  << " flags " << TcpHeader::FlagsToString (outgoing.GetFlags ())
                                  << " data size " << packet->GetSize ());
   // XXX outgoingHeader cannot be logged
-
+	
   TcpHeader outgoingHeader = outgoing;
   /** \todo UrgentPointer */
   /* outgoingHeader.SetUrgentPointer (0); */
@@ -646,6 +646,7 @@ TcpL4Protocol::SendPacket (Ptr<Packet> pkt, const TcpHeader &outgoing,
                            Ptr<NetDevice> oif) const
 {
   NS_LOG_FUNCTION (this << pkt << outgoing << saddr << daddr << oif);
+	//std::cout << "size: " << pkt->GetSize() << std::endl;
   if (Ipv4Address::IsMatchingType (saddr))
     {
       NS_ASSERT (Ipv4Address::IsMatchingType (daddr));

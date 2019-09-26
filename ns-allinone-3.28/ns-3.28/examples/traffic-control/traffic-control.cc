@@ -87,7 +87,7 @@ SojournTimeTrace (Time oldValue, Time newValue)
 int
 main (int argc, char *argv[])
 {
-  double simulationTime = 10; //seconds
+  double simulationTime = 60; //seconds
   std::string transportProt = "Tcp";
   std::string socketType;
 
