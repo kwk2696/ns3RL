@@ -100,7 +100,7 @@ int main (int argc, char** argv)
   Simulator::ScheduleWithContext (source->GetNode ()-> GetId(),
 								  Seconds (1.0), &SendPacket,
 								  source, packetSize, packetCount,interPacketInterval);
-								
+	std::cout << "Check" << std::endl;							
   NS_LOG_INFO ("Run Simulation");
   Simulator::Run();
   Simulator::Destroy ();

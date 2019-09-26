@@ -15,6 +15,7 @@
  */
 
 #include "ns3/core-module.h"
+#include "ns3/opengym-module.h"
 
 using namespace ns3;
 
@@ -24,7 +25,10 @@ int
 main (int argc, char *argv[])
 {
   NS_LOG_UNCOND ("Scratch Simulator");
-
+  std::string message = "{\"state\":0.1,\"action\":1,\"reward\":-1}";
+  Ptr<OpenGymInterface> opengymInterface;
+  opengymInterface-> Send(message);
+  opengymInterface-> Send(message);
   Simulator::Run ();
   Simulator::Destroy ();
 }

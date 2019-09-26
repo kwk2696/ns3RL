@@ -28,8 +28,8 @@ GoodputSampling (std::string fileName, ApplicationContainer app, Ptr<OutputStrea
   Simulator::Schedule (Seconds (period), &GoodputSampling, fileName, app, stream, period);
   double goodput;
   uint32_t totalPackets = DynamicCast<PacketSink> (app.Get (0))->GetTotalRx ();
-  //goodput = totalPackets * 8 / (Simulator::Now ().GetSeconds () * 1024); // Kbit/s
-  goodput = totalPackets * 8 / (Simulator::Now ().GetSeconds () * 1000000.0); // Mbps
+  goodput = totalPackets * 8 / (Simulator::Now ().GetSeconds () * 1024); // Kbit/s
+  //goodput = totalPackets * 8 / (Simulator::Now ().GetSeconds () * 1000000.0); // Mbps
   *stream->GetStream () << Simulator::Now ().GetSeconds () << " " << goodput << std::endl;
   
   std::cout << Simulator::Now (). GetSeconds() << " Goodput = " << goodput << " Mbps" << std::endl;

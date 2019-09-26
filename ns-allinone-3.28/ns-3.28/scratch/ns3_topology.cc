@@ -4,6 +4,7 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <ctime> 
+#include <thread>
 
 #include "ns3/core-module.h"
 #include "ns3/point-to-point-module.h"
@@ -26,6 +27,7 @@ static void QueueDiscEnqueueTracer (Ptr<MfifoQueueDisc>);
 
 static bool firstCwnd = true;
 static uint32_t cWndValue; 
+Ptr<OpenGymInterface> openGymInterface;
 
 class ClientApp : public Application 
 {
@@ -242,10 +244,7 @@ int main (int argc, char ** argv)
 
 	/*----- ZMQ Connect -----*/
 	NS_LOG_INFO("ZMQ Connect");
-	//std::string connectAddr = "tcp://localhost:5050";
-	Ptr<OpenGymInterface> openGymInterface;
-	openGymInterface->Init ();
-
+    
 	/*-----	Create Nodes -----*/
 	NS_LOG_INFO("Create Nodes.");
 	NodeContainer n0, n1, n2;
@@ -260,10 +259,12 @@ int main (int argc, char ** argv)
 	/*-----	Create Channels	------*/
 	NS_LOG_INFO("Create Channels.");
 	PointToPointHelper p2p;
-	p2p.SetDeviceAttribute ("DataRate", StringValue("5Mbps"));
-	p2p.SetChannelAttribute ("Delay", TimeValue(MilliSeconds(5)));
+	p2p.SetDeviceAttribute ("DataRate", StringValue ("10Mbps"));
+	p2p.SetChannelAttribute ("Delay", TimeValue (MilliSeconds ( 20)));
 	p2p.SetQueue ("ns3::DropTailQueue", "MaxSize", StringValue ("1p"));
 	NetDeviceContainer netd1 = p2p.Install (n0n1);
+	p2p.SetDeviceAttribute ("DataRate", StringValue ("2Mbps"));
+	p2p.SetChannelAttribute ("Delay", TimeValue (MilliSeconds (0.01)));
 	NetDeviceContainer netd2 = p2p.Install (n1n2);
 
 	/*-----	Create Internet Stack ------*/
@@ -301,7 +302,7 @@ int main (int argc, char ** argv)
 	PacketSinkHelper packetSinkHelper ("ns3::TcpSocketFactory", InetSocketAddress (Ipv4Address::GetAny (), serverPort));
 	ApplicationContainer serverApp = packetSinkHelper.Install (nodes.Get(2));
 	serverApp.Start (Seconds(0.));
-	serverApp.Stop (Seconds(5.));
+	serverApp.Stop (Seconds(10.));
 
 	/*----- Create Client ------*/
 	NS_LOG_INFO ("Create Client");
@@ -312,10 +313,10 @@ int main (int argc, char ** argv)
 	Ptr<TcpCongestionOps> congestionOps = CreateObject<TcpNewReno> ();
 	tcpSocket->SetCongestionControlAlgorithm (congestionOps);
 	Ptr<ClientApp> clientApp = CreateObject <ClientApp> ();
-	clientApp->Setup (clientSocket, serverAddress, 1024, 10, DataRate ("1Mbps"));
+	clientApp->Setup (clientSocket, serverAddress, 1024, 1, DataRate ("1Mbps"));
 	nodes.Get (0)->AddApplication (clientApp);
 	clientApp->SetStartTime (Seconds (1.));
-	clientApp->SetStopTime (Seconds (5.));
+	clientApp->SetStopTime (Seconds (10.));
 
 	/*----- Ascii Tracer -----*/
 	NS_LOG_INFO ("Tracer Enable");
@@ -324,7 +325,7 @@ int main (int argc, char ** argv)
 	p2p.EnablePcapAll ("ns3_topology");
 	Simulator::Schedule (Seconds (0.00001), &TraceCwnd, "ns3_topology-cwnd.data");
 	
-	Simulator::Stop (Seconds(5.1));
+	Simulator::Stop (Seconds(10.1));
 
 	NS_LOG_INFO ("Run Simulation");
 	Simulator::Run ();
@@ -332,7 +333,7 @@ int main (int argc, char ** argv)
 	/*----- QueueDisc Stats -----*/
 	QueueDisc::Stats st = qdiscs1.Get (0)->GetStats ();
 	std::cout << st << std::endl;
-	st = qdiscs2.Get (0)->GetStats();
+	st = qdiscs2.Get (1)->GetStats();
 	std::cout << st << std::endl;
 
 	Simulator::Destroy ();
@@ -358,12 +359,13 @@ static void CwndTracer (uint32_t oldval, uint32_t newval) {
 	cWndValue = newval;
 }
 static void TraceCwnd (std::string cwnd_tr_file_name) {
-    std::cout << "Check" << std::endl;
+    //std::cout << "Check" << std::endl;
 	Config::ConnectWithoutContext ("/NodeList/*/$ns3::TcpL4Protocol/SocketList/*/CongestionWindow", MakeCallback (&CwndTracer));
 }
 
 static void QueueDiscEnqueueTracer (Ptr<MfifoQueueDisc> queuedisc) {
-	if(queuedisc->GetQueueInfo () == true ) {
-		queuedisc->SetQueueWeight (1);
-	}
+	//uint32_t snd = queuedisc->GetQueueInfo ();
+	//std::cout << snd << std::endl;
+
+	//openGymInterface->Communicate ();
 }
