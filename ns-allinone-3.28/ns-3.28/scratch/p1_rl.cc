@@ -169,13 +169,13 @@ int main (int argc, char ** argv)
 	uint32_t sim_time = 4;
 	bool ascii_enable = true;
 	bool ping_enable = false;
-	// uint32_t sim_count = 1;	
+	uint32_t sim_count = 1;	
 	NS_LOG_INFO("This is RL Algorithm");
 	
-
-	// m_end = false;
-	// std::cout << "simulation count: " << sim_count << std::endl;
-	// sim_count ++;
+	while(1) {
+	m_end = false;
+	std::cout << "simulation count: " << sim_count << std::endl;
+	sim_count ++;
 	/*-----	Create Nodes -----*/
 	NS_LOG_INFO("Create Nodes.");
 	NodeContainer n0, n1, n2, n3, n4;
@@ -272,7 +272,7 @@ int main (int argc, char ** argv)
 		_tcpsocketbase->_tag = i;
 
 		Ptr<ClientApp> clientApps = CreateObject <ClientApp> ();
-		clientApps->Setup (clientSocket, serverAddress, m_segsize, 13, DataRate (dataRate.at(i)), true, ranRate.at(i));
+		clientApps->Setup (clientSocket, serverAddress, m_segsize, 0, DataRate (dataRate.at(i)), true, ranRate.at(i));
 		clientNodes.Get (i)->AddApplication (clientApps);
 		
 		clientApps->SetStartTime (Seconds (0.1));
@@ -333,6 +333,7 @@ int main (int argc, char ** argv)
 	Simulator::Destroy ();
 	
 	NS_LOG_INFO ("Done.");
+	}
 }
 
 std::list<float> m_queue0; 
@@ -349,11 +350,11 @@ static void TxTracer (Ptr<const Packet> p, const TcpHeader& h, Ptr<TcpSocketBase
 	if (hasSyn || (!hasFin && p->GetSize ())) {
 		if (hasSyn) s->_sendTime.insert(std::make_pair (sq+1, Simulator::Now ().GetSeconds ()));
 		else s->_sendTime.insert(std::make_pair (sq+p->GetSize (), Simulator::Now ().GetSeconds ()));
-		if(s->_tag == 0) { 
-			if(hasSyn) std::cout << sq+1 << std::endl;
-			else std::cout << sq+p->GetSize () << std::endl;
-			std::cout << Simulator::Now ().GetSeconds () << std::endl;
-		}
+		// if(s->_tag == 0) { 
+			// if(hasSyn) std::cout << sq+1 << std::endl;
+			// else std::cout << sq+p->GetSize () << std::endl;
+			// std::cout << Simulator::Now ().GetSeconds () << std::endl;
+		// }
 	}
 }
 
@@ -399,25 +400,7 @@ float info_n[3] = {0};
 uint32_t m_SYN = 0;
 uint32_t reward = 0;
 static void QueueDiscTracer (Ptr<MfifoQueueDisc> mfq) {
-		
-	if(m_SYN < 3) { //3개의 SYN은 통과시키기 위함
-		mfq->SetAction (m_SYN);
-		m_SYN++;
-		return;
-	}
-	
-	uint32_t info[3];
-	mfq->GetQueueInfo (info);
-	
-	// std::cout << "[" << info[0] << "," << info[1] << "," << info[2] << "]" << std::endl;
-	// uint32_t action = Reward (info);
-	// std::cout << "action: " << action << std::endl;
-
-	// mfq->SetAction (action);
-	
-	/*
-	if(m_end) return;
-	
+	if(m_end) return;	
 	if(m_SYN < 3) { //3개의 SYN은 통과시키기 위함
 		mfq->SetAction (m_SYN);
 		m_SYN++;
@@ -431,24 +414,25 @@ static void QueueDiscTracer (Ptr<MfifoQueueDisc> mfq) {
 		info_n[i] = info[i] / 120.0;
 	}
 	
-	if (mfq->GetReward () == -100) {
-		reward -= 1;
-	}
+	float reward = 0.3333 * m_rewardRtt[0] + 0.3333 * m_rewardRtt[1] + 0.3333 * m_rewardRtt[2];
+	// if (mfq->GetReward () == -100) { // if no dequeue occured
+		// reward -= 100;
+	// }
 	
 	std::string message = "{\"state0\":" + std::to_string(info_n[0]) 
 						+ ",\"state1\":" + std::to_string(info_n[1])
 						+ ",\"state2\":" + std::to_string(info_n[2])
 						+ ",\"reward\":" + std::to_string(reward) + "}";
 	
-	*/
-	/* send obs & reward to .py *//*
+	
+	/* send obs & reward to .py */
 	openGymInterface->Send(message);
 	
 	if(Simulator::Now ().GetSeconds () >= 4.1) {
 		m_end = true;
-	}*/
+	}
 	
-	/* send end to .py *//*
+	/* send end to .py */
 	if(m_end) {
 		std::cout << "--------------End True-------------"<<std::endl;
 		openGymInterface->SendEnd(1);
@@ -460,43 +444,71 @@ static void QueueDiscTracer (Ptr<MfifoQueueDisc> mfq) {
 		
 	uint32_t action = openGymInterface->SetAction ();
 	mfq->SetAction (action);
-	reward = info[action];
-	*/
 }
 
+uint32_t MAX = 10;
 void Record (uint32_t tag, float rtt) {
+	float max = 0, min = 100, avg = 0;
 	if(tag==0) {
-		if(m_queue0.size() != 10) {
+		if(m_queue0.size() != MAX) {
 			m_queue0.push_back (rtt);
 		}
 		else {
 			m_queue0.pop_front ();
 			m_queue0.push_back (rtt);
 		}
+		for (auto it = m_queue0.begin (); it != m_queue0.end (); it++) {
+			max = (*it > max) ? *it : max;
+			min = (*it < min) ? *it : min;
+			if (avg == 0) avg = *it;
+			else avg = 0.875 * *it + 0.125 * avg;
+		}
+		if(max == avg) m_rewardRtt[0] = 0;
+		else m_rewardRtt[0] = (max - avg) / (max - min); 
+	
 	}
 	else if(tag==1) {
-		if(m_queue1.size() != 10) {
+		if(m_queue1.size() != MAX) {
 			m_queue1.push_back (rtt);
 		}
 		else {
 			m_queue1.pop_front ();
 			m_queue1.push_back (rtt);
 		}
+		for (auto it = m_queue0.begin (); it != m_queue0.end (); it++) {
+			max = (*it > max) ? *it : max;
+			min = (*it < min) ? *it : min;
+			if (avg == 0) avg = *it;
+			else avg = 0.875 * *it + 0.125 * avg;
+		}
+		if(max == avg) m_rewardRtt[1] = 0;
+		else m_rewardRtt[1] = (max - avg) / (max - min); 
 	}
 	else {
-		if(m_queue2.size() != 10) {
+		if(m_queue2.size() != MAX) {
 			m_queue2.push_back (rtt);
 		}
 		else {
 			m_queue2.pop_front ();
 			m_queue2.push_back (rtt);
 		}
+		for (auto it = m_queue0.begin (); it != m_queue0.end (); it++) {
+			max = (*it > max) ? *it : max;
+			min = (*it < min) ? *it : min;
+			if (avg == 0) avg = *it;
+			else avg = 0.875 * *it + 0.125 * avg;
+		}
+		if(max == avg) m_rewardRtt[2] = 0;
+		else m_rewardRtt[2] = (max - avg) / (max - min); 
+		// std::cout << "start" << std::endl;
+		// for (auto it = m_queue0.begin (); it != m_queue0.end (); it++) {
+			// std::cout << *it << std::endl;
+		// }
+		// std::cout << max << " : " << min << " : " << avg << std::endl;
 	}
 	
-	// std::cout << "start" << std::endl;
-	// for (auto it = m_queue0.begin (); it != m_queue0.end (); it++) {
-		// std::cout << *it << std::endl;
-	// }
+	
+
 }
 uint32_t Reward (uint32_t info[]) {
 if(info[0] >= info[1] && info[0] >= info[2]) return 0;
