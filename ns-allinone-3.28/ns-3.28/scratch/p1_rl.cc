@@ -19,6 +19,11 @@
 using namespace ns3;
 NS_LOG_COMPONENT_DEFINE ("Project");
 
+typedef struct Item {
+	SequenceNumber32 Sq;
+	float RTT;
+}item;
+
 int m_segsize = 1024;
 bool m_end = false;
 Ptr<OpenGymInterface> openGymInterface;
@@ -29,8 +34,9 @@ std::ofstream rttFile2("RL-RTT2.txt");
 static void TxTracer (Ptr<const Packet>, const TcpHeader&, Ptr<TcpSocketBase>);
 static void RxTracer (Ptr<const Packet>, const TcpHeader&, Ptr<TcpSocketBase>);
 static void QueueDiscTracer (Ptr<MfifoQueueDisc>);
-void Record (uint32_t, float);
+void Record (uint32_t, SequenceNumber32, float, float, Ptr<TcpSocketBase>);
 uint32_t Reward (uint32_t []); 
+
 
 static void PingRtt (std::string context, Time rtt)
 { 
@@ -167,7 +173,7 @@ int main (int argc, char ** argv)
 
 	std::srand ((unsigned int) (std::time(NULL)));
 	uint32_t sim_time = 4;
-	bool ascii_enable = true;
+	bool ascii_enable = false;
 	bool ping_enable = false;
 	uint32_t sim_count = 1;	
 	NS_LOG_INFO("This is RL Algorithm");
@@ -336,9 +342,10 @@ int main (int argc, char ** argv)
 	}
 }
 
-std::list<float> m_queue0; 
-std::list<float> m_queue1;
-std::list<float> m_queue2;
+
+std::list<item> m_queue0; 
+std::list<item> m_queue1;
+std::list<item> m_queue2;
 
 static void TxTracer (Ptr<const Packet> p, const TcpHeader& h, Ptr<TcpSocketBase> s) {
 	uint8_t flags = h.GetFlags ();
@@ -358,7 +365,7 @@ static void TxTracer (Ptr<const Packet> p, const TcpHeader& h, Ptr<TcpSocketBase
 	}
 }
 
-
+bool print_RTT = false;
 float m_rewardRtt[3] = {0};
 static void RxTracer (Ptr<const Packet> p, const TcpHeader& h, Ptr<TcpSocketBase> s) {
 	uint8_t flags = h.GetFlags ();
@@ -374,7 +381,8 @@ static void RxTracer (Ptr<const Packet> p, const TcpHeader& h, Ptr<TcpSocketBase
 	// }
 	
 	if(!hasFin) {
-		s->_rttCur = Simulator::Now ().GetSeconds () - s->_sendTime.find (ack) -> second;
+		float time = Simulator::Now ().GetSeconds () ;
+		s->_rttCur = time - s->_sendTime.find (ack) -> second;
 		
 		s->_rttMax = (s->_rttCur > s->_rttMax) ? s->_rttCur : s->_rttMax;
 		if(s->_rttMin == 0) s->_rttMin = s->_rttCur;
@@ -387,12 +395,15 @@ static void RxTracer (Ptr<const Packet> p, const TcpHeader& h, Ptr<TcpSocketBase
 		else m_rewardRtt[s->_tag] = (s->_rttMax - s->_rttMin) / (s->_rttMax - s->_rttAvg);
 	
 		/* print RTT file */ 
-		if (s->_tag == 0) rttFile0 << "RttAvg" << "=" << s->_rttAvg << " sec" << std::endl;
-		else if (s->_tag == 1) rttFile1 << "RttAvg" << "=" << s->_rttAvg << " sec" << std::endl;
-		else rttFile2 << "RttAvg" << "=" << s->_rttCur << " sec" << std::endl;
+		if(print_RTT) {
+			if (s->_tag == 0) rttFile0 << "RttAvg" << "=" << s->_rttAvg << " sec" << std::endl;
+			else if (s->_tag == 1) rttFile1 << "RttAvg" << "=" << s->_rttAvg << " sec" << std::endl;
+			else rttFile2 << "RttAvg" << "=" << s->_rttCur << " sec" << std::endl;
+		}
 		
-		Record(s->_tag, s->_rttCur);
 		s->_sendTime.erase (ack);
+		Record(s->_tag, ack, s->_rttCur, time, s);
+		
 	}	
 }
 
@@ -400,7 +411,8 @@ float info_n[3] = {0};
 uint32_t m_SYN = 0;
 uint32_t reward = 0;
 static void QueueDiscTracer (Ptr<MfifoQueueDisc> mfq) {
-	if(m_end) return;	
+	if(m_end) return;
+	
 	if(m_SYN < 3) { //3개의 SYN은 통과시키기 위함
 		mfq->SetAction (m_SYN);
 		m_SYN++;
@@ -415,9 +427,9 @@ static void QueueDiscTracer (Ptr<MfifoQueueDisc> mfq) {
 	}
 	
 	float reward = 0.3333 * m_rewardRtt[0] + 0.3333 * m_rewardRtt[1] + 0.3333 * m_rewardRtt[2];
-	// if (mfq->GetReward () == -100) { // if no dequeue occured
-		// reward -= 100;
-	// }
+	if (mfq->GetReward () == -100) { // if no dequeue occured
+		reward -= 100;
+	}
 	
 	std::string message = "{\"state0\":" + std::to_string(info_n[0]) 
 						+ ",\"state1\":" + std::to_string(info_n[1])
@@ -447,59 +459,166 @@ static void QueueDiscTracer (Ptr<MfifoQueueDisc> mfq) {
 }
 
 uint32_t MAX = 10;
-void Record (uint32_t tag, float rtt) {
+void Record (uint32_t tag, SequenceNumber32 sq, float rtt, float time, Ptr<TcpSocketBase> s) {
 	float max = 0, min = 100, avg = 0;
+	item i = {sq, rtt};
+	
 	if(tag==0) {
+		for (auto it = m_queue0.begin (); it != m_queue0.end (); it++) {
+			if (it->Sq == sq) {
+				it = m_queue0.erase(it);
+				break;
+			}
+		}
 		if(m_queue0.size() != MAX) {
-			m_queue0.push_back (rtt);
+			m_queue0.push_back (i);
 		}
 		else {
 			m_queue0.pop_front ();
-			m_queue0.push_back (rtt);
+			m_queue0.push_back (i);
 		}
+		
+		// find temp max
+		float temp_max = 0;
 		for (auto it = m_queue0.begin (); it != m_queue0.end (); it++) {
-			max = (*it > max) ? *it : max;
-			min = (*it < min) ? *it : min;
-			if (avg == 0) avg = *it;
-			else avg = 0.875 * *it + 0.125 * avg;
+			temp_max = (it->RTT > temp_max) ? it->RTT : temp_max;
+		}
+		// if larger then temp max
+		item temp_item = {sq, temp_max};
+		for (auto it = s->_sendTime.begin (); it != s->_sendTime.end (); it++) {
+			if(temp_max < time - it->second) {
+				
+				for (auto list = m_queue0.begin (); list != m_queue0.end (); it++) {
+					if (list->Sq == it->first) {
+						m_queue0.erase (list);
+						break;
+					}
+				}
+				
+				if(m_queue0.size() != MAX) {
+					m_queue0.push_back (temp_item);
+				}
+				else {
+					m_queue0.pop_front ();
+					m_queue0.push_back (temp_item);
+				}
+			}
+		}
+		
+		for (auto it = m_queue0.begin (); it != m_queue0.end (); it++) {
+			max = (it->RTT > max) ? it->RTT : max;
+			min = (it->RTT < min) ? it->RTT : min;
+			if (avg == 0) avg = it->RTT;
+			else avg = 0.875 * it->RTT + 0.125 * avg;
 		}
 		if(max == avg) m_rewardRtt[0] = 0;
 		else m_rewardRtt[0] = (max - avg) / (max - min); 
 	
 	}
 	else if(tag==1) {
+		for (auto it = m_queue1.begin (); it != m_queue1.end (); it++) {
+			if (it->Sq == sq) {
+				it = m_queue1.erase(it);
+				break;
+			}
+		}
 		if(m_queue1.size() != MAX) {
-			m_queue1.push_back (rtt);
+			m_queue1.push_back (i);
 		}
 		else {
 			m_queue1.pop_front ();
-			m_queue1.push_back (rtt);
+			m_queue1.push_back (i);
 		}
-		for (auto it = m_queue0.begin (); it != m_queue0.end (); it++) {
-			max = (*it > max) ? *it : max;
-			min = (*it < min) ? *it : min;
-			if (avg == 0) avg = *it;
-			else avg = 0.875 * *it + 0.125 * avg;
+		
+		// find temp max
+		float temp_max = 0;
+		for (auto it = m_queue1.begin (); it != m_queue1.end (); it++) {
+			temp_max = (it->RTT > temp_max) ? it->RTT : temp_max;
 		}
+		// if larger then temp max
+		item temp_item = {sq, temp_max};
+		for (auto it = s->_sendTime.begin (); it != s->_sendTime.end (); it++) {
+			if(temp_max < time - it->second) {
+				
+				for (auto list = m_queue1.begin (); list != m_queue1.end (); it++) {
+					if (list->Sq == it->first) {
+						m_queue1.erase (list);
+						break;
+					}
+				}
+				
+				if(m_queue1.size() != MAX) {
+					m_queue1.push_back (temp_item);
+				}
+				else {
+					m_queue1.pop_front ();
+					m_queue1.push_back (temp_item);
+				}
+			}
+		}
+		
+		for (auto it = m_queue1.begin (); it != m_queue1.end (); it++) {
+			max = (it->RTT > max) ? it->RTT : max;
+			min = (it->RTT < min) ? it->RTT : min;
+			if (avg == 0) avg = it->RTT;
+			else avg = 0.875 * it->RTT + 0.125 * avg;
+		}
+		
 		if(max == avg) m_rewardRtt[1] = 0;
 		else m_rewardRtt[1] = (max - avg) / (max - min); 
 	}
 	else {
+		for (auto it = m_queue2.begin (); it != m_queue2.end (); it++) {
+			if (it->Sq == sq) {
+				it = m_queue2.erase(it);
+				break;
+			}
+		}
 		if(m_queue2.size() != MAX) {
-			m_queue2.push_back (rtt);
+			m_queue2.push_back (i);
 		}
 		else {
 			m_queue2.pop_front ();
-			m_queue2.push_back (rtt);
+			m_queue2.push_back (i);
 		}
-		for (auto it = m_queue0.begin (); it != m_queue0.end (); it++) {
-			max = (*it > max) ? *it : max;
-			min = (*it < min) ? *it : min;
-			if (avg == 0) avg = *it;
-			else avg = 0.875 * *it + 0.125 * avg;
+		
+		// find temp max
+		float temp_max = 0;
+		for (auto it = m_queue2.begin (); it != m_queue2.end (); it++) {
+			temp_max = (it->RTT > temp_max) ? it->RTT : temp_max;
 		}
+		// if larger then temp max
+		item temp_item = {sq, temp_max};
+		for (auto it = s->_sendTime.begin (); it != s->_sendTime.end (); it++) {
+			if(temp_max < time - it->second) {
+				
+				for (auto list = m_queue2.begin (); list != m_queue2.end (); it++) {
+					if (list->Sq == it->first) {
+						m_queue2.erase (list);
+						break;
+					}
+				}
+				
+				if(m_queue2.size() != MAX) {
+					m_queue2.push_back (temp_item);
+				}
+				else {
+					m_queue2.pop_front ();
+					m_queue2.push_back (temp_item);
+				}
+			}
+		}
+		
+		for (auto it = m_queue2.begin (); it != m_queue2.end (); it++) {
+			max = (it->RTT > max) ? it->RTT : max;
+			min = (it->RTT < min) ? it->RTT : min;
+			if (avg == 0) avg = it->RTT;
+			else avg = 0.875 * it->RTT + 0.125 * avg;
+		}
+		
 		if(max == avg) m_rewardRtt[2] = 0;
 		else m_rewardRtt[2] = (max - avg) / (max - min); 
+		
 		// std::cout << "start" << std::endl;
 		// for (auto it = m_queue0.begin (); it != m_queue0.end (); it++) {
 			// std::cout << *it << std::endl;
