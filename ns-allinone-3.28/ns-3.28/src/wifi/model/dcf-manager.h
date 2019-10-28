@@ -213,7 +213,7 @@ public:
 protected:
   // Inherited from ns3::Object
   void DoDispose (void);
-
+  
 private:
   /**
    * Update backoff slots for all DcfStates.

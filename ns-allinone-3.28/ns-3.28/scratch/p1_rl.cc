@@ -42,6 +42,12 @@ static void PingRtt (std::string context, Time rtt)
 { 
   std::cout << Simulator::Now (). GetSeconds() << " RTT = " << rtt.GetMilliSeconds () << " ms" << std::endl;
 }
+static void PrintTime () {
+	rttFile0 << "Time " << Simulator::Now (). GetSeconds () << std::endl;
+	rttFile1 << "Time " << Simulator::Now (). GetSeconds () << std::endl;
+	rttFile2 << "Time " << Simulator::Now (). GetSeconds () << std::endl;
+	Simulator::Schedule (Seconds (0.1), &PrintTime);
+}
 
 class ClientApp : public Application 
 {
@@ -169,11 +175,14 @@ ClientApp::ScheduleTx (void) {
 int main (int argc, char ** argv)
 {
 
-	LogComponentEnable ("Project", LOG_LEVEL_INFO);
+	// LogComponentEnable ("Project", LOG_LEVEL_INFO);
+	// LogComponentEnable ("TrafficControlLayer", LOG_LEVEL_INFO);
+	// LogComponentEnable ("Ipv4L3Protocol", LOG_LEVEL_FUNCTION);
+
 
 	std::srand ((unsigned int) (std::time(NULL)));
 	uint32_t sim_time = 4;
-	bool ascii_enable = false;
+	bool ascii_enable = true;
 	bool ping_enable = false;
 	uint32_t sim_count = 1;	
 	NS_LOG_INFO("This is RL Algorithm");
@@ -233,6 +242,7 @@ int main (int argc, char ** argv)
 	/*------ Assign IP4 Address -----*/
 	NS_LOG_INFO ("Assign IP4 Addresses.");
 	Ipv4AddressHelper address;
+	
 	address.SetBase ("10.1.1.0", "255.255.255.0");
 	Ipv4InterfaceContainer clientInterfaces;
 	clientInterfaces = address.Assign (deviceAccessLink0);
@@ -300,6 +310,7 @@ int main (int argc, char ** argv)
 		AsciiTraceHelper ascii;
 		// p2p.EnableAsciiAll (ascii.CreateFileStream ("ns3_topology.tr"));
 		bottleNeckLink.EnablePcapAll ("p1_Round");
+		Simulator::Schedule (Seconds (0.1), &PrintTime);
 	}
 	
 	/*----- Create FlowMonitor -----*/
@@ -309,6 +320,7 @@ int main (int argc, char ** argv)
 	Simulator::Stop (Seconds(sim_time + 2));
 	
 	NS_LOG_INFO ("Run Simulation");
+	
 	Simulator::Run ();
 	
 	/*----- Flow Monitor -----*/
@@ -365,7 +377,7 @@ static void TxTracer (Ptr<const Packet> p, const TcpHeader& h, Ptr<TcpSocketBase
 	}
 }
 
-bool print_RTT = false;
+bool print_RTT = true;
 float m_rewardRtt[3] = {0};
 static void RxTracer (Ptr<const Packet> p, const TcpHeader& h, Ptr<TcpSocketBase> s) {
 	uint8_t flags = h.GetFlags ();
@@ -396,9 +408,9 @@ static void RxTracer (Ptr<const Packet> p, const TcpHeader& h, Ptr<TcpSocketBase
 	
 		/* print RTT file */ 
 		if(print_RTT) {
-			if (s->_tag == 0) rttFile0 << "RttAvg" << "=" << s->_rttAvg << " sec" << std::endl;
-			else if (s->_tag == 1) rttFile1 << "RttAvg" << "=" << s->_rttAvg << " sec" << std::endl;
-			else rttFile2 << "RttAvg" << "=" << s->_rttCur << " sec" << std::endl;
+			if (s->_tag == 0) rttFile0 << "RttAvg " << s->_rttAvg << std::endl;
+			else if (s->_tag == 1) rttFile1 << "RttAvg " << s->_rttAvg << std::endl;
+			else rttFile2 << "RttAvg " << s->_rttCur <<  std::endl;
 		}
 		
 		s->_sendTime.erase (ack);
@@ -412,34 +424,35 @@ uint32_t m_SYN = 0;
 uint32_t reward = 0;
 static void QueueDiscTracer (Ptr<MfifoQueueDisc> mfq) {
 	if(m_end) return;
-	
+	// std::cout << "before0" << std::endl;
 	if(m_SYN < 3) { //3개의 SYN은 통과시키기 위함
 		mfq->SetAction (m_SYN);
 		m_SYN++;
 		return;
 	}
-	
+	// std::cout << "before1" << std::endl;
 	uint32_t info[3];
 	mfq->GetQueueInfo (info);
-	
+	// std::cout << "before2" << std::endl;
 	for(uint32_t i = 0; i < 3; i++) {
 		info_n[i] = info[i] / 120.0;
 	}
-	
+	// std::cout << "before3" << std::endl;
 	float reward = 0.3333 * m_rewardRtt[0] + 0.3333 * m_rewardRtt[1] + 0.3333 * m_rewardRtt[2];
 	if (mfq->GetReward () == -100) { // if no dequeue occured
 		reward -= 100;
 	}
-	
+	// std::cout << "before4" << std::endl;
 	std::string message = "{\"state0\":" + std::to_string(info_n[0]) 
 						+ ",\"state1\":" + std::to_string(info_n[1])
 						+ ",\"state2\":" + std::to_string(info_n[2])
 						+ ",\"reward\":" + std::to_string(reward) + "}";
 	
-	
+	// std::cout << "before5" << std::endl;
 	/* send obs & reward to .py */
+	// std::cout << "check1" << std::endl;
 	openGymInterface->Send(message);
-	
+	// std::cout << "check2" << std::endl;
 	if(Simulator::Now ().GetSeconds () >= 4.1) {
 		m_end = true;
 	}
@@ -447,14 +460,20 @@ static void QueueDiscTracer (Ptr<MfifoQueueDisc> mfq) {
 	/* send end to .py */
 	if(m_end) {
 		std::cout << "--------------End True-------------"<<std::endl;
+		// std::cout << "check3" << std::endl;
 		openGymInterface->SendEnd(1);
+		// std::cout << "check4" << std::endl;
+
 		return;
 	}
 	else {
+		// std::cout << "check5" << std::endl;
 		openGymInterface->SendEnd(0);
+		// std::cout << "check6" << std::endl;
 	}
 		
 	uint32_t action = openGymInterface->SetAction ();
+	// std::cout << "2. main: " << action << std::endl;
 	mfq->SetAction (action);
 }
 

@@ -172,10 +172,11 @@ MfifoQueueDisc::DoDequeue (void) {
 	// }
 	//CalculateReward ();	
 	m_qAction(this);
-	
-	 //std::cout << "(" << GetInternalQueue (0)-> GetCurrentSize (). GetValue () 
-		//<< GetInternalQueue (1)-> GetCurrentSize (). GetValue ()
-		//<< GetInternalQueue (2)-> GetCurrentSize (). GetValue () << ") ";
+	//std::cout << "3. qdisc dequeue: " <<  this << "  " << m_action << std::endl;
+
+	 //std::cout << "(" << GetInternalQueue (0)-> GetCurrentSize (). GetValue () << "," 
+	//	<< GetInternalQueue (1)-> GetCurrentSize (). GetValue () << ","
+	//	<< GetInternalQueue (2)-> GetCurrentSize (). GetValue () << ") " << std::endl;
 	//std::cout << m_action << std::endl;
 
 	//std::cout << "action: " << m_action << std::endl;
@@ -184,7 +185,7 @@ MfifoQueueDisc::DoDequeue (void) {
 	if(item) {
 		m_rvectors.at (m_action)->pop_front ();
 	}
-	
+	//std::cout << "4. qdisc" << std::endl;
 	m_reward = 0; // initialize reward after dequeue
 	if(!item) {
 		//std::cout << "no popped" << std::endl;
@@ -193,7 +194,7 @@ MfifoQueueDisc::DoDequeue (void) {
 		//Ptr<QueueDiscItem> item = GetInternalQueue(m_action) -> Dequeue();
 		//m_rvectors.at (m_action)->pop_front ();
 	//}
-	
+	//std::cout << "5. qdisc" << std::endl;
 	return item;
 }
 

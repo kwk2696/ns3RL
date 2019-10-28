@@ -34,6 +34,10 @@ DcfState::GetTypeId (void)
   static TypeId tid = TypeId ("ns3::DcfState")
     .SetParent<Object> ()
     .SetGroupName ("Wifi")
+	.AddTraceSource ("SetBackoff",
+					 "Set Backoff",
+					 MakeTraceSourceAccessor (&DcfState::m_backoffTrace),
+					 "ns3::DcfState::SetBackoffTracedCallback") // woo_kyung
   ;
   return tid;
 }
@@ -163,6 +167,8 @@ DcfState::StartBackoffNow (uint32_t nSlots)
       NS_LOG_DEBUG ("start backoff=" << nSlots << " slots");
     }
   m_backoffSlots = nSlots;
+  m_txop->m_backoffTrace(this, m_backoffSlots); // woo_kyung
+  //std::cout << this << ": " << m_backoffSlots << std::endl;
   m_backoffStart = Simulator::Now ();
 }
 

@@ -107,9 +107,11 @@ OpenGymInterface::SetAction (void) {
 	zmq::message_t reply;
 	_socket.recv (&reply);
 
+	//std::cout << "hello1" << std::endl;
 	std::string action = std::string (static_cast<char*> (reply.data ()), reply.size ());
+	//std::cout <<"0. opengym" << std::endl;
 	uint32_t retval = atoi (action.c_str ());
-
+	//std::cout << "1. opengym: " << retval << std::endl;
 	return retval;
 }
 

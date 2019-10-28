@@ -180,7 +180,6 @@ void PacketSink::HandleRead (Ptr<Socket> socket)
                        << InetSocketAddress::ConvertFrom(from).GetIpv4 ()
                        << " port " << InetSocketAddress::ConvertFrom (from).GetPort ()
                        << " total Rx " << m_totalRx << " bytes");
-					//std::cout << "Sinker: " << packet->GetSize () << "  " << m_totalRx << "  "  << Simulator::Now ().GetSeconds () << std::endl;
         }
       else if (Inet6SocketAddress::IsMatchingType (from))
         {

@@ -1252,8 +1252,9 @@ protected:
   TracedCallback<Ptr<const Packet>, const TcpHeader&,
                  Ptr<const TcpSocketBase> > m_rxTrace; //!< Trace of received packets
 
-	TracedCallback <Ptr<const Packet>, const TcpHeader&, Ptr<TcpSocketBase> > m_seqTrace;
-	TracedCallback <Ptr<const Packet>, const TcpHeader&, Ptr<TcpSocketBase> > m_ackTrace;
+  TracedCallback <Ptr<const Packet>, const TcpHeader&, Ptr<TcpSocketBase> > m_seqTrace; // woo_kyung
+  TracedCallback <Ptr<const Packet>, const TcpHeader&, Ptr<TcpSocketBase> > m_ackTrace; // woo_kyung
+
   // Pacing related variable
   Timer m_pacingTimer {Timer::REMOVE_ON_DESTROY}; //!< Pacing Event
 

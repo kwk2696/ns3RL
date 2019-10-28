@@ -204,11 +204,11 @@ TcpSocketBase::GetTypeId (void)
 		.AddTraceSource ("RecordTx", 
 										 "Record Tx Time of packet",
 										 MakeTraceSourceAccessor (&TcpSocketBase::m_seqTrace),
-										 "ns3::TcpSocketBase::RttTxTracedCallback")
+										 "ns3::TcpSocketBase::RttTxTracedCallback") // woo_kyung
 		.AddTraceSource ("RecordRx",
 										 "Record Rx Time of acked packet",
 										 MakeTraceSourceAccessor (&TcpSocketBase::m_ackTrace),
-										 "ns3::TcpSocketBase::RttRxTracedCallback")
+										 "ns3::TcpSocketBase::RttRxTracedCallback") // woo_Kyung
 		;
   return tid;
 }
@@ -368,8 +368,8 @@ TcpSocketBase::TcpSocketBase (const TcpSocketBase& sock)
     m_isFirstPartialAck (sock.m_isFirstPartialAck),
     m_txTrace (sock.m_txTrace),
     m_rxTrace (sock.m_rxTrace),
-		m_seqTrace (sock.m_seqTrace),
-		m_ackTrace (sock.m_ackTrace),
+	m_seqTrace (sock.m_seqTrace), // woo_kyung
+	m_ackTrace (sock.m_ackTrace), // woo_kyung
     m_pacingTimer (Timer::REMOVE_ON_DESTROY)
 {
   NS_LOG_FUNCTION (this);
@@ -1197,7 +1197,7 @@ TcpSocketBase::DoForwardUp (Ptr<Packet> packet, const Address &fromAddress,
     }
 
   m_rxTrace (packet, tcpHeader, this);
-	m_ackTrace (packet, tcpHeader, this);
+  m_ackTrace (packet, tcpHeader, this); // woo_kyung
 
   if (tcpHeader.GetFlags () & TcpHeader::SYN)
     {
@@ -1313,7 +1313,7 @@ TcpSocketBase::DoForwardUp (Ptr<Packet> packet, const Address &fromAddress,
           h.SetWindowSize (AdvertisedWindowSize ());
           AddOptions (h);
           m_txTrace (p, h, this);
-					m_seqTrace (p, h, this);
+		  m_seqTrace (p, h, this); // woo_kyung
           m_tcp->SendPacket (p, h, toAddress, fromAddress, m_boundnetdevice);
         }
       break;
@@ -2443,7 +2443,7 @@ TcpSocketBase::SendEmptyPacket (uint8_t flags)
     }
 
   m_txTrace (p, header, this);
-	m_seqTrace (p,header, this);
+  m_seqTrace (p,header, this); // woo_kyung
 
   if (m_endPoint != nullptr)
     {
@@ -2742,7 +2742,7 @@ TcpSocketBase::SendDataPacket (SequenceNumber32 seq, uint32_t maxSize, bool with
     }
 
   m_txTrace (p, header, this);
-	m_seqTrace (p, header, this);
+  m_seqTrace (p, header, this); // woo_kyung
 
   if (m_endPoint)
     {
@@ -3376,7 +3376,7 @@ TcpSocketBase::PersistTimeout ()
   AddOptions (tcpHeader);
 
   m_txTrace (p, tcpHeader, this);
-	m_seqTrace (p, tcpHeader, this);
+  m_seqTrace (p, tcpHeader, this); //woo_kyung
 
   if (m_endPoint != nullptr)
     {

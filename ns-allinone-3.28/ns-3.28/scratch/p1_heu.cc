@@ -32,6 +32,12 @@ static void PingRtt (std::string context, Time rtt)
 { 
   std::cout << Simulator::Now (). GetSeconds() << " RTT = " << rtt.GetMilliSeconds () << " ms" << std::endl;
 }
+static void PrintTime () {
+	rttFile0 << "Time " << Simulator::Now (). GetSeconds () << std::endl;
+	rttFile1 << "Time " << Simulator::Now (). GetSeconds () << std::endl;
+	rttFile2 << "Time " << Simulator::Now (). GetSeconds () << std::endl;
+	Simulator::Schedule (Seconds (0.1), &PrintTime);
+}
 
 class ClientApp : public Application 
 {
@@ -284,6 +290,7 @@ int main (int argc, char ** argv)
 		AsciiTraceHelper ascii;
 		// p2p.EnableAsciiAll (ascii.CreateFileStream ("ns3_topology.tr"));
 		bottleNeckLink.EnablePcapAll ("p1_heuristic");
+		Simulator::Schedule (Seconds (0.1), &PrintTime);
 	}
 	
 	/*----- Create FlowMonitor -----*/
@@ -361,10 +368,10 @@ static void RxTracer (Ptr<const Packet> p, const TcpHeader& h, Ptr<TcpSocketBase
 		/* print RTT file */ 
 		if (s->_tag == 0) {
 			// rttFile0 << s->_rttMax << ", " << s->_rttMin << ", " << s->_rttAvg << std::endl;
-			rttFile0 << "RttAvg" << "=" << s->_rttAvg << " sec" << std::endl;
+			rttFile0 << "RttAvg " << s->_rttAvg  << std::endl;
 		}
-		else if (s->_tag == 1) rttFile1 << "RttAvg" << "=" << s->_rttAvg << " sec" << std::endl;
-		else rttFile2 << "RttAvg" << "=" << s->_rttAvg << " sec" << std::endl;
+		else if (s->_tag == 1) rttFile1 << "RttAvg " << s->_rttAvg << std::endl;
+		else rttFile2 << "RttAvg " << s->_rttAvg << std::endl;
 		
 		s->_sendTime.erase (ack);
 	}	

@@ -21,6 +21,8 @@
 #ifndef DCF_STATE_H
 #define DCF_STATE_H
 
+#include "ns3/object.h" // woo_kyung
+#include "ns3/traced-value.h" // woo_kyung
 #include "ns3/nstime.h"
 #include "ns3/simulator.h"
 
@@ -141,6 +143,11 @@ public:
    */
   bool IsAccessRequested (void) const;
 
+  void SetCw (uint32_t cw) { // woo_kyung
+	m_cw = cw;
+  }
+private:
+  TracedCallback<Ptr<DcfState>> m_backoffTrace; // woo_kyung
 
 protected:
   /// DcfManager associated class
@@ -219,6 +226,7 @@ protected:
   Time m_txopLimit;       //!< the txop limit time
   bool m_accessRequested; //!< flag whether channel access is already requested
   Ptr<DcaTxop> m_txop;    //!< the DCA TXOP
+
 };
 
 } //namespace ns3

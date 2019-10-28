@@ -864,7 +864,7 @@ QueueDisc::Dequeue (void)
   NS_LOG_FUNCTION (this);
 
   Ptr<QueueDiscItem> item = DoDequeue ();
-
+  //std::cout << "6. Upper Queue" << std::endl; //wookyung
   NS_ASSERT (m_nPackets == m_stats.nTotalEnqueuedPackets - m_stats.nTotalDequeuedPackets);
   NS_ASSERT (m_nBytes == m_stats.nTotalEnqueuedBytes - m_stats.nTotalDequeuedBytes);
 
@@ -926,6 +926,7 @@ QueueDisc::Run (void)
               break;
             }
         }
+	  //std::cout << "8. queuedisc" << std::endl; //wookyung
       RunEnd ();
     }
 }

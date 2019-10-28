@@ -66,6 +66,12 @@ DcaTxop::GetTypeId (void)
                    PointerValue (),
                    MakePointerAccessor (&DcaTxop::GetQueue),
                    MakePointerChecker<WifiMacQueue> ())
+	.AddTraceSource ("SetBackOff", "Set BackOff",
+					 MakeTraceSourceAccessor (&DcaTxop::m_backoffTrace),
+					 "ns3::DcaTxop::SetBackOffTracedCallback") // woo_kyung
+	.AddTraceSource ("SetCw", "Set cw Max",
+					 MakeTraceSourceAccessor (&DcaTxop::m_setCW),
+					 "ns3::DcaTxop::SetcwMaxTracedCallback") // woo_kyung
   ;
   return tid;
 }
@@ -178,6 +184,11 @@ DcaTxop::SetMaxCw (uint32_t maxCw)
 }
 
 void
+DcaTxop::SetCw (uint32_t cw) // woo_kyung
+{
+	m_dcf->SetCw(cw);
+}
+void
 DcaTxop::SetAifsn (uint32_t aifsn)
 {
   NS_LOG_FUNCTION (this << aifsn);
@@ -268,6 +279,7 @@ DcaTxop::DoInitialize ()
 {
   NS_LOG_FUNCTION (this);
   m_dcf->ResetCw ();
+  m_setCW(this); // woo_kuyng
   m_dcf->StartBackoffNow (m_rng->GetInteger (0, m_dcf->GetCw ()));
 }
 
@@ -427,6 +439,7 @@ void
 DcaTxop::NotifyCollision (void)
 {
   NS_LOG_FUNCTION (this);
+  m_setCW(this); // woo_kyung
   m_dcf->StartBackoffNow (m_rng->GetInteger (0, m_dcf->GetCw ()));
   RestartAccessIfNeeded ();
 }
@@ -493,6 +506,7 @@ DcaTxop::MissedCts (void)
     {
       m_dcf->UpdateFailedCw ();
     }
+  m_setCW(this); // woo_kyung
   m_dcf->StartBackoffNow (m_rng->GetInteger (0, m_dcf->GetCw ()));
   RestartAccessIfNeeded ();
 }
@@ -515,6 +529,7 @@ DcaTxop::GotAck (void)
        */
       m_currentPacket = 0;
       m_dcf->ResetCw ();
+	  m_setCW(this); // woo_kyung
       m_dcf->StartBackoffNow (m_rng->GetInteger (0, m_dcf->GetCw ()));
       RestartAccessIfNeeded ();
     }
@@ -547,6 +562,7 @@ DcaTxop::MissedAck (void)
       m_currentHdr.SetRetry ();
       m_dcf->UpdateFailedCw ();
     }
+  m_setCW(this); // woo_kyung
   m_dcf->StartBackoffNow (m_rng->GetInteger (0, m_dcf->GetCw ()));
   RestartAccessIfNeeded ();
 }
@@ -587,6 +603,7 @@ DcaTxop::EndTxNoAck (void)
   NS_LOG_DEBUG ("a transmission that did not require an ACK just finished");
   m_currentPacket = 0;
   m_dcf->ResetCw ();
+  m_setCW(this); // woo_kyung
   m_dcf->StartBackoffNow (m_rng->GetInteger (0, m_dcf->GetCw ()));
   StartAccessIfNeeded ();
 }

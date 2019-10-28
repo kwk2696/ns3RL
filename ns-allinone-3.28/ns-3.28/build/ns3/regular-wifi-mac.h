@@ -289,7 +289,9 @@ public:
   void SetCompressedBlockAckTimeout (Time blockAckTimeout);
   Time GetCompressedBlockAckTimeout (void) const;
 
-
+  Ptr<DcaTxop> GetDcaTxopPublic (void) { // woo_kyung
+	  return m_dca;
+  }
 protected:
   virtual void DoInitialize ();
   virtual void DoDispose ();

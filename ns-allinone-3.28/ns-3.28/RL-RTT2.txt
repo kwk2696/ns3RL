@@ -1,15 +1,1 @@
-RttAvg=0.000278391 sec
-RttAvg=0.00448161 sec
-RttAvg=0.003536 sec
-RttAvg=0.00498264 sec
-RttAvg=0.00352426 sec
-RttAvg=0.00481451 sec
-RttAvg=0.00698875 sec
-RttAvg=0.00473087 sec
-RttAvg=0.00647542 sec
-RttAvg=0.00773522 sec
-RttAvg=0.00420828 sec
-RttAvg=0.00297318 sec
-RttAvg=0.0038608 sec
-RttAvg=0.00695404 sec
-RttAvg=0.00518161 sec
+Time 0.1

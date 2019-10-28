@@ -299,6 +299,8 @@ public:
    */
   int64_t AssignStreams (int64_t stream);
 
+  void SetCw (uint32_t cw);// woo_kyung
+  uint32_t m_tag; // woo_kyung
 
 protected:
   ///< DcfState associated class
@@ -420,6 +422,9 @@ protected:
   WifiMacHeader m_currentHdr; //!< the current header
   MacLowTransmissionParameters m_currentParams; ///< current transmission parameters
   uint8_t m_fragmentNumber; //!< the fragment number
+
+  TracedCallback<Ptr<DcfState>, uint32_t> m_backoffTrace; // woo_kyung
+  TracedCallback<Ptr<DcaTxop>> m_setCW; // woo_kyung
 };
 
 } //namespace ns3
