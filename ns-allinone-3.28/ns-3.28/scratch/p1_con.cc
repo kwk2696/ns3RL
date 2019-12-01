@@ -1,4 +1,5 @@
 #include <cmath>
+#include "spdlog/spdlog.h"
 
 #include "ns3/core-module.h"
 #include "ns3/point-to-point-module.h"
@@ -390,9 +391,12 @@ static void SetInterval(){
     float reward1 = (rtt_1 - avgRtt[1]) / rtt_1;
     float reward2 = (rtt_2 - avgRtt[2]) / rtt_2;
     
-    float reward = 0.3333 * reward0 + 0.3333 * reward1 + 0.3333 * reward2;
+    float quality0 = (0.0005 - interval[0]) / 0.001;
+    float quality1 = (0.001 - interval[1]) / 0.001;
+    float quality2 = (0.0025 - interval[2]) / 0.01;
+    float reward = 0.3333 * (0.5 * reward0 + 0.5 * quality0)+ 0.3333 * (0.5 * reward1 + 0.5 * quality1) + 0.3333 * (0.5 * reward2 + 0.5 * quality2);
     
-    
+    // std::cout << "quality: " << quality0 << " : " << quality1 << " : " << quality2 << std::endl;
     std::string message = "{\"state00\":" + std::to_string((interval[0] - 0.0017)/(0.001)) + ",\"state01\":" + std::to_string(avgRtt[0]/10.0) 
 						+ ",\"state10\":" + std::to_string((interval[1] - 0.0017)/(0.001)) + ",\"state11\":" + std::to_string(avgRtt[1]/10.0) 
 						+ ",\"state20\":" + std::to_string((interval[2] - 0.0017)/(0.001)) + ",\"state21\":" + std::to_string(avgRtt[2]/10.0) 
