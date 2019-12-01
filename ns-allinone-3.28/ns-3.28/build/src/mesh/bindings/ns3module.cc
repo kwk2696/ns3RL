@@ -323,6 +323,18 @@ int _wrap_PyNs3Dot11sDestinationAddressUnit__tp_init(PyNs3Dot11sDestinationAddre
 
 
 PyObject *
+_wrap_PyNs3Dot11sDestinationAddressUnit_GetDestSeqNumber(PyNs3Dot11sDestinationAddressUnit *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetDestSeqNumber();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3Dot11sDestinationAddressUnit_GetDestinationAddress(PyNs3Dot11sDestinationAddressUnit *self)
 {
     PyObject *py_retval;
@@ -339,30 +351,37 @@ _wrap_PyNs3Dot11sDestinationAddressUnit_GetDestinationAddress(PyNs3Dot11sDestina
 
 
 PyObject *
-_wrap_PyNs3Dot11sDestinationAddressUnit_GetDestSeqNumber(PyNs3Dot11sDestinationAddressUnit *self)
+_wrap_PyNs3Dot11sDestinationAddressUnit_IsDo(PyNs3Dot11sDestinationAddressUnit *self)
 {
     PyObject *py_retval;
-    uint32_t retval;
+    bool retval;
     
-    retval = self->obj->GetDestSeqNumber();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    retval = self->obj->IsDo();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3Dot11sDestinationAddressUnit_SetDestinationAddress(PyNs3Dot11sDestinationAddressUnit *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3Dot11sDestinationAddressUnit_IsRf(PyNs3Dot11sDestinationAddressUnit *self)
 {
     PyObject *py_retval;
-    PyNs3Mac48Address *dest_address;
-    const char *keywords[] = {"dest_address", NULL};
+    bool retval;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Mac48Address_Type, &dest_address)) {
-        return NULL;
-    }
-    self->obj->SetDestinationAddress(*((PyNs3Mac48Address *) dest_address)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    retval = self->obj->IsRf();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sDestinationAddressUnit_IsUsn(PyNs3Dot11sDestinationAddressUnit *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->IsUsn();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
@@ -385,13 +404,18 @@ _wrap_PyNs3Dot11sDestinationAddressUnit_SetDestSeqNumber(PyNs3Dot11sDestinationA
 
 
 PyObject *
-_wrap_PyNs3Dot11sDestinationAddressUnit_IsUsn(PyNs3Dot11sDestinationAddressUnit *self)
+_wrap_PyNs3Dot11sDestinationAddressUnit_SetDestinationAddress(PyNs3Dot11sDestinationAddressUnit *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    bool retval;
+    PyNs3Mac48Address *dest_address;
+    const char *keywords[] = {"dest_address", NULL};
     
-    retval = self->obj->IsUsn();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Mac48Address_Type, &dest_address)) {
+        return NULL;
+    }
+    self->obj->SetDestinationAddress(*((PyNs3Mac48Address *) dest_address)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -421,30 +445,6 @@ _wrap_PyNs3Dot11sDestinationAddressUnit_SetFlags(PyNs3Dot11sDestinationAddressUn
 }
 
 
-PyObject *
-_wrap_PyNs3Dot11sDestinationAddressUnit_IsRf(PyNs3Dot11sDestinationAddressUnit *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->IsRf();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sDestinationAddressUnit_IsDo(PyNs3Dot11sDestinationAddressUnit *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->IsDo();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3Dot11sDestinationAddressUnit__copy__(PyNs3Dot11sDestinationAddressUnit *self)
 {
@@ -459,14 +459,14 @@ _wrap_PyNs3Dot11sDestinationAddressUnit__copy__(PyNs3Dot11sDestinationAddressUni
 }
 
 static PyMethodDef PyNs3Dot11sDestinationAddressUnit_methods[] = {
-    {(char *) "GetDestinationAddress", (PyCFunction) _wrap_PyNs3Dot11sDestinationAddressUnit_GetDestinationAddress, METH_NOARGS, "GetDestinationAddress()\n\n" },
     {(char *) "GetDestSeqNumber", (PyCFunction) _wrap_PyNs3Dot11sDestinationAddressUnit_GetDestSeqNumber, METH_NOARGS, "GetDestSeqNumber()\n\n" },
-    {(char *) "SetDestinationAddress", (PyCFunction) _wrap_PyNs3Dot11sDestinationAddressUnit_SetDestinationAddress, METH_KEYWORDS|METH_VARARGS, "SetDestinationAddress(dest_address)\n\ntype: dest_address: ns3::Mac48Address" },
-    {(char *) "SetDestSeqNumber", (PyCFunction) _wrap_PyNs3Dot11sDestinationAddressUnit_SetDestSeqNumber, METH_KEYWORDS|METH_VARARGS, "SetDestSeqNumber(dest_seq_number)\n\ntype: dest_seq_number: uint32_t" },
-    {(char *) "IsUsn", (PyCFunction) _wrap_PyNs3Dot11sDestinationAddressUnit_IsUsn, METH_NOARGS, "IsUsn()\n\n" },
-    {(char *) "SetFlags", (PyCFunction) _wrap_PyNs3Dot11sDestinationAddressUnit_SetFlags, METH_KEYWORDS|METH_VARARGS, "SetFlags(doFlag, rfFlag, usnFlag)\n\ntype: doFlag: bool\ntype: rfFlag: bool\ntype: usnFlag: bool" },
-    {(char *) "IsRf", (PyCFunction) _wrap_PyNs3Dot11sDestinationAddressUnit_IsRf, METH_NOARGS, "IsRf()\n\n" },
+    {(char *) "GetDestinationAddress", (PyCFunction) _wrap_PyNs3Dot11sDestinationAddressUnit_GetDestinationAddress, METH_NOARGS, "GetDestinationAddress()\n\n" },
     {(char *) "IsDo", (PyCFunction) _wrap_PyNs3Dot11sDestinationAddressUnit_IsDo, METH_NOARGS, "IsDo()\n\n" },
+    {(char *) "IsRf", (PyCFunction) _wrap_PyNs3Dot11sDestinationAddressUnit_IsRf, METH_NOARGS, "IsRf()\n\n" },
+    {(char *) "IsUsn", (PyCFunction) _wrap_PyNs3Dot11sDestinationAddressUnit_IsUsn, METH_NOARGS, "IsUsn()\n\n" },
+    {(char *) "SetDestSeqNumber", (PyCFunction) _wrap_PyNs3Dot11sDestinationAddressUnit_SetDestSeqNumber, METH_KEYWORDS|METH_VARARGS, "SetDestSeqNumber(dest_seq_number)\n\ntype: dest_seq_number: uint32_t" },
+    {(char *) "SetDestinationAddress", (PyCFunction) _wrap_PyNs3Dot11sDestinationAddressUnit_SetDestinationAddress, METH_KEYWORDS|METH_VARARGS, "SetDestinationAddress(dest_address)\n\ntype: dest_address: ns3::Mac48Address" },
+    {(char *) "SetFlags", (PyCFunction) _wrap_PyNs3Dot11sDestinationAddressUnit_SetFlags, METH_KEYWORDS|METH_VARARGS, "SetFlags(doFlag, rfFlag, usnFlag)\n\ntype: doFlag: bool\ntype: rfFlag: bool\ntype: usnFlag: bool" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3Dot11sDestinationAddressUnit__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -732,9 +732,9 @@ static int _wrap_PyNs3Dot11sDot11sMeshCapability__set_powerSaveLevel(PyNs3Dot11s
 }
 static PyGetSetDef PyNs3Dot11sDot11sMeshCapability__getsets[] = {
     {
-        (char*) "acceptPeerLinks", /* attribute name */
-        (getter) _wrap_PyNs3Dot11sDot11sMeshCapability__get_acceptPeerLinks, /* C function to get the attribute */
-        (setter) _wrap_PyNs3Dot11sDot11sMeshCapability__set_acceptPeerLinks, /* C function to set the attribute */
+        (char*) "MCCAEnabled", /* attribute name */
+        (getter) _wrap_PyNs3Dot11sDot11sMeshCapability__get_MCCAEnabled, /* C function to get the attribute */
+        (setter) _wrap_PyNs3Dot11sDot11sMeshCapability__set_MCCAEnabled, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -753,9 +753,16 @@ static PyGetSetDef PyNs3Dot11sDot11sMeshCapability__getsets[] = {
         NULL /* optional additional data for getter and setter */
     },
     {
-        (char*) "powerSaveLevel", /* attribute name */
-        (getter) _wrap_PyNs3Dot11sDot11sMeshCapability__get_powerSaveLevel, /* C function to get the attribute */
-        (setter) _wrap_PyNs3Dot11sDot11sMeshCapability__set_powerSaveLevel, /* C function to set the attribute */
+        (char*) "acceptPeerLinks", /* attribute name */
+        (getter) _wrap_PyNs3Dot11sDot11sMeshCapability__get_acceptPeerLinks, /* C function to get the attribute */
+        (setter) _wrap_PyNs3Dot11sDot11sMeshCapability__set_acceptPeerLinks, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "beaconTimingReport", /* attribute name */
+        (getter) _wrap_PyNs3Dot11sDot11sMeshCapability__get_beaconTimingReport, /* C function to get the attribute */
+        (setter) _wrap_PyNs3Dot11sDot11sMeshCapability__set_beaconTimingReport, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -767,16 +774,9 @@ static PyGetSetDef PyNs3Dot11sDot11sMeshCapability__getsets[] = {
         NULL /* optional additional data for getter and setter */
     },
     {
-        (char*) "MCCAEnabled", /* attribute name */
-        (getter) _wrap_PyNs3Dot11sDot11sMeshCapability__get_MCCAEnabled, /* C function to get the attribute */
-        (setter) _wrap_PyNs3Dot11sDot11sMeshCapability__set_MCCAEnabled, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
-        (char*) "beaconTimingReport", /* attribute name */
-        (getter) _wrap_PyNs3Dot11sDot11sMeshCapability__get_beaconTimingReport, /* C function to get the attribute */
-        (setter) _wrap_PyNs3Dot11sDot11sMeshCapability__set_beaconTimingReport, /* C function to set the attribute */
+        (char*) "powerSaveLevel", /* attribute name */
+        (getter) _wrap_PyNs3Dot11sDot11sMeshCapability__get_powerSaveLevel, /* C function to get the attribute */
+        (setter) _wrap_PyNs3Dot11sDot11sMeshCapability__set_powerSaveLevel, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -849,12 +849,45 @@ int _wrap_PyNs3Dot11sDot11sMeshCapability__tp_init(PyNs3Dot11sDot11sMeshCapabili
 
 
 PyObject *
+_wrap_PyNs3Dot11sDot11sMeshCapability_Deserialize(PyNs3Dot11sDot11sMeshCapability *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3BufferIterator *i;
+    const char *keywords[] = {"i", NULL};
+    PyNs3BufferIterator *py_Iterator;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &i)) {
+        return NULL;
+    }
+    ns3::Buffer::Iterator retval = self->obj->Deserialize(*((PyNs3BufferIterator *) i)->obj);
+    py_Iterator = PyObject_New(PyNs3BufferIterator, &PyNs3BufferIterator_Type);
+    py_Iterator->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Iterator->obj = new ns3::Buffer::Iterator(retval);
+    PyNs3BufferIterator_wrapper_registry[(void *) py_Iterator->obj] = (PyObject *) py_Iterator;
+    py_retval = Py_BuildValue((char *) "N", py_Iterator);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3Dot11sDot11sMeshCapability_GetSerializedSize(PyNs3Dot11sDot11sMeshCapability *self)
 {
     PyObject *py_retval;
     uint8_t retval;
     
     retval = self->obj->GetSerializedSize();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sDot11sMeshCapability_GetUint8(PyNs3Dot11sDot11sMeshCapability *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    
+    retval = self->obj->GetUint8();
     py_retval = Py_BuildValue((char *) "i", (int)retval);
     return py_retval;
 }
@@ -907,39 +940,6 @@ _wrap_PyNs3Dot11sDot11sMeshCapability_Serialize(PyNs3Dot11sDot11sMeshCapability 
 }
 
 
-PyObject *
-_wrap_PyNs3Dot11sDot11sMeshCapability_GetUint8(PyNs3Dot11sDot11sMeshCapability *self)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    
-    retval = self->obj->GetUint8();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sDot11sMeshCapability_Deserialize(PyNs3Dot11sDot11sMeshCapability *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3BufferIterator *i;
-    const char *keywords[] = {"i", NULL};
-    PyNs3BufferIterator *py_Iterator;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &i)) {
-        return NULL;
-    }
-    ns3::Buffer::Iterator retval = self->obj->Deserialize(*((PyNs3BufferIterator *) i)->obj);
-    py_Iterator = PyObject_New(PyNs3BufferIterator, &PyNs3BufferIterator_Type);
-    py_Iterator->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Iterator->obj = new ns3::Buffer::Iterator(retval);
-    PyNs3BufferIterator_wrapper_registry[(void *) py_Iterator->obj] = (PyObject *) py_Iterator;
-    py_retval = Py_BuildValue((char *) "N", py_Iterator);
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3Dot11sDot11sMeshCapability__copy__(PyNs3Dot11sDot11sMeshCapability *self)
 {
@@ -953,11 +953,11 @@ _wrap_PyNs3Dot11sDot11sMeshCapability__copy__(PyNs3Dot11sDot11sMeshCapability *s
 }
 
 static PyMethodDef PyNs3Dot11sDot11sMeshCapability_methods[] = {
+    {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3Dot11sDot11sMeshCapability_Deserialize, METH_KEYWORDS|METH_VARARGS, "Deserialize(i)\n\ntype: i: ns3::Buffer::Iterator" },
     {(char *) "GetSerializedSize", (PyCFunction) _wrap_PyNs3Dot11sDot11sMeshCapability_GetSerializedSize, METH_NOARGS, "GetSerializedSize()\n\n" },
+    {(char *) "GetUint8", (PyCFunction) _wrap_PyNs3Dot11sDot11sMeshCapability_GetUint8, METH_NOARGS, "GetUint8()\n\n" },
     {(char *) "Is", (PyCFunction) _wrap_PyNs3Dot11sDot11sMeshCapability_Is, METH_KEYWORDS|METH_VARARGS, "Is(cap, n)\n\ntype: cap: uint8_t\ntype: n: uint8_t" },
     {(char *) "Serialize", (PyCFunction) _wrap_PyNs3Dot11sDot11sMeshCapability_Serialize, METH_KEYWORDS|METH_VARARGS, "Serialize(i)\n\ntype: i: ns3::Buffer::Iterator" },
-    {(char *) "GetUint8", (PyCFunction) _wrap_PyNs3Dot11sDot11sMeshCapability_GetUint8, METH_NOARGS, "GetUint8()\n\n" },
-    {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3Dot11sDot11sMeshCapability_Deserialize, METH_KEYWORDS|METH_VARARGS, "Deserialize(i)\n\ntype: i: ns3::Buffer::Iterator" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3Dot11sDot11sMeshCapability__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -1075,22 +1075,6 @@ PyTypeObject PyNs3Dot11sDot11sMeshCapability_Type = {
 
 
 PyObject *
-PyNs3Dot11sHwmpProtocol__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3Dot11sHwmpProtocol *self)
-{
-    PyObject *py_retval;
-    PyNs3Dot11sHwmpProtocol__PythonHelper *helper = dynamic_cast< PyNs3Dot11sHwmpProtocol__PythonHelper* >(self->obj);
-    
-    if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
-        return NULL;
-    }
-    helper->NotifyConstructionCompleted__parent_caller();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject *
 PyNs3Dot11sHwmpProtocol__PythonHelper::_wrap_NotifyNewAggregate(PyNs3Dot11sHwmpProtocol *self)
 {
     PyObject *py_retval;
@@ -1101,6 +1085,22 @@ PyNs3Dot11sHwmpProtocol__PythonHelper::_wrap_NotifyNewAggregate(PyNs3Dot11sHwmpP
         return NULL;
     }
     helper->NotifyNewAggregate__parent_caller();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject *
+PyNs3Dot11sHwmpProtocol__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3Dot11sHwmpProtocol *self)
+{
+    PyObject *py_retval;
+    PyNs3Dot11sHwmpProtocol__PythonHelper *helper = dynamic_cast< PyNs3Dot11sHwmpProtocol__PythonHelper* >(self->obj);
+    
+    if (helper == NULL) {
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        return NULL;
+    }
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -1439,68 +1439,6 @@ _wrap_PyNs3Dot11sHwmpProtocol__tp_init(PyNs3Dot11sHwmpProtocol *self, PyObject *
 
 
 PyObject *
-_wrap_PyNs3Dot11sHwmpProtocol_RemoveRoutingStuff(PyNs3Dot11sHwmpProtocol *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    unsigned int fromIface;
-    PyNs3Mac48Address *source;
-    PyNs3Mac48Address *destination;
-    PyNs3Packet *packet;
-    ns3::Packet *packet_ptr;
-    uint16_t  protocolType;
-    PyNs3Dot11sHwmpProtocol__PythonHelper *helper_class = dynamic_cast<PyNs3Dot11sHwmpProtocol__PythonHelper*> (self->obj);
-    const char *keywords[] = {"fromIface", "source", "destination", "packet", "protocolType", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "IO!O!O!H", (char **) keywords, &fromIface, &PyNs3Mac48Address_Type, &source, &PyNs3Mac48Address_Type, &destination, &PyNs3Packet_Type, &packet, &protocolType)) {
-        return NULL;
-    }
-    packet_ptr = (packet ? packet->obj : NULL);
-    retval = (helper_class == NULL)? (self->obj->RemoveRoutingStuff(fromIface, *((PyNs3Mac48Address *) source)->obj, *((PyNs3Mac48Address *) destination)->obj, ns3::Ptr< ns3::Packet  > (packet_ptr), protocolType)) : (self->obj->ns3::dot11s::HwmpProtocol::RemoveRoutingStuff(fromIface, *((PyNs3Mac48Address *) source)->obj, *((PyNs3Mac48Address *) destination)->obj, ns3::Ptr< ns3::Packet  > (packet_ptr), protocolType));
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sHwmpProtocol_PeerLinkStatus(PyNs3Dot11sHwmpProtocol *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Mac48Address *meshPontAddress;
-    PyNs3Mac48Address *peerAddress;
-    unsigned int interface;
-    bool status;
-    PyObject *py_status;
-    const char *keywords[] = {"meshPontAddress", "peerAddress", "interface", "status", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!IO", (char **) keywords, &PyNs3Mac48Address_Type, &meshPontAddress, &PyNs3Mac48Address_Type, &peerAddress, &interface, &py_status)) {
-        return NULL;
-    }
-    status = (bool) PyObject_IsTrue(py_status);
-    self->obj->PeerLinkStatus(*((PyNs3Mac48Address *) meshPontAddress)->obj, *((PyNs3Mac48Address *) peerAddress)->obj, interface, status);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sHwmpProtocol_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::dot11s::HwmpProtocol::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3Dot11sHwmpProtocol_AssignStreams(PyNs3Dot11sHwmpProtocol *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -1518,90 +1456,12 @@ _wrap_PyNs3Dot11sHwmpProtocol_AssignStreams(PyNs3Dot11sHwmpProtocol *self, PyObj
 
 
 PyObject *
-_wrap_PyNs3Dot11sHwmpProtocol_Install(PyNs3Dot11sHwmpProtocol *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3MeshPointDevice *arg0;
-    ns3::MeshPointDevice *arg0_ptr;
-    const char *keywords[] = {"arg0", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3MeshPointDevice_Type, &arg0)) {
-        return NULL;
-    }
-    arg0_ptr = (arg0 ? arg0->obj : NULL);
-    retval = self->obj->Install(ns3::Ptr< ns3::MeshPointDevice  > (arg0_ptr));
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3Dot11sHwmpProtocol_DoDispose(PyNs3Dot11sHwmpProtocol *self)
 {
     PyObject *py_retval;
     PyNs3Dot11sHwmpProtocol__PythonHelper *helper_class = dynamic_cast<PyNs3Dot11sHwmpProtocol__PythonHelper*> (self->obj);
     
     (helper_class == NULL)? (self->obj->DoDispose()) : (self->obj->ns3::dot11s::HwmpProtocol::DoDispose());
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sHwmpProtocol_UnsetRoot(PyNs3Dot11sHwmpProtocol *self)
-{
-    PyObject *py_retval;
-    
-    self->obj->UnsetRoot();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sHwmpProtocol_RequestRoute(PyNs3Dot11sHwmpProtocol *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    unsigned int sourceIface;
-    PyNs3Mac48Address *source;
-    PyNs3Mac48Address *destination;
-    PyNs3Packet *packet;
-    ns3::Packet *packet_ptr;
-    int protocolType;
-    PyObject *routeReply;
-    ns3::Ptr<PythonCallbackImpl4> routeReply_cb_impl;
-    PyNs3Dot11sHwmpProtocol__PythonHelper *helper_class = dynamic_cast<PyNs3Dot11sHwmpProtocol__PythonHelper*> (self->obj);
-    const char *keywords[] = {"sourceIface", "source", "destination", "packet", "protocolType", "routeReply", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "IO!O!O!iO", (char **) keywords, &sourceIface, &PyNs3Mac48Address_Type, &source, &PyNs3Mac48Address_Type, &destination, &PyNs3Packet_Type, &packet, &protocolType, &routeReply)) {
-        return NULL;
-    }
-    packet_ptr = (packet ? packet->obj : NULL);
-    if (protocolType > 0xffff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    if (!PyCallable_Check(routeReply)) {
-        PyErr_SetString(PyExc_TypeError, "parameter 'routeReply' must be callbale");
-        return NULL;
-    }
-    routeReply_cb_impl = ns3::Create<PythonCallbackImpl4> (routeReply);
-    retval = (helper_class == NULL)? (self->obj->RequestRoute(sourceIface, *((PyNs3Mac48Address *) source)->obj, *((PyNs3Mac48Address *) destination)->obj, ns3::Ptr< ns3::Packet  > (packet_ptr), protocolType, ns3::Callback<void, bool, ns3::Ptr<ns3::Packet>, ns3::Mac48Address, ns3::Mac48Address, unsigned short, unsigned int, ns3::empty, ns3::empty, ns3::empty> (routeReply_cb_impl))) : (self->obj->ns3::dot11s::HwmpProtocol::RequestRoute(sourceIface, *((PyNs3Mac48Address *) source)->obj, *((PyNs3Mac48Address *) destination)->obj, ns3::Ptr< ns3::Packet  > (packet_ptr), protocolType, ns3::Callback<void, bool, ns3::Ptr<ns3::Packet>, ns3::Mac48Address, ns3::Mac48Address, unsigned short, unsigned int, ns3::empty, ns3::empty, ns3::empty> (routeReply_cb_impl)));
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sHwmpProtocol_ResetStats(PyNs3Dot11sHwmpProtocol *self)
-{
-    PyObject *py_retval;
-    
-    self->obj->ResetStats();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -1654,6 +1514,134 @@ _wrap_PyNs3Dot11sHwmpProtocol_GetRoutingTable(PyNs3Dot11sHwmpProtocol *self)
 
 
 PyObject *
+_wrap_PyNs3Dot11sHwmpProtocol_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::dot11s::HwmpProtocol::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sHwmpProtocol_Install(PyNs3Dot11sHwmpProtocol *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3MeshPointDevice *arg0;
+    ns3::MeshPointDevice *arg0_ptr;
+    const char *keywords[] = {"arg0", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3MeshPointDevice_Type, &arg0)) {
+        return NULL;
+    }
+    arg0_ptr = (arg0 ? arg0->obj : NULL);
+    retval = self->obj->Install(ns3::Ptr< ns3::MeshPointDevice  > (arg0_ptr));
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sHwmpProtocol_PeerLinkStatus(PyNs3Dot11sHwmpProtocol *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Mac48Address *meshPontAddress;
+    PyNs3Mac48Address *peerAddress;
+    unsigned int interface;
+    bool status;
+    PyObject *py_status;
+    const char *keywords[] = {"meshPontAddress", "peerAddress", "interface", "status", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!IO", (char **) keywords, &PyNs3Mac48Address_Type, &meshPontAddress, &PyNs3Mac48Address_Type, &peerAddress, &interface, &py_status)) {
+        return NULL;
+    }
+    status = (bool) PyObject_IsTrue(py_status);
+    self->obj->PeerLinkStatus(*((PyNs3Mac48Address *) meshPontAddress)->obj, *((PyNs3Mac48Address *) peerAddress)->obj, interface, status);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sHwmpProtocol_RemoveRoutingStuff(PyNs3Dot11sHwmpProtocol *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    unsigned int fromIface;
+    PyNs3Mac48Address *source;
+    PyNs3Mac48Address *destination;
+    PyNs3Packet *packet;
+    ns3::Packet *packet_ptr;
+    uint16_t  protocolType;
+    PyNs3Dot11sHwmpProtocol__PythonHelper *helper_class = dynamic_cast<PyNs3Dot11sHwmpProtocol__PythonHelper*> (self->obj);
+    const char *keywords[] = {"fromIface", "source", "destination", "packet", "protocolType", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "IO!O!O!H", (char **) keywords, &fromIface, &PyNs3Mac48Address_Type, &source, &PyNs3Mac48Address_Type, &destination, &PyNs3Packet_Type, &packet, &protocolType)) {
+        return NULL;
+    }
+    packet_ptr = (packet ? packet->obj : NULL);
+    retval = (helper_class == NULL)? (self->obj->RemoveRoutingStuff(fromIface, *((PyNs3Mac48Address *) source)->obj, *((PyNs3Mac48Address *) destination)->obj, ns3::Ptr< ns3::Packet  > (packet_ptr), protocolType)) : (self->obj->ns3::dot11s::HwmpProtocol::RemoveRoutingStuff(fromIface, *((PyNs3Mac48Address *) source)->obj, *((PyNs3Mac48Address *) destination)->obj, ns3::Ptr< ns3::Packet  > (packet_ptr), protocolType));
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sHwmpProtocol_RequestRoute(PyNs3Dot11sHwmpProtocol *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    unsigned int sourceIface;
+    PyNs3Mac48Address *source;
+    PyNs3Mac48Address *destination;
+    PyNs3Packet *packet;
+    ns3::Packet *packet_ptr;
+    int protocolType;
+    PyObject *routeReply;
+    ns3::Ptr<PythonCallbackImpl4> routeReply_cb_impl;
+    PyNs3Dot11sHwmpProtocol__PythonHelper *helper_class = dynamic_cast<PyNs3Dot11sHwmpProtocol__PythonHelper*> (self->obj);
+    const char *keywords[] = {"sourceIface", "source", "destination", "packet", "protocolType", "routeReply", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "IO!O!O!iO", (char **) keywords, &sourceIface, &PyNs3Mac48Address_Type, &source, &PyNs3Mac48Address_Type, &destination, &PyNs3Packet_Type, &packet, &protocolType, &routeReply)) {
+        return NULL;
+    }
+    packet_ptr = (packet ? packet->obj : NULL);
+    if (protocolType > 0xffff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    if (!PyCallable_Check(routeReply)) {
+        PyErr_SetString(PyExc_TypeError, "parameter 'routeReply' must be callbale");
+        return NULL;
+    }
+    routeReply_cb_impl = ns3::Create<PythonCallbackImpl4> (routeReply);
+    retval = (helper_class == NULL)? (self->obj->RequestRoute(sourceIface, *((PyNs3Mac48Address *) source)->obj, *((PyNs3Mac48Address *) destination)->obj, ns3::Ptr< ns3::Packet  > (packet_ptr), protocolType, ns3::Callback<void, bool, ns3::Ptr<ns3::Packet>, ns3::Mac48Address, ns3::Mac48Address, unsigned short, unsigned int, ns3::empty, ns3::empty, ns3::empty> (routeReply_cb_impl))) : (self->obj->ns3::dot11s::HwmpProtocol::RequestRoute(sourceIface, *((PyNs3Mac48Address *) source)->obj, *((PyNs3Mac48Address *) destination)->obj, ns3::Ptr< ns3::Packet  > (packet_ptr), protocolType, ns3::Callback<void, bool, ns3::Ptr<ns3::Packet>, ns3::Mac48Address, ns3::Mac48Address, unsigned short, unsigned int, ns3::empty, ns3::empty, ns3::empty> (routeReply_cb_impl)));
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sHwmpProtocol_ResetStats(PyNs3Dot11sHwmpProtocol *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->ResetStats();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3Dot11sHwmpProtocol_SetRoot(PyNs3Dot11sHwmpProtocol *self)
 {
     PyObject *py_retval;
@@ -1664,20 +1652,32 @@ _wrap_PyNs3Dot11sHwmpProtocol_SetRoot(PyNs3Dot11sHwmpProtocol *self)
     return py_retval;
 }
 
+
+PyObject *
+_wrap_PyNs3Dot11sHwmpProtocol_UnsetRoot(PyNs3Dot11sHwmpProtocol *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->UnsetRoot();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
 static PyMethodDef PyNs3Dot11sHwmpProtocol_methods[] = {
-    {(char *) "RemoveRoutingStuff", (PyCFunction) _wrap_PyNs3Dot11sHwmpProtocol_RemoveRoutingStuff, METH_KEYWORDS|METH_VARARGS, "RemoveRoutingStuff(fromIface, source, destination, packet, protocolType)\n\ntype: fromIface: uint32_t\ntype: source: ns3::Mac48Address const\ntype: destination: ns3::Mac48Address const\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: protocolType: uint16_t &" },
-    {(char *) "PeerLinkStatus", (PyCFunction) _wrap_PyNs3Dot11sHwmpProtocol_PeerLinkStatus, METH_KEYWORDS|METH_VARARGS, "PeerLinkStatus(meshPontAddress, peerAddress, interface, status)\n\ntype: meshPontAddress: ns3::Mac48Address\ntype: peerAddress: ns3::Mac48Address\ntype: interface: uint32_t\ntype: status: bool" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3Dot11sHwmpProtocol_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
     {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3Dot11sHwmpProtocol_AssignStreams, METH_KEYWORDS|METH_VARARGS, "AssignStreams(stream)\n\ntype: stream: int64_t" },
-    {(char *) "Install", (PyCFunction) _wrap_PyNs3Dot11sHwmpProtocol_Install, METH_KEYWORDS|METH_VARARGS, "Install(arg0)\n\ntype: arg0: ns3::Ptr< ns3::MeshPointDevice >" },
     {(char *) "DoDispose", (PyCFunction) _wrap_PyNs3Dot11sHwmpProtocol_DoDispose, METH_NOARGS, "DoDispose()\n\n" },
-    {(char *) "UnsetRoot", (PyCFunction) _wrap_PyNs3Dot11sHwmpProtocol_UnsetRoot, METH_NOARGS, "UnsetRoot()\n\n" },
+    {(char *) "GetRoutingTable", (PyCFunction) _wrap_PyNs3Dot11sHwmpProtocol_GetRoutingTable, METH_NOARGS, "GetRoutingTable()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3Dot11sHwmpProtocol_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "Install", (PyCFunction) _wrap_PyNs3Dot11sHwmpProtocol_Install, METH_KEYWORDS|METH_VARARGS, "Install(arg0)\n\ntype: arg0: ns3::Ptr< ns3::MeshPointDevice >" },
+    {(char *) "PeerLinkStatus", (PyCFunction) _wrap_PyNs3Dot11sHwmpProtocol_PeerLinkStatus, METH_KEYWORDS|METH_VARARGS, "PeerLinkStatus(meshPontAddress, peerAddress, interface, status)\n\ntype: meshPontAddress: ns3::Mac48Address\ntype: peerAddress: ns3::Mac48Address\ntype: interface: uint32_t\ntype: status: bool" },
+    {(char *) "RemoveRoutingStuff", (PyCFunction) _wrap_PyNs3Dot11sHwmpProtocol_RemoveRoutingStuff, METH_KEYWORDS|METH_VARARGS, "RemoveRoutingStuff(fromIface, source, destination, packet, protocolType)\n\ntype: fromIface: uint32_t\ntype: source: ns3::Mac48Address const\ntype: destination: ns3::Mac48Address const\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: protocolType: uint16_t &" },
     {(char *) "RequestRoute", (PyCFunction) _wrap_PyNs3Dot11sHwmpProtocol_RequestRoute, METH_KEYWORDS|METH_VARARGS, "RequestRoute(sourceIface, source, destination, packet, protocolType, routeReply)\n\ntype: sourceIface: uint32_t\ntype: source: ns3::Mac48Address const\ntype: destination: ns3::Mac48Address const\ntype: packet: ns3::Ptr< ns3::Packet const >\ntype: protocolType: uint16_t\ntype: routeReply: ns3::Callback< void, bool, ns3::Ptr< ns3::Packet >, ns3::Mac48Address, ns3::Mac48Address, unsigned short, unsigned int, ns3::empty, ns3::empty, ns3::empty >" },
     {(char *) "ResetStats", (PyCFunction) _wrap_PyNs3Dot11sHwmpProtocol_ResetStats, METH_NOARGS, "ResetStats()\n\n" },
-    {(char *) "GetRoutingTable", (PyCFunction) _wrap_PyNs3Dot11sHwmpProtocol_GetRoutingTable, METH_NOARGS, "GetRoutingTable()\n\n" },
     {(char *) "SetRoot", (PyCFunction) _wrap_PyNs3Dot11sHwmpProtocol_SetRoot, METH_NOARGS, "SetRoot()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3Dot11sHwmpProtocol__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "UnsetRoot", (PyCFunction) _wrap_PyNs3Dot11sHwmpProtocol_UnsetRoot, METH_NOARGS, "UnsetRoot()\n\n" },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3Dot11sHwmpProtocol__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3Dot11sHwmpProtocol__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 
@@ -1855,16 +1855,16 @@ static int _wrap_PyNs3Dot11sHwmpProtocolFailedDestination__set_seqnum(PyNs3Dot11
 }
 static PyGetSetDef PyNs3Dot11sHwmpProtocolFailedDestination__getsets[] = {
     {
-        (char*) "seqnum", /* attribute name */
-        (getter) _wrap_PyNs3Dot11sHwmpProtocolFailedDestination__get_seqnum, /* C function to get the attribute */
-        (setter) _wrap_PyNs3Dot11sHwmpProtocolFailedDestination__set_seqnum, /* C function to set the attribute */
+        (char*) "destination", /* attribute name */
+        (getter) _wrap_PyNs3Dot11sHwmpProtocolFailedDestination__get_destination, /* C function to get the attribute */
+        (setter) _wrap_PyNs3Dot11sHwmpProtocolFailedDestination__set_destination, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
     {
-        (char*) "destination", /* attribute name */
-        (getter) _wrap_PyNs3Dot11sHwmpProtocolFailedDestination__get_destination, /* C function to get the attribute */
-        (setter) _wrap_PyNs3Dot11sHwmpProtocolFailedDestination__set_destination, /* C function to set the attribute */
+        (char*) "seqnum", /* attribute name */
+        (getter) _wrap_PyNs3Dot11sHwmpProtocolFailedDestination__get_seqnum, /* C function to get the attribute */
+        (setter) _wrap_PyNs3Dot11sHwmpProtocolFailedDestination__set_seqnum, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -2061,22 +2061,6 @@ PyTypeObject PyNs3Dot11sHwmpProtocolFailedDestination_Type = {
 
 
 PyObject *
-PyNs3Dot11sHwmpRtable__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3Dot11sHwmpRtable *self)
-{
-    PyObject *py_retval;
-    PyNs3Dot11sHwmpRtable__PythonHelper *helper = dynamic_cast< PyNs3Dot11sHwmpRtable__PythonHelper* >(self->obj);
-    
-    if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
-        return NULL;
-    }
-    helper->NotifyConstructionCompleted__parent_caller();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject *
 PyNs3Dot11sHwmpRtable__PythonHelper::_wrap_DoInitialize(PyNs3Dot11sHwmpRtable *self)
 {
     PyObject *py_retval;
@@ -2103,6 +2087,22 @@ PyNs3Dot11sHwmpRtable__PythonHelper::_wrap_NotifyNewAggregate(PyNs3Dot11sHwmpRta
         return NULL;
     }
     helper->NotifyNewAggregate__parent_caller();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject *
+PyNs3Dot11sHwmpRtable__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3Dot11sHwmpRtable *self)
+{
+    PyObject *py_retval;
+    PyNs3Dot11sHwmpRtable__PythonHelper *helper = dynamic_cast< PyNs3Dot11sHwmpRtable__PythonHelper* >(self->obj);
+    
+    if (helper == NULL) {
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        return NULL;
+    }
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -2350,15 +2350,15 @@ static PyObject* _wrap_PyNs3Dot11sHwmpRtable__get_MAX_METRIC(PyObject * PYBINDGE
 }
 static PyGetSetDef Ns3Dot11sHwmpRtableMeta__getsets[] = {
     {
-        (char*) "MAX_METRIC", /* attribute name */
-        (getter) _wrap_PyNs3Dot11sHwmpRtable__get_MAX_METRIC, /* C function to get the attribute */
+        (char*) "INTERFACE_ANY", /* attribute name */
+        (getter) _wrap_PyNs3Dot11sHwmpRtable__get_INTERFACE_ANY, /* C function to get the attribute */
         (setter) NULL, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
     {
-        (char*) "INTERFACE_ANY", /* attribute name */
-        (getter) _wrap_PyNs3Dot11sHwmpRtable__get_INTERFACE_ANY, /* C function to get the attribute */
+        (char*) "MAX_METRIC", /* attribute name */
+        (getter) _wrap_PyNs3Dot11sHwmpRtable__get_MAX_METRIC, /* C function to get the attribute */
         (setter) NULL, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
@@ -2506,22 +2506,6 @@ int _wrap_PyNs3Dot11sHwmpRtable__tp_init(PyNs3Dot11sHwmpRtable *self, PyObject *
 
 
 PyObject *
-_wrap_PyNs3Dot11sHwmpRtable_LookupProactiveExpired(PyNs3Dot11sHwmpRtable *self)
-{
-    PyObject *py_retval;
-    PyNs3Dot11sHwmpRtableLookupResult *py_LookupResult;
-    
-    ns3::dot11s::HwmpRtable::LookupResult retval = self->obj->LookupProactiveExpired();
-    py_LookupResult = PyObject_New(PyNs3Dot11sHwmpRtableLookupResult, &PyNs3Dot11sHwmpRtableLookupResult_Type);
-    py_LookupResult->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_LookupResult->obj = new ns3::dot11s::HwmpRtable::LookupResult(retval);
-    PyNs3Dot11sHwmpRtableLookupResult_wrapper_registry[(void *) py_LookupResult->obj] = (PyObject *) py_LookupResult;
-    py_retval = Py_BuildValue((char *) "N", py_LookupResult);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3Dot11sHwmpRtable_AddPrecursor(PyNs3Dot11sHwmpRtable *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -2559,38 +2543,6 @@ _wrap_PyNs3Dot11sHwmpRtable_AddProactivePath(PyNs3Dot11sHwmpRtable *self, PyObje
     self->obj->AddProactivePath(metric, *((PyNs3Mac48Address *) root)->obj, *((PyNs3Mac48Address *) retransmitter)->obj, interface, *((PyNs3Time *) lifetime)->obj, seqnum);
     Py_INCREF(Py_None);
     py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sHwmpRtable_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::dot11s::HwmpRtable::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sHwmpRtable_LookupProactive(PyNs3Dot11sHwmpRtable *self)
-{
-    PyObject *py_retval;
-    PyNs3Dot11sHwmpRtableLookupResult *py_LookupResult;
-    
-    ns3::dot11s::HwmpRtable::LookupResult retval = self->obj->LookupProactive();
-    py_LookupResult = PyObject_New(PyNs3Dot11sHwmpRtableLookupResult, &PyNs3Dot11sHwmpRtableLookupResult_Type);
-    py_LookupResult->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_LookupResult->obj = new ns3::dot11s::HwmpRtable::LookupResult(retval);
-    PyNs3Dot11sHwmpRtableLookupResult_wrapper_registry[(void *) py_LookupResult->obj] = (PyObject *) py_LookupResult;
-    py_retval = Py_BuildValue((char *) "N", py_LookupResult);
     return py_retval;
 }
 
@@ -2687,22 +2639,18 @@ PyObject * _wrap_PyNs3Dot11sHwmpRtable_DeleteProactivePath(PyNs3Dot11sHwmpRtable
 
 
 PyObject *
-_wrap_PyNs3Dot11sHwmpRtable_LookupReactiveExpired(PyNs3Dot11sHwmpRtable *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3Dot11sHwmpRtable_DeleteReactivePath(PyNs3Dot11sHwmpRtable *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
     PyNs3Mac48Address *destination;
     const char *keywords[] = {"destination", NULL};
-    PyNs3Dot11sHwmpRtableLookupResult *py_LookupResult;
     
     if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Mac48Address_Type, &destination)) {
         return NULL;
     }
-    ns3::dot11s::HwmpRtable::LookupResult retval = self->obj->LookupReactiveExpired(*((PyNs3Mac48Address *) destination)->obj);
-    py_LookupResult = PyObject_New(PyNs3Dot11sHwmpRtableLookupResult, &PyNs3Dot11sHwmpRtableLookupResult_Type);
-    py_LookupResult->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_LookupResult->obj = new ns3::dot11s::HwmpRtable::LookupResult(retval);
-    PyNs3Dot11sHwmpRtableLookupResult_wrapper_registry[(void *) py_LookupResult->obj] = (PyObject *) py_LookupResult;
-    py_retval = Py_BuildValue((char *) "N", py_LookupResult);
+    self->obj->DeleteReactivePath(*((PyNs3Mac48Address *) destination)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -2716,6 +2664,74 @@ _wrap_PyNs3Dot11sHwmpRtable_DoDispose(PyNs3Dot11sHwmpRtable *self)
     (helper_class == NULL)? (self->obj->DoDispose()) : (self->obj->ns3::dot11s::HwmpRtable::DoDispose());
     Py_INCREF(Py_None);
     py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sHwmpRtable_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::dot11s::HwmpRtable::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sHwmpRtable_GetUnreachableDestinations(PyNs3Dot11sHwmpRtable *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Mac48Address *peerAddress;
+    const char *keywords[] = {"peerAddress", NULL};
+    std::vector< ns3::dot11s::HwmpProtocol::FailedDestination > retval;
+    Pystd__vector__lt___ns3__dot11s__HwmpProtocol__FailedDestination___gt__ *py_std__vector__lt___ns3__dot11s__HwmpProtocol__FailedDestination___gt__;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Mac48Address_Type, &peerAddress)) {
+        return NULL;
+    }
+    retval = self->obj->GetUnreachableDestinations(*((PyNs3Mac48Address *) peerAddress)->obj);
+    py_std__vector__lt___ns3__dot11s__HwmpProtocol__FailedDestination___gt__ = PyObject_New(Pystd__vector__lt___ns3__dot11s__HwmpProtocol__FailedDestination___gt__, &Pystd__vector__lt___ns3__dot11s__HwmpProtocol__FailedDestination___gt___Type);
+    py_std__vector__lt___ns3__dot11s__HwmpProtocol__FailedDestination___gt__->obj = new std::vector< ns3::dot11s::HwmpProtocol::FailedDestination >(retval);
+    py_retval = Py_BuildValue((char *) "N", py_std__vector__lt___ns3__dot11s__HwmpProtocol__FailedDestination___gt__);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sHwmpRtable_LookupProactive(PyNs3Dot11sHwmpRtable *self)
+{
+    PyObject *py_retval;
+    PyNs3Dot11sHwmpRtableLookupResult *py_LookupResult;
+    
+    ns3::dot11s::HwmpRtable::LookupResult retval = self->obj->LookupProactive();
+    py_LookupResult = PyObject_New(PyNs3Dot11sHwmpRtableLookupResult, &PyNs3Dot11sHwmpRtableLookupResult_Type);
+    py_LookupResult->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_LookupResult->obj = new ns3::dot11s::HwmpRtable::LookupResult(retval);
+    PyNs3Dot11sHwmpRtableLookupResult_wrapper_registry[(void *) py_LookupResult->obj] = (PyObject *) py_LookupResult;
+    py_retval = Py_BuildValue((char *) "N", py_LookupResult);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sHwmpRtable_LookupProactiveExpired(PyNs3Dot11sHwmpRtable *self)
+{
+    PyObject *py_retval;
+    PyNs3Dot11sHwmpRtableLookupResult *py_LookupResult;
+    
+    ns3::dot11s::HwmpRtable::LookupResult retval = self->obj->LookupProactiveExpired();
+    py_LookupResult = PyObject_New(PyNs3Dot11sHwmpRtableLookupResult, &PyNs3Dot11sHwmpRtableLookupResult_Type);
+    py_LookupResult->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_LookupResult->obj = new ns3::dot11s::HwmpRtable::LookupResult(retval);
+    PyNs3Dot11sHwmpRtableLookupResult_wrapper_registry[(void *) py_LookupResult->obj] = (PyObject *) py_LookupResult;
+    py_retval = Py_BuildValue((char *) "N", py_LookupResult);
     return py_retval;
 }
 
@@ -2742,38 +2758,22 @@ _wrap_PyNs3Dot11sHwmpRtable_LookupReactive(PyNs3Dot11sHwmpRtable *self, PyObject
 
 
 PyObject *
-_wrap_PyNs3Dot11sHwmpRtable_DeleteReactivePath(PyNs3Dot11sHwmpRtable *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3Dot11sHwmpRtable_LookupReactiveExpired(PyNs3Dot11sHwmpRtable *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
     PyNs3Mac48Address *destination;
     const char *keywords[] = {"destination", NULL};
+    PyNs3Dot11sHwmpRtableLookupResult *py_LookupResult;
     
     if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Mac48Address_Type, &destination)) {
         return NULL;
     }
-    self->obj->DeleteReactivePath(*((PyNs3Mac48Address *) destination)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sHwmpRtable_GetUnreachableDestinations(PyNs3Dot11sHwmpRtable *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Mac48Address *peerAddress;
-    const char *keywords[] = {"peerAddress", NULL};
-    std::vector< ns3::dot11s::HwmpProtocol::FailedDestination > retval;
-    Pystd__vector__lt___ns3__dot11s__HwmpProtocol__FailedDestination___gt__ *py_std__vector__lt___ns3__dot11s__HwmpProtocol__FailedDestination___gt__;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Mac48Address_Type, &peerAddress)) {
-        return NULL;
-    }
-    retval = self->obj->GetUnreachableDestinations(*((PyNs3Mac48Address *) peerAddress)->obj);
-    py_std__vector__lt___ns3__dot11s__HwmpProtocol__FailedDestination___gt__ = PyObject_New(Pystd__vector__lt___ns3__dot11s__HwmpProtocol__FailedDestination___gt__, &Pystd__vector__lt___ns3__dot11s__HwmpProtocol__FailedDestination___gt___Type);
-    py_std__vector__lt___ns3__dot11s__HwmpProtocol__FailedDestination___gt__->obj = new std::vector< ns3::dot11s::HwmpProtocol::FailedDestination >(retval);
-    py_retval = Py_BuildValue((char *) "N", py_std__vector__lt___ns3__dot11s__HwmpProtocol__FailedDestination___gt__);
+    ns3::dot11s::HwmpRtable::LookupResult retval = self->obj->LookupReactiveExpired(*((PyNs3Mac48Address *) destination)->obj);
+    py_LookupResult = PyObject_New(PyNs3Dot11sHwmpRtableLookupResult, &PyNs3Dot11sHwmpRtableLookupResult_Type);
+    py_LookupResult->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_LookupResult->obj = new ns3::dot11s::HwmpRtable::LookupResult(retval);
+    PyNs3Dot11sHwmpRtableLookupResult_wrapper_registry[(void *) py_LookupResult->obj] = (PyObject *) py_LookupResult;
+    py_retval = Py_BuildValue((char *) "N", py_LookupResult);
     return py_retval;
 }
 
@@ -2794,21 +2794,21 @@ _wrap_PyNs3Dot11sHwmpRtable__copy__(PyNs3Dot11sHwmpRtable *self)
 }
 
 static PyMethodDef PyNs3Dot11sHwmpRtable_methods[] = {
-    {(char *) "LookupProactiveExpired", (PyCFunction) _wrap_PyNs3Dot11sHwmpRtable_LookupProactiveExpired, METH_NOARGS, "LookupProactiveExpired()\n\n" },
     {(char *) "AddPrecursor", (PyCFunction) _wrap_PyNs3Dot11sHwmpRtable_AddPrecursor, METH_KEYWORDS|METH_VARARGS, "AddPrecursor(destination, precursorInterface, precursorAddress, lifetime)\n\ntype: destination: ns3::Mac48Address\ntype: precursorInterface: uint32_t\ntype: precursorAddress: ns3::Mac48Address\ntype: lifetime: ns3::Time" },
     {(char *) "AddProactivePath", (PyCFunction) _wrap_PyNs3Dot11sHwmpRtable_AddProactivePath, METH_KEYWORDS|METH_VARARGS, "AddProactivePath(metric, root, retransmitter, interface, lifetime, seqnum)\n\ntype: metric: uint32_t\ntype: root: ns3::Mac48Address\ntype: retransmitter: ns3::Mac48Address\ntype: interface: uint32_t\ntype: lifetime: ns3::Time\ntype: seqnum: uint32_t" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3Dot11sHwmpRtable_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "LookupProactive", (PyCFunction) _wrap_PyNs3Dot11sHwmpRtable_LookupProactive, METH_NOARGS, "LookupProactive()\n\n" },
     {(char *) "AddReactivePath", (PyCFunction) _wrap_PyNs3Dot11sHwmpRtable_AddReactivePath, METH_KEYWORDS|METH_VARARGS, "AddReactivePath(destination, retransmitter, interface, metric, lifetime, seqnum)\n\ntype: destination: ns3::Mac48Address\ntype: retransmitter: ns3::Mac48Address\ntype: interface: uint32_t\ntype: metric: uint32_t\ntype: lifetime: ns3::Time\ntype: seqnum: uint32_t" },
     {(char *) "DeleteProactivePath", (PyCFunction) _wrap_PyNs3Dot11sHwmpRtable_DeleteProactivePath, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "LookupReactiveExpired", (PyCFunction) _wrap_PyNs3Dot11sHwmpRtable_LookupReactiveExpired, METH_KEYWORDS|METH_VARARGS, "LookupReactiveExpired(destination)\n\ntype: destination: ns3::Mac48Address" },
-    {(char *) "DoDispose", (PyCFunction) _wrap_PyNs3Dot11sHwmpRtable_DoDispose, METH_NOARGS, "DoDispose()\n\n" },
-    {(char *) "LookupReactive", (PyCFunction) _wrap_PyNs3Dot11sHwmpRtable_LookupReactive, METH_KEYWORDS|METH_VARARGS, "LookupReactive(destination)\n\ntype: destination: ns3::Mac48Address" },
     {(char *) "DeleteReactivePath", (PyCFunction) _wrap_PyNs3Dot11sHwmpRtable_DeleteReactivePath, METH_KEYWORDS|METH_VARARGS, "DeleteReactivePath(destination)\n\ntype: destination: ns3::Mac48Address" },
+    {(char *) "DoDispose", (PyCFunction) _wrap_PyNs3Dot11sHwmpRtable_DoDispose, METH_NOARGS, "DoDispose()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3Dot11sHwmpRtable_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
     {(char *) "GetUnreachableDestinations", (PyCFunction) _wrap_PyNs3Dot11sHwmpRtable_GetUnreachableDestinations, METH_KEYWORDS|METH_VARARGS, "GetUnreachableDestinations(peerAddress)\n\ntype: peerAddress: ns3::Mac48Address" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3Dot11sHwmpRtable__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "LookupProactive", (PyCFunction) _wrap_PyNs3Dot11sHwmpRtable_LookupProactive, METH_NOARGS, "LookupProactive()\n\n" },
+    {(char *) "LookupProactiveExpired", (PyCFunction) _wrap_PyNs3Dot11sHwmpRtable_LookupProactiveExpired, METH_NOARGS, "LookupProactiveExpired()\n\n" },
+    {(char *) "LookupReactive", (PyCFunction) _wrap_PyNs3Dot11sHwmpRtable_LookupReactive, METH_KEYWORDS|METH_VARARGS, "LookupReactive(destination)\n\ntype: destination: ns3::Mac48Address" },
+    {(char *) "LookupReactiveExpired", (PyCFunction) _wrap_PyNs3Dot11sHwmpRtable_LookupReactiveExpired, METH_KEYWORDS|METH_VARARGS, "LookupReactiveExpired(destination)\n\ntype: destination: ns3::Mac48Address" },
     {(char *) "DoInitialize", (PyCFunction) PyNs3Dot11sHwmpRtable__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3Dot11sHwmpRtable__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3Dot11sHwmpRtable__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3Dot11sHwmpRtable__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -3366,7 +3366,7 @@ int _wrap_PyNs3Dot11sIeBeaconTiming__tp_init(PyNs3Dot11sIeBeaconTiming *self, Py
 
 
 PyObject *
-_wrap_PyNs3Dot11sIeBeaconTiming_DelNeighboursTimingElementUnit(PyNs3Dot11sIeBeaconTiming *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3Dot11sIeBeaconTiming_AddNeighboursTimingElementUnit(PyNs3Dot11sIeBeaconTiming *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
     int aid;
@@ -3381,7 +3381,7 @@ _wrap_PyNs3Dot11sIeBeaconTiming_DelNeighboursTimingElementUnit(PyNs3Dot11sIeBeac
         PyErr_SetString(PyExc_ValueError, "Out of range");
         return NULL;
     }
-    self->obj->DelNeighboursTimingElementUnit(aid, *((PyNs3Time *) last_beacon)->obj, *((PyNs3Time *) beacon_interval)->obj);
+    self->obj->AddNeighboursTimingElementUnit(aid, *((PyNs3Time *) last_beacon)->obj, *((PyNs3Time *) beacon_interval)->obj);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -3401,16 +3401,24 @@ _wrap_PyNs3Dot11sIeBeaconTiming_ClearTimingElement(PyNs3Dot11sIeBeaconTiming *se
 
 
 PyObject *
-_wrap_PyNs3Dot11sIeBeaconTiming_GetNeighboursTimingElementsList(PyNs3Dot11sIeBeaconTiming *self)
+_wrap_PyNs3Dot11sIeBeaconTiming_DelNeighboursTimingElementUnit(PyNs3Dot11sIeBeaconTiming *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    ns3::dot11s::IeBeaconTiming::NeighboursTimingUnitsList retval;
-    Pyns3__dot11s__IeBeaconTiming__NeighboursTimingUnitsList *py_ns3__dot11s__IeBeaconTiming__NeighboursTimingUnitsList;
+    int aid;
+    PyNs3Time *last_beacon;
+    PyNs3Time *beacon_interval;
+    const char *keywords[] = {"aid", "last_beacon", "beacon_interval", NULL};
     
-    retval = self->obj->GetNeighboursTimingElementsList();
-    py_ns3__dot11s__IeBeaconTiming__NeighboursTimingUnitsList = PyObject_New(Pyns3__dot11s__IeBeaconTiming__NeighboursTimingUnitsList, &Pyns3__dot11s__IeBeaconTiming__NeighboursTimingUnitsList_Type);
-    py_ns3__dot11s__IeBeaconTiming__NeighboursTimingUnitsList->obj = new ns3::dot11s::IeBeaconTiming::NeighboursTimingUnitsList(retval);
-    py_retval = Py_BuildValue((char *) "N", py_ns3__dot11s__IeBeaconTiming__NeighboursTimingUnitsList);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "iO!O!", (char **) keywords, &aid, &PyNs3Time_Type, &last_beacon, &PyNs3Time_Type, &beacon_interval)) {
+        return NULL;
+    }
+    if (aid > 0xffff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->DelNeighboursTimingElementUnit(aid, *((PyNs3Time *) last_beacon)->obj, *((PyNs3Time *) beacon_interval)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -3438,6 +3446,18 @@ _wrap_PyNs3Dot11sIeBeaconTiming_DeserializeInformationField(PyNs3Dot11sIeBeaconT
 
 
 PyObject *
+_wrap_PyNs3Dot11sIeBeaconTiming_ElementId(PyNs3Dot11sIeBeaconTiming *self)
+{
+    PyObject *py_retval;
+    ns3::WifiInformationElementId retval;
+    
+    retval = self->obj->ElementId();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3Dot11sIeBeaconTiming_GetInformationFieldSize(PyNs3Dot11sIeBeaconTiming *self)
 {
     PyObject *py_retval;
@@ -3445,6 +3465,21 @@ _wrap_PyNs3Dot11sIeBeaconTiming_GetInformationFieldSize(PyNs3Dot11sIeBeaconTimin
     
     retval = self->obj->GetInformationFieldSize();
     py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIeBeaconTiming_GetNeighboursTimingElementsList(PyNs3Dot11sIeBeaconTiming *self)
+{
+    PyObject *py_retval;
+    ns3::dot11s::IeBeaconTiming::NeighboursTimingUnitsList retval;
+    Pyns3__dot11s__IeBeaconTiming__NeighboursTimingUnitsList *py_ns3__dot11s__IeBeaconTiming__NeighboursTimingUnitsList;
+    
+    retval = self->obj->GetNeighboursTimingElementsList();
+    py_ns3__dot11s__IeBeaconTiming__NeighboursTimingUnitsList = PyObject_New(Pyns3__dot11s__IeBeaconTiming__NeighboursTimingUnitsList, &Pyns3__dot11s__IeBeaconTiming__NeighboursTimingUnitsList_Type);
+    py_ns3__dot11s__IeBeaconTiming__NeighboursTimingUnitsList->obj = new ns3::dot11s::IeBeaconTiming::NeighboursTimingUnitsList(retval);
+    py_retval = Py_BuildValue((char *) "N", py_ns3__dot11s__IeBeaconTiming__NeighboursTimingUnitsList);
     return py_retval;
 }
 
@@ -3466,41 +3501,6 @@ _wrap_PyNs3Dot11sIeBeaconTiming_SerializeInformationField(PyNs3Dot11sIeBeaconTim
 }
 
 
-PyObject *
-_wrap_PyNs3Dot11sIeBeaconTiming_AddNeighboursTimingElementUnit(PyNs3Dot11sIeBeaconTiming *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int aid;
-    PyNs3Time *last_beacon;
-    PyNs3Time *beacon_interval;
-    const char *keywords[] = {"aid", "last_beacon", "beacon_interval", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "iO!O!", (char **) keywords, &aid, &PyNs3Time_Type, &last_beacon, &PyNs3Time_Type, &beacon_interval)) {
-        return NULL;
-    }
-    if (aid > 0xffff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->AddNeighboursTimingElementUnit(aid, *((PyNs3Time *) last_beacon)->obj, *((PyNs3Time *) beacon_interval)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIeBeaconTiming_ElementId(PyNs3Dot11sIeBeaconTiming *self)
-{
-    PyObject *py_retval;
-    ns3::WifiInformationElementId retval;
-    
-    retval = self->obj->ElementId();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3Dot11sIeBeaconTiming__copy__(PyNs3Dot11sIeBeaconTiming *self)
 {
@@ -3515,14 +3515,14 @@ _wrap_PyNs3Dot11sIeBeaconTiming__copy__(PyNs3Dot11sIeBeaconTiming *self)
 }
 
 static PyMethodDef PyNs3Dot11sIeBeaconTiming_methods[] = {
-    {(char *) "DelNeighboursTimingElementUnit", (PyCFunction) _wrap_PyNs3Dot11sIeBeaconTiming_DelNeighboursTimingElementUnit, METH_KEYWORDS|METH_VARARGS, "DelNeighboursTimingElementUnit(aid, last_beacon, beacon_interval)\n\ntype: aid: uint16_t\ntype: last_beacon: ns3::Time\ntype: beacon_interval: ns3::Time" },
-    {(char *) "ClearTimingElement", (PyCFunction) _wrap_PyNs3Dot11sIeBeaconTiming_ClearTimingElement, METH_NOARGS, "ClearTimingElement()\n\n" },
-    {(char *) "GetNeighboursTimingElementsList", (PyCFunction) _wrap_PyNs3Dot11sIeBeaconTiming_GetNeighboursTimingElementsList, METH_NOARGS, "GetNeighboursTimingElementsList()\n\n" },
-    {(char *) "DeserializeInformationField", (PyCFunction) _wrap_PyNs3Dot11sIeBeaconTiming_DeserializeInformationField, METH_KEYWORDS|METH_VARARGS, "DeserializeInformationField(i, length)\n\ntype: i: ns3::Buffer::Iterator\ntype: length: uint8_t" },
-    {(char *) "GetInformationFieldSize", (PyCFunction) _wrap_PyNs3Dot11sIeBeaconTiming_GetInformationFieldSize, METH_NOARGS, "GetInformationFieldSize()\n\n" },
-    {(char *) "SerializeInformationField", (PyCFunction) _wrap_PyNs3Dot11sIeBeaconTiming_SerializeInformationField, METH_KEYWORDS|METH_VARARGS, "SerializeInformationField(i)\n\ntype: i: ns3::Buffer::Iterator" },
     {(char *) "AddNeighboursTimingElementUnit", (PyCFunction) _wrap_PyNs3Dot11sIeBeaconTiming_AddNeighboursTimingElementUnit, METH_KEYWORDS|METH_VARARGS, "AddNeighboursTimingElementUnit(aid, last_beacon, beacon_interval)\n\ntype: aid: uint16_t\ntype: last_beacon: ns3::Time\ntype: beacon_interval: ns3::Time" },
+    {(char *) "ClearTimingElement", (PyCFunction) _wrap_PyNs3Dot11sIeBeaconTiming_ClearTimingElement, METH_NOARGS, "ClearTimingElement()\n\n" },
+    {(char *) "DelNeighboursTimingElementUnit", (PyCFunction) _wrap_PyNs3Dot11sIeBeaconTiming_DelNeighboursTimingElementUnit, METH_KEYWORDS|METH_VARARGS, "DelNeighboursTimingElementUnit(aid, last_beacon, beacon_interval)\n\ntype: aid: uint16_t\ntype: last_beacon: ns3::Time\ntype: beacon_interval: ns3::Time" },
+    {(char *) "DeserializeInformationField", (PyCFunction) _wrap_PyNs3Dot11sIeBeaconTiming_DeserializeInformationField, METH_KEYWORDS|METH_VARARGS, "DeserializeInformationField(i, length)\n\ntype: i: ns3::Buffer::Iterator\ntype: length: uint8_t" },
     {(char *) "ElementId", (PyCFunction) _wrap_PyNs3Dot11sIeBeaconTiming_ElementId, METH_NOARGS, "ElementId()\n\n" },
+    {(char *) "GetInformationFieldSize", (PyCFunction) _wrap_PyNs3Dot11sIeBeaconTiming_GetInformationFieldSize, METH_NOARGS, "GetInformationFieldSize()\n\n" },
+    {(char *) "GetNeighboursTimingElementsList", (PyCFunction) _wrap_PyNs3Dot11sIeBeaconTiming_GetNeighboursTimingElementsList, METH_NOARGS, "GetNeighboursTimingElementsList()\n\n" },
+    {(char *) "SerializeInformationField", (PyCFunction) _wrap_PyNs3Dot11sIeBeaconTiming_SerializeInformationField, METH_KEYWORDS|METH_VARARGS, "SerializeInformationField(i)\n\ntype: i: ns3::Buffer::Iterator" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3Dot11sIeBeaconTiming__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -3723,6 +3723,18 @@ _wrap_PyNs3Dot11sIeBeaconTimingUnit_GetAid(PyNs3Dot11sIeBeaconTimingUnit *self)
 
 
 PyObject *
+_wrap_PyNs3Dot11sIeBeaconTimingUnit_GetBeaconInterval(PyNs3Dot11sIeBeaconTimingUnit *self)
+{
+    PyObject *py_retval;
+    uint16_t retval;
+    
+    retval = self->obj->GetBeaconInterval();
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3Dot11sIeBeaconTimingUnit_GetLastBeacon(PyNs3Dot11sIeBeaconTimingUnit *self)
 {
     PyObject *py_retval;
@@ -3730,6 +3742,27 @@ _wrap_PyNs3Dot11sIeBeaconTimingUnit_GetLastBeacon(PyNs3Dot11sIeBeaconTimingUnit 
     
     retval = self->obj->GetLastBeacon();
     py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIeBeaconTimingUnit_SetAid(PyNs3Dot11sIeBeaconTimingUnit *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int aid;
+    const char *keywords[] = {"aid", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &aid)) {
+        return NULL;
+    }
+    if (aid > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SetAid(aid);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -3756,18 +3789,6 @@ _wrap_PyNs3Dot11sIeBeaconTimingUnit_SetBeaconInterval(PyNs3Dot11sIeBeaconTimingU
 
 
 PyObject *
-_wrap_PyNs3Dot11sIeBeaconTimingUnit_GetBeaconInterval(PyNs3Dot11sIeBeaconTimingUnit *self)
-{
-    PyObject *py_retval;
-    uint16_t retval;
-    
-    retval = self->obj->GetBeaconInterval();
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3Dot11sIeBeaconTimingUnit_SetLastBeacon(PyNs3Dot11sIeBeaconTimingUnit *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -3782,27 +3803,6 @@ _wrap_PyNs3Dot11sIeBeaconTimingUnit_SetLastBeacon(PyNs3Dot11sIeBeaconTimingUnit 
         return NULL;
     }
     self->obj->SetLastBeacon(lastBeacon);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIeBeaconTimingUnit_SetAid(PyNs3Dot11sIeBeaconTimingUnit *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int aid;
-    const char *keywords[] = {"aid", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &aid)) {
-        return NULL;
-    }
-    if (aid > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SetAid(aid);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -3824,11 +3824,11 @@ _wrap_PyNs3Dot11sIeBeaconTimingUnit__copy__(PyNs3Dot11sIeBeaconTimingUnit *self)
 
 static PyMethodDef PyNs3Dot11sIeBeaconTimingUnit_methods[] = {
     {(char *) "GetAid", (PyCFunction) _wrap_PyNs3Dot11sIeBeaconTimingUnit_GetAid, METH_NOARGS, "GetAid()\n\n" },
-    {(char *) "GetLastBeacon", (PyCFunction) _wrap_PyNs3Dot11sIeBeaconTimingUnit_GetLastBeacon, METH_NOARGS, "GetLastBeacon()\n\n" },
-    {(char *) "SetBeaconInterval", (PyCFunction) _wrap_PyNs3Dot11sIeBeaconTimingUnit_SetBeaconInterval, METH_KEYWORDS|METH_VARARGS, "SetBeaconInterval(beaconInterval)\n\ntype: beaconInterval: uint16_t" },
     {(char *) "GetBeaconInterval", (PyCFunction) _wrap_PyNs3Dot11sIeBeaconTimingUnit_GetBeaconInterval, METH_NOARGS, "GetBeaconInterval()\n\n" },
-    {(char *) "SetLastBeacon", (PyCFunction) _wrap_PyNs3Dot11sIeBeaconTimingUnit_SetLastBeacon, METH_KEYWORDS|METH_VARARGS, "SetLastBeacon(lastBeacon)\n\ntype: lastBeacon: uint16_t" },
+    {(char *) "GetLastBeacon", (PyCFunction) _wrap_PyNs3Dot11sIeBeaconTimingUnit_GetLastBeacon, METH_NOARGS, "GetLastBeacon()\n\n" },
     {(char *) "SetAid", (PyCFunction) _wrap_PyNs3Dot11sIeBeaconTimingUnit_SetAid, METH_KEYWORDS|METH_VARARGS, "SetAid(aid)\n\ntype: aid: uint8_t" },
+    {(char *) "SetBeaconInterval", (PyCFunction) _wrap_PyNs3Dot11sIeBeaconTimingUnit_SetBeaconInterval, METH_KEYWORDS|METH_VARARGS, "SetBeaconInterval(beaconInterval)\n\ntype: beaconInterval: uint16_t" },
+    {(char *) "SetLastBeacon", (PyCFunction) _wrap_PyNs3Dot11sIeBeaconTimingUnit_SetLastBeacon, METH_KEYWORDS|METH_VARARGS, "SetLastBeacon(lastBeacon)\n\ntype: lastBeacon: uint16_t" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3Dot11sIeBeaconTimingUnit__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -4011,6 +4011,121 @@ int _wrap_PyNs3Dot11sIeConfiguration__tp_init(PyNs3Dot11sIeConfiguration *self, 
 
 
 PyObject *
+_wrap_PyNs3Dot11sIeConfiguration_DeserializeInformationField(PyNs3Dot11sIeConfiguration *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    PyNs3BufferIterator *i;
+    int length;
+    const char *keywords[] = {"i", "length", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!i", (char **) keywords, &PyNs3BufferIterator_Type, &i, &length)) {
+        return NULL;
+    }
+    if (length > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    retval = self->obj->DeserializeInformationField(*((PyNs3BufferIterator *) i)->obj, length);
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIeConfiguration_ElementId(PyNs3Dot11sIeConfiguration *self)
+{
+    PyObject *py_retval;
+    ns3::WifiInformationElementId retval;
+    
+    retval = self->obj->ElementId();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIeConfiguration_GetInformationFieldSize(PyNs3Dot11sIeConfiguration *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    
+    retval = self->obj->GetInformationFieldSize();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIeConfiguration_GetNeighborCount(PyNs3Dot11sIeConfiguration *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    
+    retval = self->obj->GetNeighborCount();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIeConfiguration_IsAirtime(PyNs3Dot11sIeConfiguration *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->IsAirtime();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIeConfiguration_IsHWMP(PyNs3Dot11sIeConfiguration *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->IsHWMP();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIeConfiguration_MeshCapability(PyNs3Dot11sIeConfiguration *self)
+{
+    PyObject *py_retval;
+    PyNs3Dot11sDot11sMeshCapability *py_Dot11sMeshCapability;
+    
+    ns3::dot11s::Dot11sMeshCapability const & retval = self->obj->MeshCapability();
+    py_Dot11sMeshCapability = PyObject_New(PyNs3Dot11sDot11sMeshCapability, &PyNs3Dot11sDot11sMeshCapability_Type);
+    py_Dot11sMeshCapability->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Dot11sMeshCapability->obj = new ns3::dot11s::Dot11sMeshCapability(retval);
+    PyNs3Dot11sDot11sMeshCapability_wrapper_registry[(void *) py_Dot11sMeshCapability->obj] = (PyObject *) py_Dot11sMeshCapability;
+    py_retval = Py_BuildValue((char *) "N", py_Dot11sMeshCapability);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIeConfiguration_SerializeInformationField(PyNs3Dot11sIeConfiguration *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3BufferIterator *i;
+    const char *keywords[] = {"i", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &i)) {
+        return NULL;
+    }
+    self->obj->SerializeInformationField(*((PyNs3BufferIterator *) i)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3Dot11sIeConfiguration_SetMetric(PyNs3Dot11sIeConfiguration *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -4049,92 +4164,6 @@ _wrap_PyNs3Dot11sIeConfiguration_SetNeighborCount(PyNs3Dot11sIeConfiguration *se
 
 
 PyObject *
-_wrap_PyNs3Dot11sIeConfiguration_DeserializeInformationField(PyNs3Dot11sIeConfiguration *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    PyNs3BufferIterator *i;
-    int length;
-    const char *keywords[] = {"i", "length", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!i", (char **) keywords, &PyNs3BufferIterator_Type, &i, &length)) {
-        return NULL;
-    }
-    if (length > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    retval = self->obj->DeserializeInformationField(*((PyNs3BufferIterator *) i)->obj, length);
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIeConfiguration_GetInformationFieldSize(PyNs3Dot11sIeConfiguration *self)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    
-    retval = self->obj->GetInformationFieldSize();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIeConfiguration_MeshCapability(PyNs3Dot11sIeConfiguration *self)
-{
-    PyObject *py_retval;
-    PyNs3Dot11sDot11sMeshCapability *py_Dot11sMeshCapability;
-    
-    ns3::dot11s::Dot11sMeshCapability const & retval = self->obj->MeshCapability();
-    py_Dot11sMeshCapability = PyObject_New(PyNs3Dot11sDot11sMeshCapability, &PyNs3Dot11sDot11sMeshCapability_Type);
-    py_Dot11sMeshCapability->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Dot11sMeshCapability->obj = new ns3::dot11s::Dot11sMeshCapability(retval);
-    PyNs3Dot11sDot11sMeshCapability_wrapper_registry[(void *) py_Dot11sMeshCapability->obj] = (PyObject *) py_Dot11sMeshCapability;
-    py_retval = Py_BuildValue((char *) "N", py_Dot11sMeshCapability);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIeConfiguration_ElementId(PyNs3Dot11sIeConfiguration *self)
-{
-    PyObject *py_retval;
-    ns3::WifiInformationElementId retval;
-    
-    retval = self->obj->ElementId();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIeConfiguration_IsAirtime(PyNs3Dot11sIeConfiguration *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->IsAirtime();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIeConfiguration_GetNeighborCount(PyNs3Dot11sIeConfiguration *self)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    
-    retval = self->obj->GetNeighborCount();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3Dot11sIeConfiguration_SetRouting(PyNs3Dot11sIeConfiguration *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -4145,35 +4174,6 @@ _wrap_PyNs3Dot11sIeConfiguration_SetRouting(PyNs3Dot11sIeConfiguration *self, Py
         return NULL;
     }
     self->obj->SetRouting(routingId);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIeConfiguration_IsHWMP(PyNs3Dot11sIeConfiguration *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->IsHWMP();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIeConfiguration_SerializeInformationField(PyNs3Dot11sIeConfiguration *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3BufferIterator *i;
-    const char *keywords[] = {"i", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &i)) {
-        return NULL;
-    }
-    self->obj->SerializeInformationField(*((PyNs3BufferIterator *) i)->obj);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -4194,17 +4194,17 @@ _wrap_PyNs3Dot11sIeConfiguration__copy__(PyNs3Dot11sIeConfiguration *self)
 }
 
 static PyMethodDef PyNs3Dot11sIeConfiguration_methods[] = {
+    {(char *) "DeserializeInformationField", (PyCFunction) _wrap_PyNs3Dot11sIeConfiguration_DeserializeInformationField, METH_KEYWORDS|METH_VARARGS, "DeserializeInformationField(i, length)\n\ntype: i: ns3::Buffer::Iterator\ntype: length: uint8_t" },
+    {(char *) "ElementId", (PyCFunction) _wrap_PyNs3Dot11sIeConfiguration_ElementId, METH_NOARGS, "ElementId()\n\n" },
+    {(char *) "GetInformationFieldSize", (PyCFunction) _wrap_PyNs3Dot11sIeConfiguration_GetInformationFieldSize, METH_NOARGS, "GetInformationFieldSize()\n\n" },
+    {(char *) "GetNeighborCount", (PyCFunction) _wrap_PyNs3Dot11sIeConfiguration_GetNeighborCount, METH_NOARGS, "GetNeighborCount()\n\n" },
+    {(char *) "IsAirtime", (PyCFunction) _wrap_PyNs3Dot11sIeConfiguration_IsAirtime, METH_NOARGS, "IsAirtime()\n\n" },
+    {(char *) "IsHWMP", (PyCFunction) _wrap_PyNs3Dot11sIeConfiguration_IsHWMP, METH_NOARGS, "IsHWMP()\n\n" },
+    {(char *) "MeshCapability", (PyCFunction) _wrap_PyNs3Dot11sIeConfiguration_MeshCapability, METH_NOARGS, "MeshCapability()\n\n" },
+    {(char *) "SerializeInformationField", (PyCFunction) _wrap_PyNs3Dot11sIeConfiguration_SerializeInformationField, METH_KEYWORDS|METH_VARARGS, "SerializeInformationField(i)\n\ntype: i: ns3::Buffer::Iterator" },
     {(char *) "SetMetric", (PyCFunction) _wrap_PyNs3Dot11sIeConfiguration_SetMetric, METH_KEYWORDS|METH_VARARGS, "SetMetric(metricId)\n\ntype: metricId: ns3::dot11s::dot11sPathSelectionMetric" },
     {(char *) "SetNeighborCount", (PyCFunction) _wrap_PyNs3Dot11sIeConfiguration_SetNeighborCount, METH_KEYWORDS|METH_VARARGS, "SetNeighborCount(neighbors)\n\ntype: neighbors: uint8_t" },
-    {(char *) "DeserializeInformationField", (PyCFunction) _wrap_PyNs3Dot11sIeConfiguration_DeserializeInformationField, METH_KEYWORDS|METH_VARARGS, "DeserializeInformationField(i, length)\n\ntype: i: ns3::Buffer::Iterator\ntype: length: uint8_t" },
-    {(char *) "GetInformationFieldSize", (PyCFunction) _wrap_PyNs3Dot11sIeConfiguration_GetInformationFieldSize, METH_NOARGS, "GetInformationFieldSize()\n\n" },
-    {(char *) "MeshCapability", (PyCFunction) _wrap_PyNs3Dot11sIeConfiguration_MeshCapability, METH_NOARGS, "MeshCapability()\n\n" },
-    {(char *) "ElementId", (PyCFunction) _wrap_PyNs3Dot11sIeConfiguration_ElementId, METH_NOARGS, "ElementId()\n\n" },
-    {(char *) "IsAirtime", (PyCFunction) _wrap_PyNs3Dot11sIeConfiguration_IsAirtime, METH_NOARGS, "IsAirtime()\n\n" },
-    {(char *) "GetNeighborCount", (PyCFunction) _wrap_PyNs3Dot11sIeConfiguration_GetNeighborCount, METH_NOARGS, "GetNeighborCount()\n\n" },
     {(char *) "SetRouting", (PyCFunction) _wrap_PyNs3Dot11sIeConfiguration_SetRouting, METH_KEYWORDS|METH_VARARGS, "SetRouting(routingId)\n\ntype: routingId: ns3::dot11s::dot11sPathSelectionProtocol" },
-    {(char *) "IsHWMP", (PyCFunction) _wrap_PyNs3Dot11sIeConfiguration_IsHWMP, METH_NOARGS, "IsHWMP()\n\n" },
-    {(char *) "SerializeInformationField", (PyCFunction) _wrap_PyNs3Dot11sIeConfiguration_SerializeInformationField, METH_KEYWORDS|METH_VARARGS, "SerializeInformationField(i)\n\ntype: i: ns3::Buffer::Iterator" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3Dot11sIeConfiguration__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -4426,23 +4426,6 @@ int _wrap_PyNs3Dot11sIeLinkMetricReport__tp_init(PyNs3Dot11sIeLinkMetricReport *
 
 
 PyObject *
-_wrap_PyNs3Dot11sIeLinkMetricReport_SetMetric(PyNs3Dot11sIeLinkMetricReport *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int metric;
-    const char *keywords[] = {"metric", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &metric)) {
-        return NULL;
-    }
-    self->obj->SetMetric(metric);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3Dot11sIeLinkMetricReport_DeserializeInformationField(PyNs3Dot11sIeLinkMetricReport *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -4465,13 +4448,13 @@ _wrap_PyNs3Dot11sIeLinkMetricReport_DeserializeInformationField(PyNs3Dot11sIeLin
 
 
 PyObject *
-_wrap_PyNs3Dot11sIeLinkMetricReport_GetMetric(PyNs3Dot11sIeLinkMetricReport *self)
+_wrap_PyNs3Dot11sIeLinkMetricReport_ElementId(PyNs3Dot11sIeLinkMetricReport *self)
 {
     PyObject *py_retval;
-    uint32_t retval;
+    ns3::WifiInformationElementId retval;
     
-    retval = self->obj->GetMetric();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    retval = self->obj->ElementId();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
     return py_retval;
 }
 
@@ -4484,6 +4467,18 @@ _wrap_PyNs3Dot11sIeLinkMetricReport_GetInformationFieldSize(PyNs3Dot11sIeLinkMet
     
     retval = self->obj->GetInformationFieldSize();
     py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIeLinkMetricReport_GetMetric(PyNs3Dot11sIeLinkMetricReport *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetMetric();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
 
@@ -4506,13 +4501,18 @@ _wrap_PyNs3Dot11sIeLinkMetricReport_SerializeInformationField(PyNs3Dot11sIeLinkM
 
 
 PyObject *
-_wrap_PyNs3Dot11sIeLinkMetricReport_ElementId(PyNs3Dot11sIeLinkMetricReport *self)
+_wrap_PyNs3Dot11sIeLinkMetricReport_SetMetric(PyNs3Dot11sIeLinkMetricReport *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    ns3::WifiInformationElementId retval;
+    unsigned int metric;
+    const char *keywords[] = {"metric", NULL};
     
-    retval = self->obj->ElementId();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &metric)) {
+        return NULL;
+    }
+    self->obj->SetMetric(metric);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -4531,12 +4531,12 @@ _wrap_PyNs3Dot11sIeLinkMetricReport__copy__(PyNs3Dot11sIeLinkMetricReport *self)
 }
 
 static PyMethodDef PyNs3Dot11sIeLinkMetricReport_methods[] = {
-    {(char *) "SetMetric", (PyCFunction) _wrap_PyNs3Dot11sIeLinkMetricReport_SetMetric, METH_KEYWORDS|METH_VARARGS, "SetMetric(metric)\n\ntype: metric: uint32_t" },
     {(char *) "DeserializeInformationField", (PyCFunction) _wrap_PyNs3Dot11sIeLinkMetricReport_DeserializeInformationField, METH_KEYWORDS|METH_VARARGS, "DeserializeInformationField(start, length)\n\ntype: start: ns3::Buffer::Iterator\ntype: length: uint8_t" },
-    {(char *) "GetMetric", (PyCFunction) _wrap_PyNs3Dot11sIeLinkMetricReport_GetMetric, METH_NOARGS, "GetMetric()\n\n" },
-    {(char *) "GetInformationFieldSize", (PyCFunction) _wrap_PyNs3Dot11sIeLinkMetricReport_GetInformationFieldSize, METH_NOARGS, "GetInformationFieldSize()\n\n" },
-    {(char *) "SerializeInformationField", (PyCFunction) _wrap_PyNs3Dot11sIeLinkMetricReport_SerializeInformationField, METH_KEYWORDS|METH_VARARGS, "SerializeInformationField(i)\n\ntype: i: ns3::Buffer::Iterator" },
     {(char *) "ElementId", (PyCFunction) _wrap_PyNs3Dot11sIeLinkMetricReport_ElementId, METH_NOARGS, "ElementId()\n\n" },
+    {(char *) "GetInformationFieldSize", (PyCFunction) _wrap_PyNs3Dot11sIeLinkMetricReport_GetInformationFieldSize, METH_NOARGS, "GetInformationFieldSize()\n\n" },
+    {(char *) "GetMetric", (PyCFunction) _wrap_PyNs3Dot11sIeLinkMetricReport_GetMetric, METH_NOARGS, "GetMetric()\n\n" },
+    {(char *) "SerializeInformationField", (PyCFunction) _wrap_PyNs3Dot11sIeLinkMetricReport_SerializeInformationField, METH_KEYWORDS|METH_VARARGS, "SerializeInformationField(i)\n\ntype: i: ns3::Buffer::Iterator" },
+    {(char *) "SetMetric", (PyCFunction) _wrap_PyNs3Dot11sIeLinkMetricReport_SetMetric, METH_KEYWORDS|METH_VARARGS, "SetMetric(metric)\n\ntype: metric: uint32_t" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3Dot11sIeLinkMetricReport__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -4769,18 +4769,6 @@ int _wrap_PyNs3Dot11sIeMeshId__tp_init(PyNs3Dot11sIeMeshId *self, PyObject *args
 
 
 PyObject *
-_wrap_PyNs3Dot11sIeMeshId_IsBroadcast(PyNs3Dot11sIeMeshId *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->IsBroadcast();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3Dot11sIeMeshId_DeserializeInformationField(PyNs3Dot11sIeMeshId *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -4803,6 +4791,18 @@ _wrap_PyNs3Dot11sIeMeshId_DeserializeInformationField(PyNs3Dot11sIeMeshId *self,
 
 
 PyObject *
+_wrap_PyNs3Dot11sIeMeshId_ElementId(PyNs3Dot11sIeMeshId *self)
+{
+    PyObject *py_retval;
+    ns3::WifiInformationElementId retval;
+    
+    retval = self->obj->ElementId();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3Dot11sIeMeshId_GetInformationFieldSize(PyNs3Dot11sIeMeshId *self)
 {
     PyObject *py_retval;
@@ -4810,6 +4810,35 @@ _wrap_PyNs3Dot11sIeMeshId_GetInformationFieldSize(PyNs3Dot11sIeMeshId *self)
     
     retval = self->obj->GetInformationFieldSize();
     py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIeMeshId_IsBroadcast(PyNs3Dot11sIeMeshId *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->IsBroadcast();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIeMeshId_IsEqual(PyNs3Dot11sIeMeshId *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3Dot11sIeMeshId *o;
+    const char *keywords[] = {"o", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Dot11sIeMeshId_Type, &o)) {
+        return NULL;
+    }
+    retval = self->obj->IsEqual(*((PyNs3Dot11sIeMeshId *) o)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
@@ -4843,35 +4872,6 @@ _wrap_PyNs3Dot11sIeMeshId_SerializeInformationField(PyNs3Dot11sIeMeshId *self, P
 }
 
 
-PyObject *
-_wrap_PyNs3Dot11sIeMeshId_IsEqual(PyNs3Dot11sIeMeshId *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3Dot11sIeMeshId *o;
-    const char *keywords[] = {"o", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Dot11sIeMeshId_Type, &o)) {
-        return NULL;
-    }
-    retval = self->obj->IsEqual(*((PyNs3Dot11sIeMeshId *) o)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIeMeshId_ElementId(PyNs3Dot11sIeMeshId *self)
-{
-    PyObject *py_retval;
-    ns3::WifiInformationElementId retval;
-    
-    retval = self->obj->ElementId();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3Dot11sIeMeshId__copy__(PyNs3Dot11sIeMeshId *self)
 {
@@ -4886,13 +4886,13 @@ _wrap_PyNs3Dot11sIeMeshId__copy__(PyNs3Dot11sIeMeshId *self)
 }
 
 static PyMethodDef PyNs3Dot11sIeMeshId_methods[] = {
-    {(char *) "IsBroadcast", (PyCFunction) _wrap_PyNs3Dot11sIeMeshId_IsBroadcast, METH_NOARGS, "IsBroadcast()\n\n" },
     {(char *) "DeserializeInformationField", (PyCFunction) _wrap_PyNs3Dot11sIeMeshId_DeserializeInformationField, METH_KEYWORDS|METH_VARARGS, "DeserializeInformationField(start, length)\n\ntype: start: ns3::Buffer::Iterator\ntype: length: uint8_t" },
+    {(char *) "ElementId", (PyCFunction) _wrap_PyNs3Dot11sIeMeshId_ElementId, METH_NOARGS, "ElementId()\n\n" },
     {(char *) "GetInformationFieldSize", (PyCFunction) _wrap_PyNs3Dot11sIeMeshId_GetInformationFieldSize, METH_NOARGS, "GetInformationFieldSize()\n\n" },
+    {(char *) "IsBroadcast", (PyCFunction) _wrap_PyNs3Dot11sIeMeshId_IsBroadcast, METH_NOARGS, "IsBroadcast()\n\n" },
+    {(char *) "IsEqual", (PyCFunction) _wrap_PyNs3Dot11sIeMeshId_IsEqual, METH_KEYWORDS|METH_VARARGS, "IsEqual(o)\n\ntype: o: ns3::dot11s::IeMeshId const &" },
     {(char *) "PeekString", (PyCFunction) _wrap_PyNs3Dot11sIeMeshId_PeekString, METH_NOARGS, "PeekString()\n\n" },
     {(char *) "SerializeInformationField", (PyCFunction) _wrap_PyNs3Dot11sIeMeshId_SerializeInformationField, METH_KEYWORDS|METH_VARARGS, "SerializeInformationField(i)\n\ntype: i: ns3::Buffer::Iterator" },
-    {(char *) "IsEqual", (PyCFunction) _wrap_PyNs3Dot11sIeMeshId_IsEqual, METH_KEYWORDS|METH_VARARGS, "IsEqual(o)\n\ntype: o: ns3::dot11s::IeMeshId const &" },
-    {(char *) "ElementId", (PyCFunction) _wrap_PyNs3Dot11sIeMeshId_ElementId, METH_NOARGS, "ElementId()\n\n" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3Dot11sIeMeshId__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -5232,40 +5232,6 @@ int _wrap_PyNs3Dot11sIeMeshIdValue__tp_init(PyNs3Dot11sIeMeshIdValue *self, PyOb
 
 
 PyObject *
-_wrap_PyNs3Dot11sIeMeshIdValue_Set(PyNs3Dot11sIeMeshIdValue *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Dot11sIeMeshId *value;
-    const char *keywords[] = {"value", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Dot11sIeMeshId_Type, &value)) {
-        return NULL;
-    }
-    self->obj->Set(*((PyNs3Dot11sIeMeshId *) value)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIeMeshIdValue_Get(PyNs3Dot11sIeMeshIdValue *self)
-{
-    PyObject *py_retval;
-    PyNs3Dot11sIeMeshId *py_IeMeshId;
-    
-    ns3::dot11s::IeMeshId retval = self->obj->Get();
-    py_IeMeshId = PyObject_New(PyNs3Dot11sIeMeshId, &PyNs3Dot11sIeMeshId_Type);
-    
-    py_IeMeshId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_IeMeshId->obj = new ns3::dot11s::IeMeshId(retval);
-    PyNs3Empty_wrapper_registry[(void *) py_IeMeshId->obj] = (PyObject *) py_IeMeshId;
-    py_retval = Py_BuildValue((char *) "N", py_IeMeshId);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3Dot11sIeMeshIdValue_Copy(PyNs3Dot11sIeMeshIdValue *self)
 {
     PyObject *py_retval;
@@ -5302,25 +5268,6 @@ _wrap_PyNs3Dot11sIeMeshIdValue_Copy(PyNs3Dot11sIeMeshIdValue *self)
 
 
 PyObject *
-_wrap_PyNs3Dot11sIeMeshIdValue_SerializeToString(PyNs3Dot11sIeMeshIdValue *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    std::string retval;
-    PyNs3AttributeChecker *checker;
-    ns3::AttributeChecker *checker_ptr;
-    const char *keywords[] = {"checker", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3AttributeChecker_Type, &checker)) {
-        return NULL;
-    }
-    checker_ptr = (checker ? checker->obj : NULL);
-    retval = self->obj->SerializeToString(ns3::Ptr< ns3::AttributeChecker  > (checker_ptr));
-    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3Dot11sIeMeshIdValue_DeserializeFromString(PyNs3Dot11sIeMeshIdValue *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -5341,6 +5288,59 @@ _wrap_PyNs3Dot11sIeMeshIdValue_DeserializeFromString(PyNs3Dot11sIeMeshIdValue *s
 }
 
 
+PyObject *
+_wrap_PyNs3Dot11sIeMeshIdValue_Get(PyNs3Dot11sIeMeshIdValue *self)
+{
+    PyObject *py_retval;
+    PyNs3Dot11sIeMeshId *py_IeMeshId;
+    
+    ns3::dot11s::IeMeshId retval = self->obj->Get();
+    py_IeMeshId = PyObject_New(PyNs3Dot11sIeMeshId, &PyNs3Dot11sIeMeshId_Type);
+    
+    py_IeMeshId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_IeMeshId->obj = new ns3::dot11s::IeMeshId(retval);
+    PyNs3Empty_wrapper_registry[(void *) py_IeMeshId->obj] = (PyObject *) py_IeMeshId;
+    py_retval = Py_BuildValue((char *) "N", py_IeMeshId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIeMeshIdValue_SerializeToString(PyNs3Dot11sIeMeshIdValue *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    std::string retval;
+    PyNs3AttributeChecker *checker;
+    ns3::AttributeChecker *checker_ptr;
+    const char *keywords[] = {"checker", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3AttributeChecker_Type, &checker)) {
+        return NULL;
+    }
+    checker_ptr = (checker ? checker->obj : NULL);
+    retval = self->obj->SerializeToString(ns3::Ptr< ns3::AttributeChecker  > (checker_ptr));
+    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIeMeshIdValue_Set(PyNs3Dot11sIeMeshIdValue *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Dot11sIeMeshId *value;
+    const char *keywords[] = {"value", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Dot11sIeMeshId_Type, &value)) {
+        return NULL;
+    }
+    self->obj->Set(*((PyNs3Dot11sIeMeshId *) value)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
 static PyObject*
 _wrap_PyNs3Dot11sIeMeshIdValue__copy__(PyNs3Dot11sIeMeshIdValue *self)
 {
@@ -5355,11 +5355,11 @@ _wrap_PyNs3Dot11sIeMeshIdValue__copy__(PyNs3Dot11sIeMeshIdValue *self)
 }
 
 static PyMethodDef PyNs3Dot11sIeMeshIdValue_methods[] = {
-    {(char *) "Set", (PyCFunction) _wrap_PyNs3Dot11sIeMeshIdValue_Set, METH_KEYWORDS|METH_VARARGS, "Set(value)\n\ntype: value: ns3::dot11s::IeMeshId const &" },
-    {(char *) "Get", (PyCFunction) _wrap_PyNs3Dot11sIeMeshIdValue_Get, METH_NOARGS, "Get()\n\n" },
     {(char *) "Copy", (PyCFunction) _wrap_PyNs3Dot11sIeMeshIdValue_Copy, METH_NOARGS, "Copy()\n\n" },
-    {(char *) "SerializeToString", (PyCFunction) _wrap_PyNs3Dot11sIeMeshIdValue_SerializeToString, METH_KEYWORDS|METH_VARARGS, "SerializeToString(checker)\n\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
     {(char *) "DeserializeFromString", (PyCFunction) _wrap_PyNs3Dot11sIeMeshIdValue_DeserializeFromString, METH_KEYWORDS|METH_VARARGS, "DeserializeFromString(value, checker)\n\ntype: value: std::string\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
+    {(char *) "Get", (PyCFunction) _wrap_PyNs3Dot11sIeMeshIdValue_Get, METH_NOARGS, "Get()\n\n" },
+    {(char *) "SerializeToString", (PyCFunction) _wrap_PyNs3Dot11sIeMeshIdValue_SerializeToString, METH_KEYWORDS|METH_VARARGS, "SerializeToString(checker)\n\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
+    {(char *) "Set", (PyCFunction) _wrap_PyNs3Dot11sIeMeshIdValue_Set, METH_KEYWORDS|METH_VARARGS, "Set(value)\n\ntype: value: ns3::dot11s::IeMeshId const &" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3Dot11sIeMeshIdValue__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -5537,6 +5537,117 @@ int _wrap_PyNs3Dot11sIePeerManagement__tp_init(PyNs3Dot11sIePeerManagement *self
 
 
 PyObject *
+_wrap_PyNs3Dot11sIePeerManagement_DeserializeInformationField(PyNs3Dot11sIePeerManagement *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    PyNs3BufferIterator *i;
+    int length;
+    const char *keywords[] = {"i", "length", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!i", (char **) keywords, &PyNs3BufferIterator_Type, &i, &length)) {
+        return NULL;
+    }
+    if (length > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    retval = self->obj->DeserializeInformationField(*((PyNs3BufferIterator *) i)->obj, length);
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIePeerManagement_ElementId(PyNs3Dot11sIePeerManagement *self)
+{
+    PyObject *py_retval;
+    ns3::WifiInformationElementId retval;
+    
+    retval = self->obj->ElementId();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIePeerManagement_GetInformationFieldSize(PyNs3Dot11sIePeerManagement *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    
+    retval = self->obj->GetInformationFieldSize();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIePeerManagement_GetLocalLinkId(PyNs3Dot11sIePeerManagement *self)
+{
+    PyObject *py_retval;
+    uint16_t retval;
+    
+    retval = self->obj->GetLocalLinkId();
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIePeerManagement_GetPeerLinkId(PyNs3Dot11sIePeerManagement *self)
+{
+    PyObject *py_retval;
+    uint16_t retval;
+    
+    retval = self->obj->GetPeerLinkId();
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIePeerManagement_GetReasonCode(PyNs3Dot11sIePeerManagement *self)
+{
+    PyObject *py_retval;
+    ns3::dot11s::PmpReasonCode retval;
+    
+    retval = self->obj->GetReasonCode();
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIePeerManagement_GetSubtype(PyNs3Dot11sIePeerManagement *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    
+    retval = self->obj->GetSubtype();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIePeerManagement_SerializeInformationField(PyNs3Dot11sIePeerManagement *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3BufferIterator *i;
+    const char *keywords[] = {"i", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &i)) {
+        return NULL;
+    }
+    self->obj->SerializeInformationField(*((PyNs3BufferIterator *) i)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3Dot11sIePeerManagement_SetPeerClose(PyNs3Dot11sIePeerManagement *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -5564,98 +5675,25 @@ _wrap_PyNs3Dot11sIePeerManagement_SetPeerClose(PyNs3Dot11sIePeerManagement *self
 
 
 PyObject *
-_wrap_PyNs3Dot11sIePeerManagement_GetReasonCode(PyNs3Dot11sIePeerManagement *self)
+_wrap_PyNs3Dot11sIePeerManagement_SetPeerConfirm(PyNs3Dot11sIePeerManagement *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    ns3::dot11s::PmpReasonCode retval;
+    int localLinkID;
+    int peerLinkId;
+    const char *keywords[] = {"localLinkID", "peerLinkId", NULL};
     
-    retval = self->obj->GetReasonCode();
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIePeerManagement_DeserializeInformationField(PyNs3Dot11sIePeerManagement *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    PyNs3BufferIterator *i;
-    int length;
-    const char *keywords[] = {"i", "length", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!i", (char **) keywords, &PyNs3BufferIterator_Type, &i, &length)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "ii", (char **) keywords, &localLinkID, &peerLinkId)) {
         return NULL;
     }
-    if (length > 0xff) {
+    if (localLinkID > 0xffff) {
         PyErr_SetString(PyExc_ValueError, "Out of range");
         return NULL;
     }
-    retval = self->obj->DeserializeInformationField(*((PyNs3BufferIterator *) i)->obj, length);
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIePeerManagement_GetPeerLinkId(PyNs3Dot11sIePeerManagement *self)
-{
-    PyObject *py_retval;
-    uint16_t retval;
-    
-    retval = self->obj->GetPeerLinkId();
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIePeerManagement_GetSubtype(PyNs3Dot11sIePeerManagement *self)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    
-    retval = self->obj->GetSubtype();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIePeerManagement_GetInformationFieldSize(PyNs3Dot11sIePeerManagement *self)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    
-    retval = self->obj->GetInformationFieldSize();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIePeerManagement_SubtypeIsConfirm(PyNs3Dot11sIePeerManagement *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->SubtypeIsConfirm();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIePeerManagement_SerializeInformationField(PyNs3Dot11sIePeerManagement *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3BufferIterator *i;
-    const char *keywords[] = {"i", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &i)) {
+    if (peerLinkId > 0xffff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
         return NULL;
     }
-    self->obj->SerializeInformationField(*((PyNs3BufferIterator *) i)->obj);
+    self->obj->SetPeerConfirm(localLinkID, peerLinkId);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -5696,51 +5734,13 @@ _wrap_PyNs3Dot11sIePeerManagement_SubtypeIsClose(PyNs3Dot11sIePeerManagement *se
 
 
 PyObject *
-_wrap_PyNs3Dot11sIePeerManagement_SetPeerConfirm(PyNs3Dot11sIePeerManagement *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3Dot11sIePeerManagement_SubtypeIsConfirm(PyNs3Dot11sIePeerManagement *self)
 {
     PyObject *py_retval;
-    int localLinkID;
-    int peerLinkId;
-    const char *keywords[] = {"localLinkID", "peerLinkId", NULL};
+    bool retval;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "ii", (char **) keywords, &localLinkID, &peerLinkId)) {
-        return NULL;
-    }
-    if (localLinkID > 0xffff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    if (peerLinkId > 0xffff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SetPeerConfirm(localLinkID, peerLinkId);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIePeerManagement_GetLocalLinkId(PyNs3Dot11sIePeerManagement *self)
-{
-    PyObject *py_retval;
-    uint16_t retval;
-    
-    retval = self->obj->GetLocalLinkId();
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIePeerManagement_ElementId(PyNs3Dot11sIePeerManagement *self)
-{
-    PyObject *py_retval;
-    ns3::WifiInformationElementId retval;
-    
-    retval = self->obj->ElementId();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    retval = self->obj->SubtypeIsConfirm();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
@@ -5771,19 +5771,19 @@ _wrap_PyNs3Dot11sIePeerManagement__copy__(PyNs3Dot11sIePeerManagement *self)
 }
 
 static PyMethodDef PyNs3Dot11sIePeerManagement_methods[] = {
-    {(char *) "SetPeerClose", (PyCFunction) _wrap_PyNs3Dot11sIePeerManagement_SetPeerClose, METH_KEYWORDS|METH_VARARGS, "SetPeerClose(localLinkID, peerLinkId, reasonCode)\n\ntype: localLinkID: uint16_t\ntype: peerLinkId: uint16_t\ntype: reasonCode: ns3::dot11s::PmpReasonCode" },
-    {(char *) "GetReasonCode", (PyCFunction) _wrap_PyNs3Dot11sIePeerManagement_GetReasonCode, METH_NOARGS, "GetReasonCode()\n\n" },
     {(char *) "DeserializeInformationField", (PyCFunction) _wrap_PyNs3Dot11sIePeerManagement_DeserializeInformationField, METH_KEYWORDS|METH_VARARGS, "DeserializeInformationField(i, length)\n\ntype: i: ns3::Buffer::Iterator\ntype: length: uint8_t" },
-    {(char *) "GetPeerLinkId", (PyCFunction) _wrap_PyNs3Dot11sIePeerManagement_GetPeerLinkId, METH_NOARGS, "GetPeerLinkId()\n\n" },
-    {(char *) "GetSubtype", (PyCFunction) _wrap_PyNs3Dot11sIePeerManagement_GetSubtype, METH_NOARGS, "GetSubtype()\n\n" },
+    {(char *) "ElementId", (PyCFunction) _wrap_PyNs3Dot11sIePeerManagement_ElementId, METH_NOARGS, "ElementId()\n\n" },
     {(char *) "GetInformationFieldSize", (PyCFunction) _wrap_PyNs3Dot11sIePeerManagement_GetInformationFieldSize, METH_NOARGS, "GetInformationFieldSize()\n\n" },
-    {(char *) "SubtypeIsConfirm", (PyCFunction) _wrap_PyNs3Dot11sIePeerManagement_SubtypeIsConfirm, METH_NOARGS, "SubtypeIsConfirm()\n\n" },
+    {(char *) "GetLocalLinkId", (PyCFunction) _wrap_PyNs3Dot11sIePeerManagement_GetLocalLinkId, METH_NOARGS, "GetLocalLinkId()\n\n" },
+    {(char *) "GetPeerLinkId", (PyCFunction) _wrap_PyNs3Dot11sIePeerManagement_GetPeerLinkId, METH_NOARGS, "GetPeerLinkId()\n\n" },
+    {(char *) "GetReasonCode", (PyCFunction) _wrap_PyNs3Dot11sIePeerManagement_GetReasonCode, METH_NOARGS, "GetReasonCode()\n\n" },
+    {(char *) "GetSubtype", (PyCFunction) _wrap_PyNs3Dot11sIePeerManagement_GetSubtype, METH_NOARGS, "GetSubtype()\n\n" },
     {(char *) "SerializeInformationField", (PyCFunction) _wrap_PyNs3Dot11sIePeerManagement_SerializeInformationField, METH_KEYWORDS|METH_VARARGS, "SerializeInformationField(i)\n\ntype: i: ns3::Buffer::Iterator" },
+    {(char *) "SetPeerClose", (PyCFunction) _wrap_PyNs3Dot11sIePeerManagement_SetPeerClose, METH_KEYWORDS|METH_VARARGS, "SetPeerClose(localLinkID, peerLinkId, reasonCode)\n\ntype: localLinkID: uint16_t\ntype: peerLinkId: uint16_t\ntype: reasonCode: ns3::dot11s::PmpReasonCode" },
+    {(char *) "SetPeerConfirm", (PyCFunction) _wrap_PyNs3Dot11sIePeerManagement_SetPeerConfirm, METH_KEYWORDS|METH_VARARGS, "SetPeerConfirm(localLinkID, peerLinkId)\n\ntype: localLinkID: uint16_t\ntype: peerLinkId: uint16_t" },
     {(char *) "SetPeerOpen", (PyCFunction) _wrap_PyNs3Dot11sIePeerManagement_SetPeerOpen, METH_KEYWORDS|METH_VARARGS, "SetPeerOpen(localLinkId)\n\ntype: localLinkId: uint16_t" },
     {(char *) "SubtypeIsClose", (PyCFunction) _wrap_PyNs3Dot11sIePeerManagement_SubtypeIsClose, METH_NOARGS, "SubtypeIsClose()\n\n" },
-    {(char *) "SetPeerConfirm", (PyCFunction) _wrap_PyNs3Dot11sIePeerManagement_SetPeerConfirm, METH_KEYWORDS|METH_VARARGS, "SetPeerConfirm(localLinkID, peerLinkId)\n\ntype: localLinkID: uint16_t\ntype: peerLinkId: uint16_t" },
-    {(char *) "GetLocalLinkId", (PyCFunction) _wrap_PyNs3Dot11sIePeerManagement_GetLocalLinkId, METH_NOARGS, "GetLocalLinkId()\n\n" },
-    {(char *) "ElementId", (PyCFunction) _wrap_PyNs3Dot11sIePeerManagement_ElementId, METH_NOARGS, "ElementId()\n\n" },
+    {(char *) "SubtypeIsConfirm", (PyCFunction) _wrap_PyNs3Dot11sIePeerManagement_SubtypeIsConfirm, METH_NOARGS, "SubtypeIsConfirm()\n\n" },
     {(char *) "SubtypeIsOpen", (PyCFunction) _wrap_PyNs3Dot11sIePeerManagement_SubtypeIsOpen, METH_NOARGS, "SubtypeIsOpen()\n\n" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3Dot11sIePeerManagement__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
@@ -5978,18 +5978,6 @@ int _wrap_PyNs3Dot11sIePeeringProtocol__tp_init(PyNs3Dot11sIePeeringProtocol *se
 
 
 PyObject *
-_wrap_PyNs3Dot11sIePeeringProtocol_GetInformationFieldSize(PyNs3Dot11sIePeeringProtocol *self)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    
-    retval = self->obj->GetInformationFieldSize();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3Dot11sIePeeringProtocol_DeserializeInformationField(PyNs3Dot11sIePeeringProtocol *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -6012,6 +6000,30 @@ _wrap_PyNs3Dot11sIePeeringProtocol_DeserializeInformationField(PyNs3Dot11sIePeer
 
 
 PyObject *
+_wrap_PyNs3Dot11sIePeeringProtocol_ElementId(PyNs3Dot11sIePeeringProtocol *self)
+{
+    PyObject *py_retval;
+    ns3::WifiInformationElementId retval;
+    
+    retval = self->obj->ElementId();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIePeeringProtocol_GetInformationFieldSize(PyNs3Dot11sIePeeringProtocol *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    
+    retval = self->obj->GetInformationFieldSize();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3Dot11sIePeeringProtocol_SerializeInformationField(PyNs3Dot11sIePeeringProtocol *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -6024,18 +6036,6 @@ _wrap_PyNs3Dot11sIePeeringProtocol_SerializeInformationField(PyNs3Dot11sIePeerin
     self->obj->SerializeInformationField(*((PyNs3BufferIterator *) i)->obj);
     Py_INCREF(Py_None);
     py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIePeeringProtocol_ElementId(PyNs3Dot11sIePeeringProtocol *self)
-{
-    PyObject *py_retval;
-    ns3::WifiInformationElementId retval;
-    
-    retval = self->obj->ElementId();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
     return py_retval;
 }
 
@@ -6054,10 +6054,10 @@ _wrap_PyNs3Dot11sIePeeringProtocol__copy__(PyNs3Dot11sIePeeringProtocol *self)
 }
 
 static PyMethodDef PyNs3Dot11sIePeeringProtocol_methods[] = {
-    {(char *) "GetInformationFieldSize", (PyCFunction) _wrap_PyNs3Dot11sIePeeringProtocol_GetInformationFieldSize, METH_NOARGS, "GetInformationFieldSize()\n\n" },
     {(char *) "DeserializeInformationField", (PyCFunction) _wrap_PyNs3Dot11sIePeeringProtocol_DeserializeInformationField, METH_KEYWORDS|METH_VARARGS, "DeserializeInformationField(i, length)\n\ntype: i: ns3::Buffer::Iterator\ntype: length: uint8_t" },
-    {(char *) "SerializeInformationField", (PyCFunction) _wrap_PyNs3Dot11sIePeeringProtocol_SerializeInformationField, METH_KEYWORDS|METH_VARARGS, "SerializeInformationField(i)\n\ntype: i: ns3::Buffer::Iterator" },
     {(char *) "ElementId", (PyCFunction) _wrap_PyNs3Dot11sIePeeringProtocol_ElementId, METH_NOARGS, "ElementId()\n\n" },
+    {(char *) "GetInformationFieldSize", (PyCFunction) _wrap_PyNs3Dot11sIePeeringProtocol_GetInformationFieldSize, METH_NOARGS, "GetInformationFieldSize()\n\n" },
+    {(char *) "SerializeInformationField", (PyCFunction) _wrap_PyNs3Dot11sIePeeringProtocol_SerializeInformationField, METH_KEYWORDS|METH_VARARGS, "SerializeInformationField(i)\n\ntype: i: ns3::Buffer::Iterator" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3Dot11sIePeeringProtocol__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -6252,13 +6252,18 @@ _wrap_PyNs3Dot11sIePerr_AddAddressUnit(PyNs3Dot11sIePerr *self, PyObject *args, 
 
 
 PyObject *
-_wrap_PyNs3Dot11sIePerr_IsFull(PyNs3Dot11sIePerr *self)
+_wrap_PyNs3Dot11sIePerr_DeleteAddressUnit(PyNs3Dot11sIePerr *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    bool retval;
+    PyNs3Mac48Address *address;
+    const char *keywords[] = {"address", NULL};
     
-    retval = self->obj->IsFull();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Mac48Address_Type, &address)) {
+        return NULL;
+    }
+    self->obj->DeleteAddressUnit(*((PyNs3Mac48Address *) address)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -6286,18 +6291,28 @@ _wrap_PyNs3Dot11sIePerr_DeserializeInformationField(PyNs3Dot11sIePerr *self, PyO
 
 
 PyObject *
-_wrap_PyNs3Dot11sIePerr_DeleteAddressUnit(PyNs3Dot11sIePerr *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3Dot11sIePerr_ElementId(PyNs3Dot11sIePerr *self)
 {
     PyObject *py_retval;
-    PyNs3Mac48Address *address;
-    const char *keywords[] = {"address", NULL};
+    ns3::WifiInformationElementId retval;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Mac48Address_Type, &address)) {
-        return NULL;
-    }
-    self->obj->DeleteAddressUnit(*((PyNs3Mac48Address *) address)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    retval = self->obj->ElementId();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIePerr_GetAddressUnitVector(PyNs3Dot11sIePerr *self)
+{
+    PyObject *py_retval;
+    std::vector< ns3::dot11s::HwmpProtocol::FailedDestination > retval;
+    Pystd__vector__lt___ns3__dot11s__HwmpProtocol__FailedDestination___gt__ *py_std__vector__lt___ns3__dot11s__HwmpProtocol__FailedDestination___gt__;
+    
+    retval = self->obj->GetAddressUnitVector();
+    py_std__vector__lt___ns3__dot11s__HwmpProtocol__FailedDestination___gt__ = PyObject_New(Pystd__vector__lt___ns3__dot11s__HwmpProtocol__FailedDestination___gt__, &Pystd__vector__lt___ns3__dot11s__HwmpProtocol__FailedDestination___gt___Type);
+    py_std__vector__lt___ns3__dot11s__HwmpProtocol__FailedDestination___gt__->obj = new std::vector< ns3::dot11s::HwmpProtocol::FailedDestination >(retval);
+    py_retval = Py_BuildValue((char *) "N", py_std__vector__lt___ns3__dot11s__HwmpProtocol__FailedDestination___gt__);
     return py_retval;
 }
 
@@ -6327,6 +6342,18 @@ _wrap_PyNs3Dot11sIePerr_GetNumOfDest(PyNs3Dot11sIePerr *self)
 
 
 PyObject *
+_wrap_PyNs3Dot11sIePerr_IsFull(PyNs3Dot11sIePerr *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->IsFull();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3Dot11sIePerr_ResetPerr(PyNs3Dot11sIePerr *self)
 {
     PyObject *py_retval;
@@ -6334,33 +6361,6 @@ _wrap_PyNs3Dot11sIePerr_ResetPerr(PyNs3Dot11sIePerr *self)
     self->obj->ResetPerr();
     Py_INCREF(Py_None);
     py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIePerr_GetAddressUnitVector(PyNs3Dot11sIePerr *self)
-{
-    PyObject *py_retval;
-    std::vector< ns3::dot11s::HwmpProtocol::FailedDestination > retval;
-    Pystd__vector__lt___ns3__dot11s__HwmpProtocol__FailedDestination___gt__ *py_std__vector__lt___ns3__dot11s__HwmpProtocol__FailedDestination___gt__;
-    
-    retval = self->obj->GetAddressUnitVector();
-    py_std__vector__lt___ns3__dot11s__HwmpProtocol__FailedDestination___gt__ = PyObject_New(Pystd__vector__lt___ns3__dot11s__HwmpProtocol__FailedDestination___gt__, &Pystd__vector__lt___ns3__dot11s__HwmpProtocol__FailedDestination___gt___Type);
-    py_std__vector__lt___ns3__dot11s__HwmpProtocol__FailedDestination___gt__->obj = new std::vector< ns3::dot11s::HwmpProtocol::FailedDestination >(retval);
-    py_retval = Py_BuildValue((char *) "N", py_std__vector__lt___ns3__dot11s__HwmpProtocol__FailedDestination___gt__);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIePerr_ElementId(PyNs3Dot11sIePerr *self)
-{
-    PyObject *py_retval;
-    ns3::WifiInformationElementId retval;
-    
-    retval = self->obj->ElementId();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
     return py_retval;
 }
 
@@ -6397,14 +6397,14 @@ _wrap_PyNs3Dot11sIePerr__copy__(PyNs3Dot11sIePerr *self)
 
 static PyMethodDef PyNs3Dot11sIePerr_methods[] = {
     {(char *) "AddAddressUnit", (PyCFunction) _wrap_PyNs3Dot11sIePerr_AddAddressUnit, METH_KEYWORDS|METH_VARARGS, "AddAddressUnit(unit)\n\ntype: unit: ns3::dot11s::HwmpProtocol::FailedDestination" },
-    {(char *) "IsFull", (PyCFunction) _wrap_PyNs3Dot11sIePerr_IsFull, METH_NOARGS, "IsFull()\n\n" },
-    {(char *) "DeserializeInformationField", (PyCFunction) _wrap_PyNs3Dot11sIePerr_DeserializeInformationField, METH_KEYWORDS|METH_VARARGS, "DeserializeInformationField(start, length)\n\ntype: start: ns3::Buffer::Iterator\ntype: length: uint8_t" },
     {(char *) "DeleteAddressUnit", (PyCFunction) _wrap_PyNs3Dot11sIePerr_DeleteAddressUnit, METH_KEYWORDS|METH_VARARGS, "DeleteAddressUnit(address)\n\ntype: address: ns3::Mac48Address" },
+    {(char *) "DeserializeInformationField", (PyCFunction) _wrap_PyNs3Dot11sIePerr_DeserializeInformationField, METH_KEYWORDS|METH_VARARGS, "DeserializeInformationField(start, length)\n\ntype: start: ns3::Buffer::Iterator\ntype: length: uint8_t" },
+    {(char *) "ElementId", (PyCFunction) _wrap_PyNs3Dot11sIePerr_ElementId, METH_NOARGS, "ElementId()\n\n" },
+    {(char *) "GetAddressUnitVector", (PyCFunction) _wrap_PyNs3Dot11sIePerr_GetAddressUnitVector, METH_NOARGS, "GetAddressUnitVector()\n\n" },
     {(char *) "GetInformationFieldSize", (PyCFunction) _wrap_PyNs3Dot11sIePerr_GetInformationFieldSize, METH_NOARGS, "GetInformationFieldSize()\n\n" },
     {(char *) "GetNumOfDest", (PyCFunction) _wrap_PyNs3Dot11sIePerr_GetNumOfDest, METH_NOARGS, "GetNumOfDest()\n\n" },
+    {(char *) "IsFull", (PyCFunction) _wrap_PyNs3Dot11sIePerr_IsFull, METH_NOARGS, "IsFull()\n\n" },
     {(char *) "ResetPerr", (PyCFunction) _wrap_PyNs3Dot11sIePerr_ResetPerr, METH_NOARGS, "ResetPerr()\n\n" },
-    {(char *) "GetAddressUnitVector", (PyCFunction) _wrap_PyNs3Dot11sIePerr_GetAddressUnitVector, METH_NOARGS, "GetAddressUnitVector()\n\n" },
-    {(char *) "ElementId", (PyCFunction) _wrap_PyNs3Dot11sIePerr_ElementId, METH_NOARGS, "ElementId()\n\n" },
     {(char *) "SerializeInformationField", (PyCFunction) _wrap_PyNs3Dot11sIePerr_SerializeInformationField, METH_KEYWORDS|METH_VARARGS, "SerializeInformationField(i)\n\ntype: i: ns3::Buffer::Iterator" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3Dot11sIePerr__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
@@ -6599,16 +6599,11 @@ int _wrap_PyNs3Dot11sIePrep__tp_init(PyNs3Dot11sIePrep *self, PyObject *args, Py
 
 
 PyObject *
-_wrap_PyNs3Dot11sIePrep_SetMetric(PyNs3Dot11sIePrep *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3Dot11sIePrep_DecrementTtl(PyNs3Dot11sIePrep *self)
 {
     PyObject *py_retval;
-    unsigned int metric;
-    const char *keywords[] = {"metric", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &metric)) {
-        return NULL;
-    }
-    self->obj->SetMetric(metric);
+    self->obj->DecrementTtl();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -6632,6 +6627,82 @@ _wrap_PyNs3Dot11sIePrep_DeserializeInformationField(PyNs3Dot11sIePrep *self, PyO
         return NULL;
     }
     retval = self->obj->DeserializeInformationField(*((PyNs3BufferIterator *) start)->obj, length);
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIePrep_ElementId(PyNs3Dot11sIePrep *self)
+{
+    PyObject *py_retval;
+    ns3::WifiInformationElementId retval;
+    
+    retval = self->obj->ElementId();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIePrep_GetDestinationAddress(PyNs3Dot11sIePrep *self)
+{
+    PyObject *py_retval;
+    PyNs3Mac48Address *py_Mac48Address;
+    
+    ns3::Mac48Address retval = self->obj->GetDestinationAddress();
+    py_Mac48Address = PyObject_New(PyNs3Mac48Address, &PyNs3Mac48Address_Type);
+    py_Mac48Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Mac48Address->obj = new ns3::Mac48Address(retval);
+    PyNs3Mac48Address_wrapper_registry[(void *) py_Mac48Address->obj] = (PyObject *) py_Mac48Address;
+    py_retval = Py_BuildValue((char *) "N", py_Mac48Address);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIePrep_GetDestinationSeqNumber(PyNs3Dot11sIePrep *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetDestinationSeqNumber();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIePrep_GetFlags(PyNs3Dot11sIePrep *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    
+    retval = self->obj->GetFlags();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIePrep_GetHopcount(PyNs3Dot11sIePrep *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    
+    retval = self->obj->GetHopcount();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIePrep_GetInformationFieldSize(PyNs3Dot11sIePrep *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    
+    retval = self->obj->GetInformationFieldSize();
     py_retval = Py_BuildValue((char *) "i", (int)retval);
     return py_retval;
 }
@@ -6662,20 +6733,56 @@ _wrap_PyNs3Dot11sIePrep_GetMetric(PyNs3Dot11sIePrep *self)
 
 
 PyObject *
-_wrap_PyNs3Dot11sIePrep_SetTtl(PyNs3Dot11sIePrep *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3Dot11sIePrep_GetOriginatorAddress(PyNs3Dot11sIePrep *self)
 {
     PyObject *py_retval;
-    int ttl;
-    const char *keywords[] = {"ttl", NULL};
+    PyNs3Mac48Address *py_Mac48Address;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &ttl)) {
+    ns3::Mac48Address retval = self->obj->GetOriginatorAddress();
+    py_Mac48Address = PyObject_New(PyNs3Mac48Address, &PyNs3Mac48Address_Type);
+    py_Mac48Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Mac48Address->obj = new ns3::Mac48Address(retval);
+    PyNs3Mac48Address_wrapper_registry[(void *) py_Mac48Address->obj] = (PyObject *) py_Mac48Address;
+    py_retval = Py_BuildValue((char *) "N", py_Mac48Address);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIePrep_GetOriginatorSeqNumber(PyNs3Dot11sIePrep *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetOriginatorSeqNumber();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIePrep_GetTtl(PyNs3Dot11sIePrep *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetTtl();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIePrep_IncrementMetric(PyNs3Dot11sIePrep *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int metric;
+    const char *keywords[] = {"metric", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &metric)) {
         return NULL;
     }
-    if (ttl > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SetTtl(ttl);
+    self->obj->IncrementMetric(metric);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -6700,13 +6807,77 @@ _wrap_PyNs3Dot11sIePrep_SerializeInformationField(PyNs3Dot11sIePrep *self, PyObj
 
 
 PyObject *
-_wrap_PyNs3Dot11sIePrep_GetDestinationSeqNumber(PyNs3Dot11sIePrep *self)
+_wrap_PyNs3Dot11sIePrep_SetDestinationAddress(PyNs3Dot11sIePrep *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    uint32_t retval;
+    PyNs3Mac48Address *dest_address;
+    const char *keywords[] = {"dest_address", NULL};
     
-    retval = self->obj->GetDestinationSeqNumber();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Mac48Address_Type, &dest_address)) {
+        return NULL;
+    }
+    self->obj->SetDestinationAddress(*((PyNs3Mac48Address *) dest_address)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIePrep_SetDestinationSeqNumber(PyNs3Dot11sIePrep *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int dest_seq_number;
+    const char *keywords[] = {"dest_seq_number", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &dest_seq_number)) {
+        return NULL;
+    }
+    self->obj->SetDestinationSeqNumber(dest_seq_number);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIePrep_SetFlags(PyNs3Dot11sIePrep *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int flags;
+    const char *keywords[] = {"flags", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &flags)) {
+        return NULL;
+    }
+    if (flags > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SetFlags(flags);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIePrep_SetHopcount(PyNs3Dot11sIePrep *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int hopcount;
+    const char *keywords[] = {"hopcount", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &hopcount)) {
+        return NULL;
+    }
+    if (hopcount > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SetHopcount(hopcount);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -6729,78 +6900,18 @@ _wrap_PyNs3Dot11sIePrep_SetLifetime(PyNs3Dot11sIePrep *self, PyObject *args, PyO
 
 
 PyObject *
-_wrap_PyNs3Dot11sIePrep_GetFlags(PyNs3Dot11sIePrep *self)
+_wrap_PyNs3Dot11sIePrep_SetMetric(PyNs3Dot11sIePrep *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    uint8_t retval;
+    unsigned int metric;
+    const char *keywords[] = {"metric", NULL};
     
-    retval = self->obj->GetFlags();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIePrep_ElementId(PyNs3Dot11sIePrep *self)
-{
-    PyObject *py_retval;
-    ns3::WifiInformationElementId retval;
-    
-    retval = self->obj->ElementId();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIePrep_SetDestinationAddress(PyNs3Dot11sIePrep *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Mac48Address *dest_address;
-    const char *keywords[] = {"dest_address", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Mac48Address_Type, &dest_address)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &metric)) {
         return NULL;
     }
-    self->obj->SetDestinationAddress(*((PyNs3Mac48Address *) dest_address)->obj);
+    self->obj->SetMetric(metric);
     Py_INCREF(Py_None);
     py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIePrep_GetHopcount(PyNs3Dot11sIePrep *self)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    
-    retval = self->obj->GetHopcount();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIePrep_GetOriginatorSeqNumber(PyNs3Dot11sIePrep *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetOriginatorSeqNumber();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIePrep_GetInformationFieldSize(PyNs3Dot11sIePrep *self)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    
-    retval = self->obj->GetInformationFieldSize();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
     return py_retval;
 }
 
@@ -6840,133 +6951,22 @@ _wrap_PyNs3Dot11sIePrep_SetOriginatorSeqNumber(PyNs3Dot11sIePrep *self, PyObject
 
 
 PyObject *
-_wrap_PyNs3Dot11sIePrep_SetFlags(PyNs3Dot11sIePrep *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3Dot11sIePrep_SetTtl(PyNs3Dot11sIePrep *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    int flags;
-    const char *keywords[] = {"flags", NULL};
+    int ttl;
+    const char *keywords[] = {"ttl", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &flags)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &ttl)) {
         return NULL;
     }
-    if (flags > 0xff) {
+    if (ttl > 0xff) {
         PyErr_SetString(PyExc_ValueError, "Out of range");
         return NULL;
     }
-    self->obj->SetFlags(flags);
+    self->obj->SetTtl(ttl);
     Py_INCREF(Py_None);
     py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIePrep_DecrementTtl(PyNs3Dot11sIePrep *self)
-{
-    PyObject *py_retval;
-    
-    self->obj->DecrementTtl();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIePrep_GetDestinationAddress(PyNs3Dot11sIePrep *self)
-{
-    PyObject *py_retval;
-    PyNs3Mac48Address *py_Mac48Address;
-    
-    ns3::Mac48Address retval = self->obj->GetDestinationAddress();
-    py_Mac48Address = PyObject_New(PyNs3Mac48Address, &PyNs3Mac48Address_Type);
-    py_Mac48Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Mac48Address->obj = new ns3::Mac48Address(retval);
-    PyNs3Mac48Address_wrapper_registry[(void *) py_Mac48Address->obj] = (PyObject *) py_Mac48Address;
-    py_retval = Py_BuildValue((char *) "N", py_Mac48Address);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIePrep_GetOriginatorAddress(PyNs3Dot11sIePrep *self)
-{
-    PyObject *py_retval;
-    PyNs3Mac48Address *py_Mac48Address;
-    
-    ns3::Mac48Address retval = self->obj->GetOriginatorAddress();
-    py_Mac48Address = PyObject_New(PyNs3Mac48Address, &PyNs3Mac48Address_Type);
-    py_Mac48Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Mac48Address->obj = new ns3::Mac48Address(retval);
-    PyNs3Mac48Address_wrapper_registry[(void *) py_Mac48Address->obj] = (PyObject *) py_Mac48Address;
-    py_retval = Py_BuildValue((char *) "N", py_Mac48Address);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIePrep_SetHopcount(PyNs3Dot11sIePrep *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int hopcount;
-    const char *keywords[] = {"hopcount", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &hopcount)) {
-        return NULL;
-    }
-    if (hopcount > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SetHopcount(hopcount);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIePrep_IncrementMetric(PyNs3Dot11sIePrep *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int metric;
-    const char *keywords[] = {"metric", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &metric)) {
-        return NULL;
-    }
-    self->obj->IncrementMetric(metric);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIePrep_SetDestinationSeqNumber(PyNs3Dot11sIePrep *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int dest_seq_number;
-    const char *keywords[] = {"dest_seq_number", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &dest_seq_number)) {
-        return NULL;
-    }
-    self->obj->SetDestinationSeqNumber(dest_seq_number);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIePrep_GetTtl(PyNs3Dot11sIePrep *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetTtl();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
 
@@ -6985,30 +6985,30 @@ _wrap_PyNs3Dot11sIePrep__copy__(PyNs3Dot11sIePrep *self)
 }
 
 static PyMethodDef PyNs3Dot11sIePrep_methods[] = {
-    {(char *) "SetMetric", (PyCFunction) _wrap_PyNs3Dot11sIePrep_SetMetric, METH_KEYWORDS|METH_VARARGS, "SetMetric(metric)\n\ntype: metric: uint32_t" },
+    {(char *) "DecrementTtl", (PyCFunction) _wrap_PyNs3Dot11sIePrep_DecrementTtl, METH_NOARGS, "DecrementTtl()\n\n" },
     {(char *) "DeserializeInformationField", (PyCFunction) _wrap_PyNs3Dot11sIePrep_DeserializeInformationField, METH_KEYWORDS|METH_VARARGS, "DeserializeInformationField(start, length)\n\ntype: start: ns3::Buffer::Iterator\ntype: length: uint8_t" },
+    {(char *) "ElementId", (PyCFunction) _wrap_PyNs3Dot11sIePrep_ElementId, METH_NOARGS, "ElementId()\n\n" },
+    {(char *) "GetDestinationAddress", (PyCFunction) _wrap_PyNs3Dot11sIePrep_GetDestinationAddress, METH_NOARGS, "GetDestinationAddress()\n\n" },
+    {(char *) "GetDestinationSeqNumber", (PyCFunction) _wrap_PyNs3Dot11sIePrep_GetDestinationSeqNumber, METH_NOARGS, "GetDestinationSeqNumber()\n\n" },
+    {(char *) "GetFlags", (PyCFunction) _wrap_PyNs3Dot11sIePrep_GetFlags, METH_NOARGS, "GetFlags()\n\n" },
+    {(char *) "GetHopcount", (PyCFunction) _wrap_PyNs3Dot11sIePrep_GetHopcount, METH_NOARGS, "GetHopcount()\n\n" },
+    {(char *) "GetInformationFieldSize", (PyCFunction) _wrap_PyNs3Dot11sIePrep_GetInformationFieldSize, METH_NOARGS, "GetInformationFieldSize()\n\n" },
     {(char *) "GetLifetime", (PyCFunction) _wrap_PyNs3Dot11sIePrep_GetLifetime, METH_NOARGS, "GetLifetime()\n\n" },
     {(char *) "GetMetric", (PyCFunction) _wrap_PyNs3Dot11sIePrep_GetMetric, METH_NOARGS, "GetMetric()\n\n" },
-    {(char *) "SetTtl", (PyCFunction) _wrap_PyNs3Dot11sIePrep_SetTtl, METH_KEYWORDS|METH_VARARGS, "SetTtl(ttl)\n\ntype: ttl: uint8_t" },
-    {(char *) "SerializeInformationField", (PyCFunction) _wrap_PyNs3Dot11sIePrep_SerializeInformationField, METH_KEYWORDS|METH_VARARGS, "SerializeInformationField(i)\n\ntype: i: ns3::Buffer::Iterator" },
-    {(char *) "GetDestinationSeqNumber", (PyCFunction) _wrap_PyNs3Dot11sIePrep_GetDestinationSeqNumber, METH_NOARGS, "GetDestinationSeqNumber()\n\n" },
-    {(char *) "SetLifetime", (PyCFunction) _wrap_PyNs3Dot11sIePrep_SetLifetime, METH_KEYWORDS|METH_VARARGS, "SetLifetime(lifetime)\n\ntype: lifetime: uint32_t" },
-    {(char *) "GetFlags", (PyCFunction) _wrap_PyNs3Dot11sIePrep_GetFlags, METH_NOARGS, "GetFlags()\n\n" },
-    {(char *) "ElementId", (PyCFunction) _wrap_PyNs3Dot11sIePrep_ElementId, METH_NOARGS, "ElementId()\n\n" },
-    {(char *) "SetDestinationAddress", (PyCFunction) _wrap_PyNs3Dot11sIePrep_SetDestinationAddress, METH_KEYWORDS|METH_VARARGS, "SetDestinationAddress(dest_address)\n\ntype: dest_address: ns3::Mac48Address" },
-    {(char *) "GetHopcount", (PyCFunction) _wrap_PyNs3Dot11sIePrep_GetHopcount, METH_NOARGS, "GetHopcount()\n\n" },
+    {(char *) "GetOriginatorAddress", (PyCFunction) _wrap_PyNs3Dot11sIePrep_GetOriginatorAddress, METH_NOARGS, "GetOriginatorAddress()\n\n" },
     {(char *) "GetOriginatorSeqNumber", (PyCFunction) _wrap_PyNs3Dot11sIePrep_GetOriginatorSeqNumber, METH_NOARGS, "GetOriginatorSeqNumber()\n\n" },
-    {(char *) "GetInformationFieldSize", (PyCFunction) _wrap_PyNs3Dot11sIePrep_GetInformationFieldSize, METH_NOARGS, "GetInformationFieldSize()\n\n" },
+    {(char *) "GetTtl", (PyCFunction) _wrap_PyNs3Dot11sIePrep_GetTtl, METH_NOARGS, "GetTtl()\n\n" },
+    {(char *) "IncrementMetric", (PyCFunction) _wrap_PyNs3Dot11sIePrep_IncrementMetric, METH_KEYWORDS|METH_VARARGS, "IncrementMetric(metric)\n\ntype: metric: uint32_t" },
+    {(char *) "SerializeInformationField", (PyCFunction) _wrap_PyNs3Dot11sIePrep_SerializeInformationField, METH_KEYWORDS|METH_VARARGS, "SerializeInformationField(i)\n\ntype: i: ns3::Buffer::Iterator" },
+    {(char *) "SetDestinationAddress", (PyCFunction) _wrap_PyNs3Dot11sIePrep_SetDestinationAddress, METH_KEYWORDS|METH_VARARGS, "SetDestinationAddress(dest_address)\n\ntype: dest_address: ns3::Mac48Address" },
+    {(char *) "SetDestinationSeqNumber", (PyCFunction) _wrap_PyNs3Dot11sIePrep_SetDestinationSeqNumber, METH_KEYWORDS|METH_VARARGS, "SetDestinationSeqNumber(dest_seq_number)\n\ntype: dest_seq_number: uint32_t" },
+    {(char *) "SetFlags", (PyCFunction) _wrap_PyNs3Dot11sIePrep_SetFlags, METH_KEYWORDS|METH_VARARGS, "SetFlags(flags)\n\ntype: flags: uint8_t" },
+    {(char *) "SetHopcount", (PyCFunction) _wrap_PyNs3Dot11sIePrep_SetHopcount, METH_KEYWORDS|METH_VARARGS, "SetHopcount(hopcount)\n\ntype: hopcount: uint8_t" },
+    {(char *) "SetLifetime", (PyCFunction) _wrap_PyNs3Dot11sIePrep_SetLifetime, METH_KEYWORDS|METH_VARARGS, "SetLifetime(lifetime)\n\ntype: lifetime: uint32_t" },
+    {(char *) "SetMetric", (PyCFunction) _wrap_PyNs3Dot11sIePrep_SetMetric, METH_KEYWORDS|METH_VARARGS, "SetMetric(metric)\n\ntype: metric: uint32_t" },
     {(char *) "SetOriginatorAddress", (PyCFunction) _wrap_PyNs3Dot11sIePrep_SetOriginatorAddress, METH_KEYWORDS|METH_VARARGS, "SetOriginatorAddress(originator_address)\n\ntype: originator_address: ns3::Mac48Address" },
     {(char *) "SetOriginatorSeqNumber", (PyCFunction) _wrap_PyNs3Dot11sIePrep_SetOriginatorSeqNumber, METH_KEYWORDS|METH_VARARGS, "SetOriginatorSeqNumber(originator_seq_number)\n\ntype: originator_seq_number: uint32_t" },
-    {(char *) "SetFlags", (PyCFunction) _wrap_PyNs3Dot11sIePrep_SetFlags, METH_KEYWORDS|METH_VARARGS, "SetFlags(flags)\n\ntype: flags: uint8_t" },
-    {(char *) "DecrementTtl", (PyCFunction) _wrap_PyNs3Dot11sIePrep_DecrementTtl, METH_NOARGS, "DecrementTtl()\n\n" },
-    {(char *) "GetDestinationAddress", (PyCFunction) _wrap_PyNs3Dot11sIePrep_GetDestinationAddress, METH_NOARGS, "GetDestinationAddress()\n\n" },
-    {(char *) "GetOriginatorAddress", (PyCFunction) _wrap_PyNs3Dot11sIePrep_GetOriginatorAddress, METH_NOARGS, "GetOriginatorAddress()\n\n" },
-    {(char *) "SetHopcount", (PyCFunction) _wrap_PyNs3Dot11sIePrep_SetHopcount, METH_KEYWORDS|METH_VARARGS, "SetHopcount(hopcount)\n\ntype: hopcount: uint8_t" },
-    {(char *) "IncrementMetric", (PyCFunction) _wrap_PyNs3Dot11sIePrep_IncrementMetric, METH_KEYWORDS|METH_VARARGS, "IncrementMetric(metric)\n\ntype: metric: uint32_t" },
-    {(char *) "SetDestinationSeqNumber", (PyCFunction) _wrap_PyNs3Dot11sIePrep_SetDestinationSeqNumber, METH_KEYWORDS|METH_VARARGS, "SetDestinationSeqNumber(dest_seq_number)\n\ntype: dest_seq_number: uint32_t" },
-    {(char *) "GetTtl", (PyCFunction) _wrap_PyNs3Dot11sIePrep_GetTtl, METH_NOARGS, "GetTtl()\n\n" },
+    {(char *) "SetTtl", (PyCFunction) _wrap_PyNs3Dot11sIePrep_SetTtl, METH_KEYWORDS|METH_VARARGS, "SetTtl(ttl)\n\ntype: ttl: uint8_t" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3Dot11sIePrep__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -7202,28 +7202,47 @@ int _wrap_PyNs3Dot11sIePreq__tp_init(PyNs3Dot11sIePreq *self, PyObject *args, Py
 
 
 PyObject *
-_wrap_PyNs3Dot11sIePreq_IsUnicastPreq(PyNs3Dot11sIePreq *self)
+_wrap_PyNs3Dot11sIePreq_AddDestinationAddressElement(PyNs3Dot11sIePreq *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    bool retval;
+    bool doFlag;
+    PyObject *py_doFlag;
+    bool rfFlag;
+    PyObject *py_rfFlag;
+    PyNs3Mac48Address *dest_address;
+    unsigned int dest_seq_number;
+    const char *keywords[] = {"doFlag", "rfFlag", "dest_address", "dest_seq_number", NULL};
     
-    retval = self->obj->IsUnicastPreq();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "OOO!I", (char **) keywords, &py_doFlag, &py_rfFlag, &PyNs3Mac48Address_Type, &dest_address, &dest_seq_number)) {
+        return NULL;
+    }
+    doFlag = (bool) PyObject_IsTrue(py_doFlag);
+    rfFlag = (bool) PyObject_IsTrue(py_rfFlag);
+    self->obj->AddDestinationAddressElement(doFlag, rfFlag, *((PyNs3Mac48Address *) dest_address)->obj, dest_seq_number);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3Dot11sIePreq_SetMetric(PyNs3Dot11sIePreq *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3Dot11sIePreq_ClearDestinationAddressElements(PyNs3Dot11sIePreq *self)
 {
     PyObject *py_retval;
-    unsigned int metric;
-    const char *keywords[] = {"metric", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &metric)) {
-        return NULL;
-    }
-    self->obj->SetMetric(metric);
+    self->obj->ClearDestinationAddressElements();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIePreq_DecrementTtl(PyNs3Dot11sIePreq *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->DecrementTtl();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -7270,6 +7289,69 @@ _wrap_PyNs3Dot11sIePreq_DeserializeInformationField(PyNs3Dot11sIePreq *self, PyO
 
 
 PyObject *
+_wrap_PyNs3Dot11sIePreq_ElementId(PyNs3Dot11sIePreq *self)
+{
+    PyObject *py_retval;
+    ns3::WifiInformationElementId retval;
+    
+    retval = self->obj->ElementId();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIePreq_GetDestCount(PyNs3Dot11sIePreq *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    
+    retval = self->obj->GetDestCount();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIePreq_GetDestinationList(PyNs3Dot11sIePreq *self)
+{
+    PyObject *py_retval;
+    std::vector< ns3::Ptr< ns3::dot11s::DestinationAddressUnit > > retval;
+    Pystd__vector__lt___ns3__Ptr__lt___ns3__dot11s__DestinationAddressUnit___gt_____gt__ *py_std__vector__lt___ns3__Ptr__lt___ns3__dot11s__DestinationAddressUnit___gt_____gt__;
+    
+    retval = self->obj->GetDestinationList();
+    py_std__vector__lt___ns3__Ptr__lt___ns3__dot11s__DestinationAddressUnit___gt_____gt__ = PyObject_New(Pystd__vector__lt___ns3__Ptr__lt___ns3__dot11s__DestinationAddressUnit___gt_____gt__, &Pystd__vector__lt___ns3__Ptr__lt___ns3__dot11s__DestinationAddressUnit___gt_____gt___Type);
+    py_std__vector__lt___ns3__Ptr__lt___ns3__dot11s__DestinationAddressUnit___gt_____gt__->obj = new std::vector< ns3::Ptr< ns3::dot11s::DestinationAddressUnit > >(retval);
+    py_retval = Py_BuildValue((char *) "N", py_std__vector__lt___ns3__Ptr__lt___ns3__dot11s__DestinationAddressUnit___gt_____gt__);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIePreq_GetHopCount(PyNs3Dot11sIePreq *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    
+    retval = self->obj->GetHopCount();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIePreq_GetInformationFieldSize(PyNs3Dot11sIePreq *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    
+    retval = self->obj->GetInformationFieldSize();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3Dot11sIePreq_GetLifetime(PyNs3Dot11sIePreq *self)
 {
     PyObject *py_retval;
@@ -7294,78 +7376,68 @@ _wrap_PyNs3Dot11sIePreq_GetMetric(PyNs3Dot11sIePreq *self)
 
 
 PyObject *
-_wrap_PyNs3Dot11sIePreq_SerializeInformationField(PyNs3Dot11sIePreq *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3Dot11sIePreq_GetOriginatorAddress(PyNs3Dot11sIePreq *self)
 {
     PyObject *py_retval;
-    PyNs3BufferIterator *i;
-    const char *keywords[] = {"i", NULL};
+    PyNs3Mac48Address *py_Mac48Address;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &i)) {
-        return NULL;
-    }
-    self->obj->SerializeInformationField(*((PyNs3BufferIterator *) i)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    ns3::Mac48Address retval = self->obj->GetOriginatorAddress();
+    py_Mac48Address = PyObject_New(PyNs3Mac48Address, &PyNs3Mac48Address_Type);
+    py_Mac48Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Mac48Address->obj = new ns3::Mac48Address(retval);
+    PyNs3Mac48Address_wrapper_registry[(void *) py_Mac48Address->obj] = (PyObject *) py_Mac48Address;
+    py_retval = Py_BuildValue((char *) "N", py_Mac48Address);
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3Dot11sIePreq_SetLifetime(PyNs3Dot11sIePreq *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3Dot11sIePreq_GetOriginatorSeqNumber(PyNs3Dot11sIePreq *self)
 {
     PyObject *py_retval;
-    unsigned int lifetime;
-    const char *keywords[] = {"lifetime", NULL};
+    uint32_t retval;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &lifetime)) {
-        return NULL;
-    }
-    self->obj->SetLifetime(lifetime);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    retval = self->obj->GetOriginatorSeqNumber();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3Dot11sIePreq_ClearDestinationAddressElements(PyNs3Dot11sIePreq *self)
+_wrap_PyNs3Dot11sIePreq_GetPreqID(PyNs3Dot11sIePreq *self)
 {
     PyObject *py_retval;
+    uint32_t retval;
     
-    self->obj->ClearDestinationAddressElements();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    retval = self->obj->GetPreqID();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3Dot11sIePreq_ElementId(PyNs3Dot11sIePreq *self)
+_wrap_PyNs3Dot11sIePreq_GetTtl(PyNs3Dot11sIePreq *self)
 {
     PyObject *py_retval;
-    ns3::WifiInformationElementId retval;
+    uint8_t retval;
     
-    retval = self->obj->ElementId();
+    retval = self->obj->GetTtl();
     py_retval = Py_BuildValue((char *) "i", (int)retval);
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3Dot11sIePreq_SetDestCount(PyNs3Dot11sIePreq *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3Dot11sIePreq_IncrementMetric(PyNs3Dot11sIePreq *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    int dest_count;
-    const char *keywords[] = {"dest_count", NULL};
+    unsigned int metric;
+    const char *keywords[] = {"metric", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &dest_count)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &metric)) {
         return NULL;
     }
-    if (dest_count > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SetDestCount(dest_count);
+    self->obj->IncrementMetric(metric);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -7385,117 +7457,6 @@ _wrap_PyNs3Dot11sIePreq_IsFull(PyNs3Dot11sIePreq *self)
 
 
 PyObject *
-_wrap_PyNs3Dot11sIePreq_GetOriginatorSeqNumber(PyNs3Dot11sIePreq *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetOriginatorSeqNumber();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIePreq_SetPreqID(PyNs3Dot11sIePreq *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int id;
-    const char *keywords[] = {"id", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &id)) {
-        return NULL;
-    }
-    self->obj->SetPreqID(id);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIePreq_GetInformationFieldSize(PyNs3Dot11sIePreq *self)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    
-    retval = self->obj->GetInformationFieldSize();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIePreq_SetOriginatorAddress(PyNs3Dot11sIePreq *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Mac48Address *originator_address;
-    const char *keywords[] = {"originator_address", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Mac48Address_Type, &originator_address)) {
-        return NULL;
-    }
-    self->obj->SetOriginatorAddress(*((PyNs3Mac48Address *) originator_address)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIePreq_SetUnicastPreq(PyNs3Dot11sIePreq *self)
-{
-    PyObject *py_retval;
-    
-    self->obj->SetUnicastPreq();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIePreq_GetHopCount(PyNs3Dot11sIePreq *self)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    
-    retval = self->obj->GetHopCount();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIePreq_SetOriginatorSeqNumber(PyNs3Dot11sIePreq *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int originator_seq_number;
-    const char *keywords[] = {"originator_seq_number", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &originator_seq_number)) {
-        return NULL;
-    }
-    self->obj->SetOriginatorSeqNumber(originator_seq_number);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIePreq_GetPreqID(PyNs3Dot11sIePreq *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetPreqID();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3Dot11sIePreq_IsNeedNotPrep(PyNs3Dot11sIePreq *self)
 {
     PyObject *py_retval;
@@ -7508,25 +7469,13 @@ _wrap_PyNs3Dot11sIePreq_IsNeedNotPrep(PyNs3Dot11sIePreq *self)
 
 
 PyObject *
-_wrap_PyNs3Dot11sIePreq_DecrementTtl(PyNs3Dot11sIePreq *self)
+_wrap_PyNs3Dot11sIePreq_IsUnicastPreq(PyNs3Dot11sIePreq *self)
 {
     PyObject *py_retval;
+    bool retval;
     
-    self->obj->DecrementTtl();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIePreq_GetDestCount(PyNs3Dot11sIePreq *self)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    
-    retval = self->obj->GetDestCount();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    retval = self->obj->IsUnicastPreq();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
@@ -7549,36 +7498,16 @@ _wrap_PyNs3Dot11sIePreq_MayAddAddress(PyNs3Dot11sIePreq *self, PyObject *args, P
 
 
 PyObject *
-_wrap_PyNs3Dot11sIePreq_GetOriginatorAddress(PyNs3Dot11sIePreq *self)
+_wrap_PyNs3Dot11sIePreq_SerializeInformationField(PyNs3Dot11sIePreq *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3Mac48Address *py_Mac48Address;
+    PyNs3BufferIterator *i;
+    const char *keywords[] = {"i", NULL};
     
-    ns3::Mac48Address retval = self->obj->GetOriginatorAddress();
-    py_Mac48Address = PyObject_New(PyNs3Mac48Address, &PyNs3Mac48Address_Type);
-    py_Mac48Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Mac48Address->obj = new ns3::Mac48Address(retval);
-    PyNs3Mac48Address_wrapper_registry[(void *) py_Mac48Address->obj] = (PyObject *) py_Mac48Address;
-    py_retval = Py_BuildValue((char *) "N", py_Mac48Address);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIePreq_SetTTL(PyNs3Dot11sIePreq *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int ttl;
-    const char *keywords[] = {"ttl", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &ttl)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &i)) {
         return NULL;
     }
-    if (ttl > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SetTTL(ttl);
+    self->obj->SerializeInformationField(*((PyNs3BufferIterator *) i)->obj);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -7586,26 +7515,20 @@ _wrap_PyNs3Dot11sIePreq_SetTTL(PyNs3Dot11sIePreq *self, PyObject *args, PyObject
 
 
 PyObject *
-_wrap_PyNs3Dot11sIePreq_GetDestinationList(PyNs3Dot11sIePreq *self)
+_wrap_PyNs3Dot11sIePreq_SetDestCount(PyNs3Dot11sIePreq *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    std::vector< ns3::Ptr< ns3::dot11s::DestinationAddressUnit > > retval;
-    Pystd__vector__lt___ns3__Ptr__lt___ns3__dot11s__DestinationAddressUnit___gt_____gt__ *py_std__vector__lt___ns3__Ptr__lt___ns3__dot11s__DestinationAddressUnit___gt_____gt__;
+    int dest_count;
+    const char *keywords[] = {"dest_count", NULL};
     
-    retval = self->obj->GetDestinationList();
-    py_std__vector__lt___ns3__Ptr__lt___ns3__dot11s__DestinationAddressUnit___gt_____gt__ = PyObject_New(Pystd__vector__lt___ns3__Ptr__lt___ns3__dot11s__DestinationAddressUnit___gt_____gt__, &Pystd__vector__lt___ns3__Ptr__lt___ns3__dot11s__DestinationAddressUnit___gt_____gt___Type);
-    py_std__vector__lt___ns3__Ptr__lt___ns3__dot11s__DestinationAddressUnit___gt_____gt__->obj = new std::vector< ns3::Ptr< ns3::dot11s::DestinationAddressUnit > >(retval);
-    py_retval = Py_BuildValue((char *) "N", py_std__vector__lt___ns3__Ptr__lt___ns3__dot11s__DestinationAddressUnit___gt_____gt__);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIePreq_SetNeedNotPrep(PyNs3Dot11sIePreq *self)
-{
-    PyObject *py_retval;
-    
-    self->obj->SetNeedNotPrep();
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &dest_count)) {
+        return NULL;
+    }
+    if (dest_count > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SetDestCount(dest_count);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -7634,7 +7557,24 @@ _wrap_PyNs3Dot11sIePreq_SetHopcount(PyNs3Dot11sIePreq *self, PyObject *args, PyO
 
 
 PyObject *
-_wrap_PyNs3Dot11sIePreq_IncrementMetric(PyNs3Dot11sIePreq *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3Dot11sIePreq_SetLifetime(PyNs3Dot11sIePreq *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int lifetime;
+    const char *keywords[] = {"lifetime", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &lifetime)) {
+        return NULL;
+    }
+    self->obj->SetLifetime(lifetime);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIePreq_SetMetric(PyNs3Dot11sIePreq *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
     unsigned int metric;
@@ -7643,7 +7583,7 @@ _wrap_PyNs3Dot11sIePreq_IncrementMetric(PyNs3Dot11sIePreq *self, PyObject *args,
     if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &metric)) {
         return NULL;
     }
-    self->obj->IncrementMetric(metric);
+    self->obj->SetMetric(metric);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -7651,35 +7591,95 @@ _wrap_PyNs3Dot11sIePreq_IncrementMetric(PyNs3Dot11sIePreq *self, PyObject *args,
 
 
 PyObject *
-_wrap_PyNs3Dot11sIePreq_GetTtl(PyNs3Dot11sIePreq *self)
+_wrap_PyNs3Dot11sIePreq_SetNeedNotPrep(PyNs3Dot11sIePreq *self)
 {
     PyObject *py_retval;
-    uint8_t retval;
     
-    retval = self->obj->GetTtl();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    self->obj->SetNeedNotPrep();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3Dot11sIePreq_AddDestinationAddressElement(PyNs3Dot11sIePreq *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3Dot11sIePreq_SetOriginatorAddress(PyNs3Dot11sIePreq *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    bool doFlag;
-    PyObject *py_doFlag;
-    bool rfFlag;
-    PyObject *py_rfFlag;
-    PyNs3Mac48Address *dest_address;
-    unsigned int dest_seq_number;
-    const char *keywords[] = {"doFlag", "rfFlag", "dest_address", "dest_seq_number", NULL};
+    PyNs3Mac48Address *originator_address;
+    const char *keywords[] = {"originator_address", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "OOO!I", (char **) keywords, &py_doFlag, &py_rfFlag, &PyNs3Mac48Address_Type, &dest_address, &dest_seq_number)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Mac48Address_Type, &originator_address)) {
         return NULL;
     }
-    doFlag = (bool) PyObject_IsTrue(py_doFlag);
-    rfFlag = (bool) PyObject_IsTrue(py_rfFlag);
-    self->obj->AddDestinationAddressElement(doFlag, rfFlag, *((PyNs3Mac48Address *) dest_address)->obj, dest_seq_number);
+    self->obj->SetOriginatorAddress(*((PyNs3Mac48Address *) originator_address)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIePreq_SetOriginatorSeqNumber(PyNs3Dot11sIePreq *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int originator_seq_number;
+    const char *keywords[] = {"originator_seq_number", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &originator_seq_number)) {
+        return NULL;
+    }
+    self->obj->SetOriginatorSeqNumber(originator_seq_number);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIePreq_SetPreqID(PyNs3Dot11sIePreq *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int id;
+    const char *keywords[] = {"id", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &id)) {
+        return NULL;
+    }
+    self->obj->SetPreqID(id);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIePreq_SetTTL(PyNs3Dot11sIePreq *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int ttl;
+    const char *keywords[] = {"ttl", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &ttl)) {
+        return NULL;
+    }
+    if (ttl > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SetTTL(ttl);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIePreq_SetUnicastPreq(PyNs3Dot11sIePreq *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->SetUnicastPreq();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -7700,38 +7700,38 @@ _wrap_PyNs3Dot11sIePreq__copy__(PyNs3Dot11sIePreq *self)
 }
 
 static PyMethodDef PyNs3Dot11sIePreq_methods[] = {
-    {(char *) "IsUnicastPreq", (PyCFunction) _wrap_PyNs3Dot11sIePreq_IsUnicastPreq, METH_NOARGS, "IsUnicastPreq()\n\n" },
-    {(char *) "SetMetric", (PyCFunction) _wrap_PyNs3Dot11sIePreq_SetMetric, METH_KEYWORDS|METH_VARARGS, "SetMetric(metric)\n\ntype: metric: uint32_t" },
+    {(char *) "AddDestinationAddressElement", (PyCFunction) _wrap_PyNs3Dot11sIePreq_AddDestinationAddressElement, METH_KEYWORDS|METH_VARARGS, "AddDestinationAddressElement(doFlag, rfFlag, dest_address, dest_seq_number)\n\ntype: doFlag: bool\ntype: rfFlag: bool\ntype: dest_address: ns3::Mac48Address\ntype: dest_seq_number: uint32_t" },
+    {(char *) "ClearDestinationAddressElements", (PyCFunction) _wrap_PyNs3Dot11sIePreq_ClearDestinationAddressElements, METH_NOARGS, "ClearDestinationAddressElements()\n\n" },
+    {(char *) "DecrementTtl", (PyCFunction) _wrap_PyNs3Dot11sIePreq_DecrementTtl, METH_NOARGS, "DecrementTtl()\n\n" },
     {(char *) "DelDestinationAddressElement", (PyCFunction) _wrap_PyNs3Dot11sIePreq_DelDestinationAddressElement, METH_KEYWORDS|METH_VARARGS, "DelDestinationAddressElement(dest_address)\n\ntype: dest_address: ns3::Mac48Address" },
     {(char *) "DeserializeInformationField", (PyCFunction) _wrap_PyNs3Dot11sIePreq_DeserializeInformationField, METH_KEYWORDS|METH_VARARGS, "DeserializeInformationField(i, length)\n\ntype: i: ns3::Buffer::Iterator\ntype: length: uint8_t" },
+    {(char *) "ElementId", (PyCFunction) _wrap_PyNs3Dot11sIePreq_ElementId, METH_NOARGS, "ElementId()\n\n" },
+    {(char *) "GetDestCount", (PyCFunction) _wrap_PyNs3Dot11sIePreq_GetDestCount, METH_NOARGS, "GetDestCount()\n\n" },
+    {(char *) "GetDestinationList", (PyCFunction) _wrap_PyNs3Dot11sIePreq_GetDestinationList, METH_NOARGS, "GetDestinationList()\n\n" },
+    {(char *) "GetHopCount", (PyCFunction) _wrap_PyNs3Dot11sIePreq_GetHopCount, METH_NOARGS, "GetHopCount()\n\n" },
+    {(char *) "GetInformationFieldSize", (PyCFunction) _wrap_PyNs3Dot11sIePreq_GetInformationFieldSize, METH_NOARGS, "GetInformationFieldSize()\n\n" },
     {(char *) "GetLifetime", (PyCFunction) _wrap_PyNs3Dot11sIePreq_GetLifetime, METH_NOARGS, "GetLifetime()\n\n" },
     {(char *) "GetMetric", (PyCFunction) _wrap_PyNs3Dot11sIePreq_GetMetric, METH_NOARGS, "GetMetric()\n\n" },
-    {(char *) "SerializeInformationField", (PyCFunction) _wrap_PyNs3Dot11sIePreq_SerializeInformationField, METH_KEYWORDS|METH_VARARGS, "SerializeInformationField(i)\n\ntype: i: ns3::Buffer::Iterator" },
-    {(char *) "SetLifetime", (PyCFunction) _wrap_PyNs3Dot11sIePreq_SetLifetime, METH_KEYWORDS|METH_VARARGS, "SetLifetime(lifetime)\n\ntype: lifetime: uint32_t" },
-    {(char *) "ClearDestinationAddressElements", (PyCFunction) _wrap_PyNs3Dot11sIePreq_ClearDestinationAddressElements, METH_NOARGS, "ClearDestinationAddressElements()\n\n" },
-    {(char *) "ElementId", (PyCFunction) _wrap_PyNs3Dot11sIePreq_ElementId, METH_NOARGS, "ElementId()\n\n" },
-    {(char *) "SetDestCount", (PyCFunction) _wrap_PyNs3Dot11sIePreq_SetDestCount, METH_KEYWORDS|METH_VARARGS, "SetDestCount(dest_count)\n\ntype: dest_count: uint8_t" },
-    {(char *) "IsFull", (PyCFunction) _wrap_PyNs3Dot11sIePreq_IsFull, METH_NOARGS, "IsFull()\n\n" },
-    {(char *) "GetOriginatorSeqNumber", (PyCFunction) _wrap_PyNs3Dot11sIePreq_GetOriginatorSeqNumber, METH_NOARGS, "GetOriginatorSeqNumber()\n\n" },
-    {(char *) "SetPreqID", (PyCFunction) _wrap_PyNs3Dot11sIePreq_SetPreqID, METH_KEYWORDS|METH_VARARGS, "SetPreqID(id)\n\ntype: id: uint32_t" },
-    {(char *) "GetInformationFieldSize", (PyCFunction) _wrap_PyNs3Dot11sIePreq_GetInformationFieldSize, METH_NOARGS, "GetInformationFieldSize()\n\n" },
-    {(char *) "SetOriginatorAddress", (PyCFunction) _wrap_PyNs3Dot11sIePreq_SetOriginatorAddress, METH_KEYWORDS|METH_VARARGS, "SetOriginatorAddress(originator_address)\n\ntype: originator_address: ns3::Mac48Address" },
-    {(char *) "SetUnicastPreq", (PyCFunction) _wrap_PyNs3Dot11sIePreq_SetUnicastPreq, METH_NOARGS, "SetUnicastPreq()\n\n" },
-    {(char *) "GetHopCount", (PyCFunction) _wrap_PyNs3Dot11sIePreq_GetHopCount, METH_NOARGS, "GetHopCount()\n\n" },
-    {(char *) "SetOriginatorSeqNumber", (PyCFunction) _wrap_PyNs3Dot11sIePreq_SetOriginatorSeqNumber, METH_KEYWORDS|METH_VARARGS, "SetOriginatorSeqNumber(originator_seq_number)\n\ntype: originator_seq_number: uint32_t" },
-    {(char *) "GetPreqID", (PyCFunction) _wrap_PyNs3Dot11sIePreq_GetPreqID, METH_NOARGS, "GetPreqID()\n\n" },
-    {(char *) "IsNeedNotPrep", (PyCFunction) _wrap_PyNs3Dot11sIePreq_IsNeedNotPrep, METH_NOARGS, "IsNeedNotPrep()\n\n" },
-    {(char *) "DecrementTtl", (PyCFunction) _wrap_PyNs3Dot11sIePreq_DecrementTtl, METH_NOARGS, "DecrementTtl()\n\n" },
-    {(char *) "GetDestCount", (PyCFunction) _wrap_PyNs3Dot11sIePreq_GetDestCount, METH_NOARGS, "GetDestCount()\n\n" },
-    {(char *) "MayAddAddress", (PyCFunction) _wrap_PyNs3Dot11sIePreq_MayAddAddress, METH_KEYWORDS|METH_VARARGS, "MayAddAddress(originator)\n\ntype: originator: ns3::Mac48Address" },
     {(char *) "GetOriginatorAddress", (PyCFunction) _wrap_PyNs3Dot11sIePreq_GetOriginatorAddress, METH_NOARGS, "GetOriginatorAddress()\n\n" },
-    {(char *) "SetTTL", (PyCFunction) _wrap_PyNs3Dot11sIePreq_SetTTL, METH_KEYWORDS|METH_VARARGS, "SetTTL(ttl)\n\ntype: ttl: uint8_t" },
-    {(char *) "GetDestinationList", (PyCFunction) _wrap_PyNs3Dot11sIePreq_GetDestinationList, METH_NOARGS, "GetDestinationList()\n\n" },
-    {(char *) "SetNeedNotPrep", (PyCFunction) _wrap_PyNs3Dot11sIePreq_SetNeedNotPrep, METH_NOARGS, "SetNeedNotPrep()\n\n" },
-    {(char *) "SetHopcount", (PyCFunction) _wrap_PyNs3Dot11sIePreq_SetHopcount, METH_KEYWORDS|METH_VARARGS, "SetHopcount(hopcount)\n\ntype: hopcount: uint8_t" },
-    {(char *) "IncrementMetric", (PyCFunction) _wrap_PyNs3Dot11sIePreq_IncrementMetric, METH_KEYWORDS|METH_VARARGS, "IncrementMetric(metric)\n\ntype: metric: uint32_t" },
+    {(char *) "GetOriginatorSeqNumber", (PyCFunction) _wrap_PyNs3Dot11sIePreq_GetOriginatorSeqNumber, METH_NOARGS, "GetOriginatorSeqNumber()\n\n" },
+    {(char *) "GetPreqID", (PyCFunction) _wrap_PyNs3Dot11sIePreq_GetPreqID, METH_NOARGS, "GetPreqID()\n\n" },
     {(char *) "GetTtl", (PyCFunction) _wrap_PyNs3Dot11sIePreq_GetTtl, METH_NOARGS, "GetTtl()\n\n" },
-    {(char *) "AddDestinationAddressElement", (PyCFunction) _wrap_PyNs3Dot11sIePreq_AddDestinationAddressElement, METH_KEYWORDS|METH_VARARGS, "AddDestinationAddressElement(doFlag, rfFlag, dest_address, dest_seq_number)\n\ntype: doFlag: bool\ntype: rfFlag: bool\ntype: dest_address: ns3::Mac48Address\ntype: dest_seq_number: uint32_t" },
+    {(char *) "IncrementMetric", (PyCFunction) _wrap_PyNs3Dot11sIePreq_IncrementMetric, METH_KEYWORDS|METH_VARARGS, "IncrementMetric(metric)\n\ntype: metric: uint32_t" },
+    {(char *) "IsFull", (PyCFunction) _wrap_PyNs3Dot11sIePreq_IsFull, METH_NOARGS, "IsFull()\n\n" },
+    {(char *) "IsNeedNotPrep", (PyCFunction) _wrap_PyNs3Dot11sIePreq_IsNeedNotPrep, METH_NOARGS, "IsNeedNotPrep()\n\n" },
+    {(char *) "IsUnicastPreq", (PyCFunction) _wrap_PyNs3Dot11sIePreq_IsUnicastPreq, METH_NOARGS, "IsUnicastPreq()\n\n" },
+    {(char *) "MayAddAddress", (PyCFunction) _wrap_PyNs3Dot11sIePreq_MayAddAddress, METH_KEYWORDS|METH_VARARGS, "MayAddAddress(originator)\n\ntype: originator: ns3::Mac48Address" },
+    {(char *) "SerializeInformationField", (PyCFunction) _wrap_PyNs3Dot11sIePreq_SerializeInformationField, METH_KEYWORDS|METH_VARARGS, "SerializeInformationField(i)\n\ntype: i: ns3::Buffer::Iterator" },
+    {(char *) "SetDestCount", (PyCFunction) _wrap_PyNs3Dot11sIePreq_SetDestCount, METH_KEYWORDS|METH_VARARGS, "SetDestCount(dest_count)\n\ntype: dest_count: uint8_t" },
+    {(char *) "SetHopcount", (PyCFunction) _wrap_PyNs3Dot11sIePreq_SetHopcount, METH_KEYWORDS|METH_VARARGS, "SetHopcount(hopcount)\n\ntype: hopcount: uint8_t" },
+    {(char *) "SetLifetime", (PyCFunction) _wrap_PyNs3Dot11sIePreq_SetLifetime, METH_KEYWORDS|METH_VARARGS, "SetLifetime(lifetime)\n\ntype: lifetime: uint32_t" },
+    {(char *) "SetMetric", (PyCFunction) _wrap_PyNs3Dot11sIePreq_SetMetric, METH_KEYWORDS|METH_VARARGS, "SetMetric(metric)\n\ntype: metric: uint32_t" },
+    {(char *) "SetNeedNotPrep", (PyCFunction) _wrap_PyNs3Dot11sIePreq_SetNeedNotPrep, METH_NOARGS, "SetNeedNotPrep()\n\n" },
+    {(char *) "SetOriginatorAddress", (PyCFunction) _wrap_PyNs3Dot11sIePreq_SetOriginatorAddress, METH_KEYWORDS|METH_VARARGS, "SetOriginatorAddress(originator_address)\n\ntype: originator_address: ns3::Mac48Address" },
+    {(char *) "SetOriginatorSeqNumber", (PyCFunction) _wrap_PyNs3Dot11sIePreq_SetOriginatorSeqNumber, METH_KEYWORDS|METH_VARARGS, "SetOriginatorSeqNumber(originator_seq_number)\n\ntype: originator_seq_number: uint32_t" },
+    {(char *) "SetPreqID", (PyCFunction) _wrap_PyNs3Dot11sIePreq_SetPreqID, METH_KEYWORDS|METH_VARARGS, "SetPreqID(id)\n\ntype: id: uint32_t" },
+    {(char *) "SetTTL", (PyCFunction) _wrap_PyNs3Dot11sIePreq_SetTTL, METH_KEYWORDS|METH_VARARGS, "SetTTL(ttl)\n\ntype: ttl: uint8_t" },
+    {(char *) "SetUnicastPreq", (PyCFunction) _wrap_PyNs3Dot11sIePreq_SetUnicastPreq, METH_NOARGS, "SetUnicastPreq()\n\n" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3Dot11sIePreq__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -7925,6 +7925,52 @@ int _wrap_PyNs3Dot11sIeRann__tp_init(PyNs3Dot11sIeRann *self, PyObject *args, Py
 
 
 PyObject *
+_wrap_PyNs3Dot11sIeRann_DecrementTtl(PyNs3Dot11sIeRann *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->DecrementTtl();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIeRann_DeserializeInformationField(PyNs3Dot11sIeRann *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    PyNs3BufferIterator *start;
+    int length;
+    const char *keywords[] = {"start", "length", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!i", (char **) keywords, &PyNs3BufferIterator_Type, &start, &length)) {
+        return NULL;
+    }
+    if (length > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    retval = self->obj->DeserializeInformationField(*((PyNs3BufferIterator *) start)->obj, length);
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIeRann_ElementId(PyNs3Dot11sIeRann *self)
+{
+    PyObject *py_retval;
+    ns3::WifiInformationElementId retval;
+    
+    retval = self->obj->ElementId();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3Dot11sIeRann_GetDestSeqNumber(PyNs3Dot11sIeRann *self)
 {
     PyObject *py_retval;
@@ -7932,6 +7978,154 @@ _wrap_PyNs3Dot11sIeRann_GetDestSeqNumber(PyNs3Dot11sIeRann *self)
     
     retval = self->obj->GetDestSeqNumber();
     py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIeRann_GetFlags(PyNs3Dot11sIeRann *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    
+    retval = self->obj->GetFlags();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIeRann_GetHopcount(PyNs3Dot11sIeRann *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    
+    retval = self->obj->GetHopcount();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIeRann_GetInformationFieldSize(PyNs3Dot11sIeRann *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    
+    retval = self->obj->GetInformationFieldSize();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIeRann_GetMetric(PyNs3Dot11sIeRann *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetMetric();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIeRann_GetOriginatorAddress(PyNs3Dot11sIeRann *self)
+{
+    PyObject *py_retval;
+    PyNs3Mac48Address *py_Mac48Address;
+    
+    ns3::Mac48Address retval = self->obj->GetOriginatorAddress();
+    py_Mac48Address = PyObject_New(PyNs3Mac48Address, &PyNs3Mac48Address_Type);
+    py_Mac48Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Mac48Address->obj = new ns3::Mac48Address(retval);
+    PyNs3Mac48Address_wrapper_registry[(void *) py_Mac48Address->obj] = (PyObject *) py_Mac48Address;
+    py_retval = Py_BuildValue((char *) "N", py_Mac48Address);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIeRann_GetTtl(PyNs3Dot11sIeRann *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    
+    retval = self->obj->GetTtl();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIeRann_IncrementMetric(PyNs3Dot11sIeRann *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int metric;
+    const char *keywords[] = {"metric", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &metric)) {
+        return NULL;
+    }
+    self->obj->IncrementMetric(metric);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIeRann_SerializeInformationField(PyNs3Dot11sIeRann *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3BufferIterator *i;
+    const char *keywords[] = {"i", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &i)) {
+        return NULL;
+    }
+    self->obj->SerializeInformationField(*((PyNs3BufferIterator *) i)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIeRann_SetDestSeqNumber(PyNs3Dot11sIeRann *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int dest_seq_number;
+    const char *keywords[] = {"dest_seq_number", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &dest_seq_number)) {
+        return NULL;
+    }
+    self->obj->SetDestSeqNumber(dest_seq_number);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sIeRann_SetFlags(PyNs3Dot11sIeRann *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int flags;
+    const char *keywords[] = {"flags", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &flags)) {
+        return NULL;
+    }
+    if (flags > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SetFlags(flags);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -7975,68 +8169,18 @@ _wrap_PyNs3Dot11sIeRann_SetMetric(PyNs3Dot11sIeRann *self, PyObject *args, PyObj
 
 
 PyObject *
-_wrap_PyNs3Dot11sIeRann_GetHopcount(PyNs3Dot11sIeRann *self)
+_wrap_PyNs3Dot11sIeRann_SetOriginatorAddress(PyNs3Dot11sIeRann *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    uint8_t retval;
+    PyNs3Mac48Address *originator_address;
+    const char *keywords[] = {"originator_address", NULL};
     
-    retval = self->obj->GetHopcount();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIeRann_SetDestSeqNumber(PyNs3Dot11sIeRann *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int dest_seq_number;
-    const char *keywords[] = {"dest_seq_number", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &dest_seq_number)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Mac48Address_Type, &originator_address)) {
         return NULL;
     }
-    self->obj->SetDestSeqNumber(dest_seq_number);
+    self->obj->SetOriginatorAddress(*((PyNs3Mac48Address *) originator_address)->obj);
     Py_INCREF(Py_None);
     py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIeRann_GetOriginatorAddress(PyNs3Dot11sIeRann *self)
-{
-    PyObject *py_retval;
-    PyNs3Mac48Address *py_Mac48Address;
-    
-    ns3::Mac48Address retval = self->obj->GetOriginatorAddress();
-    py_Mac48Address = PyObject_New(PyNs3Mac48Address, &PyNs3Mac48Address_Type);
-    py_Mac48Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Mac48Address->obj = new ns3::Mac48Address(retval);
-    PyNs3Mac48Address_wrapper_registry[(void *) py_Mac48Address->obj] = (PyObject *) py_Mac48Address;
-    py_retval = Py_BuildValue((char *) "N", py_Mac48Address);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIeRann_DeserializeInformationField(PyNs3Dot11sIeRann *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    PyNs3BufferIterator *start;
-    int length;
-    const char *keywords[] = {"start", "length", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!i", (char **) keywords, &PyNs3BufferIterator_Type, &start, &length)) {
-        return NULL;
-    }
-    if (length > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    retval = self->obj->DeserializeInformationField(*((PyNs3BufferIterator *) start)->obj, length);
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
     return py_retval;
 }
 
@@ -8062,150 +8206,6 @@ _wrap_PyNs3Dot11sIeRann_SetTTL(PyNs3Dot11sIeRann *self, PyObject *args, PyObject
 }
 
 
-PyObject *
-_wrap_PyNs3Dot11sIeRann_GetMetric(PyNs3Dot11sIeRann *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetMetric();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIeRann_GetInformationFieldSize(PyNs3Dot11sIeRann *self)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    
-    retval = self->obj->GetInformationFieldSize();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIeRann_GetTtl(PyNs3Dot11sIeRann *self)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    
-    retval = self->obj->GetTtl();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIeRann_SetOriginatorAddress(PyNs3Dot11sIeRann *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Mac48Address *originator_address;
-    const char *keywords[] = {"originator_address", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Mac48Address_Type, &originator_address)) {
-        return NULL;
-    }
-    self->obj->SetOriginatorAddress(*((PyNs3Mac48Address *) originator_address)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIeRann_SetFlags(PyNs3Dot11sIeRann *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int flags;
-    const char *keywords[] = {"flags", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &flags)) {
-        return NULL;
-    }
-    if (flags > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SetFlags(flags);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIeRann_DecrementTtl(PyNs3Dot11sIeRann *self)
-{
-    PyObject *py_retval;
-    
-    self->obj->DecrementTtl();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIeRann_IncrementMetric(PyNs3Dot11sIeRann *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int metric;
-    const char *keywords[] = {"metric", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &metric)) {
-        return NULL;
-    }
-    self->obj->IncrementMetric(metric);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIeRann_GetFlags(PyNs3Dot11sIeRann *self)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    
-    retval = self->obj->GetFlags();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIeRann_ElementId(PyNs3Dot11sIeRann *self)
-{
-    PyObject *py_retval;
-    ns3::WifiInformationElementId retval;
-    
-    retval = self->obj->ElementId();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sIeRann_SerializeInformationField(PyNs3Dot11sIeRann *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3BufferIterator *i;
-    const char *keywords[] = {"i", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &i)) {
-        return NULL;
-    }
-    self->obj->SerializeInformationField(*((PyNs3BufferIterator *) i)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3Dot11sIeRann__copy__(PyNs3Dot11sIeRann *self)
 {
@@ -8220,24 +8220,24 @@ _wrap_PyNs3Dot11sIeRann__copy__(PyNs3Dot11sIeRann *self)
 }
 
 static PyMethodDef PyNs3Dot11sIeRann_methods[] = {
+    {(char *) "DecrementTtl", (PyCFunction) _wrap_PyNs3Dot11sIeRann_DecrementTtl, METH_NOARGS, "DecrementTtl()\n\n" },
+    {(char *) "DeserializeInformationField", (PyCFunction) _wrap_PyNs3Dot11sIeRann_DeserializeInformationField, METH_KEYWORDS|METH_VARARGS, "DeserializeInformationField(start, length)\n\ntype: start: ns3::Buffer::Iterator\ntype: length: uint8_t" },
+    {(char *) "ElementId", (PyCFunction) _wrap_PyNs3Dot11sIeRann_ElementId, METH_NOARGS, "ElementId()\n\n" },
     {(char *) "GetDestSeqNumber", (PyCFunction) _wrap_PyNs3Dot11sIeRann_GetDestSeqNumber, METH_NOARGS, "GetDestSeqNumber()\n\n" },
+    {(char *) "GetFlags", (PyCFunction) _wrap_PyNs3Dot11sIeRann_GetFlags, METH_NOARGS, "GetFlags()\n\n" },
+    {(char *) "GetHopcount", (PyCFunction) _wrap_PyNs3Dot11sIeRann_GetHopcount, METH_NOARGS, "GetHopcount()\n\n" },
+    {(char *) "GetInformationFieldSize", (PyCFunction) _wrap_PyNs3Dot11sIeRann_GetInformationFieldSize, METH_NOARGS, "GetInformationFieldSize()\n\n" },
+    {(char *) "GetMetric", (PyCFunction) _wrap_PyNs3Dot11sIeRann_GetMetric, METH_NOARGS, "GetMetric()\n\n" },
+    {(char *) "GetOriginatorAddress", (PyCFunction) _wrap_PyNs3Dot11sIeRann_GetOriginatorAddress, METH_NOARGS, "GetOriginatorAddress()\n\n" },
+    {(char *) "GetTtl", (PyCFunction) _wrap_PyNs3Dot11sIeRann_GetTtl, METH_NOARGS, "GetTtl()\n\n" },
+    {(char *) "IncrementMetric", (PyCFunction) _wrap_PyNs3Dot11sIeRann_IncrementMetric, METH_KEYWORDS|METH_VARARGS, "IncrementMetric(metric)\n\ntype: metric: uint32_t" },
+    {(char *) "SerializeInformationField", (PyCFunction) _wrap_PyNs3Dot11sIeRann_SerializeInformationField, METH_KEYWORDS|METH_VARARGS, "SerializeInformationField(i)\n\ntype: i: ns3::Buffer::Iterator" },
+    {(char *) "SetDestSeqNumber", (PyCFunction) _wrap_PyNs3Dot11sIeRann_SetDestSeqNumber, METH_KEYWORDS|METH_VARARGS, "SetDestSeqNumber(dest_seq_number)\n\ntype: dest_seq_number: uint32_t" },
+    {(char *) "SetFlags", (PyCFunction) _wrap_PyNs3Dot11sIeRann_SetFlags, METH_KEYWORDS|METH_VARARGS, "SetFlags(flags)\n\ntype: flags: uint8_t" },
     {(char *) "SetHopcount", (PyCFunction) _wrap_PyNs3Dot11sIeRann_SetHopcount, METH_KEYWORDS|METH_VARARGS, "SetHopcount(hopcount)\n\ntype: hopcount: uint8_t" },
     {(char *) "SetMetric", (PyCFunction) _wrap_PyNs3Dot11sIeRann_SetMetric, METH_KEYWORDS|METH_VARARGS, "SetMetric(metric)\n\ntype: metric: uint32_t" },
-    {(char *) "GetHopcount", (PyCFunction) _wrap_PyNs3Dot11sIeRann_GetHopcount, METH_NOARGS, "GetHopcount()\n\n" },
-    {(char *) "SetDestSeqNumber", (PyCFunction) _wrap_PyNs3Dot11sIeRann_SetDestSeqNumber, METH_KEYWORDS|METH_VARARGS, "SetDestSeqNumber(dest_seq_number)\n\ntype: dest_seq_number: uint32_t" },
-    {(char *) "GetOriginatorAddress", (PyCFunction) _wrap_PyNs3Dot11sIeRann_GetOriginatorAddress, METH_NOARGS, "GetOriginatorAddress()\n\n" },
-    {(char *) "DeserializeInformationField", (PyCFunction) _wrap_PyNs3Dot11sIeRann_DeserializeInformationField, METH_KEYWORDS|METH_VARARGS, "DeserializeInformationField(start, length)\n\ntype: start: ns3::Buffer::Iterator\ntype: length: uint8_t" },
-    {(char *) "SetTTL", (PyCFunction) _wrap_PyNs3Dot11sIeRann_SetTTL, METH_KEYWORDS|METH_VARARGS, "SetTTL(ttl)\n\ntype: ttl: uint8_t" },
-    {(char *) "GetMetric", (PyCFunction) _wrap_PyNs3Dot11sIeRann_GetMetric, METH_NOARGS, "GetMetric()\n\n" },
-    {(char *) "GetInformationFieldSize", (PyCFunction) _wrap_PyNs3Dot11sIeRann_GetInformationFieldSize, METH_NOARGS, "GetInformationFieldSize()\n\n" },
-    {(char *) "GetTtl", (PyCFunction) _wrap_PyNs3Dot11sIeRann_GetTtl, METH_NOARGS, "GetTtl()\n\n" },
     {(char *) "SetOriginatorAddress", (PyCFunction) _wrap_PyNs3Dot11sIeRann_SetOriginatorAddress, METH_KEYWORDS|METH_VARARGS, "SetOriginatorAddress(originator_address)\n\ntype: originator_address: ns3::Mac48Address" },
-    {(char *) "SetFlags", (PyCFunction) _wrap_PyNs3Dot11sIeRann_SetFlags, METH_KEYWORDS|METH_VARARGS, "SetFlags(flags)\n\ntype: flags: uint8_t" },
-    {(char *) "DecrementTtl", (PyCFunction) _wrap_PyNs3Dot11sIeRann_DecrementTtl, METH_NOARGS, "DecrementTtl()\n\n" },
-    {(char *) "IncrementMetric", (PyCFunction) _wrap_PyNs3Dot11sIeRann_IncrementMetric, METH_KEYWORDS|METH_VARARGS, "IncrementMetric(metric)\n\ntype: metric: uint32_t" },
-    {(char *) "GetFlags", (PyCFunction) _wrap_PyNs3Dot11sIeRann_GetFlags, METH_NOARGS, "GetFlags()\n\n" },
-    {(char *) "ElementId", (PyCFunction) _wrap_PyNs3Dot11sIeRann_ElementId, METH_NOARGS, "ElementId()\n\n" },
-    {(char *) "SerializeInformationField", (PyCFunction) _wrap_PyNs3Dot11sIeRann_SerializeInformationField, METH_KEYWORDS|METH_VARARGS, "SerializeInformationField(i)\n\ntype: i: ns3::Buffer::Iterator" },
+    {(char *) "SetTTL", (PyCFunction) _wrap_PyNs3Dot11sIeRann_SetTTL, METH_KEYWORDS|METH_VARARGS, "SetTTL(ttl)\n\ntype: ttl: uint8_t" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3Dot11sIeRann__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -8431,12 +8431,29 @@ int _wrap_PyNs3Dot11sMeshHeader__tp_init(PyNs3Dot11sMeshHeader *self, PyObject *
 
 
 PyObject *
-_wrap_PyNs3Dot11sMeshHeader_GetAddr6(PyNs3Dot11sMeshHeader *self)
+_wrap_PyNs3Dot11sMeshHeader_Deserialize(PyNs3Dot11sMeshHeader *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    PyNs3BufferIterator *start;
+    const char *keywords[] = {"start", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
+        return NULL;
+    }
+    retval = self->obj->Deserialize(*((PyNs3BufferIterator *) start)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sMeshHeader_GetAddr4(PyNs3Dot11sMeshHeader *self)
 {
     PyObject *py_retval;
     PyNs3Mac48Address *py_Mac48Address;
     
-    ns3::Mac48Address retval = self->obj->GetAddr6();
+    ns3::Mac48Address retval = self->obj->GetAddr4();
     py_Mac48Address = PyObject_New(PyNs3Mac48Address, &PyNs3Mac48Address_Type);
     py_Mac48Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
     py_Mac48Address->obj = new ns3::Mac48Address(retval);
@@ -8463,12 +8480,12 @@ _wrap_PyNs3Dot11sMeshHeader_GetAddr5(PyNs3Dot11sMeshHeader *self)
 
 
 PyObject *
-_wrap_PyNs3Dot11sMeshHeader_GetAddr4(PyNs3Dot11sMeshHeader *self)
+_wrap_PyNs3Dot11sMeshHeader_GetAddr6(PyNs3Dot11sMeshHeader *self)
 {
     PyObject *py_retval;
     PyNs3Mac48Address *py_Mac48Address;
     
-    ns3::Mac48Address retval = self->obj->GetAddr4();
+    ns3::Mac48Address retval = self->obj->GetAddr6();
     py_Mac48Address = PyObject_New(PyNs3Mac48Address, &PyNs3Mac48Address_Type);
     py_Mac48Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
     py_Mac48Address->obj = new ns3::Mac48Address(retval);
@@ -8479,35 +8496,29 @@ _wrap_PyNs3Dot11sMeshHeader_GetAddr4(PyNs3Dot11sMeshHeader *self)
 
 
 PyObject *
-_wrap_PyNs3Dot11sMeshHeader_SetMeshSeqno(PyNs3Dot11sMeshHeader *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3Dot11sMeshHeader_GetAddressExt(PyNs3Dot11sMeshHeader *self)
 {
     PyObject *py_retval;
-    unsigned int seqno;
-    const char *keywords[] = {"seqno", NULL};
+    uint8_t retval;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &seqno)) {
-        return NULL;
-    }
-    self->obj->SetMeshSeqno(seqno);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    retval = self->obj->GetAddressExt();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3Dot11sMeshHeader_Deserialize(PyNs3Dot11sMeshHeader *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3Dot11sMeshHeader_GetInstanceTypeId(PyNs3Dot11sMeshHeader *self)
 {
     PyObject *py_retval;
-    uint32_t retval;
-    PyNs3BufferIterator *start;
-    const char *keywords[] = {"start", NULL};
+    PyNs3TypeId *py_TypeId;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
-        return NULL;
-    }
-    retval = self->obj->Deserialize(*((PyNs3BufferIterator *) start)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    ns3::TypeId retval = self->obj->GetInstanceTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
     return py_retval;
 }
 
@@ -8519,6 +8530,30 @@ _wrap_PyNs3Dot11sMeshHeader_GetMeshSeqno(PyNs3Dot11sMeshHeader *self)
     uint32_t retval;
     
     retval = self->obj->GetMeshSeqno();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sMeshHeader_GetMeshTtl(PyNs3Dot11sMeshHeader *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    
+    retval = self->obj->GetMeshTtl();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sMeshHeader_GetSerializedSize(PyNs3Dot11sMeshHeader *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetSerializedSize();
     py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
@@ -8541,13 +8576,69 @@ _wrap_PyNs3Dot11sMeshHeader_GetTypeId(void)
 
 
 PyObject *
-_wrap_PyNs3Dot11sMeshHeader_GetMeshTtl(PyNs3Dot11sMeshHeader *self)
+_wrap_PyNs3Dot11sMeshHeader_Serialize(PyNs3Dot11sMeshHeader *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    uint8_t retval;
+    PyNs3BufferIterator *start;
+    const char *keywords[] = {"start", NULL};
     
-    retval = self->obj->GetMeshTtl();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
+        return NULL;
+    }
+    self->obj->Serialize(*((PyNs3BufferIterator *) start)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sMeshHeader_SetAddr4(PyNs3Dot11sMeshHeader *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Mac48Address *address;
+    const char *keywords[] = {"address", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Mac48Address_Type, &address)) {
+        return NULL;
+    }
+    self->obj->SetAddr4(*((PyNs3Mac48Address *) address)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sMeshHeader_SetAddr5(PyNs3Dot11sMeshHeader *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Mac48Address *address;
+    const char *keywords[] = {"address", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Mac48Address_Type, &address)) {
+        return NULL;
+    }
+    self->obj->SetAddr5(*((PyNs3Mac48Address *) address)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sMeshHeader_SetAddr6(PyNs3Dot11sMeshHeader *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Mac48Address *address;
+    const char *keywords[] = {"address", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Mac48Address_Type, &address)) {
+        return NULL;
+    }
+    self->obj->SetAddr6(*((PyNs3Mac48Address *) address)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -8574,13 +8665,18 @@ _wrap_PyNs3Dot11sMeshHeader_SetAddressExt(PyNs3Dot11sMeshHeader *self, PyObject 
 
 
 PyObject *
-_wrap_PyNs3Dot11sMeshHeader_GetAddressExt(PyNs3Dot11sMeshHeader *self)
+_wrap_PyNs3Dot11sMeshHeader_SetMeshSeqno(PyNs3Dot11sMeshHeader *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    uint8_t retval;
+    unsigned int seqno;
+    const char *keywords[] = {"seqno", NULL};
     
-    retval = self->obj->GetAddressExt();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &seqno)) {
+        return NULL;
+    }
+    self->obj->SetMeshSeqno(seqno);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -8606,102 +8702,6 @@ _wrap_PyNs3Dot11sMeshHeader_SetMeshTtl(PyNs3Dot11sMeshHeader *self, PyObject *ar
 }
 
 
-PyObject *
-_wrap_PyNs3Dot11sMeshHeader_GetInstanceTypeId(PyNs3Dot11sMeshHeader *self)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = self->obj->GetInstanceTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sMeshHeader_GetSerializedSize(PyNs3Dot11sMeshHeader *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetSerializedSize();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sMeshHeader_Serialize(PyNs3Dot11sMeshHeader *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3BufferIterator *start;
-    const char *keywords[] = {"start", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
-        return NULL;
-    }
-    self->obj->Serialize(*((PyNs3BufferIterator *) start)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sMeshHeader_SetAddr6(PyNs3Dot11sMeshHeader *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Mac48Address *address;
-    const char *keywords[] = {"address", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Mac48Address_Type, &address)) {
-        return NULL;
-    }
-    self->obj->SetAddr6(*((PyNs3Mac48Address *) address)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sMeshHeader_SetAddr5(PyNs3Dot11sMeshHeader *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Mac48Address *address;
-    const char *keywords[] = {"address", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Mac48Address_Type, &address)) {
-        return NULL;
-    }
-    self->obj->SetAddr5(*((PyNs3Mac48Address *) address)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sMeshHeader_SetAddr4(PyNs3Dot11sMeshHeader *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Mac48Address *address;
-    const char *keywords[] = {"address", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Mac48Address_Type, &address)) {
-        return NULL;
-    }
-    self->obj->SetAddr4(*((PyNs3Mac48Address *) address)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3Dot11sMeshHeader__copy__(PyNs3Dot11sMeshHeader *self)
 {
@@ -8717,23 +8717,23 @@ _wrap_PyNs3Dot11sMeshHeader__copy__(PyNs3Dot11sMeshHeader *self)
 }
 
 static PyMethodDef PyNs3Dot11sMeshHeader_methods[] = {
-    {(char *) "GetAddr6", (PyCFunction) _wrap_PyNs3Dot11sMeshHeader_GetAddr6, METH_NOARGS, "GetAddr6()\n\n" },
-    {(char *) "GetAddr5", (PyCFunction) _wrap_PyNs3Dot11sMeshHeader_GetAddr5, METH_NOARGS, "GetAddr5()\n\n" },
-    {(char *) "GetAddr4", (PyCFunction) _wrap_PyNs3Dot11sMeshHeader_GetAddr4, METH_NOARGS, "GetAddr4()\n\n" },
-    {(char *) "SetMeshSeqno", (PyCFunction) _wrap_PyNs3Dot11sMeshHeader_SetMeshSeqno, METH_KEYWORDS|METH_VARARGS, "SetMeshSeqno(seqno)\n\ntype: seqno: uint32_t" },
     {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3Dot11sMeshHeader_Deserialize, METH_KEYWORDS|METH_VARARGS, "Deserialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
-    {(char *) "GetMeshSeqno", (PyCFunction) _wrap_PyNs3Dot11sMeshHeader_GetMeshSeqno, METH_NOARGS, "GetMeshSeqno()\n\n" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3Dot11sMeshHeader_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "GetMeshTtl", (PyCFunction) _wrap_PyNs3Dot11sMeshHeader_GetMeshTtl, METH_NOARGS, "GetMeshTtl()\n\n" },
-    {(char *) "SetAddressExt", (PyCFunction) _wrap_PyNs3Dot11sMeshHeader_SetAddressExt, METH_KEYWORDS|METH_VARARGS, "SetAddressExt(num_of_addresses)\n\ntype: num_of_addresses: uint8_t" },
+    {(char *) "GetAddr4", (PyCFunction) _wrap_PyNs3Dot11sMeshHeader_GetAddr4, METH_NOARGS, "GetAddr4()\n\n" },
+    {(char *) "GetAddr5", (PyCFunction) _wrap_PyNs3Dot11sMeshHeader_GetAddr5, METH_NOARGS, "GetAddr5()\n\n" },
+    {(char *) "GetAddr6", (PyCFunction) _wrap_PyNs3Dot11sMeshHeader_GetAddr6, METH_NOARGS, "GetAddr6()\n\n" },
     {(char *) "GetAddressExt", (PyCFunction) _wrap_PyNs3Dot11sMeshHeader_GetAddressExt, METH_NOARGS, "GetAddressExt()\n\n" },
-    {(char *) "SetMeshTtl", (PyCFunction) _wrap_PyNs3Dot11sMeshHeader_SetMeshTtl, METH_KEYWORDS|METH_VARARGS, "SetMeshTtl(TTL)\n\ntype: TTL: uint8_t" },
     {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3Dot11sMeshHeader_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
+    {(char *) "GetMeshSeqno", (PyCFunction) _wrap_PyNs3Dot11sMeshHeader_GetMeshSeqno, METH_NOARGS, "GetMeshSeqno()\n\n" },
+    {(char *) "GetMeshTtl", (PyCFunction) _wrap_PyNs3Dot11sMeshHeader_GetMeshTtl, METH_NOARGS, "GetMeshTtl()\n\n" },
     {(char *) "GetSerializedSize", (PyCFunction) _wrap_PyNs3Dot11sMeshHeader_GetSerializedSize, METH_NOARGS, "GetSerializedSize()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3Dot11sMeshHeader_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
     {(char *) "Serialize", (PyCFunction) _wrap_PyNs3Dot11sMeshHeader_Serialize, METH_KEYWORDS|METH_VARARGS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
-    {(char *) "SetAddr6", (PyCFunction) _wrap_PyNs3Dot11sMeshHeader_SetAddr6, METH_KEYWORDS|METH_VARARGS, "SetAddr6(address)\n\ntype: address: ns3::Mac48Address" },
-    {(char *) "SetAddr5", (PyCFunction) _wrap_PyNs3Dot11sMeshHeader_SetAddr5, METH_KEYWORDS|METH_VARARGS, "SetAddr5(address)\n\ntype: address: ns3::Mac48Address" },
     {(char *) "SetAddr4", (PyCFunction) _wrap_PyNs3Dot11sMeshHeader_SetAddr4, METH_KEYWORDS|METH_VARARGS, "SetAddr4(address)\n\ntype: address: ns3::Mac48Address" },
+    {(char *) "SetAddr5", (PyCFunction) _wrap_PyNs3Dot11sMeshHeader_SetAddr5, METH_KEYWORDS|METH_VARARGS, "SetAddr5(address)\n\ntype: address: ns3::Mac48Address" },
+    {(char *) "SetAddr6", (PyCFunction) _wrap_PyNs3Dot11sMeshHeader_SetAddr6, METH_KEYWORDS|METH_VARARGS, "SetAddr6(address)\n\ntype: address: ns3::Mac48Address" },
+    {(char *) "SetAddressExt", (PyCFunction) _wrap_PyNs3Dot11sMeshHeader_SetAddressExt, METH_KEYWORDS|METH_VARARGS, "SetAddressExt(num_of_addresses)\n\ntype: num_of_addresses: uint8_t" },
+    {(char *) "SetMeshSeqno", (PyCFunction) _wrap_PyNs3Dot11sMeshHeader_SetMeshSeqno, METH_KEYWORDS|METH_VARARGS, "SetMeshSeqno(seqno)\n\ntype: seqno: uint32_t" },
+    {(char *) "SetMeshTtl", (PyCFunction) _wrap_PyNs3Dot11sMeshHeader_SetMeshTtl, METH_KEYWORDS|METH_VARARGS, "SetMeshTtl(TTL)\n\ntype: TTL: uint8_t" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3Dot11sMeshHeader__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -8868,22 +8868,6 @@ PyTypeObject PyNs3Dot11sMeshHeader_Type = {
 
 
 PyObject *
-PyNs3Dot11sPeerLink__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3Dot11sPeerLink *self)
-{
-    PyObject *py_retval;
-    PyNs3Dot11sPeerLink__PythonHelper *helper = dynamic_cast< PyNs3Dot11sPeerLink__PythonHelper* >(self->obj);
-    
-    if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
-        return NULL;
-    }
-    helper->NotifyConstructionCompleted__parent_caller();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject *
 PyNs3Dot11sPeerLink__PythonHelper::_wrap_DoInitialize(PyNs3Dot11sPeerLink *self)
 {
     PyObject *py_retval;
@@ -8910,6 +8894,22 @@ PyNs3Dot11sPeerLink__PythonHelper::_wrap_NotifyNewAggregate(PyNs3Dot11sPeerLink 
         return NULL;
     }
     helper->NotifyNewAggregate__parent_caller();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject *
+PyNs3Dot11sPeerLink__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3Dot11sPeerLink *self)
+{
+    PyObject *py_retval;
+    PyNs3Dot11sPeerLink__PythonHelper *helper = dynamic_cast< PyNs3Dot11sPeerLink__PythonHelper* >(self->obj);
+    
+    if (helper == NULL) {
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        return NULL;
+    }
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -9169,30 +9169,48 @@ _wrap_PyNs3Dot11sPeerLink__tp_init(PyNs3Dot11sPeerLink *self, PyObject *args, Py
 
 
 PyObject *
-_wrap_PyNs3Dot11sPeerLink_GetPeerAid(PyNs3Dot11sPeerLink *self)
+_wrap_PyNs3Dot11sPeerLink_GetTypeId(void)
 {
     PyObject *py_retval;
-    uint16_t retval;
+    PyNs3TypeId *py_TypeId;
     
-    retval = self->obj->GetPeerAid();
-    py_retval = Py_BuildValue((char *) "i", retval);
+    ns3::TypeId retval = ns3::dot11s::PeerLink::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3Dot11sPeerLink_GetBeaconTimingElement(PyNs3Dot11sPeerLink *self)
+_wrap_PyNs3Dot11sPeerLink_DoDispose(PyNs3Dot11sPeerLink *self)
 {
     PyObject *py_retval;
-    PyNs3Dot11sIeBeaconTiming *py_IeBeaconTiming;
+    PyNs3Dot11sPeerLink__PythonHelper *helper_class = dynamic_cast<PyNs3Dot11sPeerLink__PythonHelper*> (self->obj);
     
-    ns3::dot11s::IeBeaconTiming retval = self->obj->GetBeaconTimingElement();
-    py_IeBeaconTiming = PyObject_New(PyNs3Dot11sIeBeaconTiming, &PyNs3Dot11sIeBeaconTiming_Type);
+    (helper_class == NULL)? (self->obj->DoDispose()) : (self->obj->ns3::dot11s::PeerLink::DoDispose());
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sPeerLink_SetBeaconInformation(PyNs3Dot11sPeerLink *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Time *lastBeacon;
+    PyNs3Time *BeaconInterval;
+    const char *keywords[] = {"lastBeacon", "BeaconInterval", NULL};
     
-    py_IeBeaconTiming->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_IeBeaconTiming->obj = new ns3::dot11s::IeBeaconTiming(retval);
-    PyNs3Empty_wrapper_registry[(void *) py_IeBeaconTiming->obj] = (PyObject *) py_IeBeaconTiming;
-    py_retval = Py_BuildValue((char *) "N", py_IeBeaconTiming);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3Time_Type, &lastBeacon, &PyNs3Time_Type, &BeaconInterval)) {
+        return NULL;
+    }
+    self->obj->SetBeaconInformation(*((PyNs3Time *) lastBeacon)->obj, *((PyNs3Time *) BeaconInterval)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -9215,18 +9233,6 @@ _wrap_PyNs3Dot11sPeerLink_SetPeerAddress(PyNs3Dot11sPeerLink *self, PyObject *ar
 
 
 PyObject *
-_wrap_PyNs3Dot11sPeerLink_MLMEPeeringRequestReject(PyNs3Dot11sPeerLink *self)
-{
-    PyObject *py_retval;
-    
-    self->obj->MLMEPeeringRequestReject();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3Dot11sPeerLink_SetPeerMeshPointAddress(PyNs3Dot11sPeerLink *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -9237,6 +9243,212 @@ _wrap_PyNs3Dot11sPeerLink_SetPeerMeshPointAddress(PyNs3Dot11sPeerLink *self, PyO
         return NULL;
     }
     self->obj->SetPeerMeshPointAddress(*((PyNs3Mac48Address *) macaddr)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sPeerLink_SetInterface(PyNs3Dot11sPeerLink *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int interface;
+    const char *keywords[] = {"interface", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &interface)) {
+        return NULL;
+    }
+    self->obj->SetInterface(interface);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sPeerLink_SetLocalLinkId(PyNs3Dot11sPeerLink *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int id;
+    const char *keywords[] = {"id", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &id)) {
+        return NULL;
+    }
+    if (id > 0xffff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SetLocalLinkId(id);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sPeerLink_SetLocalAid(PyNs3Dot11sPeerLink *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int aid;
+    const char *keywords[] = {"aid", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &aid)) {
+        return NULL;
+    }
+    if (aid > 0xffff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SetLocalAid(aid);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sPeerLink_GetPeerAid(PyNs3Dot11sPeerLink *self)
+{
+    PyObject *py_retval;
+    uint16_t retval;
+    
+    retval = self->obj->GetPeerAid();
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sPeerLink_SetBeaconTimingElement(PyNs3Dot11sPeerLink *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Dot11sIeBeaconTiming *beaconTiming;
+    const char *keywords[] = {"beaconTiming", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Dot11sIeBeaconTiming_Type, &beaconTiming)) {
+        return NULL;
+    }
+    self->obj->SetBeaconTimingElement(*((PyNs3Dot11sIeBeaconTiming *) beaconTiming)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sPeerLink_GetPeerAddress(PyNs3Dot11sPeerLink *self)
+{
+    PyObject *py_retval;
+    PyNs3Mac48Address *py_Mac48Address;
+    
+    ns3::Mac48Address retval = self->obj->GetPeerAddress();
+    py_Mac48Address = PyObject_New(PyNs3Mac48Address, &PyNs3Mac48Address_Type);
+    py_Mac48Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Mac48Address->obj = new ns3::Mac48Address(retval);
+    PyNs3Mac48Address_wrapper_registry[(void *) py_Mac48Address->obj] = (PyObject *) py_Mac48Address;
+    py_retval = Py_BuildValue((char *) "N", py_Mac48Address);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sPeerLink_GetLocalAid(PyNs3Dot11sPeerLink *self)
+{
+    PyObject *py_retval;
+    uint16_t retval;
+    
+    retval = self->obj->GetLocalAid();
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sPeerLink_GetLastBeacon(PyNs3Dot11sPeerLink *self)
+{
+    PyObject *py_retval;
+    PyNs3Time *py_Time;
+    
+    ns3::Time retval = self->obj->GetLastBeacon();
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sPeerLink_GetBeaconInterval(PyNs3Dot11sPeerLink *self)
+{
+    PyObject *py_retval;
+    PyNs3Time *py_Time;
+    
+    ns3::Time retval = self->obj->GetBeaconInterval();
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sPeerLink_GetBeaconTimingElement(PyNs3Dot11sPeerLink *self)
+{
+    PyObject *py_retval;
+    PyNs3Dot11sIeBeaconTiming *py_IeBeaconTiming;
+    
+    ns3::dot11s::IeBeaconTiming retval = self->obj->GetBeaconTimingElement();
+    py_IeBeaconTiming = PyObject_New(PyNs3Dot11sIeBeaconTiming, &PyNs3Dot11sIeBeaconTiming_Type);
+    
+    py_IeBeaconTiming->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_IeBeaconTiming->obj = new ns3::dot11s::IeBeaconTiming(retval);
+    PyNs3Empty_wrapper_registry[(void *) py_IeBeaconTiming->obj] = (PyObject *) py_IeBeaconTiming;
+    py_retval = Py_BuildValue((char *) "N", py_IeBeaconTiming);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sPeerLink_MLMECancelPeerLink(PyNs3Dot11sPeerLink *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    ns3::dot11s::PmpReasonCode reason;
+    const char *keywords[] = {"reason", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &reason)) {
+        return NULL;
+    }
+    self->obj->MLMECancelPeerLink(reason);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sPeerLink_MLMEActivePeerLinkOpen(PyNs3Dot11sPeerLink *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->MLMEActivePeerLinkOpen();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sPeerLink_MLMEPeeringRequestReject(PyNs3Dot11sPeerLink *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->MLMEPeeringRequestReject();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -9267,176 +9479,11 @@ _wrap_PyNs3Dot11sPeerLink_MLMESetSignalStatusCallback(PyNs3Dot11sPeerLink *self,
 
 
 PyObject *
-_wrap_PyNs3Dot11sPeerLink_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::dot11s::PeerLink::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sPeerLink_MLMEActivePeerLinkOpen(PyNs3Dot11sPeerLink *self)
-{
-    PyObject *py_retval;
-    
-    self->obj->MLMEActivePeerLinkOpen();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sPeerLink_SetBeaconTimingElement(PyNs3Dot11sPeerLink *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Dot11sIeBeaconTiming *beaconTiming;
-    const char *keywords[] = {"beaconTiming", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Dot11sIeBeaconTiming_Type, &beaconTiming)) {
-        return NULL;
-    }
-    self->obj->SetBeaconTimingElement(*((PyNs3Dot11sIeBeaconTiming *) beaconTiming)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sPeerLink_GetLastBeacon(PyNs3Dot11sPeerLink *self)
-{
-    PyObject *py_retval;
-    PyNs3Time *py_Time;
-    
-    ns3::Time retval = self->obj->GetLastBeacon();
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sPeerLink_GetPeerAddress(PyNs3Dot11sPeerLink *self)
-{
-    PyObject *py_retval;
-    PyNs3Mac48Address *py_Mac48Address;
-    
-    ns3::Mac48Address retval = self->obj->GetPeerAddress();
-    py_Mac48Address = PyObject_New(PyNs3Mac48Address, &PyNs3Mac48Address_Type);
-    py_Mac48Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Mac48Address->obj = new ns3::Mac48Address(retval);
-    PyNs3Mac48Address_wrapper_registry[(void *) py_Mac48Address->obj] = (PyObject *) py_Mac48Address;
-    py_retval = Py_BuildValue((char *) "N", py_Mac48Address);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sPeerLink_MLMECancelPeerLink(PyNs3Dot11sPeerLink *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    ns3::dot11s::PmpReasonCode reason;
-    const char *keywords[] = {"reason", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &reason)) {
-        return NULL;
-    }
-    self->obj->MLMECancelPeerLink(reason);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sPeerLink_GetBeaconInterval(PyNs3Dot11sPeerLink *self)
-{
-    PyObject *py_retval;
-    PyNs3Time *py_Time;
-    
-    ns3::Time retval = self->obj->GetBeaconInterval();
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3Dot11sPeerLink_TransmissionSuccess(PyNs3Dot11sPeerLink *self)
 {
     PyObject *py_retval;
     
     self->obj->TransmissionSuccess();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sPeerLink_SetLocalAid(PyNs3Dot11sPeerLink *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int aid;
-    const char *keywords[] = {"aid", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &aid)) {
-        return NULL;
-    }
-    if (aid > 0xffff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SetLocalAid(aid);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sPeerLink_DoDispose(PyNs3Dot11sPeerLink *self)
-{
-    PyObject *py_retval;
-    PyNs3Dot11sPeerLink__PythonHelper *helper_class = dynamic_cast<PyNs3Dot11sPeerLink__PythonHelper*> (self->obj);
-    
-    (helper_class == NULL)? (self->obj->DoDispose()) : (self->obj->ns3::dot11s::PeerLink::DoDispose());
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sPeerLink_SetLocalLinkId(PyNs3Dot11sPeerLink *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int id;
-    const char *keywords[] = {"id", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &id)) {
-        return NULL;
-    }
-    if (id > 0xffff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SetLocalLinkId(id);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -9454,78 +9501,31 @@ _wrap_PyNs3Dot11sPeerLink_TransmissionFailure(PyNs3Dot11sPeerLink *self)
     return py_retval;
 }
 
-
-PyObject *
-_wrap_PyNs3Dot11sPeerLink_SetInterface(PyNs3Dot11sPeerLink *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int interface;
-    const char *keywords[] = {"interface", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &interface)) {
-        return NULL;
-    }
-    self->obj->SetInterface(interface);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sPeerLink_GetLocalAid(PyNs3Dot11sPeerLink *self)
-{
-    PyObject *py_retval;
-    uint16_t retval;
-    
-    retval = self->obj->GetLocalAid();
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sPeerLink_SetBeaconInformation(PyNs3Dot11sPeerLink *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Time *lastBeacon;
-    PyNs3Time *BeaconInterval;
-    const char *keywords[] = {"lastBeacon", "BeaconInterval", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3Time_Type, &lastBeacon, &PyNs3Time_Type, &BeaconInterval)) {
-        return NULL;
-    }
-    self->obj->SetBeaconInformation(*((PyNs3Time *) lastBeacon)->obj, *((PyNs3Time *) BeaconInterval)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
 static PyMethodDef PyNs3Dot11sPeerLink_methods[] = {
-    {(char *) "GetPeerAid", (PyCFunction) _wrap_PyNs3Dot11sPeerLink_GetPeerAid, METH_NOARGS, "GetPeerAid()\n\n" },
-    {(char *) "GetBeaconTimingElement", (PyCFunction) _wrap_PyNs3Dot11sPeerLink_GetBeaconTimingElement, METH_NOARGS, "GetBeaconTimingElement()\n\n" },
-    {(char *) "SetPeerAddress", (PyCFunction) _wrap_PyNs3Dot11sPeerLink_SetPeerAddress, METH_KEYWORDS|METH_VARARGS, "SetPeerAddress(macaddr)\n\ntype: macaddr: ns3::Mac48Address" },
-    {(char *) "MLMEPeeringRequestReject", (PyCFunction) _wrap_PyNs3Dot11sPeerLink_MLMEPeeringRequestReject, METH_NOARGS, "MLMEPeeringRequestReject()\n\n" },
-    {(char *) "SetPeerMeshPointAddress", (PyCFunction) _wrap_PyNs3Dot11sPeerLink_SetPeerMeshPointAddress, METH_KEYWORDS|METH_VARARGS, "SetPeerMeshPointAddress(macaddr)\n\ntype: macaddr: ns3::Mac48Address" },
-    {(char *) "MLMESetSignalStatusCallback", (PyCFunction) _wrap_PyNs3Dot11sPeerLink_MLMESetSignalStatusCallback, METH_KEYWORDS|METH_VARARGS, "MLMESetSignalStatusCallback(cb)\n\ntype: cb: ns3::Callback< void, unsigned int, ns3::Mac48Address, ns3::Mac48Address, ns3::dot11s::PeerLink::PeerState, ns3::dot11s::PeerLink::PeerState, ns3::empty, ns3::empty, ns3::empty, ns3::empty >" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3Dot11sPeerLink_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "MLMEActivePeerLinkOpen", (PyCFunction) _wrap_PyNs3Dot11sPeerLink_MLMEActivePeerLinkOpen, METH_NOARGS, "MLMEActivePeerLinkOpen()\n\n" },
-    {(char *) "SetBeaconTimingElement", (PyCFunction) _wrap_PyNs3Dot11sPeerLink_SetBeaconTimingElement, METH_KEYWORDS|METH_VARARGS, "SetBeaconTimingElement(beaconTiming)\n\ntype: beaconTiming: ns3::dot11s::IeBeaconTiming" },
-    {(char *) "GetLastBeacon", (PyCFunction) _wrap_PyNs3Dot11sPeerLink_GetLastBeacon, METH_NOARGS, "GetLastBeacon()\n\n" },
-    {(char *) "GetPeerAddress", (PyCFunction) _wrap_PyNs3Dot11sPeerLink_GetPeerAddress, METH_NOARGS, "GetPeerAddress()\n\n" },
-    {(char *) "MLMECancelPeerLink", (PyCFunction) _wrap_PyNs3Dot11sPeerLink_MLMECancelPeerLink, METH_KEYWORDS|METH_VARARGS, "MLMECancelPeerLink(reason)\n\ntype: reason: ns3::dot11s::PmpReasonCode" },
-    {(char *) "GetBeaconInterval", (PyCFunction) _wrap_PyNs3Dot11sPeerLink_GetBeaconInterval, METH_NOARGS, "GetBeaconInterval()\n\n" },
-    {(char *) "TransmissionSuccess", (PyCFunction) _wrap_PyNs3Dot11sPeerLink_TransmissionSuccess, METH_NOARGS, "TransmissionSuccess()\n\n" },
-    {(char *) "SetLocalAid", (PyCFunction) _wrap_PyNs3Dot11sPeerLink_SetLocalAid, METH_KEYWORDS|METH_VARARGS, "SetLocalAid(aid)\n\ntype: aid: uint16_t" },
     {(char *) "DoDispose", (PyCFunction) _wrap_PyNs3Dot11sPeerLink_DoDispose, METH_NOARGS, "DoDispose()\n\n" },
-    {(char *) "SetLocalLinkId", (PyCFunction) _wrap_PyNs3Dot11sPeerLink_SetLocalLinkId, METH_KEYWORDS|METH_VARARGS, "SetLocalLinkId(id)\n\ntype: id: uint16_t" },
-    {(char *) "TransmissionFailure", (PyCFunction) _wrap_PyNs3Dot11sPeerLink_TransmissionFailure, METH_NOARGS, "TransmissionFailure()\n\n" },
-    {(char *) "SetInterface", (PyCFunction) _wrap_PyNs3Dot11sPeerLink_SetInterface, METH_KEYWORDS|METH_VARARGS, "SetInterface(interface)\n\ntype: interface: uint32_t" },
-    {(char *) "GetLocalAid", (PyCFunction) _wrap_PyNs3Dot11sPeerLink_GetLocalAid, METH_NOARGS, "GetLocalAid()\n\n" },
     {(char *) "SetBeaconInformation", (PyCFunction) _wrap_PyNs3Dot11sPeerLink_SetBeaconInformation, METH_KEYWORDS|METH_VARARGS, "SetBeaconInformation(lastBeacon, BeaconInterval)\n\ntype: lastBeacon: ns3::Time\ntype: BeaconInterval: ns3::Time" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3Dot11sPeerLink__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "SetPeerAddress", (PyCFunction) _wrap_PyNs3Dot11sPeerLink_SetPeerAddress, METH_KEYWORDS|METH_VARARGS, "SetPeerAddress(macaddr)\n\ntype: macaddr: ns3::Mac48Address" },
+    {(char *) "SetPeerMeshPointAddress", (PyCFunction) _wrap_PyNs3Dot11sPeerLink_SetPeerMeshPointAddress, METH_KEYWORDS|METH_VARARGS, "SetPeerMeshPointAddress(macaddr)\n\ntype: macaddr: ns3::Mac48Address" },
+    {(char *) "SetInterface", (PyCFunction) _wrap_PyNs3Dot11sPeerLink_SetInterface, METH_KEYWORDS|METH_VARARGS, "SetInterface(interface)\n\ntype: interface: uint32_t" },
+    {(char *) "SetLocalLinkId", (PyCFunction) _wrap_PyNs3Dot11sPeerLink_SetLocalLinkId, METH_KEYWORDS|METH_VARARGS, "SetLocalLinkId(id)\n\ntype: id: uint16_t" },
+    {(char *) "SetLocalAid", (PyCFunction) _wrap_PyNs3Dot11sPeerLink_SetLocalAid, METH_KEYWORDS|METH_VARARGS, "SetLocalAid(aid)\n\ntype: aid: uint16_t" },
+    {(char *) "GetPeerAid", (PyCFunction) _wrap_PyNs3Dot11sPeerLink_GetPeerAid, METH_NOARGS, "GetPeerAid()\n\n" },
+    {(char *) "SetBeaconTimingElement", (PyCFunction) _wrap_PyNs3Dot11sPeerLink_SetBeaconTimingElement, METH_KEYWORDS|METH_VARARGS, "SetBeaconTimingElement(beaconTiming)\n\ntype: beaconTiming: ns3::dot11s::IeBeaconTiming" },
+    {(char *) "GetPeerAddress", (PyCFunction) _wrap_PyNs3Dot11sPeerLink_GetPeerAddress, METH_NOARGS, "GetPeerAddress()\n\n" },
+    {(char *) "GetLocalAid", (PyCFunction) _wrap_PyNs3Dot11sPeerLink_GetLocalAid, METH_NOARGS, "GetLocalAid()\n\n" },
+    {(char *) "GetLastBeacon", (PyCFunction) _wrap_PyNs3Dot11sPeerLink_GetLastBeacon, METH_NOARGS, "GetLastBeacon()\n\n" },
+    {(char *) "GetBeaconInterval", (PyCFunction) _wrap_PyNs3Dot11sPeerLink_GetBeaconInterval, METH_NOARGS, "GetBeaconInterval()\n\n" },
+    {(char *) "GetBeaconTimingElement", (PyCFunction) _wrap_PyNs3Dot11sPeerLink_GetBeaconTimingElement, METH_NOARGS, "GetBeaconTimingElement()\n\n" },
+    {(char *) "MLMECancelPeerLink", (PyCFunction) _wrap_PyNs3Dot11sPeerLink_MLMECancelPeerLink, METH_KEYWORDS|METH_VARARGS, "MLMECancelPeerLink(reason)\n\ntype: reason: ns3::dot11s::PmpReasonCode" },
+    {(char *) "MLMEActivePeerLinkOpen", (PyCFunction) _wrap_PyNs3Dot11sPeerLink_MLMEActivePeerLinkOpen, METH_NOARGS, "MLMEActivePeerLinkOpen()\n\n" },
+    {(char *) "MLMEPeeringRequestReject", (PyCFunction) _wrap_PyNs3Dot11sPeerLink_MLMEPeeringRequestReject, METH_NOARGS, "MLMEPeeringRequestReject()\n\n" },
+    {(char *) "MLMESetSignalStatusCallback", (PyCFunction) _wrap_PyNs3Dot11sPeerLink_MLMESetSignalStatusCallback, METH_KEYWORDS|METH_VARARGS, "MLMESetSignalStatusCallback(cb)\n\ntype: cb: ns3::Callback< void, unsigned int, ns3::Mac48Address, ns3::Mac48Address, ns3::dot11s::PeerLink::PeerState, ns3::dot11s::PeerLink::PeerState, ns3::empty, ns3::empty, ns3::empty, ns3::empty >" },
+    {(char *) "TransmissionSuccess", (PyCFunction) _wrap_PyNs3Dot11sPeerLink_TransmissionSuccess, METH_NOARGS, "TransmissionSuccess()\n\n" },
+    {(char *) "TransmissionFailure", (PyCFunction) _wrap_PyNs3Dot11sPeerLink_TransmissionFailure, METH_NOARGS, "TransmissionFailure()\n\n" },
     {(char *) "DoInitialize", (PyCFunction) PyNs3Dot11sPeerLink__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3Dot11sPeerLink__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3Dot11sPeerLink__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 
@@ -9688,34 +9688,17 @@ _wrap_PyNs3Dot11sPeerLinkCloseStart_Deserialize(PyNs3Dot11sPeerLinkCloseStart *s
 
 
 PyObject *
-_wrap_PyNs3Dot11sPeerLinkCloseStart_GetTypeId(void)
+_wrap_PyNs3Dot11sPeerLinkCloseStart_GetFields(PyNs3Dot11sPeerLinkCloseStart *self)
 {
     PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
+    PyNs3Dot11sPeerLinkCloseStartPlinkCloseStartFields *py_PlinkCloseStartFields;
     
-    ns3::TypeId retval = ns3::dot11s::PeerLinkCloseStart::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sPeerLinkCloseStart_Serialize(PyNs3Dot11sPeerLinkCloseStart *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3BufferIterator *start;
-    const char *keywords[] = {"start", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
-        return NULL;
-    }
-    self->obj->Serialize(*((PyNs3BufferIterator *) start)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    ns3::dot11s::PeerLinkCloseStart::PlinkCloseStartFields retval = self->obj->GetFields();
+    py_PlinkCloseStartFields = PyObject_New(PyNs3Dot11sPeerLinkCloseStartPlinkCloseStartFields, &PyNs3Dot11sPeerLinkCloseStartPlinkCloseStartFields_Type);
+    py_PlinkCloseStartFields->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_PlinkCloseStartFields->obj = new ns3::dot11s::PeerLinkCloseStart::PlinkCloseStartFields(retval);
+    PyNs3Dot11sPeerLinkCloseStartPlinkCloseStartFields_wrapper_registry[(void *) py_PlinkCloseStartFields->obj] = (PyObject *) py_PlinkCloseStartFields;
+    py_retval = Py_BuildValue((char *) "N", py_PlinkCloseStartFields);
     return py_retval;
 }
 
@@ -9749,17 +9732,34 @@ _wrap_PyNs3Dot11sPeerLinkCloseStart_GetSerializedSize(PyNs3Dot11sPeerLinkCloseSt
 
 
 PyObject *
-_wrap_PyNs3Dot11sPeerLinkCloseStart_GetFields(PyNs3Dot11sPeerLinkCloseStart *self)
+_wrap_PyNs3Dot11sPeerLinkCloseStart_GetTypeId(void)
 {
     PyObject *py_retval;
-    PyNs3Dot11sPeerLinkCloseStartPlinkCloseStartFields *py_PlinkCloseStartFields;
+    PyNs3TypeId *py_TypeId;
     
-    ns3::dot11s::PeerLinkCloseStart::PlinkCloseStartFields retval = self->obj->GetFields();
-    py_PlinkCloseStartFields = PyObject_New(PyNs3Dot11sPeerLinkCloseStartPlinkCloseStartFields, &PyNs3Dot11sPeerLinkCloseStartPlinkCloseStartFields_Type);
-    py_PlinkCloseStartFields->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_PlinkCloseStartFields->obj = new ns3::dot11s::PeerLinkCloseStart::PlinkCloseStartFields(retval);
-    PyNs3Dot11sPeerLinkCloseStartPlinkCloseStartFields_wrapper_registry[(void *) py_PlinkCloseStartFields->obj] = (PyObject *) py_PlinkCloseStartFields;
-    py_retval = Py_BuildValue((char *) "N", py_PlinkCloseStartFields);
+    ns3::TypeId retval = ns3::dot11s::PeerLinkCloseStart::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sPeerLinkCloseStart_Serialize(PyNs3Dot11sPeerLinkCloseStart *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3BufferIterator *start;
+    const char *keywords[] = {"start", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
+        return NULL;
+    }
+    self->obj->Serialize(*((PyNs3BufferIterator *) start)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -9782,11 +9782,11 @@ _wrap_PyNs3Dot11sPeerLinkCloseStart_SetPlinkCloseStart(PyNs3Dot11sPeerLinkCloseS
 
 static PyMethodDef PyNs3Dot11sPeerLinkCloseStart_methods[] = {
     {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3Dot11sPeerLinkCloseStart_Deserialize, METH_KEYWORDS|METH_VARARGS, "Deserialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3Dot11sPeerLinkCloseStart_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3Dot11sPeerLinkCloseStart_Serialize, METH_KEYWORDS|METH_VARARGS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
+    {(char *) "GetFields", (PyCFunction) _wrap_PyNs3Dot11sPeerLinkCloseStart_GetFields, METH_NOARGS, "GetFields()\n\n" },
     {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3Dot11sPeerLinkCloseStart_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
     {(char *) "GetSerializedSize", (PyCFunction) _wrap_PyNs3Dot11sPeerLinkCloseStart_GetSerializedSize, METH_NOARGS, "GetSerializedSize()\n\n" },
-    {(char *) "GetFields", (PyCFunction) _wrap_PyNs3Dot11sPeerLinkCloseStart_GetFields, METH_NOARGS, "GetFields()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3Dot11sPeerLinkCloseStart_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3Dot11sPeerLinkCloseStart_Serialize, METH_KEYWORDS|METH_VARARGS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
     {(char *) "SetPlinkCloseStart", (PyCFunction) _wrap_PyNs3Dot11sPeerLinkCloseStart_SetPlinkCloseStart, METH_KEYWORDS|METH_VARARGS, "SetPlinkCloseStart(fields)\n\ntype: fields: ns3::dot11s::PeerLinkCloseStart::PlinkCloseStartFields" },
     {NULL, NULL, 0, NULL}
 };
@@ -9976,16 +9976,16 @@ static int _wrap_PyNs3Dot11sPeerLinkCloseStartPlinkCloseStartFields__set_protoco
 }
 static PyGetSetDef PyNs3Dot11sPeerLinkCloseStartPlinkCloseStartFields__getsets[] = {
     {
-        (char*) "protocol", /* attribute name */
-        (getter) _wrap_PyNs3Dot11sPeerLinkCloseStartPlinkCloseStartFields__get_protocol, /* C function to get the attribute */
-        (setter) _wrap_PyNs3Dot11sPeerLinkCloseStartPlinkCloseStartFields__set_protocol, /* C function to set the attribute */
+        (char*) "meshId", /* attribute name */
+        (getter) _wrap_PyNs3Dot11sPeerLinkCloseStartPlinkCloseStartFields__get_meshId, /* C function to get the attribute */
+        (setter) _wrap_PyNs3Dot11sPeerLinkCloseStartPlinkCloseStartFields__set_meshId, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
     {
-        (char*) "meshId", /* attribute name */
-        (getter) _wrap_PyNs3Dot11sPeerLinkCloseStartPlinkCloseStartFields__get_meshId, /* C function to get the attribute */
-        (setter) _wrap_PyNs3Dot11sPeerLinkCloseStartPlinkCloseStartFields__set_meshId, /* C function to set the attribute */
+        (char*) "protocol", /* attribute name */
+        (getter) _wrap_PyNs3Dot11sPeerLinkCloseStartPlinkCloseStartFields__get_protocol, /* C function to get the attribute */
+        (setter) _wrap_PyNs3Dot11sPeerLinkCloseStartPlinkCloseStartFields__set_protocol, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -10196,23 +10196,6 @@ _wrap_PyNs3Dot11sPeerLinkConfirmStart__tp_init(PyNs3Dot11sPeerLinkConfirmStart *
 
 
 PyObject *
-_wrap_PyNs3Dot11sPeerLinkConfirmStart_SetPlinkConfirmStart(PyNs3Dot11sPeerLinkConfirmStart *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Dot11sPeerLinkConfirmStartPlinkConfirmStartFields *fields;
-    const char *keywords[] = {"fields", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Dot11sPeerLinkConfirmStartPlinkConfirmStartFields_Type, &fields)) {
-        return NULL;
-    }
-    self->obj->SetPlinkConfirmStart(*((PyNs3Dot11sPeerLinkConfirmStartPlinkConfirmStartFields *) fields)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3Dot11sPeerLinkConfirmStart_Deserialize(PyNs3Dot11sPeerLinkConfirmStart *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -10224,6 +10207,50 @@ _wrap_PyNs3Dot11sPeerLinkConfirmStart_Deserialize(PyNs3Dot11sPeerLinkConfirmStar
         return NULL;
     }
     retval = self->obj->Deserialize(*((PyNs3BufferIterator *) start)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sPeerLinkConfirmStart_GetFields(PyNs3Dot11sPeerLinkConfirmStart *self)
+{
+    PyObject *py_retval;
+    PyNs3Dot11sPeerLinkConfirmStartPlinkConfirmStartFields *py_PlinkConfirmStartFields;
+    
+    ns3::dot11s::PeerLinkConfirmStart::PlinkConfirmStartFields retval = self->obj->GetFields();
+    py_PlinkConfirmStartFields = PyObject_New(PyNs3Dot11sPeerLinkConfirmStartPlinkConfirmStartFields, &PyNs3Dot11sPeerLinkConfirmStartPlinkConfirmStartFields_Type);
+    py_PlinkConfirmStartFields->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_PlinkConfirmStartFields->obj = new ns3::dot11s::PeerLinkConfirmStart::PlinkConfirmStartFields(retval);
+    PyNs3Dot11sPeerLinkConfirmStartPlinkConfirmStartFields_wrapper_registry[(void *) py_PlinkConfirmStartFields->obj] = (PyObject *) py_PlinkConfirmStartFields;
+    py_retval = Py_BuildValue((char *) "N", py_PlinkConfirmStartFields);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sPeerLinkConfirmStart_GetInstanceTypeId(PyNs3Dot11sPeerLinkConfirmStart *self)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = self->obj->GetInstanceTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sPeerLinkConfirmStart_GetSerializedSize(PyNs3Dot11sPeerLinkConfirmStart *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetSerializedSize();
     py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
@@ -10263,56 +10290,29 @@ _wrap_PyNs3Dot11sPeerLinkConfirmStart_Serialize(PyNs3Dot11sPeerLinkConfirmStart 
 
 
 PyObject *
-_wrap_PyNs3Dot11sPeerLinkConfirmStart_GetInstanceTypeId(PyNs3Dot11sPeerLinkConfirmStart *self)
+_wrap_PyNs3Dot11sPeerLinkConfirmStart_SetPlinkConfirmStart(PyNs3Dot11sPeerLinkConfirmStart *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
+    PyNs3Dot11sPeerLinkConfirmStartPlinkConfirmStartFields *fields;
+    const char *keywords[] = {"fields", NULL};
     
-    ns3::TypeId retval = self->obj->GetInstanceTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sPeerLinkConfirmStart_GetSerializedSize(PyNs3Dot11sPeerLinkConfirmStart *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetSerializedSize();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sPeerLinkConfirmStart_GetFields(PyNs3Dot11sPeerLinkConfirmStart *self)
-{
-    PyObject *py_retval;
-    PyNs3Dot11sPeerLinkConfirmStartPlinkConfirmStartFields *py_PlinkConfirmStartFields;
-    
-    ns3::dot11s::PeerLinkConfirmStart::PlinkConfirmStartFields retval = self->obj->GetFields();
-    py_PlinkConfirmStartFields = PyObject_New(PyNs3Dot11sPeerLinkConfirmStartPlinkConfirmStartFields, &PyNs3Dot11sPeerLinkConfirmStartPlinkConfirmStartFields_Type);
-    py_PlinkConfirmStartFields->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_PlinkConfirmStartFields->obj = new ns3::dot11s::PeerLinkConfirmStart::PlinkConfirmStartFields(retval);
-    PyNs3Dot11sPeerLinkConfirmStartPlinkConfirmStartFields_wrapper_registry[(void *) py_PlinkConfirmStartFields->obj] = (PyObject *) py_PlinkConfirmStartFields;
-    py_retval = Py_BuildValue((char *) "N", py_PlinkConfirmStartFields);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Dot11sPeerLinkConfirmStartPlinkConfirmStartFields_Type, &fields)) {
+        return NULL;
+    }
+    self->obj->SetPlinkConfirmStart(*((PyNs3Dot11sPeerLinkConfirmStartPlinkConfirmStartFields *) fields)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
 static PyMethodDef PyNs3Dot11sPeerLinkConfirmStart_methods[] = {
-    {(char *) "SetPlinkConfirmStart", (PyCFunction) _wrap_PyNs3Dot11sPeerLinkConfirmStart_SetPlinkConfirmStart, METH_KEYWORDS|METH_VARARGS, "SetPlinkConfirmStart(fields)\n\ntype: fields: ns3::dot11s::PeerLinkConfirmStart::PlinkConfirmStartFields" },
     {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3Dot11sPeerLinkConfirmStart_Deserialize, METH_KEYWORDS|METH_VARARGS, "Deserialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3Dot11sPeerLinkConfirmStart_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3Dot11sPeerLinkConfirmStart_Serialize, METH_KEYWORDS|METH_VARARGS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
+    {(char *) "GetFields", (PyCFunction) _wrap_PyNs3Dot11sPeerLinkConfirmStart_GetFields, METH_NOARGS, "GetFields()\n\n" },
     {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3Dot11sPeerLinkConfirmStart_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
     {(char *) "GetSerializedSize", (PyCFunction) _wrap_PyNs3Dot11sPeerLinkConfirmStart_GetSerializedSize, METH_NOARGS, "GetSerializedSize()\n\n" },
-    {(char *) "GetFields", (PyCFunction) _wrap_PyNs3Dot11sPeerLinkConfirmStart_GetFields, METH_NOARGS, "GetFields()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3Dot11sPeerLinkConfirmStart_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3Dot11sPeerLinkConfirmStart_Serialize, METH_KEYWORDS|METH_VARARGS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
+    {(char *) "SetPlinkConfirmStart", (PyCFunction) _wrap_PyNs3Dot11sPeerLinkConfirmStart_SetPlinkConfirmStart, METH_KEYWORDS|METH_VARARGS, "SetPlinkConfirmStart(fields)\n\ntype: fields: ns3::dot11s::PeerLinkConfirmStart::PlinkConfirmStartFields" },
     {NULL, NULL, 0, NULL}
 };
 
@@ -10580,16 +10580,16 @@ static int _wrap_PyNs3Dot11sPeerLinkConfirmStartPlinkConfirmStartFields__set_rat
 }
 static PyGetSetDef PyNs3Dot11sPeerLinkConfirmStartPlinkConfirmStartFields__getsets[] = {
     {
-        (char*) "capability", /* attribute name */
-        (getter) _wrap_PyNs3Dot11sPeerLinkConfirmStartPlinkConfirmStartFields__get_capability, /* C function to get the attribute */
-        (setter) _wrap_PyNs3Dot11sPeerLinkConfirmStartPlinkConfirmStartFields__set_capability, /* C function to set the attribute */
+        (char*) "aid", /* attribute name */
+        (getter) _wrap_PyNs3Dot11sPeerLinkConfirmStartPlinkConfirmStartFields__get_aid, /* C function to get the attribute */
+        (setter) _wrap_PyNs3Dot11sPeerLinkConfirmStartPlinkConfirmStartFields__set_aid, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
     {
-        (char*) "aid", /* attribute name */
-        (getter) _wrap_PyNs3Dot11sPeerLinkConfirmStartPlinkConfirmStartFields__get_aid, /* C function to get the attribute */
-        (setter) _wrap_PyNs3Dot11sPeerLinkConfirmStartPlinkConfirmStartFields__set_aid, /* C function to set the attribute */
+        (char*) "capability", /* attribute name */
+        (getter) _wrap_PyNs3Dot11sPeerLinkConfirmStartPlinkConfirmStartFields__get_capability, /* C function to get the attribute */
+        (setter) _wrap_PyNs3Dot11sPeerLinkConfirmStartPlinkConfirmStartFields__set_capability, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -10838,6 +10838,50 @@ _wrap_PyNs3Dot11sPeerLinkOpenStart_Deserialize(PyNs3Dot11sPeerLinkOpenStart *sel
 
 
 PyObject *
+_wrap_PyNs3Dot11sPeerLinkOpenStart_GetFields(PyNs3Dot11sPeerLinkOpenStart *self)
+{
+    PyObject *py_retval;
+    PyNs3Dot11sPeerLinkOpenStartPlinkOpenStartFields *py_PlinkOpenStartFields;
+    
+    ns3::dot11s::PeerLinkOpenStart::PlinkOpenStartFields retval = self->obj->GetFields();
+    py_PlinkOpenStartFields = PyObject_New(PyNs3Dot11sPeerLinkOpenStartPlinkOpenStartFields, &PyNs3Dot11sPeerLinkOpenStartPlinkOpenStartFields_Type);
+    py_PlinkOpenStartFields->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_PlinkOpenStartFields->obj = new ns3::dot11s::PeerLinkOpenStart::PlinkOpenStartFields(retval);
+    PyNs3Dot11sPeerLinkOpenStartPlinkOpenStartFields_wrapper_registry[(void *) py_PlinkOpenStartFields->obj] = (PyObject *) py_PlinkOpenStartFields;
+    py_retval = Py_BuildValue((char *) "N", py_PlinkOpenStartFields);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sPeerLinkOpenStart_GetInstanceTypeId(PyNs3Dot11sPeerLinkOpenStart *self)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = self->obj->GetInstanceTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sPeerLinkOpenStart_GetSerializedSize(PyNs3Dot11sPeerLinkOpenStart *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetSerializedSize();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3Dot11sPeerLinkOpenStart_GetTypeId(void)
 {
     PyObject *py_retval;
@@ -10886,58 +10930,14 @@ _wrap_PyNs3Dot11sPeerLinkOpenStart_SetPlinkOpenStart(PyNs3Dot11sPeerLinkOpenStar
     return py_retval;
 }
 
-
-PyObject *
-_wrap_PyNs3Dot11sPeerLinkOpenStart_GetInstanceTypeId(PyNs3Dot11sPeerLinkOpenStart *self)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = self->obj->GetInstanceTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sPeerLinkOpenStart_GetSerializedSize(PyNs3Dot11sPeerLinkOpenStart *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetSerializedSize();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sPeerLinkOpenStart_GetFields(PyNs3Dot11sPeerLinkOpenStart *self)
-{
-    PyObject *py_retval;
-    PyNs3Dot11sPeerLinkOpenStartPlinkOpenStartFields *py_PlinkOpenStartFields;
-    
-    ns3::dot11s::PeerLinkOpenStart::PlinkOpenStartFields retval = self->obj->GetFields();
-    py_PlinkOpenStartFields = PyObject_New(PyNs3Dot11sPeerLinkOpenStartPlinkOpenStartFields, &PyNs3Dot11sPeerLinkOpenStartPlinkOpenStartFields_Type);
-    py_PlinkOpenStartFields->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_PlinkOpenStartFields->obj = new ns3::dot11s::PeerLinkOpenStart::PlinkOpenStartFields(retval);
-    PyNs3Dot11sPeerLinkOpenStartPlinkOpenStartFields_wrapper_registry[(void *) py_PlinkOpenStartFields->obj] = (PyObject *) py_PlinkOpenStartFields;
-    py_retval = Py_BuildValue((char *) "N", py_PlinkOpenStartFields);
-    return py_retval;
-}
-
 static PyMethodDef PyNs3Dot11sPeerLinkOpenStart_methods[] = {
     {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3Dot11sPeerLinkOpenStart_Deserialize, METH_KEYWORDS|METH_VARARGS, "Deserialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
+    {(char *) "GetFields", (PyCFunction) _wrap_PyNs3Dot11sPeerLinkOpenStart_GetFields, METH_NOARGS, "GetFields()\n\n" },
+    {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3Dot11sPeerLinkOpenStart_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
+    {(char *) "GetSerializedSize", (PyCFunction) _wrap_PyNs3Dot11sPeerLinkOpenStart_GetSerializedSize, METH_NOARGS, "GetSerializedSize()\n\n" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3Dot11sPeerLinkOpenStart_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
     {(char *) "Serialize", (PyCFunction) _wrap_PyNs3Dot11sPeerLinkOpenStart_Serialize, METH_KEYWORDS|METH_VARARGS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
     {(char *) "SetPlinkOpenStart", (PyCFunction) _wrap_PyNs3Dot11sPeerLinkOpenStart_SetPlinkOpenStart, METH_KEYWORDS|METH_VARARGS, "SetPlinkOpenStart(fields)\n\ntype: fields: ns3::dot11s::PeerLinkOpenStart::PlinkOpenStartFields" },
-    {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3Dot11sPeerLinkOpenStart_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
-    {(char *) "GetSerializedSize", (PyCFunction) _wrap_PyNs3Dot11sPeerLinkOpenStart_GetSerializedSize, METH_NOARGS, "GetSerializedSize()\n\n" },
-    {(char *) "GetFields", (PyCFunction) _wrap_PyNs3Dot11sPeerLinkOpenStart_GetFields, METH_NOARGS, "GetFields()\n\n" },
     {NULL, NULL, 0, NULL}
 };
 
@@ -11213,13 +11213,6 @@ static PyGetSetDef PyNs3Dot11sPeerLinkOpenStartPlinkOpenStartFields__getsets[] =
         NULL /* optional additional data for getter and setter */
     },
     {
-        (char*) "protocol", /* attribute name */
-        (getter) _wrap_PyNs3Dot11sPeerLinkOpenStartPlinkOpenStartFields__get_protocol, /* C function to get the attribute */
-        (setter) _wrap_PyNs3Dot11sPeerLinkOpenStartPlinkOpenStartFields__set_protocol, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
         (char*) "config", /* attribute name */
         (getter) _wrap_PyNs3Dot11sPeerLinkOpenStartPlinkOpenStartFields__get_config, /* C function to get the attribute */
         (setter) _wrap_PyNs3Dot11sPeerLinkOpenStartPlinkOpenStartFields__set_config, /* C function to set the attribute */
@@ -11230,6 +11223,13 @@ static PyGetSetDef PyNs3Dot11sPeerLinkOpenStartPlinkOpenStartFields__getsets[] =
         (char*) "meshId", /* attribute name */
         (getter) _wrap_PyNs3Dot11sPeerLinkOpenStartPlinkOpenStartFields__get_meshId, /* C function to get the attribute */
         (setter) _wrap_PyNs3Dot11sPeerLinkOpenStartPlinkOpenStartFields__set_meshId, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "protocol", /* attribute name */
+        (getter) _wrap_PyNs3Dot11sPeerLinkOpenStartPlinkOpenStartFields__get_protocol, /* C function to get the attribute */
+        (setter) _wrap_PyNs3Dot11sPeerLinkOpenStartPlinkOpenStartFields__set_protocol, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -11433,22 +11433,6 @@ PyTypeObject PyNs3Dot11sPeerLinkOpenStartPlinkOpenStartFields_Type = {
 
 
 PyObject *
-PyNs3Dot11sPeerManagementProtocol__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3Dot11sPeerManagementProtocol *self)
-{
-    PyObject *py_retval;
-    PyNs3Dot11sPeerManagementProtocol__PythonHelper *helper = dynamic_cast< PyNs3Dot11sPeerManagementProtocol__PythonHelper* >(self->obj);
-    
-    if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
-        return NULL;
-    }
-    helper->NotifyConstructionCompleted__parent_caller();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject *
 PyNs3Dot11sPeerManagementProtocol__PythonHelper::_wrap_NotifyNewAggregate(PyNs3Dot11sPeerManagementProtocol *self)
 {
     PyObject *py_retval;
@@ -11459,6 +11443,22 @@ PyNs3Dot11sPeerManagementProtocol__PythonHelper::_wrap_NotifyNewAggregate(PyNs3D
         return NULL;
     }
     helper->NotifyNewAggregate__parent_caller();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject *
+PyNs3Dot11sPeerManagementProtocol__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3Dot11sPeerManagementProtocol *self)
+{
+    PyObject *py_retval;
+    PyNs3Dot11sPeerManagementProtocol__PythonHelper *helper = dynamic_cast< PyNs3Dot11sPeerManagementProtocol__PythonHelper* >(self->obj);
+    
+    if (helper == NULL) {
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        return NULL;
+    }
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -11717,153 +11717,18 @@ _wrap_PyNs3Dot11sPeerManagementProtocol__tp_init(PyNs3Dot11sPeerManagementProtoc
 
 
 PyObject *
-_wrap_PyNs3Dot11sPeerManagementProtocol_SetPeerLinkStatusCallback(PyNs3Dot11sPeerManagementProtocol *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3Dot11sPeerManagementProtocol_AssignStreams(PyNs3Dot11sPeerManagementProtocol *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyObject *cb;
-    ns3::Ptr<PythonCallbackImpl32> cb_cb_impl;
-    const char *keywords[] = {"cb", NULL};
+    int64_t retval;
+    int64_t stream;
+    const char *keywords[] = {"stream", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &cb)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "L", (char **) keywords, &stream)) {
         return NULL;
     }
-    if (!PyCallable_Check(cb)) {
-        PyErr_SetString(PyExc_TypeError, "parameter 'cb' must be callbale");
-        return NULL;
-    }
-    cb_cb_impl = ns3::Create<PythonCallbackImpl32> (cb);
-    self->obj->SetPeerLinkStatusCallback(ns3::Callback<void, ns3::Mac48Address, ns3::Mac48Address, unsigned int, bool, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty> (cb_cb_impl));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sPeerManagementProtocol_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::dot11s::PeerManagementProtocol::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sPeerManagementProtocol_SetBeaconCollisionAvoidance(PyNs3Dot11sPeerManagementProtocol *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool enable;
-    PyObject *py_enable;
-    const char *keywords[] = {"enable", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &py_enable)) {
-        return NULL;
-    }
-    enable = (bool) PyObject_IsTrue(py_enable);
-    self->obj->SetBeaconCollisionAvoidance(enable);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sPeerManagementProtocol_GetPeers(PyNs3Dot11sPeerManagementProtocol *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int interface;
-    const char *keywords[] = {"interface", NULL};
-    std::vector< ns3::Mac48Address > retval;
-    Pystd__vector__lt___ns3__Mac48Address___gt__ *py_std__vector__lt___ns3__Mac48Address___gt__;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &interface)) {
-        return NULL;
-    }
-    retval = self->obj->GetPeers(interface);
-    py_std__vector__lt___ns3__Mac48Address___gt__ = PyObject_New(Pystd__vector__lt___ns3__Mac48Address___gt__, &Pystd__vector__lt___ns3__Mac48Address___gt___Type);
-    py_std__vector__lt___ns3__Mac48Address___gt__->obj = new std::vector< ns3::Mac48Address >(retval);
-    py_retval = Py_BuildValue((char *) "N", py_std__vector__lt___ns3__Mac48Address___gt__);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sPeerManagementProtocol_IsActiveLink(PyNs3Dot11sPeerManagementProtocol *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    unsigned int interface;
-    PyNs3Mac48Address *peerAddress;
-    const char *keywords[] = {"interface", "peerAddress", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "IO!", (char **) keywords, &interface, &PyNs3Mac48Address_Type, &peerAddress)) {
-        return NULL;
-    }
-    retval = self->obj->IsActiveLink(interface, *((PyNs3Mac48Address *) peerAddress)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sPeerManagementProtocol_GetNumberOfLinks(PyNs3Dot11sPeerManagementProtocol *self)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    
-    retval = self->obj->GetNumberOfLinks();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sPeerManagementProtocol_ReceivePeerLinkFrame(PyNs3Dot11sPeerManagementProtocol *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int interface;
-    PyNs3Mac48Address *peerAddress;
-    PyNs3Mac48Address *peerMeshPointAddress;
-    int aid;
-    PyNs3Dot11sIePeerManagement *peerManagementElement;
-    PyNs3Dot11sIeConfiguration *meshConfig;
-    const char *keywords[] = {"interface", "peerAddress", "peerMeshPointAddress", "aid", "peerManagementElement", "meshConfig", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "IO!O!iO!O!", (char **) keywords, &interface, &PyNs3Mac48Address_Type, &peerAddress, &PyNs3Mac48Address_Type, &peerMeshPointAddress, &aid, &PyNs3Dot11sIePeerManagement_Type, &peerManagementElement, &PyNs3Dot11sIeConfiguration_Type, &meshConfig)) {
-        return NULL;
-    }
-    if (aid > 0xffff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->ReceivePeerLinkFrame(interface, *((PyNs3Mac48Address *) peerAddress)->obj, *((PyNs3Mac48Address *) peerMeshPointAddress)->obj, aid, *((PyNs3Dot11sIePeerManagement *) peerManagementElement)->obj, *((PyNs3Dot11sIeConfiguration *) meshConfig)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sPeerManagementProtocol_SetMeshId(PyNs3Dot11sPeerManagementProtocol *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    const char *s;
-    Py_ssize_t s_len;
-    const char *keywords[] = {"s", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#", (char **) keywords, &s, &s_len)) {
-        return NULL;
-    }
-    self->obj->SetMeshId(std::string(s, s_len));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    retval = self->obj->AssignStreams(stream);
+    py_retval = Py_BuildValue((char *) "L", retval);
     return py_retval;
 }
 
@@ -11887,58 +11752,12 @@ _wrap_PyNs3Dot11sPeerManagementProtocol_ConfigurationMismatch(PyNs3Dot11sPeerMan
 
 
 PyObject *
-_wrap_PyNs3Dot11sPeerManagementProtocol_GetBeaconTimingElement(PyNs3Dot11sPeerManagementProtocol *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3Dot11sPeerManagementProtocol_DoDispose(PyNs3Dot11sPeerManagementProtocol *self)
 {
     PyObject *py_retval;
-    ns3::Ptr< ns3::dot11s::IeBeaconTiming > retval;
-    unsigned int interface;
-    const char *keywords[] = {"interface", NULL};
-    PyNs3Dot11sIeBeaconTiming *py_IeBeaconTiming;
-    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
-    PyTypeObject *wrapper_type = 0;
+    PyNs3Dot11sPeerManagementProtocol__PythonHelper *helper_class = dynamic_cast<PyNs3Dot11sPeerManagementProtocol__PythonHelper*> (self->obj);
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &interface)) {
-        return NULL;
-    }
-    retval = self->obj->GetBeaconTimingElement(interface);
-    if (!(const_cast<ns3::dot11s::IeBeaconTiming *> (ns3::PeekPointer (retval)))) {
-        Py_INCREF(Py_None);
-        return Py_None;
-    }
-    wrapper_lookup_iter = PyNs3Empty_wrapper_registry.find((void *) const_cast<ns3::dot11s::IeBeaconTiming *> (ns3::PeekPointer (retval)));
-    if (wrapper_lookup_iter == PyNs3Empty_wrapper_registry.end()) {
-        py_IeBeaconTiming = NULL;
-    } else {
-        py_IeBeaconTiming = (PyNs3Dot11sIeBeaconTiming *) wrapper_lookup_iter->second;
-        Py_INCREF(py_IeBeaconTiming);
-    }
-    
-    if (py_IeBeaconTiming == NULL) {
-        wrapper_type = PyNs3SimpleRefCount__Ns3WifiInformationElement_Ns3Empty_Ns3DefaultDeleter__lt__ns3WifiInformationElement__gt____typeid_map.lookup_wrapper(typeid((*const_cast<ns3::dot11s::IeBeaconTiming *> (ns3::PeekPointer (retval)))), &PyNs3Dot11sIeBeaconTiming_Type);
-        py_IeBeaconTiming = PyObject_New(PyNs3Dot11sIeBeaconTiming, wrapper_type);
-    
-        py_IeBeaconTiming->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-        const_cast<ns3::dot11s::IeBeaconTiming *> (ns3::PeekPointer (retval))->Ref();
-        py_IeBeaconTiming->obj = const_cast<ns3::dot11s::IeBeaconTiming *> (ns3::PeekPointer (retval));
-        PyNs3Empty_wrapper_registry[(void *) py_IeBeaconTiming->obj] = (PyObject *) py_IeBeaconTiming;
-    }
-    py_retval = Py_BuildValue((char *) "N", py_IeBeaconTiming);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sPeerManagementProtocol_TransmissionFailure(PyNs3Dot11sPeerManagementProtocol *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int interface;
-    PyNs3Mac48Address *peerAddress;
-    const char *keywords[] = {"interface", "peerAddress", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "IO!", (char **) keywords, &interface, &PyNs3Mac48Address_Type, &peerAddress)) {
-        return NULL;
-    }
-    self->obj->TransmissionFailure(interface, *((PyNs3Mac48Address *) peerAddress)->obj);
+    (helper_class == NULL)? (self->obj->DoDispose()) : (self->obj->ns3::dot11s::PeerManagementProtocol::DoDispose());
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -11997,19 +11816,6 @@ _wrap_PyNs3Dot11sPeerManagementProtocol_FindPeerLink(PyNs3Dot11sPeerManagementPr
 
 
 PyObject *
-_wrap_PyNs3Dot11sPeerManagementProtocol_DoDispose(PyNs3Dot11sPeerManagementProtocol *self)
-{
-    PyObject *py_retval;
-    PyNs3Dot11sPeerManagementProtocol__PythonHelper *helper_class = dynamic_cast<PyNs3Dot11sPeerManagementProtocol__PythonHelper*> (self->obj);
-    
-    (helper_class == NULL)? (self->obj->DoDispose()) : (self->obj->ns3::dot11s::PeerManagementProtocol::DoDispose());
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3Dot11sPeerManagementProtocol_GetAddress(PyNs3Dot11sPeerManagementProtocol *self)
 {
     PyObject *py_retval;
@@ -12033,6 +11839,47 @@ _wrap_PyNs3Dot11sPeerManagementProtocol_GetBeaconCollisionAvoidance(PyNs3Dot11sP
     
     retval = self->obj->GetBeaconCollisionAvoidance();
     py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sPeerManagementProtocol_GetBeaconTimingElement(PyNs3Dot11sPeerManagementProtocol *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    ns3::Ptr< ns3::dot11s::IeBeaconTiming > retval;
+    unsigned int interface;
+    const char *keywords[] = {"interface", NULL};
+    PyNs3Dot11sIeBeaconTiming *py_IeBeaconTiming;
+    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
+    PyTypeObject *wrapper_type = 0;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &interface)) {
+        return NULL;
+    }
+    retval = self->obj->GetBeaconTimingElement(interface);
+    if (!(const_cast<ns3::dot11s::IeBeaconTiming *> (ns3::PeekPointer (retval)))) {
+        Py_INCREF(Py_None);
+        return Py_None;
+    }
+    wrapper_lookup_iter = PyNs3Empty_wrapper_registry.find((void *) const_cast<ns3::dot11s::IeBeaconTiming *> (ns3::PeekPointer (retval)));
+    if (wrapper_lookup_iter == PyNs3Empty_wrapper_registry.end()) {
+        py_IeBeaconTiming = NULL;
+    } else {
+        py_IeBeaconTiming = (PyNs3Dot11sIeBeaconTiming *) wrapper_lookup_iter->second;
+        Py_INCREF(py_IeBeaconTiming);
+    }
+    
+    if (py_IeBeaconTiming == NULL) {
+        wrapper_type = PyNs3SimpleRefCount__Ns3WifiInformationElement_Ns3Empty_Ns3DefaultDeleter__lt__ns3WifiInformationElement__gt____typeid_map.lookup_wrapper(typeid((*const_cast<ns3::dot11s::IeBeaconTiming *> (ns3::PeekPointer (retval)))), &PyNs3Dot11sIeBeaconTiming_Type);
+        py_IeBeaconTiming = PyObject_New(PyNs3Dot11sIeBeaconTiming, wrapper_type);
+    
+        py_IeBeaconTiming->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+        const_cast<ns3::dot11s::IeBeaconTiming *> (ns3::PeekPointer (retval))->Ref();
+        py_IeBeaconTiming->obj = const_cast<ns3::dot11s::IeBeaconTiming *> (ns3::PeekPointer (retval));
+        PyNs3Empty_wrapper_registry[(void *) py_IeBeaconTiming->obj] = (PyObject *) py_IeBeaconTiming;
+    }
+    py_retval = Py_BuildValue((char *) "N", py_IeBeaconTiming);
     return py_retval;
 }
 
@@ -12074,6 +11921,69 @@ _wrap_PyNs3Dot11sPeerManagementProtocol_GetMeshId(PyNs3Dot11sPeerManagementProto
 
 
 PyObject *
+_wrap_PyNs3Dot11sPeerManagementProtocol_GetNumberOfLinks(PyNs3Dot11sPeerManagementProtocol *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    
+    retval = self->obj->GetNumberOfLinks();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sPeerManagementProtocol_GetPeerLinks(PyNs3Dot11sPeerManagementProtocol *self)
+{
+    PyObject *py_retval;
+    std::vector< ns3::Ptr< ns3::dot11s::PeerLink > > retval;
+    Pystd__vector__lt___ns3__Ptr__lt___ns3__dot11s__PeerLink___gt_____gt__ *py_std__vector__lt___ns3__Ptr__lt___ns3__dot11s__PeerLink___gt_____gt__;
+    
+    retval = self->obj->GetPeerLinks();
+    py_std__vector__lt___ns3__Ptr__lt___ns3__dot11s__PeerLink___gt_____gt__ = PyObject_New(Pystd__vector__lt___ns3__Ptr__lt___ns3__dot11s__PeerLink___gt_____gt__, &Pystd__vector__lt___ns3__Ptr__lt___ns3__dot11s__PeerLink___gt_____gt___Type);
+    py_std__vector__lt___ns3__Ptr__lt___ns3__dot11s__PeerLink___gt_____gt__->obj = new std::vector< ns3::Ptr< ns3::dot11s::PeerLink > >(retval);
+    py_retval = Py_BuildValue((char *) "N", py_std__vector__lt___ns3__Ptr__lt___ns3__dot11s__PeerLink___gt_____gt__);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sPeerManagementProtocol_GetPeers(PyNs3Dot11sPeerManagementProtocol *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int interface;
+    const char *keywords[] = {"interface", NULL};
+    std::vector< ns3::Mac48Address > retval;
+    Pystd__vector__lt___ns3__Mac48Address___gt__ *py_std__vector__lt___ns3__Mac48Address___gt__;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &interface)) {
+        return NULL;
+    }
+    retval = self->obj->GetPeers(interface);
+    py_std__vector__lt___ns3__Mac48Address___gt__ = PyObject_New(Pystd__vector__lt___ns3__Mac48Address___gt__, &Pystd__vector__lt___ns3__Mac48Address___gt___Type);
+    py_std__vector__lt___ns3__Mac48Address___gt__->obj = new std::vector< ns3::Mac48Address >(retval);
+    py_retval = Py_BuildValue((char *) "N", py_std__vector__lt___ns3__Mac48Address___gt__);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sPeerManagementProtocol_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::dot11s::PeerManagementProtocol::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3Dot11sPeerManagementProtocol_Install(PyNs3Dot11sPeerManagementProtocol *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -12093,21 +12003,10 @@ _wrap_PyNs3Dot11sPeerManagementProtocol_Install(PyNs3Dot11sPeerManagementProtoco
 
 
 PyObject *
-_wrap_PyNs3Dot11sPeerManagementProtocol_ResetStats(PyNs3Dot11sPeerManagementProtocol *self)
+_wrap_PyNs3Dot11sPeerManagementProtocol_IsActiveLink(PyNs3Dot11sPeerManagementProtocol *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    
-    self->obj->ResetStats();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Dot11sPeerManagementProtocol_TransmissionSuccess(PyNs3Dot11sPeerManagementProtocol *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
+    bool retval;
     unsigned int interface;
     PyNs3Mac48Address *peerAddress;
     const char *keywords[] = {"interface", "peerAddress", NULL};
@@ -12115,24 +12014,26 @@ _wrap_PyNs3Dot11sPeerManagementProtocol_TransmissionSuccess(PyNs3Dot11sPeerManag
     if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "IO!", (char **) keywords, &interface, &PyNs3Mac48Address_Type, &peerAddress)) {
         return NULL;
     }
-    self->obj->TransmissionSuccess(interface, *((PyNs3Mac48Address *) peerAddress)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    retval = self->obj->IsActiveLink(interface, *((PyNs3Mac48Address *) peerAddress)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3Dot11sPeerManagementProtocol_GetPeerLinks(PyNs3Dot11sPeerManagementProtocol *self)
+_wrap_PyNs3Dot11sPeerManagementProtocol_NotifyBeaconSent(PyNs3Dot11sPeerManagementProtocol *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    std::vector< ns3::Ptr< ns3::dot11s::PeerLink > > retval;
-    Pystd__vector__lt___ns3__Ptr__lt___ns3__dot11s__PeerLink___gt_____gt__ *py_std__vector__lt___ns3__Ptr__lt___ns3__dot11s__PeerLink___gt_____gt__;
+    unsigned int interface;
+    PyNs3Time *beaconInterval;
+    const char *keywords[] = {"interface", "beaconInterval", NULL};
     
-    retval = self->obj->GetPeerLinks();
-    py_std__vector__lt___ns3__Ptr__lt___ns3__dot11s__PeerLink___gt_____gt__ = PyObject_New(Pystd__vector__lt___ns3__Ptr__lt___ns3__dot11s__PeerLink___gt_____gt__, &Pystd__vector__lt___ns3__Ptr__lt___ns3__dot11s__PeerLink___gt_____gt___Type);
-    py_std__vector__lt___ns3__Ptr__lt___ns3__dot11s__PeerLink___gt_____gt__->obj = new std::vector< ns3::Ptr< ns3::dot11s::PeerLink > >(retval);
-    py_retval = Py_BuildValue((char *) "N", py_std__vector__lt___ns3__Ptr__lt___ns3__dot11s__PeerLink___gt_____gt__);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "IO!", (char **) keywords, &interface, &PyNs3Time_Type, &beaconInterval)) {
+        return NULL;
+    }
+    self->obj->NotifyBeaconSent(interface, *((PyNs3Time *) beaconInterval)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -12160,17 +12061,25 @@ _wrap_PyNs3Dot11sPeerManagementProtocol_ReceiveBeacon(PyNs3Dot11sPeerManagementP
 
 
 PyObject *
-_wrap_PyNs3Dot11sPeerManagementProtocol_NotifyBeaconSent(PyNs3Dot11sPeerManagementProtocol *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3Dot11sPeerManagementProtocol_ReceivePeerLinkFrame(PyNs3Dot11sPeerManagementProtocol *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
     unsigned int interface;
-    PyNs3Time *beaconInterval;
-    const char *keywords[] = {"interface", "beaconInterval", NULL};
+    PyNs3Mac48Address *peerAddress;
+    PyNs3Mac48Address *peerMeshPointAddress;
+    int aid;
+    PyNs3Dot11sIePeerManagement *peerManagementElement;
+    PyNs3Dot11sIeConfiguration *meshConfig;
+    const char *keywords[] = {"interface", "peerAddress", "peerMeshPointAddress", "aid", "peerManagementElement", "meshConfig", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "IO!", (char **) keywords, &interface, &PyNs3Time_Type, &beaconInterval)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "IO!O!iO!O!", (char **) keywords, &interface, &PyNs3Mac48Address_Type, &peerAddress, &PyNs3Mac48Address_Type, &peerMeshPointAddress, &aid, &PyNs3Dot11sIePeerManagement_Type, &peerManagementElement, &PyNs3Dot11sIeConfiguration_Type, &meshConfig)) {
         return NULL;
     }
-    self->obj->NotifyBeaconSent(interface, *((PyNs3Time *) beaconInterval)->obj);
+    if (aid > 0xffff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->ReceivePeerLinkFrame(interface, *((PyNs3Mac48Address *) peerAddress)->obj, *((PyNs3Mac48Address *) peerMeshPointAddress)->obj, aid, *((PyNs3Dot11sIePeerManagement *) peerManagementElement)->obj, *((PyNs3Dot11sIeConfiguration *) meshConfig)->obj);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -12178,47 +12087,138 @@ _wrap_PyNs3Dot11sPeerManagementProtocol_NotifyBeaconSent(PyNs3Dot11sPeerManageme
 
 
 PyObject *
-_wrap_PyNs3Dot11sPeerManagementProtocol_AssignStreams(PyNs3Dot11sPeerManagementProtocol *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3Dot11sPeerManagementProtocol_ResetStats(PyNs3Dot11sPeerManagementProtocol *self)
 {
     PyObject *py_retval;
-    int64_t retval;
-    int64_t stream;
-    const char *keywords[] = {"stream", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "L", (char **) keywords, &stream)) {
+    self->obj->ResetStats();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sPeerManagementProtocol_SetBeaconCollisionAvoidance(PyNs3Dot11sPeerManagementProtocol *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool enable;
+    PyObject *py_enable;
+    const char *keywords[] = {"enable", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &py_enable)) {
         return NULL;
     }
-    retval = self->obj->AssignStreams(stream);
-    py_retval = Py_BuildValue((char *) "L", retval);
+    enable = (bool) PyObject_IsTrue(py_enable);
+    self->obj->SetBeaconCollisionAvoidance(enable);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sPeerManagementProtocol_SetMeshId(PyNs3Dot11sPeerManagementProtocol *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    const char *s;
+    Py_ssize_t s_len;
+    const char *keywords[] = {"s", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#", (char **) keywords, &s, &s_len)) {
+        return NULL;
+    }
+    self->obj->SetMeshId(std::string(s, s_len));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sPeerManagementProtocol_SetPeerLinkStatusCallback(PyNs3Dot11sPeerManagementProtocol *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyObject *cb;
+    ns3::Ptr<PythonCallbackImpl32> cb_cb_impl;
+    const char *keywords[] = {"cb", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &cb)) {
+        return NULL;
+    }
+    if (!PyCallable_Check(cb)) {
+        PyErr_SetString(PyExc_TypeError, "parameter 'cb' must be callbale");
+        return NULL;
+    }
+    cb_cb_impl = ns3::Create<PythonCallbackImpl32> (cb);
+    self->obj->SetPeerLinkStatusCallback(ns3::Callback<void, ns3::Mac48Address, ns3::Mac48Address, unsigned int, bool, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty> (cb_cb_impl));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sPeerManagementProtocol_TransmissionFailure(PyNs3Dot11sPeerManagementProtocol *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int interface;
+    PyNs3Mac48Address *peerAddress;
+    const char *keywords[] = {"interface", "peerAddress", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "IO!", (char **) keywords, &interface, &PyNs3Mac48Address_Type, &peerAddress)) {
+        return NULL;
+    }
+    self->obj->TransmissionFailure(interface, *((PyNs3Mac48Address *) peerAddress)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Dot11sPeerManagementProtocol_TransmissionSuccess(PyNs3Dot11sPeerManagementProtocol *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int interface;
+    PyNs3Mac48Address *peerAddress;
+    const char *keywords[] = {"interface", "peerAddress", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "IO!", (char **) keywords, &interface, &PyNs3Mac48Address_Type, &peerAddress)) {
+        return NULL;
+    }
+    self->obj->TransmissionSuccess(interface, *((PyNs3Mac48Address *) peerAddress)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
 static PyMethodDef PyNs3Dot11sPeerManagementProtocol_methods[] = {
-    {(char *) "SetPeerLinkStatusCallback", (PyCFunction) _wrap_PyNs3Dot11sPeerManagementProtocol_SetPeerLinkStatusCallback, METH_KEYWORDS|METH_VARARGS, "SetPeerLinkStatusCallback(cb)\n\ntype: cb: ns3::Callback< void, ns3::Mac48Address, ns3::Mac48Address, unsigned int, bool, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty >" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3Dot11sPeerManagementProtocol_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "SetBeaconCollisionAvoidance", (PyCFunction) _wrap_PyNs3Dot11sPeerManagementProtocol_SetBeaconCollisionAvoidance, METH_KEYWORDS|METH_VARARGS, "SetBeaconCollisionAvoidance(enable)\n\ntype: enable: bool" },
-    {(char *) "GetPeers", (PyCFunction) _wrap_PyNs3Dot11sPeerManagementProtocol_GetPeers, METH_KEYWORDS|METH_VARARGS, "GetPeers(interface)\n\ntype: interface: uint32_t" },
-    {(char *) "IsActiveLink", (PyCFunction) _wrap_PyNs3Dot11sPeerManagementProtocol_IsActiveLink, METH_KEYWORDS|METH_VARARGS, "IsActiveLink(interface, peerAddress)\n\ntype: interface: uint32_t\ntype: peerAddress: ns3::Mac48Address" },
-    {(char *) "GetNumberOfLinks", (PyCFunction) _wrap_PyNs3Dot11sPeerManagementProtocol_GetNumberOfLinks, METH_NOARGS, "GetNumberOfLinks()\n\n" },
-    {(char *) "ReceivePeerLinkFrame", (PyCFunction) _wrap_PyNs3Dot11sPeerManagementProtocol_ReceivePeerLinkFrame, METH_KEYWORDS|METH_VARARGS, "ReceivePeerLinkFrame(interface, peerAddress, peerMeshPointAddress, aid, peerManagementElement, meshConfig)\n\ntype: interface: uint32_t\ntype: peerAddress: ns3::Mac48Address\ntype: peerMeshPointAddress: ns3::Mac48Address\ntype: aid: uint16_t\ntype: peerManagementElement: ns3::dot11s::IePeerManagement\ntype: meshConfig: ns3::dot11s::IeConfiguration" },
-    {(char *) "SetMeshId", (PyCFunction) _wrap_PyNs3Dot11sPeerManagementProtocol_SetMeshId, METH_KEYWORDS|METH_VARARGS, "SetMeshId(s)\n\ntype: s: std::string" },
+    {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3Dot11sPeerManagementProtocol_AssignStreams, METH_KEYWORDS|METH_VARARGS, "AssignStreams(stream)\n\ntype: stream: int64_t" },
     {(char *) "ConfigurationMismatch", (PyCFunction) _wrap_PyNs3Dot11sPeerManagementProtocol_ConfigurationMismatch, METH_KEYWORDS|METH_VARARGS, "ConfigurationMismatch(interface, peerAddress)\n\ntype: interface: uint32_t\ntype: peerAddress: ns3::Mac48Address" },
-    {(char *) "GetBeaconTimingElement", (PyCFunction) _wrap_PyNs3Dot11sPeerManagementProtocol_GetBeaconTimingElement, METH_KEYWORDS|METH_VARARGS, "GetBeaconTimingElement(interface)\n\ntype: interface: uint32_t" },
-    {(char *) "TransmissionFailure", (PyCFunction) _wrap_PyNs3Dot11sPeerManagementProtocol_TransmissionFailure, METH_KEYWORDS|METH_VARARGS, "TransmissionFailure(interface, peerAddress)\n\ntype: interface: uint32_t\ntype: peerAddress: ns3::Mac48Address const" },
-    {(char *) "FindPeerLink", (PyCFunction) _wrap_PyNs3Dot11sPeerManagementProtocol_FindPeerLink, METH_KEYWORDS|METH_VARARGS, "FindPeerLink(interface, peerAddress)\n\ntype: interface: uint32_t\ntype: peerAddress: ns3::Mac48Address" },
     {(char *) "DoDispose", (PyCFunction) _wrap_PyNs3Dot11sPeerManagementProtocol_DoDispose, METH_NOARGS, "DoDispose()\n\n" },
+    {(char *) "FindPeerLink", (PyCFunction) _wrap_PyNs3Dot11sPeerManagementProtocol_FindPeerLink, METH_KEYWORDS|METH_VARARGS, "FindPeerLink(interface, peerAddress)\n\ntype: interface: uint32_t\ntype: peerAddress: ns3::Mac48Address" },
     {(char *) "GetAddress", (PyCFunction) _wrap_PyNs3Dot11sPeerManagementProtocol_GetAddress, METH_NOARGS, "GetAddress()\n\n" },
     {(char *) "GetBeaconCollisionAvoidance", (PyCFunction) _wrap_PyNs3Dot11sPeerManagementProtocol_GetBeaconCollisionAvoidance, METH_NOARGS, "GetBeaconCollisionAvoidance()\n\n" },
+    {(char *) "GetBeaconTimingElement", (PyCFunction) _wrap_PyNs3Dot11sPeerManagementProtocol_GetBeaconTimingElement, METH_KEYWORDS|METH_VARARGS, "GetBeaconTimingElement(interface)\n\ntype: interface: uint32_t" },
     {(char *) "GetMeshId", (PyCFunction) _wrap_PyNs3Dot11sPeerManagementProtocol_GetMeshId, METH_NOARGS, "GetMeshId()\n\n" },
-    {(char *) "Install", (PyCFunction) _wrap_PyNs3Dot11sPeerManagementProtocol_Install, METH_KEYWORDS|METH_VARARGS, "Install(arg0)\n\ntype: arg0: ns3::Ptr< ns3::MeshPointDevice >" },
-    {(char *) "ResetStats", (PyCFunction) _wrap_PyNs3Dot11sPeerManagementProtocol_ResetStats, METH_NOARGS, "ResetStats()\n\n" },
-    {(char *) "TransmissionSuccess", (PyCFunction) _wrap_PyNs3Dot11sPeerManagementProtocol_TransmissionSuccess, METH_KEYWORDS|METH_VARARGS, "TransmissionSuccess(interface, peerAddress)\n\ntype: interface: uint32_t\ntype: peerAddress: ns3::Mac48Address const" },
+    {(char *) "GetNumberOfLinks", (PyCFunction) _wrap_PyNs3Dot11sPeerManagementProtocol_GetNumberOfLinks, METH_NOARGS, "GetNumberOfLinks()\n\n" },
     {(char *) "GetPeerLinks", (PyCFunction) _wrap_PyNs3Dot11sPeerManagementProtocol_GetPeerLinks, METH_NOARGS, "GetPeerLinks()\n\n" },
-    {(char *) "ReceiveBeacon", (PyCFunction) _wrap_PyNs3Dot11sPeerManagementProtocol_ReceiveBeacon, METH_KEYWORDS|METH_VARARGS, "ReceiveBeacon(interface, peerAddress, beaconInterval, beaconTiming)\n\ntype: interface: uint32_t\ntype: peerAddress: ns3::Mac48Address\ntype: beaconInterval: ns3::Time\ntype: beaconTiming: ns3::Ptr< ns3::dot11s::IeBeaconTiming >" },
+    {(char *) "GetPeers", (PyCFunction) _wrap_PyNs3Dot11sPeerManagementProtocol_GetPeers, METH_KEYWORDS|METH_VARARGS, "GetPeers(interface)\n\ntype: interface: uint32_t" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3Dot11sPeerManagementProtocol_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "Install", (PyCFunction) _wrap_PyNs3Dot11sPeerManagementProtocol_Install, METH_KEYWORDS|METH_VARARGS, "Install(arg0)\n\ntype: arg0: ns3::Ptr< ns3::MeshPointDevice >" },
+    {(char *) "IsActiveLink", (PyCFunction) _wrap_PyNs3Dot11sPeerManagementProtocol_IsActiveLink, METH_KEYWORDS|METH_VARARGS, "IsActiveLink(interface, peerAddress)\n\ntype: interface: uint32_t\ntype: peerAddress: ns3::Mac48Address" },
     {(char *) "NotifyBeaconSent", (PyCFunction) _wrap_PyNs3Dot11sPeerManagementProtocol_NotifyBeaconSent, METH_KEYWORDS|METH_VARARGS, "NotifyBeaconSent(interface, beaconInterval)\n\ntype: interface: uint32_t\ntype: beaconInterval: ns3::Time" },
-    {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3Dot11sPeerManagementProtocol_AssignStreams, METH_KEYWORDS|METH_VARARGS, "AssignStreams(stream)\n\ntype: stream: int64_t" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3Dot11sPeerManagementProtocol__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "ReceiveBeacon", (PyCFunction) _wrap_PyNs3Dot11sPeerManagementProtocol_ReceiveBeacon, METH_KEYWORDS|METH_VARARGS, "ReceiveBeacon(interface, peerAddress, beaconInterval, beaconTiming)\n\ntype: interface: uint32_t\ntype: peerAddress: ns3::Mac48Address\ntype: beaconInterval: ns3::Time\ntype: beaconTiming: ns3::Ptr< ns3::dot11s::IeBeaconTiming >" },
+    {(char *) "ReceivePeerLinkFrame", (PyCFunction) _wrap_PyNs3Dot11sPeerManagementProtocol_ReceivePeerLinkFrame, METH_KEYWORDS|METH_VARARGS, "ReceivePeerLinkFrame(interface, peerAddress, peerMeshPointAddress, aid, peerManagementElement, meshConfig)\n\ntype: interface: uint32_t\ntype: peerAddress: ns3::Mac48Address\ntype: peerMeshPointAddress: ns3::Mac48Address\ntype: aid: uint16_t\ntype: peerManagementElement: ns3::dot11s::IePeerManagement\ntype: meshConfig: ns3::dot11s::IeConfiguration" },
+    {(char *) "ResetStats", (PyCFunction) _wrap_PyNs3Dot11sPeerManagementProtocol_ResetStats, METH_NOARGS, "ResetStats()\n\n" },
+    {(char *) "SetBeaconCollisionAvoidance", (PyCFunction) _wrap_PyNs3Dot11sPeerManagementProtocol_SetBeaconCollisionAvoidance, METH_KEYWORDS|METH_VARARGS, "SetBeaconCollisionAvoidance(enable)\n\ntype: enable: bool" },
+    {(char *) "SetMeshId", (PyCFunction) _wrap_PyNs3Dot11sPeerManagementProtocol_SetMeshId, METH_KEYWORDS|METH_VARARGS, "SetMeshId(s)\n\ntype: s: std::string" },
+    {(char *) "SetPeerLinkStatusCallback", (PyCFunction) _wrap_PyNs3Dot11sPeerManagementProtocol_SetPeerLinkStatusCallback, METH_KEYWORDS|METH_VARARGS, "SetPeerLinkStatusCallback(cb)\n\ntype: cb: ns3::Callback< void, ns3::Mac48Address, ns3::Mac48Address, unsigned int, bool, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty >" },
+    {(char *) "TransmissionFailure", (PyCFunction) _wrap_PyNs3Dot11sPeerManagementProtocol_TransmissionFailure, METH_KEYWORDS|METH_VARARGS, "TransmissionFailure(interface, peerAddress)\n\ntype: interface: uint32_t\ntype: peerAddress: ns3::Mac48Address const" },
+    {(char *) "TransmissionSuccess", (PyCFunction) _wrap_PyNs3Dot11sPeerManagementProtocol_TransmissionSuccess, METH_KEYWORDS|METH_VARARGS, "TransmissionSuccess(interface, peerAddress)\n\ntype: interface: uint32_t\ntype: peerAddress: ns3::Mac48Address const" },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3Dot11sPeerManagementProtocol__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3Dot11sPeerManagementProtocol__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 
@@ -12508,30 +12508,9 @@ static int _wrap_PyNs3Dot11sRouteChange__set_type(PyNs3Dot11sRouteChange *self, 
 }
 static PyGetSetDef PyNs3Dot11sRouteChange__getsets[] = {
     {
-        (char*) "seqnum", /* attribute name */
-        (getter) _wrap_PyNs3Dot11sRouteChange__get_seqnum, /* C function to get the attribute */
-        (setter) _wrap_PyNs3Dot11sRouteChange__set_seqnum, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
-        (char*) "metric", /* attribute name */
-        (getter) _wrap_PyNs3Dot11sRouteChange__get_metric, /* C function to get the attribute */
-        (setter) _wrap_PyNs3Dot11sRouteChange__set_metric, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
         (char*) "destination", /* attribute name */
         (getter) _wrap_PyNs3Dot11sRouteChange__get_destination, /* C function to get the attribute */
         (setter) _wrap_PyNs3Dot11sRouteChange__set_destination, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
-        (char*) "retransmitter", /* attribute name */
-        (getter) _wrap_PyNs3Dot11sRouteChange__get_retransmitter, /* C function to get the attribute */
-        (setter) _wrap_PyNs3Dot11sRouteChange__set_retransmitter, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -12546,6 +12525,27 @@ static PyGetSetDef PyNs3Dot11sRouteChange__getsets[] = {
         (char*) "lifetime", /* attribute name */
         (getter) _wrap_PyNs3Dot11sRouteChange__get_lifetime, /* C function to get the attribute */
         (setter) _wrap_PyNs3Dot11sRouteChange__set_lifetime, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "metric", /* attribute name */
+        (getter) _wrap_PyNs3Dot11sRouteChange__get_metric, /* C function to get the attribute */
+        (setter) _wrap_PyNs3Dot11sRouteChange__set_metric, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "retransmitter", /* attribute name */
+        (getter) _wrap_PyNs3Dot11sRouteChange__get_retransmitter, /* C function to get the attribute */
+        (setter) _wrap_PyNs3Dot11sRouteChange__set_retransmitter, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "seqnum", /* attribute name */
+        (getter) _wrap_PyNs3Dot11sRouteChange__get_seqnum, /* C function to get the attribute */
+        (setter) _wrap_PyNs3Dot11sRouteChange__set_seqnum, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -14747,20 +14747,20 @@ int _wrap_PyNs3FlameFlameHeader__tp_init(PyNs3FlameFlameHeader *self, PyObject *
 
 
 PyObject *
-_wrap_PyNs3FlameFlameHeader_SetSeqno(PyNs3FlameFlameHeader *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3FlameFlameHeader_AddCost(PyNs3FlameFlameHeader *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    int seqno;
-    const char *keywords[] = {"seqno", NULL};
+    int cost;
+    const char *keywords[] = {"cost", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &seqno)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &cost)) {
         return NULL;
     }
-    if (seqno > 0xffff) {
+    if (cost > 0xff) {
         PyErr_SetString(PyExc_ValueError, "Out of range");
         return NULL;
     }
-    self->obj->SetSeqno(seqno);
+    self->obj->AddCost(cost);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -14785,6 +14785,34 @@ _wrap_PyNs3FlameFlameHeader_Deserialize(PyNs3FlameFlameHeader *self, PyObject *a
 
 
 PyObject *
+_wrap_PyNs3FlameFlameHeader_GetCost(PyNs3FlameFlameHeader *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    
+    retval = self->obj->GetCost();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3FlameFlameHeader_GetInstanceTypeId(PyNs3FlameFlameHeader *self)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = self->obj->GetInstanceTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3FlameFlameHeader_GetOrigDst(PyNs3FlameFlameHeader *self)
 {
     PyObject *py_retval;
@@ -14801,22 +14829,29 @@ _wrap_PyNs3FlameFlameHeader_GetOrigDst(PyNs3FlameFlameHeader *self)
 
 
 PyObject *
-_wrap_PyNs3FlameFlameHeader_SetProtocol(PyNs3FlameFlameHeader *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3FlameFlameHeader_GetOrigSrc(PyNs3FlameFlameHeader *self)
 {
     PyObject *py_retval;
-    int protocol;
-    const char *keywords[] = {"protocol", NULL};
+    PyNs3Mac48Address *py_Mac48Address;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &protocol)) {
-        return NULL;
-    }
-    if (protocol > 0xffff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SetProtocol(protocol);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    ns3::Mac48Address retval = self->obj->GetOrigSrc();
+    py_Mac48Address = PyObject_New(PyNs3Mac48Address, &PyNs3Mac48Address_Type);
+    py_Mac48Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Mac48Address->obj = new ns3::Mac48Address(retval);
+    PyNs3Mac48Address_wrapper_registry[(void *) py_Mac48Address->obj] = (PyObject *) py_Mac48Address;
+    py_retval = Py_BuildValue((char *) "N", py_Mac48Address);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3FlameFlameHeader_GetProtocol(PyNs3FlameFlameHeader *self)
+{
+    PyObject *py_retval;
+    uint16_t retval;
+    
+    retval = self->obj->GetProtocol();
+    py_retval = Py_BuildValue((char *) "i", retval);
     return py_retval;
 }
 
@@ -14829,6 +14864,18 @@ _wrap_PyNs3FlameFlameHeader_GetSeqno(PyNs3FlameFlameHeader *self)
     
     retval = self->obj->GetSeqno();
     py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3FlameFlameHeader_GetSerializedSize(PyNs3FlameFlameHeader *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetSerializedSize();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
 
@@ -14867,41 +14914,18 @@ _wrap_PyNs3FlameFlameHeader_Serialize(PyNs3FlameFlameHeader *self, PyObject *arg
 
 
 PyObject *
-_wrap_PyNs3FlameFlameHeader_GetCost(PyNs3FlameFlameHeader *self)
+_wrap_PyNs3FlameFlameHeader_SetOrigDst(PyNs3FlameFlameHeader *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    uint8_t retval;
+    PyNs3Mac48Address *dst;
+    const char *keywords[] = {"dst", NULL};
     
-    retval = self->obj->GetCost();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3FlameFlameHeader_GetOrigSrc(PyNs3FlameFlameHeader *self)
-{
-    PyObject *py_retval;
-    PyNs3Mac48Address *py_Mac48Address;
-    
-    ns3::Mac48Address retval = self->obj->GetOrigSrc();
-    py_Mac48Address = PyObject_New(PyNs3Mac48Address, &PyNs3Mac48Address_Type);
-    py_Mac48Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Mac48Address->obj = new ns3::Mac48Address(retval);
-    PyNs3Mac48Address_wrapper_registry[(void *) py_Mac48Address->obj] = (PyObject *) py_Mac48Address;
-    py_retval = Py_BuildValue((char *) "N", py_Mac48Address);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3FlameFlameHeader_GetProtocol(PyNs3FlameFlameHeader *self)
-{
-    PyObject *py_retval;
-    uint16_t retval;
-    
-    retval = self->obj->GetProtocol();
-    py_retval = Py_BuildValue((char *) "i", retval);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Mac48Address_Type, &dst)) {
+        return NULL;
+    }
+    self->obj->SetOrigDst(*((PyNs3Mac48Address *) dst)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -14924,48 +14948,20 @@ _wrap_PyNs3FlameFlameHeader_SetOrigSrc(PyNs3FlameFlameHeader *self, PyObject *ar
 
 
 PyObject *
-_wrap_PyNs3FlameFlameHeader_GetInstanceTypeId(PyNs3FlameFlameHeader *self)
+_wrap_PyNs3FlameFlameHeader_SetProtocol(PyNs3FlameFlameHeader *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
+    int protocol;
+    const char *keywords[] = {"protocol", NULL};
     
-    ns3::TypeId retval = self->obj->GetInstanceTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3FlameFlameHeader_GetSerializedSize(PyNs3FlameFlameHeader *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetSerializedSize();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3FlameFlameHeader_AddCost(PyNs3FlameFlameHeader *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int cost;
-    const char *keywords[] = {"cost", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &cost)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &protocol)) {
         return NULL;
     }
-    if (cost > 0xff) {
+    if (protocol > 0xffff) {
         PyErr_SetString(PyExc_ValueError, "Out of range");
         return NULL;
     }
-    self->obj->AddCost(cost);
+    self->obj->SetProtocol(protocol);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -14973,16 +14969,20 @@ _wrap_PyNs3FlameFlameHeader_AddCost(PyNs3FlameFlameHeader *self, PyObject *args,
 
 
 PyObject *
-_wrap_PyNs3FlameFlameHeader_SetOrigDst(PyNs3FlameFlameHeader *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3FlameFlameHeader_SetSeqno(PyNs3FlameFlameHeader *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3Mac48Address *dst;
-    const char *keywords[] = {"dst", NULL};
+    int seqno;
+    const char *keywords[] = {"seqno", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Mac48Address_Type, &dst)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &seqno)) {
         return NULL;
     }
-    self->obj->SetOrigDst(*((PyNs3Mac48Address *) dst)->obj);
+    if (seqno > 0xffff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SetSeqno(seqno);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -15004,21 +15004,21 @@ _wrap_PyNs3FlameFlameHeader__copy__(PyNs3FlameFlameHeader *self)
 }
 
 static PyMethodDef PyNs3FlameFlameHeader_methods[] = {
-    {(char *) "SetSeqno", (PyCFunction) _wrap_PyNs3FlameFlameHeader_SetSeqno, METH_KEYWORDS|METH_VARARGS, "SetSeqno(seqno)\n\ntype: seqno: uint16_t" },
+    {(char *) "AddCost", (PyCFunction) _wrap_PyNs3FlameFlameHeader_AddCost, METH_KEYWORDS|METH_VARARGS, "AddCost(cost)\n\ntype: cost: uint8_t" },
     {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3FlameFlameHeader_Deserialize, METH_KEYWORDS|METH_VARARGS, "Deserialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
-    {(char *) "GetOrigDst", (PyCFunction) _wrap_PyNs3FlameFlameHeader_GetOrigDst, METH_NOARGS, "GetOrigDst()\n\n" },
-    {(char *) "SetProtocol", (PyCFunction) _wrap_PyNs3FlameFlameHeader_SetProtocol, METH_KEYWORDS|METH_VARARGS, "SetProtocol(protocol)\n\ntype: protocol: uint16_t" },
-    {(char *) "GetSeqno", (PyCFunction) _wrap_PyNs3FlameFlameHeader_GetSeqno, METH_NOARGS, "GetSeqno()\n\n" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3FlameFlameHeader_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3FlameFlameHeader_Serialize, METH_KEYWORDS|METH_VARARGS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
     {(char *) "GetCost", (PyCFunction) _wrap_PyNs3FlameFlameHeader_GetCost, METH_NOARGS, "GetCost()\n\n" },
+    {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3FlameFlameHeader_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
+    {(char *) "GetOrigDst", (PyCFunction) _wrap_PyNs3FlameFlameHeader_GetOrigDst, METH_NOARGS, "GetOrigDst()\n\n" },
     {(char *) "GetOrigSrc", (PyCFunction) _wrap_PyNs3FlameFlameHeader_GetOrigSrc, METH_NOARGS, "GetOrigSrc()\n\n" },
     {(char *) "GetProtocol", (PyCFunction) _wrap_PyNs3FlameFlameHeader_GetProtocol, METH_NOARGS, "GetProtocol()\n\n" },
-    {(char *) "SetOrigSrc", (PyCFunction) _wrap_PyNs3FlameFlameHeader_SetOrigSrc, METH_KEYWORDS|METH_VARARGS, "SetOrigSrc(OrigSrc)\n\ntype: OrigSrc: ns3::Mac48Address" },
-    {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3FlameFlameHeader_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
+    {(char *) "GetSeqno", (PyCFunction) _wrap_PyNs3FlameFlameHeader_GetSeqno, METH_NOARGS, "GetSeqno()\n\n" },
     {(char *) "GetSerializedSize", (PyCFunction) _wrap_PyNs3FlameFlameHeader_GetSerializedSize, METH_NOARGS, "GetSerializedSize()\n\n" },
-    {(char *) "AddCost", (PyCFunction) _wrap_PyNs3FlameFlameHeader_AddCost, METH_KEYWORDS|METH_VARARGS, "AddCost(cost)\n\ntype: cost: uint8_t" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3FlameFlameHeader_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3FlameFlameHeader_Serialize, METH_KEYWORDS|METH_VARARGS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
     {(char *) "SetOrigDst", (PyCFunction) _wrap_PyNs3FlameFlameHeader_SetOrigDst, METH_KEYWORDS|METH_VARARGS, "SetOrigDst(dst)\n\ntype: dst: ns3::Mac48Address" },
+    {(char *) "SetOrigSrc", (PyCFunction) _wrap_PyNs3FlameFlameHeader_SetOrigSrc, METH_KEYWORDS|METH_VARARGS, "SetOrigSrc(OrigSrc)\n\ntype: OrigSrc: ns3::Mac48Address" },
+    {(char *) "SetProtocol", (PyCFunction) _wrap_PyNs3FlameFlameHeader_SetProtocol, METH_KEYWORDS|METH_VARARGS, "SetProtocol(protocol)\n\ntype: protocol: uint16_t" },
+    {(char *) "SetSeqno", (PyCFunction) _wrap_PyNs3FlameFlameHeader_SetSeqno, METH_KEYWORDS|METH_VARARGS, "SetSeqno(seqno)\n\ntype: seqno: uint16_t" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3FlameFlameHeader__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -15153,22 +15153,6 @@ PyTypeObject PyNs3FlameFlameHeader_Type = {
 
 
 PyObject *
-PyNs3FlameFlameProtocol__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3FlameFlameProtocol *self)
-{
-    PyObject *py_retval;
-    PyNs3FlameFlameProtocol__PythonHelper *helper = dynamic_cast< PyNs3FlameFlameProtocol__PythonHelper* >(self->obj);
-    
-    if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
-        return NULL;
-    }
-    helper->NotifyConstructionCompleted__parent_caller();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject *
 PyNs3FlameFlameProtocol__PythonHelper::_wrap_DoInitialize(PyNs3FlameFlameProtocol *self)
 {
     PyObject *py_retval;
@@ -15195,6 +15179,22 @@ PyNs3FlameFlameProtocol__PythonHelper::_wrap_NotifyNewAggregate(PyNs3FlameFlameP
         return NULL;
     }
     helper->NotifyNewAggregate__parent_caller();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject *
+PyNs3FlameFlameProtocol__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3FlameFlameProtocol *self)
+{
+    PyObject *py_retval;
+    PyNs3FlameFlameProtocol__PythonHelper *helper = dynamic_cast< PyNs3FlameFlameProtocol__PythonHelper* >(self->obj);
+    
+    if (helper == NULL) {
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        return NULL;
+    }
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -15534,41 +15534,14 @@ _wrap_PyNs3FlameFlameProtocol__tp_init(PyNs3FlameFlameProtocol *self, PyObject *
 
 
 PyObject *
-_wrap_PyNs3FlameFlameProtocol_RemoveRoutingStuff(PyNs3FlameFlameProtocol *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3FlameFlameProtocol_DoDispose(PyNs3FlameFlameProtocol *self)
 {
     PyObject *py_retval;
-    bool retval;
-    unsigned int fromIface;
-    PyNs3Mac48Address *source;
-    PyNs3Mac48Address *destination;
-    PyNs3Packet *packet;
-    ns3::Packet *packet_ptr;
-    uint16_t  protocolType;
     PyNs3FlameFlameProtocol__PythonHelper *helper_class = dynamic_cast<PyNs3FlameFlameProtocol__PythonHelper*> (self->obj);
-    const char *keywords[] = {"fromIface", "source", "destination", "packet", "protocolType", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "IO!O!O!H", (char **) keywords, &fromIface, &PyNs3Mac48Address_Type, &source, &PyNs3Mac48Address_Type, &destination, &PyNs3Packet_Type, &packet, &protocolType)) {
-        return NULL;
-    }
-    packet_ptr = (packet ? packet->obj : NULL);
-    retval = (helper_class == NULL)? (self->obj->RemoveRoutingStuff(fromIface, *((PyNs3Mac48Address *) source)->obj, *((PyNs3Mac48Address *) destination)->obj, ns3::Ptr< ns3::Packet  > (packet_ptr), protocolType)) : (self->obj->ns3::flame::FlameProtocol::RemoveRoutingStuff(fromIface, *((PyNs3Mac48Address *) source)->obj, *((PyNs3Mac48Address *) destination)->obj, ns3::Ptr< ns3::Packet  > (packet_ptr), protocolType));
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3FlameFlameProtocol_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::flame::FlameProtocol::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    (helper_class == NULL)? (self->obj->DoDispose()) : (self->obj->ns3::flame::FlameProtocol::DoDispose());
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -15585,6 +15558,22 @@ _wrap_PyNs3FlameFlameProtocol_GetAddress(PyNs3FlameFlameProtocol *self)
     py_Mac48Address->obj = new ns3::Mac48Address(retval);
     PyNs3Mac48Address_wrapper_registry[(void *) py_Mac48Address->obj] = (PyObject *) py_Mac48Address;
     py_retval = Py_BuildValue((char *) "N", py_Mac48Address);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3FlameFlameProtocol_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::flame::FlameProtocol::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
     return py_retval;
 }
 
@@ -15609,14 +15598,25 @@ _wrap_PyNs3FlameFlameProtocol_Install(PyNs3FlameFlameProtocol *self, PyObject *a
 
 
 PyObject *
-_wrap_PyNs3FlameFlameProtocol_DoDispose(PyNs3FlameFlameProtocol *self)
+_wrap_PyNs3FlameFlameProtocol_RemoveRoutingStuff(PyNs3FlameFlameProtocol *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
+    bool retval;
+    unsigned int fromIface;
+    PyNs3Mac48Address *source;
+    PyNs3Mac48Address *destination;
+    PyNs3Packet *packet;
+    ns3::Packet *packet_ptr;
+    uint16_t  protocolType;
     PyNs3FlameFlameProtocol__PythonHelper *helper_class = dynamic_cast<PyNs3FlameFlameProtocol__PythonHelper*> (self->obj);
+    const char *keywords[] = {"fromIface", "source", "destination", "packet", "protocolType", NULL};
     
-    (helper_class == NULL)? (self->obj->DoDispose()) : (self->obj->ns3::flame::FlameProtocol::DoDispose());
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "IO!O!O!H", (char **) keywords, &fromIface, &PyNs3Mac48Address_Type, &source, &PyNs3Mac48Address_Type, &destination, &PyNs3Packet_Type, &packet, &protocolType)) {
+        return NULL;
+    }
+    packet_ptr = (packet ? packet->obj : NULL);
+    retval = (helper_class == NULL)? (self->obj->RemoveRoutingStuff(fromIface, *((PyNs3Mac48Address *) source)->obj, *((PyNs3Mac48Address *) destination)->obj, ns3::Ptr< ns3::Packet  > (packet_ptr), protocolType)) : (self->obj->ns3::flame::FlameProtocol::RemoveRoutingStuff(fromIface, *((PyNs3Mac48Address *) source)->obj, *((PyNs3Mac48Address *) destination)->obj, ns3::Ptr< ns3::Packet  > (packet_ptr), protocolType));
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
@@ -15668,16 +15668,16 @@ _wrap_PyNs3FlameFlameProtocol_ResetStats(PyNs3FlameFlameProtocol *self)
 }
 
 static PyMethodDef PyNs3FlameFlameProtocol_methods[] = {
-    {(char *) "RemoveRoutingStuff", (PyCFunction) _wrap_PyNs3FlameFlameProtocol_RemoveRoutingStuff, METH_KEYWORDS|METH_VARARGS, "RemoveRoutingStuff(fromIface, source, destination, packet, protocolType)\n\ntype: fromIface: uint32_t\ntype: source: ns3::Mac48Address const\ntype: destination: ns3::Mac48Address const\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: protocolType: uint16_t &" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3FlameFlameProtocol_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "GetAddress", (PyCFunction) _wrap_PyNs3FlameFlameProtocol_GetAddress, METH_NOARGS, "GetAddress()\n\n" },
-    {(char *) "Install", (PyCFunction) _wrap_PyNs3FlameFlameProtocol_Install, METH_KEYWORDS|METH_VARARGS, "Install(arg0)\n\ntype: arg0: ns3::Ptr< ns3::MeshPointDevice >" },
     {(char *) "DoDispose", (PyCFunction) _wrap_PyNs3FlameFlameProtocol_DoDispose, METH_NOARGS, "DoDispose()\n\n" },
+    {(char *) "GetAddress", (PyCFunction) _wrap_PyNs3FlameFlameProtocol_GetAddress, METH_NOARGS, "GetAddress()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3FlameFlameProtocol_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "Install", (PyCFunction) _wrap_PyNs3FlameFlameProtocol_Install, METH_KEYWORDS|METH_VARARGS, "Install(arg0)\n\ntype: arg0: ns3::Ptr< ns3::MeshPointDevice >" },
+    {(char *) "RemoveRoutingStuff", (PyCFunction) _wrap_PyNs3FlameFlameProtocol_RemoveRoutingStuff, METH_KEYWORDS|METH_VARARGS, "RemoveRoutingStuff(fromIface, source, destination, packet, protocolType)\n\ntype: fromIface: uint32_t\ntype: source: ns3::Mac48Address const\ntype: destination: ns3::Mac48Address const\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: protocolType: uint16_t &" },
     {(char *) "RequestRoute", (PyCFunction) _wrap_PyNs3FlameFlameProtocol_RequestRoute, METH_KEYWORDS|METH_VARARGS, "RequestRoute(sourceIface, source, destination, packet, protocolType, routeReply)\n\ntype: sourceIface: uint32_t\ntype: source: ns3::Mac48Address const\ntype: destination: ns3::Mac48Address const\ntype: packet: ns3::Ptr< ns3::Packet const >\ntype: protocolType: uint16_t\ntype: routeReply: ns3::Callback< void, bool, ns3::Ptr< ns3::Packet >, ns3::Mac48Address, ns3::Mac48Address, unsigned short, unsigned int, ns3::empty, ns3::empty, ns3::empty >" },
     {(char *) "ResetStats", (PyCFunction) _wrap_PyNs3FlameFlameProtocol_ResetStats, METH_NOARGS, "ResetStats()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3FlameFlameProtocol__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3FlameFlameProtocol__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3FlameFlameProtocol__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3FlameFlameProtocol__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 
@@ -15877,62 +15877,6 @@ int _wrap_PyNs3FlameFlameProtocolMac__tp_init(PyNs3FlameFlameProtocolMac *self, 
 
 
 PyObject *
-_wrap_PyNs3FlameFlameProtocolMac_UpdateBeacon(PyNs3FlameFlameProtocolMac *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3MeshWifiBeacon *beacon;
-    const char *keywords[] = {"beacon", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3MeshWifiBeacon_Type, &beacon)) {
-        return NULL;
-    }
-    self->obj->UpdateBeacon(*((PyNs3MeshWifiBeacon *) beacon)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3FlameFlameProtocolMac_Receive(PyNs3FlameFlameProtocolMac *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3Packet *packet;
-    ns3::Packet *packet_ptr;
-    PyNs3WifiMacHeader *header;
-    const char *keywords[] = {"packet", "header", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3Packet_Type, &packet, &PyNs3WifiMacHeader_Type, &header)) {
-        return NULL;
-    }
-    packet_ptr = (packet ? packet->obj : NULL);
-    retval = self->obj->Receive(ns3::Ptr< ns3::Packet  > (packet_ptr), *((PyNs3WifiMacHeader *) header)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3FlameFlameProtocolMac_SetParent(PyNs3FlameFlameProtocolMac *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3MeshWifiInterfaceMac *parent;
-    ns3::MeshWifiInterfaceMac *parent_ptr;
-    const char *keywords[] = {"parent", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3MeshWifiInterfaceMac_Type, &parent)) {
-        return NULL;
-    }
-    parent_ptr = (parent ? parent->obj : NULL);
-    self->obj->SetParent(ns3::Ptr< ns3::MeshWifiInterfaceMac  > (parent_ptr));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3FlameFlameProtocolMac_AssignStreams(PyNs3FlameFlameProtocolMac *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -15962,6 +15906,74 @@ _wrap_PyNs3FlameFlameProtocolMac_GetChannelId(PyNs3FlameFlameProtocolMac *self)
 
 
 PyObject *
+_wrap_PyNs3FlameFlameProtocolMac_Receive(PyNs3FlameFlameProtocolMac *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3Packet *packet;
+    ns3::Packet *packet_ptr;
+    PyNs3WifiMacHeader *header;
+    const char *keywords[] = {"packet", "header", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3Packet_Type, &packet, &PyNs3WifiMacHeader_Type, &header)) {
+        return NULL;
+    }
+    packet_ptr = (packet ? packet->obj : NULL);
+    retval = self->obj->Receive(ns3::Ptr< ns3::Packet  > (packet_ptr), *((PyNs3WifiMacHeader *) header)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3FlameFlameProtocolMac_ResetStats(PyNs3FlameFlameProtocolMac *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->ResetStats();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3FlameFlameProtocolMac_SetParent(PyNs3FlameFlameProtocolMac *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3MeshWifiInterfaceMac *parent;
+    ns3::MeshWifiInterfaceMac *parent_ptr;
+    const char *keywords[] = {"parent", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3MeshWifiInterfaceMac_Type, &parent)) {
+        return NULL;
+    }
+    parent_ptr = (parent ? parent->obj : NULL);
+    self->obj->SetParent(ns3::Ptr< ns3::MeshWifiInterfaceMac  > (parent_ptr));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3FlameFlameProtocolMac_UpdateBeacon(PyNs3FlameFlameProtocolMac *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3MeshWifiBeacon *beacon;
+    const char *keywords[] = {"beacon", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3MeshWifiBeacon_Type, &beacon)) {
+        return NULL;
+    }
+    self->obj->UpdateBeacon(*((PyNs3MeshWifiBeacon *) beacon)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3FlameFlameProtocolMac_UpdateOutcomingFrame(PyNs3FlameFlameProtocolMac *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -15983,18 +15995,6 @@ _wrap_PyNs3FlameFlameProtocolMac_UpdateOutcomingFrame(PyNs3FlameFlameProtocolMac
 }
 
 
-PyObject *
-_wrap_PyNs3FlameFlameProtocolMac_ResetStats(PyNs3FlameFlameProtocolMac *self)
-{
-    PyObject *py_retval;
-    
-    self->obj->ResetStats();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3FlameFlameProtocolMac__copy__(PyNs3FlameFlameProtocolMac *self)
 {
@@ -16009,13 +16009,13 @@ _wrap_PyNs3FlameFlameProtocolMac__copy__(PyNs3FlameFlameProtocolMac *self)
 }
 
 static PyMethodDef PyNs3FlameFlameProtocolMac_methods[] = {
-    {(char *) "UpdateBeacon", (PyCFunction) _wrap_PyNs3FlameFlameProtocolMac_UpdateBeacon, METH_KEYWORDS|METH_VARARGS, "UpdateBeacon(beacon)\n\ntype: beacon: ns3::MeshWifiBeacon &" },
-    {(char *) "Receive", (PyCFunction) _wrap_PyNs3FlameFlameProtocolMac_Receive, METH_KEYWORDS|METH_VARARGS, "Receive(packet, header)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: header: ns3::WifiMacHeader const &" },
-    {(char *) "SetParent", (PyCFunction) _wrap_PyNs3FlameFlameProtocolMac_SetParent, METH_KEYWORDS|METH_VARARGS, "SetParent(parent)\n\ntype: parent: ns3::Ptr< ns3::MeshWifiInterfaceMac >" },
     {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3FlameFlameProtocolMac_AssignStreams, METH_KEYWORDS|METH_VARARGS, "AssignStreams(stream)\n\ntype: stream: int64_t" },
     {(char *) "GetChannelId", (PyCFunction) _wrap_PyNs3FlameFlameProtocolMac_GetChannelId, METH_NOARGS, "GetChannelId()\n\n" },
-    {(char *) "UpdateOutcomingFrame", (PyCFunction) _wrap_PyNs3FlameFlameProtocolMac_UpdateOutcomingFrame, METH_KEYWORDS|METH_VARARGS, "UpdateOutcomingFrame(packet, header, from, to)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: header: ns3::WifiMacHeader &\ntype: from: ns3::Mac48Address\ntype: to: ns3::Mac48Address" },
+    {(char *) "Receive", (PyCFunction) _wrap_PyNs3FlameFlameProtocolMac_Receive, METH_KEYWORDS|METH_VARARGS, "Receive(packet, header)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: header: ns3::WifiMacHeader const &" },
     {(char *) "ResetStats", (PyCFunction) _wrap_PyNs3FlameFlameProtocolMac_ResetStats, METH_NOARGS, "ResetStats()\n\n" },
+    {(char *) "SetParent", (PyCFunction) _wrap_PyNs3FlameFlameProtocolMac_SetParent, METH_KEYWORDS|METH_VARARGS, "SetParent(parent)\n\ntype: parent: ns3::Ptr< ns3::MeshWifiInterfaceMac >" },
+    {(char *) "UpdateBeacon", (PyCFunction) _wrap_PyNs3FlameFlameProtocolMac_UpdateBeacon, METH_KEYWORDS|METH_VARARGS, "UpdateBeacon(beacon)\n\ntype: beacon: ns3::MeshWifiBeacon &" },
+    {(char *) "UpdateOutcomingFrame", (PyCFunction) _wrap_PyNs3FlameFlameProtocolMac_UpdateOutcomingFrame, METH_KEYWORDS|METH_VARARGS, "UpdateOutcomingFrame(packet, header, from, to)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: header: ns3::WifiMacHeader &\ntype: from: ns3::Mac48Address\ntype: to: ns3::Mac48Address" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3FlameFlameProtocolMac__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -16128,22 +16128,6 @@ PyTypeObject PyNs3FlameFlameProtocolMac_Type = {
 
 
 PyObject *
-PyNs3FlameFlameRtable__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3FlameFlameRtable *self)
-{
-    PyObject *py_retval;
-    PyNs3FlameFlameRtable__PythonHelper *helper = dynamic_cast< PyNs3FlameFlameRtable__PythonHelper* >(self->obj);
-    
-    if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
-        return NULL;
-    }
-    helper->NotifyConstructionCompleted__parent_caller();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject *
 PyNs3FlameFlameRtable__PythonHelper::_wrap_DoInitialize(PyNs3FlameFlameRtable *self)
 {
     PyObject *py_retval;
@@ -16170,6 +16154,22 @@ PyNs3FlameFlameRtable__PythonHelper::_wrap_NotifyNewAggregate(PyNs3FlameFlameRta
         return NULL;
     }
     helper->NotifyNewAggregate__parent_caller();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject *
+PyNs3FlameFlameRtable__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3FlameFlameRtable *self)
+{
+    PyObject *py_retval;
+    PyNs3FlameFlameRtable__PythonHelper *helper = dynamic_cast< PyNs3FlameFlameRtable__PythonHelper* >(self->obj);
+    
+    if (helper == NULL) {
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        return NULL;
+    }
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -16417,15 +16417,15 @@ static PyObject* _wrap_PyNs3FlameFlameRtable__get_MAX_COST(PyObject * PYBINDGEN_
 }
 static PyGetSetDef Ns3FlameFlameRtableMeta__getsets[] = {
     {
-        (char*) "MAX_COST", /* attribute name */
-        (getter) _wrap_PyNs3FlameFlameRtable__get_MAX_COST, /* C function to get the attribute */
+        (char*) "INTERFACE_ANY", /* attribute name */
+        (getter) _wrap_PyNs3FlameFlameRtable__get_INTERFACE_ANY, /* C function to get the attribute */
         (setter) NULL, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
     {
-        (char*) "INTERFACE_ANY", /* attribute name */
-        (getter) _wrap_PyNs3FlameFlameRtable__get_INTERFACE_ANY, /* C function to get the attribute */
+        (char*) "MAX_COST", /* attribute name */
+        (getter) _wrap_PyNs3FlameFlameRtable__get_MAX_COST, /* C function to get the attribute */
         (setter) NULL, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
@@ -16510,22 +16510,6 @@ _wrap_PyNs3FlameFlameRtable__tp_init(PyNs3FlameFlameRtable *self, PyObject *args
 
 
 PyObject *
-_wrap_PyNs3FlameFlameRtable_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::flame::FlameRtable::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3FlameFlameRtable_AddPath(PyNs3FlameFlameRtable *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -16555,6 +16539,35 @@ _wrap_PyNs3FlameFlameRtable_AddPath(PyNs3FlameFlameRtable *self, PyObject *args,
 
 
 PyObject *
+_wrap_PyNs3FlameFlameRtable_DoDispose(PyNs3FlameFlameRtable *self)
+{
+    PyObject *py_retval;
+    PyNs3FlameFlameRtable__PythonHelper *helper_class = dynamic_cast<PyNs3FlameFlameRtable__PythonHelper*> (self->obj);
+    
+    (helper_class == NULL)? (self->obj->DoDispose()) : (self->obj->ns3::flame::FlameRtable::DoDispose());
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3FlameFlameRtable_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::flame::FlameRtable::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3FlameFlameRtable_Lookup(PyNs3FlameFlameRtable *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -16574,27 +16587,14 @@ _wrap_PyNs3FlameFlameRtable_Lookup(PyNs3FlameFlameRtable *self, PyObject *args, 
     return py_retval;
 }
 
-
-PyObject *
-_wrap_PyNs3FlameFlameRtable_DoDispose(PyNs3FlameFlameRtable *self)
-{
-    PyObject *py_retval;
-    PyNs3FlameFlameRtable__PythonHelper *helper_class = dynamic_cast<PyNs3FlameFlameRtable__PythonHelper*> (self->obj);
-    
-    (helper_class == NULL)? (self->obj->DoDispose()) : (self->obj->ns3::flame::FlameRtable::DoDispose());
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
 static PyMethodDef PyNs3FlameFlameRtable_methods[] = {
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3FlameFlameRtable_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
     {(char *) "AddPath", (PyCFunction) _wrap_PyNs3FlameFlameRtable_AddPath, METH_KEYWORDS|METH_VARARGS, "AddPath(destination, retransmitter, interface, cost, seqnum)\n\ntype: destination: ns3::Mac48Address const\ntype: retransmitter: ns3::Mac48Address const\ntype: interface: uint32_t const\ntype: cost: uint8_t const\ntype: seqnum: uint16_t const" },
-    {(char *) "Lookup", (PyCFunction) _wrap_PyNs3FlameFlameRtable_Lookup, METH_KEYWORDS|METH_VARARGS, "Lookup(destination)\n\ntype: destination: ns3::Mac48Address" },
     {(char *) "DoDispose", (PyCFunction) _wrap_PyNs3FlameFlameRtable_DoDispose, METH_NOARGS, "DoDispose()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3FlameFlameRtable__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3FlameFlameRtable_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "Lookup", (PyCFunction) _wrap_PyNs3FlameFlameRtable_Lookup, METH_KEYWORDS|METH_VARARGS, "Lookup(destination)\n\ntype: destination: ns3::Mac48Address" },
     {(char *) "DoInitialize", (PyCFunction) PyNs3FlameFlameRtable__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3FlameFlameRtable__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3FlameFlameRtable__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 
@@ -16824,20 +16824,6 @@ static int _wrap_PyNs3FlameFlameRtableLookupResult__set_seqnum(PyNs3FlameFlameRt
 }
 static PyGetSetDef PyNs3FlameFlameRtableLookupResult__getsets[] = {
     {
-        (char*) "ifIndex", /* attribute name */
-        (getter) _wrap_PyNs3FlameFlameRtableLookupResult__get_ifIndex, /* C function to get the attribute */
-        (setter) _wrap_PyNs3FlameFlameRtableLookupResult__set_ifIndex, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
-        (char*) "seqnum", /* attribute name */
-        (getter) _wrap_PyNs3FlameFlameRtableLookupResult__get_seqnum, /* C function to get the attribute */
-        (setter) _wrap_PyNs3FlameFlameRtableLookupResult__set_seqnum, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
         (char*) "cost", /* attribute name */
         (getter) _wrap_PyNs3FlameFlameRtableLookupResult__get_cost, /* C function to get the attribute */
         (setter) _wrap_PyNs3FlameFlameRtableLookupResult__set_cost, /* C function to set the attribute */
@@ -16845,9 +16831,23 @@ static PyGetSetDef PyNs3FlameFlameRtableLookupResult__getsets[] = {
         NULL /* optional additional data for getter and setter */
     },
     {
+        (char*) "ifIndex", /* attribute name */
+        (getter) _wrap_PyNs3FlameFlameRtableLookupResult__get_ifIndex, /* C function to get the attribute */
+        (setter) _wrap_PyNs3FlameFlameRtableLookupResult__set_ifIndex, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
         (char*) "retransmitter", /* attribute name */
         (getter) _wrap_PyNs3FlameFlameRtableLookupResult__get_retransmitter, /* C function to get the attribute */
         (setter) _wrap_PyNs3FlameFlameRtableLookupResult__set_retransmitter, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "seqnum", /* attribute name */
+        (getter) _wrap_PyNs3FlameFlameRtableLookupResult__get_seqnum, /* C function to get the attribute */
+        (setter) _wrap_PyNs3FlameFlameRtableLookupResult__set_seqnum, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -17138,16 +17138,16 @@ static int _wrap_PyNs3FlameFlameTag__set_transmitter(PyNs3FlameFlameTag *self, P
 }
 static PyGetSetDef PyNs3FlameFlameTag__getsets[] = {
     {
-        (char*) "transmitter", /* attribute name */
-        (getter) _wrap_PyNs3FlameFlameTag__get_transmitter, /* C function to get the attribute */
-        (setter) _wrap_PyNs3FlameFlameTag__set_transmitter, /* C function to set the attribute */
+        (char*) "receiver", /* attribute name */
+        (getter) _wrap_PyNs3FlameFlameTag__get_receiver, /* C function to get the attribute */
+        (setter) _wrap_PyNs3FlameFlameTag__set_receiver, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
     {
-        (char*) "receiver", /* attribute name */
-        (getter) _wrap_PyNs3FlameFlameTag__get_receiver, /* C function to get the attribute */
-        (setter) _wrap_PyNs3FlameFlameTag__set_receiver, /* C function to set the attribute */
+        (char*) "transmitter", /* attribute name */
+        (getter) _wrap_PyNs3FlameFlameTag__get_transmitter, /* C function to get the attribute */
+        (setter) _wrap_PyNs3FlameFlameTag__set_transmitter, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -17221,6 +17221,39 @@ int _wrap_PyNs3FlameFlameTag__tp_init(PyNs3FlameFlameTag *self, PyObject *args, 
 
 
 PyObject *
+_wrap_PyNs3FlameFlameTag_Deserialize(PyNs3FlameFlameTag *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3TagBuffer *i;
+    const char *keywords[] = {"i", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3TagBuffer_Type, &i)) {
+        return NULL;
+    }
+    self->obj->Deserialize(*((PyNs3TagBuffer *) i)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3FlameFlameTag_GetInstanceTypeId(PyNs3FlameFlameTag *self)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = self->obj->GetInstanceTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3FlameFlameTag_GetSerializedSize(PyNs3FlameFlameTag *self)
 {
     PyObject *py_retval;
@@ -17265,39 +17298,6 @@ _wrap_PyNs3FlameFlameTag_Serialize(PyNs3FlameFlameTag *self, PyObject *args, PyO
 }
 
 
-PyObject *
-_wrap_PyNs3FlameFlameTag_Deserialize(PyNs3FlameFlameTag *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3TagBuffer *i;
-    const char *keywords[] = {"i", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3TagBuffer_Type, &i)) {
-        return NULL;
-    }
-    self->obj->Deserialize(*((PyNs3TagBuffer *) i)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3FlameFlameTag_GetInstanceTypeId(PyNs3FlameFlameTag *self)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = self->obj->GetInstanceTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3FlameFlameTag__copy__(PyNs3FlameFlameTag *self)
 {
@@ -17313,11 +17313,11 @@ _wrap_PyNs3FlameFlameTag__copy__(PyNs3FlameFlameTag *self)
 }
 
 static PyMethodDef PyNs3FlameFlameTag_methods[] = {
+    {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3FlameFlameTag_Deserialize, METH_KEYWORDS|METH_VARARGS, "Deserialize(i)\n\ntype: i: ns3::TagBuffer" },
+    {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3FlameFlameTag_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
     {(char *) "GetSerializedSize", (PyCFunction) _wrap_PyNs3FlameFlameTag_GetSerializedSize, METH_NOARGS, "GetSerializedSize()\n\n" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3FlameFlameTag_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
     {(char *) "Serialize", (PyCFunction) _wrap_PyNs3FlameFlameTag_Serialize, METH_KEYWORDS|METH_VARARGS, "Serialize(i)\n\ntype: i: ns3::TagBuffer" },
-    {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3FlameFlameTag_Deserialize, METH_KEYWORDS|METH_VARARGS, "Deserialize(i)\n\ntype: i: ns3::TagBuffer" },
-    {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3FlameFlameTag_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3FlameFlameTag__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -19075,16 +19075,103 @@ int _wrap_PyNs3MeshHelper__tp_init(PyNs3MeshHelper *self, PyObject *args, PyObje
 
 
 PyObject *
-_wrap_PyNs3MeshHelper_SetSpreadInterfaceChannels(PyNs3MeshHelper *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3MeshHelper_AssignStreams(PyNs3MeshHelper *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    ns3::MeshHelper::ChannelPolicy policy;
-    const char *keywords[] = {"policy", NULL};
+    int64_t retval;
+    PyNs3NetDeviceContainer *c;
+    int64_t stream;
+    const char *keywords[] = {"c", "stream", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &policy)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!L", (char **) keywords, &PyNs3NetDeviceContainer_Type, &c, &stream)) {
         return NULL;
     }
-    self->obj->SetSpreadInterfaceChannels(policy);
+    retval = self->obj->AssignStreams(*((PyNs3NetDeviceContainer *) c)->obj, stream);
+    py_retval = Py_BuildValue((char *) "L", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3MeshHelper_Default(void)
+{
+    PyObject *py_retval;
+    PyNs3MeshHelper *py_MeshHelper;
+    
+    ns3::MeshHelper retval = ns3::MeshHelper::Default();
+    py_MeshHelper = PyObject_New(PyNs3MeshHelper, &PyNs3MeshHelper_Type);
+    py_MeshHelper->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_MeshHelper->obj = new ns3::MeshHelper(retval);
+    PyNs3MeshHelper_wrapper_registry[(void *) py_MeshHelper->obj] = (PyObject *) py_MeshHelper;
+    py_retval = Py_BuildValue((char *) "N", py_MeshHelper);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3MeshHelper_Install(PyNs3MeshHelper *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3WifiPhyHelper *phyHelper;
+    PyNs3NodeContainer *c;
+    const char *keywords[] = {"phyHelper", "c", NULL};
+    PyNs3NetDeviceContainer *py_NetDeviceContainer;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3WifiPhyHelper_Type, &phyHelper, &PyNs3NodeContainer_Type, &c)) {
+        return NULL;
+    }
+    ns3::NetDeviceContainer retval = self->obj->Install(*((PyNs3WifiPhyHelper *) phyHelper)->obj, *((PyNs3NodeContainer *) c)->obj);
+    py_NetDeviceContainer = PyObject_New(PyNs3NetDeviceContainer, &PyNs3NetDeviceContainer_Type);
+    py_NetDeviceContainer->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_NetDeviceContainer->obj = new ns3::NetDeviceContainer(retval);
+    PyNs3NetDeviceContainer_wrapper_registry[(void *) py_NetDeviceContainer->obj] = (PyObject *) py_NetDeviceContainer;
+    py_retval = Py_BuildValue((char *) "N", py_NetDeviceContainer);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3MeshHelper_SetMacType(PyNs3MeshHelper *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    const char *n0 = NULL;
+    Py_ssize_t n0_len;
+    PyNs3AttributeValue *v0 = NULL;
+    ns3::EmptyAttributeValue v0_default = ns3::EmptyAttributeValue();
+    const char *n1 = NULL;
+    Py_ssize_t n1_len;
+    PyNs3AttributeValue *v1 = NULL;
+    ns3::EmptyAttributeValue v1_default = ns3::EmptyAttributeValue();
+    const char *n2 = NULL;
+    Py_ssize_t n2_len;
+    PyNs3AttributeValue *v2 = NULL;
+    ns3::EmptyAttributeValue v2_default = ns3::EmptyAttributeValue();
+    const char *n3 = NULL;
+    Py_ssize_t n3_len;
+    PyNs3AttributeValue *v3 = NULL;
+    ns3::EmptyAttributeValue v3_default = ns3::EmptyAttributeValue();
+    const char *n4 = NULL;
+    Py_ssize_t n4_len;
+    PyNs3AttributeValue *v4 = NULL;
+    ns3::EmptyAttributeValue v4_default = ns3::EmptyAttributeValue();
+    const char *n5 = NULL;
+    Py_ssize_t n5_len;
+    PyNs3AttributeValue *v5 = NULL;
+    ns3::EmptyAttributeValue v5_default = ns3::EmptyAttributeValue();
+    const char *n6 = NULL;
+    Py_ssize_t n6_len;
+    PyNs3AttributeValue *v6 = NULL;
+    ns3::EmptyAttributeValue v6_default = ns3::EmptyAttributeValue();
+    const char *n7 = NULL;
+    Py_ssize_t n7_len;
+    PyNs3AttributeValue *v7 = NULL;
+    ns3::EmptyAttributeValue v7_default = ns3::EmptyAttributeValue();
+    const char *keywords[] = {"n0", "v0", "n1", "v1", "n2", "v2", "n3", "v3", "n4", "v4", "n5", "v5", "n6", "v6", "n7", "v7", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "|s#O!s#O!s#O!s#O!s#O!s#O!s#O!s#O!", (char **) keywords, &n0, &n0_len, &PyNs3AttributeValue_Type, &v0, &n1, &n1_len, &PyNs3AttributeValue_Type, &v1, &n2, &n2_len, &PyNs3AttributeValue_Type, &v2, &n3, &n3_len, &PyNs3AttributeValue_Type, &v3, &n4, &n4_len, &PyNs3AttributeValue_Type, &v4, &n5, &n5_len, &PyNs3AttributeValue_Type, &v5, &n6, &n6_len, &PyNs3AttributeValue_Type, &v6, &n7, &n7_len, &PyNs3AttributeValue_Type, &v7)) {
+        return NULL;
+    }
+    self->obj->SetMacType((n0 ? std::string(n0, n0_len) : ""), (v0 ? (*((PyNs3AttributeValue *) v0)->obj) : v0_default), (n1 ? std::string(n1, n1_len) : ""), (v1 ? (*((PyNs3AttributeValue *) v1)->obj) : v1_default), (n2 ? std::string(n2, n2_len) : ""), (v2 ? (*((PyNs3AttributeValue *) v2)->obj) : v2_default), (n3 ? std::string(n3, n3_len) : ""), (v3 ? (*((PyNs3AttributeValue *) v3)->obj) : v3_default), (n4 ? std::string(n4, n4_len) : ""), (v4 ? (*((PyNs3AttributeValue *) v4)->obj) : v4_default), (n5 ? std::string(n5, n5_len) : ""), (v5 ? (*((PyNs3AttributeValue *) v5)->obj) : v5_default), (n6 ? std::string(n6, n6_len) : ""), (v6 ? (*((PyNs3AttributeValue *) v6)->obj) : v6_default), (n7 ? std::string(n7, n7_len) : ""), (v7 ? (*((PyNs3AttributeValue *) v7)->obj) : v7_default));
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -19109,17 +19196,68 @@ _wrap_PyNs3MeshHelper_SetNumberOfInterfaces(PyNs3MeshHelper *self, PyObject *arg
 
 
 PyObject *
-_wrap_PyNs3MeshHelper_Default(void)
+_wrap_PyNs3MeshHelper_SetRemoteStationManager(PyNs3MeshHelper *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3MeshHelper *py_MeshHelper;
+    const char *type;
+    Py_ssize_t type_len;
+    const char *n0 = NULL;
+    Py_ssize_t n0_len;
+    PyNs3AttributeValue *v0 = NULL;
+    ns3::EmptyAttributeValue v0_default = ns3::EmptyAttributeValue();
+    const char *n1 = NULL;
+    Py_ssize_t n1_len;
+    PyNs3AttributeValue *v1 = NULL;
+    ns3::EmptyAttributeValue v1_default = ns3::EmptyAttributeValue();
+    const char *n2 = NULL;
+    Py_ssize_t n2_len;
+    PyNs3AttributeValue *v2 = NULL;
+    ns3::EmptyAttributeValue v2_default = ns3::EmptyAttributeValue();
+    const char *n3 = NULL;
+    Py_ssize_t n3_len;
+    PyNs3AttributeValue *v3 = NULL;
+    ns3::EmptyAttributeValue v3_default = ns3::EmptyAttributeValue();
+    const char *n4 = NULL;
+    Py_ssize_t n4_len;
+    PyNs3AttributeValue *v4 = NULL;
+    ns3::EmptyAttributeValue v4_default = ns3::EmptyAttributeValue();
+    const char *n5 = NULL;
+    Py_ssize_t n5_len;
+    PyNs3AttributeValue *v5 = NULL;
+    ns3::EmptyAttributeValue v5_default = ns3::EmptyAttributeValue();
+    const char *n6 = NULL;
+    Py_ssize_t n6_len;
+    PyNs3AttributeValue *v6 = NULL;
+    ns3::EmptyAttributeValue v6_default = ns3::EmptyAttributeValue();
+    const char *n7 = NULL;
+    Py_ssize_t n7_len;
+    PyNs3AttributeValue *v7 = NULL;
+    ns3::EmptyAttributeValue v7_default = ns3::EmptyAttributeValue();
+    const char *keywords[] = {"type", "n0", "v0", "n1", "v1", "n2", "v2", "n3", "v3", "n4", "v4", "n5", "v5", "n6", "v6", "n7", "v7", NULL};
     
-    ns3::MeshHelper retval = ns3::MeshHelper::Default();
-    py_MeshHelper = PyObject_New(PyNs3MeshHelper, &PyNs3MeshHelper_Type);
-    py_MeshHelper->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_MeshHelper->obj = new ns3::MeshHelper(retval);
-    PyNs3MeshHelper_wrapper_registry[(void *) py_MeshHelper->obj] = (PyObject *) py_MeshHelper;
-    py_retval = Py_BuildValue((char *) "N", py_MeshHelper);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#|s#O!s#O!s#O!s#O!s#O!s#O!s#O!s#O!", (char **) keywords, &type, &type_len, &n0, &n0_len, &PyNs3AttributeValue_Type, &v0, &n1, &n1_len, &PyNs3AttributeValue_Type, &v1, &n2, &n2_len, &PyNs3AttributeValue_Type, &v2, &n3, &n3_len, &PyNs3AttributeValue_Type, &v3, &n4, &n4_len, &PyNs3AttributeValue_Type, &v4, &n5, &n5_len, &PyNs3AttributeValue_Type, &v5, &n6, &n6_len, &PyNs3AttributeValue_Type, &v6, &n7, &n7_len, &PyNs3AttributeValue_Type, &v7)) {
+        return NULL;
+    }
+    self->obj->SetRemoteStationManager(std::string(type, type_len), (n0 ? std::string(n0, n0_len) : ""), (v0 ? (*((PyNs3AttributeValue *) v0)->obj) : v0_default), (n1 ? std::string(n1, n1_len) : ""), (v1 ? (*((PyNs3AttributeValue *) v1)->obj) : v1_default), (n2 ? std::string(n2, n2_len) : ""), (v2 ? (*((PyNs3AttributeValue *) v2)->obj) : v2_default), (n3 ? std::string(n3, n3_len) : ""), (v3 ? (*((PyNs3AttributeValue *) v3)->obj) : v3_default), (n4 ? std::string(n4, n4_len) : ""), (v4 ? (*((PyNs3AttributeValue *) v4)->obj) : v4_default), (n5 ? std::string(n5, n5_len) : ""), (v5 ? (*((PyNs3AttributeValue *) v5)->obj) : v5_default), (n6 ? std::string(n6, n6_len) : ""), (v6 ? (*((PyNs3AttributeValue *) v6)->obj) : v6_default), (n7 ? std::string(n7, n7_len) : ""), (v7 ? (*((PyNs3AttributeValue *) v7)->obj) : v7_default));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3MeshHelper_SetSpreadInterfaceChannels(PyNs3MeshHelper *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    ns3::MeshHelper::ChannelPolicy policy;
+    const char *keywords[] = {"policy", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &policy)) {
+        return NULL;
+    }
+    self->obj->SetSpreadInterfaceChannels(policy);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -19191,144 +19329,6 @@ _wrap_PyNs3MeshHelper_SetStandard(PyNs3MeshHelper *self, PyObject *args, PyObjec
 }
 
 
-PyObject *
-_wrap_PyNs3MeshHelper_SetMacType(PyNs3MeshHelper *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    const char *n0 = NULL;
-    Py_ssize_t n0_len;
-    PyNs3AttributeValue *v0 = NULL;
-    ns3::EmptyAttributeValue v0_default = ns3::EmptyAttributeValue();
-    const char *n1 = NULL;
-    Py_ssize_t n1_len;
-    PyNs3AttributeValue *v1 = NULL;
-    ns3::EmptyAttributeValue v1_default = ns3::EmptyAttributeValue();
-    const char *n2 = NULL;
-    Py_ssize_t n2_len;
-    PyNs3AttributeValue *v2 = NULL;
-    ns3::EmptyAttributeValue v2_default = ns3::EmptyAttributeValue();
-    const char *n3 = NULL;
-    Py_ssize_t n3_len;
-    PyNs3AttributeValue *v3 = NULL;
-    ns3::EmptyAttributeValue v3_default = ns3::EmptyAttributeValue();
-    const char *n4 = NULL;
-    Py_ssize_t n4_len;
-    PyNs3AttributeValue *v4 = NULL;
-    ns3::EmptyAttributeValue v4_default = ns3::EmptyAttributeValue();
-    const char *n5 = NULL;
-    Py_ssize_t n5_len;
-    PyNs3AttributeValue *v5 = NULL;
-    ns3::EmptyAttributeValue v5_default = ns3::EmptyAttributeValue();
-    const char *n6 = NULL;
-    Py_ssize_t n6_len;
-    PyNs3AttributeValue *v6 = NULL;
-    ns3::EmptyAttributeValue v6_default = ns3::EmptyAttributeValue();
-    const char *n7 = NULL;
-    Py_ssize_t n7_len;
-    PyNs3AttributeValue *v7 = NULL;
-    ns3::EmptyAttributeValue v7_default = ns3::EmptyAttributeValue();
-    const char *keywords[] = {"n0", "v0", "n1", "v1", "n2", "v2", "n3", "v3", "n4", "v4", "n5", "v5", "n6", "v6", "n7", "v7", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "|s#O!s#O!s#O!s#O!s#O!s#O!s#O!s#O!", (char **) keywords, &n0, &n0_len, &PyNs3AttributeValue_Type, &v0, &n1, &n1_len, &PyNs3AttributeValue_Type, &v1, &n2, &n2_len, &PyNs3AttributeValue_Type, &v2, &n3, &n3_len, &PyNs3AttributeValue_Type, &v3, &n4, &n4_len, &PyNs3AttributeValue_Type, &v4, &n5, &n5_len, &PyNs3AttributeValue_Type, &v5, &n6, &n6_len, &PyNs3AttributeValue_Type, &v6, &n7, &n7_len, &PyNs3AttributeValue_Type, &v7)) {
-        return NULL;
-    }
-    self->obj->SetMacType((n0 ? std::string(n0, n0_len) : ""), (v0 ? (*((PyNs3AttributeValue *) v0)->obj) : v0_default), (n1 ? std::string(n1, n1_len) : ""), (v1 ? (*((PyNs3AttributeValue *) v1)->obj) : v1_default), (n2 ? std::string(n2, n2_len) : ""), (v2 ? (*((PyNs3AttributeValue *) v2)->obj) : v2_default), (n3 ? std::string(n3, n3_len) : ""), (v3 ? (*((PyNs3AttributeValue *) v3)->obj) : v3_default), (n4 ? std::string(n4, n4_len) : ""), (v4 ? (*((PyNs3AttributeValue *) v4)->obj) : v4_default), (n5 ? std::string(n5, n5_len) : ""), (v5 ? (*((PyNs3AttributeValue *) v5)->obj) : v5_default), (n6 ? std::string(n6, n6_len) : ""), (v6 ? (*((PyNs3AttributeValue *) v6)->obj) : v6_default), (n7 ? std::string(n7, n7_len) : ""), (v7 ? (*((PyNs3AttributeValue *) v7)->obj) : v7_default));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MeshHelper_Install(PyNs3MeshHelper *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3WifiPhyHelper *phyHelper;
-    PyNs3NodeContainer *c;
-    const char *keywords[] = {"phyHelper", "c", NULL};
-    PyNs3NetDeviceContainer *py_NetDeviceContainer;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3WifiPhyHelper_Type, &phyHelper, &PyNs3NodeContainer_Type, &c)) {
-        return NULL;
-    }
-    ns3::NetDeviceContainer retval = self->obj->Install(*((PyNs3WifiPhyHelper *) phyHelper)->obj, *((PyNs3NodeContainer *) c)->obj);
-    py_NetDeviceContainer = PyObject_New(PyNs3NetDeviceContainer, &PyNs3NetDeviceContainer_Type);
-    py_NetDeviceContainer->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_NetDeviceContainer->obj = new ns3::NetDeviceContainer(retval);
-    PyNs3NetDeviceContainer_wrapper_registry[(void *) py_NetDeviceContainer->obj] = (PyObject *) py_NetDeviceContainer;
-    py_retval = Py_BuildValue((char *) "N", py_NetDeviceContainer);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MeshHelper_AssignStreams(PyNs3MeshHelper *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int64_t retval;
-    PyNs3NetDeviceContainer *c;
-    int64_t stream;
-    const char *keywords[] = {"c", "stream", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!L", (char **) keywords, &PyNs3NetDeviceContainer_Type, &c, &stream)) {
-        return NULL;
-    }
-    retval = self->obj->AssignStreams(*((PyNs3NetDeviceContainer *) c)->obj, stream);
-    py_retval = Py_BuildValue((char *) "L", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MeshHelper_SetRemoteStationManager(PyNs3MeshHelper *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    const char *type;
-    Py_ssize_t type_len;
-    const char *n0 = NULL;
-    Py_ssize_t n0_len;
-    PyNs3AttributeValue *v0 = NULL;
-    ns3::EmptyAttributeValue v0_default = ns3::EmptyAttributeValue();
-    const char *n1 = NULL;
-    Py_ssize_t n1_len;
-    PyNs3AttributeValue *v1 = NULL;
-    ns3::EmptyAttributeValue v1_default = ns3::EmptyAttributeValue();
-    const char *n2 = NULL;
-    Py_ssize_t n2_len;
-    PyNs3AttributeValue *v2 = NULL;
-    ns3::EmptyAttributeValue v2_default = ns3::EmptyAttributeValue();
-    const char *n3 = NULL;
-    Py_ssize_t n3_len;
-    PyNs3AttributeValue *v3 = NULL;
-    ns3::EmptyAttributeValue v3_default = ns3::EmptyAttributeValue();
-    const char *n4 = NULL;
-    Py_ssize_t n4_len;
-    PyNs3AttributeValue *v4 = NULL;
-    ns3::EmptyAttributeValue v4_default = ns3::EmptyAttributeValue();
-    const char *n5 = NULL;
-    Py_ssize_t n5_len;
-    PyNs3AttributeValue *v5 = NULL;
-    ns3::EmptyAttributeValue v5_default = ns3::EmptyAttributeValue();
-    const char *n6 = NULL;
-    Py_ssize_t n6_len;
-    PyNs3AttributeValue *v6 = NULL;
-    ns3::EmptyAttributeValue v6_default = ns3::EmptyAttributeValue();
-    const char *n7 = NULL;
-    Py_ssize_t n7_len;
-    PyNs3AttributeValue *v7 = NULL;
-    ns3::EmptyAttributeValue v7_default = ns3::EmptyAttributeValue();
-    const char *keywords[] = {"type", "n0", "v0", "n1", "v1", "n2", "v2", "n3", "v3", "n4", "v4", "n5", "v5", "n6", "v6", "n7", "v7", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#|s#O!s#O!s#O!s#O!s#O!s#O!s#O!s#O!", (char **) keywords, &type, &type_len, &n0, &n0_len, &PyNs3AttributeValue_Type, &v0, &n1, &n1_len, &PyNs3AttributeValue_Type, &v1, &n2, &n2_len, &PyNs3AttributeValue_Type, &v2, &n3, &n3_len, &PyNs3AttributeValue_Type, &v3, &n4, &n4_len, &PyNs3AttributeValue_Type, &v4, &n5, &n5_len, &PyNs3AttributeValue_Type, &v5, &n6, &n6_len, &PyNs3AttributeValue_Type, &v6, &n7, &n7_len, &PyNs3AttributeValue_Type, &v7)) {
-        return NULL;
-    }
-    self->obj->SetRemoteStationManager(std::string(type, type_len), (n0 ? std::string(n0, n0_len) : ""), (v0 ? (*((PyNs3AttributeValue *) v0)->obj) : v0_default), (n1 ? std::string(n1, n1_len) : ""), (v1 ? (*((PyNs3AttributeValue *) v1)->obj) : v1_default), (n2 ? std::string(n2, n2_len) : ""), (v2 ? (*((PyNs3AttributeValue *) v2)->obj) : v2_default), (n3 ? std::string(n3, n3_len) : ""), (v3 ? (*((PyNs3AttributeValue *) v3)->obj) : v3_default), (n4 ? std::string(n4, n4_len) : ""), (v4 ? (*((PyNs3AttributeValue *) v4)->obj) : v4_default), (n5 ? std::string(n5, n5_len) : ""), (v5 ? (*((PyNs3AttributeValue *) v5)->obj) : v5_default), (n6 ? std::string(n6, n6_len) : ""), (v6 ? (*((PyNs3AttributeValue *) v6)->obj) : v6_default), (n7 ? std::string(n7, n7_len) : ""), (v7 ? (*((PyNs3AttributeValue *) v7)->obj) : v7_default));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3MeshHelper__copy__(PyNs3MeshHelper *self)
 {
@@ -19342,15 +19342,15 @@ _wrap_PyNs3MeshHelper__copy__(PyNs3MeshHelper *self)
 }
 
 static PyMethodDef PyNs3MeshHelper_methods[] = {
-    {(char *) "SetSpreadInterfaceChannels", (PyCFunction) _wrap_PyNs3MeshHelper_SetSpreadInterfaceChannels, METH_KEYWORDS|METH_VARARGS, "SetSpreadInterfaceChannels(policy)\n\ntype: policy: ns3::MeshHelper::ChannelPolicy" },
-    {(char *) "SetNumberOfInterfaces", (PyCFunction) _wrap_PyNs3MeshHelper_SetNumberOfInterfaces, METH_KEYWORDS|METH_VARARGS, "SetNumberOfInterfaces(nInterfaces)\n\ntype: nInterfaces: uint32_t" },
+    {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3MeshHelper_AssignStreams, METH_KEYWORDS|METH_VARARGS, "AssignStreams(c, stream)\n\ntype: c: ns3::NetDeviceContainer\ntype: stream: int64_t" },
     {(char *) "Default", (PyCFunction) _wrap_PyNs3MeshHelper_Default, METH_NOARGS|METH_STATIC, "Default()\n\n" },
+    {(char *) "Install", (PyCFunction) _wrap_PyNs3MeshHelper_Install, METH_KEYWORDS|METH_VARARGS, "Install(phyHelper, c)\n\ntype: phyHelper: ns3::WifiPhyHelper const &\ntype: c: ns3::NodeContainer" },
+    {(char *) "SetMacType", (PyCFunction) _wrap_PyNs3MeshHelper_SetMacType, METH_KEYWORDS|METH_VARARGS, "SetMacType(n0, v0, n1, v1, n2, v2, n3, v3, n4, v4, n5, v5, n6, v6, n7, v7)\n\ntype: n0: std::string\ntype: v0: ns3::AttributeValue const &\ntype: n1: std::string\ntype: v1: ns3::AttributeValue const &\ntype: n2: std::string\ntype: v2: ns3::AttributeValue const &\ntype: n3: std::string\ntype: v3: ns3::AttributeValue const &\ntype: n4: std::string\ntype: v4: ns3::AttributeValue const &\ntype: n5: std::string\ntype: v5: ns3::AttributeValue const &\ntype: n6: std::string\ntype: v6: ns3::AttributeValue const &\ntype: n7: std::string\ntype: v7: ns3::AttributeValue const &" },
+    {(char *) "SetNumberOfInterfaces", (PyCFunction) _wrap_PyNs3MeshHelper_SetNumberOfInterfaces, METH_KEYWORDS|METH_VARARGS, "SetNumberOfInterfaces(nInterfaces)\n\ntype: nInterfaces: uint32_t" },
+    {(char *) "SetRemoteStationManager", (PyCFunction) _wrap_PyNs3MeshHelper_SetRemoteStationManager, METH_KEYWORDS|METH_VARARGS, "SetRemoteStationManager(type, n0, v0, n1, v1, n2, v2, n3, v3, n4, v4, n5, v5, n6, v6, n7, v7)\n\ntype: type: std::string\ntype: n0: std::string\ntype: v0: ns3::AttributeValue const &\ntype: n1: std::string\ntype: v1: ns3::AttributeValue const &\ntype: n2: std::string\ntype: v2: ns3::AttributeValue const &\ntype: n3: std::string\ntype: v3: ns3::AttributeValue const &\ntype: n4: std::string\ntype: v4: ns3::AttributeValue const &\ntype: n5: std::string\ntype: v5: ns3::AttributeValue const &\ntype: n6: std::string\ntype: v6: ns3::AttributeValue const &\ntype: n7: std::string\ntype: v7: ns3::AttributeValue const &" },
+    {(char *) "SetSpreadInterfaceChannels", (PyCFunction) _wrap_PyNs3MeshHelper_SetSpreadInterfaceChannels, METH_KEYWORDS|METH_VARARGS, "SetSpreadInterfaceChannels(policy)\n\ntype: policy: ns3::MeshHelper::ChannelPolicy" },
     {(char *) "SetStackInstaller", (PyCFunction) _wrap_PyNs3MeshHelper_SetStackInstaller, METH_KEYWORDS|METH_VARARGS, "SetStackInstaller(type, n0, v0, n1, v1, n2, v2, n3, v3, n4, v4, n5, v5, n6, v6, n7, v7)\n\ntype: type: std::string\ntype: n0: std::string\ntype: v0: ns3::AttributeValue const &\ntype: n1: std::string\ntype: v1: ns3::AttributeValue const &\ntype: n2: std::string\ntype: v2: ns3::AttributeValue const &\ntype: n3: std::string\ntype: v3: ns3::AttributeValue const &\ntype: n4: std::string\ntype: v4: ns3::AttributeValue const &\ntype: n5: std::string\ntype: v5: ns3::AttributeValue const &\ntype: n6: std::string\ntype: v6: ns3::AttributeValue const &\ntype: n7: std::string\ntype: v7: ns3::AttributeValue const &" },
     {(char *) "SetStandard", (PyCFunction) _wrap_PyNs3MeshHelper_SetStandard, METH_KEYWORDS|METH_VARARGS, "SetStandard(standard)\n\ntype: standard: ns3::WifiPhyStandard" },
-    {(char *) "SetMacType", (PyCFunction) _wrap_PyNs3MeshHelper_SetMacType, METH_KEYWORDS|METH_VARARGS, "SetMacType(n0, v0, n1, v1, n2, v2, n3, v3, n4, v4, n5, v5, n6, v6, n7, v7)\n\ntype: n0: std::string\ntype: v0: ns3::AttributeValue const &\ntype: n1: std::string\ntype: v1: ns3::AttributeValue const &\ntype: n2: std::string\ntype: v2: ns3::AttributeValue const &\ntype: n3: std::string\ntype: v3: ns3::AttributeValue const &\ntype: n4: std::string\ntype: v4: ns3::AttributeValue const &\ntype: n5: std::string\ntype: v5: ns3::AttributeValue const &\ntype: n6: std::string\ntype: v6: ns3::AttributeValue const &\ntype: n7: std::string\ntype: v7: ns3::AttributeValue const &" },
-    {(char *) "Install", (PyCFunction) _wrap_PyNs3MeshHelper_Install, METH_KEYWORDS|METH_VARARGS, "Install(phyHelper, c)\n\ntype: phyHelper: ns3::WifiPhyHelper const &\ntype: c: ns3::NodeContainer" },
-    {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3MeshHelper_AssignStreams, METH_KEYWORDS|METH_VARARGS, "AssignStreams(c, stream)\n\ntype: c: ns3::NetDeviceContainer\ntype: stream: int64_t" },
-    {(char *) "SetRemoteStationManager", (PyCFunction) _wrap_PyNs3MeshHelper_SetRemoteStationManager, METH_KEYWORDS|METH_VARARGS, "SetRemoteStationManager(type, n0, v0, n1, v1, n2, v2, n3, v3, n4, v4, n5, v5, n6, v6, n7, v7)\n\ntype: type: std::string\ntype: n0: std::string\ntype: v0: ns3::AttributeValue const &\ntype: n1: std::string\ntype: v1: ns3::AttributeValue const &\ntype: n2: std::string\ntype: v2: ns3::AttributeValue const &\ntype: n3: std::string\ntype: v3: ns3::AttributeValue const &\ntype: n4: std::string\ntype: v4: ns3::AttributeValue const &\ntype: n5: std::string\ntype: v5: ns3::AttributeValue const &\ntype: n6: std::string\ntype: v6: ns3::AttributeValue const &\ntype: n7: std::string\ntype: v7: ns3::AttributeValue const &" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3MeshHelper__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -19532,6 +19532,67 @@ int _wrap_PyNs3MeshWifiBeacon__tp_init(PyNs3MeshWifiBeacon *self, PyObject *args
 
 
 PyObject *
+_wrap_PyNs3MeshWifiBeacon_AddInformationElement(PyNs3MeshWifiBeacon *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3WifiInformationElement *ie;
+    ns3::WifiInformationElement *ie_ptr;
+    const char *keywords[] = {"ie", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3WifiInformationElement_Type, &ie)) {
+        return NULL;
+    }
+    ie_ptr = (ie ? ie->obj : NULL);
+    self->obj->AddInformationElement(ns3::Ptr< ns3::WifiInformationElement  > (ie_ptr));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3MeshWifiBeacon_BeaconHeader(PyNs3MeshWifiBeacon *self)
+{
+    PyObject *py_retval;
+    PyNs3MgtBeaconHeader *py_MgtBeaconHeader;
+    
+    ns3::MgtBeaconHeader retval = self->obj->BeaconHeader();
+    py_MgtBeaconHeader = PyObject_GC_New(PyNs3MgtBeaconHeader, &PyNs3MgtBeaconHeader_Type);
+    py_MgtBeaconHeader->inst_dict = NULL;
+    py_MgtBeaconHeader->inst_dict = NULL;
+    py_MgtBeaconHeader->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_MgtBeaconHeader->obj = new ns3::MgtBeaconHeader(retval);
+    PyNs3ObjectBase_wrapper_registry[(void *) py_MgtBeaconHeader->obj] = (PyObject *) py_MgtBeaconHeader;
+    py_retval = Py_BuildValue((char *) "N", py_MgtBeaconHeader);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3MeshWifiBeacon_CreateHeader(PyNs3MeshWifiBeacon *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Mac48Address *address;
+    PyNs3Mac48Address *mpAddress;
+    const char *keywords[] = {"address", "mpAddress", NULL};
+    PyNs3WifiMacHeader *py_WifiMacHeader;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3Mac48Address_Type, &address, &PyNs3Mac48Address_Type, &mpAddress)) {
+        return NULL;
+    }
+    ns3::WifiMacHeader retval = self->obj->CreateHeader(*((PyNs3Mac48Address *) address)->obj, *((PyNs3Mac48Address *) mpAddress)->obj);
+    py_WifiMacHeader = PyObject_GC_New(PyNs3WifiMacHeader, &PyNs3WifiMacHeader_Type);
+    py_WifiMacHeader->inst_dict = NULL;
+    py_WifiMacHeader->inst_dict = NULL;
+    py_WifiMacHeader->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_WifiMacHeader->obj = new ns3::WifiMacHeader(retval);
+    PyNs3ObjectBase_wrapper_registry[(void *) py_WifiMacHeader->obj] = (PyObject *) py_WifiMacHeader;
+    py_retval = Py_BuildValue((char *) "N", py_WifiMacHeader);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3MeshWifiBeacon_CreatePacket(PyNs3MeshWifiBeacon *self)
 {
     PyObject *py_retval;
@@ -19583,67 +19644,6 @@ _wrap_PyNs3MeshWifiBeacon_GetBeaconInterval(PyNs3MeshWifiBeacon *self)
 }
 
 
-PyObject *
-_wrap_PyNs3MeshWifiBeacon_CreateHeader(PyNs3MeshWifiBeacon *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Mac48Address *address;
-    PyNs3Mac48Address *mpAddress;
-    const char *keywords[] = {"address", "mpAddress", NULL};
-    PyNs3WifiMacHeader *py_WifiMacHeader;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3Mac48Address_Type, &address, &PyNs3Mac48Address_Type, &mpAddress)) {
-        return NULL;
-    }
-    ns3::WifiMacHeader retval = self->obj->CreateHeader(*((PyNs3Mac48Address *) address)->obj, *((PyNs3Mac48Address *) mpAddress)->obj);
-    py_WifiMacHeader = PyObject_GC_New(PyNs3WifiMacHeader, &PyNs3WifiMacHeader_Type);
-    py_WifiMacHeader->inst_dict = NULL;
-    py_WifiMacHeader->inst_dict = NULL;
-    py_WifiMacHeader->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_WifiMacHeader->obj = new ns3::WifiMacHeader(retval);
-    PyNs3ObjectBase_wrapper_registry[(void *) py_WifiMacHeader->obj] = (PyObject *) py_WifiMacHeader;
-    py_retval = Py_BuildValue((char *) "N", py_WifiMacHeader);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MeshWifiBeacon_AddInformationElement(PyNs3MeshWifiBeacon *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3WifiInformationElement *ie;
-    ns3::WifiInformationElement *ie_ptr;
-    const char *keywords[] = {"ie", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3WifiInformationElement_Type, &ie)) {
-        return NULL;
-    }
-    ie_ptr = (ie ? ie->obj : NULL);
-    self->obj->AddInformationElement(ns3::Ptr< ns3::WifiInformationElement  > (ie_ptr));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MeshWifiBeacon_BeaconHeader(PyNs3MeshWifiBeacon *self)
-{
-    PyObject *py_retval;
-    PyNs3MgtBeaconHeader *py_MgtBeaconHeader;
-    
-    ns3::MgtBeaconHeader retval = self->obj->BeaconHeader();
-    py_MgtBeaconHeader = PyObject_GC_New(PyNs3MgtBeaconHeader, &PyNs3MgtBeaconHeader_Type);
-    py_MgtBeaconHeader->inst_dict = NULL;
-    py_MgtBeaconHeader->inst_dict = NULL;
-    py_MgtBeaconHeader->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_MgtBeaconHeader->obj = new ns3::MgtBeaconHeader(retval);
-    PyNs3ObjectBase_wrapper_registry[(void *) py_MgtBeaconHeader->obj] = (PyObject *) py_MgtBeaconHeader;
-    py_retval = Py_BuildValue((char *) "N", py_MgtBeaconHeader);
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3MeshWifiBeacon__copy__(PyNs3MeshWifiBeacon *self)
 {
@@ -19657,11 +19657,11 @@ _wrap_PyNs3MeshWifiBeacon__copy__(PyNs3MeshWifiBeacon *self)
 }
 
 static PyMethodDef PyNs3MeshWifiBeacon_methods[] = {
-    {(char *) "CreatePacket", (PyCFunction) _wrap_PyNs3MeshWifiBeacon_CreatePacket, METH_NOARGS, "CreatePacket()\n\n" },
-    {(char *) "GetBeaconInterval", (PyCFunction) _wrap_PyNs3MeshWifiBeacon_GetBeaconInterval, METH_NOARGS, "GetBeaconInterval()\n\n" },
-    {(char *) "CreateHeader", (PyCFunction) _wrap_PyNs3MeshWifiBeacon_CreateHeader, METH_KEYWORDS|METH_VARARGS, "CreateHeader(address, mpAddress)\n\ntype: address: ns3::Mac48Address\ntype: mpAddress: ns3::Mac48Address" },
     {(char *) "AddInformationElement", (PyCFunction) _wrap_PyNs3MeshWifiBeacon_AddInformationElement, METH_KEYWORDS|METH_VARARGS, "AddInformationElement(ie)\n\ntype: ie: ns3::Ptr< ns3::WifiInformationElement >" },
     {(char *) "BeaconHeader", (PyCFunction) _wrap_PyNs3MeshWifiBeacon_BeaconHeader, METH_NOARGS, "BeaconHeader()\n\n" },
+    {(char *) "CreateHeader", (PyCFunction) _wrap_PyNs3MeshWifiBeacon_CreateHeader, METH_KEYWORDS|METH_VARARGS, "CreateHeader(address, mpAddress)\n\ntype: address: ns3::Mac48Address\ntype: mpAddress: ns3::Mac48Address" },
+    {(char *) "CreatePacket", (PyCFunction) _wrap_PyNs3MeshWifiBeacon_CreatePacket, METH_NOARGS, "CreatePacket()\n\n" },
+    {(char *) "GetBeaconInterval", (PyCFunction) _wrap_PyNs3MeshWifiBeacon_GetBeaconInterval, METH_NOARGS, "GetBeaconInterval()\n\n" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3MeshWifiBeacon__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -20418,22 +20418,6 @@ int _wrap_PyNs3MeshInformationElementVector__tp_init(PyNs3MeshInformationElement
 
 
 PyObject *
-_wrap_PyNs3MeshInformationElementVector_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::MeshInformationElementVector::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3MeshInformationElementVector_DeserializeSingleIe(PyNs3MeshInformationElementVector *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -20466,6 +20450,22 @@ _wrap_PyNs3MeshInformationElementVector_GetInstanceTypeId(PyNs3MeshInformationEl
 }
 
 
+PyObject *
+_wrap_PyNs3MeshInformationElementVector_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::MeshInformationElementVector::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
 static PyObject*
 _wrap_PyNs3MeshInformationElementVector__copy__(PyNs3MeshInformationElementVector *self)
 {
@@ -20481,9 +20481,9 @@ _wrap_PyNs3MeshInformationElementVector__copy__(PyNs3MeshInformationElementVecto
 }
 
 static PyMethodDef PyNs3MeshInformationElementVector_methods[] = {
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3MeshInformationElementVector_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
     {(char *) "DeserializeSingleIe", (PyCFunction) _wrap_PyNs3MeshInformationElementVector_DeserializeSingleIe, METH_KEYWORDS|METH_VARARGS, "DeserializeSingleIe(start)\n\ntype: start: ns3::Buffer::Iterator" },
     {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3MeshInformationElementVector_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3MeshInformationElementVector_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3MeshInformationElementVector__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -20621,56 +20621,6 @@ _wrap_PyNs3MeshL2RoutingProtocol__tp_init(void)
 
 
 PyObject *
-_wrap_PyNs3MeshL2RoutingProtocol_RequestRoute(PyNs3MeshL2RoutingProtocol *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    unsigned int sourceIface;
-    PyNs3Mac48Address *source;
-    PyNs3Mac48Address *destination;
-    PyNs3Packet *packet;
-    ns3::Packet *packet_ptr;
-    int protocolType;
-    PyObject *routeReply;
-    ns3::Ptr<PythonCallbackImpl4> routeReply_cb_impl;
-    const char *keywords[] = {"sourceIface", "source", "destination", "packet", "protocolType", "routeReply", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "IO!O!O!iO", (char **) keywords, &sourceIface, &PyNs3Mac48Address_Type, &source, &PyNs3Mac48Address_Type, &destination, &PyNs3Packet_Type, &packet, &protocolType, &routeReply)) {
-        return NULL;
-    }
-    packet_ptr = (packet ? packet->obj : NULL);
-    if (protocolType > 0xffff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    if (!PyCallable_Check(routeReply)) {
-        PyErr_SetString(PyExc_TypeError, "parameter 'routeReply' must be callbale");
-        return NULL;
-    }
-    routeReply_cb_impl = ns3::Create<PythonCallbackImpl4> (routeReply);
-    retval = self->obj->RequestRoute(sourceIface, *((PyNs3Mac48Address *) source)->obj, *((PyNs3Mac48Address *) destination)->obj, ns3::Ptr< ns3::Packet  > (packet_ptr), protocolType, ns3::Callback<void, bool, ns3::Ptr<ns3::Packet>, ns3::Mac48Address, ns3::Mac48Address, unsigned short, unsigned int, ns3::empty, ns3::empty, ns3::empty> (routeReply_cb_impl));
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MeshL2RoutingProtocol_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::MeshL2RoutingProtocol::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3MeshL2RoutingProtocol_GetMeshPoint(PyNs3MeshL2RoutingProtocol *self)
 {
     PyObject *py_retval;
@@ -20716,6 +20666,22 @@ _wrap_PyNs3MeshL2RoutingProtocol_GetMeshPoint(PyNs3MeshL2RoutingProtocol *self)
 
 
 PyObject *
+_wrap_PyNs3MeshL2RoutingProtocol_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::MeshL2RoutingProtocol::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3MeshL2RoutingProtocol_RemoveRoutingStuff(PyNs3MeshL2RoutingProtocol *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -20733,6 +20699,40 @@ _wrap_PyNs3MeshL2RoutingProtocol_RemoveRoutingStuff(PyNs3MeshL2RoutingProtocol *
     }
     packet_ptr = (packet ? packet->obj : NULL);
     retval = self->obj->RemoveRoutingStuff(fromIface, *((PyNs3Mac48Address *) source)->obj, *((PyNs3Mac48Address *) destination)->obj, ns3::Ptr< ns3::Packet  > (packet_ptr), protocolType);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3MeshL2RoutingProtocol_RequestRoute(PyNs3MeshL2RoutingProtocol *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    unsigned int sourceIface;
+    PyNs3Mac48Address *source;
+    PyNs3Mac48Address *destination;
+    PyNs3Packet *packet;
+    ns3::Packet *packet_ptr;
+    int protocolType;
+    PyObject *routeReply;
+    ns3::Ptr<PythonCallbackImpl4> routeReply_cb_impl;
+    const char *keywords[] = {"sourceIface", "source", "destination", "packet", "protocolType", "routeReply", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "IO!O!O!iO", (char **) keywords, &sourceIface, &PyNs3Mac48Address_Type, &source, &PyNs3Mac48Address_Type, &destination, &PyNs3Packet_Type, &packet, &protocolType, &routeReply)) {
+        return NULL;
+    }
+    packet_ptr = (packet ? packet->obj : NULL);
+    if (protocolType > 0xffff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    if (!PyCallable_Check(routeReply)) {
+        PyErr_SetString(PyExc_TypeError, "parameter 'routeReply' must be callbale");
+        return NULL;
+    }
+    routeReply_cb_impl = ns3::Create<PythonCallbackImpl4> (routeReply);
+    retval = self->obj->RequestRoute(sourceIface, *((PyNs3Mac48Address *) source)->obj, *((PyNs3Mac48Address *) destination)->obj, ns3::Ptr< ns3::Packet  > (packet_ptr), protocolType, ns3::Callback<void, bool, ns3::Ptr<ns3::Packet>, ns3::Mac48Address, ns3::Mac48Address, unsigned short, unsigned int, ns3::empty, ns3::empty, ns3::empty> (routeReply_cb_impl));
     py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
@@ -20757,10 +20757,10 @@ _wrap_PyNs3MeshL2RoutingProtocol_SetMeshPoint(PyNs3MeshL2RoutingProtocol *self, 
 }
 
 static PyMethodDef PyNs3MeshL2RoutingProtocol_methods[] = {
-    {(char *) "RequestRoute", (PyCFunction) _wrap_PyNs3MeshL2RoutingProtocol_RequestRoute, METH_KEYWORDS|METH_VARARGS, "RequestRoute(sourceIface, source, destination, packet, protocolType, routeReply)\n\ntype: sourceIface: uint32_t\ntype: source: ns3::Mac48Address const\ntype: destination: ns3::Mac48Address const\ntype: packet: ns3::Ptr< ns3::Packet const >\ntype: protocolType: uint16_t\ntype: routeReply: ns3::Callback< void, bool, ns3::Ptr< ns3::Packet >, ns3::Mac48Address, ns3::Mac48Address, unsigned short, unsigned int, ns3::empty, ns3::empty, ns3::empty >" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3MeshL2RoutingProtocol_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
     {(char *) "GetMeshPoint", (PyCFunction) _wrap_PyNs3MeshL2RoutingProtocol_GetMeshPoint, METH_NOARGS, "GetMeshPoint()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3MeshL2RoutingProtocol_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
     {(char *) "RemoveRoutingStuff", (PyCFunction) _wrap_PyNs3MeshL2RoutingProtocol_RemoveRoutingStuff, METH_KEYWORDS|METH_VARARGS, "RemoveRoutingStuff(fromIface, source, destination, packet, protocolType)\n\ntype: fromIface: uint32_t\ntype: source: ns3::Mac48Address const\ntype: destination: ns3::Mac48Address const\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: protocolType: uint16_t &" },
+    {(char *) "RequestRoute", (PyCFunction) _wrap_PyNs3MeshL2RoutingProtocol_RequestRoute, METH_KEYWORDS|METH_VARARGS, "RequestRoute(sourceIface, source, destination, packet, protocolType, routeReply)\n\ntype: sourceIface: uint32_t\ntype: source: ns3::Mac48Address const\ntype: destination: ns3::Mac48Address const\ntype: packet: ns3::Ptr< ns3::Packet const >\ntype: protocolType: uint16_t\ntype: routeReply: ns3::Callback< void, bool, ns3::Ptr< ns3::Packet >, ns3::Mac48Address, ns3::Mac48Address, unsigned short, unsigned int, ns3::empty, ns3::empty, ns3::empty >" },
     {(char *) "SetMeshPoint", (PyCFunction) _wrap_PyNs3MeshL2RoutingProtocol_SetMeshPoint, METH_KEYWORDS|METH_VARARGS, "SetMeshPoint(mp)\n\ntype: mp: ns3::Ptr< ns3::MeshPointDevice >" },
     {NULL, NULL, 0, NULL}
 };
@@ -21070,6 +21070,23 @@ _wrap_PyNs3MeshWifiInterfaceMacPlugin__tp_init(void)
 
 
 PyObject *
+_wrap_PyNs3MeshWifiInterfaceMacPlugin_AssignStreams(PyNs3MeshWifiInterfaceMacPlugin *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int64_t retval;
+    int64_t stream;
+    const char *keywords[] = {"stream", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "L", (char **) keywords, &stream)) {
+        return NULL;
+    }
+    retval = self->obj->AssignStreams(stream);
+    py_retval = Py_BuildValue((char *) "L", retval);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3MeshWifiInterfaceMacPlugin_Receive(PyNs3MeshWifiInterfaceMacPlugin *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -21146,29 +21163,12 @@ _wrap_PyNs3MeshWifiInterfaceMacPlugin_UpdateOutcomingFrame(PyNs3MeshWifiInterfac
     return py_retval;
 }
 
-
-PyObject *
-_wrap_PyNs3MeshWifiInterfaceMacPlugin_AssignStreams(PyNs3MeshWifiInterfaceMacPlugin *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int64_t retval;
-    int64_t stream;
-    const char *keywords[] = {"stream", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "L", (char **) keywords, &stream)) {
-        return NULL;
-    }
-    retval = self->obj->AssignStreams(stream);
-    py_retval = Py_BuildValue((char *) "L", retval);
-    return py_retval;
-}
-
 static PyMethodDef PyNs3MeshWifiInterfaceMacPlugin_methods[] = {
+    {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMacPlugin_AssignStreams, METH_KEYWORDS|METH_VARARGS, "AssignStreams(stream)\n\ntype: stream: int64_t" },
     {(char *) "Receive", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMacPlugin_Receive, METH_KEYWORDS|METH_VARARGS, "Receive(packet, header)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: header: ns3::WifiMacHeader const &" },
     {(char *) "SetParent", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMacPlugin_SetParent, METH_KEYWORDS|METH_VARARGS, "SetParent(parent)\n\ntype: parent: ns3::Ptr< ns3::MeshWifiInterfaceMac >" },
     {(char *) "UpdateBeacon", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMacPlugin_UpdateBeacon, METH_KEYWORDS|METH_VARARGS, "UpdateBeacon(beacon)\n\ntype: beacon: ns3::MeshWifiBeacon &" },
     {(char *) "UpdateOutcomingFrame", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMacPlugin_UpdateOutcomingFrame, METH_KEYWORDS|METH_VARARGS, "UpdateOutcomingFrame(packet, header, from, to)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: header: ns3::WifiMacHeader &\ntype: from: ns3::Mac48Address\ntype: to: ns3::Mac48Address" },
-    {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMacPlugin_AssignStreams, METH_KEYWORDS|METH_VARARGS, "AssignStreams(stream)\n\ntype: stream: int64_t" },
     {NULL, NULL, 0, NULL}
 };
 
@@ -21288,23 +21288,6 @@ _wrap_PyNs3CallbackImpl__Void_Ns3Dot11sRouteChange_Ns3Empty_Ns3Empty_Ns3Empty_Ns
 
 
 PyObject *
-_wrap_PyNs3CallbackImpl__Void_Ns3Dot11sRouteChange_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty___call__(PyNs3CallbackImpl__Void_Ns3Dot11sRouteChange_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Dot11sRouteChange *arg0;
-    const char *keywords[] = {"arg0", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Dot11sRouteChange_Type, &arg0)) {
-        return NULL;
-    }
-    self->obj->operator()(*((PyNs3Dot11sRouteChange *) arg0)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3CallbackImpl__Void_Ns3Dot11sRouteChange_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_DoGetTypeid(void)
 {
     PyObject *py_retval;
@@ -21324,6 +21307,23 @@ _wrap_PyNs3CallbackImpl__Void_Ns3Dot11sRouteChange_Ns3Empty_Ns3Empty_Ns3Empty_Ns
     
     retval = self->obj->GetTypeid();
     py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3CallbackImpl__Void_Ns3Dot11sRouteChange_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty___call__(PyNs3CallbackImpl__Void_Ns3Dot11sRouteChange_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Dot11sRouteChange *arg0;
+    const char *keywords[] = {"arg0", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Dot11sRouteChange_Type, &arg0)) {
+        return NULL;
+    }
+    self->obj->operator()(*((PyNs3Dot11sRouteChange *) arg0)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -21510,6 +21510,18 @@ int _wrap_PyNs3Dot11sStack__tp_init(PyNs3Dot11sStack *self, PyObject *args, PyOb
 
 
 PyObject *
+_wrap_PyNs3Dot11sStack_DoDispose(PyNs3Dot11sStack *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->DoDispose();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3Dot11sStack_GetTypeId(void)
 {
     PyObject *py_retval;
@@ -21544,18 +21556,6 @@ _wrap_PyNs3Dot11sStack_InstallStack(PyNs3Dot11sStack *self, PyObject *args, PyOb
 }
 
 
-PyObject *
-_wrap_PyNs3Dot11sStack_DoDispose(PyNs3Dot11sStack *self)
-{
-    PyObject *py_retval;
-    
-    self->obj->DoDispose();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3Dot11sStack__copy__(PyNs3Dot11sStack *self)
 {
@@ -21572,9 +21572,9 @@ _wrap_PyNs3Dot11sStack__copy__(PyNs3Dot11sStack *self)
 }
 
 static PyMethodDef PyNs3Dot11sStack_methods[] = {
+    {(char *) "DoDispose", (PyCFunction) _wrap_PyNs3Dot11sStack_DoDispose, METH_NOARGS, "DoDispose()\n\n" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3Dot11sStack_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
     {(char *) "InstallStack", (PyCFunction) _wrap_PyNs3Dot11sStack_InstallStack, METH_KEYWORDS|METH_VARARGS, "InstallStack(mp)\n\ntype: mp: ns3::Ptr< ns3::MeshPointDevice >" },
-    {(char *) "DoDispose", (PyCFunction) _wrap_PyNs3Dot11sStack_DoDispose, METH_NOARGS, "DoDispose()\n\n" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3Dot11sStack__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -21773,6 +21773,18 @@ int _wrap_PyNs3FlameStack__tp_init(PyNs3FlameStack *self, PyObject *args, PyObje
 
 
 PyObject *
+_wrap_PyNs3FlameStack_DoDispose(PyNs3FlameStack *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->DoDispose();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3FlameStack_GetTypeId(void)
 {
     PyObject *py_retval;
@@ -21807,18 +21819,6 @@ _wrap_PyNs3FlameStack_InstallStack(PyNs3FlameStack *self, PyObject *args, PyObje
 }
 
 
-PyObject *
-_wrap_PyNs3FlameStack_DoDispose(PyNs3FlameStack *self)
-{
-    PyObject *py_retval;
-    
-    self->obj->DoDispose();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3FlameStack__copy__(PyNs3FlameStack *self)
 {
@@ -21835,9 +21835,9 @@ _wrap_PyNs3FlameStack__copy__(PyNs3FlameStack *self)
 }
 
 static PyMethodDef PyNs3FlameStack_methods[] = {
+    {(char *) "DoDispose", (PyCFunction) _wrap_PyNs3FlameStack_DoDispose, METH_NOARGS, "DoDispose()\n\n" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3FlameStack_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
     {(char *) "InstallStack", (PyCFunction) _wrap_PyNs3FlameStack_InstallStack, METH_KEYWORDS|METH_VARARGS, "InstallStack(mp)\n\ntype: mp: ns3::Ptr< ns3::MeshPointDevice >" },
-    {(char *) "DoDispose", (PyCFunction) _wrap_PyNs3FlameStack_DoDispose, METH_NOARGS, "DoDispose()\n\n" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3FlameStack__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -21967,22 +21967,6 @@ PyTypeObject PyNs3FlameStack_Type = {
 
 
 PyObject *
-PyNs3MeshPointDevice__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3MeshPointDevice *self)
-{
-    PyObject *py_retval;
-    PyNs3MeshPointDevice__PythonHelper *helper = dynamic_cast< PyNs3MeshPointDevice__PythonHelper* >(self->obj);
-    
-    if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
-        return NULL;
-    }
-    helper->NotifyConstructionCompleted__parent_caller();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject *
 PyNs3MeshPointDevice__PythonHelper::_wrap_DoInitialize(PyNs3MeshPointDevice *self)
 {
     PyObject *py_retval;
@@ -22009,6 +21993,22 @@ PyNs3MeshPointDevice__PythonHelper::_wrap_NotifyNewAggregate(PyNs3MeshPointDevic
         return NULL;
     }
     helper->NotifyNewAggregate__parent_caller();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject *
+PyNs3MeshPointDevice__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3MeshPointDevice *self)
+{
+    PyObject *py_retval;
+    PyNs3MeshPointDevice__PythonHelper *helper = dynamic_cast< PyNs3MeshPointDevice__PythonHelper* >(self->obj);
+    
+    if (helper == NULL) {
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        return NULL;
+    }
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -23439,13 +23439,228 @@ int _wrap_PyNs3MeshPointDevice__tp_init(PyNs3MeshPointDevice *self, PyObject *ar
 
 
 PyObject *
-_wrap_PyNs3MeshPointDevice_GetNInterfaces(PyNs3MeshPointDevice *self)
+_wrap_PyNs3MeshPointDevice_AddInterface(PyNs3MeshPointDevice *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3NetDevice *port;
+    ns3::NetDevice *port_ptr;
+    const char *keywords[] = {"port", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3NetDevice_Type, &port)) {
+        return NULL;
+    }
+    port_ptr = (port ? port->obj : NULL);
+    self->obj->AddInterface(ns3::Ptr< ns3::NetDevice  > (port_ptr));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3MeshPointDevice_AddLinkChangeCallback(PyNs3MeshPointDevice *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyObject *callback;
+    ns3::Ptr<PythonCallbackImpl1> callback_cb_impl;
+    PyNs3MeshPointDevice__PythonHelper *helper_class = dynamic_cast<PyNs3MeshPointDevice__PythonHelper*> (self->obj);
+    const char *keywords[] = {"callback", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &callback)) {
+        return NULL;
+    }
+    if (!PyCallable_Check(callback)) {
+        PyErr_SetString(PyExc_TypeError, "parameter 'callback' must be callbale");
+        return NULL;
+    }
+    callback_cb_impl = ns3::Create<PythonCallbackImpl1> (callback);
+    (helper_class == NULL)? (self->obj->AddLinkChangeCallback(ns3::Callback<void, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty> (callback_cb_impl))) : (self->obj->ns3::MeshPointDevice::AddLinkChangeCallback(ns3::Callback<void, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty> (callback_cb_impl)));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3MeshPointDevice_DoDispose(PyNs3MeshPointDevice *self)
+{
+    PyObject *py_retval;
+    PyNs3MeshPointDevice__PythonHelper *helper_class = dynamic_cast<PyNs3MeshPointDevice__PythonHelper*> (self->obj);
+    
+    (helper_class == NULL)? (self->obj->DoDispose()) : (self->obj->ns3::MeshPointDevice::DoDispose());
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3MeshPointDevice_GetAddress(PyNs3MeshPointDevice *self)
+{
+    PyObject *py_retval;
+    PyNs3MeshPointDevice__PythonHelper *helper_class = dynamic_cast<PyNs3MeshPointDevice__PythonHelper*> (self->obj);
+    PyNs3Address *py_Address;
+    
+    ns3::Address retval = (helper_class == NULL)? (self->obj->GetAddress()) : (self->obj->ns3::MeshPointDevice::GetAddress());
+    py_Address = PyObject_New(PyNs3Address, &PyNs3Address_Type);
+    py_Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Address->obj = new ns3::Address(retval);
+    PyNs3Address_wrapper_registry[(void *) py_Address->obj] = (PyObject *) py_Address;
+    py_retval = Py_BuildValue((char *) "N", py_Address);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3MeshPointDevice_GetBroadcast(PyNs3MeshPointDevice *self)
+{
+    PyObject *py_retval;
+    PyNs3MeshPointDevice__PythonHelper *helper_class = dynamic_cast<PyNs3MeshPointDevice__PythonHelper*> (self->obj);
+    PyNs3Address *py_Address;
+    
+    ns3::Address retval = (helper_class == NULL)? (self->obj->GetBroadcast()) : (self->obj->ns3::MeshPointDevice::GetBroadcast());
+    py_Address = PyObject_New(PyNs3Address, &PyNs3Address_Type);
+    py_Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Address->obj = new ns3::Address(retval);
+    PyNs3Address_wrapper_registry[(void *) py_Address->obj] = (PyObject *) py_Address;
+    py_retval = Py_BuildValue((char *) "N", py_Address);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3MeshPointDevice_GetChannel(PyNs3MeshPointDevice *self)
+{
+    PyObject *py_retval;
+    ns3::Ptr< ns3::Channel > retval;
+    PyNs3MeshPointDevice__PythonHelper *helper_class = dynamic_cast<PyNs3MeshPointDevice__PythonHelper*> (self->obj);
+    PyNs3Channel *py_Channel;
+    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
+    PyTypeObject *wrapper_type = 0;
+    
+    retval = (helper_class == NULL)? (self->obj->GetChannel()) : (self->obj->ns3::MeshPointDevice::GetChannel());
+    if (!(const_cast<ns3::Channel *> (ns3::PeekPointer (retval)))) {
+        Py_INCREF(Py_None);
+        return Py_None;
+    }
+    if (typeid((*const_cast<ns3::Channel *> (ns3::PeekPointer (retval)))).name() == typeid(PyNs3Channel__PythonHelper).name())
+    {
+        py_Channel = reinterpret_cast< PyNs3Channel* >(reinterpret_cast< PyNs3Channel__PythonHelper* >(const_cast<ns3::Channel *> (ns3::PeekPointer (retval)))->m_pyself);
+        py_Channel->obj = const_cast<ns3::Channel *> (ns3::PeekPointer (retval));
+        Py_INCREF(py_Channel);
+    } else {
+        wrapper_lookup_iter = PyNs3ObjectBase_wrapper_registry.find((void *) const_cast<ns3::Channel *> (ns3::PeekPointer (retval)));
+        if (wrapper_lookup_iter == PyNs3ObjectBase_wrapper_registry.end()) {
+            py_Channel = NULL;
+        } else {
+            py_Channel = (PyNs3Channel *) wrapper_lookup_iter->second;
+            Py_INCREF(py_Channel);
+        }
+    
+        if (py_Channel == NULL) {
+            wrapper_type = PyNs3SimpleRefCount__Ns3Object_Ns3ObjectBase_Ns3ObjectDeleter__typeid_map.lookup_wrapper(typeid((*const_cast<ns3::Channel *> (ns3::PeekPointer (retval)))), &PyNs3Channel_Type);
+            py_Channel = PyObject_GC_New(PyNs3Channel, wrapper_type);
+            py_Channel->inst_dict = NULL;
+    
+            py_Channel->inst_dict = NULL;
+            py_Channel->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+            const_cast<ns3::Channel *> (ns3::PeekPointer (retval))->Ref();
+            py_Channel->obj = const_cast<ns3::Channel *> (ns3::PeekPointer (retval));
+            PyNs3ObjectBase_wrapper_registry[(void *) py_Channel->obj] = (PyObject *) py_Channel;
+        }
+    }
+    py_retval = Py_BuildValue((char *) "N", py_Channel);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3MeshPointDevice_GetIfIndex(PyNs3MeshPointDevice *self)
 {
     PyObject *py_retval;
     uint32_t retval;
+    PyNs3MeshPointDevice__PythonHelper *helper_class = dynamic_cast<PyNs3MeshPointDevice__PythonHelper*> (self->obj);
     
-    retval = self->obj->GetNInterfaces();
+    retval = (helper_class == NULL)? (self->obj->GetIfIndex()) : (self->obj->ns3::MeshPointDevice::GetIfIndex());
     py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3MeshPointDevice_GetInterface(PyNs3MeshPointDevice *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    ns3::Ptr< ns3::NetDevice > retval;
+    unsigned int id;
+    const char *keywords[] = {"id", NULL};
+    PyNs3NetDevice *py_NetDevice;
+    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
+    PyTypeObject *wrapper_type = 0;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &id)) {
+        return NULL;
+    }
+    retval = self->obj->GetInterface(id);
+    if (!(const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval)))) {
+        Py_INCREF(Py_None);
+        return Py_None;
+    }
+    if (typeid((*const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval)))).name() == typeid(PyNs3NetDevice__PythonHelper).name())
+    {
+        py_NetDevice = reinterpret_cast< PyNs3NetDevice* >(reinterpret_cast< PyNs3NetDevice__PythonHelper* >(const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval)))->m_pyself);
+        py_NetDevice->obj = const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval));
+        Py_INCREF(py_NetDevice);
+    } else {
+        wrapper_lookup_iter = PyNs3ObjectBase_wrapper_registry.find((void *) const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval)));
+        if (wrapper_lookup_iter == PyNs3ObjectBase_wrapper_registry.end()) {
+            py_NetDevice = NULL;
+        } else {
+            py_NetDevice = (PyNs3NetDevice *) wrapper_lookup_iter->second;
+            Py_INCREF(py_NetDevice);
+        }
+    
+        if (py_NetDevice == NULL) {
+            wrapper_type = PyNs3SimpleRefCount__Ns3Object_Ns3ObjectBase_Ns3ObjectDeleter__typeid_map.lookup_wrapper(typeid((*const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval)))), &PyNs3NetDevice_Type);
+            py_NetDevice = PyObject_GC_New(PyNs3NetDevice, wrapper_type);
+            py_NetDevice->inst_dict = NULL;
+    
+            py_NetDevice->inst_dict = NULL;
+            py_NetDevice->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+            const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval))->Ref();
+            py_NetDevice->obj = const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval));
+            PyNs3ObjectBase_wrapper_registry[(void *) py_NetDevice->obj] = (PyObject *) py_NetDevice;
+        }
+    }
+    py_retval = Py_BuildValue((char *) "N", py_NetDevice);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3MeshPointDevice_GetInterfaces(PyNs3MeshPointDevice *self)
+{
+    PyObject *py_retval;
+    std::vector< ns3::Ptr< ns3::NetDevice > > retval;
+    Pystd__vector__lt___ns3__Ptr__lt___ns3__NetDevice___gt_____gt__ *py_std__vector__lt___ns3__Ptr__lt___ns3__NetDevice___gt_____gt__;
+    
+    retval = self->obj->GetInterfaces();
+    py_std__vector__lt___ns3__Ptr__lt___ns3__NetDevice___gt_____gt__ = PyObject_New(Pystd__vector__lt___ns3__Ptr__lt___ns3__NetDevice___gt_____gt__, &Pystd__vector__lt___ns3__Ptr__lt___ns3__NetDevice___gt_____gt___Type);
+    py_std__vector__lt___ns3__Ptr__lt___ns3__NetDevice___gt_____gt__->obj = new std::vector< ns3::Ptr< ns3::NetDevice > >(retval);
+    py_retval = Py_BuildValue((char *) "N", py_std__vector__lt___ns3__Ptr__lt___ns3__NetDevice___gt_____gt__);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3MeshPointDevice_GetMtu(PyNs3MeshPointDevice *self)
+{
+    PyObject *py_retval;
+    uint16_t retval;
+    PyNs3MeshPointDevice__PythonHelper *helper_class = dynamic_cast<PyNs3MeshPointDevice__PythonHelper*> (self->obj);
+    
+    retval = (helper_class == NULL)? (self->obj->GetMtu()) : (self->obj->ns3::MeshPointDevice::GetMtu());
+    py_retval = Py_BuildValue((char *) "i", retval);
     return py_retval;
 }
 
@@ -23531,145 +23746,13 @@ PyObject * _wrap_PyNs3MeshPointDevice_GetMulticast(PyNs3MeshPointDevice *self, P
 
 
 PyObject *
-_wrap_PyNs3MeshPointDevice_IsPointToPoint(PyNs3MeshPointDevice *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3MeshPointDevice__PythonHelper *helper_class = dynamic_cast<PyNs3MeshPointDevice__PythonHelper*> (self->obj);
-    
-    retval = (helper_class == NULL)? (self->obj->IsPointToPoint()) : (self->obj->ns3::MeshPointDevice::IsPointToPoint());
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MeshPointDevice_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::MeshPointDevice::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MeshPointDevice_Send(PyNs3MeshPointDevice *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3Packet *packet;
-    ns3::Packet *packet_ptr;
-    PyObject *dest;
-    ns3::Address dest2;
-    int protocolNumber;
-    PyNs3MeshPointDevice__PythonHelper *helper_class = dynamic_cast<PyNs3MeshPointDevice__PythonHelper*> (self->obj);
-    const char *keywords[] = {"packet", "dest", "protocolNumber", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!Oi", (char **) keywords, &PyNs3Packet_Type, &packet, &dest, &protocolNumber)) {
-        return NULL;
-    }
-    packet_ptr = (packet ? packet->obj : NULL);
-    if (PyObject_IsInstance(dest, (PyObject*) &PyNs3Address_Type)) {
-        dest2 = *((PyNs3Address *) dest)->obj;
-    } else if (PyObject_IsInstance(dest, (PyObject*) &PyNs3Ipv4Address_Type)) {
-        dest2 = *((PyNs3Ipv4Address *) dest)->obj;
-    } else if (PyObject_IsInstance(dest, (PyObject*) &PyNs3Ipv6Address_Type)) {
-        dest2 = *((PyNs3Ipv6Address *) dest)->obj;
-    } else if (PyObject_IsInstance(dest, (PyObject*) &PyNs3Mac16Address_Type)) {
-        dest2 = *((PyNs3Mac16Address *) dest)->obj;
-    } else if (PyObject_IsInstance(dest, (PyObject*) &PyNs3Mac48Address_Type)) {
-        dest2 = *((PyNs3Mac48Address *) dest)->obj;
-    } else if (PyObject_IsInstance(dest, (PyObject*) &PyNs3Mac64Address_Type)) {
-        dest2 = *((PyNs3Mac64Address *) dest)->obj;
-    } else if (PyObject_IsInstance(dest, (PyObject*) &PyNs3Mac8Address_Type)) {
-        dest2 = *((PyNs3Mac8Address *) dest)->obj;
-    } else {
-    
-        PyErr_Format(PyExc_TypeError, "parameter must an instance of one of the types (Address, Ipv4Address, Ipv6Address, Mac16Address, Mac48Address, Mac64Address, Mac8Address), not %s", Py_TYPE(dest)->tp_name);
-        return NULL;
-    }
-    if (protocolNumber > 0xffff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    retval = (helper_class == NULL)? (self->obj->Send(ns3::Ptr< ns3::Packet  > (packet_ptr), dest2, protocolNumber)) : (self->obj->ns3::MeshPointDevice::Send(ns3::Ptr< ns3::Packet  > (packet_ptr), dest2, protocolNumber));
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MeshPointDevice_GetIfIndex(PyNs3MeshPointDevice *self)
+_wrap_PyNs3MeshPointDevice_GetNInterfaces(PyNs3MeshPointDevice *self)
 {
     PyObject *py_retval;
     uint32_t retval;
-    PyNs3MeshPointDevice__PythonHelper *helper_class = dynamic_cast<PyNs3MeshPointDevice__PythonHelper*> (self->obj);
     
-    retval = (helper_class == NULL)? (self->obj->GetIfIndex()) : (self->obj->ns3::MeshPointDevice::GetIfIndex());
+    retval = self->obj->GetNInterfaces();
     py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MeshPointDevice_NeedsArp(PyNs3MeshPointDevice *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3MeshPointDevice__PythonHelper *helper_class = dynamic_cast<PyNs3MeshPointDevice__PythonHelper*> (self->obj);
-    
-    retval = (helper_class == NULL)? (self->obj->NeedsArp()) : (self->obj->ns3::MeshPointDevice::NeedsArp());
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MeshPointDevice_AddInterface(PyNs3MeshPointDevice *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3NetDevice *port;
-    ns3::NetDevice *port_ptr;
-    const char *keywords[] = {"port", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3NetDevice_Type, &port)) {
-        return NULL;
-    }
-    port_ptr = (port ? port->obj : NULL);
-    self->obj->AddInterface(ns3::Ptr< ns3::NetDevice  > (port_ptr));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MeshPointDevice_SetPromiscReceiveCallback(PyNs3MeshPointDevice *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyObject *cb;
-    ns3::Ptr<PythonCallbackImpl3> cb_cb_impl;
-    PyNs3MeshPointDevice__PythonHelper *helper_class = dynamic_cast<PyNs3MeshPointDevice__PythonHelper*> (self->obj);
-    const char *keywords[] = {"cb", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &cb)) {
-        return NULL;
-    }
-    if (!PyCallable_Check(cb)) {
-        PyErr_SetString(PyExc_TypeError, "parameter 'cb' must be callbale");
-        return NULL;
-    }
-    cb_cb_impl = ns3::Create<PythonCallbackImpl3> (cb);
-    (helper_class == NULL)? (self->obj->SetPromiscReceiveCallback(ns3::Callback<bool, ns3::Ptr<ns3::NetDevice>, ns3::Ptr<const ns3::Packet>, unsigned short, const ns3::Address &, const ns3::Address &, ns3::NetDevice::PacketType, ns3::empty, ns3::empty, ns3::empty> (cb_cb_impl))) : (self->obj->ns3::MeshPointDevice::SetPromiscReceiveCallback(ns3::Callback<bool, ns3::Ptr<ns3::NetDevice>, ns3::Ptr<const ns3::Packet>, unsigned short, const ns3::Address &, const ns3::Address &, ns3::NetDevice::PacketType, ns3::empty, ns3::empty, ns3::empty> (cb_cb_impl)));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
     return py_retval;
 }
 
@@ -23716,6 +23799,196 @@ _wrap_PyNs3MeshPointDevice_GetNode(PyNs3MeshPointDevice *self)
         }
     }
     py_retval = Py_BuildValue((char *) "N", py_Node);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3MeshPointDevice_GetRoutingProtocol(PyNs3MeshPointDevice *self)
+{
+    PyObject *py_retval;
+    ns3::Ptr< ns3::MeshL2RoutingProtocol > retval;
+    PyNs3MeshL2RoutingProtocol *py_MeshL2RoutingProtocol;
+    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
+    PyTypeObject *wrapper_type = 0;
+    
+    retval = self->obj->GetRoutingProtocol();
+    if (!(const_cast<ns3::MeshL2RoutingProtocol *> (ns3::PeekPointer (retval)))) {
+        Py_INCREF(Py_None);
+        return Py_None;
+    }
+    wrapper_lookup_iter = PyNs3ObjectBase_wrapper_registry.find((void *) const_cast<ns3::MeshL2RoutingProtocol *> (ns3::PeekPointer (retval)));
+    if (wrapper_lookup_iter == PyNs3ObjectBase_wrapper_registry.end()) {
+        py_MeshL2RoutingProtocol = NULL;
+    } else {
+        py_MeshL2RoutingProtocol = (PyNs3MeshL2RoutingProtocol *) wrapper_lookup_iter->second;
+        Py_INCREF(py_MeshL2RoutingProtocol);
+    }
+    
+    if (py_MeshL2RoutingProtocol == NULL) {
+        wrapper_type = PyNs3SimpleRefCount__Ns3Object_Ns3ObjectBase_Ns3ObjectDeleter__typeid_map.lookup_wrapper(typeid((*const_cast<ns3::MeshL2RoutingProtocol *> (ns3::PeekPointer (retval)))), &PyNs3MeshL2RoutingProtocol_Type);
+        py_MeshL2RoutingProtocol = PyObject_GC_New(PyNs3MeshL2RoutingProtocol, wrapper_type);
+        py_MeshL2RoutingProtocol->inst_dict = NULL;
+    
+        py_MeshL2RoutingProtocol->inst_dict = NULL;
+        py_MeshL2RoutingProtocol->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+        const_cast<ns3::MeshL2RoutingProtocol *> (ns3::PeekPointer (retval))->Ref();
+        py_MeshL2RoutingProtocol->obj = const_cast<ns3::MeshL2RoutingProtocol *> (ns3::PeekPointer (retval));
+        PyNs3ObjectBase_wrapper_registry[(void *) py_MeshL2RoutingProtocol->obj] = (PyObject *) py_MeshL2RoutingProtocol;
+    }
+    py_retval = Py_BuildValue((char *) "N", py_MeshL2RoutingProtocol);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3MeshPointDevice_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::MeshPointDevice::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3MeshPointDevice_IsBridge(PyNs3MeshPointDevice *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3MeshPointDevice__PythonHelper *helper_class = dynamic_cast<PyNs3MeshPointDevice__PythonHelper*> (self->obj);
+    
+    retval = (helper_class == NULL)? (self->obj->IsBridge()) : (self->obj->ns3::MeshPointDevice::IsBridge());
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3MeshPointDevice_IsBroadcast(PyNs3MeshPointDevice *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3MeshPointDevice__PythonHelper *helper_class = dynamic_cast<PyNs3MeshPointDevice__PythonHelper*> (self->obj);
+    
+    retval = (helper_class == NULL)? (self->obj->IsBroadcast()) : (self->obj->ns3::MeshPointDevice::IsBroadcast());
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3MeshPointDevice_IsLinkUp(PyNs3MeshPointDevice *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3MeshPointDevice__PythonHelper *helper_class = dynamic_cast<PyNs3MeshPointDevice__PythonHelper*> (self->obj);
+    
+    retval = (helper_class == NULL)? (self->obj->IsLinkUp()) : (self->obj->ns3::MeshPointDevice::IsLinkUp());
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3MeshPointDevice_IsMulticast(PyNs3MeshPointDevice *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3MeshPointDevice__PythonHelper *helper_class = dynamic_cast<PyNs3MeshPointDevice__PythonHelper*> (self->obj);
+    
+    retval = (helper_class == NULL)? (self->obj->IsMulticast()) : (self->obj->ns3::MeshPointDevice::IsMulticast());
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3MeshPointDevice_IsPointToPoint(PyNs3MeshPointDevice *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3MeshPointDevice__PythonHelper *helper_class = dynamic_cast<PyNs3MeshPointDevice__PythonHelper*> (self->obj);
+    
+    retval = (helper_class == NULL)? (self->obj->IsPointToPoint()) : (self->obj->ns3::MeshPointDevice::IsPointToPoint());
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3MeshPointDevice_NeedsArp(PyNs3MeshPointDevice *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3MeshPointDevice__PythonHelper *helper_class = dynamic_cast<PyNs3MeshPointDevice__PythonHelper*> (self->obj);
+    
+    retval = (helper_class == NULL)? (self->obj->NeedsArp()) : (self->obj->ns3::MeshPointDevice::NeedsArp());
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3MeshPointDevice_ResetStats(PyNs3MeshPointDevice *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->ResetStats();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3MeshPointDevice_Send(PyNs3MeshPointDevice *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3Packet *packet;
+    ns3::Packet *packet_ptr;
+    PyObject *dest;
+    ns3::Address dest2;
+    int protocolNumber;
+    PyNs3MeshPointDevice__PythonHelper *helper_class = dynamic_cast<PyNs3MeshPointDevice__PythonHelper*> (self->obj);
+    const char *keywords[] = {"packet", "dest", "protocolNumber", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!Oi", (char **) keywords, &PyNs3Packet_Type, &packet, &dest, &protocolNumber)) {
+        return NULL;
+    }
+    packet_ptr = (packet ? packet->obj : NULL);
+    if (PyObject_IsInstance(dest, (PyObject*) &PyNs3Address_Type)) {
+        dest2 = *((PyNs3Address *) dest)->obj;
+    } else if (PyObject_IsInstance(dest, (PyObject*) &PyNs3Ipv4Address_Type)) {
+        dest2 = *((PyNs3Ipv4Address *) dest)->obj;
+    } else if (PyObject_IsInstance(dest, (PyObject*) &PyNs3Ipv6Address_Type)) {
+        dest2 = *((PyNs3Ipv6Address *) dest)->obj;
+    } else if (PyObject_IsInstance(dest, (PyObject*) &PyNs3Mac16Address_Type)) {
+        dest2 = *((PyNs3Mac16Address *) dest)->obj;
+    } else if (PyObject_IsInstance(dest, (PyObject*) &PyNs3Mac48Address_Type)) {
+        dest2 = *((PyNs3Mac48Address *) dest)->obj;
+    } else if (PyObject_IsInstance(dest, (PyObject*) &PyNs3Mac64Address_Type)) {
+        dest2 = *((PyNs3Mac64Address *) dest)->obj;
+    } else if (PyObject_IsInstance(dest, (PyObject*) &PyNs3Mac8Address_Type)) {
+        dest2 = *((PyNs3Mac8Address *) dest)->obj;
+    } else {
+    
+        PyErr_Format(PyExc_TypeError, "parameter must an instance of one of the types (Address, Ipv4Address, Ipv6Address, Mac16Address, Mac48Address, Mac64Address, Mac8Address), not %s", Py_TYPE(dest)->tp_name);
+        return NULL;
+    }
+    if (protocolNumber > 0xffff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    retval = (helper_class == NULL)? (self->obj->Send(ns3::Ptr< ns3::Packet  > (packet_ptr), dest2, protocolNumber)) : (self->obj->ns3::MeshPointDevice::Send(ns3::Ptr< ns3::Packet  > (packet_ptr), dest2, protocolNumber));
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
@@ -23788,160 +24061,6 @@ _wrap_PyNs3MeshPointDevice_SendFrom(PyNs3MeshPointDevice *self, PyObject *args, 
 
 
 PyObject *
-_wrap_PyNs3MeshPointDevice_IsBroadcast(PyNs3MeshPointDevice *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3MeshPointDevice__PythonHelper *helper_class = dynamic_cast<PyNs3MeshPointDevice__PythonHelper*> (self->obj);
-    
-    retval = (helper_class == NULL)? (self->obj->IsBroadcast()) : (self->obj->ns3::MeshPointDevice::IsBroadcast());
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MeshPointDevice_GetMtu(PyNs3MeshPointDevice *self)
-{
-    PyObject *py_retval;
-    uint16_t retval;
-    PyNs3MeshPointDevice__PythonHelper *helper_class = dynamic_cast<PyNs3MeshPointDevice__PythonHelper*> (self->obj);
-    
-    retval = (helper_class == NULL)? (self->obj->GetMtu()) : (self->obj->ns3::MeshPointDevice::GetMtu());
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MeshPointDevice_IsBridge(PyNs3MeshPointDevice *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3MeshPointDevice__PythonHelper *helper_class = dynamic_cast<PyNs3MeshPointDevice__PythonHelper*> (self->obj);
-    
-    retval = (helper_class == NULL)? (self->obj->IsBridge()) : (self->obj->ns3::MeshPointDevice::IsBridge());
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MeshPointDevice_SetRoutingProtocol(PyNs3MeshPointDevice *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3MeshL2RoutingProtocol *protocol;
-    ns3::MeshL2RoutingProtocol *protocol_ptr;
-    const char *keywords[] = {"protocol", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3MeshL2RoutingProtocol_Type, &protocol)) {
-        return NULL;
-    }
-    protocol_ptr = (protocol ? protocol->obj : NULL);
-    self->obj->SetRoutingProtocol(ns3::Ptr< ns3::MeshL2RoutingProtocol  > (protocol_ptr));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MeshPointDevice_SetNode(PyNs3MeshPointDevice *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Node *node;
-    ns3::Node *node_ptr;
-    PyNs3MeshPointDevice__PythonHelper *helper_class = dynamic_cast<PyNs3MeshPointDevice__PythonHelper*> (self->obj);
-    const char *keywords[] = {"node", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Node_Type, &node)) {
-        return NULL;
-    }
-    node_ptr = (node ? node->obj : NULL);
-    (helper_class == NULL)? (self->obj->SetNode(ns3::Ptr< ns3::Node  > (node_ptr))) : (self->obj->ns3::MeshPointDevice::SetNode(ns3::Ptr< ns3::Node  > (node_ptr)));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MeshPointDevice_GetInterfaces(PyNs3MeshPointDevice *self)
-{
-    PyObject *py_retval;
-    std::vector< ns3::Ptr< ns3::NetDevice > > retval;
-    Pystd__vector__lt___ns3__Ptr__lt___ns3__NetDevice___gt_____gt__ *py_std__vector__lt___ns3__Ptr__lt___ns3__NetDevice___gt_____gt__;
-    
-    retval = self->obj->GetInterfaces();
-    py_std__vector__lt___ns3__Ptr__lt___ns3__NetDevice___gt_____gt__ = PyObject_New(Pystd__vector__lt___ns3__Ptr__lt___ns3__NetDevice___gt_____gt__, &Pystd__vector__lt___ns3__Ptr__lt___ns3__NetDevice___gt_____gt___Type);
-    py_std__vector__lt___ns3__Ptr__lt___ns3__NetDevice___gt_____gt__->obj = new std::vector< ns3::Ptr< ns3::NetDevice > >(retval);
-    py_retval = Py_BuildValue((char *) "N", py_std__vector__lt___ns3__Ptr__lt___ns3__NetDevice___gt_____gt__);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MeshPointDevice_DoDispose(PyNs3MeshPointDevice *self)
-{
-    PyObject *py_retval;
-    PyNs3MeshPointDevice__PythonHelper *helper_class = dynamic_cast<PyNs3MeshPointDevice__PythonHelper*> (self->obj);
-    
-    (helper_class == NULL)? (self->obj->DoDispose()) : (self->obj->ns3::MeshPointDevice::DoDispose());
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MeshPointDevice_GetAddress(PyNs3MeshPointDevice *self)
-{
-    PyObject *py_retval;
-    PyNs3MeshPointDevice__PythonHelper *helper_class = dynamic_cast<PyNs3MeshPointDevice__PythonHelper*> (self->obj);
-    PyNs3Address *py_Address;
-    
-    ns3::Address retval = (helper_class == NULL)? (self->obj->GetAddress()) : (self->obj->ns3::MeshPointDevice::GetAddress());
-    py_Address = PyObject_New(PyNs3Address, &PyNs3Address_Type);
-    py_Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Address->obj = new ns3::Address(retval);
-    PyNs3Address_wrapper_registry[(void *) py_Address->obj] = (PyObject *) py_Address;
-    py_retval = Py_BuildValue((char *) "N", py_Address);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MeshPointDevice_IsLinkUp(PyNs3MeshPointDevice *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3MeshPointDevice__PythonHelper *helper_class = dynamic_cast<PyNs3MeshPointDevice__PythonHelper*> (self->obj);
-    
-    retval = (helper_class == NULL)? (self->obj->IsLinkUp()) : (self->obj->ns3::MeshPointDevice::IsLinkUp());
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MeshPointDevice_SetIfIndex(PyNs3MeshPointDevice *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int index;
-    PyNs3MeshPointDevice__PythonHelper *helper_class = dynamic_cast<PyNs3MeshPointDevice__PythonHelper*> (self->obj);
-    const char *keywords[] = {"index", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &index)) {
-        return NULL;
-    }
-    (helper_class == NULL)? (self->obj->SetIfIndex(index)) : (self->obj->ns3::MeshPointDevice::SetIfIndex(index));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3MeshPointDevice_SetAddress(PyNs3MeshPointDevice *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -23980,11 +24099,17 @@ _wrap_PyNs3MeshPointDevice_SetAddress(PyNs3MeshPointDevice *self, PyObject *args
 
 
 PyObject *
-_wrap_PyNs3MeshPointDevice_ResetStats(PyNs3MeshPointDevice *self)
+_wrap_PyNs3MeshPointDevice_SetIfIndex(PyNs3MeshPointDevice *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
+    unsigned int index;
+    PyNs3MeshPointDevice__PythonHelper *helper_class = dynamic_cast<PyNs3MeshPointDevice__PythonHelper*> (self->obj);
+    const char *keywords[] = {"index", NULL};
     
-    self->obj->ResetStats();
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &index)) {
+        return NULL;
+    }
+    (helper_class == NULL)? (self->obj->SetIfIndex(index)) : (self->obj->ns3::MeshPointDevice::SetIfIndex(index));
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -23992,78 +24117,65 @@ _wrap_PyNs3MeshPointDevice_ResetStats(PyNs3MeshPointDevice *self)
 
 
 PyObject *
-_wrap_PyNs3MeshPointDevice_GetBroadcast(PyNs3MeshPointDevice *self)
+_wrap_PyNs3MeshPointDevice_SetMtu(PyNs3MeshPointDevice *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
+    bool retval;
+    int mtu;
     PyNs3MeshPointDevice__PythonHelper *helper_class = dynamic_cast<PyNs3MeshPointDevice__PythonHelper*> (self->obj);
-    PyNs3Address *py_Address;
+    const char *keywords[] = {"mtu", NULL};
     
-    ns3::Address retval = (helper_class == NULL)? (self->obj->GetBroadcast()) : (self->obj->ns3::MeshPointDevice::GetBroadcast());
-    py_Address = PyObject_New(PyNs3Address, &PyNs3Address_Type);
-    py_Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Address->obj = new ns3::Address(retval);
-    PyNs3Address_wrapper_registry[(void *) py_Address->obj] = (PyObject *) py_Address;
-    py_retval = Py_BuildValue((char *) "N", py_Address);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &mtu)) {
+        return NULL;
+    }
+    if (mtu > 0xffff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    retval = (helper_class == NULL)? (self->obj->SetMtu(mtu)) : (self->obj->ns3::MeshPointDevice::SetMtu(mtu));
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3MeshPointDevice_GetRoutingProtocol(PyNs3MeshPointDevice *self)
+_wrap_PyNs3MeshPointDevice_SetNode(PyNs3MeshPointDevice *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    ns3::Ptr< ns3::MeshL2RoutingProtocol > retval;
-    PyNs3MeshL2RoutingProtocol *py_MeshL2RoutingProtocol;
-    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
-    PyTypeObject *wrapper_type = 0;
+    PyNs3Node *node;
+    ns3::Node *node_ptr;
+    PyNs3MeshPointDevice__PythonHelper *helper_class = dynamic_cast<PyNs3MeshPointDevice__PythonHelper*> (self->obj);
+    const char *keywords[] = {"node", NULL};
     
-    retval = self->obj->GetRoutingProtocol();
-    if (!(const_cast<ns3::MeshL2RoutingProtocol *> (ns3::PeekPointer (retval)))) {
-        Py_INCREF(Py_None);
-        return Py_None;
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Node_Type, &node)) {
+        return NULL;
     }
-    wrapper_lookup_iter = PyNs3ObjectBase_wrapper_registry.find((void *) const_cast<ns3::MeshL2RoutingProtocol *> (ns3::PeekPointer (retval)));
-    if (wrapper_lookup_iter == PyNs3ObjectBase_wrapper_registry.end()) {
-        py_MeshL2RoutingProtocol = NULL;
-    } else {
-        py_MeshL2RoutingProtocol = (PyNs3MeshL2RoutingProtocol *) wrapper_lookup_iter->second;
-        Py_INCREF(py_MeshL2RoutingProtocol);
-    }
-    
-    if (py_MeshL2RoutingProtocol == NULL) {
-        wrapper_type = PyNs3SimpleRefCount__Ns3Object_Ns3ObjectBase_Ns3ObjectDeleter__typeid_map.lookup_wrapper(typeid((*const_cast<ns3::MeshL2RoutingProtocol *> (ns3::PeekPointer (retval)))), &PyNs3MeshL2RoutingProtocol_Type);
-        py_MeshL2RoutingProtocol = PyObject_GC_New(PyNs3MeshL2RoutingProtocol, wrapper_type);
-        py_MeshL2RoutingProtocol->inst_dict = NULL;
-    
-        py_MeshL2RoutingProtocol->inst_dict = NULL;
-        py_MeshL2RoutingProtocol->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-        const_cast<ns3::MeshL2RoutingProtocol *> (ns3::PeekPointer (retval))->Ref();
-        py_MeshL2RoutingProtocol->obj = const_cast<ns3::MeshL2RoutingProtocol *> (ns3::PeekPointer (retval));
-        PyNs3ObjectBase_wrapper_registry[(void *) py_MeshL2RoutingProtocol->obj] = (PyObject *) py_MeshL2RoutingProtocol;
-    }
-    py_retval = Py_BuildValue((char *) "N", py_MeshL2RoutingProtocol);
+    node_ptr = (node ? node->obj : NULL);
+    (helper_class == NULL)? (self->obj->SetNode(ns3::Ptr< ns3::Node  > (node_ptr))) : (self->obj->ns3::MeshPointDevice::SetNode(ns3::Ptr< ns3::Node  > (node_ptr)));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3MeshPointDevice_AddLinkChangeCallback(PyNs3MeshPointDevice *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3MeshPointDevice_SetPromiscReceiveCallback(PyNs3MeshPointDevice *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyObject *callback;
-    ns3::Ptr<PythonCallbackImpl1> callback_cb_impl;
+    PyObject *cb;
+    ns3::Ptr<PythonCallbackImpl3> cb_cb_impl;
     PyNs3MeshPointDevice__PythonHelper *helper_class = dynamic_cast<PyNs3MeshPointDevice__PythonHelper*> (self->obj);
-    const char *keywords[] = {"callback", NULL};
+    const char *keywords[] = {"cb", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &callback)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &cb)) {
         return NULL;
     }
-    if (!PyCallable_Check(callback)) {
-        PyErr_SetString(PyExc_TypeError, "parameter 'callback' must be callbale");
+    if (!PyCallable_Check(cb)) {
+        PyErr_SetString(PyExc_TypeError, "parameter 'cb' must be callbale");
         return NULL;
     }
-    callback_cb_impl = ns3::Create<PythonCallbackImpl1> (callback);
-    (helper_class == NULL)? (self->obj->AddLinkChangeCallback(ns3::Callback<void, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty> (callback_cb_impl))) : (self->obj->ns3::MeshPointDevice::AddLinkChangeCallback(ns3::Callback<void, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty> (callback_cb_impl)));
+    cb_cb_impl = ns3::Create<PythonCallbackImpl3> (cb);
+    (helper_class == NULL)? (self->obj->SetPromiscReceiveCallback(ns3::Callback<bool, ns3::Ptr<ns3::NetDevice>, ns3::Ptr<const ns3::Packet>, unsigned short, const ns3::Address &, const ns3::Address &, ns3::NetDevice::PacketType, ns3::empty, ns3::empty, ns3::empty> (cb_cb_impl))) : (self->obj->ns3::MeshPointDevice::SetPromiscReceiveCallback(ns3::Callback<bool, ns3::Ptr<ns3::NetDevice>, ns3::Ptr<const ns3::Packet>, unsigned short, const ns3::Address &, const ns3::Address &, ns3::NetDevice::PacketType, ns3::empty, ns3::empty, ns3::empty> (cb_cb_impl)));
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -24095,36 +24207,20 @@ _wrap_PyNs3MeshPointDevice_SetReceiveCallback(PyNs3MeshPointDevice *self, PyObje
 
 
 PyObject *
-_wrap_PyNs3MeshPointDevice_IsMulticast(PyNs3MeshPointDevice *self)
+_wrap_PyNs3MeshPointDevice_SetRoutingProtocol(PyNs3MeshPointDevice *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    bool retval;
-    PyNs3MeshPointDevice__PythonHelper *helper_class = dynamic_cast<PyNs3MeshPointDevice__PythonHelper*> (self->obj);
+    PyNs3MeshL2RoutingProtocol *protocol;
+    ns3::MeshL2RoutingProtocol *protocol_ptr;
+    const char *keywords[] = {"protocol", NULL};
     
-    retval = (helper_class == NULL)? (self->obj->IsMulticast()) : (self->obj->ns3::MeshPointDevice::IsMulticast());
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MeshPointDevice_SetMtu(PyNs3MeshPointDevice *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    int mtu;
-    PyNs3MeshPointDevice__PythonHelper *helper_class = dynamic_cast<PyNs3MeshPointDevice__PythonHelper*> (self->obj);
-    const char *keywords[] = {"mtu", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &mtu)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3MeshL2RoutingProtocol_Type, &protocol)) {
         return NULL;
     }
-    if (mtu > 0xffff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    retval = (helper_class == NULL)? (self->obj->SetMtu(mtu)) : (self->obj->ns3::MeshPointDevice::SetMtu(mtu));
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    protocol_ptr = (protocol ? protocol->obj : NULL);
+    self->obj->SetRoutingProtocol(ns3::Ptr< ns3::MeshL2RoutingProtocol  > (protocol_ptr));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -24138,102 +24234,6 @@ _wrap_PyNs3MeshPointDevice_SupportsSendFrom(PyNs3MeshPointDevice *self)
     
     retval = (helper_class == NULL)? (self->obj->SupportsSendFrom()) : (self->obj->ns3::MeshPointDevice::SupportsSendFrom());
     py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MeshPointDevice_GetChannel(PyNs3MeshPointDevice *self)
-{
-    PyObject *py_retval;
-    ns3::Ptr< ns3::Channel > retval;
-    PyNs3MeshPointDevice__PythonHelper *helper_class = dynamic_cast<PyNs3MeshPointDevice__PythonHelper*> (self->obj);
-    PyNs3Channel *py_Channel;
-    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
-    PyTypeObject *wrapper_type = 0;
-    
-    retval = (helper_class == NULL)? (self->obj->GetChannel()) : (self->obj->ns3::MeshPointDevice::GetChannel());
-    if (!(const_cast<ns3::Channel *> (ns3::PeekPointer (retval)))) {
-        Py_INCREF(Py_None);
-        return Py_None;
-    }
-    if (typeid((*const_cast<ns3::Channel *> (ns3::PeekPointer (retval)))).name() == typeid(PyNs3Channel__PythonHelper).name())
-    {
-        py_Channel = reinterpret_cast< PyNs3Channel* >(reinterpret_cast< PyNs3Channel__PythonHelper* >(const_cast<ns3::Channel *> (ns3::PeekPointer (retval)))->m_pyself);
-        py_Channel->obj = const_cast<ns3::Channel *> (ns3::PeekPointer (retval));
-        Py_INCREF(py_Channel);
-    } else {
-        wrapper_lookup_iter = PyNs3ObjectBase_wrapper_registry.find((void *) const_cast<ns3::Channel *> (ns3::PeekPointer (retval)));
-        if (wrapper_lookup_iter == PyNs3ObjectBase_wrapper_registry.end()) {
-            py_Channel = NULL;
-        } else {
-            py_Channel = (PyNs3Channel *) wrapper_lookup_iter->second;
-            Py_INCREF(py_Channel);
-        }
-    
-        if (py_Channel == NULL) {
-            wrapper_type = PyNs3SimpleRefCount__Ns3Object_Ns3ObjectBase_Ns3ObjectDeleter__typeid_map.lookup_wrapper(typeid((*const_cast<ns3::Channel *> (ns3::PeekPointer (retval)))), &PyNs3Channel_Type);
-            py_Channel = PyObject_GC_New(PyNs3Channel, wrapper_type);
-            py_Channel->inst_dict = NULL;
-    
-            py_Channel->inst_dict = NULL;
-            py_Channel->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-            const_cast<ns3::Channel *> (ns3::PeekPointer (retval))->Ref();
-            py_Channel->obj = const_cast<ns3::Channel *> (ns3::PeekPointer (retval));
-            PyNs3ObjectBase_wrapper_registry[(void *) py_Channel->obj] = (PyObject *) py_Channel;
-        }
-    }
-    py_retval = Py_BuildValue((char *) "N", py_Channel);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MeshPointDevice_GetInterface(PyNs3MeshPointDevice *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    ns3::Ptr< ns3::NetDevice > retval;
-    unsigned int id;
-    const char *keywords[] = {"id", NULL};
-    PyNs3NetDevice *py_NetDevice;
-    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
-    PyTypeObject *wrapper_type = 0;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &id)) {
-        return NULL;
-    }
-    retval = self->obj->GetInterface(id);
-    if (!(const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval)))) {
-        Py_INCREF(Py_None);
-        return Py_None;
-    }
-    if (typeid((*const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval)))).name() == typeid(PyNs3NetDevice__PythonHelper).name())
-    {
-        py_NetDevice = reinterpret_cast< PyNs3NetDevice* >(reinterpret_cast< PyNs3NetDevice__PythonHelper* >(const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval)))->m_pyself);
-        py_NetDevice->obj = const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval));
-        Py_INCREF(py_NetDevice);
-    } else {
-        wrapper_lookup_iter = PyNs3ObjectBase_wrapper_registry.find((void *) const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval)));
-        if (wrapper_lookup_iter == PyNs3ObjectBase_wrapper_registry.end()) {
-            py_NetDevice = NULL;
-        } else {
-            py_NetDevice = (PyNs3NetDevice *) wrapper_lookup_iter->second;
-            Py_INCREF(py_NetDevice);
-        }
-    
-        if (py_NetDevice == NULL) {
-            wrapper_type = PyNs3SimpleRefCount__Ns3Object_Ns3ObjectBase_Ns3ObjectDeleter__typeid_map.lookup_wrapper(typeid((*const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval)))), &PyNs3NetDevice_Type);
-            py_NetDevice = PyObject_GC_New(PyNs3NetDevice, wrapper_type);
-            py_NetDevice->inst_dict = NULL;
-    
-            py_NetDevice->inst_dict = NULL;
-            py_NetDevice->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-            const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval))->Ref();
-            py_NetDevice->obj = const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval));
-            PyNs3ObjectBase_wrapper_registry[(void *) py_NetDevice->obj] = (PyObject *) py_NetDevice;
-        }
-    }
-    py_retval = Py_BuildValue((char *) "N", py_NetDevice);
     return py_retval;
 }
 
@@ -24254,41 +24254,41 @@ _wrap_PyNs3MeshPointDevice__copy__(PyNs3MeshPointDevice *self)
 }
 
 static PyMethodDef PyNs3MeshPointDevice_methods[] = {
-    {(char *) "GetNInterfaces", (PyCFunction) _wrap_PyNs3MeshPointDevice_GetNInterfaces, METH_NOARGS, "GetNInterfaces()\n\n" },
-    {(char *) "GetMulticast", (PyCFunction) _wrap_PyNs3MeshPointDevice_GetMulticast, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "IsPointToPoint", (PyCFunction) _wrap_PyNs3MeshPointDevice_IsPointToPoint, METH_NOARGS, "IsPointToPoint()\n\n" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3MeshPointDevice_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "Send", (PyCFunction) _wrap_PyNs3MeshPointDevice_Send, METH_KEYWORDS|METH_VARARGS, "Send(packet, dest, protocolNumber)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: dest: ns3::Address const &\ntype: protocolNumber: uint16_t" },
-    {(char *) "GetIfIndex", (PyCFunction) _wrap_PyNs3MeshPointDevice_GetIfIndex, METH_NOARGS, "GetIfIndex()\n\n" },
-    {(char *) "NeedsArp", (PyCFunction) _wrap_PyNs3MeshPointDevice_NeedsArp, METH_NOARGS, "NeedsArp()\n\n" },
     {(char *) "AddInterface", (PyCFunction) _wrap_PyNs3MeshPointDevice_AddInterface, METH_KEYWORDS|METH_VARARGS, "AddInterface(port)\n\ntype: port: ns3::Ptr< ns3::NetDevice >" },
-    {(char *) "SetPromiscReceiveCallback", (PyCFunction) _wrap_PyNs3MeshPointDevice_SetPromiscReceiveCallback, METH_KEYWORDS|METH_VARARGS, "SetPromiscReceiveCallback(cb)\n\ntype: cb: ns3::Callback< bool, ns3::Ptr< ns3::NetDevice >, ns3::Ptr< ns3::Packet const >, unsigned short, ns3::Address const &, ns3::Address const &, ns3::NetDevice::PacketType, ns3::empty, ns3::empty, ns3::empty >" },
-    {(char *) "GetNode", (PyCFunction) _wrap_PyNs3MeshPointDevice_GetNode, METH_NOARGS, "GetNode()\n\n" },
-    {(char *) "SendFrom", (PyCFunction) _wrap_PyNs3MeshPointDevice_SendFrom, METH_KEYWORDS|METH_VARARGS, "SendFrom(packet, source, dest, protocolNumber)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: source: ns3::Address const &\ntype: dest: ns3::Address const &\ntype: protocolNumber: uint16_t" },
-    {(char *) "IsBroadcast", (PyCFunction) _wrap_PyNs3MeshPointDevice_IsBroadcast, METH_NOARGS, "IsBroadcast()\n\n" },
-    {(char *) "GetMtu", (PyCFunction) _wrap_PyNs3MeshPointDevice_GetMtu, METH_NOARGS, "GetMtu()\n\n" },
-    {(char *) "IsBridge", (PyCFunction) _wrap_PyNs3MeshPointDevice_IsBridge, METH_NOARGS, "IsBridge()\n\n" },
-    {(char *) "SetRoutingProtocol", (PyCFunction) _wrap_PyNs3MeshPointDevice_SetRoutingProtocol, METH_KEYWORDS|METH_VARARGS, "SetRoutingProtocol(protocol)\n\ntype: protocol: ns3::Ptr< ns3::MeshL2RoutingProtocol >" },
-    {(char *) "SetNode", (PyCFunction) _wrap_PyNs3MeshPointDevice_SetNode, METH_KEYWORDS|METH_VARARGS, "SetNode(node)\n\ntype: node: ns3::Ptr< ns3::Node >" },
-    {(char *) "GetInterfaces", (PyCFunction) _wrap_PyNs3MeshPointDevice_GetInterfaces, METH_NOARGS, "GetInterfaces()\n\n" },
+    {(char *) "AddLinkChangeCallback", (PyCFunction) _wrap_PyNs3MeshPointDevice_AddLinkChangeCallback, METH_KEYWORDS|METH_VARARGS, "AddLinkChangeCallback(callback)\n\ntype: callback: ns3::Callback< void, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty >" },
     {(char *) "DoDispose", (PyCFunction) _wrap_PyNs3MeshPointDevice_DoDispose, METH_NOARGS, "DoDispose()\n\n" },
     {(char *) "GetAddress", (PyCFunction) _wrap_PyNs3MeshPointDevice_GetAddress, METH_NOARGS, "GetAddress()\n\n" },
-    {(char *) "IsLinkUp", (PyCFunction) _wrap_PyNs3MeshPointDevice_IsLinkUp, METH_NOARGS, "IsLinkUp()\n\n" },
-    {(char *) "SetIfIndex", (PyCFunction) _wrap_PyNs3MeshPointDevice_SetIfIndex, METH_KEYWORDS|METH_VARARGS, "SetIfIndex(index)\n\ntype: index: uint32_t const" },
-    {(char *) "SetAddress", (PyCFunction) _wrap_PyNs3MeshPointDevice_SetAddress, METH_KEYWORDS|METH_VARARGS, "SetAddress(a)\n\ntype: a: ns3::Address" },
-    {(char *) "ResetStats", (PyCFunction) _wrap_PyNs3MeshPointDevice_ResetStats, METH_NOARGS, "ResetStats()\n\n" },
     {(char *) "GetBroadcast", (PyCFunction) _wrap_PyNs3MeshPointDevice_GetBroadcast, METH_NOARGS, "GetBroadcast()\n\n" },
-    {(char *) "GetRoutingProtocol", (PyCFunction) _wrap_PyNs3MeshPointDevice_GetRoutingProtocol, METH_NOARGS, "GetRoutingProtocol()\n\n" },
-    {(char *) "AddLinkChangeCallback", (PyCFunction) _wrap_PyNs3MeshPointDevice_AddLinkChangeCallback, METH_KEYWORDS|METH_VARARGS, "AddLinkChangeCallback(callback)\n\ntype: callback: ns3::Callback< void, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty >" },
-    {(char *) "SetReceiveCallback", (PyCFunction) _wrap_PyNs3MeshPointDevice_SetReceiveCallback, METH_KEYWORDS|METH_VARARGS, "SetReceiveCallback(cb)\n\ntype: cb: ns3::Callback< bool, ns3::Ptr< ns3::NetDevice >, ns3::Ptr< ns3::Packet const >, unsigned short, ns3::Address const &, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty >" },
-    {(char *) "IsMulticast", (PyCFunction) _wrap_PyNs3MeshPointDevice_IsMulticast, METH_NOARGS, "IsMulticast()\n\n" },
-    {(char *) "SetMtu", (PyCFunction) _wrap_PyNs3MeshPointDevice_SetMtu, METH_KEYWORDS|METH_VARARGS, "SetMtu(mtu)\n\ntype: mtu: uint16_t const" },
-    {(char *) "SupportsSendFrom", (PyCFunction) _wrap_PyNs3MeshPointDevice_SupportsSendFrom, METH_NOARGS, "SupportsSendFrom()\n\n" },
     {(char *) "GetChannel", (PyCFunction) _wrap_PyNs3MeshPointDevice_GetChannel, METH_NOARGS, "GetChannel()\n\n" },
+    {(char *) "GetIfIndex", (PyCFunction) _wrap_PyNs3MeshPointDevice_GetIfIndex, METH_NOARGS, "GetIfIndex()\n\n" },
     {(char *) "GetInterface", (PyCFunction) _wrap_PyNs3MeshPointDevice_GetInterface, METH_KEYWORDS|METH_VARARGS, "GetInterface(id)\n\ntype: id: uint32_t" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3MeshPointDevice__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "GetInterfaces", (PyCFunction) _wrap_PyNs3MeshPointDevice_GetInterfaces, METH_NOARGS, "GetInterfaces()\n\n" },
+    {(char *) "GetMtu", (PyCFunction) _wrap_PyNs3MeshPointDevice_GetMtu, METH_NOARGS, "GetMtu()\n\n" },
+    {(char *) "GetMulticast", (PyCFunction) _wrap_PyNs3MeshPointDevice_GetMulticast, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "GetNInterfaces", (PyCFunction) _wrap_PyNs3MeshPointDevice_GetNInterfaces, METH_NOARGS, "GetNInterfaces()\n\n" },
+    {(char *) "GetNode", (PyCFunction) _wrap_PyNs3MeshPointDevice_GetNode, METH_NOARGS, "GetNode()\n\n" },
+    {(char *) "GetRoutingProtocol", (PyCFunction) _wrap_PyNs3MeshPointDevice_GetRoutingProtocol, METH_NOARGS, "GetRoutingProtocol()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3MeshPointDevice_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "IsBridge", (PyCFunction) _wrap_PyNs3MeshPointDevice_IsBridge, METH_NOARGS, "IsBridge()\n\n" },
+    {(char *) "IsBroadcast", (PyCFunction) _wrap_PyNs3MeshPointDevice_IsBroadcast, METH_NOARGS, "IsBroadcast()\n\n" },
+    {(char *) "IsLinkUp", (PyCFunction) _wrap_PyNs3MeshPointDevice_IsLinkUp, METH_NOARGS, "IsLinkUp()\n\n" },
+    {(char *) "IsMulticast", (PyCFunction) _wrap_PyNs3MeshPointDevice_IsMulticast, METH_NOARGS, "IsMulticast()\n\n" },
+    {(char *) "IsPointToPoint", (PyCFunction) _wrap_PyNs3MeshPointDevice_IsPointToPoint, METH_NOARGS, "IsPointToPoint()\n\n" },
+    {(char *) "NeedsArp", (PyCFunction) _wrap_PyNs3MeshPointDevice_NeedsArp, METH_NOARGS, "NeedsArp()\n\n" },
+    {(char *) "ResetStats", (PyCFunction) _wrap_PyNs3MeshPointDevice_ResetStats, METH_NOARGS, "ResetStats()\n\n" },
+    {(char *) "Send", (PyCFunction) _wrap_PyNs3MeshPointDevice_Send, METH_KEYWORDS|METH_VARARGS, "Send(packet, dest, protocolNumber)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: dest: ns3::Address const &\ntype: protocolNumber: uint16_t" },
+    {(char *) "SendFrom", (PyCFunction) _wrap_PyNs3MeshPointDevice_SendFrom, METH_KEYWORDS|METH_VARARGS, "SendFrom(packet, source, dest, protocolNumber)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: source: ns3::Address const &\ntype: dest: ns3::Address const &\ntype: protocolNumber: uint16_t" },
+    {(char *) "SetAddress", (PyCFunction) _wrap_PyNs3MeshPointDevice_SetAddress, METH_KEYWORDS|METH_VARARGS, "SetAddress(a)\n\ntype: a: ns3::Address" },
+    {(char *) "SetIfIndex", (PyCFunction) _wrap_PyNs3MeshPointDevice_SetIfIndex, METH_KEYWORDS|METH_VARARGS, "SetIfIndex(index)\n\ntype: index: uint32_t const" },
+    {(char *) "SetMtu", (PyCFunction) _wrap_PyNs3MeshPointDevice_SetMtu, METH_KEYWORDS|METH_VARARGS, "SetMtu(mtu)\n\ntype: mtu: uint16_t const" },
+    {(char *) "SetNode", (PyCFunction) _wrap_PyNs3MeshPointDevice_SetNode, METH_KEYWORDS|METH_VARARGS, "SetNode(node)\n\ntype: node: ns3::Ptr< ns3::Node >" },
+    {(char *) "SetPromiscReceiveCallback", (PyCFunction) _wrap_PyNs3MeshPointDevice_SetPromiscReceiveCallback, METH_KEYWORDS|METH_VARARGS, "SetPromiscReceiveCallback(cb)\n\ntype: cb: ns3::Callback< bool, ns3::Ptr< ns3::NetDevice >, ns3::Ptr< ns3::Packet const >, unsigned short, ns3::Address const &, ns3::Address const &, ns3::NetDevice::PacketType, ns3::empty, ns3::empty, ns3::empty >" },
+    {(char *) "SetReceiveCallback", (PyCFunction) _wrap_PyNs3MeshPointDevice_SetReceiveCallback, METH_KEYWORDS|METH_VARARGS, "SetReceiveCallback(cb)\n\ntype: cb: ns3::Callback< bool, ns3::Ptr< ns3::NetDevice >, ns3::Ptr< ns3::Packet const >, unsigned short, ns3::Address const &, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty >" },
+    {(char *) "SetRoutingProtocol", (PyCFunction) _wrap_PyNs3MeshPointDevice_SetRoutingProtocol, METH_KEYWORDS|METH_VARARGS, "SetRoutingProtocol(protocol)\n\ntype: protocol: ns3::Ptr< ns3::MeshL2RoutingProtocol >" },
+    {(char *) "SupportsSendFrom", (PyCFunction) _wrap_PyNs3MeshPointDevice_SupportsSendFrom, METH_NOARGS, "SupportsSendFrom()\n\n" },
     {(char *) "DoInitialize", (PyCFunction) PyNs3MeshPointDevice__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3MeshPointDevice__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3MeshPointDevice__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3MeshPointDevice__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -24421,16 +24421,42 @@ PyTypeObject PyNs3MeshPointDevice_Type = {
 
 
 PyObject *
-PyNs3MeshWifiInterfaceMac__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3MeshWifiInterfaceMac *self)
+PyNs3MeshWifiInterfaceMac__PythonHelper::_wrap_TxOk(PyNs3MeshWifiInterfaceMac *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
+    PyNs3WifiMacHeader *hdr;
     PyNs3MeshWifiInterfaceMac__PythonHelper *helper = dynamic_cast< PyNs3MeshWifiInterfaceMac__PythonHelper* >(self->obj);
+    const char *keywords[] = {"hdr", NULL};
     
-    if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3WifiMacHeader_Type, &hdr)) {
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    if (helper == NULL) {
+        PyErr_SetString(PyExc_TypeError, "Method TxOk of class RegularWifiMac is protected and can only be called by a subclass");
+        return NULL;
+    }
+    helper->TxOk__parent_caller(*((PyNs3WifiMacHeader *) hdr)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject *
+PyNs3MeshWifiInterfaceMac__PythonHelper::_wrap_TxFailed(PyNs3MeshWifiInterfaceMac *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3WifiMacHeader *hdr;
+    PyNs3MeshWifiInterfaceMac__PythonHelper *helper = dynamic_cast< PyNs3MeshWifiInterfaceMac__PythonHelper* >(self->obj);
+    const char *keywords[] = {"hdr", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3WifiMacHeader_Type, &hdr)) {
+        return NULL;
+    }
+    if (helper == NULL) {
+        PyErr_SetString(PyExc_TypeError, "Method TxFailed of class RegularWifiMac is protected and can only be called by a subclass");
+        return NULL;
+    }
+    helper->TxFailed__parent_caller(*((PyNs3WifiMacHeader *) hdr)->obj);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -24463,27 +24489,6 @@ PyNs3MeshWifiInterfaceMac__PythonHelper::_wrap_DeaggregateAmsduAndForward(PyNs3M
 }
 
 PyObject *
-PyNs3MeshWifiInterfaceMac__PythonHelper::_wrap_TxFailed(PyNs3MeshWifiInterfaceMac *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3WifiMacHeader *hdr;
-    PyNs3MeshWifiInterfaceMac__PythonHelper *helper = dynamic_cast< PyNs3MeshWifiInterfaceMac__PythonHelper* >(self->obj);
-    const char *keywords[] = {"hdr", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3WifiMacHeader_Type, &hdr)) {
-        return NULL;
-    }
-    if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method TxFailed of class RegularWifiMac is protected and can only be called by a subclass");
-        return NULL;
-    }
-    helper->TxFailed__parent_caller(*((PyNs3WifiMacHeader *) hdr)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject *
 PyNs3MeshWifiInterfaceMac__PythonHelper::_wrap_NotifyNewAggregate(PyNs3MeshWifiInterfaceMac *self)
 {
     PyObject *py_retval;
@@ -24500,21 +24505,16 @@ PyNs3MeshWifiInterfaceMac__PythonHelper::_wrap_NotifyNewAggregate(PyNs3MeshWifiI
 }
 
 PyObject *
-PyNs3MeshWifiInterfaceMac__PythonHelper::_wrap_TxOk(PyNs3MeshWifiInterfaceMac *self, PyObject *args, PyObject *kwargs)
+PyNs3MeshWifiInterfaceMac__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3MeshWifiInterfaceMac *self)
 {
     PyObject *py_retval;
-    PyNs3WifiMacHeader *hdr;
     PyNs3MeshWifiInterfaceMac__PythonHelper *helper = dynamic_cast< PyNs3MeshWifiInterfaceMac__PythonHelper* >(self->obj);
-    const char *keywords[] = {"hdr", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3WifiMacHeader_Type, &hdr)) {
-        return NULL;
-    }
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method TxOk of class RegularWifiMac is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->TxOk__parent_caller(*((PyNs3WifiMacHeader *) hdr)->obj);
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -24932,336 +24932,6 @@ PyNs3MeshWifiInterfaceMac__PythonHelper::Receive(ns3::Ptr< ns3::Packet > packet,
     return;
 }
 
-ns3::Time
-PyNs3MeshWifiInterfaceMac__PythonHelper::GetBasicBlockAckTimeout() const
-{
-    PyGILState_STATE __py_gil_state;
-    PyObject *py_method;
-    ns3::RegularWifiMac *self_obj_before;
-    PyObject *py_retval;
-    PyNs3Time *tmp_Time;
-    
-    __py_gil_state = (PyEval_ThreadsInitialized() ? PyGILState_Ensure() : (PyGILState_STATE) 0);
-    py_method = PyObject_GetAttrString(m_pyself, (char *) "GetBasicBlockAckTimeout"); PyErr_Clear();
-    if (py_method == NULL || Py_TYPE(py_method) == &PyCFunction_Type) {
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return ns3::RegularWifiMac::GetBasicBlockAckTimeout();
-    }
-    self_obj_before = reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj;
-    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = const_cast< ns3::RegularWifiMac* >((const ns3::RegularWifiMac*) this);
-    py_retval = PyObject_CallMethod(m_pyself, (char *) "GetBasicBlockAckTimeout", (char *) "");
-    if (py_retval == NULL) {
-        PyErr_Print();
-        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return ns3::RegularWifiMac::GetBasicBlockAckTimeout();
-    }
-    py_retval = Py_BuildValue((char*) "(N)", py_retval);
-    if (!PyArg_ParseTuple(py_retval, (char *) "O!", &PyNs3Time_Type, &tmp_Time)) {
-        PyErr_Print();
-        Py_DECREF(py_retval);
-        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return ns3::RegularWifiMac::GetBasicBlockAckTimeout();
-    }
-    ns3::Time retval = *tmp_Time->obj;
-    Py_DECREF(py_retval);
-    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-    Py_XDECREF(py_method);
-    if (PyEval_ThreadsInitialized())
-        PyGILState_Release(__py_gil_state);
-    return retval;
-}
-
-
-ns3::Mac48Address
-PyNs3MeshWifiInterfaceMac__PythonHelper::GetBssid() const
-{
-    PyGILState_STATE __py_gil_state;
-    PyObject *py_method;
-    ns3::RegularWifiMac *self_obj_before;
-    PyObject *py_retval;
-    PyNs3Mac48Address *tmp_Mac48Address;
-    
-    __py_gil_state = (PyEval_ThreadsInitialized() ? PyGILState_Ensure() : (PyGILState_STATE) 0);
-    py_method = PyObject_GetAttrString(m_pyself, (char *) "GetBssid"); PyErr_Clear();
-    if (py_method == NULL || Py_TYPE(py_method) == &PyCFunction_Type) {
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return ns3::RegularWifiMac::GetBssid();
-    }
-    self_obj_before = reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj;
-    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = const_cast< ns3::RegularWifiMac* >((const ns3::RegularWifiMac*) this);
-    py_retval = PyObject_CallMethod(m_pyself, (char *) "GetBssid", (char *) "");
-    if (py_retval == NULL) {
-        PyErr_Print();
-        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return ns3::RegularWifiMac::GetBssid();
-    }
-    py_retval = Py_BuildValue((char*) "(N)", py_retval);
-    if (!PyArg_ParseTuple(py_retval, (char *) "O!", &PyNs3Mac48Address_Type, &tmp_Mac48Address)) {
-        PyErr_Print();
-        Py_DECREF(py_retval);
-        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return ns3::RegularWifiMac::GetBssid();
-    }
-    ns3::Mac48Address retval = *tmp_Mac48Address->obj;
-    Py_DECREF(py_retval);
-    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-    Py_XDECREF(py_method);
-    if (PyEval_ThreadsInitialized())
-        PyGILState_Release(__py_gil_state);
-    return retval;
-}
-
-void
-PyNs3MeshWifiInterfaceMac__PythonHelper::SetPifs(ns3::Time pifs)
-{
-    PyGILState_STATE __py_gil_state;
-    PyObject *py_method;
-    ns3::RegularWifiMac *self_obj_before;
-    PyObject *py_retval;
-    PyNs3Time *py_Time;
-    
-    __py_gil_state = (PyEval_ThreadsInitialized() ? PyGILState_Ensure() : (PyGILState_STATE) 0);
-    py_method = PyObject_GetAttrString(m_pyself, (char *) "SetPifs"); PyErr_Clear();
-    if (py_method == NULL || Py_TYPE(py_method) == &PyCFunction_Type) {
-        ns3::RegularWifiMac::SetPifs(pifs);
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return;
-    }
-    self_obj_before = reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj;
-    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = (ns3::RegularWifiMac*) this;
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(pifs);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = PyObject_CallMethod(m_pyself, (char *) "SetPifs", (char *) "N", py_Time);
-    if (py_retval == NULL) {
-        PyErr_Print();
-        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return;
-    }
-    if (py_retval != Py_None) {
-        PyErr_SetString(PyExc_TypeError, "function/method should return None");
-        Py_DECREF(py_retval);
-        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return;
-    }
-    Py_DECREF(py_retval);
-    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-    Py_XDECREF(py_method);
-    if (PyEval_ThreadsInitialized())
-        PyGILState_Release(__py_gil_state);
-    return;
-}
-
-ns3::Time
-PyNs3MeshWifiInterfaceMac__PythonHelper::GetEifsNoDifs() const
-{
-    PyGILState_STATE __py_gil_state;
-    PyObject *py_method;
-    ns3::RegularWifiMac *self_obj_before;
-    PyObject *py_retval;
-    PyNs3Time *tmp_Time;
-    
-    __py_gil_state = (PyEval_ThreadsInitialized() ? PyGILState_Ensure() : (PyGILState_STATE) 0);
-    py_method = PyObject_GetAttrString(m_pyself, (char *) "GetEifsNoDifs"); PyErr_Clear();
-    if (py_method == NULL || Py_TYPE(py_method) == &PyCFunction_Type) {
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return ns3::RegularWifiMac::GetEifsNoDifs();
-    }
-    self_obj_before = reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj;
-    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = const_cast< ns3::RegularWifiMac* >((const ns3::RegularWifiMac*) this);
-    py_retval = PyObject_CallMethod(m_pyself, (char *) "GetEifsNoDifs", (char *) "");
-    if (py_retval == NULL) {
-        PyErr_Print();
-        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return ns3::RegularWifiMac::GetEifsNoDifs();
-    }
-    py_retval = Py_BuildValue((char*) "(N)", py_retval);
-    if (!PyArg_ParseTuple(py_retval, (char *) "O!", &PyNs3Time_Type, &tmp_Time)) {
-        PyErr_Print();
-        Py_DECREF(py_retval);
-        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return ns3::RegularWifiMac::GetEifsNoDifs();
-    }
-    ns3::Time retval = *tmp_Time->obj;
-    Py_DECREF(py_retval);
-    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-    Py_XDECREF(py_method);
-    if (PyEval_ThreadsInitialized())
-        PyGILState_Release(__py_gil_state);
-    return retval;
-}
-
-bool
-PyNs3MeshWifiInterfaceMac__PythonHelper::GetShortSlotTimeSupported() const
-{
-    PyGILState_STATE __py_gil_state;
-    PyObject *py_method;
-    ns3::RegularWifiMac *self_obj_before;
-    PyObject *py_retval;
-    bool retval;
-    PyObject *py_boolretval;
-    
-    __py_gil_state = (PyEval_ThreadsInitialized() ? PyGILState_Ensure() : (PyGILState_STATE) 0);
-    py_method = PyObject_GetAttrString(m_pyself, (char *) "GetShortSlotTimeSupported"); PyErr_Clear();
-    if (py_method == NULL || Py_TYPE(py_method) == &PyCFunction_Type) {
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return ns3::RegularWifiMac::GetShortSlotTimeSupported();
-    }
-    self_obj_before = reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj;
-    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = const_cast< ns3::RegularWifiMac* >((const ns3::RegularWifiMac*) this);
-    py_retval = PyObject_CallMethod(m_pyself, (char *) "GetShortSlotTimeSupported", (char *) "");
-    if (py_retval == NULL) {
-        PyErr_Print();
-        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return ns3::RegularWifiMac::GetShortSlotTimeSupported();
-    }
-    py_retval = Py_BuildValue((char*) "(N)", py_retval);
-    if (!PyArg_ParseTuple(py_retval, (char *) "O", &py_boolretval)) {
-        PyErr_Print();
-        Py_DECREF(py_retval);
-        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return ns3::RegularWifiMac::GetShortSlotTimeSupported();
-    }
-    retval = PyObject_IsTrue(py_boolretval);
-    Py_DECREF(py_retval);
-    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-    Py_XDECREF(py_method);
-    if (PyEval_ThreadsInitialized())
-        PyGILState_Release(__py_gil_state);
-    return retval;
-}
-
-void
-PyNs3MeshWifiInterfaceMac__PythonHelper::SetPromisc()
-{
-    PyGILState_STATE __py_gil_state;
-    PyObject *py_method;
-    ns3::RegularWifiMac *self_obj_before;
-    PyObject *py_retval;
-    
-    __py_gil_state = (PyEval_ThreadsInitialized() ? PyGILState_Ensure() : (PyGILState_STATE) 0);
-    py_method = PyObject_GetAttrString(m_pyself, (char *) "SetPromisc"); PyErr_Clear();
-    if (py_method == NULL || Py_TYPE(py_method) == &PyCFunction_Type) {
-        ns3::RegularWifiMac::SetPromisc();
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return;
-    }
-    self_obj_before = reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj;
-    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = (ns3::RegularWifiMac*) this;
-    py_retval = PyObject_CallMethod(m_pyself, (char *) "SetPromisc", (char *) "");
-    if (py_retval == NULL) {
-        PyErr_Print();
-        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return;
-    }
-    if (py_retval != Py_None) {
-        PyErr_SetString(PyExc_TypeError, "function/method should return None");
-        Py_DECREF(py_retval);
-        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return;
-    }
-    Py_DECREF(py_retval);
-    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-    Py_XDECREF(py_method);
-    if (PyEval_ThreadsInitialized())
-        PyGILState_Release(__py_gil_state);
-    return;
-}
-
-void
-PyNs3MeshWifiInterfaceMac__PythonHelper::SetShortSlotTimeSupported(bool enable)
-{
-    PyGILState_STATE __py_gil_state;
-    PyObject *py_method;
-    ns3::RegularWifiMac *self_obj_before;
-    PyObject *py_retval;
-    
-    __py_gil_state = (PyEval_ThreadsInitialized() ? PyGILState_Ensure() : (PyGILState_STATE) 0);
-    py_method = PyObject_GetAttrString(m_pyself, (char *) "SetShortSlotTimeSupported"); PyErr_Clear();
-    if (py_method == NULL || Py_TYPE(py_method) == &PyCFunction_Type) {
-        ns3::RegularWifiMac::SetShortSlotTimeSupported(enable);
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return;
-    }
-    self_obj_before = reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj;
-    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = (ns3::RegularWifiMac*) this;
-    py_retval = PyObject_CallMethod(m_pyself, (char *) "SetShortSlotTimeSupported", (char *) "N", PyBool_FromLong(enable));
-    if (py_retval == NULL) {
-        PyErr_Print();
-        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return;
-    }
-    if (py_retval != Py_None) {
-        PyErr_SetString(PyExc_TypeError, "function/method should return None");
-        Py_DECREF(py_retval);
-        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return;
-    }
-    Py_DECREF(py_retval);
-    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-    Py_XDECREF(py_method);
-    if (PyEval_ThreadsInitialized())
-        PyGILState_Release(__py_gil_state);
-    return;
-}
-
 void
 PyNs3MeshWifiInterfaceMac__PythonHelper::SetSlot(ns3::Time slotTime)
 {
@@ -25311,540 +24981,6 @@ PyNs3MeshWifiInterfaceMac__PythonHelper::SetSlot(ns3::Time slotTime)
         PyGILState_Release(__py_gil_state);
     return;
 }
-
-void
-PyNs3MeshWifiInterfaceMac__PythonHelper::SetSsid(ns3::Ssid ssid)
-{
-    PyGILState_STATE __py_gil_state;
-    PyObject *py_method;
-    ns3::RegularWifiMac *self_obj_before;
-    PyObject *py_retval;
-    PyNs3Ssid *py_Ssid;
-    
-    __py_gil_state = (PyEval_ThreadsInitialized() ? PyGILState_Ensure() : (PyGILState_STATE) 0);
-    py_method = PyObject_GetAttrString(m_pyself, (char *) "SetSsid"); PyErr_Clear();
-    if (py_method == NULL || Py_TYPE(py_method) == &PyCFunction_Type) {
-        ns3::RegularWifiMac::SetSsid(ssid);
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return;
-    }
-    self_obj_before = reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj;
-    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = (ns3::RegularWifiMac*) this;
-    py_Ssid = PyObject_New(PyNs3Ssid, &PyNs3Ssid_Type);
-    
-    py_Ssid->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Ssid->obj = new ns3::Ssid(ssid);
-    PyNs3Empty_wrapper_registry[(void *) py_Ssid->obj] = (PyObject *) py_Ssid;
-    py_retval = PyObject_CallMethod(m_pyself, (char *) "SetSsid", (char *) "N", py_Ssid);
-    if (py_retval == NULL) {
-        PyErr_Print();
-        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return;
-    }
-    if (py_retval != Py_None) {
-        PyErr_SetString(PyExc_TypeError, "function/method should return None");
-        Py_DECREF(py_retval);
-        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return;
-    }
-    Py_DECREF(py_retval);
-    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-    Py_XDECREF(py_method);
-    if (PyEval_ThreadsInitialized())
-        PyGILState_Release(__py_gil_state);
-    return;
-}
-
-ns3::Time
-PyNs3MeshWifiInterfaceMac__PythonHelper::GetPifs() const
-{
-    PyGILState_STATE __py_gil_state;
-    PyObject *py_method;
-    ns3::RegularWifiMac *self_obj_before;
-    PyObject *py_retval;
-    PyNs3Time *tmp_Time;
-    
-    __py_gil_state = (PyEval_ThreadsInitialized() ? PyGILState_Ensure() : (PyGILState_STATE) 0);
-    py_method = PyObject_GetAttrString(m_pyself, (char *) "GetPifs"); PyErr_Clear();
-    if (py_method == NULL || Py_TYPE(py_method) == &PyCFunction_Type) {
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return ns3::RegularWifiMac::GetPifs();
-    }
-    self_obj_before = reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj;
-    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = const_cast< ns3::RegularWifiMac* >((const ns3::RegularWifiMac*) this);
-    py_retval = PyObject_CallMethod(m_pyself, (char *) "GetPifs", (char *) "");
-    if (py_retval == NULL) {
-        PyErr_Print();
-        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return ns3::RegularWifiMac::GetPifs();
-    }
-    py_retval = Py_BuildValue((char*) "(N)", py_retval);
-    if (!PyArg_ParseTuple(py_retval, (char *) "O!", &PyNs3Time_Type, &tmp_Time)) {
-        PyErr_Print();
-        Py_DECREF(py_retval);
-        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return ns3::RegularWifiMac::GetPifs();
-    }
-    ns3::Time retval = *tmp_Time->obj;
-    Py_DECREF(py_retval);
-    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-    Py_XDECREF(py_method);
-    if (PyEval_ThreadsInitialized())
-        PyGILState_Release(__py_gil_state);
-    return retval;
-}
-
-ns3::Time
-PyNs3MeshWifiInterfaceMac__PythonHelper::GetRifs() const
-{
-    PyGILState_STATE __py_gil_state;
-    PyObject *py_method;
-    ns3::RegularWifiMac *self_obj_before;
-    PyObject *py_retval;
-    PyNs3Time *tmp_Time;
-    
-    __py_gil_state = (PyEval_ThreadsInitialized() ? PyGILState_Ensure() : (PyGILState_STATE) 0);
-    py_method = PyObject_GetAttrString(m_pyself, (char *) "GetRifs"); PyErr_Clear();
-    if (py_method == NULL || Py_TYPE(py_method) == &PyCFunction_Type) {
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return ns3::RegularWifiMac::GetRifs();
-    }
-    self_obj_before = reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj;
-    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = const_cast< ns3::RegularWifiMac* >((const ns3::RegularWifiMac*) this);
-    py_retval = PyObject_CallMethod(m_pyself, (char *) "GetRifs", (char *) "");
-    if (py_retval == NULL) {
-        PyErr_Print();
-        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return ns3::RegularWifiMac::GetRifs();
-    }
-    py_retval = Py_BuildValue((char*) "(N)", py_retval);
-    if (!PyArg_ParseTuple(py_retval, (char *) "O!", &PyNs3Time_Type, &tmp_Time)) {
-        PyErr_Print();
-        Py_DECREF(py_retval);
-        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return ns3::RegularWifiMac::GetRifs();
-    }
-    ns3::Time retval = *tmp_Time->obj;
-    Py_DECREF(py_retval);
-    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-    Py_XDECREF(py_method);
-    if (PyEval_ThreadsInitialized())
-        PyGILState_Release(__py_gil_state);
-    return retval;
-}
-
-void
-PyNs3MeshWifiInterfaceMac__PythonHelper::SetCompressedBlockAckTimeout(ns3::Time blockAckTimeout)
-{
-    PyGILState_STATE __py_gil_state;
-    PyObject *py_method;
-    ns3::RegularWifiMac *self_obj_before;
-    PyObject *py_retval;
-    PyNs3Time *py_Time;
-    
-    __py_gil_state = (PyEval_ThreadsInitialized() ? PyGILState_Ensure() : (PyGILState_STATE) 0);
-    py_method = PyObject_GetAttrString(m_pyself, (char *) "SetCompressedBlockAckTimeout"); PyErr_Clear();
-    if (py_method == NULL || Py_TYPE(py_method) == &PyCFunction_Type) {
-        ns3::RegularWifiMac::SetCompressedBlockAckTimeout(blockAckTimeout);
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return;
-    }
-    self_obj_before = reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj;
-    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = (ns3::RegularWifiMac*) this;
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(blockAckTimeout);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = PyObject_CallMethod(m_pyself, (char *) "SetCompressedBlockAckTimeout", (char *) "N", py_Time);
-    if (py_retval == NULL) {
-        PyErr_Print();
-        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return;
-    }
-    if (py_retval != Py_None) {
-        PyErr_SetString(PyExc_TypeError, "function/method should return None");
-        Py_DECREF(py_retval);
-        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return;
-    }
-    Py_DECREF(py_retval);
-    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-    Py_XDECREF(py_method);
-    if (PyEval_ThreadsInitialized())
-        PyGILState_Release(__py_gil_state);
-    return;
-}
-
-ns3::Ptr< ns3::WifiPhy >
-PyNs3MeshWifiInterfaceMac__PythonHelper::GetWifiPhy() const
-{
-    PyGILState_STATE __py_gil_state;
-    PyObject *py_method;
-    ns3::RegularWifiMac *self_obj_before;
-    PyObject *py_retval;
-    ns3::Ptr< ns3::WifiPhy > retval;
-    PyNs3WifiPhy *tmp_WifiPhy;
-    
-    __py_gil_state = (PyEval_ThreadsInitialized() ? PyGILState_Ensure() : (PyGILState_STATE) 0);
-    py_method = PyObject_GetAttrString(m_pyself, (char *) "GetWifiPhy"); PyErr_Clear();
-    if (py_method == NULL || Py_TYPE(py_method) == &PyCFunction_Type) {
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return ns3::RegularWifiMac::GetWifiPhy();
-    }
-    self_obj_before = reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj;
-    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = const_cast< ns3::RegularWifiMac* >((const ns3::RegularWifiMac*) this);
-    py_retval = PyObject_CallMethod(m_pyself, (char *) "GetWifiPhy", (char *) "");
-    if (py_retval == NULL) {
-        PyErr_Print();
-        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return ns3::RegularWifiMac::GetWifiPhy();
-    }
-    py_retval = Py_BuildValue((char*) "(N)", py_retval);
-    if (!PyArg_ParseTuple(py_retval, (char *) "O!", &PyNs3WifiPhy_Type, &tmp_WifiPhy)) {
-        PyErr_Print();
-        Py_DECREF(py_retval);
-        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return ns3::RegularWifiMac::GetWifiPhy();
-    }
-    // dangerous!
-    retval = ns3::Ptr< ns3::WifiPhy  > (tmp_WifiPhy->obj);
-    Py_DECREF(py_retval);
-    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-    Py_XDECREF(py_method);
-    if (PyEval_ThreadsInitialized())
-        PyGILState_Release(__py_gil_state);
-    return retval;
-}
-
-void
-PyNs3MeshWifiInterfaceMac__PythonHelper::SetBasicBlockAckTimeout(ns3::Time blockAckTimeout)
-{
-    PyGILState_STATE __py_gil_state;
-    PyObject *py_method;
-    ns3::RegularWifiMac *self_obj_before;
-    PyObject *py_retval;
-    PyNs3Time *py_Time;
-    
-    __py_gil_state = (PyEval_ThreadsInitialized() ? PyGILState_Ensure() : (PyGILState_STATE) 0);
-    py_method = PyObject_GetAttrString(m_pyself, (char *) "SetBasicBlockAckTimeout"); PyErr_Clear();
-    if (py_method == NULL || Py_TYPE(py_method) == &PyCFunction_Type) {
-        ns3::RegularWifiMac::SetBasicBlockAckTimeout(blockAckTimeout);
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return;
-    }
-    self_obj_before = reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj;
-    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = (ns3::RegularWifiMac*) this;
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(blockAckTimeout);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = PyObject_CallMethod(m_pyself, (char *) "SetBasicBlockAckTimeout", (char *) "N", py_Time);
-    if (py_retval == NULL) {
-        PyErr_Print();
-        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return;
-    }
-    if (py_retval != Py_None) {
-        PyErr_SetString(PyExc_TypeError, "function/method should return None");
-        Py_DECREF(py_retval);
-        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return;
-    }
-    Py_DECREF(py_retval);
-    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-    Py_XDECREF(py_method);
-    if (PyEval_ThreadsInitialized())
-        PyGILState_Release(__py_gil_state);
-    return;
-}
-
-void
-PyNs3MeshWifiInterfaceMac__PythonHelper::SetCtsTimeout(ns3::Time ctsTimeout)
-{
-    PyGILState_STATE __py_gil_state;
-    PyObject *py_method;
-    ns3::RegularWifiMac *self_obj_before;
-    PyObject *py_retval;
-    PyNs3Time *py_Time;
-    
-    __py_gil_state = (PyEval_ThreadsInitialized() ? PyGILState_Ensure() : (PyGILState_STATE) 0);
-    py_method = PyObject_GetAttrString(m_pyself, (char *) "SetCtsTimeout"); PyErr_Clear();
-    if (py_method == NULL || Py_TYPE(py_method) == &PyCFunction_Type) {
-        ns3::RegularWifiMac::SetCtsTimeout(ctsTimeout);
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return;
-    }
-    self_obj_before = reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj;
-    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = (ns3::RegularWifiMac*) this;
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(ctsTimeout);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = PyObject_CallMethod(m_pyself, (char *) "SetCtsTimeout", (char *) "N", py_Time);
-    if (py_retval == NULL) {
-        PyErr_Print();
-        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return;
-    }
-    if (py_retval != Py_None) {
-        PyErr_SetString(PyExc_TypeError, "function/method should return None");
-        Py_DECREF(py_retval);
-        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return;
-    }
-    Py_DECREF(py_retval);
-    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-    Py_XDECREF(py_method);
-    if (PyEval_ThreadsInitialized())
-        PyGILState_Release(__py_gil_state);
-    return;
-}
-
-ns3::Time
-PyNs3MeshWifiInterfaceMac__PythonHelper::GetCtsTimeout() const
-{
-    PyGILState_STATE __py_gil_state;
-    PyObject *py_method;
-    ns3::RegularWifiMac *self_obj_before;
-    PyObject *py_retval;
-    PyNs3Time *tmp_Time;
-    
-    __py_gil_state = (PyEval_ThreadsInitialized() ? PyGILState_Ensure() : (PyGILState_STATE) 0);
-    py_method = PyObject_GetAttrString(m_pyself, (char *) "GetCtsTimeout"); PyErr_Clear();
-    if (py_method == NULL || Py_TYPE(py_method) == &PyCFunction_Type) {
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return ns3::RegularWifiMac::GetCtsTimeout();
-    }
-    self_obj_before = reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj;
-    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = const_cast< ns3::RegularWifiMac* >((const ns3::RegularWifiMac*) this);
-    py_retval = PyObject_CallMethod(m_pyself, (char *) "GetCtsTimeout", (char *) "");
-    if (py_retval == NULL) {
-        PyErr_Print();
-        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return ns3::RegularWifiMac::GetCtsTimeout();
-    }
-    py_retval = Py_BuildValue((char*) "(N)", py_retval);
-    if (!PyArg_ParseTuple(py_retval, (char *) "O!", &PyNs3Time_Type, &tmp_Time)) {
-        PyErr_Print();
-        Py_DECREF(py_retval);
-        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return ns3::RegularWifiMac::GetCtsTimeout();
-    }
-    ns3::Time retval = *tmp_Time->obj;
-    Py_DECREF(py_retval);
-    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-    Py_XDECREF(py_method);
-    if (PyEval_ThreadsInitialized())
-        PyGILState_Release(__py_gil_state);
-    return retval;
-}
-
-ns3::Mac48Address
-PyNs3MeshWifiInterfaceMac__PythonHelper::GetAddress() const
-{
-    PyGILState_STATE __py_gil_state;
-    PyObject *py_method;
-    ns3::RegularWifiMac *self_obj_before;
-    PyObject *py_retval;
-    PyNs3Mac48Address *tmp_Mac48Address;
-    
-    __py_gil_state = (PyEval_ThreadsInitialized() ? PyGILState_Ensure() : (PyGILState_STATE) 0);
-    py_method = PyObject_GetAttrString(m_pyself, (char *) "GetAddress"); PyErr_Clear();
-    if (py_method == NULL || Py_TYPE(py_method) == &PyCFunction_Type) {
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return ns3::RegularWifiMac::GetAddress();
-    }
-    self_obj_before = reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj;
-    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = const_cast< ns3::RegularWifiMac* >((const ns3::RegularWifiMac*) this);
-    py_retval = PyObject_CallMethod(m_pyself, (char *) "GetAddress", (char *) "");
-    if (py_retval == NULL) {
-        PyErr_Print();
-        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return ns3::RegularWifiMac::GetAddress();
-    }
-    py_retval = Py_BuildValue((char*) "(N)", py_retval);
-    if (!PyArg_ParseTuple(py_retval, (char *) "O!", &PyNs3Mac48Address_Type, &tmp_Mac48Address)) {
-        PyErr_Print();
-        Py_DECREF(py_retval);
-        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return ns3::RegularWifiMac::GetAddress();
-    }
-    ns3::Mac48Address retval = *tmp_Mac48Address->obj;
-    Py_DECREF(py_retval);
-    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-    Py_XDECREF(py_method);
-    if (PyEval_ThreadsInitialized())
-        PyGILState_Release(__py_gil_state);
-    return retval;
-}
-
-bool
-PyNs3MeshWifiInterfaceMac__PythonHelper::GetRifsSupported() const
-{
-    PyGILState_STATE __py_gil_state;
-    PyObject *py_method;
-    ns3::RegularWifiMac *self_obj_before;
-    PyObject *py_retval;
-    bool retval;
-    PyObject *py_boolretval;
-    
-    __py_gil_state = (PyEval_ThreadsInitialized() ? PyGILState_Ensure() : (PyGILState_STATE) 0);
-    py_method = PyObject_GetAttrString(m_pyself, (char *) "GetRifsSupported"); PyErr_Clear();
-    if (py_method == NULL || Py_TYPE(py_method) == &PyCFunction_Type) {
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return ns3::RegularWifiMac::GetRifsSupported();
-    }
-    self_obj_before = reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj;
-    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = const_cast< ns3::RegularWifiMac* >((const ns3::RegularWifiMac*) this);
-    py_retval = PyObject_CallMethod(m_pyself, (char *) "GetRifsSupported", (char *) "");
-    if (py_retval == NULL) {
-        PyErr_Print();
-        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return ns3::RegularWifiMac::GetRifsSupported();
-    }
-    py_retval = Py_BuildValue((char*) "(N)", py_retval);
-    if (!PyArg_ParseTuple(py_retval, (char *) "O", &py_boolretval)) {
-        PyErr_Print();
-        Py_DECREF(py_retval);
-        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return ns3::RegularWifiMac::GetRifsSupported();
-    }
-    retval = PyObject_IsTrue(py_boolretval);
-    Py_DECREF(py_retval);
-    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-    Py_XDECREF(py_method);
-    if (PyEval_ThreadsInitialized())
-        PyGILState_Release(__py_gil_state);
-    return retval;
-}
-
-ns3::Time
-PyNs3MeshWifiInterfaceMac__PythonHelper::GetSlot() const
-{
-    PyGILState_STATE __py_gil_state;
-    PyObject *py_method;
-    ns3::RegularWifiMac *self_obj_before;
-    PyObject *py_retval;
-    PyNs3Time *tmp_Time;
-    
-    __py_gil_state = (PyEval_ThreadsInitialized() ? PyGILState_Ensure() : (PyGILState_STATE) 0);
-    py_method = PyObject_GetAttrString(m_pyself, (char *) "GetSlot"); PyErr_Clear();
-    if (py_method == NULL || Py_TYPE(py_method) == &PyCFunction_Type) {
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return ns3::RegularWifiMac::GetSlot();
-    }
-    self_obj_before = reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj;
-    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = const_cast< ns3::RegularWifiMac* >((const ns3::RegularWifiMac*) this);
-    py_retval = PyObject_CallMethod(m_pyself, (char *) "GetSlot", (char *) "");
-    if (py_retval == NULL) {
-        PyErr_Print();
-        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return ns3::RegularWifiMac::GetSlot();
-    }
-    py_retval = Py_BuildValue((char*) "(N)", py_retval);
-    if (!PyArg_ParseTuple(py_retval, (char *) "O!", &PyNs3Time_Type, &tmp_Time)) {
-        PyErr_Print();
-        Py_DECREF(py_retval);
-        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return ns3::RegularWifiMac::GetSlot();
-    }
-    ns3::Time retval = *tmp_Time->obj;
-    Py_DECREF(py_retval);
-    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-    Py_XDECREF(py_method);
-    if (PyEval_ThreadsInitialized())
-        PyGILState_Release(__py_gil_state);
-    return retval;
-}
-
 
 void
 PyNs3MeshWifiInterfaceMac__PythonHelper::SetSifs(ns3::Time sifs)
@@ -25897,18 +25033,18 @@ PyNs3MeshWifiInterfaceMac__PythonHelper::SetSifs(ns3::Time sifs)
 }
 
 void
-PyNs3MeshWifiInterfaceMac__PythonHelper::SetAddress(ns3::Mac48Address address)
+PyNs3MeshWifiInterfaceMac__PythonHelper::SetEifsNoDifs(ns3::Time eifsNoDifs)
 {
     PyGILState_STATE __py_gil_state;
     PyObject *py_method;
     ns3::RegularWifiMac *self_obj_before;
     PyObject *py_retval;
-    PyNs3Mac48Address *py_Mac48Address;
+    PyNs3Time *py_Time;
     
     __py_gil_state = (PyEval_ThreadsInitialized() ? PyGILState_Ensure() : (PyGILState_STATE) 0);
-    py_method = PyObject_GetAttrString(m_pyself, (char *) "SetAddress"); PyErr_Clear();
+    py_method = PyObject_GetAttrString(m_pyself, (char *) "SetEifsNoDifs"); PyErr_Clear();
     if (py_method == NULL || Py_TYPE(py_method) == &PyCFunction_Type) {
-        ns3::RegularWifiMac::SetAddress(address);
+        ns3::RegularWifiMac::SetEifsNoDifs(eifsNoDifs);
         Py_XDECREF(py_method);
         if (PyEval_ThreadsInitialized())
             PyGILState_Release(__py_gil_state);
@@ -25916,11 +25052,11 @@ PyNs3MeshWifiInterfaceMac__PythonHelper::SetAddress(ns3::Mac48Address address)
     }
     self_obj_before = reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj;
     reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = (ns3::RegularWifiMac*) this;
-    py_Mac48Address = PyObject_New(PyNs3Mac48Address, &PyNs3Mac48Address_Type);
-    py_Mac48Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Mac48Address->obj = new ns3::Mac48Address(address);
-    PyNs3Mac48Address_wrapper_registry[(void *) py_Mac48Address->obj] = (PyObject *) py_Mac48Address;
-    py_retval = PyObject_CallMethod(m_pyself, (char *) "SetAddress", (char *) "N", py_Mac48Address);
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(eifsNoDifs);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = PyObject_CallMethod(m_pyself, (char *) "SetEifsNoDifs", (char *) "N", py_Time);
     if (py_retval == NULL) {
         PyErr_Print();
         reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
@@ -25946,65 +25082,19 @@ PyNs3MeshWifiInterfaceMac__PythonHelper::SetAddress(ns3::Mac48Address address)
     return;
 }
 
-ns3::Time
-PyNs3MeshWifiInterfaceMac__PythonHelper::GetCompressedBlockAckTimeout() const
-{
-    PyGILState_STATE __py_gil_state;
-    PyObject *py_method;
-    ns3::RegularWifiMac *self_obj_before;
-    PyObject *py_retval;
-    PyNs3Time *tmp_Time;
-    
-    __py_gil_state = (PyEval_ThreadsInitialized() ? PyGILState_Ensure() : (PyGILState_STATE) 0);
-    py_method = PyObject_GetAttrString(m_pyself, (char *) "GetCompressedBlockAckTimeout"); PyErr_Clear();
-    if (py_method == NULL || Py_TYPE(py_method) == &PyCFunction_Type) {
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return ns3::RegularWifiMac::GetCompressedBlockAckTimeout();
-    }
-    self_obj_before = reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj;
-    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = const_cast< ns3::RegularWifiMac* >((const ns3::RegularWifiMac*) this);
-    py_retval = PyObject_CallMethod(m_pyself, (char *) "GetCompressedBlockAckTimeout", (char *) "");
-    if (py_retval == NULL) {
-        PyErr_Print();
-        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return ns3::RegularWifiMac::GetCompressedBlockAckTimeout();
-    }
-    py_retval = Py_BuildValue((char*) "(N)", py_retval);
-    if (!PyArg_ParseTuple(py_retval, (char *) "O!", &PyNs3Time_Type, &tmp_Time)) {
-        PyErr_Print();
-        Py_DECREF(py_retval);
-        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return ns3::RegularWifiMac::GetCompressedBlockAckTimeout();
-    }
-    ns3::Time retval = *tmp_Time->obj;
-    Py_DECREF(py_retval);
-    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-    Py_XDECREF(py_method);
-    if (PyEval_ThreadsInitialized())
-        PyGILState_Release(__py_gil_state);
-    return retval;
-}
-
 void
-PyNs3MeshWifiInterfaceMac__PythonHelper::ResetWifiPhy()
+PyNs3MeshWifiInterfaceMac__PythonHelper::SetPifs(ns3::Time pifs)
 {
     PyGILState_STATE __py_gil_state;
     PyObject *py_method;
     ns3::RegularWifiMac *self_obj_before;
     PyObject *py_retval;
+    PyNs3Time *py_Time;
     
     __py_gil_state = (PyEval_ThreadsInitialized() ? PyGILState_Ensure() : (PyGILState_STATE) 0);
-    py_method = PyObject_GetAttrString(m_pyself, (char *) "ResetWifiPhy"); PyErr_Clear();
+    py_method = PyObject_GetAttrString(m_pyself, (char *) "SetPifs"); PyErr_Clear();
     if (py_method == NULL || Py_TYPE(py_method) == &PyCFunction_Type) {
-        ns3::RegularWifiMac::ResetWifiPhy();
+        ns3::RegularWifiMac::SetPifs(pifs);
         Py_XDECREF(py_method);
         if (PyEval_ThreadsInitialized())
             PyGILState_Release(__py_gil_state);
@@ -26012,7 +25102,11 @@ PyNs3MeshWifiInterfaceMac__PythonHelper::ResetWifiPhy()
     }
     self_obj_before = reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj;
     reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = (ns3::RegularWifiMac*) this;
-    py_retval = PyObject_CallMethod(m_pyself, (char *) "ResetWifiPhy", (char *) "");
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(pifs);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = PyObject_CallMethod(m_pyself, (char *) "SetPifs", (char *) "N", py_Time);
     if (py_retval == NULL) {
         PyErr_Print();
         reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
@@ -26089,6 +25183,56 @@ PyNs3MeshWifiInterfaceMac__PythonHelper::SetRifs(ns3::Time rifs)
 }
 
 void
+PyNs3MeshWifiInterfaceMac__PythonHelper::SetCtsTimeout(ns3::Time ctsTimeout)
+{
+    PyGILState_STATE __py_gil_state;
+    PyObject *py_method;
+    ns3::RegularWifiMac *self_obj_before;
+    PyObject *py_retval;
+    PyNs3Time *py_Time;
+    
+    __py_gil_state = (PyEval_ThreadsInitialized() ? PyGILState_Ensure() : (PyGILState_STATE) 0);
+    py_method = PyObject_GetAttrString(m_pyself, (char *) "SetCtsTimeout"); PyErr_Clear();
+    if (py_method == NULL || Py_TYPE(py_method) == &PyCFunction_Type) {
+        ns3::RegularWifiMac::SetCtsTimeout(ctsTimeout);
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return;
+    }
+    self_obj_before = reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj;
+    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = (ns3::RegularWifiMac*) this;
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(ctsTimeout);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = PyObject_CallMethod(m_pyself, (char *) "SetCtsTimeout", (char *) "N", py_Time);
+    if (py_retval == NULL) {
+        PyErr_Print();
+        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return;
+    }
+    if (py_retval != Py_None) {
+        PyErr_SetString(PyExc_TypeError, "function/method should return None");
+        Py_DECREF(py_retval);
+        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return;
+    }
+    Py_DECREF(py_retval);
+    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+    Py_XDECREF(py_method);
+    if (PyEval_ThreadsInitialized())
+        PyGILState_Release(__py_gil_state);
+    return;
+}
+
+void
 PyNs3MeshWifiInterfaceMac__PythonHelper::SetAckTimeout(ns3::Time ackTimeout)
 {
     PyGILState_STATE __py_gil_state;
@@ -26138,105 +25282,8 @@ PyNs3MeshWifiInterfaceMac__PythonHelper::SetAckTimeout(ns3::Time ackTimeout)
     return;
 }
 
-ns3::Ssid
-PyNs3MeshWifiInterfaceMac__PythonHelper::GetSsid() const
-{
-    PyGILState_STATE __py_gil_state;
-    PyObject *py_method;
-    ns3::RegularWifiMac *self_obj_before;
-    PyObject *py_retval;
-    PyNs3Ssid *tmp_Ssid;
-    
-    __py_gil_state = (PyEval_ThreadsInitialized() ? PyGILState_Ensure() : (PyGILState_STATE) 0);
-    py_method = PyObject_GetAttrString(m_pyself, (char *) "GetSsid"); PyErr_Clear();
-    if (py_method == NULL || Py_TYPE(py_method) == &PyCFunction_Type) {
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return ns3::RegularWifiMac::GetSsid();
-    }
-    self_obj_before = reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj;
-    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = const_cast< ns3::RegularWifiMac* >((const ns3::RegularWifiMac*) this);
-    py_retval = PyObject_CallMethod(m_pyself, (char *) "GetSsid", (char *) "");
-    if (py_retval == NULL) {
-        PyErr_Print();
-        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return ns3::RegularWifiMac::GetSsid();
-    }
-    py_retval = Py_BuildValue((char*) "(N)", py_retval);
-    if (!PyArg_ParseTuple(py_retval, (char *) "O!", &PyNs3Ssid_Type, &tmp_Ssid)) {
-        PyErr_Print();
-        Py_DECREF(py_retval);
-        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return ns3::RegularWifiMac::GetSsid();
-    }
-    ns3::Ssid retval = *tmp_Ssid->obj;
-    Py_DECREF(py_retval);
-    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-    Py_XDECREF(py_method);
-    if (PyEval_ThreadsInitialized())
-        PyGILState_Release(__py_gil_state);
-    return retval;
-}
-
-void
-PyNs3MeshWifiInterfaceMac__PythonHelper::SetEifsNoDifs(ns3::Time eifsNoDifs)
-{
-    PyGILState_STATE __py_gil_state;
-    PyObject *py_method;
-    ns3::RegularWifiMac *self_obj_before;
-    PyObject *py_retval;
-    PyNs3Time *py_Time;
-    
-    __py_gil_state = (PyEval_ThreadsInitialized() ? PyGILState_Ensure() : (PyGILState_STATE) 0);
-    py_method = PyObject_GetAttrString(m_pyself, (char *) "SetEifsNoDifs"); PyErr_Clear();
-    if (py_method == NULL || Py_TYPE(py_method) == &PyCFunction_Type) {
-        ns3::RegularWifiMac::SetEifsNoDifs(eifsNoDifs);
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return;
-    }
-    self_obj_before = reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj;
-    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = (ns3::RegularWifiMac*) this;
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(eifsNoDifs);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = PyObject_CallMethod(m_pyself, (char *) "SetEifsNoDifs", (char *) "N", py_Time);
-    if (py_retval == NULL) {
-        PyErr_Print();
-        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return;
-    }
-    if (py_retval != Py_None) {
-        PyErr_SetString(PyExc_TypeError, "function/method should return None");
-        Py_DECREF(py_retval);
-        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-        Py_XDECREF(py_method);
-        if (PyEval_ThreadsInitialized())
-            PyGILState_Release(__py_gil_state);
-        return;
-    }
-    Py_DECREF(py_retval);
-    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
-    Py_XDECREF(py_method);
-    if (PyEval_ThreadsInitialized())
-        PyGILState_Release(__py_gil_state);
-    return;
-}
-
 ns3::Time
-PyNs3MeshWifiInterfaceMac__PythonHelper::GetAckTimeout() const
+PyNs3MeshWifiInterfaceMac__PythonHelper::GetRifs() const
 {
     PyGILState_STATE __py_gil_state;
     PyObject *py_method;
@@ -26245,23 +25292,23 @@ PyNs3MeshWifiInterfaceMac__PythonHelper::GetAckTimeout() const
     PyNs3Time *tmp_Time;
     
     __py_gil_state = (PyEval_ThreadsInitialized() ? PyGILState_Ensure() : (PyGILState_STATE) 0);
-    py_method = PyObject_GetAttrString(m_pyself, (char *) "GetAckTimeout"); PyErr_Clear();
+    py_method = PyObject_GetAttrString(m_pyself, (char *) "GetRifs"); PyErr_Clear();
     if (py_method == NULL || Py_TYPE(py_method) == &PyCFunction_Type) {
         Py_XDECREF(py_method);
         if (PyEval_ThreadsInitialized())
             PyGILState_Release(__py_gil_state);
-        return ns3::RegularWifiMac::GetAckTimeout();
+        return ns3::RegularWifiMac::GetRifs();
     }
     self_obj_before = reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj;
     reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = const_cast< ns3::RegularWifiMac* >((const ns3::RegularWifiMac*) this);
-    py_retval = PyObject_CallMethod(m_pyself, (char *) "GetAckTimeout", (char *) "");
+    py_retval = PyObject_CallMethod(m_pyself, (char *) "GetRifs", (char *) "");
     if (py_retval == NULL) {
         PyErr_Print();
         reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
         Py_XDECREF(py_method);
         if (PyEval_ThreadsInitialized())
             PyGILState_Release(__py_gil_state);
-        return ns3::RegularWifiMac::GetAckTimeout();
+        return ns3::RegularWifiMac::GetRifs();
     }
     py_retval = Py_BuildValue((char*) "(N)", py_retval);
     if (!PyArg_ParseTuple(py_retval, (char *) "O!", &PyNs3Time_Type, &tmp_Time)) {
@@ -26271,7 +25318,54 @@ PyNs3MeshWifiInterfaceMac__PythonHelper::GetAckTimeout() const
         Py_XDECREF(py_method);
         if (PyEval_ThreadsInitialized())
             PyGILState_Release(__py_gil_state);
-        return ns3::RegularWifiMac::GetAckTimeout();
+        return ns3::RegularWifiMac::GetRifs();
+    }
+    ns3::Time retval = *tmp_Time->obj;
+    Py_DECREF(py_retval);
+    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+    Py_XDECREF(py_method);
+    if (PyEval_ThreadsInitialized())
+        PyGILState_Release(__py_gil_state);
+    return retval;
+}
+
+ns3::Time
+PyNs3MeshWifiInterfaceMac__PythonHelper::GetPifs() const
+{
+    PyGILState_STATE __py_gil_state;
+    PyObject *py_method;
+    ns3::RegularWifiMac *self_obj_before;
+    PyObject *py_retval;
+    PyNs3Time *tmp_Time;
+    
+    __py_gil_state = (PyEval_ThreadsInitialized() ? PyGILState_Ensure() : (PyGILState_STATE) 0);
+    py_method = PyObject_GetAttrString(m_pyself, (char *) "GetPifs"); PyErr_Clear();
+    if (py_method == NULL || Py_TYPE(py_method) == &PyCFunction_Type) {
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return ns3::RegularWifiMac::GetPifs();
+    }
+    self_obj_before = reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj;
+    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = const_cast< ns3::RegularWifiMac* >((const ns3::RegularWifiMac*) this);
+    py_retval = PyObject_CallMethod(m_pyself, (char *) "GetPifs", (char *) "");
+    if (py_retval == NULL) {
+        PyErr_Print();
+        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return ns3::RegularWifiMac::GetPifs();
+    }
+    py_retval = Py_BuildValue((char*) "(N)", py_retval);
+    if (!PyArg_ParseTuple(py_retval, (char *) "O!", &PyNs3Time_Type, &tmp_Time)) {
+        PyErr_Print();
+        Py_DECREF(py_retval);
+        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return ns3::RegularWifiMac::GetPifs();
     }
     ns3::Time retval = *tmp_Time->obj;
     Py_DECREF(py_retval);
@@ -26329,6 +25423,716 @@ PyNs3MeshWifiInterfaceMac__PythonHelper::GetSifs() const
     return retval;
 }
 
+ns3::Time
+PyNs3MeshWifiInterfaceMac__PythonHelper::GetSlot() const
+{
+    PyGILState_STATE __py_gil_state;
+    PyObject *py_method;
+    ns3::RegularWifiMac *self_obj_before;
+    PyObject *py_retval;
+    PyNs3Time *tmp_Time;
+    
+    __py_gil_state = (PyEval_ThreadsInitialized() ? PyGILState_Ensure() : (PyGILState_STATE) 0);
+    py_method = PyObject_GetAttrString(m_pyself, (char *) "GetSlot"); PyErr_Clear();
+    if (py_method == NULL || Py_TYPE(py_method) == &PyCFunction_Type) {
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return ns3::RegularWifiMac::GetSlot();
+    }
+    self_obj_before = reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj;
+    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = const_cast< ns3::RegularWifiMac* >((const ns3::RegularWifiMac*) this);
+    py_retval = PyObject_CallMethod(m_pyself, (char *) "GetSlot", (char *) "");
+    if (py_retval == NULL) {
+        PyErr_Print();
+        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return ns3::RegularWifiMac::GetSlot();
+    }
+    py_retval = Py_BuildValue((char*) "(N)", py_retval);
+    if (!PyArg_ParseTuple(py_retval, (char *) "O!", &PyNs3Time_Type, &tmp_Time)) {
+        PyErr_Print();
+        Py_DECREF(py_retval);
+        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return ns3::RegularWifiMac::GetSlot();
+    }
+    ns3::Time retval = *tmp_Time->obj;
+    Py_DECREF(py_retval);
+    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+    Py_XDECREF(py_method);
+    if (PyEval_ThreadsInitialized())
+        PyGILState_Release(__py_gil_state);
+    return retval;
+}
+
+ns3::Time
+PyNs3MeshWifiInterfaceMac__PythonHelper::GetEifsNoDifs() const
+{
+    PyGILState_STATE __py_gil_state;
+    PyObject *py_method;
+    ns3::RegularWifiMac *self_obj_before;
+    PyObject *py_retval;
+    PyNs3Time *tmp_Time;
+    
+    __py_gil_state = (PyEval_ThreadsInitialized() ? PyGILState_Ensure() : (PyGILState_STATE) 0);
+    py_method = PyObject_GetAttrString(m_pyself, (char *) "GetEifsNoDifs"); PyErr_Clear();
+    if (py_method == NULL || Py_TYPE(py_method) == &PyCFunction_Type) {
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return ns3::RegularWifiMac::GetEifsNoDifs();
+    }
+    self_obj_before = reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj;
+    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = const_cast< ns3::RegularWifiMac* >((const ns3::RegularWifiMac*) this);
+    py_retval = PyObject_CallMethod(m_pyself, (char *) "GetEifsNoDifs", (char *) "");
+    if (py_retval == NULL) {
+        PyErr_Print();
+        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return ns3::RegularWifiMac::GetEifsNoDifs();
+    }
+    py_retval = Py_BuildValue((char*) "(N)", py_retval);
+    if (!PyArg_ParseTuple(py_retval, (char *) "O!", &PyNs3Time_Type, &tmp_Time)) {
+        PyErr_Print();
+        Py_DECREF(py_retval);
+        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return ns3::RegularWifiMac::GetEifsNoDifs();
+    }
+    ns3::Time retval = *tmp_Time->obj;
+    Py_DECREF(py_retval);
+    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+    Py_XDECREF(py_method);
+    if (PyEval_ThreadsInitialized())
+        PyGILState_Release(__py_gil_state);
+    return retval;
+}
+
+ns3::Time
+PyNs3MeshWifiInterfaceMac__PythonHelper::GetCtsTimeout() const
+{
+    PyGILState_STATE __py_gil_state;
+    PyObject *py_method;
+    ns3::RegularWifiMac *self_obj_before;
+    PyObject *py_retval;
+    PyNs3Time *tmp_Time;
+    
+    __py_gil_state = (PyEval_ThreadsInitialized() ? PyGILState_Ensure() : (PyGILState_STATE) 0);
+    py_method = PyObject_GetAttrString(m_pyself, (char *) "GetCtsTimeout"); PyErr_Clear();
+    if (py_method == NULL || Py_TYPE(py_method) == &PyCFunction_Type) {
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return ns3::RegularWifiMac::GetCtsTimeout();
+    }
+    self_obj_before = reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj;
+    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = const_cast< ns3::RegularWifiMac* >((const ns3::RegularWifiMac*) this);
+    py_retval = PyObject_CallMethod(m_pyself, (char *) "GetCtsTimeout", (char *) "");
+    if (py_retval == NULL) {
+        PyErr_Print();
+        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return ns3::RegularWifiMac::GetCtsTimeout();
+    }
+    py_retval = Py_BuildValue((char*) "(N)", py_retval);
+    if (!PyArg_ParseTuple(py_retval, (char *) "O!", &PyNs3Time_Type, &tmp_Time)) {
+        PyErr_Print();
+        Py_DECREF(py_retval);
+        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return ns3::RegularWifiMac::GetCtsTimeout();
+    }
+    ns3::Time retval = *tmp_Time->obj;
+    Py_DECREF(py_retval);
+    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+    Py_XDECREF(py_method);
+    if (PyEval_ThreadsInitialized())
+        PyGILState_Release(__py_gil_state);
+    return retval;
+}
+
+ns3::Time
+PyNs3MeshWifiInterfaceMac__PythonHelper::GetAckTimeout() const
+{
+    PyGILState_STATE __py_gil_state;
+    PyObject *py_method;
+    ns3::RegularWifiMac *self_obj_before;
+    PyObject *py_retval;
+    PyNs3Time *tmp_Time;
+    
+    __py_gil_state = (PyEval_ThreadsInitialized() ? PyGILState_Ensure() : (PyGILState_STATE) 0);
+    py_method = PyObject_GetAttrString(m_pyself, (char *) "GetAckTimeout"); PyErr_Clear();
+    if (py_method == NULL || Py_TYPE(py_method) == &PyCFunction_Type) {
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return ns3::RegularWifiMac::GetAckTimeout();
+    }
+    self_obj_before = reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj;
+    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = const_cast< ns3::RegularWifiMac* >((const ns3::RegularWifiMac*) this);
+    py_retval = PyObject_CallMethod(m_pyself, (char *) "GetAckTimeout", (char *) "");
+    if (py_retval == NULL) {
+        PyErr_Print();
+        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return ns3::RegularWifiMac::GetAckTimeout();
+    }
+    py_retval = Py_BuildValue((char*) "(N)", py_retval);
+    if (!PyArg_ParseTuple(py_retval, (char *) "O!", &PyNs3Time_Type, &tmp_Time)) {
+        PyErr_Print();
+        Py_DECREF(py_retval);
+        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return ns3::RegularWifiMac::GetAckTimeout();
+    }
+    ns3::Time retval = *tmp_Time->obj;
+    Py_DECREF(py_retval);
+    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+    Py_XDECREF(py_method);
+    if (PyEval_ThreadsInitialized())
+        PyGILState_Release(__py_gil_state);
+    return retval;
+}
+
+void
+PyNs3MeshWifiInterfaceMac__PythonHelper::SetShortSlotTimeSupported(bool enable)
+{
+    PyGILState_STATE __py_gil_state;
+    PyObject *py_method;
+    ns3::RegularWifiMac *self_obj_before;
+    PyObject *py_retval;
+    
+    __py_gil_state = (PyEval_ThreadsInitialized() ? PyGILState_Ensure() : (PyGILState_STATE) 0);
+    py_method = PyObject_GetAttrString(m_pyself, (char *) "SetShortSlotTimeSupported"); PyErr_Clear();
+    if (py_method == NULL || Py_TYPE(py_method) == &PyCFunction_Type) {
+        ns3::RegularWifiMac::SetShortSlotTimeSupported(enable);
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return;
+    }
+    self_obj_before = reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj;
+    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = (ns3::RegularWifiMac*) this;
+    py_retval = PyObject_CallMethod(m_pyself, (char *) "SetShortSlotTimeSupported", (char *) "N", PyBool_FromLong(enable));
+    if (py_retval == NULL) {
+        PyErr_Print();
+        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return;
+    }
+    if (py_retval != Py_None) {
+        PyErr_SetString(PyExc_TypeError, "function/method should return None");
+        Py_DECREF(py_retval);
+        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return;
+    }
+    Py_DECREF(py_retval);
+    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+    Py_XDECREF(py_method);
+    if (PyEval_ThreadsInitialized())
+        PyGILState_Release(__py_gil_state);
+    return;
+}
+
+bool
+PyNs3MeshWifiInterfaceMac__PythonHelper::GetShortSlotTimeSupported() const
+{
+    PyGILState_STATE __py_gil_state;
+    PyObject *py_method;
+    ns3::RegularWifiMac *self_obj_before;
+    PyObject *py_retval;
+    bool retval;
+    PyObject *py_boolretval;
+    
+    __py_gil_state = (PyEval_ThreadsInitialized() ? PyGILState_Ensure() : (PyGILState_STATE) 0);
+    py_method = PyObject_GetAttrString(m_pyself, (char *) "GetShortSlotTimeSupported"); PyErr_Clear();
+    if (py_method == NULL || Py_TYPE(py_method) == &PyCFunction_Type) {
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return ns3::RegularWifiMac::GetShortSlotTimeSupported();
+    }
+    self_obj_before = reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj;
+    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = const_cast< ns3::RegularWifiMac* >((const ns3::RegularWifiMac*) this);
+    py_retval = PyObject_CallMethod(m_pyself, (char *) "GetShortSlotTimeSupported", (char *) "");
+    if (py_retval == NULL) {
+        PyErr_Print();
+        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return ns3::RegularWifiMac::GetShortSlotTimeSupported();
+    }
+    py_retval = Py_BuildValue((char*) "(N)", py_retval);
+    if (!PyArg_ParseTuple(py_retval, (char *) "O", &py_boolretval)) {
+        PyErr_Print();
+        Py_DECREF(py_retval);
+        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return ns3::RegularWifiMac::GetShortSlotTimeSupported();
+    }
+    retval = PyObject_IsTrue(py_boolretval);
+    Py_DECREF(py_retval);
+    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+    Py_XDECREF(py_method);
+    if (PyEval_ThreadsInitialized())
+        PyGILState_Release(__py_gil_state);
+    return retval;
+}
+
+bool
+PyNs3MeshWifiInterfaceMac__PythonHelper::GetRifsSupported() const
+{
+    PyGILState_STATE __py_gil_state;
+    PyObject *py_method;
+    ns3::RegularWifiMac *self_obj_before;
+    PyObject *py_retval;
+    bool retval;
+    PyObject *py_boolretval;
+    
+    __py_gil_state = (PyEval_ThreadsInitialized() ? PyGILState_Ensure() : (PyGILState_STATE) 0);
+    py_method = PyObject_GetAttrString(m_pyself, (char *) "GetRifsSupported"); PyErr_Clear();
+    if (py_method == NULL || Py_TYPE(py_method) == &PyCFunction_Type) {
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return ns3::RegularWifiMac::GetRifsSupported();
+    }
+    self_obj_before = reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj;
+    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = const_cast< ns3::RegularWifiMac* >((const ns3::RegularWifiMac*) this);
+    py_retval = PyObject_CallMethod(m_pyself, (char *) "GetRifsSupported", (char *) "");
+    if (py_retval == NULL) {
+        PyErr_Print();
+        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return ns3::RegularWifiMac::GetRifsSupported();
+    }
+    py_retval = Py_BuildValue((char*) "(N)", py_retval);
+    if (!PyArg_ParseTuple(py_retval, (char *) "O", &py_boolretval)) {
+        PyErr_Print();
+        Py_DECREF(py_retval);
+        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return ns3::RegularWifiMac::GetRifsSupported();
+    }
+    retval = PyObject_IsTrue(py_boolretval);
+    Py_DECREF(py_retval);
+    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+    Py_XDECREF(py_method);
+    if (PyEval_ThreadsInitialized())
+        PyGILState_Release(__py_gil_state);
+    return retval;
+}
+
+ns3::Mac48Address
+PyNs3MeshWifiInterfaceMac__PythonHelper::GetAddress() const
+{
+    PyGILState_STATE __py_gil_state;
+    PyObject *py_method;
+    ns3::RegularWifiMac *self_obj_before;
+    PyObject *py_retval;
+    PyNs3Mac48Address *tmp_Mac48Address;
+    
+    __py_gil_state = (PyEval_ThreadsInitialized() ? PyGILState_Ensure() : (PyGILState_STATE) 0);
+    py_method = PyObject_GetAttrString(m_pyself, (char *) "GetAddress"); PyErr_Clear();
+    if (py_method == NULL || Py_TYPE(py_method) == &PyCFunction_Type) {
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return ns3::RegularWifiMac::GetAddress();
+    }
+    self_obj_before = reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj;
+    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = const_cast< ns3::RegularWifiMac* >((const ns3::RegularWifiMac*) this);
+    py_retval = PyObject_CallMethod(m_pyself, (char *) "GetAddress", (char *) "");
+    if (py_retval == NULL) {
+        PyErr_Print();
+        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return ns3::RegularWifiMac::GetAddress();
+    }
+    py_retval = Py_BuildValue((char*) "(N)", py_retval);
+    if (!PyArg_ParseTuple(py_retval, (char *) "O!", &PyNs3Mac48Address_Type, &tmp_Mac48Address)) {
+        PyErr_Print();
+        Py_DECREF(py_retval);
+        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return ns3::RegularWifiMac::GetAddress();
+    }
+    ns3::Mac48Address retval = *tmp_Mac48Address->obj;
+    Py_DECREF(py_retval);
+    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+    Py_XDECREF(py_method);
+    if (PyEval_ThreadsInitialized())
+        PyGILState_Release(__py_gil_state);
+    return retval;
+}
+
+ns3::Ssid
+PyNs3MeshWifiInterfaceMac__PythonHelper::GetSsid() const
+{
+    PyGILState_STATE __py_gil_state;
+    PyObject *py_method;
+    ns3::RegularWifiMac *self_obj_before;
+    PyObject *py_retval;
+    PyNs3Ssid *tmp_Ssid;
+    
+    __py_gil_state = (PyEval_ThreadsInitialized() ? PyGILState_Ensure() : (PyGILState_STATE) 0);
+    py_method = PyObject_GetAttrString(m_pyself, (char *) "GetSsid"); PyErr_Clear();
+    if (py_method == NULL || Py_TYPE(py_method) == &PyCFunction_Type) {
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return ns3::RegularWifiMac::GetSsid();
+    }
+    self_obj_before = reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj;
+    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = const_cast< ns3::RegularWifiMac* >((const ns3::RegularWifiMac*) this);
+    py_retval = PyObject_CallMethod(m_pyself, (char *) "GetSsid", (char *) "");
+    if (py_retval == NULL) {
+        PyErr_Print();
+        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return ns3::RegularWifiMac::GetSsid();
+    }
+    py_retval = Py_BuildValue((char*) "(N)", py_retval);
+    if (!PyArg_ParseTuple(py_retval, (char *) "O!", &PyNs3Ssid_Type, &tmp_Ssid)) {
+        PyErr_Print();
+        Py_DECREF(py_retval);
+        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return ns3::RegularWifiMac::GetSsid();
+    }
+    ns3::Ssid retval = *tmp_Ssid->obj;
+    Py_DECREF(py_retval);
+    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+    Py_XDECREF(py_method);
+    if (PyEval_ThreadsInitialized())
+        PyGILState_Release(__py_gil_state);
+    return retval;
+}
+
+void
+PyNs3MeshWifiInterfaceMac__PythonHelper::SetAddress(ns3::Mac48Address address)
+{
+    PyGILState_STATE __py_gil_state;
+    PyObject *py_method;
+    ns3::RegularWifiMac *self_obj_before;
+    PyObject *py_retval;
+    PyNs3Mac48Address *py_Mac48Address;
+    
+    __py_gil_state = (PyEval_ThreadsInitialized() ? PyGILState_Ensure() : (PyGILState_STATE) 0);
+    py_method = PyObject_GetAttrString(m_pyself, (char *) "SetAddress"); PyErr_Clear();
+    if (py_method == NULL || Py_TYPE(py_method) == &PyCFunction_Type) {
+        ns3::RegularWifiMac::SetAddress(address);
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return;
+    }
+    self_obj_before = reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj;
+    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = (ns3::RegularWifiMac*) this;
+    py_Mac48Address = PyObject_New(PyNs3Mac48Address, &PyNs3Mac48Address_Type);
+    py_Mac48Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Mac48Address->obj = new ns3::Mac48Address(address);
+    PyNs3Mac48Address_wrapper_registry[(void *) py_Mac48Address->obj] = (PyObject *) py_Mac48Address;
+    py_retval = PyObject_CallMethod(m_pyself, (char *) "SetAddress", (char *) "N", py_Mac48Address);
+    if (py_retval == NULL) {
+        PyErr_Print();
+        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return;
+    }
+    if (py_retval != Py_None) {
+        PyErr_SetString(PyExc_TypeError, "function/method should return None");
+        Py_DECREF(py_retval);
+        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return;
+    }
+    Py_DECREF(py_retval);
+    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+    Py_XDECREF(py_method);
+    if (PyEval_ThreadsInitialized())
+        PyGILState_Release(__py_gil_state);
+    return;
+}
+
+void
+PyNs3MeshWifiInterfaceMac__PythonHelper::SetSsid(ns3::Ssid ssid)
+{
+    PyGILState_STATE __py_gil_state;
+    PyObject *py_method;
+    ns3::RegularWifiMac *self_obj_before;
+    PyObject *py_retval;
+    PyNs3Ssid *py_Ssid;
+    
+    __py_gil_state = (PyEval_ThreadsInitialized() ? PyGILState_Ensure() : (PyGILState_STATE) 0);
+    py_method = PyObject_GetAttrString(m_pyself, (char *) "SetSsid"); PyErr_Clear();
+    if (py_method == NULL || Py_TYPE(py_method) == &PyCFunction_Type) {
+        ns3::RegularWifiMac::SetSsid(ssid);
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return;
+    }
+    self_obj_before = reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj;
+    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = (ns3::RegularWifiMac*) this;
+    py_Ssid = PyObject_New(PyNs3Ssid, &PyNs3Ssid_Type);
+    
+    py_Ssid->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Ssid->obj = new ns3::Ssid(ssid);
+    PyNs3Empty_wrapper_registry[(void *) py_Ssid->obj] = (PyObject *) py_Ssid;
+    py_retval = PyObject_CallMethod(m_pyself, (char *) "SetSsid", (char *) "N", py_Ssid);
+    if (py_retval == NULL) {
+        PyErr_Print();
+        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return;
+    }
+    if (py_retval != Py_None) {
+        PyErr_SetString(PyExc_TypeError, "function/method should return None");
+        Py_DECREF(py_retval);
+        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return;
+    }
+    Py_DECREF(py_retval);
+    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+    Py_XDECREF(py_method);
+    if (PyEval_ThreadsInitialized())
+        PyGILState_Release(__py_gil_state);
+    return;
+}
+
+ns3::Mac48Address
+PyNs3MeshWifiInterfaceMac__PythonHelper::GetBssid() const
+{
+    PyGILState_STATE __py_gil_state;
+    PyObject *py_method;
+    ns3::RegularWifiMac *self_obj_before;
+    PyObject *py_retval;
+    PyNs3Mac48Address *tmp_Mac48Address;
+    
+    __py_gil_state = (PyEval_ThreadsInitialized() ? PyGILState_Ensure() : (PyGILState_STATE) 0);
+    py_method = PyObject_GetAttrString(m_pyself, (char *) "GetBssid"); PyErr_Clear();
+    if (py_method == NULL || Py_TYPE(py_method) == &PyCFunction_Type) {
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return ns3::RegularWifiMac::GetBssid();
+    }
+    self_obj_before = reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj;
+    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = const_cast< ns3::RegularWifiMac* >((const ns3::RegularWifiMac*) this);
+    py_retval = PyObject_CallMethod(m_pyself, (char *) "GetBssid", (char *) "");
+    if (py_retval == NULL) {
+        PyErr_Print();
+        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return ns3::RegularWifiMac::GetBssid();
+    }
+    py_retval = Py_BuildValue((char*) "(N)", py_retval);
+    if (!PyArg_ParseTuple(py_retval, (char *) "O!", &PyNs3Mac48Address_Type, &tmp_Mac48Address)) {
+        PyErr_Print();
+        Py_DECREF(py_retval);
+        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return ns3::RegularWifiMac::GetBssid();
+    }
+    ns3::Mac48Address retval = *tmp_Mac48Address->obj;
+    Py_DECREF(py_retval);
+    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+    Py_XDECREF(py_method);
+    if (PyEval_ThreadsInitialized())
+        PyGILState_Release(__py_gil_state);
+    return retval;
+}
+
+void
+PyNs3MeshWifiInterfaceMac__PythonHelper::SetPromisc()
+{
+    PyGILState_STATE __py_gil_state;
+    PyObject *py_method;
+    ns3::RegularWifiMac *self_obj_before;
+    PyObject *py_retval;
+    
+    __py_gil_state = (PyEval_ThreadsInitialized() ? PyGILState_Ensure() : (PyGILState_STATE) 0);
+    py_method = PyObject_GetAttrString(m_pyself, (char *) "SetPromisc"); PyErr_Clear();
+    if (py_method == NULL || Py_TYPE(py_method) == &PyCFunction_Type) {
+        ns3::RegularWifiMac::SetPromisc();
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return;
+    }
+    self_obj_before = reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj;
+    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = (ns3::RegularWifiMac*) this;
+    py_retval = PyObject_CallMethod(m_pyself, (char *) "SetPromisc", (char *) "");
+    if (py_retval == NULL) {
+        PyErr_Print();
+        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return;
+    }
+    if (py_retval != Py_None) {
+        PyErr_SetString(PyExc_TypeError, "function/method should return None");
+        Py_DECREF(py_retval);
+        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return;
+    }
+    Py_DECREF(py_retval);
+    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+    Py_XDECREF(py_method);
+    if (PyEval_ThreadsInitialized())
+        PyGILState_Release(__py_gil_state);
+    return;
+}
+
+ns3::Ptr< ns3::WifiPhy >
+PyNs3MeshWifiInterfaceMac__PythonHelper::GetWifiPhy() const
+{
+    PyGILState_STATE __py_gil_state;
+    PyObject *py_method;
+    ns3::RegularWifiMac *self_obj_before;
+    PyObject *py_retval;
+    ns3::Ptr< ns3::WifiPhy > retval;
+    PyNs3WifiPhy *tmp_WifiPhy;
+    
+    __py_gil_state = (PyEval_ThreadsInitialized() ? PyGILState_Ensure() : (PyGILState_STATE) 0);
+    py_method = PyObject_GetAttrString(m_pyself, (char *) "GetWifiPhy"); PyErr_Clear();
+    if (py_method == NULL || Py_TYPE(py_method) == &PyCFunction_Type) {
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return ns3::RegularWifiMac::GetWifiPhy();
+    }
+    self_obj_before = reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj;
+    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = const_cast< ns3::RegularWifiMac* >((const ns3::RegularWifiMac*) this);
+    py_retval = PyObject_CallMethod(m_pyself, (char *) "GetWifiPhy", (char *) "");
+    if (py_retval == NULL) {
+        PyErr_Print();
+        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return ns3::RegularWifiMac::GetWifiPhy();
+    }
+    py_retval = Py_BuildValue((char*) "(N)", py_retval);
+    if (!PyArg_ParseTuple(py_retval, (char *) "O!", &PyNs3WifiPhy_Type, &tmp_WifiPhy)) {
+        PyErr_Print();
+        Py_DECREF(py_retval);
+        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return ns3::RegularWifiMac::GetWifiPhy();
+    }
+    // dangerous!
+    retval = ns3::Ptr< ns3::WifiPhy  > (tmp_WifiPhy->obj);
+    Py_DECREF(py_retval);
+    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+    Py_XDECREF(py_method);
+    if (PyEval_ThreadsInitialized())
+        PyGILState_Release(__py_gil_state);
+    return retval;
+}
+
+void
+PyNs3MeshWifiInterfaceMac__PythonHelper::ResetWifiPhy()
+{
+    PyGILState_STATE __py_gil_state;
+    PyObject *py_method;
+    ns3::RegularWifiMac *self_obj_before;
+    PyObject *py_retval;
+    
+    __py_gil_state = (PyEval_ThreadsInitialized() ? PyGILState_Ensure() : (PyGILState_STATE) 0);
+    py_method = PyObject_GetAttrString(m_pyself, (char *) "ResetWifiPhy"); PyErr_Clear();
+    if (py_method == NULL || Py_TYPE(py_method) == &PyCFunction_Type) {
+        ns3::RegularWifiMac::ResetWifiPhy();
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return;
+    }
+    self_obj_before = reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj;
+    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = (ns3::RegularWifiMac*) this;
+    py_retval = PyObject_CallMethod(m_pyself, (char *) "ResetWifiPhy", (char *) "");
+    if (py_retval == NULL) {
+        PyErr_Print();
+        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return;
+    }
+    if (py_retval != Py_None) {
+        PyErr_SetString(PyExc_TypeError, "function/method should return None");
+        Py_DECREF(py_retval);
+        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return;
+    }
+    Py_DECREF(py_retval);
+    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+    Py_XDECREF(py_method);
+    if (PyEval_ThreadsInitialized())
+        PyGILState_Release(__py_gil_state);
+    return;
+}
+
 ns3::Ptr< ns3::WifiRemoteStationManager >
 PyNs3MeshWifiInterfaceMac__PythonHelper::GetWifiRemoteStationManager() const
 {
@@ -26370,6 +26174,202 @@ PyNs3MeshWifiInterfaceMac__PythonHelper::GetWifiRemoteStationManager() const
     }
     // dangerous!
     retval = ns3::Ptr< ns3::WifiRemoteStationManager  > (tmp_WifiRemoteStationManager->obj);
+    Py_DECREF(py_retval);
+    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+    Py_XDECREF(py_method);
+    if (PyEval_ThreadsInitialized())
+        PyGILState_Release(__py_gil_state);
+    return retval;
+}
+
+
+
+void
+PyNs3MeshWifiInterfaceMac__PythonHelper::SetBasicBlockAckTimeout(ns3::Time blockAckTimeout)
+{
+    PyGILState_STATE __py_gil_state;
+    PyObject *py_method;
+    ns3::RegularWifiMac *self_obj_before;
+    PyObject *py_retval;
+    PyNs3Time *py_Time;
+    
+    __py_gil_state = (PyEval_ThreadsInitialized() ? PyGILState_Ensure() : (PyGILState_STATE) 0);
+    py_method = PyObject_GetAttrString(m_pyself, (char *) "SetBasicBlockAckTimeout"); PyErr_Clear();
+    if (py_method == NULL || Py_TYPE(py_method) == &PyCFunction_Type) {
+        ns3::RegularWifiMac::SetBasicBlockAckTimeout(blockAckTimeout);
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return;
+    }
+    self_obj_before = reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj;
+    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = (ns3::RegularWifiMac*) this;
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(blockAckTimeout);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = PyObject_CallMethod(m_pyself, (char *) "SetBasicBlockAckTimeout", (char *) "N", py_Time);
+    if (py_retval == NULL) {
+        PyErr_Print();
+        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return;
+    }
+    if (py_retval != Py_None) {
+        PyErr_SetString(PyExc_TypeError, "function/method should return None");
+        Py_DECREF(py_retval);
+        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return;
+    }
+    Py_DECREF(py_retval);
+    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+    Py_XDECREF(py_method);
+    if (PyEval_ThreadsInitialized())
+        PyGILState_Release(__py_gil_state);
+    return;
+}
+
+ns3::Time
+PyNs3MeshWifiInterfaceMac__PythonHelper::GetBasicBlockAckTimeout() const
+{
+    PyGILState_STATE __py_gil_state;
+    PyObject *py_method;
+    ns3::RegularWifiMac *self_obj_before;
+    PyObject *py_retval;
+    PyNs3Time *tmp_Time;
+    
+    __py_gil_state = (PyEval_ThreadsInitialized() ? PyGILState_Ensure() : (PyGILState_STATE) 0);
+    py_method = PyObject_GetAttrString(m_pyself, (char *) "GetBasicBlockAckTimeout"); PyErr_Clear();
+    if (py_method == NULL || Py_TYPE(py_method) == &PyCFunction_Type) {
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return ns3::RegularWifiMac::GetBasicBlockAckTimeout();
+    }
+    self_obj_before = reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj;
+    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = const_cast< ns3::RegularWifiMac* >((const ns3::RegularWifiMac*) this);
+    py_retval = PyObject_CallMethod(m_pyself, (char *) "GetBasicBlockAckTimeout", (char *) "");
+    if (py_retval == NULL) {
+        PyErr_Print();
+        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return ns3::RegularWifiMac::GetBasicBlockAckTimeout();
+    }
+    py_retval = Py_BuildValue((char*) "(N)", py_retval);
+    if (!PyArg_ParseTuple(py_retval, (char *) "O!", &PyNs3Time_Type, &tmp_Time)) {
+        PyErr_Print();
+        Py_DECREF(py_retval);
+        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return ns3::RegularWifiMac::GetBasicBlockAckTimeout();
+    }
+    ns3::Time retval = *tmp_Time->obj;
+    Py_DECREF(py_retval);
+    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+    Py_XDECREF(py_method);
+    if (PyEval_ThreadsInitialized())
+        PyGILState_Release(__py_gil_state);
+    return retval;
+}
+
+void
+PyNs3MeshWifiInterfaceMac__PythonHelper::SetCompressedBlockAckTimeout(ns3::Time blockAckTimeout)
+{
+    PyGILState_STATE __py_gil_state;
+    PyObject *py_method;
+    ns3::RegularWifiMac *self_obj_before;
+    PyObject *py_retval;
+    PyNs3Time *py_Time;
+    
+    __py_gil_state = (PyEval_ThreadsInitialized() ? PyGILState_Ensure() : (PyGILState_STATE) 0);
+    py_method = PyObject_GetAttrString(m_pyself, (char *) "SetCompressedBlockAckTimeout"); PyErr_Clear();
+    if (py_method == NULL || Py_TYPE(py_method) == &PyCFunction_Type) {
+        ns3::RegularWifiMac::SetCompressedBlockAckTimeout(blockAckTimeout);
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return;
+    }
+    self_obj_before = reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj;
+    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = (ns3::RegularWifiMac*) this;
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(blockAckTimeout);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = PyObject_CallMethod(m_pyself, (char *) "SetCompressedBlockAckTimeout", (char *) "N", py_Time);
+    if (py_retval == NULL) {
+        PyErr_Print();
+        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return;
+    }
+    if (py_retval != Py_None) {
+        PyErr_SetString(PyExc_TypeError, "function/method should return None");
+        Py_DECREF(py_retval);
+        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return;
+    }
+    Py_DECREF(py_retval);
+    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+    Py_XDECREF(py_method);
+    if (PyEval_ThreadsInitialized())
+        PyGILState_Release(__py_gil_state);
+    return;
+}
+
+ns3::Time
+PyNs3MeshWifiInterfaceMac__PythonHelper::GetCompressedBlockAckTimeout() const
+{
+    PyGILState_STATE __py_gil_state;
+    PyObject *py_method;
+    ns3::RegularWifiMac *self_obj_before;
+    PyObject *py_retval;
+    PyNs3Time *tmp_Time;
+    
+    __py_gil_state = (PyEval_ThreadsInitialized() ? PyGILState_Ensure() : (PyGILState_STATE) 0);
+    py_method = PyObject_GetAttrString(m_pyself, (char *) "GetCompressedBlockAckTimeout"); PyErr_Clear();
+    if (py_method == NULL || Py_TYPE(py_method) == &PyCFunction_Type) {
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return ns3::RegularWifiMac::GetCompressedBlockAckTimeout();
+    }
+    self_obj_before = reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj;
+    reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = const_cast< ns3::RegularWifiMac* >((const ns3::RegularWifiMac*) this);
+    py_retval = PyObject_CallMethod(m_pyself, (char *) "GetCompressedBlockAckTimeout", (char *) "");
+    if (py_retval == NULL) {
+        PyErr_Print();
+        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return ns3::RegularWifiMac::GetCompressedBlockAckTimeout();
+    }
+    py_retval = Py_BuildValue((char*) "(N)", py_retval);
+    if (!PyArg_ParseTuple(py_retval, (char *) "O!", &PyNs3Time_Type, &tmp_Time)) {
+        PyErr_Print();
+        Py_DECREF(py_retval);
+        reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
+        Py_XDECREF(py_method);
+        if (PyEval_ThreadsInitialized())
+            PyGILState_Release(__py_gil_state);
+        return ns3::RegularWifiMac::GetCompressedBlockAckTimeout();
+    }
+    ns3::Time retval = *tmp_Time->obj;
     Py_DECREF(py_retval);
     reinterpret_cast< PyNs3RegularWifiMac* >(m_pyself)->obj = self_obj_before;
     Py_XDECREF(py_method);
@@ -26867,165 +26867,18 @@ _wrap_PyNs3MeshWifiInterfaceMac__tp_init(PyNs3MeshWifiInterfaceMac *self, PyObje
 
 
 PyObject *
-_wrap_PyNs3MeshWifiInterfaceMac_GetSupportedRates(PyNs3MeshWifiInterfaceMac *self)
+_wrap_PyNs3MeshWifiInterfaceMac_AssignStreams(PyNs3MeshWifiInterfaceMac *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3SupportedRates *py_SupportedRates;
+    int64_t retval;
+    int64_t stream;
+    const char *keywords[] = {"stream", NULL};
     
-    ns3::SupportedRates retval = self->obj->GetSupportedRates();
-    py_SupportedRates = PyObject_New(PyNs3SupportedRates, &PyNs3SupportedRates_Type);
-    
-    py_SupportedRates->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_SupportedRates->obj = new ns3::SupportedRates(retval);
-    PyNs3Empty_wrapper_registry[(void *) py_SupportedRates->obj] = (PyObject *) py_SupportedRates;
-    py_retval = Py_BuildValue((char *) "N", py_SupportedRates);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MeshWifiInterfaceMac_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::MeshWifiInterfaceMac::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MeshWifiInterfaceMac_GetTbtt(PyNs3MeshWifiInterfaceMac *self)
-{
-    PyObject *py_retval;
-    PyNs3Time *py_Time;
-    
-    ns3::Time retval = self->obj->GetTbtt();
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MeshWifiInterfaceMac_SetLinkMetricCallback(PyNs3MeshWifiInterfaceMac *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyObject *cb;
-    ns3::Ptr<PythonCallbackImpl26> cb_cb_impl;
-    const char *keywords[] = {"cb", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &cb)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "L", (char **) keywords, &stream)) {
         return NULL;
     }
-    if (!PyCallable_Check(cb)) {
-        PyErr_SetString(PyExc_TypeError, "parameter 'cb' must be callbale");
-        return NULL;
-    }
-    cb_cb_impl = ns3::Create<PythonCallbackImpl26> (cb);
-    self->obj->SetLinkMetricCallback(ns3::Callback<unsigned int, ns3::Mac48Address, ns3::Ptr<ns3::MeshWifiInterfaceMac>, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty> (cb_cb_impl));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MeshWifiInterfaceMac_SupportsSendFrom(PyNs3MeshWifiInterfaceMac *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3MeshWifiInterfaceMac__PythonHelper *helper_class = dynamic_cast<PyNs3MeshWifiInterfaceMac__PythonHelper*> (self->obj);
-    
-    retval = (helper_class == NULL)? (self->obj->SupportsSendFrom()) : (self->obj->ns3::MeshWifiInterfaceMac::SupportsSendFrom());
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MeshWifiInterfaceMac_SetMeshPointAddress(PyNs3MeshWifiInterfaceMac *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Mac48Address *arg0;
-    const char *keywords[] = {"arg0", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Mac48Address_Type, &arg0)) {
-        return NULL;
-    }
-    self->obj->SetMeshPointAddress(*((PyNs3Mac48Address *) arg0)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MeshWifiInterfaceMac_GetMeshPointAddress(PyNs3MeshWifiInterfaceMac *self)
-{
-    PyObject *py_retval;
-    PyNs3Mac48Address *py_Mac48Address;
-    
-    ns3::Mac48Address retval = self->obj->GetMeshPointAddress();
-    py_Mac48Address = PyObject_New(PyNs3Mac48Address, &PyNs3Mac48Address_Type);
-    py_Mac48Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Mac48Address->obj = new ns3::Mac48Address(retval);
-    PyNs3Mac48Address_wrapper_registry[(void *) py_Mac48Address->obj] = (PyObject *) py_Mac48Address;
-    py_retval = Py_BuildValue((char *) "N", py_Mac48Address);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MeshWifiInterfaceMac_ShiftTbtt(PyNs3MeshWifiInterfaceMac *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Time *shift;
-    const char *keywords[] = {"shift", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Time_Type, &shift)) {
-        return NULL;
-    }
-    self->obj->ShiftTbtt(*((PyNs3Time *) shift)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MeshWifiInterfaceMac_GetPhyStandard(PyNs3MeshWifiInterfaceMac *self)
-{
-    PyObject *py_retval;
-    ns3::WifiPhyStandard retval;
-    
-    retval = self->obj->GetPhyStandard();
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MeshWifiInterfaceMac_GetLinkMetric(PyNs3MeshWifiInterfaceMac *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    PyNs3Mac48Address *peerAddress;
-    const char *keywords[] = {"peerAddress", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Mac48Address_Type, &peerAddress)) {
-        return NULL;
-    }
-    retval = self->obj->GetLinkMetric(*((PyNs3Mac48Address *) peerAddress)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    retval = self->obj->AssignStreams(stream);
+    py_retval = Py_BuildValue((char *) "L", retval);
     return py_retval;
 }
 
@@ -27043,23 +26896,6 @@ _wrap_PyNs3MeshWifiInterfaceMac_CheckSupportedRates(PyNs3MeshWifiInterfaceMac *s
     }
     retval = self->obj->CheckSupportedRates(*((PyNs3SupportedRates *) rates)->obj);
     py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MeshWifiInterfaceMac_SetBeaconInterval(PyNs3MeshWifiInterfaceMac *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Time *interval;
-    const char *keywords[] = {"interval", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Time_Type, &interval)) {
-        return NULL;
-    }
-    self->obj->SetBeaconInterval(*((PyNs3Time *) interval)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
     return py_retval;
 }
 
@@ -27144,6 +26980,146 @@ PyObject * _wrap_PyNs3MeshWifiInterfaceMac_Enqueue(PyNs3MeshWifiInterfaceMac *se
 
 
 PyObject *
+_wrap_PyNs3MeshWifiInterfaceMac_FinishConfigureStandard(PyNs3MeshWifiInterfaceMac *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    ns3::WifiPhyStandard standard;
+    PyNs3MeshWifiInterfaceMac__PythonHelper *helper_class = dynamic_cast<PyNs3MeshWifiInterfaceMac__PythonHelper*> (self->obj);
+    const char *keywords[] = {"standard", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &standard)) {
+        return NULL;
+    }
+    (helper_class == NULL)? (self->obj->FinishConfigureStandard(standard)) : (self->obj->ns3::MeshWifiInterfaceMac::FinishConfigureStandard(standard));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3MeshWifiInterfaceMac_GetBeaconInterval(PyNs3MeshWifiInterfaceMac *self)
+{
+    PyObject *py_retval;
+    PyNs3Time *py_Time;
+    
+    ns3::Time retval = self->obj->GetBeaconInterval();
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3MeshWifiInterfaceMac_GetFrequencyChannel(PyNs3MeshWifiInterfaceMac *self)
+{
+    PyObject *py_retval;
+    uint16_t retval;
+    
+    retval = self->obj->GetFrequencyChannel();
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3MeshWifiInterfaceMac_GetLinkMetric(PyNs3MeshWifiInterfaceMac *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    PyNs3Mac48Address *peerAddress;
+    const char *keywords[] = {"peerAddress", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Mac48Address_Type, &peerAddress)) {
+        return NULL;
+    }
+    retval = self->obj->GetLinkMetric(*((PyNs3Mac48Address *) peerAddress)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3MeshWifiInterfaceMac_GetMeshPointAddress(PyNs3MeshWifiInterfaceMac *self)
+{
+    PyObject *py_retval;
+    PyNs3Mac48Address *py_Mac48Address;
+    
+    ns3::Mac48Address retval = self->obj->GetMeshPointAddress();
+    py_Mac48Address = PyObject_New(PyNs3Mac48Address, &PyNs3Mac48Address_Type);
+    py_Mac48Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Mac48Address->obj = new ns3::Mac48Address(retval);
+    PyNs3Mac48Address_wrapper_registry[(void *) py_Mac48Address->obj] = (PyObject *) py_Mac48Address;
+    py_retval = Py_BuildValue((char *) "N", py_Mac48Address);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3MeshWifiInterfaceMac_GetPhyStandard(PyNs3MeshWifiInterfaceMac *self)
+{
+    PyObject *py_retval;
+    ns3::WifiPhyStandard retval;
+    
+    retval = self->obj->GetPhyStandard();
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3MeshWifiInterfaceMac_GetSupportedRates(PyNs3MeshWifiInterfaceMac *self)
+{
+    PyObject *py_retval;
+    PyNs3SupportedRates *py_SupportedRates;
+    
+    ns3::SupportedRates retval = self->obj->GetSupportedRates();
+    py_SupportedRates = PyObject_New(PyNs3SupportedRates, &PyNs3SupportedRates_Type);
+    
+    py_SupportedRates->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_SupportedRates->obj = new ns3::SupportedRates(retval);
+    PyNs3Empty_wrapper_registry[(void *) py_SupportedRates->obj] = (PyObject *) py_SupportedRates;
+    py_retval = Py_BuildValue((char *) "N", py_SupportedRates);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3MeshWifiInterfaceMac_GetTbtt(PyNs3MeshWifiInterfaceMac *self)
+{
+    PyObject *py_retval;
+    PyNs3Time *py_Time;
+    
+    ns3::Time retval = self->obj->GetTbtt();
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3MeshWifiInterfaceMac_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::MeshWifiInterfaceMac::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3MeshWifiInterfaceMac_InstallPlugin(PyNs3MeshWifiInterfaceMac *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -27163,77 +27139,11 @@ _wrap_PyNs3MeshWifiInterfaceMac_InstallPlugin(PyNs3MeshWifiInterfaceMac *self, P
 
 
 PyObject *
-_wrap_PyNs3MeshWifiInterfaceMac_FinishConfigureStandard(PyNs3MeshWifiInterfaceMac *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    ns3::WifiPhyStandard standard;
-    PyNs3MeshWifiInterfaceMac__PythonHelper *helper_class = dynamic_cast<PyNs3MeshWifiInterfaceMac__PythonHelper*> (self->obj);
-    const char *keywords[] = {"standard", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &standard)) {
-        return NULL;
-    }
-    (helper_class == NULL)? (self->obj->FinishConfigureStandard(standard)) : (self->obj->ns3::MeshWifiInterfaceMac::FinishConfigureStandard(standard));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MeshWifiInterfaceMac_SetRandomStartDelay(PyNs3MeshWifiInterfaceMac *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Time *interval;
-    const char *keywords[] = {"interval", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Time_Type, &interval)) {
-        return NULL;
-    }
-    self->obj->SetRandomStartDelay(*((PyNs3Time *) interval)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3MeshWifiInterfaceMac_ResetStats(PyNs3MeshWifiInterfaceMac *self)
 {
     PyObject *py_retval;
     
     self->obj->ResetStats();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MeshWifiInterfaceMac_GetFrequencyChannel(PyNs3MeshWifiInterfaceMac *self)
-{
-    PyObject *py_retval;
-    uint16_t retval;
-    
-    retval = self->obj->GetFrequencyChannel();
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MeshWifiInterfaceMac_SetBeaconGeneration(PyNs3MeshWifiInterfaceMac *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool enable;
-    PyObject *py_enable;
-    const char *keywords[] = {"enable", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &py_enable)) {
-        return NULL;
-    }
-    enable = (bool) PyObject_IsTrue(py_enable);
-    self->obj->SetBeaconGeneration(enable);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -27261,53 +27171,58 @@ _wrap_PyNs3MeshWifiInterfaceMac_SendManagementFrame(PyNs3MeshWifiInterfaceMac *s
 
 
 PyObject *
-_wrap_PyNs3MeshWifiInterfaceMac_GetBeaconInterval(PyNs3MeshWifiInterfaceMac *self)
+_wrap_PyNs3MeshWifiInterfaceMac_SetBeaconGeneration(PyNs3MeshWifiInterfaceMac *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3Time *py_Time;
+    bool enable;
+    PyObject *py_enable;
+    const char *keywords[] = {"enable", NULL};
     
-    ns3::Time retval = self->obj->GetBeaconInterval();
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &py_enable)) {
+        return NULL;
+    }
+    enable = (bool) PyObject_IsTrue(py_enable);
+    self->obj->SetBeaconGeneration(enable);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3MeshWifiInterfaceMac_AssignStreams(PyNs3MeshWifiInterfaceMac *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3MeshWifiInterfaceMac_SetBeaconInterval(PyNs3MeshWifiInterfaceMac *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    int64_t retval;
-    int64_t stream;
-    const char *keywords[] = {"stream", NULL};
+    PyNs3Time *interval;
+    const char *keywords[] = {"interval", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "L", (char **) keywords, &stream)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Time_Type, &interval)) {
         return NULL;
     }
-    retval = self->obj->AssignStreams(stream);
-    py_retval = Py_BuildValue((char *) "L", retval);
+    self->obj->SetBeaconInterval(*((PyNs3Time *) interval)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3MeshWifiInterfaceMac_SwitchFrequencyChannel(PyNs3MeshWifiInterfaceMac *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3MeshWifiInterfaceMac_SetLinkMetricCallback(PyNs3MeshWifiInterfaceMac *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    int new_id;
-    const char *keywords[] = {"new_id", NULL};
+    PyObject *cb;
+    ns3::Ptr<PythonCallbackImpl26> cb_cb_impl;
+    const char *keywords[] = {"cb", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &new_id)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &cb)) {
         return NULL;
     }
-    if (new_id > 0xffff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
+    if (!PyCallable_Check(cb)) {
+        PyErr_SetString(PyExc_TypeError, "parameter 'cb' must be callbale");
         return NULL;
     }
-    self->obj->SwitchFrequencyChannel(new_id);
+    cb_cb_impl = ns3::Create<PythonCallbackImpl26> (cb);
+    self->obj->SetLinkMetricCallback(ns3::Callback<unsigned int, ns3::Mac48Address, ns3::Ptr<ns3::MeshWifiInterfaceMac>, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty> (cb_cb_impl));
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -27337,36 +27252,121 @@ _wrap_PyNs3MeshWifiInterfaceMac_SetLinkUpCallback(PyNs3MeshWifiInterfaceMac *sel
     return py_retval;
 }
 
+
+PyObject *
+_wrap_PyNs3MeshWifiInterfaceMac_SetMeshPointAddress(PyNs3MeshWifiInterfaceMac *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Mac48Address *arg0;
+    const char *keywords[] = {"arg0", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Mac48Address_Type, &arg0)) {
+        return NULL;
+    }
+    self->obj->SetMeshPointAddress(*((PyNs3Mac48Address *) arg0)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3MeshWifiInterfaceMac_SetRandomStartDelay(PyNs3MeshWifiInterfaceMac *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Time *interval;
+    const char *keywords[] = {"interval", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Time_Type, &interval)) {
+        return NULL;
+    }
+    self->obj->SetRandomStartDelay(*((PyNs3Time *) interval)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3MeshWifiInterfaceMac_ShiftTbtt(PyNs3MeshWifiInterfaceMac *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Time *shift;
+    const char *keywords[] = {"shift", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Time_Type, &shift)) {
+        return NULL;
+    }
+    self->obj->ShiftTbtt(*((PyNs3Time *) shift)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3MeshWifiInterfaceMac_SupportsSendFrom(PyNs3MeshWifiInterfaceMac *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3MeshWifiInterfaceMac__PythonHelper *helper_class = dynamic_cast<PyNs3MeshWifiInterfaceMac__PythonHelper*> (self->obj);
+    
+    retval = (helper_class == NULL)? (self->obj->SupportsSendFrom()) : (self->obj->ns3::MeshWifiInterfaceMac::SupportsSendFrom());
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3MeshWifiInterfaceMac_SwitchFrequencyChannel(PyNs3MeshWifiInterfaceMac *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int new_id;
+    const char *keywords[] = {"new_id", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &new_id)) {
+        return NULL;
+    }
+    if (new_id > 0xffff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SwitchFrequencyChannel(new_id);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
 static PyMethodDef PyNs3MeshWifiInterfaceMac_methods[] = {
-    {(char *) "GetSupportedRates", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMac_GetSupportedRates, METH_NOARGS, "GetSupportedRates()\n\n" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMac_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "GetTbtt", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMac_GetTbtt, METH_NOARGS, "GetTbtt()\n\n" },
-    {(char *) "SetLinkMetricCallback", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMac_SetLinkMetricCallback, METH_KEYWORDS|METH_VARARGS, "SetLinkMetricCallback(cb)\n\ntype: cb: ns3::Callback< unsigned int, ns3::Mac48Address, ns3::Ptr< ns3::MeshWifiInterfaceMac >, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty >" },
-    {(char *) "SupportsSendFrom", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMac_SupportsSendFrom, METH_NOARGS, "SupportsSendFrom()\n\n" },
-    {(char *) "SetMeshPointAddress", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMac_SetMeshPointAddress, METH_KEYWORDS|METH_VARARGS, "SetMeshPointAddress(arg0)\n\ntype: arg0: ns3::Mac48Address" },
-    {(char *) "GetMeshPointAddress", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMac_GetMeshPointAddress, METH_NOARGS, "GetMeshPointAddress()\n\n" },
-    {(char *) "ShiftTbtt", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMac_ShiftTbtt, METH_KEYWORDS|METH_VARARGS, "ShiftTbtt(shift)\n\ntype: shift: ns3::Time" },
-    {(char *) "GetPhyStandard", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMac_GetPhyStandard, METH_NOARGS, "GetPhyStandard()\n\n" },
-    {(char *) "GetLinkMetric", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMac_GetLinkMetric, METH_KEYWORDS|METH_VARARGS, "GetLinkMetric(peerAddress)\n\ntype: peerAddress: ns3::Mac48Address" },
-    {(char *) "CheckSupportedRates", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMac_CheckSupportedRates, METH_KEYWORDS|METH_VARARGS, "CheckSupportedRates(rates)\n\ntype: rates: ns3::SupportedRates" },
-    {(char *) "SetBeaconInterval", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMac_SetBeaconInterval, METH_KEYWORDS|METH_VARARGS, "SetBeaconInterval(interval)\n\ntype: interval: ns3::Time" },
-    {(char *) "Enqueue", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMac_Enqueue, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "InstallPlugin", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMac_InstallPlugin, METH_KEYWORDS|METH_VARARGS, "InstallPlugin(plugin)\n\ntype: plugin: ns3::Ptr< ns3::MeshWifiInterfaceMacPlugin >" },
-    {(char *) "FinishConfigureStandard", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMac_FinishConfigureStandard, METH_KEYWORDS|METH_VARARGS, "FinishConfigureStandard(standard)\n\ntype: standard: ns3::WifiPhyStandard" },
-    {(char *) "SetRandomStartDelay", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMac_SetRandomStartDelay, METH_KEYWORDS|METH_VARARGS, "SetRandomStartDelay(interval)\n\ntype: interval: ns3::Time" },
-    {(char *) "ResetStats", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMac_ResetStats, METH_NOARGS, "ResetStats()\n\n" },
-    {(char *) "GetFrequencyChannel", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMac_GetFrequencyChannel, METH_NOARGS, "GetFrequencyChannel()\n\n" },
-    {(char *) "SetBeaconGeneration", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMac_SetBeaconGeneration, METH_KEYWORDS|METH_VARARGS, "SetBeaconGeneration(enable)\n\ntype: enable: bool" },
-    {(char *) "SendManagementFrame", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMac_SendManagementFrame, METH_KEYWORDS|METH_VARARGS, "SendManagementFrame(frame, hdr)\n\ntype: frame: ns3::Ptr< ns3::Packet >\ntype: hdr: ns3::WifiMacHeader const &" },
-    {(char *) "GetBeaconInterval", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMac_GetBeaconInterval, METH_NOARGS, "GetBeaconInterval()\n\n" },
     {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMac_AssignStreams, METH_KEYWORDS|METH_VARARGS, "AssignStreams(stream)\n\ntype: stream: int64_t" },
-    {(char *) "SwitchFrequencyChannel", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMac_SwitchFrequencyChannel, METH_KEYWORDS|METH_VARARGS, "SwitchFrequencyChannel(new_id)\n\ntype: new_id: uint16_t" },
+    {(char *) "CheckSupportedRates", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMac_CheckSupportedRates, METH_KEYWORDS|METH_VARARGS, "CheckSupportedRates(rates)\n\ntype: rates: ns3::SupportedRates" },
+    {(char *) "Enqueue", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMac_Enqueue, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "FinishConfigureStandard", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMac_FinishConfigureStandard, METH_KEYWORDS|METH_VARARGS, "FinishConfigureStandard(standard)\n\ntype: standard: ns3::WifiPhyStandard" },
+    {(char *) "GetBeaconInterval", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMac_GetBeaconInterval, METH_NOARGS, "GetBeaconInterval()\n\n" },
+    {(char *) "GetFrequencyChannel", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMac_GetFrequencyChannel, METH_NOARGS, "GetFrequencyChannel()\n\n" },
+    {(char *) "GetLinkMetric", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMac_GetLinkMetric, METH_KEYWORDS|METH_VARARGS, "GetLinkMetric(peerAddress)\n\ntype: peerAddress: ns3::Mac48Address" },
+    {(char *) "GetMeshPointAddress", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMac_GetMeshPointAddress, METH_NOARGS, "GetMeshPointAddress()\n\n" },
+    {(char *) "GetPhyStandard", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMac_GetPhyStandard, METH_NOARGS, "GetPhyStandard()\n\n" },
+    {(char *) "GetSupportedRates", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMac_GetSupportedRates, METH_NOARGS, "GetSupportedRates()\n\n" },
+    {(char *) "GetTbtt", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMac_GetTbtt, METH_NOARGS, "GetTbtt()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMac_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "InstallPlugin", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMac_InstallPlugin, METH_KEYWORDS|METH_VARARGS, "InstallPlugin(plugin)\n\ntype: plugin: ns3::Ptr< ns3::MeshWifiInterfaceMacPlugin >" },
+    {(char *) "ResetStats", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMac_ResetStats, METH_NOARGS, "ResetStats()\n\n" },
+    {(char *) "SendManagementFrame", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMac_SendManagementFrame, METH_KEYWORDS|METH_VARARGS, "SendManagementFrame(frame, hdr)\n\ntype: frame: ns3::Ptr< ns3::Packet >\ntype: hdr: ns3::WifiMacHeader const &" },
+    {(char *) "SetBeaconGeneration", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMac_SetBeaconGeneration, METH_KEYWORDS|METH_VARARGS, "SetBeaconGeneration(enable)\n\ntype: enable: bool" },
+    {(char *) "SetBeaconInterval", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMac_SetBeaconInterval, METH_KEYWORDS|METH_VARARGS, "SetBeaconInterval(interval)\n\ntype: interval: ns3::Time" },
+    {(char *) "SetLinkMetricCallback", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMac_SetLinkMetricCallback, METH_KEYWORDS|METH_VARARGS, "SetLinkMetricCallback(cb)\n\ntype: cb: ns3::Callback< unsigned int, ns3::Mac48Address, ns3::Ptr< ns3::MeshWifiInterfaceMac >, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty >" },
     {(char *) "SetLinkUpCallback", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMac_SetLinkUpCallback, METH_KEYWORDS|METH_VARARGS, "SetLinkUpCallback(linkUp)\n\ntype: linkUp: ns3::Callback< void, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty >" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3MeshWifiInterfaceMac__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
-    {(char *) "DeaggregateAmsduAndForward", (PyCFunction) PyNs3MeshWifiInterfaceMac__PythonHelper::_wrap_DeaggregateAmsduAndForward, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "TxFailed", (PyCFunction) PyNs3MeshWifiInterfaceMac__PythonHelper::_wrap_TxFailed, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3MeshWifiInterfaceMac__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
+    {(char *) "SetMeshPointAddress", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMac_SetMeshPointAddress, METH_KEYWORDS|METH_VARARGS, "SetMeshPointAddress(arg0)\n\ntype: arg0: ns3::Mac48Address" },
+    {(char *) "SetRandomStartDelay", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMac_SetRandomStartDelay, METH_KEYWORDS|METH_VARARGS, "SetRandomStartDelay(interval)\n\ntype: interval: ns3::Time" },
+    {(char *) "ShiftTbtt", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMac_ShiftTbtt, METH_KEYWORDS|METH_VARARGS, "ShiftTbtt(shift)\n\ntype: shift: ns3::Time" },
+    {(char *) "SupportsSendFrom", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMac_SupportsSendFrom, METH_NOARGS, "SupportsSendFrom()\n\n" },
+    {(char *) "SwitchFrequencyChannel", (PyCFunction) _wrap_PyNs3MeshWifiInterfaceMac_SwitchFrequencyChannel, METH_KEYWORDS|METH_VARARGS, "SwitchFrequencyChannel(new_id)\n\ntype: new_id: uint16_t" },
     {(char *) "TxOk", (PyCFunction) PyNs3MeshWifiInterfaceMac__PythonHelper::_wrap_TxOk, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "TxFailed", (PyCFunction) PyNs3MeshWifiInterfaceMac__PythonHelper::_wrap_TxFailed, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "DeaggregateAmsduAndForward", (PyCFunction) PyNs3MeshWifiInterfaceMac__PythonHelper::_wrap_DeaggregateAmsduAndForward, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3MeshWifiInterfaceMac__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3MeshWifiInterfaceMac__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 

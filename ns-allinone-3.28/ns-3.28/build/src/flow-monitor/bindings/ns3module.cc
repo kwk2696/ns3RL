@@ -874,219 +874,6 @@ _wrap_PyNs3FlowMonitorHelper__tp_init(PyNs3FlowMonitorHelper *self, PyObject *ar
 
 
 PyObject *
-_wrap_PyNs3FlowMonitorHelper_SerializeToXmlString(PyNs3FlowMonitorHelper *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    std::string retval;
-    int indent;
-    bool enableHistograms;
-    PyObject *py_enableHistograms;
-    bool enableProbes;
-    PyObject *py_enableProbes;
-    const char *keywords[] = {"indent", "enableHistograms", "enableProbes", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "iOO", (char **) keywords, &indent, &py_enableHistograms, &py_enableProbes)) {
-        return NULL;
-    }
-    if (indent > 0xffff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    enableHistograms = (bool) PyObject_IsTrue(py_enableHistograms);
-    enableProbes = (bool) PyObject_IsTrue(py_enableProbes);
-    retval = self->obj->SerializeToXmlString(indent, enableHistograms, enableProbes);
-    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3FlowMonitorHelper_InstallAll(PyNs3FlowMonitorHelper *self)
-{
-    PyObject *py_retval;
-    ns3::Ptr< ns3::FlowMonitor > retval;
-    PyNs3FlowMonitor *py_FlowMonitor;
-    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
-    PyTypeObject *wrapper_type = 0;
-    
-    retval = self->obj->InstallAll();
-    if (!(const_cast<ns3::FlowMonitor *> (ns3::PeekPointer (retval)))) {
-        Py_INCREF(Py_None);
-        return Py_None;
-    }
-    if (typeid((*const_cast<ns3::FlowMonitor *> (ns3::PeekPointer (retval)))).name() == typeid(PyNs3FlowMonitor__PythonHelper).name())
-    {
-        py_FlowMonitor = reinterpret_cast< PyNs3FlowMonitor* >(reinterpret_cast< PyNs3FlowMonitor__PythonHelper* >(const_cast<ns3::FlowMonitor *> (ns3::PeekPointer (retval)))->m_pyself);
-        py_FlowMonitor->obj = const_cast<ns3::FlowMonitor *> (ns3::PeekPointer (retval));
-        Py_INCREF(py_FlowMonitor);
-    } else {
-        wrapper_lookup_iter = PyNs3ObjectBase_wrapper_registry.find((void *) const_cast<ns3::FlowMonitor *> (ns3::PeekPointer (retval)));
-        if (wrapper_lookup_iter == PyNs3ObjectBase_wrapper_registry.end()) {
-            py_FlowMonitor = NULL;
-        } else {
-            py_FlowMonitor = (PyNs3FlowMonitor *) wrapper_lookup_iter->second;
-            Py_INCREF(py_FlowMonitor);
-        }
-    
-        if (py_FlowMonitor == NULL) {
-            wrapper_type = PyNs3SimpleRefCount__Ns3Object_Ns3ObjectBase_Ns3ObjectDeleter__typeid_map.lookup_wrapper(typeid((*const_cast<ns3::FlowMonitor *> (ns3::PeekPointer (retval)))), &PyNs3FlowMonitor_Type);
-            py_FlowMonitor = PyObject_GC_New(PyNs3FlowMonitor, wrapper_type);
-            py_FlowMonitor->inst_dict = NULL;
-    
-            py_FlowMonitor->inst_dict = NULL;
-            py_FlowMonitor->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-            const_cast<ns3::FlowMonitor *> (ns3::PeekPointer (retval))->Ref();
-            py_FlowMonitor->obj = const_cast<ns3::FlowMonitor *> (ns3::PeekPointer (retval));
-            PyNs3ObjectBase_wrapper_registry[(void *) py_FlowMonitor->obj] = (PyObject *) py_FlowMonitor;
-        }
-    }
-    py_retval = Py_BuildValue((char *) "N", py_FlowMonitor);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3FlowMonitorHelper_GetMonitor(PyNs3FlowMonitorHelper *self)
-{
-    PyObject *py_retval;
-    ns3::Ptr< ns3::FlowMonitor > retval;
-    PyNs3FlowMonitor *py_FlowMonitor;
-    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
-    PyTypeObject *wrapper_type = 0;
-    
-    retval = self->obj->GetMonitor();
-    if (!(const_cast<ns3::FlowMonitor *> (ns3::PeekPointer (retval)))) {
-        Py_INCREF(Py_None);
-        return Py_None;
-    }
-    if (typeid((*const_cast<ns3::FlowMonitor *> (ns3::PeekPointer (retval)))).name() == typeid(PyNs3FlowMonitor__PythonHelper).name())
-    {
-        py_FlowMonitor = reinterpret_cast< PyNs3FlowMonitor* >(reinterpret_cast< PyNs3FlowMonitor__PythonHelper* >(const_cast<ns3::FlowMonitor *> (ns3::PeekPointer (retval)))->m_pyself);
-        py_FlowMonitor->obj = const_cast<ns3::FlowMonitor *> (ns3::PeekPointer (retval));
-        Py_INCREF(py_FlowMonitor);
-    } else {
-        wrapper_lookup_iter = PyNs3ObjectBase_wrapper_registry.find((void *) const_cast<ns3::FlowMonitor *> (ns3::PeekPointer (retval)));
-        if (wrapper_lookup_iter == PyNs3ObjectBase_wrapper_registry.end()) {
-            py_FlowMonitor = NULL;
-        } else {
-            py_FlowMonitor = (PyNs3FlowMonitor *) wrapper_lookup_iter->second;
-            Py_INCREF(py_FlowMonitor);
-        }
-    
-        if (py_FlowMonitor == NULL) {
-            wrapper_type = PyNs3SimpleRefCount__Ns3Object_Ns3ObjectBase_Ns3ObjectDeleter__typeid_map.lookup_wrapper(typeid((*const_cast<ns3::FlowMonitor *> (ns3::PeekPointer (retval)))), &PyNs3FlowMonitor_Type);
-            py_FlowMonitor = PyObject_GC_New(PyNs3FlowMonitor, wrapper_type);
-            py_FlowMonitor->inst_dict = NULL;
-    
-            py_FlowMonitor->inst_dict = NULL;
-            py_FlowMonitor->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-            const_cast<ns3::FlowMonitor *> (ns3::PeekPointer (retval))->Ref();
-            py_FlowMonitor->obj = const_cast<ns3::FlowMonitor *> (ns3::PeekPointer (retval));
-            PyNs3ObjectBase_wrapper_registry[(void *) py_FlowMonitor->obj] = (PyObject *) py_FlowMonitor;
-        }
-    }
-    py_retval = Py_BuildValue((char *) "N", py_FlowMonitor);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3FlowMonitorHelper_GetClassifier(PyNs3FlowMonitorHelper *self)
-{
-    PyObject *py_retval;
-    ns3::Ptr< ns3::FlowClassifier > retval;
-    PyNs3FlowClassifier *py_FlowClassifier;
-    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
-    PyTypeObject *wrapper_type = 0;
-    
-    retval = self->obj->GetClassifier();
-    if (!(const_cast<ns3::FlowClassifier *> (ns3::PeekPointer (retval)))) {
-        Py_INCREF(Py_None);
-        return Py_None;
-    }
-    wrapper_lookup_iter = PyNs3Empty_wrapper_registry.find((void *) const_cast<ns3::FlowClassifier *> (ns3::PeekPointer (retval)));
-    if (wrapper_lookup_iter == PyNs3Empty_wrapper_registry.end()) {
-        py_FlowClassifier = NULL;
-    } else {
-        py_FlowClassifier = (PyNs3FlowClassifier *) wrapper_lookup_iter->second;
-        Py_INCREF(py_FlowClassifier);
-    }
-    
-    if (py_FlowClassifier == NULL) {
-        wrapper_type = PyNs3SimpleRefCount__Ns3FlowClassifier_Ns3Empty_Ns3DefaultDeleter__lt__ns3FlowClassifier__gt____typeid_map.lookup_wrapper(typeid((*const_cast<ns3::FlowClassifier *> (ns3::PeekPointer (retval)))), &PyNs3FlowClassifier_Type);
-        py_FlowClassifier = PyObject_New(PyNs3FlowClassifier, wrapper_type);
-    
-        py_FlowClassifier->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-        const_cast<ns3::FlowClassifier *> (ns3::PeekPointer (retval))->Ref();
-        py_FlowClassifier->obj = const_cast<ns3::FlowClassifier *> (ns3::PeekPointer (retval));
-        PyNs3Empty_wrapper_registry[(void *) py_FlowClassifier->obj] = (PyObject *) py_FlowClassifier;
-    }
-    py_retval = Py_BuildValue((char *) "N", py_FlowClassifier);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3FlowMonitorHelper_SerializeToXmlFile(PyNs3FlowMonitorHelper *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    const char *fileName;
-    Py_ssize_t fileName_len;
-    bool enableHistograms;
-    PyObject *py_enableHistograms;
-    bool enableProbes;
-    PyObject *py_enableProbes;
-    const char *keywords[] = {"fileName", "enableHistograms", "enableProbes", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#OO", (char **) keywords, &fileName, &fileName_len, &py_enableHistograms, &py_enableProbes)) {
-        return NULL;
-    }
-    enableHistograms = (bool) PyObject_IsTrue(py_enableHistograms);
-    enableProbes = (bool) PyObject_IsTrue(py_enableProbes);
-    self->obj->SerializeToXmlFile(std::string(fileName, fileName_len), enableHistograms, enableProbes);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3FlowMonitorHelper_GetClassifier6(PyNs3FlowMonitorHelper *self)
-{
-    PyObject *py_retval;
-    ns3::Ptr< ns3::FlowClassifier > retval;
-    PyNs3FlowClassifier *py_FlowClassifier;
-    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
-    PyTypeObject *wrapper_type = 0;
-    
-    retval = self->obj->GetClassifier6();
-    if (!(const_cast<ns3::FlowClassifier *> (ns3::PeekPointer (retval)))) {
-        Py_INCREF(Py_None);
-        return Py_None;
-    }
-    wrapper_lookup_iter = PyNs3Empty_wrapper_registry.find((void *) const_cast<ns3::FlowClassifier *> (ns3::PeekPointer (retval)));
-    if (wrapper_lookup_iter == PyNs3Empty_wrapper_registry.end()) {
-        py_FlowClassifier = NULL;
-    } else {
-        py_FlowClassifier = (PyNs3FlowClassifier *) wrapper_lookup_iter->second;
-        Py_INCREF(py_FlowClassifier);
-    }
-    
-    if (py_FlowClassifier == NULL) {
-        wrapper_type = PyNs3SimpleRefCount__Ns3FlowClassifier_Ns3Empty_Ns3DefaultDeleter__lt__ns3FlowClassifier__gt____typeid_map.lookup_wrapper(typeid((*const_cast<ns3::FlowClassifier *> (ns3::PeekPointer (retval)))), &PyNs3FlowClassifier_Type);
-        py_FlowClassifier = PyObject_New(PyNs3FlowClassifier, wrapper_type);
-    
-        py_FlowClassifier->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-        const_cast<ns3::FlowClassifier *> (ns3::PeekPointer (retval))->Ref();
-        py_FlowClassifier->obj = const_cast<ns3::FlowClassifier *> (ns3::PeekPointer (retval));
-        PyNs3Empty_wrapper_registry[(void *) py_FlowClassifier->obj] = (PyObject *) py_FlowClassifier;
-    }
-    py_retval = Py_BuildValue((char *) "N", py_FlowClassifier);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3FlowMonitorHelper_SetMonitorAttribute(PyNs3FlowMonitorHelper *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -1242,15 +1029,228 @@ PyObject * _wrap_PyNs3FlowMonitorHelper_Install(PyNs3FlowMonitorHelper *self, Py
     return NULL;
 }
 
+
+PyObject *
+_wrap_PyNs3FlowMonitorHelper_InstallAll(PyNs3FlowMonitorHelper *self)
+{
+    PyObject *py_retval;
+    ns3::Ptr< ns3::FlowMonitor > retval;
+    PyNs3FlowMonitor *py_FlowMonitor;
+    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
+    PyTypeObject *wrapper_type = 0;
+    
+    retval = self->obj->InstallAll();
+    if (!(const_cast<ns3::FlowMonitor *> (ns3::PeekPointer (retval)))) {
+        Py_INCREF(Py_None);
+        return Py_None;
+    }
+    if (typeid((*const_cast<ns3::FlowMonitor *> (ns3::PeekPointer (retval)))).name() == typeid(PyNs3FlowMonitor__PythonHelper).name())
+    {
+        py_FlowMonitor = reinterpret_cast< PyNs3FlowMonitor* >(reinterpret_cast< PyNs3FlowMonitor__PythonHelper* >(const_cast<ns3::FlowMonitor *> (ns3::PeekPointer (retval)))->m_pyself);
+        py_FlowMonitor->obj = const_cast<ns3::FlowMonitor *> (ns3::PeekPointer (retval));
+        Py_INCREF(py_FlowMonitor);
+    } else {
+        wrapper_lookup_iter = PyNs3ObjectBase_wrapper_registry.find((void *) const_cast<ns3::FlowMonitor *> (ns3::PeekPointer (retval)));
+        if (wrapper_lookup_iter == PyNs3ObjectBase_wrapper_registry.end()) {
+            py_FlowMonitor = NULL;
+        } else {
+            py_FlowMonitor = (PyNs3FlowMonitor *) wrapper_lookup_iter->second;
+            Py_INCREF(py_FlowMonitor);
+        }
+    
+        if (py_FlowMonitor == NULL) {
+            wrapper_type = PyNs3SimpleRefCount__Ns3Object_Ns3ObjectBase_Ns3ObjectDeleter__typeid_map.lookup_wrapper(typeid((*const_cast<ns3::FlowMonitor *> (ns3::PeekPointer (retval)))), &PyNs3FlowMonitor_Type);
+            py_FlowMonitor = PyObject_GC_New(PyNs3FlowMonitor, wrapper_type);
+            py_FlowMonitor->inst_dict = NULL;
+    
+            py_FlowMonitor->inst_dict = NULL;
+            py_FlowMonitor->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+            const_cast<ns3::FlowMonitor *> (ns3::PeekPointer (retval))->Ref();
+            py_FlowMonitor->obj = const_cast<ns3::FlowMonitor *> (ns3::PeekPointer (retval));
+            PyNs3ObjectBase_wrapper_registry[(void *) py_FlowMonitor->obj] = (PyObject *) py_FlowMonitor;
+        }
+    }
+    py_retval = Py_BuildValue((char *) "N", py_FlowMonitor);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3FlowMonitorHelper_GetMonitor(PyNs3FlowMonitorHelper *self)
+{
+    PyObject *py_retval;
+    ns3::Ptr< ns3::FlowMonitor > retval;
+    PyNs3FlowMonitor *py_FlowMonitor;
+    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
+    PyTypeObject *wrapper_type = 0;
+    
+    retval = self->obj->GetMonitor();
+    if (!(const_cast<ns3::FlowMonitor *> (ns3::PeekPointer (retval)))) {
+        Py_INCREF(Py_None);
+        return Py_None;
+    }
+    if (typeid((*const_cast<ns3::FlowMonitor *> (ns3::PeekPointer (retval)))).name() == typeid(PyNs3FlowMonitor__PythonHelper).name())
+    {
+        py_FlowMonitor = reinterpret_cast< PyNs3FlowMonitor* >(reinterpret_cast< PyNs3FlowMonitor__PythonHelper* >(const_cast<ns3::FlowMonitor *> (ns3::PeekPointer (retval)))->m_pyself);
+        py_FlowMonitor->obj = const_cast<ns3::FlowMonitor *> (ns3::PeekPointer (retval));
+        Py_INCREF(py_FlowMonitor);
+    } else {
+        wrapper_lookup_iter = PyNs3ObjectBase_wrapper_registry.find((void *) const_cast<ns3::FlowMonitor *> (ns3::PeekPointer (retval)));
+        if (wrapper_lookup_iter == PyNs3ObjectBase_wrapper_registry.end()) {
+            py_FlowMonitor = NULL;
+        } else {
+            py_FlowMonitor = (PyNs3FlowMonitor *) wrapper_lookup_iter->second;
+            Py_INCREF(py_FlowMonitor);
+        }
+    
+        if (py_FlowMonitor == NULL) {
+            wrapper_type = PyNs3SimpleRefCount__Ns3Object_Ns3ObjectBase_Ns3ObjectDeleter__typeid_map.lookup_wrapper(typeid((*const_cast<ns3::FlowMonitor *> (ns3::PeekPointer (retval)))), &PyNs3FlowMonitor_Type);
+            py_FlowMonitor = PyObject_GC_New(PyNs3FlowMonitor, wrapper_type);
+            py_FlowMonitor->inst_dict = NULL;
+    
+            py_FlowMonitor->inst_dict = NULL;
+            py_FlowMonitor->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+            const_cast<ns3::FlowMonitor *> (ns3::PeekPointer (retval))->Ref();
+            py_FlowMonitor->obj = const_cast<ns3::FlowMonitor *> (ns3::PeekPointer (retval));
+            PyNs3ObjectBase_wrapper_registry[(void *) py_FlowMonitor->obj] = (PyObject *) py_FlowMonitor;
+        }
+    }
+    py_retval = Py_BuildValue((char *) "N", py_FlowMonitor);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3FlowMonitorHelper_GetClassifier(PyNs3FlowMonitorHelper *self)
+{
+    PyObject *py_retval;
+    ns3::Ptr< ns3::FlowClassifier > retval;
+    PyNs3FlowClassifier *py_FlowClassifier;
+    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
+    PyTypeObject *wrapper_type = 0;
+    
+    retval = self->obj->GetClassifier();
+    if (!(const_cast<ns3::FlowClassifier *> (ns3::PeekPointer (retval)))) {
+        Py_INCREF(Py_None);
+        return Py_None;
+    }
+    wrapper_lookup_iter = PyNs3Empty_wrapper_registry.find((void *) const_cast<ns3::FlowClassifier *> (ns3::PeekPointer (retval)));
+    if (wrapper_lookup_iter == PyNs3Empty_wrapper_registry.end()) {
+        py_FlowClassifier = NULL;
+    } else {
+        py_FlowClassifier = (PyNs3FlowClassifier *) wrapper_lookup_iter->second;
+        Py_INCREF(py_FlowClassifier);
+    }
+    
+    if (py_FlowClassifier == NULL) {
+        wrapper_type = PyNs3SimpleRefCount__Ns3FlowClassifier_Ns3Empty_Ns3DefaultDeleter__lt__ns3FlowClassifier__gt____typeid_map.lookup_wrapper(typeid((*const_cast<ns3::FlowClassifier *> (ns3::PeekPointer (retval)))), &PyNs3FlowClassifier_Type);
+        py_FlowClassifier = PyObject_New(PyNs3FlowClassifier, wrapper_type);
+    
+        py_FlowClassifier->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+        const_cast<ns3::FlowClassifier *> (ns3::PeekPointer (retval))->Ref();
+        py_FlowClassifier->obj = const_cast<ns3::FlowClassifier *> (ns3::PeekPointer (retval));
+        PyNs3Empty_wrapper_registry[(void *) py_FlowClassifier->obj] = (PyObject *) py_FlowClassifier;
+    }
+    py_retval = Py_BuildValue((char *) "N", py_FlowClassifier);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3FlowMonitorHelper_GetClassifier6(PyNs3FlowMonitorHelper *self)
+{
+    PyObject *py_retval;
+    ns3::Ptr< ns3::FlowClassifier > retval;
+    PyNs3FlowClassifier *py_FlowClassifier;
+    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
+    PyTypeObject *wrapper_type = 0;
+    
+    retval = self->obj->GetClassifier6();
+    if (!(const_cast<ns3::FlowClassifier *> (ns3::PeekPointer (retval)))) {
+        Py_INCREF(Py_None);
+        return Py_None;
+    }
+    wrapper_lookup_iter = PyNs3Empty_wrapper_registry.find((void *) const_cast<ns3::FlowClassifier *> (ns3::PeekPointer (retval)));
+    if (wrapper_lookup_iter == PyNs3Empty_wrapper_registry.end()) {
+        py_FlowClassifier = NULL;
+    } else {
+        py_FlowClassifier = (PyNs3FlowClassifier *) wrapper_lookup_iter->second;
+        Py_INCREF(py_FlowClassifier);
+    }
+    
+    if (py_FlowClassifier == NULL) {
+        wrapper_type = PyNs3SimpleRefCount__Ns3FlowClassifier_Ns3Empty_Ns3DefaultDeleter__lt__ns3FlowClassifier__gt____typeid_map.lookup_wrapper(typeid((*const_cast<ns3::FlowClassifier *> (ns3::PeekPointer (retval)))), &PyNs3FlowClassifier_Type);
+        py_FlowClassifier = PyObject_New(PyNs3FlowClassifier, wrapper_type);
+    
+        py_FlowClassifier->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+        const_cast<ns3::FlowClassifier *> (ns3::PeekPointer (retval))->Ref();
+        py_FlowClassifier->obj = const_cast<ns3::FlowClassifier *> (ns3::PeekPointer (retval));
+        PyNs3Empty_wrapper_registry[(void *) py_FlowClassifier->obj] = (PyObject *) py_FlowClassifier;
+    }
+    py_retval = Py_BuildValue((char *) "N", py_FlowClassifier);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3FlowMonitorHelper_SerializeToXmlString(PyNs3FlowMonitorHelper *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    std::string retval;
+    int indent;
+    bool enableHistograms;
+    PyObject *py_enableHistograms;
+    bool enableProbes;
+    PyObject *py_enableProbes;
+    const char *keywords[] = {"indent", "enableHistograms", "enableProbes", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "iOO", (char **) keywords, &indent, &py_enableHistograms, &py_enableProbes)) {
+        return NULL;
+    }
+    if (indent > 0xffff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    enableHistograms = (bool) PyObject_IsTrue(py_enableHistograms);
+    enableProbes = (bool) PyObject_IsTrue(py_enableProbes);
+    retval = self->obj->SerializeToXmlString(indent, enableHistograms, enableProbes);
+    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3FlowMonitorHelper_SerializeToXmlFile(PyNs3FlowMonitorHelper *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    const char *fileName;
+    Py_ssize_t fileName_len;
+    bool enableHistograms;
+    PyObject *py_enableHistograms;
+    bool enableProbes;
+    PyObject *py_enableProbes;
+    const char *keywords[] = {"fileName", "enableHistograms", "enableProbes", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#OO", (char **) keywords, &fileName, &fileName_len, &py_enableHistograms, &py_enableProbes)) {
+        return NULL;
+    }
+    enableHistograms = (bool) PyObject_IsTrue(py_enableHistograms);
+    enableProbes = (bool) PyObject_IsTrue(py_enableProbes);
+    self->obj->SerializeToXmlFile(std::string(fileName, fileName_len), enableHistograms, enableProbes);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
 static PyMethodDef PyNs3FlowMonitorHelper_methods[] = {
-    {(char *) "SerializeToXmlString", (PyCFunction) _wrap_PyNs3FlowMonitorHelper_SerializeToXmlString, METH_KEYWORDS|METH_VARARGS, "SerializeToXmlString(indent, enableHistograms, enableProbes)\n\ntype: indent: uint16_t\ntype: enableHistograms: bool\ntype: enableProbes: bool" },
+    {(char *) "SetMonitorAttribute", (PyCFunction) _wrap_PyNs3FlowMonitorHelper_SetMonitorAttribute, METH_VARARGS|METH_KEYWORDS, "SetMonitorAttribute(n1, v1)\n\ntype: n1: std::string\ntype: v1: ns3::AttributeValue const &" },
+    {(char *) "Install", (PyCFunction) _wrap_PyNs3FlowMonitorHelper_Install, METH_VARARGS|METH_KEYWORDS, NULL },
     {(char *) "InstallAll", (PyCFunction) _wrap_PyNs3FlowMonitorHelper_InstallAll, METH_NOARGS, "InstallAll()\n\n" },
     {(char *) "GetMonitor", (PyCFunction) _wrap_PyNs3FlowMonitorHelper_GetMonitor, METH_NOARGS, "GetMonitor()\n\n" },
     {(char *) "GetClassifier", (PyCFunction) _wrap_PyNs3FlowMonitorHelper_GetClassifier, METH_NOARGS, "GetClassifier()\n\n" },
-    {(char *) "SerializeToXmlFile", (PyCFunction) _wrap_PyNs3FlowMonitorHelper_SerializeToXmlFile, METH_KEYWORDS|METH_VARARGS, "SerializeToXmlFile(fileName, enableHistograms, enableProbes)\n\ntype: fileName: std::string\ntype: enableHistograms: bool\ntype: enableProbes: bool" },
     {(char *) "GetClassifier6", (PyCFunction) _wrap_PyNs3FlowMonitorHelper_GetClassifier6, METH_NOARGS, "GetClassifier6()\n\n" },
-    {(char *) "SetMonitorAttribute", (PyCFunction) _wrap_PyNs3FlowMonitorHelper_SetMonitorAttribute, METH_KEYWORDS|METH_VARARGS, "SetMonitorAttribute(n1, v1)\n\ntype: n1: std::string\ntype: v1: ns3::AttributeValue const &" },
-    {(char *) "Install", (PyCFunction) _wrap_PyNs3FlowMonitorHelper_Install, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "SerializeToXmlString", (PyCFunction) _wrap_PyNs3FlowMonitorHelper_SerializeToXmlString, METH_VARARGS|METH_KEYWORDS, "SerializeToXmlString(indent, enableHistograms, enableProbes)\n\ntype: indent: uint16_t\ntype: enableHistograms: bool\ntype: enableProbes: bool" },
+    {(char *) "SerializeToXmlFile", (PyCFunction) _wrap_PyNs3FlowMonitorHelper_SerializeToXmlFile, METH_VARARGS|METH_KEYWORDS, "SerializeToXmlFile(fileName, enableHistograms, enableProbes)\n\ntype: fileName: std::string\ntype: enableHistograms: bool\ntype: enableProbes: bool" },
     {NULL, NULL, 0, NULL}
 };
 
@@ -1456,16 +1456,16 @@ int _wrap_PyNs3Histogram__tp_init(PyNs3Histogram *self, PyObject *args, PyObject
 
 
 PyObject *
-_wrap_PyNs3Histogram_SetDefaultBinWidth(PyNs3Histogram *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3Histogram_AddValue(PyNs3Histogram *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    double binWidth;
-    const char *keywords[] = {"binWidth", NULL};
+    double value;
+    const char *keywords[] = {"value", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "d", (char **) keywords, &binWidth)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "d", (char **) keywords, &value)) {
         return NULL;
     }
-    self->obj->SetDefaultBinWidth(binWidth);
+    self->obj->AddValue(value);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -1485,6 +1485,40 @@ _wrap_PyNs3Histogram_GetBinCount(PyNs3Histogram *self, PyObject *args, PyObject 
     }
     retval = self->obj->GetBinCount(index);
     py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Histogram_GetBinEnd(PyNs3Histogram *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    double retval;
+    unsigned int index;
+    const char *keywords[] = {"index", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &index)) {
+        return NULL;
+    }
+    retval = self->obj->GetBinEnd(index);
+    py_retval = Py_BuildValue((char *) "d", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Histogram_GetBinStart(PyNs3Histogram *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    double retval;
+    unsigned int index;
+    const char *keywords[] = {"index", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &index)) {
+        return NULL;
+    }
+    retval = self->obj->GetBinStart(index);
+    py_retval = Py_BuildValue((char *) "d", retval);
     return py_retval;
 }
 
@@ -1519,52 +1553,18 @@ _wrap_PyNs3Histogram_GetNBins(PyNs3Histogram *self)
 
 
 PyObject *
-_wrap_PyNs3Histogram_GetBinEnd(PyNs3Histogram *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3Histogram_SetDefaultBinWidth(PyNs3Histogram *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    double retval;
-    unsigned int index;
-    const char *keywords[] = {"index", NULL};
+    double binWidth;
+    const char *keywords[] = {"binWidth", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &index)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "d", (char **) keywords, &binWidth)) {
         return NULL;
     }
-    retval = self->obj->GetBinEnd(index);
-    py_retval = Py_BuildValue((char *) "d", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Histogram_AddValue(PyNs3Histogram *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    double value;
-    const char *keywords[] = {"value", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "d", (char **) keywords, &value)) {
-        return NULL;
-    }
-    self->obj->AddValue(value);
+    self->obj->SetDefaultBinWidth(binWidth);
     Py_INCREF(Py_None);
     py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Histogram_GetBinStart(PyNs3Histogram *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    double retval;
-    unsigned int index;
-    const char *keywords[] = {"index", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &index)) {
-        return NULL;
-    }
-    retval = self->obj->GetBinStart(index);
-    py_retval = Py_BuildValue((char *) "d", retval);
     return py_retval;
 }
 
@@ -1582,13 +1582,13 @@ _wrap_PyNs3Histogram__copy__(PyNs3Histogram *self)
 }
 
 static PyMethodDef PyNs3Histogram_methods[] = {
-    {(char *) "SetDefaultBinWidth", (PyCFunction) _wrap_PyNs3Histogram_SetDefaultBinWidth, METH_KEYWORDS|METH_VARARGS, "SetDefaultBinWidth(binWidth)\n\ntype: binWidth: double" },
-    {(char *) "GetBinCount", (PyCFunction) _wrap_PyNs3Histogram_GetBinCount, METH_KEYWORDS|METH_VARARGS, "GetBinCount(index)\n\ntype: index: uint32_t" },
-    {(char *) "GetBinWidth", (PyCFunction) _wrap_PyNs3Histogram_GetBinWidth, METH_KEYWORDS|METH_VARARGS, "GetBinWidth(index)\n\ntype: index: uint32_t" },
+    {(char *) "AddValue", (PyCFunction) _wrap_PyNs3Histogram_AddValue, METH_VARARGS|METH_KEYWORDS, "AddValue(value)\n\ntype: value: double" },
+    {(char *) "GetBinCount", (PyCFunction) _wrap_PyNs3Histogram_GetBinCount, METH_VARARGS|METH_KEYWORDS, "GetBinCount(index)\n\ntype: index: uint32_t" },
+    {(char *) "GetBinEnd", (PyCFunction) _wrap_PyNs3Histogram_GetBinEnd, METH_VARARGS|METH_KEYWORDS, "GetBinEnd(index)\n\ntype: index: uint32_t" },
+    {(char *) "GetBinStart", (PyCFunction) _wrap_PyNs3Histogram_GetBinStart, METH_VARARGS|METH_KEYWORDS, "GetBinStart(index)\n\ntype: index: uint32_t" },
+    {(char *) "GetBinWidth", (PyCFunction) _wrap_PyNs3Histogram_GetBinWidth, METH_VARARGS|METH_KEYWORDS, "GetBinWidth(index)\n\ntype: index: uint32_t" },
     {(char *) "GetNBins", (PyCFunction) _wrap_PyNs3Histogram_GetNBins, METH_NOARGS, "GetNBins()\n\n" },
-    {(char *) "GetBinEnd", (PyCFunction) _wrap_PyNs3Histogram_GetBinEnd, METH_KEYWORDS|METH_VARARGS, "GetBinEnd(index)\n\ntype: index: uint32_t" },
-    {(char *) "AddValue", (PyCFunction) _wrap_PyNs3Histogram_AddValue, METH_KEYWORDS|METH_VARARGS, "AddValue(value)\n\ntype: value: double" },
-    {(char *) "GetBinStart", (PyCFunction) _wrap_PyNs3Histogram_GetBinStart, METH_KEYWORDS|METH_VARARGS, "GetBinStart(index)\n\ntype: index: uint32_t" },
+    {(char *) "SetDefaultBinWidth", (PyCFunction) _wrap_PyNs3Histogram_SetDefaultBinWidth, METH_VARARGS|METH_KEYWORDS, "SetDefaultBinWidth(binWidth)\n\ntype: binWidth: double" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3Histogram__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -2012,6 +2012,22 @@ PyTypeObject PyNs3FlowClassifier_Type = {
 
 
 PyObject *
+PyNs3FlowMonitor__PythonHelper::_wrap_DoDispose(PyNs3FlowMonitor *self)
+{
+    PyObject *py_retval;
+    PyNs3FlowMonitor__PythonHelper *helper = dynamic_cast< PyNs3FlowMonitor__PythonHelper* >(self->obj);
+    
+    if (helper == NULL) {
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class FlowMonitor is protected and can only be called by a subclass");
+        return NULL;
+    }
+    helper->DoDispose__parent_caller();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject *
 PyNs3FlowMonitor__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3FlowMonitor *self)
 {
     PyObject *py_retval;
@@ -2054,22 +2070,6 @@ PyNs3FlowMonitor__PythonHelper::_wrap_NotifyNewAggregate(PyNs3FlowMonitor *self)
         return NULL;
     }
     helper->NotifyNewAggregate__parent_caller();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject *
-PyNs3FlowMonitor__PythonHelper::_wrap_DoDispose(PyNs3FlowMonitor *self)
-{
-    PyObject *py_retval;
-    PyNs3FlowMonitor__PythonHelper *helper = dynamic_cast< PyNs3FlowMonitor__PythonHelper* >(self->obj);
-    
-    if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class FlowMonitor is protected and can only be called by a subclass");
-        return NULL;
-    }
-    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -2392,55 +2392,18 @@ int _wrap_PyNs3FlowMonitor__tp_init(PyNs3FlowMonitor *self, PyObject *args, PyOb
 
 
 PyObject *
-_wrap_PyNs3FlowMonitor_ReportLastRx(PyNs3FlowMonitor *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3FlowMonitor_AddFlowClassifier(PyNs3FlowMonitor *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3FlowProbe *probe;
-    ns3::FlowProbe *probe_ptr;
-    unsigned int flowId;
-    unsigned int packetId;
-    unsigned int packetSize;
-    const char *keywords[] = {"probe", "flowId", "packetId", "packetSize", NULL};
+    PyNs3FlowClassifier *classifier;
+    ns3::FlowClassifier *classifier_ptr;
+    const char *keywords[] = {"classifier", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!III", (char **) keywords, &PyNs3FlowProbe_Type, &probe, &flowId, &packetId, &packetSize)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3FlowClassifier_Type, &classifier)) {
         return NULL;
     }
-    probe_ptr = (probe ? probe->obj : NULL);
-    self->obj->ReportLastRx(ns3::Ptr< ns3::FlowProbe  > (probe_ptr), flowId, packetId, packetSize);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3FlowMonitor_StopRightNow(PyNs3FlowMonitor *self)
-{
-    PyObject *py_retval;
-    
-    self->obj->StopRightNow();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3FlowMonitor_ReportFirstTx(PyNs3FlowMonitor *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3FlowProbe *probe;
-    ns3::FlowProbe *probe_ptr;
-    unsigned int flowId;
-    unsigned int packetId;
-    unsigned int packetSize;
-    const char *keywords[] = {"probe", "flowId", "packetId", "packetSize", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!III", (char **) keywords, &PyNs3FlowProbe_Type, &probe, &flowId, &packetId, &packetSize)) {
-        return NULL;
-    }
-    probe_ptr = (probe ? probe->obj : NULL);
-    self->obj->ReportFirstTx(ns3::Ptr< ns3::FlowProbe  > (probe_ptr), flowId, packetId, packetSize);
+    classifier_ptr = (classifier ? classifier->obj : NULL);
+    self->obj->AddFlowClassifier(ns3::Ptr< ns3::FlowClassifier  > (classifier_ptr));
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -2462,33 +2425,6 @@ _wrap_PyNs3FlowMonitor_AddProbe(PyNs3FlowMonitor *self, PyObject *args, PyObject
     self->obj->AddProbe(ns3::Ptr< ns3::FlowProbe  > (probe_ptr));
     Py_INCREF(Py_None);
     py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3FlowMonitor_SerializeToXmlString(PyNs3FlowMonitor *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    std::string retval;
-    int indent;
-    bool enableHistograms;
-    PyObject *py_enableHistograms;
-    bool enableProbes;
-    PyObject *py_enableProbes;
-    const char *keywords[] = {"indent", "enableHistograms", "enableProbes", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "iOO", (char **) keywords, &indent, &py_enableHistograms, &py_enableProbes)) {
-        return NULL;
-    }
-    if (indent > 0xffff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    enableHistograms = (bool) PyObject_IsTrue(py_enableHistograms);
-    enableProbes = (bool) PyObject_IsTrue(py_enableProbes);
-    retval = self->obj->SerializeToXmlString(indent, enableHistograms, enableProbes);
-    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
     return py_retval;
 }
 
@@ -2563,41 +2499,6 @@ PyObject * _wrap_PyNs3FlowMonitor_CheckForLostPackets(PyNs3FlowMonitor *self, Py
 
 
 PyObject *
-_wrap_PyNs3FlowMonitor_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::FlowMonitor::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3FlowMonitor_AddFlowClassifier(PyNs3FlowMonitor *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3FlowClassifier *classifier;
-    ns3::FlowClassifier *classifier_ptr;
-    const char *keywords[] = {"classifier", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3FlowClassifier_Type, &classifier)) {
-        return NULL;
-    }
-    classifier_ptr = (classifier ? classifier->obj : NULL);
-    self->obj->AddFlowClassifier(ns3::Ptr< ns3::FlowClassifier  > (classifier_ptr));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3FlowMonitor_GetAllProbes(PyNs3FlowMonitor *self)
 {
     PyObject *py_retval;
@@ -2608,76 +2509,6 @@ _wrap_PyNs3FlowMonitor_GetAllProbes(PyNs3FlowMonitor *self)
     py_std__vector__lt___ns3__Ptr__lt___ns3__FlowProbe___gt_____gt__ = PyObject_New(Pystd__vector__lt___ns3__Ptr__lt___ns3__FlowProbe___gt_____gt__, &Pystd__vector__lt___ns3__Ptr__lt___ns3__FlowProbe___gt_____gt___Type);
     py_std__vector__lt___ns3__Ptr__lt___ns3__FlowProbe___gt_____gt__->obj = new std::vector< ns3::Ptr< ns3::FlowProbe > >(retval);
     py_retval = Py_BuildValue((char *) "N", py_std__vector__lt___ns3__Ptr__lt___ns3__FlowProbe___gt_____gt__);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3FlowMonitor_Stop(PyNs3FlowMonitor *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Time *time;
-    const char *keywords[] = {"time", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Time_Type, &time)) {
-        return NULL;
-    }
-    self->obj->Stop(*((PyNs3Time *) time)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3FlowMonitor_StartRightNow(PyNs3FlowMonitor *self)
-{
-    PyObject *py_retval;
-    
-    self->obj->StartRightNow();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3FlowMonitor_SerializeToXmlFile(PyNs3FlowMonitor *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    const char *fileName;
-    Py_ssize_t fileName_len;
-    bool enableHistograms;
-    PyObject *py_enableHistograms;
-    bool enableProbes;
-    PyObject *py_enableProbes;
-    const char *keywords[] = {"fileName", "enableHistograms", "enableProbes", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#OO", (char **) keywords, &fileName, &fileName_len, &py_enableHistograms, &py_enableProbes)) {
-        return NULL;
-    }
-    enableHistograms = (bool) PyObject_IsTrue(py_enableHistograms);
-    enableProbes = (bool) PyObject_IsTrue(py_enableProbes);
-    self->obj->SerializeToXmlFile(std::string(fileName, fileName_len), enableHistograms, enableProbes);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3FlowMonitor_Start(PyNs3FlowMonitor *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Time *time;
-    const char *keywords[] = {"time", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Time_Type, &time)) {
-        return NULL;
-    }
-    self->obj->Start(*((PyNs3Time *) time)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
     return py_retval;
 }
 
@@ -2715,23 +2546,17 @@ _wrap_PyNs3FlowMonitor_GetInstanceTypeId(PyNs3FlowMonitor *self)
 
 
 PyObject *
-_wrap_PyNs3FlowMonitor_ReportForwarding(PyNs3FlowMonitor *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3FlowMonitor_GetTypeId(void)
 {
     PyObject *py_retval;
-    PyNs3FlowProbe *probe;
-    ns3::FlowProbe *probe_ptr;
-    unsigned int flowId;
-    unsigned int packetId;
-    unsigned int packetSize;
-    const char *keywords[] = {"probe", "flowId", "packetId", "packetSize", NULL};
+    PyNs3TypeId *py_TypeId;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!III", (char **) keywords, &PyNs3FlowProbe_Type, &probe, &flowId, &packetId, &packetSize)) {
-        return NULL;
-    }
-    probe_ptr = (probe ? probe->obj : NULL);
-    self->obj->ReportForwarding(ns3::Ptr< ns3::FlowProbe  > (probe_ptr), flowId, packetId, packetSize);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    ns3::TypeId retval = ns3::FlowMonitor::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
     return py_retval;
 }
 
@@ -2759,6 +2584,181 @@ _wrap_PyNs3FlowMonitor_ReportDrop(PyNs3FlowMonitor *self, PyObject *args, PyObje
 }
 
 
+PyObject *
+_wrap_PyNs3FlowMonitor_ReportFirstTx(PyNs3FlowMonitor *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3FlowProbe *probe;
+    ns3::FlowProbe *probe_ptr;
+    unsigned int flowId;
+    unsigned int packetId;
+    unsigned int packetSize;
+    const char *keywords[] = {"probe", "flowId", "packetId", "packetSize", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!III", (char **) keywords, &PyNs3FlowProbe_Type, &probe, &flowId, &packetId, &packetSize)) {
+        return NULL;
+    }
+    probe_ptr = (probe ? probe->obj : NULL);
+    self->obj->ReportFirstTx(ns3::Ptr< ns3::FlowProbe  > (probe_ptr), flowId, packetId, packetSize);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3FlowMonitor_ReportForwarding(PyNs3FlowMonitor *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3FlowProbe *probe;
+    ns3::FlowProbe *probe_ptr;
+    unsigned int flowId;
+    unsigned int packetId;
+    unsigned int packetSize;
+    const char *keywords[] = {"probe", "flowId", "packetId", "packetSize", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!III", (char **) keywords, &PyNs3FlowProbe_Type, &probe, &flowId, &packetId, &packetSize)) {
+        return NULL;
+    }
+    probe_ptr = (probe ? probe->obj : NULL);
+    self->obj->ReportForwarding(ns3::Ptr< ns3::FlowProbe  > (probe_ptr), flowId, packetId, packetSize);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3FlowMonitor_ReportLastRx(PyNs3FlowMonitor *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3FlowProbe *probe;
+    ns3::FlowProbe *probe_ptr;
+    unsigned int flowId;
+    unsigned int packetId;
+    unsigned int packetSize;
+    const char *keywords[] = {"probe", "flowId", "packetId", "packetSize", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!III", (char **) keywords, &PyNs3FlowProbe_Type, &probe, &flowId, &packetId, &packetSize)) {
+        return NULL;
+    }
+    probe_ptr = (probe ? probe->obj : NULL);
+    self->obj->ReportLastRx(ns3::Ptr< ns3::FlowProbe  > (probe_ptr), flowId, packetId, packetSize);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3FlowMonitor_SerializeToXmlFile(PyNs3FlowMonitor *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    const char *fileName;
+    Py_ssize_t fileName_len;
+    bool enableHistograms;
+    PyObject *py_enableHistograms;
+    bool enableProbes;
+    PyObject *py_enableProbes;
+    const char *keywords[] = {"fileName", "enableHistograms", "enableProbes", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#OO", (char **) keywords, &fileName, &fileName_len, &py_enableHistograms, &py_enableProbes)) {
+        return NULL;
+    }
+    enableHistograms = (bool) PyObject_IsTrue(py_enableHistograms);
+    enableProbes = (bool) PyObject_IsTrue(py_enableProbes);
+    self->obj->SerializeToXmlFile(std::string(fileName, fileName_len), enableHistograms, enableProbes);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3FlowMonitor_SerializeToXmlString(PyNs3FlowMonitor *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    std::string retval;
+    int indent;
+    bool enableHistograms;
+    PyObject *py_enableHistograms;
+    bool enableProbes;
+    PyObject *py_enableProbes;
+    const char *keywords[] = {"indent", "enableHistograms", "enableProbes", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "iOO", (char **) keywords, &indent, &py_enableHistograms, &py_enableProbes)) {
+        return NULL;
+    }
+    if (indent > 0xffff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    enableHistograms = (bool) PyObject_IsTrue(py_enableHistograms);
+    enableProbes = (bool) PyObject_IsTrue(py_enableProbes);
+    retval = self->obj->SerializeToXmlString(indent, enableHistograms, enableProbes);
+    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3FlowMonitor_Start(PyNs3FlowMonitor *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Time *time;
+    const char *keywords[] = {"time", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Time_Type, &time)) {
+        return NULL;
+    }
+    self->obj->Start(*((PyNs3Time *) time)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3FlowMonitor_StartRightNow(PyNs3FlowMonitor *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->StartRightNow();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3FlowMonitor_Stop(PyNs3FlowMonitor *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Time *time;
+    const char *keywords[] = {"time", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Time_Type, &time)) {
+        return NULL;
+    }
+    self->obj->Stop(*((PyNs3Time *) time)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3FlowMonitor_StopRightNow(PyNs3FlowMonitor *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->StopRightNow();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
 static PyObject*
 _wrap_PyNs3FlowMonitor__copy__(PyNs3FlowMonitor *self)
 {
@@ -2775,27 +2775,27 @@ _wrap_PyNs3FlowMonitor__copy__(PyNs3FlowMonitor *self)
 }
 
 static PyMethodDef PyNs3FlowMonitor_methods[] = {
-    {(char *) "ReportLastRx", (PyCFunction) _wrap_PyNs3FlowMonitor_ReportLastRx, METH_KEYWORDS|METH_VARARGS, "ReportLastRx(probe, flowId, packetId, packetSize)\n\ntype: probe: ns3::Ptr< ns3::FlowProbe >\ntype: flowId: uint32_t\ntype: packetId: uint32_t\ntype: packetSize: uint32_t" },
-    {(char *) "StopRightNow", (PyCFunction) _wrap_PyNs3FlowMonitor_StopRightNow, METH_NOARGS, "StopRightNow()\n\n" },
-    {(char *) "ReportFirstTx", (PyCFunction) _wrap_PyNs3FlowMonitor_ReportFirstTx, METH_KEYWORDS|METH_VARARGS, "ReportFirstTx(probe, flowId, packetId, packetSize)\n\ntype: probe: ns3::Ptr< ns3::FlowProbe >\ntype: flowId: uint32_t\ntype: packetId: uint32_t\ntype: packetSize: uint32_t" },
-    {(char *) "AddProbe", (PyCFunction) _wrap_PyNs3FlowMonitor_AddProbe, METH_KEYWORDS|METH_VARARGS, "AddProbe(probe)\n\ntype: probe: ns3::Ptr< ns3::FlowProbe >" },
-    {(char *) "SerializeToXmlString", (PyCFunction) _wrap_PyNs3FlowMonitor_SerializeToXmlString, METH_KEYWORDS|METH_VARARGS, "SerializeToXmlString(indent, enableHistograms, enableProbes)\n\ntype: indent: uint16_t\ntype: enableHistograms: bool\ntype: enableProbes: bool" },
-    {(char *) "CheckForLostPackets", (PyCFunction) _wrap_PyNs3FlowMonitor_CheckForLostPackets, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3FlowMonitor_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "AddFlowClassifier", (PyCFunction) _wrap_PyNs3FlowMonitor_AddFlowClassifier, METH_KEYWORDS|METH_VARARGS, "AddFlowClassifier(classifier)\n\ntype: classifier: ns3::Ptr< ns3::FlowClassifier >" },
+    {(char *) "AddFlowClassifier", (PyCFunction) _wrap_PyNs3FlowMonitor_AddFlowClassifier, METH_VARARGS|METH_KEYWORDS, "AddFlowClassifier(classifier)\n\ntype: classifier: ns3::Ptr< ns3::FlowClassifier >" },
+    {(char *) "AddProbe", (PyCFunction) _wrap_PyNs3FlowMonitor_AddProbe, METH_VARARGS|METH_KEYWORDS, "AddProbe(probe)\n\ntype: probe: ns3::Ptr< ns3::FlowProbe >" },
+    {(char *) "CheckForLostPackets", (PyCFunction) _wrap_PyNs3FlowMonitor_CheckForLostPackets, METH_VARARGS|METH_KEYWORDS, NULL },
     {(char *) "GetAllProbes", (PyCFunction) _wrap_PyNs3FlowMonitor_GetAllProbes, METH_NOARGS, "GetAllProbes()\n\n" },
-    {(char *) "Stop", (PyCFunction) _wrap_PyNs3FlowMonitor_Stop, METH_KEYWORDS|METH_VARARGS, "Stop(time)\n\ntype: time: ns3::Time const &" },
-    {(char *) "StartRightNow", (PyCFunction) _wrap_PyNs3FlowMonitor_StartRightNow, METH_NOARGS, "StartRightNow()\n\n" },
-    {(char *) "SerializeToXmlFile", (PyCFunction) _wrap_PyNs3FlowMonitor_SerializeToXmlFile, METH_KEYWORDS|METH_VARARGS, "SerializeToXmlFile(fileName, enableHistograms, enableProbes)\n\ntype: fileName: std::string\ntype: enableHistograms: bool\ntype: enableProbes: bool" },
-    {(char *) "Start", (PyCFunction) _wrap_PyNs3FlowMonitor_Start, METH_KEYWORDS|METH_VARARGS, "Start(time)\n\ntype: time: ns3::Time const &" },
     {(char *) "GetFlowStats", (PyCFunction) _wrap_PyNs3FlowMonitor_GetFlowStats, METH_NOARGS, "GetFlowStats()\n\n" },
     {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3FlowMonitor_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
-    {(char *) "ReportForwarding", (PyCFunction) _wrap_PyNs3FlowMonitor_ReportForwarding, METH_KEYWORDS|METH_VARARGS, "ReportForwarding(probe, flowId, packetId, packetSize)\n\ntype: probe: ns3::Ptr< ns3::FlowProbe >\ntype: flowId: uint32_t\ntype: packetId: uint32_t\ntype: packetSize: uint32_t" },
-    {(char *) "ReportDrop", (PyCFunction) _wrap_PyNs3FlowMonitor_ReportDrop, METH_KEYWORDS|METH_VARARGS, "ReportDrop(probe, flowId, packetId, packetSize, reasonCode)\n\ntype: probe: ns3::Ptr< ns3::FlowProbe >\ntype: flowId: uint32_t\ntype: packetId: uint32_t\ntype: packetSize: uint32_t\ntype: reasonCode: uint32_t" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3FlowMonitor_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "ReportDrop", (PyCFunction) _wrap_PyNs3FlowMonitor_ReportDrop, METH_VARARGS|METH_KEYWORDS, "ReportDrop(probe, flowId, packetId, packetSize, reasonCode)\n\ntype: probe: ns3::Ptr< ns3::FlowProbe >\ntype: flowId: uint32_t\ntype: packetId: uint32_t\ntype: packetSize: uint32_t\ntype: reasonCode: uint32_t" },
+    {(char *) "ReportFirstTx", (PyCFunction) _wrap_PyNs3FlowMonitor_ReportFirstTx, METH_VARARGS|METH_KEYWORDS, "ReportFirstTx(probe, flowId, packetId, packetSize)\n\ntype: probe: ns3::Ptr< ns3::FlowProbe >\ntype: flowId: uint32_t\ntype: packetId: uint32_t\ntype: packetSize: uint32_t" },
+    {(char *) "ReportForwarding", (PyCFunction) _wrap_PyNs3FlowMonitor_ReportForwarding, METH_VARARGS|METH_KEYWORDS, "ReportForwarding(probe, flowId, packetId, packetSize)\n\ntype: probe: ns3::Ptr< ns3::FlowProbe >\ntype: flowId: uint32_t\ntype: packetId: uint32_t\ntype: packetSize: uint32_t" },
+    {(char *) "ReportLastRx", (PyCFunction) _wrap_PyNs3FlowMonitor_ReportLastRx, METH_VARARGS|METH_KEYWORDS, "ReportLastRx(probe, flowId, packetId, packetSize)\n\ntype: probe: ns3::Ptr< ns3::FlowProbe >\ntype: flowId: uint32_t\ntype: packetId: uint32_t\ntype: packetSize: uint32_t" },
+    {(char *) "SerializeToXmlFile", (PyCFunction) _wrap_PyNs3FlowMonitor_SerializeToXmlFile, METH_VARARGS|METH_KEYWORDS, "SerializeToXmlFile(fileName, enableHistograms, enableProbes)\n\ntype: fileName: std::string\ntype: enableHistograms: bool\ntype: enableProbes: bool" },
+    {(char *) "SerializeToXmlString", (PyCFunction) _wrap_PyNs3FlowMonitor_SerializeToXmlString, METH_VARARGS|METH_KEYWORDS, "SerializeToXmlString(indent, enableHistograms, enableProbes)\n\ntype: indent: uint16_t\ntype: enableHistograms: bool\ntype: enableProbes: bool" },
+    {(char *) "Start", (PyCFunction) _wrap_PyNs3FlowMonitor_Start, METH_VARARGS|METH_KEYWORDS, "Start(time)\n\ntype: time: ns3::Time const &" },
+    {(char *) "StartRightNow", (PyCFunction) _wrap_PyNs3FlowMonitor_StartRightNow, METH_NOARGS, "StartRightNow()\n\n" },
+    {(char *) "Stop", (PyCFunction) _wrap_PyNs3FlowMonitor_Stop, METH_VARARGS|METH_KEYWORDS, "Stop(time)\n\ntype: time: ns3::Time const &" },
+    {(char *) "StopRightNow", (PyCFunction) _wrap_PyNs3FlowMonitor_StopRightNow, METH_NOARGS, "StopRightNow()\n\n" },
+    {(char *) "DoDispose", (PyCFunction) PyNs3FlowMonitor__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3FlowMonitor__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3FlowMonitor__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3FlowMonitor__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3FlowMonitor__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3FlowMonitor__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -2895,7 +2895,7 @@ PyTypeObject PyNs3FlowMonitor_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "FlowMonitor(arg0)\nFlowMonitor()",                        /* Documentation string */
     (traverseproc)PyNs3FlowMonitor__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3FlowMonitor__tp_clear,             /* tp_clear */
@@ -3377,76 +3377,6 @@ static int _wrap_PyNs3FlowMonitorFlowStats__set_txPackets(PyNs3FlowMonitorFlowSt
 }
 static PyGetSetDef PyNs3FlowMonitorFlowStats__getsets[] = {
     {
-        (char*) "delayHistogram", /* attribute name */
-        (getter) _wrap_PyNs3FlowMonitorFlowStats__get_delayHistogram, /* C function to get the attribute */
-        (setter) _wrap_PyNs3FlowMonitorFlowStats__set_delayHistogram, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
-        (char*) "lostPackets", /* attribute name */
-        (getter) _wrap_PyNs3FlowMonitorFlowStats__get_lostPackets, /* C function to get the attribute */
-        (setter) _wrap_PyNs3FlowMonitorFlowStats__set_lostPackets, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
-        (char*) "timesForwarded", /* attribute name */
-        (getter) _wrap_PyNs3FlowMonitorFlowStats__get_timesForwarded, /* C function to get the attribute */
-        (setter) _wrap_PyNs3FlowMonitorFlowStats__set_timesForwarded, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
-        (char*) "timeLastTxPacket", /* attribute name */
-        (getter) _wrap_PyNs3FlowMonitorFlowStats__get_timeLastTxPacket, /* C function to get the attribute */
-        (setter) _wrap_PyNs3FlowMonitorFlowStats__set_timeLastTxPacket, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
-        (char*) "rxPackets", /* attribute name */
-        (getter) _wrap_PyNs3FlowMonitorFlowStats__get_rxPackets, /* C function to get the attribute */
-        (setter) _wrap_PyNs3FlowMonitorFlowStats__set_rxPackets, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
-        (char*) "packetSizeHistogram", /* attribute name */
-        (getter) _wrap_PyNs3FlowMonitorFlowStats__get_packetSizeHistogram, /* C function to get the attribute */
-        (setter) _wrap_PyNs3FlowMonitorFlowStats__set_packetSizeHistogram, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
-        (char*) "timeFirstTxPacket", /* attribute name */
-        (getter) _wrap_PyNs3FlowMonitorFlowStats__get_timeFirstTxPacket, /* C function to get the attribute */
-        (setter) _wrap_PyNs3FlowMonitorFlowStats__set_timeFirstTxPacket, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
-        (char*) "packetsDropped", /* attribute name */
-        (getter) _wrap_PyNs3FlowMonitorFlowStats__get_packetsDropped, /* C function to get the attribute */
-        (setter) _wrap_PyNs3FlowMonitorFlowStats__set_packetsDropped, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
-        (char*) "txPackets", /* attribute name */
-        (getter) _wrap_PyNs3FlowMonitorFlowStats__get_txPackets, /* C function to get the attribute */
-        (setter) _wrap_PyNs3FlowMonitorFlowStats__set_txPackets, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
-        (char*) "flowInterruptionsHistogram", /* attribute name */
-        (getter) _wrap_PyNs3FlowMonitorFlowStats__get_flowInterruptionsHistogram, /* C function to get the attribute */
-        (setter) _wrap_PyNs3FlowMonitorFlowStats__set_flowInterruptionsHistogram, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
         (char*) "bytesDropped", /* attribute name */
         (getter) _wrap_PyNs3FlowMonitorFlowStats__get_bytesDropped, /* C function to get the attribute */
         (setter) _wrap_PyNs3FlowMonitorFlowStats__set_bytesDropped, /* C function to set the attribute */
@@ -3454,23 +3384,9 @@ static PyGetSetDef PyNs3FlowMonitorFlowStats__getsets[] = {
         NULL /* optional additional data for getter and setter */
     },
     {
-        (char*) "txBytes", /* attribute name */
-        (getter) _wrap_PyNs3FlowMonitorFlowStats__get_txBytes, /* C function to get the attribute */
-        (setter) _wrap_PyNs3FlowMonitorFlowStats__set_txBytes, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
-        (char*) "jitterHistogram", /* attribute name */
-        (getter) _wrap_PyNs3FlowMonitorFlowStats__get_jitterHistogram, /* C function to get the attribute */
-        (setter) _wrap_PyNs3FlowMonitorFlowStats__set_jitterHistogram, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
-        (char*) "rxBytes", /* attribute name */
-        (getter) _wrap_PyNs3FlowMonitorFlowStats__get_rxBytes, /* C function to get the attribute */
-        (setter) _wrap_PyNs3FlowMonitorFlowStats__set_rxBytes, /* C function to set the attribute */
+        (char*) "delayHistogram", /* attribute name */
+        (getter) _wrap_PyNs3FlowMonitorFlowStats__get_delayHistogram, /* C function to get the attribute */
+        (setter) _wrap_PyNs3FlowMonitorFlowStats__set_delayHistogram, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -3482,16 +3398,16 @@ static PyGetSetDef PyNs3FlowMonitorFlowStats__getsets[] = {
         NULL /* optional additional data for getter and setter */
     },
     {
-        (char*) "timeLastRxPacket", /* attribute name */
-        (getter) _wrap_PyNs3FlowMonitorFlowStats__get_timeLastRxPacket, /* C function to get the attribute */
-        (setter) _wrap_PyNs3FlowMonitorFlowStats__set_timeLastRxPacket, /* C function to set the attribute */
+        (char*) "flowInterruptionsHistogram", /* attribute name */
+        (getter) _wrap_PyNs3FlowMonitorFlowStats__get_flowInterruptionsHistogram, /* C function to get the attribute */
+        (setter) _wrap_PyNs3FlowMonitorFlowStats__set_flowInterruptionsHistogram, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
     {
-        (char*) "timeFirstRxPacket", /* attribute name */
-        (getter) _wrap_PyNs3FlowMonitorFlowStats__get_timeFirstRxPacket, /* C function to get the attribute */
-        (setter) _wrap_PyNs3FlowMonitorFlowStats__set_timeFirstRxPacket, /* C function to set the attribute */
+        (char*) "jitterHistogram", /* attribute name */
+        (getter) _wrap_PyNs3FlowMonitorFlowStats__get_jitterHistogram, /* C function to get the attribute */
+        (setter) _wrap_PyNs3FlowMonitorFlowStats__set_jitterHistogram, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -3506,6 +3422,90 @@ static PyGetSetDef PyNs3FlowMonitorFlowStats__getsets[] = {
         (char*) "lastDelay", /* attribute name */
         (getter) _wrap_PyNs3FlowMonitorFlowStats__get_lastDelay, /* C function to get the attribute */
         (setter) _wrap_PyNs3FlowMonitorFlowStats__set_lastDelay, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "lostPackets", /* attribute name */
+        (getter) _wrap_PyNs3FlowMonitorFlowStats__get_lostPackets, /* C function to get the attribute */
+        (setter) _wrap_PyNs3FlowMonitorFlowStats__set_lostPackets, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "packetSizeHistogram", /* attribute name */
+        (getter) _wrap_PyNs3FlowMonitorFlowStats__get_packetSizeHistogram, /* C function to get the attribute */
+        (setter) _wrap_PyNs3FlowMonitorFlowStats__set_packetSizeHistogram, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "packetsDropped", /* attribute name */
+        (getter) _wrap_PyNs3FlowMonitorFlowStats__get_packetsDropped, /* C function to get the attribute */
+        (setter) _wrap_PyNs3FlowMonitorFlowStats__set_packetsDropped, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "rxBytes", /* attribute name */
+        (getter) _wrap_PyNs3FlowMonitorFlowStats__get_rxBytes, /* C function to get the attribute */
+        (setter) _wrap_PyNs3FlowMonitorFlowStats__set_rxBytes, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "rxPackets", /* attribute name */
+        (getter) _wrap_PyNs3FlowMonitorFlowStats__get_rxPackets, /* C function to get the attribute */
+        (setter) _wrap_PyNs3FlowMonitorFlowStats__set_rxPackets, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "timeFirstRxPacket", /* attribute name */
+        (getter) _wrap_PyNs3FlowMonitorFlowStats__get_timeFirstRxPacket, /* C function to get the attribute */
+        (setter) _wrap_PyNs3FlowMonitorFlowStats__set_timeFirstRxPacket, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "timeFirstTxPacket", /* attribute name */
+        (getter) _wrap_PyNs3FlowMonitorFlowStats__get_timeFirstTxPacket, /* C function to get the attribute */
+        (setter) _wrap_PyNs3FlowMonitorFlowStats__set_timeFirstTxPacket, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "timeLastRxPacket", /* attribute name */
+        (getter) _wrap_PyNs3FlowMonitorFlowStats__get_timeLastRxPacket, /* C function to get the attribute */
+        (setter) _wrap_PyNs3FlowMonitorFlowStats__set_timeLastRxPacket, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "timeLastTxPacket", /* attribute name */
+        (getter) _wrap_PyNs3FlowMonitorFlowStats__get_timeLastTxPacket, /* C function to get the attribute */
+        (setter) _wrap_PyNs3FlowMonitorFlowStats__set_timeLastTxPacket, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "timesForwarded", /* attribute name */
+        (getter) _wrap_PyNs3FlowMonitorFlowStats__get_timesForwarded, /* C function to get the attribute */
+        (setter) _wrap_PyNs3FlowMonitorFlowStats__set_timesForwarded, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "txBytes", /* attribute name */
+        (getter) _wrap_PyNs3FlowMonitorFlowStats__get_txBytes, /* C function to get the attribute */
+        (setter) _wrap_PyNs3FlowMonitorFlowStats__set_txBytes, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "txPackets", /* attribute name */
+        (getter) _wrap_PyNs3FlowMonitorFlowStats__get_txPackets, /* C function to get the attribute */
+        (setter) _wrap_PyNs3FlowMonitorFlowStats__set_txPackets, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -3702,16 +3702,16 @@ PyTypeObject PyNs3FlowMonitorFlowStats_Type = {
 
 
 PyObject *
-PyNs3FlowProbe__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3FlowProbe *self)
+PyNs3FlowProbe__PythonHelper::_wrap_DoDispose(PyNs3FlowProbe *self)
 {
     PyObject *py_retval;
     PyNs3FlowProbe__PythonHelper *helper = dynamic_cast< PyNs3FlowProbe__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class FlowProbe is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -3750,16 +3750,16 @@ PyNs3FlowProbe__PythonHelper::_wrap_NotifyNewAggregate(PyNs3FlowProbe *self)
 }
 
 PyObject *
-PyNs3FlowProbe__PythonHelper::_wrap_DoDispose(PyNs3FlowProbe *self)
+PyNs3FlowProbe__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3FlowProbe *self)
 {
     PyObject *py_retval;
     PyNs3FlowProbe__PythonHelper *helper = dynamic_cast< PyNs3FlowProbe__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class FlowProbe is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -4020,41 +4020,6 @@ _wrap_PyNs3FlowProbe__tp_init(PyNs3FlowProbe *self, PyObject *args, PyObject *kw
 
 
 PyObject *
-_wrap_PyNs3FlowProbe_AddPacketStats(PyNs3FlowProbe *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int flowId;
-    unsigned int packetSize;
-    PyNs3Time *delayFromFirstProbe;
-    const char *keywords[] = {"flowId", "packetSize", "delayFromFirstProbe", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "IIO!", (char **) keywords, &flowId, &packetSize, &PyNs3Time_Type, &delayFromFirstProbe)) {
-        return NULL;
-    }
-    self->obj->AddPacketStats(flowId, packetSize, *((PyNs3Time *) delayFromFirstProbe)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3FlowProbe_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::FlowProbe::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3FlowProbe_AddPacketDropStats(PyNs3FlowProbe *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -4067,6 +4032,25 @@ _wrap_PyNs3FlowProbe_AddPacketDropStats(PyNs3FlowProbe *self, PyObject *args, Py
         return NULL;
     }
     self->obj->AddPacketDropStats(flowId, packetSize, reasonCode);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3FlowProbe_AddPacketStats(PyNs3FlowProbe *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int flowId;
+    unsigned int packetSize;
+    PyNs3Time *delayFromFirstProbe;
+    const char *keywords[] = {"flowId", "packetSize", "delayFromFirstProbe", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "IIO!", (char **) keywords, &flowId, &packetSize, &PyNs3Time_Type, &delayFromFirstProbe)) {
+        return NULL;
+    }
+    self->obj->AddPacketStats(flowId, packetSize, *((PyNs3Time *) delayFromFirstProbe)->obj);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -4087,15 +4071,31 @@ _wrap_PyNs3FlowProbe_GetStats(PyNs3FlowProbe *self)
     return py_retval;
 }
 
+
+PyObject *
+_wrap_PyNs3FlowProbe_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::FlowProbe::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
 static PyMethodDef PyNs3FlowProbe_methods[] = {
-    {(char *) "AddPacketStats", (PyCFunction) _wrap_PyNs3FlowProbe_AddPacketStats, METH_KEYWORDS|METH_VARARGS, "AddPacketStats(flowId, packetSize, delayFromFirstProbe)\n\ntype: flowId: uint32_t\ntype: packetSize: uint32_t\ntype: delayFromFirstProbe: ns3::Time" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3FlowProbe_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "AddPacketDropStats", (PyCFunction) _wrap_PyNs3FlowProbe_AddPacketDropStats, METH_KEYWORDS|METH_VARARGS, "AddPacketDropStats(flowId, packetSize, reasonCode)\n\ntype: flowId: uint32_t\ntype: packetSize: uint32_t\ntype: reasonCode: uint32_t" },
+    {(char *) "AddPacketDropStats", (PyCFunction) _wrap_PyNs3FlowProbe_AddPacketDropStats, METH_VARARGS|METH_KEYWORDS, "AddPacketDropStats(flowId, packetSize, reasonCode)\n\ntype: flowId: uint32_t\ntype: packetSize: uint32_t\ntype: reasonCode: uint32_t" },
+    {(char *) "AddPacketStats", (PyCFunction) _wrap_PyNs3FlowProbe_AddPacketStats, METH_VARARGS|METH_KEYWORDS, "AddPacketStats(flowId, packetSize, delayFromFirstProbe)\n\ntype: flowId: uint32_t\ntype: packetSize: uint32_t\ntype: delayFromFirstProbe: ns3::Time" },
     {(char *) "GetStats", (PyCFunction) _wrap_PyNs3FlowProbe_GetStats, METH_NOARGS, "GetStats()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3FlowProbe__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3FlowProbe_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "DoDispose", (PyCFunction) PyNs3FlowProbe__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3FlowProbe__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3FlowProbe__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3FlowProbe__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3FlowProbe__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 
@@ -4194,7 +4194,7 @@ PyTypeObject PyNs3FlowProbe_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "FlowProbe(flowMonitor)",                        /* Documentation string */
     (traverseproc)PyNs3FlowProbe__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3FlowProbe__tp_clear,             /* tp_clear */
@@ -4340,6 +4340,13 @@ static int _wrap_PyNs3FlowProbeFlowStats__set_packetsDropped(PyNs3FlowProbeFlowS
 }
 static PyGetSetDef PyNs3FlowProbeFlowStats__getsets[] = {
     {
+        (char*) "bytes", /* attribute name */
+        (getter) _wrap_PyNs3FlowProbeFlowStats__get_bytes, /* C function to get the attribute */
+        (setter) _wrap_PyNs3FlowProbeFlowStats__set_bytes, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
         (char*) "bytesDropped", /* attribute name */
         (getter) _wrap_PyNs3FlowProbeFlowStats__get_bytesDropped, /* C function to get the attribute */
         (setter) _wrap_PyNs3FlowProbeFlowStats__set_bytesDropped, /* C function to set the attribute */
@@ -4350,13 +4357,6 @@ static PyGetSetDef PyNs3FlowProbeFlowStats__getsets[] = {
         (char*) "delayFromFirstProbeSum", /* attribute name */
         (getter) _wrap_PyNs3FlowProbeFlowStats__get_delayFromFirstProbeSum, /* C function to get the attribute */
         (setter) _wrap_PyNs3FlowProbeFlowStats__set_delayFromFirstProbeSum, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
-        (char*) "bytes", /* attribute name */
-        (getter) _wrap_PyNs3FlowProbeFlowStats__get_bytes, /* C function to get the attribute */
-        (setter) _wrap_PyNs3FlowProbeFlowStats__set_bytes, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -4581,27 +4581,6 @@ _wrap_PyNs3Ipv4FlowClassifier__tp_init(PyNs3Ipv4FlowClassifier *self, PyObject *
 
 
 PyObject *
-_wrap_PyNs3Ipv4FlowClassifier_FindFlow(PyNs3Ipv4FlowClassifier *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int flowId;
-    const char *keywords[] = {"flowId", NULL};
-    PyNs3Ipv4FlowClassifierFiveTuple *py_FiveTuple;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &flowId)) {
-        return NULL;
-    }
-    ns3::Ipv4FlowClassifier::FiveTuple retval = self->obj->FindFlow(flowId);
-    py_FiveTuple = PyObject_New(PyNs3Ipv4FlowClassifierFiveTuple, &PyNs3Ipv4FlowClassifierFiveTuple_Type);
-    py_FiveTuple->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_FiveTuple->obj = new ns3::Ipv4FlowClassifier::FiveTuple(retval);
-    PyNs3Ipv4FlowClassifierFiveTuple_wrapper_registry[(void *) py_FiveTuple->obj] = (PyObject *) py_FiveTuple;
-    py_retval = Py_BuildValue((char *) "N", py_FiveTuple);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3Ipv4FlowClassifier_Classify(PyNs3Ipv4FlowClassifier *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -4622,9 +4601,30 @@ _wrap_PyNs3Ipv4FlowClassifier_Classify(PyNs3Ipv4FlowClassifier *self, PyObject *
     return py_retval;
 }
 
+
+PyObject *
+_wrap_PyNs3Ipv4FlowClassifier_FindFlow(PyNs3Ipv4FlowClassifier *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int flowId;
+    const char *keywords[] = {"flowId", NULL};
+    PyNs3Ipv4FlowClassifierFiveTuple *py_FiveTuple;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &flowId)) {
+        return NULL;
+    }
+    ns3::Ipv4FlowClassifier::FiveTuple retval = self->obj->FindFlow(flowId);
+    py_FiveTuple = PyObject_New(PyNs3Ipv4FlowClassifierFiveTuple, &PyNs3Ipv4FlowClassifierFiveTuple_Type);
+    py_FiveTuple->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_FiveTuple->obj = new ns3::Ipv4FlowClassifier::FiveTuple(retval);
+    PyNs3Ipv4FlowClassifierFiveTuple_wrapper_registry[(void *) py_FiveTuple->obj] = (PyObject *) py_FiveTuple;
+    py_retval = Py_BuildValue((char *) "N", py_FiveTuple);
+    return py_retval;
+}
+
 static PyMethodDef PyNs3Ipv4FlowClassifier_methods[] = {
-    {(char *) "FindFlow", (PyCFunction) _wrap_PyNs3Ipv4FlowClassifier_FindFlow, METH_KEYWORDS|METH_VARARGS, "FindFlow(flowId)\n\ntype: flowId: uint32_t" },
-    {(char *) "Classify", (PyCFunction) _wrap_PyNs3Ipv4FlowClassifier_Classify, METH_KEYWORDS|METH_VARARGS, "Classify(ipHeader, ipPayload, out_flowId, out_packetId)\n\ntype: ipHeader: ns3::Ipv4Header const &\ntype: ipPayload: ns3::Ptr< ns3::Packet const >\ntype: out_flowId: uint32_t *\ntype: out_packetId: uint32_t *" },
+    {(char *) "Classify", (PyCFunction) _wrap_PyNs3Ipv4FlowClassifier_Classify, METH_VARARGS|METH_KEYWORDS, "Classify(ipHeader, ipPayload, out_flowId, out_packetId)\n\ntype: ipHeader: ns3::Ipv4Header const &\ntype: ipPayload: ns3::Ptr< ns3::Packet const >\ntype: out_flowId: uint32_t *\ntype: out_packetId: uint32_t *" },
+    {(char *) "FindFlow", (PyCFunction) _wrap_PyNs3Ipv4FlowClassifier_FindFlow, METH_VARARGS|METH_KEYWORDS, "FindFlow(flowId)\n\ntype: flowId: uint32_t" },
     {NULL, NULL, 0, NULL}
 };
 
@@ -4867,23 +4867,16 @@ static int _wrap_PyNs3Ipv4FlowClassifierFiveTuple__set_sourcePort(PyNs3Ipv4FlowC
 }
 static PyGetSetDef PyNs3Ipv4FlowClassifierFiveTuple__getsets[] = {
     {
-        (char*) "sourcePort", /* attribute name */
-        (getter) _wrap_PyNs3Ipv4FlowClassifierFiveTuple__get_sourcePort, /* C function to get the attribute */
-        (setter) _wrap_PyNs3Ipv4FlowClassifierFiveTuple__set_sourcePort, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
-        (char*) "sourceAddress", /* attribute name */
-        (getter) _wrap_PyNs3Ipv4FlowClassifierFiveTuple__get_sourceAddress, /* C function to get the attribute */
-        (setter) _wrap_PyNs3Ipv4FlowClassifierFiveTuple__set_sourceAddress, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
         (char*) "destinationAddress", /* attribute name */
         (getter) _wrap_PyNs3Ipv4FlowClassifierFiveTuple__get_destinationAddress, /* C function to get the attribute */
         (setter) _wrap_PyNs3Ipv4FlowClassifierFiveTuple__set_destinationAddress, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "destinationPort", /* attribute name */
+        (getter) _wrap_PyNs3Ipv4FlowClassifierFiveTuple__get_destinationPort, /* C function to get the attribute */
+        (setter) _wrap_PyNs3Ipv4FlowClassifierFiveTuple__set_destinationPort, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -4895,9 +4888,16 @@ static PyGetSetDef PyNs3Ipv4FlowClassifierFiveTuple__getsets[] = {
         NULL /* optional additional data for getter and setter */
     },
     {
-        (char*) "destinationPort", /* attribute name */
-        (getter) _wrap_PyNs3Ipv4FlowClassifierFiveTuple__get_destinationPort, /* C function to get the attribute */
-        (setter) _wrap_PyNs3Ipv4FlowClassifierFiveTuple__set_destinationPort, /* C function to set the attribute */
+        (char*) "sourceAddress", /* attribute name */
+        (getter) _wrap_PyNs3Ipv4FlowClassifierFiveTuple__get_sourceAddress, /* C function to get the attribute */
+        (setter) _wrap_PyNs3Ipv4FlowClassifierFiveTuple__set_sourceAddress, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "sourcePort", /* attribute name */
+        (getter) _wrap_PyNs3Ipv4FlowClassifierFiveTuple__get_sourcePort, /* C function to get the attribute */
+        (setter) _wrap_PyNs3Ipv4FlowClassifierFiveTuple__set_sourcePort, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -5294,16 +5294,16 @@ PyTypeObject PyNs3Ipv4FlowClassifierSortByCount_Type = {
 
 
 PyObject *
-PyNs3Ipv4FlowProbe__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3Ipv4FlowProbe *self)
+PyNs3Ipv4FlowProbe__PythonHelper::_wrap_DoDispose(PyNs3Ipv4FlowProbe *self)
 {
     PyObject *py_retval;
     PyNs3Ipv4FlowProbe__PythonHelper *helper = dynamic_cast< PyNs3Ipv4FlowProbe__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Ipv4FlowProbe is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -5342,16 +5342,16 @@ PyNs3Ipv4FlowProbe__PythonHelper::_wrap_NotifyNewAggregate(PyNs3Ipv4FlowProbe *s
 }
 
 PyObject *
-PyNs3Ipv4FlowProbe__PythonHelper::_wrap_DoDispose(PyNs3Ipv4FlowProbe *self)
+PyNs3Ipv4FlowProbe__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3Ipv4FlowProbe *self)
 {
     PyObject *py_retval;
     PyNs3Ipv4FlowProbe__PythonHelper *helper = dynamic_cast< PyNs3Ipv4FlowProbe__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Ipv4FlowProbe is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -5636,10 +5636,10 @@ _wrap_PyNs3Ipv4FlowProbe_GetTypeId(void)
 
 static PyMethodDef PyNs3Ipv4FlowProbe_methods[] = {
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3Ipv4FlowProbe_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3Ipv4FlowProbe__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "DoDispose", (PyCFunction) PyNs3Ipv4FlowProbe__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3Ipv4FlowProbe__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3Ipv4FlowProbe__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3Ipv4FlowProbe__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3Ipv4FlowProbe__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 
@@ -5738,7 +5738,7 @@ PyTypeObject PyNs3Ipv4FlowProbe_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "Ipv4FlowProbe(monitor, classifier, node)",                        /* Documentation string */
     (traverseproc)PyNs3Ipv4FlowProbe__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3Ipv4FlowProbe__tp_clear,             /* tp_clear */
@@ -5785,27 +5785,6 @@ _wrap_PyNs3Ipv6FlowClassifier__tp_init(PyNs3Ipv6FlowClassifier *self, PyObject *
 
 
 PyObject *
-_wrap_PyNs3Ipv6FlowClassifier_FindFlow(PyNs3Ipv6FlowClassifier *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int flowId;
-    const char *keywords[] = {"flowId", NULL};
-    PyNs3Ipv6FlowClassifierFiveTuple *py_FiveTuple;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &flowId)) {
-        return NULL;
-    }
-    ns3::Ipv6FlowClassifier::FiveTuple retval = self->obj->FindFlow(flowId);
-    py_FiveTuple = PyObject_New(PyNs3Ipv6FlowClassifierFiveTuple, &PyNs3Ipv6FlowClassifierFiveTuple_Type);
-    py_FiveTuple->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_FiveTuple->obj = new ns3::Ipv6FlowClassifier::FiveTuple(retval);
-    PyNs3Ipv6FlowClassifierFiveTuple_wrapper_registry[(void *) py_FiveTuple->obj] = (PyObject *) py_FiveTuple;
-    py_retval = Py_BuildValue((char *) "N", py_FiveTuple);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3Ipv6FlowClassifier_Classify(PyNs3Ipv6FlowClassifier *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -5826,9 +5805,30 @@ _wrap_PyNs3Ipv6FlowClassifier_Classify(PyNs3Ipv6FlowClassifier *self, PyObject *
     return py_retval;
 }
 
+
+PyObject *
+_wrap_PyNs3Ipv6FlowClassifier_FindFlow(PyNs3Ipv6FlowClassifier *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int flowId;
+    const char *keywords[] = {"flowId", NULL};
+    PyNs3Ipv6FlowClassifierFiveTuple *py_FiveTuple;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &flowId)) {
+        return NULL;
+    }
+    ns3::Ipv6FlowClassifier::FiveTuple retval = self->obj->FindFlow(flowId);
+    py_FiveTuple = PyObject_New(PyNs3Ipv6FlowClassifierFiveTuple, &PyNs3Ipv6FlowClassifierFiveTuple_Type);
+    py_FiveTuple->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_FiveTuple->obj = new ns3::Ipv6FlowClassifier::FiveTuple(retval);
+    PyNs3Ipv6FlowClassifierFiveTuple_wrapper_registry[(void *) py_FiveTuple->obj] = (PyObject *) py_FiveTuple;
+    py_retval = Py_BuildValue((char *) "N", py_FiveTuple);
+    return py_retval;
+}
+
 static PyMethodDef PyNs3Ipv6FlowClassifier_methods[] = {
-    {(char *) "FindFlow", (PyCFunction) _wrap_PyNs3Ipv6FlowClassifier_FindFlow, METH_KEYWORDS|METH_VARARGS, "FindFlow(flowId)\n\ntype: flowId: uint32_t" },
-    {(char *) "Classify", (PyCFunction) _wrap_PyNs3Ipv6FlowClassifier_Classify, METH_KEYWORDS|METH_VARARGS, "Classify(ipHeader, ipPayload, out_flowId, out_packetId)\n\ntype: ipHeader: ns3::Ipv6Header const &\ntype: ipPayload: ns3::Ptr< ns3::Packet const >\ntype: out_flowId: uint32_t *\ntype: out_packetId: uint32_t *" },
+    {(char *) "Classify", (PyCFunction) _wrap_PyNs3Ipv6FlowClassifier_Classify, METH_VARARGS|METH_KEYWORDS, "Classify(ipHeader, ipPayload, out_flowId, out_packetId)\n\ntype: ipHeader: ns3::Ipv6Header const &\ntype: ipPayload: ns3::Ptr< ns3::Packet const >\ntype: out_flowId: uint32_t *\ntype: out_packetId: uint32_t *" },
+    {(char *) "FindFlow", (PyCFunction) _wrap_PyNs3Ipv6FlowClassifier_FindFlow, METH_VARARGS|METH_KEYWORDS, "FindFlow(flowId)\n\ntype: flowId: uint32_t" },
     {NULL, NULL, 0, NULL}
 };
 
@@ -6071,23 +6071,16 @@ static int _wrap_PyNs3Ipv6FlowClassifierFiveTuple__set_sourcePort(PyNs3Ipv6FlowC
 }
 static PyGetSetDef PyNs3Ipv6FlowClassifierFiveTuple__getsets[] = {
     {
-        (char*) "sourcePort", /* attribute name */
-        (getter) _wrap_PyNs3Ipv6FlowClassifierFiveTuple__get_sourcePort, /* C function to get the attribute */
-        (setter) _wrap_PyNs3Ipv6FlowClassifierFiveTuple__set_sourcePort, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
-        (char*) "sourceAddress", /* attribute name */
-        (getter) _wrap_PyNs3Ipv6FlowClassifierFiveTuple__get_sourceAddress, /* C function to get the attribute */
-        (setter) _wrap_PyNs3Ipv6FlowClassifierFiveTuple__set_sourceAddress, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
         (char*) "destinationAddress", /* attribute name */
         (getter) _wrap_PyNs3Ipv6FlowClassifierFiveTuple__get_destinationAddress, /* C function to get the attribute */
         (setter) _wrap_PyNs3Ipv6FlowClassifierFiveTuple__set_destinationAddress, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "destinationPort", /* attribute name */
+        (getter) _wrap_PyNs3Ipv6FlowClassifierFiveTuple__get_destinationPort, /* C function to get the attribute */
+        (setter) _wrap_PyNs3Ipv6FlowClassifierFiveTuple__set_destinationPort, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -6099,9 +6092,16 @@ static PyGetSetDef PyNs3Ipv6FlowClassifierFiveTuple__getsets[] = {
         NULL /* optional additional data for getter and setter */
     },
     {
-        (char*) "destinationPort", /* attribute name */
-        (getter) _wrap_PyNs3Ipv6FlowClassifierFiveTuple__get_destinationPort, /* C function to get the attribute */
-        (setter) _wrap_PyNs3Ipv6FlowClassifierFiveTuple__set_destinationPort, /* C function to set the attribute */
+        (char*) "sourceAddress", /* attribute name */
+        (getter) _wrap_PyNs3Ipv6FlowClassifierFiveTuple__get_sourceAddress, /* C function to get the attribute */
+        (setter) _wrap_PyNs3Ipv6FlowClassifierFiveTuple__set_sourceAddress, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "sourcePort", /* attribute name */
+        (getter) _wrap_PyNs3Ipv6FlowClassifierFiveTuple__get_sourcePort, /* C function to get the attribute */
+        (setter) _wrap_PyNs3Ipv6FlowClassifierFiveTuple__set_sourcePort, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -6498,16 +6498,16 @@ PyTypeObject PyNs3Ipv6FlowClassifierSortByCount_Type = {
 
 
 PyObject *
-PyNs3Ipv6FlowProbe__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3Ipv6FlowProbe *self)
+PyNs3Ipv6FlowProbe__PythonHelper::_wrap_DoDispose(PyNs3Ipv6FlowProbe *self)
 {
     PyObject *py_retval;
     PyNs3Ipv6FlowProbe__PythonHelper *helper = dynamic_cast< PyNs3Ipv6FlowProbe__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Ipv6FlowProbe is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -6546,16 +6546,16 @@ PyNs3Ipv6FlowProbe__PythonHelper::_wrap_NotifyNewAggregate(PyNs3Ipv6FlowProbe *s
 }
 
 PyObject *
-PyNs3Ipv6FlowProbe__PythonHelper::_wrap_DoDispose(PyNs3Ipv6FlowProbe *self)
+PyNs3Ipv6FlowProbe__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3Ipv6FlowProbe *self)
 {
     PyObject *py_retval;
     PyNs3Ipv6FlowProbe__PythonHelper *helper = dynamic_cast< PyNs3Ipv6FlowProbe__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Ipv6FlowProbe is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -6840,10 +6840,10 @@ _wrap_PyNs3Ipv6FlowProbe_GetTypeId(void)
 
 static PyMethodDef PyNs3Ipv6FlowProbe_methods[] = {
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3Ipv6FlowProbe_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3Ipv6FlowProbe__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "DoDispose", (PyCFunction) PyNs3Ipv6FlowProbe__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3Ipv6FlowProbe__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3Ipv6FlowProbe__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3Ipv6FlowProbe__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3Ipv6FlowProbe__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 
@@ -6942,7 +6942,7 @@ PyTypeObject PyNs3Ipv6FlowProbe_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "Ipv6FlowProbe(monitor, classifier, node)",                        /* Documentation string */
     (traverseproc)PyNs3Ipv6FlowProbe__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3Ipv6FlowProbe__tp_clear,             /* tp_clear */

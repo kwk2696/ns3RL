@@ -4,51 +4,6 @@
 #include <stddef.h>
 
 
-#if PY_VERSION_HEX < 0x020400F0
-
-#define PyEval_ThreadsInitialized() 1
-
-#define Py_CLEAR(op)				\
-        do {                            	\
-                if (op) {			\
-                        PyObject *tmp = (PyObject *)(op);	\
-                        (op) = NULL;		\
-                        Py_DECREF(tmp);		\
-                }				\
-        } while (0)
-
-
-#define Py_VISIT(op)							\
-        do { 								\
-                if (op) {						\
-                        int vret = visit((PyObject *)(op), arg);	\
-                        if (vret)					\
-                                return vret;				\
-                }							\
-        } while (0)
-
-#endif
-
-
-
-#if PY_VERSION_HEX < 0x020500F0
-
-typedef int Py_ssize_t;
-# define PY_SSIZE_T_MAX INT_MAX
-# define PY_SSIZE_T_MIN INT_MIN
-typedef inquiry lenfunc;
-typedef intargfunc ssizeargfunc;
-typedef intobjargproc ssizeobjargproc;
-
-#endif
-
-
-#ifndef PyVarObject_HEAD_INIT
-#define PyVarObject_HEAD_INIT(type, size) \
-        PyObject_HEAD_INIT(type) size,
-#endif
-
-
 #if PY_VERSION_HEX >= 0x03000000
 typedef void* cmpfunc;
 #define PyCObject_FromVoidPtr(a, b) PyCapsule_New(a, NULL, b)
@@ -3092,10 +3047,6 @@ public:
     }
 
 
-    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3ServiceFlowManager *self);
-    inline void NotifyConstructionCompleted__parent_caller()
-    { ns3::ObjectBase::NotifyConstructionCompleted(); }
-
     static PyObject * _wrap_DoInitialize(PyNs3ServiceFlowManager *self);
     inline void DoInitialize__parent_caller()
     { ns3::Object::DoInitialize(); }
@@ -3103,6 +3054,10 @@ public:
     static PyObject * _wrap_NotifyNewAggregate(PyNs3ServiceFlowManager *self);
     inline void NotifyNewAggregate__parent_caller()
     { ns3::Object::NotifyNewAggregate(); }
+
+    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3ServiceFlowManager *self);
+    inline void NotifyConstructionCompleted__parent_caller()
+    { ns3::ObjectBase::NotifyConstructionCompleted(); }
 
     virtual void DoDispose();
 
@@ -3173,10 +3128,6 @@ public:
     }
 
 
-    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3SsServiceFlowManager *self);
-    inline void NotifyConstructionCompleted__parent_caller()
-    { ns3::ObjectBase::NotifyConstructionCompleted(); }
-
     static PyObject * _wrap_DoInitialize(PyNs3SsServiceFlowManager *self);
     inline void DoInitialize__parent_caller()
     { ns3::Object::DoInitialize(); }
@@ -3184,6 +3135,10 @@ public:
     static PyObject * _wrap_NotifyNewAggregate(PyNs3SsServiceFlowManager *self);
     inline void NotifyNewAggregate__parent_caller()
     { ns3::Object::NotifyNewAggregate(); }
+
+    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3SsServiceFlowManager *self);
+    inline void NotifyConstructionCompleted__parent_caller()
+    { ns3::ObjectBase::NotifyConstructionCompleted(); }
 
     virtual void DoDispose();
 
@@ -3331,10 +3286,6 @@ public:
     }
 
 
-    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3WimaxConnection *self);
-    inline void NotifyConstructionCompleted__parent_caller()
-    { ns3::ObjectBase::NotifyConstructionCompleted(); }
-
     static PyObject * _wrap_DoInitialize(PyNs3WimaxConnection *self);
     inline void DoInitialize__parent_caller()
     { ns3::Object::DoInitialize(); }
@@ -3342,6 +3293,10 @@ public:
     static PyObject * _wrap_NotifyNewAggregate(PyNs3WimaxConnection *self);
     inline void NotifyNewAggregate__parent_caller()
     { ns3::Object::NotifyNewAggregate(); }
+
+    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3WimaxConnection *self);
+    inline void NotifyConstructionCompleted__parent_caller()
+    { ns3::ObjectBase::NotifyConstructionCompleted(); }
 
     virtual void DoDispose();
 
@@ -3489,10 +3444,6 @@ public:
     }
 
 
-    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3BsServiceFlowManager *self);
-    inline void NotifyConstructionCompleted__parent_caller()
-    { ns3::ObjectBase::NotifyConstructionCompleted(); }
-
     static PyObject * _wrap_DoInitialize(PyNs3BsServiceFlowManager *self);
     inline void DoInitialize__parent_caller()
     { ns3::Object::DoInitialize(); }
@@ -3500,6 +3451,10 @@ public:
     static PyObject * _wrap_NotifyNewAggregate(PyNs3BsServiceFlowManager *self);
     inline void NotifyNewAggregate__parent_caller()
     { ns3::Object::NotifyNewAggregate(); }
+
+    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3BsServiceFlowManager *self);
+    inline void NotifyConstructionCompleted__parent_caller()
+    { ns3::ObjectBase::NotifyConstructionCompleted(); }
 
     virtual void DoDispose();
 
@@ -3559,10 +3514,6 @@ public:
     }
 
 
-    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3ConnectionManager *self);
-    inline void NotifyConstructionCompleted__parent_caller()
-    { ns3::ObjectBase::NotifyConstructionCompleted(); }
-
     static PyObject * _wrap_DoInitialize(PyNs3ConnectionManager *self);
     inline void DoInitialize__parent_caller()
     { ns3::Object::DoInitialize(); }
@@ -3570,6 +3521,10 @@ public:
     static PyObject * _wrap_NotifyNewAggregate(PyNs3ConnectionManager *self);
     inline void NotifyNewAggregate__parent_caller()
     { ns3::Object::NotifyNewAggregate(); }
+
+    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3ConnectionManager *self);
+    inline void NotifyConstructionCompleted__parent_caller()
+    { ns3::ObjectBase::NotifyConstructionCompleted(); }
 
     virtual void DoDispose();
 
@@ -3739,9 +3694,9 @@ public:
     }
 
 
-    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3WimaxChannel *self);
-    inline void NotifyConstructionCompleted__parent_caller()
-    { ns3::ObjectBase::NotifyConstructionCompleted(); }
+    static PyObject * _wrap_DoDispose(PyNs3WimaxChannel *self);
+    inline void DoDispose__parent_caller()
+    { ns3::Object::DoDispose(); }
 
     static PyObject * _wrap_DoInitialize(PyNs3WimaxChannel *self);
     inline void DoInitialize__parent_caller()
@@ -3751,9 +3706,9 @@ public:
     inline void NotifyNewAggregate__parent_caller()
     { ns3::Object::NotifyNewAggregate(); }
 
-    static PyObject * _wrap_DoDispose(PyNs3WimaxChannel *self);
-    inline void DoDispose__parent_caller()
-    { ns3::Object::DoDispose(); }
+    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3WimaxChannel *self);
+    inline void NotifyConstructionCompleted__parent_caller()
+    { ns3::ObjectBase::NotifyConstructionCompleted(); }
 
     virtual int64_t AssignStreams(int64_t stream);
 
@@ -3822,10 +3777,6 @@ public:
     }
 
 
-    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3WimaxNetDevice *self);
-    inline void NotifyConstructionCompleted__parent_caller()
-    { ns3::ObjectBase::NotifyConstructionCompleted(); }
-
     static PyObject * _wrap_DoInitialize(PyNs3WimaxNetDevice *self);
     inline void DoInitialize__parent_caller()
     { ns3::Object::DoInitialize(); }
@@ -3833,6 +3784,10 @@ public:
     static PyObject * _wrap_NotifyNewAggregate(PyNs3WimaxNetDevice *self);
     inline void NotifyNewAggregate__parent_caller()
     { ns3::Object::NotifyNewAggregate(); }
+
+    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3WimaxNetDevice *self);
+    inline void NotifyConstructionCompleted__parent_caller()
+    { ns3::ObjectBase::NotifyConstructionCompleted(); }
 
     virtual void SetConnectionManager(ns3::Ptr< ns3::ConnectionManager > connectionManager);
 
@@ -3962,10 +3917,6 @@ public:
     }
 
 
-    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3BaseStationNetDevice *self);
-    inline void NotifyConstructionCompleted__parent_caller()
-    { ns3::ObjectBase::NotifyConstructionCompleted(); }
-
     static PyObject * _wrap_DoInitialize(PyNs3BaseStationNetDevice *self);
     inline void DoInitialize__parent_caller()
     { ns3::Object::DoInitialize(); }
@@ -3973,6 +3924,10 @@ public:
     static PyObject * _wrap_NotifyNewAggregate(PyNs3BaseStationNetDevice *self);
     inline void NotifyNewAggregate__parent_caller()
     { ns3::Object::NotifyNewAggregate(); }
+
+    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3BaseStationNetDevice *self);
+    inline void NotifyConstructionCompleted__parent_caller()
+    { ns3::ObjectBase::NotifyConstructionCompleted(); }
 
     virtual void Start();
 
@@ -3986,6 +3941,34 @@ public:
 
     virtual void DoReceive(ns3::Ptr< ns3::Packet > packet);
 
+    virtual ns3::Ptr< ns3::Channel > GetChannel() const;
+
+    virtual void SetConnectionManager(ns3::Ptr< ns3::ConnectionManager > connectionManager);
+
+    virtual void SetName(std::string const name);
+
+    virtual std::string GetName() const;
+
+    virtual void SetIfIndex(uint32_t const index);
+
+    virtual uint32_t GetIfIndex() const;
+
+    virtual ns3::Ptr< ns3::Channel > GetPhyChannel() const;
+
+    virtual void SetAddress(ns3::Address address);
+
+    virtual ns3::Address GetAddress() const;
+
+    virtual bool SetMtu(uint16_t const mtu);
+
+    virtual uint16_t GetMtu() const;
+
+    virtual bool IsLinkUp() const;
+
+    virtual bool IsBroadcast() const;
+
+    virtual ns3::Address GetBroadcast() const;
+
     virtual bool IsMulticast() const;
 
     virtual ns3::Address GetMulticast() const;
@@ -3994,51 +3977,23 @@ public:
 
     virtual ns3::Address GetMulticast(ns3::Ipv4Address multicastGroup) const;
 
-    virtual bool Send(ns3::Ptr< ns3::Packet > packet, ns3::Address const & dest, uint16_t protocolNumber);
-
-    virtual bool NeedsArp() const;
-
-    virtual ns3::Ptr< ns3::Node > GetNode() const;
-
-    virtual bool SendFrom(ns3::Ptr< ns3::Packet > packet, ns3::Address const & source, ns3::Address const & dest, uint16_t protocolNumber);
-
-    virtual bool IsBroadcast() const;
+    virtual ns3::Address MakeMulticastAddress(ns3::Ipv4Address multicastGroup) const;
 
     virtual bool IsPointToPoint() const;
 
-    virtual uint16_t GetMtu() const;
-
-    virtual ns3::Address MakeMulticastAddress(ns3::Ipv4Address multicastGroup) const;
+    virtual bool Send(ns3::Ptr< ns3::Packet > packet, ns3::Address const & dest, uint16_t protocolNumber);
 
     virtual void SetNode(ns3::Ptr< ns3::Node > node);
 
-    virtual ns3::Address GetBroadcast() const;
+    virtual ns3::Ptr< ns3::Node > GetNode() const;
 
-    virtual std::string GetName() const;
+    virtual bool NeedsArp() const;
 
-    virtual bool IsBridge() const;
-
-    virtual ns3::Address GetAddress() const;
-
-    virtual ns3::Ptr< ns3::Channel > GetPhyChannel() const;
-
-    virtual void SetIfIndex(uint32_t const index);
-
-    virtual void SetAddress(ns3::Address address);
-
-    virtual bool IsLinkUp() const;
-
-    virtual void SetName(std::string const name);
-
-    virtual bool SetMtu(uint16_t const mtu);
+    virtual bool SendFrom(ns3::Ptr< ns3::Packet > packet, ns3::Address const & source, ns3::Address const & dest, uint16_t protocolNumber);
 
     virtual bool SupportsSendFrom() const;
 
-    virtual ns3::Ptr< ns3::Channel > GetChannel() const;
-
-    virtual void SetConnectionManager(ns3::Ptr< ns3::ConnectionManager > connectionManager);
-
-    virtual uint32_t GetIfIndex() const;
+    virtual bool IsBridge() const;
 
     virtual ns3::Ptr< ns3::WimaxChannel > DoGetChannel() const;
 
@@ -4112,9 +4067,9 @@ public:
     }
 
 
-    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3SimpleOfdmWimaxChannel *self);
-    inline void NotifyConstructionCompleted__parent_caller()
-    { ns3::ObjectBase::NotifyConstructionCompleted(); }
+    static PyObject * _wrap_DoDispose(PyNs3SimpleOfdmWimaxChannel *self);
+    inline void DoDispose__parent_caller()
+    { ns3::Object::DoDispose(); }
 
     static PyObject * _wrap_DoInitialize(PyNs3SimpleOfdmWimaxChannel *self);
     inline void DoInitialize__parent_caller()
@@ -4124,9 +4079,9 @@ public:
     inline void NotifyNewAggregate__parent_caller()
     { ns3::Object::NotifyNewAggregate(); }
 
-    static PyObject * _wrap_DoDispose(PyNs3SimpleOfdmWimaxChannel *self);
-    inline void DoDispose__parent_caller()
-    { ns3::Object::DoDispose(); }
+    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3SimpleOfdmWimaxChannel *self);
+    inline void NotifyConstructionCompleted__parent_caller()
+    { ns3::ObjectBase::NotifyConstructionCompleted(); }
 
     virtual int64_t AssignStreams(int64_t stream);
 
@@ -4136,9 +4091,9 @@ public:
 
     virtual uint32_t DoGetNDevices() const;
 
-    virtual uint32_t GetNDevices() const;
-
     virtual ns3::Ptr< ns3::NetDevice > GetDevice(uint32_t i) const;
+
+    virtual uint32_t GetNDevices() const;
 
     virtual ns3::TypeId GetInstanceTypeId() const;
 
@@ -4198,10 +4153,6 @@ public:
     }
 
 
-    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3SubscriberStationNetDevice *self);
-    inline void NotifyConstructionCompleted__parent_caller()
-    { ns3::ObjectBase::NotifyConstructionCompleted(); }
-
     static PyObject * _wrap_DoInitialize(PyNs3SubscriberStationNetDevice *self);
     inline void DoInitialize__parent_caller()
     { ns3::Object::DoInitialize(); }
@@ -4209,6 +4160,10 @@ public:
     static PyObject * _wrap_NotifyNewAggregate(PyNs3SubscriberStationNetDevice *self);
     inline void NotifyNewAggregate__parent_caller()
     { ns3::Object::NotifyNewAggregate(); }
+
+    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3SubscriberStationNetDevice *self);
+    inline void NotifyConstructionCompleted__parent_caller()
+    { ns3::ObjectBase::NotifyConstructionCompleted(); }
 
     virtual bool Enqueue(ns3::Ptr< ns3::Packet > packet, ns3::MacHeaderType const & hdrType, ns3::Ptr< ns3::WimaxConnection > connection);
 
@@ -4222,6 +4177,34 @@ public:
 
     virtual void DoReceive(ns3::Ptr< ns3::Packet > packet);
 
+    virtual ns3::Ptr< ns3::Channel > GetChannel() const;
+
+    virtual void SetConnectionManager(ns3::Ptr< ns3::ConnectionManager > connectionManager);
+
+    virtual void SetName(std::string const name);
+
+    virtual std::string GetName() const;
+
+    virtual void SetIfIndex(uint32_t const index);
+
+    virtual uint32_t GetIfIndex() const;
+
+    virtual ns3::Ptr< ns3::Channel > GetPhyChannel() const;
+
+    virtual void SetAddress(ns3::Address address);
+
+    virtual ns3::Address GetAddress() const;
+
+    virtual bool SetMtu(uint16_t const mtu);
+
+    virtual uint16_t GetMtu() const;
+
+    virtual bool IsLinkUp() const;
+
+    virtual bool IsBroadcast() const;
+
+    virtual ns3::Address GetBroadcast() const;
+
     virtual bool IsMulticast() const;
 
     virtual ns3::Address GetMulticast() const;
@@ -4230,51 +4213,23 @@ public:
 
     virtual ns3::Address GetMulticast(ns3::Ipv4Address multicastGroup) const;
 
-    virtual bool Send(ns3::Ptr< ns3::Packet > packet, ns3::Address const & dest, uint16_t protocolNumber);
-
-    virtual bool NeedsArp() const;
-
-    virtual ns3::Ptr< ns3::Node > GetNode() const;
-
-    virtual bool SendFrom(ns3::Ptr< ns3::Packet > packet, ns3::Address const & source, ns3::Address const & dest, uint16_t protocolNumber);
-
-    virtual bool IsBroadcast() const;
+    virtual ns3::Address MakeMulticastAddress(ns3::Ipv4Address multicastGroup) const;
 
     virtual bool IsPointToPoint() const;
 
-    virtual uint16_t GetMtu() const;
-
-    virtual ns3::Address MakeMulticastAddress(ns3::Ipv4Address multicastGroup) const;
+    virtual bool Send(ns3::Ptr< ns3::Packet > packet, ns3::Address const & dest, uint16_t protocolNumber);
 
     virtual void SetNode(ns3::Ptr< ns3::Node > node);
 
-    virtual ns3::Address GetBroadcast() const;
+    virtual ns3::Ptr< ns3::Node > GetNode() const;
 
-    virtual std::string GetName() const;
+    virtual bool NeedsArp() const;
 
-    virtual bool IsBridge() const;
-
-    virtual ns3::Address GetAddress() const;
-
-    virtual ns3::Ptr< ns3::Channel > GetPhyChannel() const;
-
-    virtual void SetIfIndex(uint32_t const index);
-
-    virtual void SetAddress(ns3::Address address);
-
-    virtual bool IsLinkUp() const;
-
-    virtual void SetName(std::string const name);
-
-    virtual bool SetMtu(uint16_t const mtu);
+    virtual bool SendFrom(ns3::Ptr< ns3::Packet > packet, ns3::Address const & source, ns3::Address const & dest, uint16_t protocolNumber);
 
     virtual bool SupportsSendFrom() const;
 
-    virtual ns3::Ptr< ns3::Channel > GetChannel() const;
-
-    virtual void SetConnectionManager(ns3::Ptr< ns3::ConnectionManager > connectionManager);
-
-    virtual uint32_t GetIfIndex() const;
+    virtual bool IsBridge() const;
 
     virtual ns3::Ptr< ns3::WimaxChannel > DoGetChannel() const;
 

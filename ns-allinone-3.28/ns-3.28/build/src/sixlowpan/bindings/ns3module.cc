@@ -654,27 +654,6 @@ int _wrap_PyNs3SixLowPanDispatch__tp_init(PyNs3SixLowPanDispatch *self, PyObject
 
 
 PyObject *
-_wrap_PyNs3SixLowPanDispatch_GetNhcDispatchType(PyNs3SixLowPanDispatch *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    ns3::SixLowPanDispatch::NhcDispatch_e retval;
-    int dispatch;
-    const char *keywords[] = {"dispatch", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &dispatch)) {
-        return NULL;
-    }
-    if (dispatch > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    retval = ns3::SixLowPanDispatch::GetNhcDispatchType(dispatch);
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3SixLowPanDispatch_GetDispatchType(PyNs3SixLowPanDispatch *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -695,6 +674,27 @@ _wrap_PyNs3SixLowPanDispatch_GetDispatchType(PyNs3SixLowPanDispatch *PYBINDGEN_U
 }
 
 
+PyObject *
+_wrap_PyNs3SixLowPanDispatch_GetNhcDispatchType(PyNs3SixLowPanDispatch *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    ns3::SixLowPanDispatch::NhcDispatch_e retval;
+    int dispatch;
+    const char *keywords[] = {"dispatch", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &dispatch)) {
+        return NULL;
+    }
+    if (dispatch > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    retval = ns3::SixLowPanDispatch::GetNhcDispatchType(dispatch);
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
 static PyObject*
 _wrap_PyNs3SixLowPanDispatch__copy__(PyNs3SixLowPanDispatch *self)
 {
@@ -708,8 +708,8 @@ _wrap_PyNs3SixLowPanDispatch__copy__(PyNs3SixLowPanDispatch *self)
 }
 
 static PyMethodDef PyNs3SixLowPanDispatch_methods[] = {
-    {(char *) "GetNhcDispatchType", (PyCFunction) _wrap_PyNs3SixLowPanDispatch_GetNhcDispatchType, METH_KEYWORDS|METH_VARARGS|METH_STATIC, "GetNhcDispatchType(dispatch)\n\ntype: dispatch: uint8_t" },
     {(char *) "GetDispatchType", (PyCFunction) _wrap_PyNs3SixLowPanDispatch_GetDispatchType, METH_KEYWORDS|METH_VARARGS|METH_STATIC, "GetDispatchType(dispatch)\n\ntype: dispatch: uint8_t" },
+    {(char *) "GetNhcDispatchType", (PyCFunction) _wrap_PyNs3SixLowPanDispatch_GetNhcDispatchType, METH_KEYWORDS|METH_VARARGS|METH_STATIC, "GetNhcDispatchType(dispatch)\n\ntype: dispatch: uint8_t" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3SixLowPanDispatch__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -888,20 +888,19 @@ int _wrap_PyNs3SixLowPanHelper__tp_init(PyNs3SixLowPanHelper *self, PyObject *ar
 
 
 PyObject *
-_wrap_PyNs3SixLowPanHelper_SetDeviceAttribute(PyNs3SixLowPanHelper *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3SixLowPanHelper_AssignStreams(PyNs3SixLowPanHelper *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    const char *n1;
-    Py_ssize_t n1_len;
-    PyNs3AttributeValue *v1;
-    const char *keywords[] = {"n1", "v1", NULL};
+    int64_t retval;
+    PyNs3NetDeviceContainer *c;
+    int64_t stream;
+    const char *keywords[] = {"c", "stream", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &n1, &n1_len, &PyNs3AttributeValue_Type, &v1)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!L", (char **) keywords, &PyNs3NetDeviceContainer_Type, &c, &stream)) {
         return NULL;
     }
-    self->obj->SetDeviceAttribute(std::string(n1, n1_len), *((PyNs3AttributeValue *) v1)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    retval = self->obj->AssignStreams(*((PyNs3NetDeviceContainer *) c)->obj, stream);
+    py_retval = Py_BuildValue((char *) "L", retval);
     return py_retval;
 }
 
@@ -928,19 +927,20 @@ _wrap_PyNs3SixLowPanHelper_Install(PyNs3SixLowPanHelper *self, PyObject *args, P
 
 
 PyObject *
-_wrap_PyNs3SixLowPanHelper_AssignStreams(PyNs3SixLowPanHelper *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3SixLowPanHelper_SetDeviceAttribute(PyNs3SixLowPanHelper *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    int64_t retval;
-    PyNs3NetDeviceContainer *c;
-    int64_t stream;
-    const char *keywords[] = {"c", "stream", NULL};
+    const char *n1;
+    Py_ssize_t n1_len;
+    PyNs3AttributeValue *v1;
+    const char *keywords[] = {"n1", "v1", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!L", (char **) keywords, &PyNs3NetDeviceContainer_Type, &c, &stream)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &n1, &n1_len, &PyNs3AttributeValue_Type, &v1)) {
         return NULL;
     }
-    retval = self->obj->AssignStreams(*((PyNs3NetDeviceContainer *) c)->obj, stream);
-    py_retval = Py_BuildValue((char *) "L", retval);
+    self->obj->SetDeviceAttribute(std::string(n1, n1_len), *((PyNs3AttributeValue *) v1)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -958,9 +958,9 @@ _wrap_PyNs3SixLowPanHelper__copy__(PyNs3SixLowPanHelper *self)
 }
 
 static PyMethodDef PyNs3SixLowPanHelper_methods[] = {
-    {(char *) "SetDeviceAttribute", (PyCFunction) _wrap_PyNs3SixLowPanHelper_SetDeviceAttribute, METH_KEYWORDS|METH_VARARGS, "SetDeviceAttribute(n1, v1)\n\ntype: n1: std::string\ntype: v1: ns3::AttributeValue const &" },
-    {(char *) "Install", (PyCFunction) _wrap_PyNs3SixLowPanHelper_Install, METH_KEYWORDS|METH_VARARGS, "Install(c)\n\ntype: c: ns3::NetDeviceContainer" },
     {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3SixLowPanHelper_AssignStreams, METH_KEYWORDS|METH_VARARGS, "AssignStreams(c, stream)\n\ntype: c: ns3::NetDeviceContainer\ntype: stream: int64_t" },
+    {(char *) "Install", (PyCFunction) _wrap_PyNs3SixLowPanHelper_Install, METH_KEYWORDS|METH_VARARGS, "Install(c)\n\ntype: c: ns3::NetDeviceContainer" },
+    {(char *) "SetDeviceAttribute", (PyCFunction) _wrap_PyNs3SixLowPanHelper_SetDeviceAttribute, METH_KEYWORDS|METH_VARARGS, "SetDeviceAttribute(n1, v1)\n\ntype: n1: std::string\ntype: v1: ns3::AttributeValue const &" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3SixLowPanHelper__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -1138,30 +1138,6 @@ int _wrap_PyNs3SixLowPanFrag1__tp_init(PyNs3SixLowPanFrag1 *self, PyObject *args
 
 
 PyObject *
-_wrap_PyNs3SixLowPanFrag1_GetDatagramTag(PyNs3SixLowPanFrag1 *self)
-{
-    PyObject *py_retval;
-    uint16_t retval;
-    
-    retval = self->obj->GetDatagramTag();
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanFrag1_GetDatagramSize(PyNs3SixLowPanFrag1 *self)
-{
-    PyObject *py_retval;
-    uint16_t retval;
-    
-    retval = self->obj->GetDatagramSize();
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3SixLowPanFrag1_Deserialize(PyNs3SixLowPanFrag1 *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -1179,22 +1155,53 @@ _wrap_PyNs3SixLowPanFrag1_Deserialize(PyNs3SixLowPanFrag1 *self, PyObject *args,
 
 
 PyObject *
-_wrap_PyNs3SixLowPanFrag1_SetDatagramSize(PyNs3SixLowPanFrag1 *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3SixLowPanFrag1_GetDatagramSize(PyNs3SixLowPanFrag1 *self)
 {
     PyObject *py_retval;
-    int datagramSize;
-    const char *keywords[] = {"datagramSize", NULL};
+    uint16_t retval;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &datagramSize)) {
-        return NULL;
-    }
-    if (datagramSize > 0xffff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SetDatagramSize(datagramSize);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    retval = self->obj->GetDatagramSize();
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanFrag1_GetDatagramTag(PyNs3SixLowPanFrag1 *self)
+{
+    PyObject *py_retval;
+    uint16_t retval;
+    
+    retval = self->obj->GetDatagramTag();
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanFrag1_GetInstanceTypeId(PyNs3SixLowPanFrag1 *self)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = self->obj->GetInstanceTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanFrag1_GetSerializedSize(PyNs3SixLowPanFrag1 *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetSerializedSize();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
 
@@ -1233,29 +1240,22 @@ _wrap_PyNs3SixLowPanFrag1_Serialize(PyNs3SixLowPanFrag1 *self, PyObject *args, P
 
 
 PyObject *
-_wrap_PyNs3SixLowPanFrag1_GetInstanceTypeId(PyNs3SixLowPanFrag1 *self)
+_wrap_PyNs3SixLowPanFrag1_SetDatagramSize(PyNs3SixLowPanFrag1 *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
+    int datagramSize;
+    const char *keywords[] = {"datagramSize", NULL};
     
-    ns3::TypeId retval = self->obj->GetInstanceTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanFrag1_GetSerializedSize(PyNs3SixLowPanFrag1 *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetSerializedSize();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &datagramSize)) {
+        return NULL;
+    }
+    if (datagramSize > 0xffff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SetDatagramSize(datagramSize);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -1296,14 +1296,14 @@ _wrap_PyNs3SixLowPanFrag1__copy__(PyNs3SixLowPanFrag1 *self)
 }
 
 static PyMethodDef PyNs3SixLowPanFrag1_methods[] = {
-    {(char *) "GetDatagramTag", (PyCFunction) _wrap_PyNs3SixLowPanFrag1_GetDatagramTag, METH_NOARGS, "GetDatagramTag()\n\n" },
-    {(char *) "GetDatagramSize", (PyCFunction) _wrap_PyNs3SixLowPanFrag1_GetDatagramSize, METH_NOARGS, "GetDatagramSize()\n\n" },
     {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3SixLowPanFrag1_Deserialize, METH_KEYWORDS|METH_VARARGS, "Deserialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
-    {(char *) "SetDatagramSize", (PyCFunction) _wrap_PyNs3SixLowPanFrag1_SetDatagramSize, METH_KEYWORDS|METH_VARARGS, "SetDatagramSize(datagramSize)\n\ntype: datagramSize: uint16_t" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3SixLowPanFrag1_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3SixLowPanFrag1_Serialize, METH_KEYWORDS|METH_VARARGS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
+    {(char *) "GetDatagramSize", (PyCFunction) _wrap_PyNs3SixLowPanFrag1_GetDatagramSize, METH_NOARGS, "GetDatagramSize()\n\n" },
+    {(char *) "GetDatagramTag", (PyCFunction) _wrap_PyNs3SixLowPanFrag1_GetDatagramTag, METH_NOARGS, "GetDatagramTag()\n\n" },
     {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3SixLowPanFrag1_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
     {(char *) "GetSerializedSize", (PyCFunction) _wrap_PyNs3SixLowPanFrag1_GetSerializedSize, METH_NOARGS, "GetSerializedSize()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3SixLowPanFrag1_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3SixLowPanFrag1_Serialize, METH_KEYWORDS|METH_VARARGS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
+    {(char *) "SetDatagramSize", (PyCFunction) _wrap_PyNs3SixLowPanFrag1_SetDatagramSize, METH_KEYWORDS|METH_VARARGS, "SetDatagramSize(datagramSize)\n\ntype: datagramSize: uint16_t" },
     {(char *) "SetDatagramTag", (PyCFunction) _wrap_PyNs3SixLowPanFrag1_SetDatagramTag, METH_KEYWORDS|METH_VARARGS, "SetDatagramTag(datagramTag)\n\ntype: datagramTag: uint16_t" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3SixLowPanFrag1__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
@@ -1412,7 +1412,7 @@ PyTypeObject PyNs3SixLowPanFrag1_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_BASETYPE,                      /* tp_flags */
     "SixLowPanFrag1(arg0)\nSixLowPanFrag1()",                        /* Documentation string */
     (traverseproc)PyNs3SixLowPanFrag1__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3SixLowPanFrag1__tp_clear,             /* tp_clear */
@@ -1510,30 +1510,6 @@ int _wrap_PyNs3SixLowPanFragN__tp_init(PyNs3SixLowPanFragN *self, PyObject *args
 
 
 PyObject *
-_wrap_PyNs3SixLowPanFragN_GetDatagramTag(PyNs3SixLowPanFragN *self)
-{
-    PyObject *py_retval;
-    uint16_t retval;
-    
-    retval = self->obj->GetDatagramTag();
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanFragN_GetDatagramSize(PyNs3SixLowPanFragN *self)
-{
-    PyObject *py_retval;
-    uint16_t retval;
-    
-    retval = self->obj->GetDatagramSize();
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3SixLowPanFragN_Deserialize(PyNs3SixLowPanFragN *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -1551,22 +1527,65 @@ _wrap_PyNs3SixLowPanFragN_Deserialize(PyNs3SixLowPanFragN *self, PyObject *args,
 
 
 PyObject *
-_wrap_PyNs3SixLowPanFragN_SetDatagramSize(PyNs3SixLowPanFragN *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3SixLowPanFragN_GetDatagramOffset(PyNs3SixLowPanFragN *self)
 {
     PyObject *py_retval;
-    int datagramSize;
-    const char *keywords[] = {"datagramSize", NULL};
+    uint8_t retval;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &datagramSize)) {
-        return NULL;
-    }
-    if (datagramSize > 0xffff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SetDatagramSize(datagramSize);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    retval = self->obj->GetDatagramOffset();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanFragN_GetDatagramSize(PyNs3SixLowPanFragN *self)
+{
+    PyObject *py_retval;
+    uint16_t retval;
+    
+    retval = self->obj->GetDatagramSize();
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanFragN_GetDatagramTag(PyNs3SixLowPanFragN *self)
+{
+    PyObject *py_retval;
+    uint16_t retval;
+    
+    retval = self->obj->GetDatagramTag();
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanFragN_GetInstanceTypeId(PyNs3SixLowPanFragN *self)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = self->obj->GetInstanceTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanFragN_GetSerializedSize(PyNs3SixLowPanFragN *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetSerializedSize();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
 
@@ -1605,46 +1624,6 @@ _wrap_PyNs3SixLowPanFragN_Serialize(PyNs3SixLowPanFragN *self, PyObject *args, P
 
 
 PyObject *
-_wrap_PyNs3SixLowPanFragN_GetDatagramOffset(PyNs3SixLowPanFragN *self)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    
-    retval = self->obj->GetDatagramOffset();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanFragN_GetInstanceTypeId(PyNs3SixLowPanFragN *self)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = self->obj->GetInstanceTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanFragN_GetSerializedSize(PyNs3SixLowPanFragN *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetSerializedSize();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3SixLowPanFragN_SetDatagramOffset(PyNs3SixLowPanFragN *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -1659,6 +1638,27 @@ _wrap_PyNs3SixLowPanFragN_SetDatagramOffset(PyNs3SixLowPanFragN *self, PyObject 
         return NULL;
     }
     self->obj->SetDatagramOffset(datagramOffset);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanFragN_SetDatagramSize(PyNs3SixLowPanFragN *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int datagramSize;
+    const char *keywords[] = {"datagramSize", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &datagramSize)) {
+        return NULL;
+    }
+    if (datagramSize > 0xffff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SetDatagramSize(datagramSize);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -1701,16 +1701,16 @@ _wrap_PyNs3SixLowPanFragN__copy__(PyNs3SixLowPanFragN *self)
 }
 
 static PyMethodDef PyNs3SixLowPanFragN_methods[] = {
-    {(char *) "GetDatagramTag", (PyCFunction) _wrap_PyNs3SixLowPanFragN_GetDatagramTag, METH_NOARGS, "GetDatagramTag()\n\n" },
-    {(char *) "GetDatagramSize", (PyCFunction) _wrap_PyNs3SixLowPanFragN_GetDatagramSize, METH_NOARGS, "GetDatagramSize()\n\n" },
     {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3SixLowPanFragN_Deserialize, METH_KEYWORDS|METH_VARARGS, "Deserialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
-    {(char *) "SetDatagramSize", (PyCFunction) _wrap_PyNs3SixLowPanFragN_SetDatagramSize, METH_KEYWORDS|METH_VARARGS, "SetDatagramSize(datagramSize)\n\ntype: datagramSize: uint16_t" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3SixLowPanFragN_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3SixLowPanFragN_Serialize, METH_KEYWORDS|METH_VARARGS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
     {(char *) "GetDatagramOffset", (PyCFunction) _wrap_PyNs3SixLowPanFragN_GetDatagramOffset, METH_NOARGS, "GetDatagramOffset()\n\n" },
+    {(char *) "GetDatagramSize", (PyCFunction) _wrap_PyNs3SixLowPanFragN_GetDatagramSize, METH_NOARGS, "GetDatagramSize()\n\n" },
+    {(char *) "GetDatagramTag", (PyCFunction) _wrap_PyNs3SixLowPanFragN_GetDatagramTag, METH_NOARGS, "GetDatagramTag()\n\n" },
     {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3SixLowPanFragN_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
     {(char *) "GetSerializedSize", (PyCFunction) _wrap_PyNs3SixLowPanFragN_GetSerializedSize, METH_NOARGS, "GetSerializedSize()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3SixLowPanFragN_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3SixLowPanFragN_Serialize, METH_KEYWORDS|METH_VARARGS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
     {(char *) "SetDatagramOffset", (PyCFunction) _wrap_PyNs3SixLowPanFragN_SetDatagramOffset, METH_KEYWORDS|METH_VARARGS, "SetDatagramOffset(datagramOffset)\n\ntype: datagramOffset: uint8_t" },
+    {(char *) "SetDatagramSize", (PyCFunction) _wrap_PyNs3SixLowPanFragN_SetDatagramSize, METH_KEYWORDS|METH_VARARGS, "SetDatagramSize(datagramSize)\n\ntype: datagramSize: uint16_t" },
     {(char *) "SetDatagramTag", (PyCFunction) _wrap_PyNs3SixLowPanFragN_SetDatagramTag, METH_KEYWORDS|METH_VARARGS, "SetDatagramTag(datagramTag)\n\ntype: datagramTag: uint16_t" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3SixLowPanFragN__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
@@ -1819,7 +1819,7 @@ PyTypeObject PyNs3SixLowPanFragN_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_BASETYPE,                      /* tp_flags */
     "SixLowPanFragN(arg0)\nSixLowPanFragN()",                        /* Documentation string */
     (traverseproc)PyNs3SixLowPanFragN__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3SixLowPanFragN__tp_clear,             /* tp_clear */
@@ -1917,56 +1917,6 @@ int _wrap_PyNs3SixLowPanHc1__tp_init(PyNs3SixLowPanHc1 *self, PyObject *args, Py
 
 
 PyObject *
-_wrap_PyNs3SixLowPanHc1_SetSrcCompression(PyNs3SixLowPanHc1 *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    ns3::SixLowPanHc1::LowPanHc1Addr_e srcCompression;
-    const char *keywords[] = {"srcCompression", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &srcCompression)) {
-        return NULL;
-    }
-    self->obj->SetSrcCompression(srcCompression);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanHc1_GetDstCompression(PyNs3SixLowPanHc1 *self)
-{
-    PyObject *py_retval;
-    ns3::SixLowPanHc1::LowPanHc1Addr_e retval;
-    
-    retval = self->obj->GetDstCompression();
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanHc1_SetHopLimit(PyNs3SixLowPanHc1 *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int limit;
-    const char *keywords[] = {"limit", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &limit)) {
-        return NULL;
-    }
-    if (limit > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SetHopLimit(limit);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3SixLowPanHc1_Deserialize(PyNs3SixLowPanHc1 *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -1984,18 +1934,13 @@ _wrap_PyNs3SixLowPanHc1_Deserialize(PyNs3SixLowPanHc1 *self, PyObject *args, PyO
 
 
 PyObject *
-_wrap_PyNs3SixLowPanHc1_SetDstCompression(PyNs3SixLowPanHc1 *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3SixLowPanHc1_GetDstCompression(PyNs3SixLowPanHc1 *self)
 {
     PyObject *py_retval;
-    ns3::SixLowPanHc1::LowPanHc1Addr_e dstCompression;
-    const char *keywords[] = {"dstCompression", NULL};
+    ns3::SixLowPanHc1::LowPanHc1Addr_e retval;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &dstCompression)) {
-        return NULL;
-    }
-    self->obj->SetDstCompression(dstCompression);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    retval = self->obj->GetDstCompression();
+    py_retval = Py_BuildValue((char *) "i", retval);
     return py_retval;
 }
 
@@ -2008,6 +1953,122 @@ _wrap_PyNs3SixLowPanHc1_GetFlowLabel(PyNs3SixLowPanHc1 *self)
     
     retval = self->obj->GetFlowLabel();
     py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanHc1_GetHopLimit(PyNs3SixLowPanHc1 *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    
+    retval = self->obj->GetHopLimit();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanHc1_GetInstanceTypeId(PyNs3SixLowPanHc1 *self)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = self->obj->GetInstanceTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanHc1_GetNextHeader(PyNs3SixLowPanHc1 *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    
+    retval = self->obj->GetNextHeader();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanHc1_GetSerializedSize(PyNs3SixLowPanHc1 *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetSerializedSize();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanHc1_GetSrcCompression(PyNs3SixLowPanHc1 *self)
+{
+    PyObject *py_retval;
+    ns3::SixLowPanHc1::LowPanHc1Addr_e retval;
+    
+    retval = self->obj->GetSrcCompression();
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanHc1_GetTrafficClass(PyNs3SixLowPanHc1 *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    
+    retval = self->obj->GetTrafficClass();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanHc1_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::SixLowPanHc1::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanHc1_IsHc2HeaderPresent(PyNs3SixLowPanHc1 *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->IsHc2HeaderPresent();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanHc1_IsTcflCompression(PyNs3SixLowPanHc1 *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->IsTcflCompression();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
@@ -2030,13 +2091,18 @@ _wrap_PyNs3SixLowPanHc1_Serialize(PyNs3SixLowPanHc1 *self, PyObject *args, PyObj
 
 
 PyObject *
-_wrap_PyNs3SixLowPanHc1_GetNextHeader(PyNs3SixLowPanHc1 *self)
+_wrap_PyNs3SixLowPanHc1_SetDstCompression(PyNs3SixLowPanHc1 *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    uint8_t retval;
+    ns3::SixLowPanHc1::LowPanHc1Addr_e dstCompression;
+    const char *keywords[] = {"dstCompression", NULL};
     
-    retval = self->obj->GetNextHeader();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &dstCompression)) {
+        return NULL;
+    }
+    self->obj->SetDstCompression(dstCompression);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -2052,76 +2118,6 @@ _wrap_PyNs3SixLowPanHc1_SetFlowLabel(PyNs3SixLowPanHc1 *self, PyObject *args, Py
         return NULL;
     }
     self->obj->SetFlowLabel(flowLabel);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanHc1_IsHc2HeaderPresent(PyNs3SixLowPanHc1 *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->IsHc2HeaderPresent();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanHc1_SetNextHeader(PyNs3SixLowPanHc1 *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int nextHeader;
-    const char *keywords[] = {"nextHeader", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &nextHeader)) {
-        return NULL;
-    }
-    if (nextHeader > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SetNextHeader(nextHeader);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanHc1_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::SixLowPanHc1::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanHc1_SetTrafficClass(PyNs3SixLowPanHc1 *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int trafficClass;
-    const char *keywords[] = {"trafficClass", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &trafficClass)) {
-        return NULL;
-    }
-    if (trafficClass > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SetTrafficClass(trafficClass);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -2148,53 +2144,60 @@ _wrap_PyNs3SixLowPanHc1_SetHc2HeaderPresent(PyNs3SixLowPanHc1 *self, PyObject *a
 
 
 PyObject *
-_wrap_PyNs3SixLowPanHc1_GetInstanceTypeId(PyNs3SixLowPanHc1 *self)
+_wrap_PyNs3SixLowPanHc1_SetHopLimit(PyNs3SixLowPanHc1 *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
+    int limit;
+    const char *keywords[] = {"limit", NULL};
     
-    ns3::TypeId retval = self->obj->GetInstanceTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &limit)) {
+        return NULL;
+    }
+    if (limit > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SetHopLimit(limit);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3SixLowPanHc1_GetSerializedSize(PyNs3SixLowPanHc1 *self)
+_wrap_PyNs3SixLowPanHc1_SetNextHeader(PyNs3SixLowPanHc1 *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    uint32_t retval;
+    int nextHeader;
+    const char *keywords[] = {"nextHeader", NULL};
     
-    retval = self->obj->GetSerializedSize();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &nextHeader)) {
+        return NULL;
+    }
+    if (nextHeader > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SetNextHeader(nextHeader);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3SixLowPanHc1_GetHopLimit(PyNs3SixLowPanHc1 *self)
+_wrap_PyNs3SixLowPanHc1_SetSrcCompression(PyNs3SixLowPanHc1 *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    uint8_t retval;
+    ns3::SixLowPanHc1::LowPanHc1Addr_e srcCompression;
+    const char *keywords[] = {"srcCompression", NULL};
     
-    retval = self->obj->GetHopLimit();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanHc1_GetTrafficClass(PyNs3SixLowPanHc1 *self)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    
-    retval = self->obj->GetTrafficClass();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &srcCompression)) {
+        return NULL;
+    }
+    self->obj->SetSrcCompression(srcCompression);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -2219,25 +2222,22 @@ _wrap_PyNs3SixLowPanHc1_SetTcflCompression(PyNs3SixLowPanHc1 *self, PyObject *ar
 
 
 PyObject *
-_wrap_PyNs3SixLowPanHc1_GetSrcCompression(PyNs3SixLowPanHc1 *self)
+_wrap_PyNs3SixLowPanHc1_SetTrafficClass(PyNs3SixLowPanHc1 *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    ns3::SixLowPanHc1::LowPanHc1Addr_e retval;
+    int trafficClass;
+    const char *keywords[] = {"trafficClass", NULL};
     
-    retval = self->obj->GetSrcCompression();
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanHc1_IsTcflCompression(PyNs3SixLowPanHc1 *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->IsTcflCompression();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &trafficClass)) {
+        return NULL;
+    }
+    if (trafficClass > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SetTrafficClass(trafficClass);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -2257,27 +2257,27 @@ _wrap_PyNs3SixLowPanHc1__copy__(PyNs3SixLowPanHc1 *self)
 }
 
 static PyMethodDef PyNs3SixLowPanHc1_methods[] = {
-    {(char *) "SetSrcCompression", (PyCFunction) _wrap_PyNs3SixLowPanHc1_SetSrcCompression, METH_KEYWORDS|METH_VARARGS, "SetSrcCompression(srcCompression)\n\ntype: srcCompression: ns3::SixLowPanHc1::LowPanHc1Addr_e" },
-    {(char *) "GetDstCompression", (PyCFunction) _wrap_PyNs3SixLowPanHc1_GetDstCompression, METH_NOARGS, "GetDstCompression()\n\n" },
-    {(char *) "SetHopLimit", (PyCFunction) _wrap_PyNs3SixLowPanHc1_SetHopLimit, METH_KEYWORDS|METH_VARARGS, "SetHopLimit(limit)\n\ntype: limit: uint8_t" },
     {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3SixLowPanHc1_Deserialize, METH_KEYWORDS|METH_VARARGS, "Deserialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
-    {(char *) "SetDstCompression", (PyCFunction) _wrap_PyNs3SixLowPanHc1_SetDstCompression, METH_KEYWORDS|METH_VARARGS, "SetDstCompression(dstCompression)\n\ntype: dstCompression: ns3::SixLowPanHc1::LowPanHc1Addr_e" },
+    {(char *) "GetDstCompression", (PyCFunction) _wrap_PyNs3SixLowPanHc1_GetDstCompression, METH_NOARGS, "GetDstCompression()\n\n" },
     {(char *) "GetFlowLabel", (PyCFunction) _wrap_PyNs3SixLowPanHc1_GetFlowLabel, METH_NOARGS, "GetFlowLabel()\n\n" },
-    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3SixLowPanHc1_Serialize, METH_KEYWORDS|METH_VARARGS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
-    {(char *) "GetNextHeader", (PyCFunction) _wrap_PyNs3SixLowPanHc1_GetNextHeader, METH_NOARGS, "GetNextHeader()\n\n" },
-    {(char *) "SetFlowLabel", (PyCFunction) _wrap_PyNs3SixLowPanHc1_SetFlowLabel, METH_KEYWORDS|METH_VARARGS, "SetFlowLabel(flowLabel)\n\ntype: flowLabel: uint32_t" },
-    {(char *) "IsHc2HeaderPresent", (PyCFunction) _wrap_PyNs3SixLowPanHc1_IsHc2HeaderPresent, METH_NOARGS, "IsHc2HeaderPresent()\n\n" },
-    {(char *) "SetNextHeader", (PyCFunction) _wrap_PyNs3SixLowPanHc1_SetNextHeader, METH_KEYWORDS|METH_VARARGS, "SetNextHeader(nextHeader)\n\ntype: nextHeader: uint8_t" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3SixLowPanHc1_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "SetTrafficClass", (PyCFunction) _wrap_PyNs3SixLowPanHc1_SetTrafficClass, METH_KEYWORDS|METH_VARARGS, "SetTrafficClass(trafficClass)\n\ntype: trafficClass: uint8_t" },
-    {(char *) "SetHc2HeaderPresent", (PyCFunction) _wrap_PyNs3SixLowPanHc1_SetHc2HeaderPresent, METH_KEYWORDS|METH_VARARGS, "SetHc2HeaderPresent(hc2HeaderPresent)\n\ntype: hc2HeaderPresent: bool" },
-    {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3SixLowPanHc1_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
-    {(char *) "GetSerializedSize", (PyCFunction) _wrap_PyNs3SixLowPanHc1_GetSerializedSize, METH_NOARGS, "GetSerializedSize()\n\n" },
     {(char *) "GetHopLimit", (PyCFunction) _wrap_PyNs3SixLowPanHc1_GetHopLimit, METH_NOARGS, "GetHopLimit()\n\n" },
-    {(char *) "GetTrafficClass", (PyCFunction) _wrap_PyNs3SixLowPanHc1_GetTrafficClass, METH_NOARGS, "GetTrafficClass()\n\n" },
-    {(char *) "SetTcflCompression", (PyCFunction) _wrap_PyNs3SixLowPanHc1_SetTcflCompression, METH_KEYWORDS|METH_VARARGS, "SetTcflCompression(tcflCompression)\n\ntype: tcflCompression: bool" },
+    {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3SixLowPanHc1_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
+    {(char *) "GetNextHeader", (PyCFunction) _wrap_PyNs3SixLowPanHc1_GetNextHeader, METH_NOARGS, "GetNextHeader()\n\n" },
+    {(char *) "GetSerializedSize", (PyCFunction) _wrap_PyNs3SixLowPanHc1_GetSerializedSize, METH_NOARGS, "GetSerializedSize()\n\n" },
     {(char *) "GetSrcCompression", (PyCFunction) _wrap_PyNs3SixLowPanHc1_GetSrcCompression, METH_NOARGS, "GetSrcCompression()\n\n" },
+    {(char *) "GetTrafficClass", (PyCFunction) _wrap_PyNs3SixLowPanHc1_GetTrafficClass, METH_NOARGS, "GetTrafficClass()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3SixLowPanHc1_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "IsHc2HeaderPresent", (PyCFunction) _wrap_PyNs3SixLowPanHc1_IsHc2HeaderPresent, METH_NOARGS, "IsHc2HeaderPresent()\n\n" },
     {(char *) "IsTcflCompression", (PyCFunction) _wrap_PyNs3SixLowPanHc1_IsTcflCompression, METH_NOARGS, "IsTcflCompression()\n\n" },
+    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3SixLowPanHc1_Serialize, METH_KEYWORDS|METH_VARARGS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
+    {(char *) "SetDstCompression", (PyCFunction) _wrap_PyNs3SixLowPanHc1_SetDstCompression, METH_KEYWORDS|METH_VARARGS, "SetDstCompression(dstCompression)\n\ntype: dstCompression: ns3::SixLowPanHc1::LowPanHc1Addr_e" },
+    {(char *) "SetFlowLabel", (PyCFunction) _wrap_PyNs3SixLowPanHc1_SetFlowLabel, METH_KEYWORDS|METH_VARARGS, "SetFlowLabel(flowLabel)\n\ntype: flowLabel: uint32_t" },
+    {(char *) "SetHc2HeaderPresent", (PyCFunction) _wrap_PyNs3SixLowPanHc1_SetHc2HeaderPresent, METH_KEYWORDS|METH_VARARGS, "SetHc2HeaderPresent(hc2HeaderPresent)\n\ntype: hc2HeaderPresent: bool" },
+    {(char *) "SetHopLimit", (PyCFunction) _wrap_PyNs3SixLowPanHc1_SetHopLimit, METH_KEYWORDS|METH_VARARGS, "SetHopLimit(limit)\n\ntype: limit: uint8_t" },
+    {(char *) "SetNextHeader", (PyCFunction) _wrap_PyNs3SixLowPanHc1_SetNextHeader, METH_KEYWORDS|METH_VARARGS, "SetNextHeader(nextHeader)\n\ntype: nextHeader: uint8_t" },
+    {(char *) "SetSrcCompression", (PyCFunction) _wrap_PyNs3SixLowPanHc1_SetSrcCompression, METH_KEYWORDS|METH_VARARGS, "SetSrcCompression(srcCompression)\n\ntype: srcCompression: ns3::SixLowPanHc1::LowPanHc1Addr_e" },
+    {(char *) "SetTcflCompression", (PyCFunction) _wrap_PyNs3SixLowPanHc1_SetTcflCompression, METH_KEYWORDS|METH_VARARGS, "SetTcflCompression(tcflCompression)\n\ntype: tcflCompression: bool" },
+    {(char *) "SetTrafficClass", (PyCFunction) _wrap_PyNs3SixLowPanHc1_SetTrafficClass, METH_KEYWORDS|METH_VARARGS, "SetTrafficClass(trafficClass)\n\ntype: trafficClass: uint8_t" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3SixLowPanHc1__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -2385,7 +2385,7 @@ PyTypeObject PyNs3SixLowPanHc1_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_BASETYPE,                      /* tp_flags */
     "SixLowPanHc1(arg0)\nSixLowPanHc1()",                        /* Documentation string */
     (traverseproc)PyNs3SixLowPanHc1__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3SixLowPanHc1__tp_clear,             /* tp_clear */
@@ -2521,18 +2521,270 @@ int _wrap_PyNs3SixLowPanIphc__tp_init(PyNs3SixLowPanIphc *self, PyObject *args, 
 
 
 PyObject *
-_wrap_PyNs3SixLowPanIphc_SetSam(PyNs3SixLowPanIphc *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3SixLowPanIphc_Deserialize(PyNs3SixLowPanIphc *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    ns3::SixLowPanIphc::HeaderCompression_e samField;
-    const char *keywords[] = {"samField", NULL};
+    uint32_t retval;
+    PyNs3BufferIterator *start;
+    const char *keywords[] = {"start", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &samField)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
         return NULL;
     }
-    self->obj->SetSam(samField);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    retval = self->obj->Deserialize(*((PyNs3BufferIterator *) start)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanIphc_GetCid(PyNs3SixLowPanIphc *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->GetCid();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanIphc_GetDac(PyNs3SixLowPanIphc *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->GetDac();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanIphc_GetDam(PyNs3SixLowPanIphc *self)
+{
+    PyObject *py_retval;
+    ns3::SixLowPanIphc::HeaderCompression_e retval;
+    
+    retval = self->obj->GetDam();
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanIphc_GetDscp(PyNs3SixLowPanIphc *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    
+    retval = self->obj->GetDscp();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanIphc_GetDstAddress(PyNs3SixLowPanIphc *self)
+{
+    PyObject *py_retval;
+    PyNs3Ipv6Address *py_Ipv6Address;
+    
+    ns3::Ipv6Address retval = self->obj->GetDstAddress();
+    py_Ipv6Address = PyObject_New(PyNs3Ipv6Address, &PyNs3Ipv6Address_Type);
+    py_Ipv6Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Ipv6Address->obj = new ns3::Ipv6Address(retval);
+    PyNs3Ipv6Address_wrapper_registry[(void *) py_Ipv6Address->obj] = (PyObject *) py_Ipv6Address;
+    py_retval = Py_BuildValue((char *) "N", py_Ipv6Address);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanIphc_GetDstContextId(PyNs3SixLowPanIphc *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    
+    retval = self->obj->GetDstContextId();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanIphc_GetEcn(PyNs3SixLowPanIphc *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    
+    retval = self->obj->GetEcn();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanIphc_GetFlowLabel(PyNs3SixLowPanIphc *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetFlowLabel();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanIphc_GetHlim(PyNs3SixLowPanIphc *self)
+{
+    PyObject *py_retval;
+    ns3::SixLowPanIphc::Hlim_e retval;
+    
+    retval = self->obj->GetHlim();
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanIphc_GetHopLimit(PyNs3SixLowPanIphc *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    
+    retval = self->obj->GetHopLimit();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanIphc_GetInstanceTypeId(PyNs3SixLowPanIphc *self)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = self->obj->GetInstanceTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanIphc_GetM(PyNs3SixLowPanIphc *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->GetM();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanIphc_GetNextHeader(PyNs3SixLowPanIphc *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    
+    retval = self->obj->GetNextHeader();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanIphc_GetNh(PyNs3SixLowPanIphc *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->GetNh();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanIphc_GetSac(PyNs3SixLowPanIphc *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->GetSac();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanIphc_GetSam(PyNs3SixLowPanIphc *self)
+{
+    PyObject *py_retval;
+    ns3::SixLowPanIphc::HeaderCompression_e retval;
+    
+    retval = self->obj->GetSam();
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanIphc_GetSerializedSize(PyNs3SixLowPanIphc *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetSerializedSize();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanIphc_GetSrcAddress(PyNs3SixLowPanIphc *self)
+{
+    PyObject *py_retval;
+    PyNs3Ipv6Address *py_Ipv6Address;
+    
+    ns3::Ipv6Address retval = self->obj->GetSrcAddress();
+    py_Ipv6Address = PyObject_New(PyNs3Ipv6Address, &PyNs3Ipv6Address_Type);
+    py_Ipv6Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Ipv6Address->obj = new ns3::Ipv6Address(retval);
+    PyNs3Ipv6Address_wrapper_registry[(void *) py_Ipv6Address->obj] = (PyObject *) py_Ipv6Address;
+    py_retval = Py_BuildValue((char *) "N", py_Ipv6Address);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanIphc_GetSrcContextId(PyNs3SixLowPanIphc *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    
+    retval = self->obj->GetSrcContextId();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanIphc_GetTf(PyNs3SixLowPanIphc *self)
+{
+    PyObject *py_retval;
+    ns3::SixLowPanIphc::TrafficClassFlowLabel_e retval;
+    
+    retval = self->obj->GetTf();
+    py_retval = Py_BuildValue((char *) "i", retval);
     return py_retval;
 }
 
@@ -2554,13 +2806,267 @@ _wrap_PyNs3SixLowPanIphc_GetTypeId(void)
 
 
 PyObject *
-_wrap_PyNs3SixLowPanIphc_GetNh(PyNs3SixLowPanIphc *self)
+_wrap_PyNs3SixLowPanIphc_Serialize(PyNs3SixLowPanIphc *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    bool retval;
+    PyNs3BufferIterator *start;
+    const char *keywords[] = {"start", NULL};
     
-    retval = self->obj->GetNh();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
+        return NULL;
+    }
+    self->obj->Serialize(*((PyNs3BufferIterator *) start)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanIphc_SetCid(PyNs3SixLowPanIphc *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool cidField;
+    PyObject *py_cidField;
+    const char *keywords[] = {"cidField", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &py_cidField)) {
+        return NULL;
+    }
+    cidField = (bool) PyObject_IsTrue(py_cidField);
+    self->obj->SetCid(cidField);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanIphc_SetDac(PyNs3SixLowPanIphc *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool dacField;
+    PyObject *py_dacField;
+    const char *keywords[] = {"dacField", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &py_dacField)) {
+        return NULL;
+    }
+    dacField = (bool) PyObject_IsTrue(py_dacField);
+    self->obj->SetDac(dacField);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanIphc_SetDam(PyNs3SixLowPanIphc *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    ns3::SixLowPanIphc::HeaderCompression_e damField;
+    const char *keywords[] = {"damField", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &damField)) {
+        return NULL;
+    }
+    self->obj->SetDam(damField);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanIphc_SetDscp(PyNs3SixLowPanIphc *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int dscp;
+    const char *keywords[] = {"dscp", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &dscp)) {
+        return NULL;
+    }
+    if (dscp > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SetDscp(dscp);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanIphc_SetDstAddress(PyNs3SixLowPanIphc *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Ipv6Address *dstAddress;
+    const char *keywords[] = {"dstAddress", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv6Address_Type, &dstAddress)) {
+        return NULL;
+    }
+    self->obj->SetDstAddress(*((PyNs3Ipv6Address *) dstAddress)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanIphc_SetDstContextId(PyNs3SixLowPanIphc *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int dstContextId;
+    const char *keywords[] = {"dstContextId", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &dstContextId)) {
+        return NULL;
+    }
+    if (dstContextId > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SetDstContextId(dstContextId);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanIphc_SetEcn(PyNs3SixLowPanIphc *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int ecn;
+    const char *keywords[] = {"ecn", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &ecn)) {
+        return NULL;
+    }
+    if (ecn > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SetEcn(ecn);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanIphc_SetFlowLabel(PyNs3SixLowPanIphc *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int flowLabel;
+    const char *keywords[] = {"flowLabel", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &flowLabel)) {
+        return NULL;
+    }
+    self->obj->SetFlowLabel(flowLabel);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanIphc_SetHlim(PyNs3SixLowPanIphc *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    ns3::SixLowPanIphc::Hlim_e hlimField;
+    const char *keywords[] = {"hlimField", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &hlimField)) {
+        return NULL;
+    }
+    self->obj->SetHlim(hlimField);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanIphc_SetHopLimit(PyNs3SixLowPanIphc *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int hopLimit;
+    const char *keywords[] = {"hopLimit", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &hopLimit)) {
+        return NULL;
+    }
+    if (hopLimit > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SetHopLimit(hopLimit);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanIphc_SetM(PyNs3SixLowPanIphc *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool mField;
+    PyObject *py_mField;
+    const char *keywords[] = {"mField", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &py_mField)) {
+        return NULL;
+    }
+    mField = (bool) PyObject_IsTrue(py_mField);
+    self->obj->SetM(mField);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanIphc_SetNextHeader(PyNs3SixLowPanIphc *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int nextHeader;
+    const char *keywords[] = {"nextHeader", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &nextHeader)) {
+        return NULL;
+    }
+    if (nextHeader > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SetNextHeader(nextHeader);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanIphc_SetNh(PyNs3SixLowPanIphc *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool nhField;
+    PyObject *py_nhField;
+    const char *keywords[] = {"nhField", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &py_nhField)) {
+        return NULL;
+    }
+    nhField = (bool) PyObject_IsTrue(py_nhField);
+    self->obj->SetNh(nhField);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -2585,57 +3091,16 @@ _wrap_PyNs3SixLowPanIphc_SetSac(PyNs3SixLowPanIphc *self, PyObject *args, PyObje
 
 
 PyObject *
-_wrap_PyNs3SixLowPanIphc_GetCid(PyNs3SixLowPanIphc *self)
+_wrap_PyNs3SixLowPanIphc_SetSam(PyNs3SixLowPanIphc *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    bool retval;
+    ns3::SixLowPanIphc::HeaderCompression_e samField;
+    const char *keywords[] = {"samField", NULL};
     
-    retval = self->obj->GetCid();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanIphc_GetHlim(PyNs3SixLowPanIphc *self)
-{
-    PyObject *py_retval;
-    ns3::SixLowPanIphc::Hlim_e retval;
-    
-    retval = self->obj->GetHlim();
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanIphc_SetHlim(PyNs3SixLowPanIphc *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    ns3::SixLowPanIphc::Hlim_e hlimField;
-    const char *keywords[] = {"hlimField", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &hlimField)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &samField)) {
         return NULL;
     }
-    self->obj->SetHlim(hlimField);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanIphc_SetDstAddress(PyNs3SixLowPanIphc *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Ipv6Address *dstAddress;
-    const char *keywords[] = {"dstAddress", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv6Address_Type, &dstAddress)) {
-        return NULL;
-    }
-    self->obj->SetDstAddress(*((PyNs3Ipv6Address *) dstAddress)->obj);
+    self->obj->SetSam(samField);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -2681,37 +3146,6 @@ _wrap_PyNs3SixLowPanIphc_SetSrcContextId(PyNs3SixLowPanIphc *self, PyObject *arg
 
 
 PyObject *
-_wrap_PyNs3SixLowPanIphc_GetM(PyNs3SixLowPanIphc *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->GetM();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanIphc_SetNh(PyNs3SixLowPanIphc *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool nhField;
-    PyObject *py_nhField;
-    const char *keywords[] = {"nhField", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &py_nhField)) {
-        return NULL;
-    }
-    nhField = (bool) PyObject_IsTrue(py_nhField);
-    self->obj->SetNh(nhField);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3SixLowPanIphc_SetTf(PyNs3SixLowPanIphc *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -2724,440 +3158,6 @@ _wrap_PyNs3SixLowPanIphc_SetTf(PyNs3SixLowPanIphc *self, PyObject *args, PyObjec
     self->obj->SetTf(tfField);
     Py_INCREF(Py_None);
     py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanIphc_SetFlowLabel(PyNs3SixLowPanIphc *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int flowLabel;
-    const char *keywords[] = {"flowLabel", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &flowLabel)) {
-        return NULL;
-    }
-    self->obj->SetFlowLabel(flowLabel);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanIphc_GetSac(PyNs3SixLowPanIphc *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->GetSac();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanIphc_GetDstAddress(PyNs3SixLowPanIphc *self)
-{
-    PyObject *py_retval;
-    PyNs3Ipv6Address *py_Ipv6Address;
-    
-    ns3::Ipv6Address retval = self->obj->GetDstAddress();
-    py_Ipv6Address = PyObject_New(PyNs3Ipv6Address, &PyNs3Ipv6Address_Type);
-    py_Ipv6Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Ipv6Address->obj = new ns3::Ipv6Address(retval);
-    PyNs3Ipv6Address_wrapper_registry[(void *) py_Ipv6Address->obj] = (PyObject *) py_Ipv6Address;
-    py_retval = Py_BuildValue((char *) "N", py_Ipv6Address);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanIphc_GetDstContextId(PyNs3SixLowPanIphc *self)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    
-    retval = self->obj->GetDstContextId();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanIphc_GetHopLimit(PyNs3SixLowPanIphc *self)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    
-    retval = self->obj->GetHopLimit();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanIphc_GetSrcContextId(PyNs3SixLowPanIphc *self)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    
-    retval = self->obj->GetSrcContextId();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanIphc_GetEcn(PyNs3SixLowPanIphc *self)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    
-    retval = self->obj->GetEcn();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanIphc_SetDac(PyNs3SixLowPanIphc *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool dacField;
-    PyObject *py_dacField;
-    const char *keywords[] = {"dacField", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &py_dacField)) {
-        return NULL;
-    }
-    dacField = (bool) PyObject_IsTrue(py_dacField);
-    self->obj->SetDac(dacField);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanIphc_GetTf(PyNs3SixLowPanIphc *self)
-{
-    PyObject *py_retval;
-    ns3::SixLowPanIphc::TrafficClassFlowLabel_e retval;
-    
-    retval = self->obj->GetTf();
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanIphc_SetHopLimit(PyNs3SixLowPanIphc *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int hopLimit;
-    const char *keywords[] = {"hopLimit", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &hopLimit)) {
-        return NULL;
-    }
-    if (hopLimit > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SetHopLimit(hopLimit);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanIphc_Deserialize(PyNs3SixLowPanIphc *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    PyNs3BufferIterator *start;
-    const char *keywords[] = {"start", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
-        return NULL;
-    }
-    retval = self->obj->Deserialize(*((PyNs3BufferIterator *) start)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanIphc_SetEcn(PyNs3SixLowPanIphc *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int ecn;
-    const char *keywords[] = {"ecn", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &ecn)) {
-        return NULL;
-    }
-    if (ecn > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SetEcn(ecn);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanIphc_GetFlowLabel(PyNs3SixLowPanIphc *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetFlowLabel();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanIphc_GetSrcAddress(PyNs3SixLowPanIphc *self)
-{
-    PyObject *py_retval;
-    PyNs3Ipv6Address *py_Ipv6Address;
-    
-    ns3::Ipv6Address retval = self->obj->GetSrcAddress();
-    py_Ipv6Address = PyObject_New(PyNs3Ipv6Address, &PyNs3Ipv6Address_Type);
-    py_Ipv6Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Ipv6Address->obj = new ns3::Ipv6Address(retval);
-    PyNs3Ipv6Address_wrapper_registry[(void *) py_Ipv6Address->obj] = (PyObject *) py_Ipv6Address;
-    py_retval = Py_BuildValue((char *) "N", py_Ipv6Address);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanIphc_SetDam(PyNs3SixLowPanIphc *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    ns3::SixLowPanIphc::HeaderCompression_e damField;
-    const char *keywords[] = {"damField", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &damField)) {
-        return NULL;
-    }
-    self->obj->SetDam(damField);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanIphc_SetDscp(PyNs3SixLowPanIphc *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int dscp;
-    const char *keywords[] = {"dscp", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &dscp)) {
-        return NULL;
-    }
-    if (dscp > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SetDscp(dscp);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanIphc_SetNextHeader(PyNs3SixLowPanIphc *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int nextHeader;
-    const char *keywords[] = {"nextHeader", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &nextHeader)) {
-        return NULL;
-    }
-    if (nextHeader > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SetNextHeader(nextHeader);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanIphc_GetInstanceTypeId(PyNs3SixLowPanIphc *self)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = self->obj->GetInstanceTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanIphc_GetSerializedSize(PyNs3SixLowPanIphc *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetSerializedSize();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanIphc_SetDstContextId(PyNs3SixLowPanIphc *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int dstContextId;
-    const char *keywords[] = {"dstContextId", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &dstContextId)) {
-        return NULL;
-    }
-    if (dstContextId > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SetDstContextId(dstContextId);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanIphc_GetDam(PyNs3SixLowPanIphc *self)
-{
-    PyObject *py_retval;
-    ns3::SixLowPanIphc::HeaderCompression_e retval;
-    
-    retval = self->obj->GetDam();
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanIphc_SetCid(PyNs3SixLowPanIphc *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool cidField;
-    PyObject *py_cidField;
-    const char *keywords[] = {"cidField", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &py_cidField)) {
-        return NULL;
-    }
-    cidField = (bool) PyObject_IsTrue(py_cidField);
-    self->obj->SetCid(cidField);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanIphc_SetM(PyNs3SixLowPanIphc *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool mField;
-    PyObject *py_mField;
-    const char *keywords[] = {"mField", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &py_mField)) {
-        return NULL;
-    }
-    mField = (bool) PyObject_IsTrue(py_mField);
-    self->obj->SetM(mField);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanIphc_Serialize(PyNs3SixLowPanIphc *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3BufferIterator *start;
-    const char *keywords[] = {"start", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
-        return NULL;
-    }
-    self->obj->Serialize(*((PyNs3BufferIterator *) start)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanIphc_GetNextHeader(PyNs3SixLowPanIphc *self)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    
-    retval = self->obj->GetNextHeader();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanIphc_GetDac(PyNs3SixLowPanIphc *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->GetDac();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanIphc_GetDscp(PyNs3SixLowPanIphc *self)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    
-    retval = self->obj->GetDscp();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanIphc_GetSam(PyNs3SixLowPanIphc *self)
-{
-    PyObject *py_retval;
-    ns3::SixLowPanIphc::HeaderCompression_e retval;
-    
-    retval = self->obj->GetSam();
-    py_retval = Py_BuildValue((char *) "i", retval);
     return py_retval;
 }
 
@@ -3177,47 +3177,47 @@ _wrap_PyNs3SixLowPanIphc__copy__(PyNs3SixLowPanIphc *self)
 }
 
 static PyMethodDef PyNs3SixLowPanIphc_methods[] = {
-    {(char *) "SetSam", (PyCFunction) _wrap_PyNs3SixLowPanIphc_SetSam, METH_KEYWORDS|METH_VARARGS, "SetSam(samField)\n\ntype: samField: ns3::SixLowPanIphc::HeaderCompression_e" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3SixLowPanIphc_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "GetNh", (PyCFunction) _wrap_PyNs3SixLowPanIphc_GetNh, METH_NOARGS, "GetNh()\n\n" },
-    {(char *) "SetSac", (PyCFunction) _wrap_PyNs3SixLowPanIphc_SetSac, METH_KEYWORDS|METH_VARARGS, "SetSac(sacField)\n\ntype: sacField: bool" },
+    {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3SixLowPanIphc_Deserialize, METH_KEYWORDS|METH_VARARGS, "Deserialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
     {(char *) "GetCid", (PyCFunction) _wrap_PyNs3SixLowPanIphc_GetCid, METH_NOARGS, "GetCid()\n\n" },
-    {(char *) "GetHlim", (PyCFunction) _wrap_PyNs3SixLowPanIphc_GetHlim, METH_NOARGS, "GetHlim()\n\n" },
-    {(char *) "SetHlim", (PyCFunction) _wrap_PyNs3SixLowPanIphc_SetHlim, METH_KEYWORDS|METH_VARARGS, "SetHlim(hlimField)\n\ntype: hlimField: ns3::SixLowPanIphc::Hlim_e" },
-    {(char *) "SetDstAddress", (PyCFunction) _wrap_PyNs3SixLowPanIphc_SetDstAddress, METH_KEYWORDS|METH_VARARGS, "SetDstAddress(dstAddress)\n\ntype: dstAddress: ns3::Ipv6Address" },
-    {(char *) "SetSrcAddress", (PyCFunction) _wrap_PyNs3SixLowPanIphc_SetSrcAddress, METH_KEYWORDS|METH_VARARGS, "SetSrcAddress(srcAddress)\n\ntype: srcAddress: ns3::Ipv6Address" },
-    {(char *) "SetSrcContextId", (PyCFunction) _wrap_PyNs3SixLowPanIphc_SetSrcContextId, METH_KEYWORDS|METH_VARARGS, "SetSrcContextId(srcContextId)\n\ntype: srcContextId: uint8_t" },
-    {(char *) "GetM", (PyCFunction) _wrap_PyNs3SixLowPanIphc_GetM, METH_NOARGS, "GetM()\n\n" },
-    {(char *) "SetNh", (PyCFunction) _wrap_PyNs3SixLowPanIphc_SetNh, METH_KEYWORDS|METH_VARARGS, "SetNh(nhField)\n\ntype: nhField: bool" },
-    {(char *) "SetTf", (PyCFunction) _wrap_PyNs3SixLowPanIphc_SetTf, METH_KEYWORDS|METH_VARARGS, "SetTf(tfField)\n\ntype: tfField: ns3::SixLowPanIphc::TrafficClassFlowLabel_e" },
-    {(char *) "SetFlowLabel", (PyCFunction) _wrap_PyNs3SixLowPanIphc_SetFlowLabel, METH_KEYWORDS|METH_VARARGS, "SetFlowLabel(flowLabel)\n\ntype: flowLabel: uint32_t" },
-    {(char *) "GetSac", (PyCFunction) _wrap_PyNs3SixLowPanIphc_GetSac, METH_NOARGS, "GetSac()\n\n" },
+    {(char *) "GetDac", (PyCFunction) _wrap_PyNs3SixLowPanIphc_GetDac, METH_NOARGS, "GetDac()\n\n" },
+    {(char *) "GetDam", (PyCFunction) _wrap_PyNs3SixLowPanIphc_GetDam, METH_NOARGS, "GetDam()\n\n" },
+    {(char *) "GetDscp", (PyCFunction) _wrap_PyNs3SixLowPanIphc_GetDscp, METH_NOARGS, "GetDscp()\n\n" },
     {(char *) "GetDstAddress", (PyCFunction) _wrap_PyNs3SixLowPanIphc_GetDstAddress, METH_NOARGS, "GetDstAddress()\n\n" },
     {(char *) "GetDstContextId", (PyCFunction) _wrap_PyNs3SixLowPanIphc_GetDstContextId, METH_NOARGS, "GetDstContextId()\n\n" },
-    {(char *) "GetHopLimit", (PyCFunction) _wrap_PyNs3SixLowPanIphc_GetHopLimit, METH_NOARGS, "GetHopLimit()\n\n" },
-    {(char *) "GetSrcContextId", (PyCFunction) _wrap_PyNs3SixLowPanIphc_GetSrcContextId, METH_NOARGS, "GetSrcContextId()\n\n" },
     {(char *) "GetEcn", (PyCFunction) _wrap_PyNs3SixLowPanIphc_GetEcn, METH_NOARGS, "GetEcn()\n\n" },
-    {(char *) "SetDac", (PyCFunction) _wrap_PyNs3SixLowPanIphc_SetDac, METH_KEYWORDS|METH_VARARGS, "SetDac(dacField)\n\ntype: dacField: bool" },
-    {(char *) "GetTf", (PyCFunction) _wrap_PyNs3SixLowPanIphc_GetTf, METH_NOARGS, "GetTf()\n\n" },
-    {(char *) "SetHopLimit", (PyCFunction) _wrap_PyNs3SixLowPanIphc_SetHopLimit, METH_KEYWORDS|METH_VARARGS, "SetHopLimit(hopLimit)\n\ntype: hopLimit: uint8_t" },
-    {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3SixLowPanIphc_Deserialize, METH_KEYWORDS|METH_VARARGS, "Deserialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
-    {(char *) "SetEcn", (PyCFunction) _wrap_PyNs3SixLowPanIphc_SetEcn, METH_KEYWORDS|METH_VARARGS, "SetEcn(ecn)\n\ntype: ecn: uint8_t" },
     {(char *) "GetFlowLabel", (PyCFunction) _wrap_PyNs3SixLowPanIphc_GetFlowLabel, METH_NOARGS, "GetFlowLabel()\n\n" },
+    {(char *) "GetHlim", (PyCFunction) _wrap_PyNs3SixLowPanIphc_GetHlim, METH_NOARGS, "GetHlim()\n\n" },
+    {(char *) "GetHopLimit", (PyCFunction) _wrap_PyNs3SixLowPanIphc_GetHopLimit, METH_NOARGS, "GetHopLimit()\n\n" },
+    {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3SixLowPanIphc_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
+    {(char *) "GetM", (PyCFunction) _wrap_PyNs3SixLowPanIphc_GetM, METH_NOARGS, "GetM()\n\n" },
+    {(char *) "GetNextHeader", (PyCFunction) _wrap_PyNs3SixLowPanIphc_GetNextHeader, METH_NOARGS, "GetNextHeader()\n\n" },
+    {(char *) "GetNh", (PyCFunction) _wrap_PyNs3SixLowPanIphc_GetNh, METH_NOARGS, "GetNh()\n\n" },
+    {(char *) "GetSac", (PyCFunction) _wrap_PyNs3SixLowPanIphc_GetSac, METH_NOARGS, "GetSac()\n\n" },
+    {(char *) "GetSam", (PyCFunction) _wrap_PyNs3SixLowPanIphc_GetSam, METH_NOARGS, "GetSam()\n\n" },
+    {(char *) "GetSerializedSize", (PyCFunction) _wrap_PyNs3SixLowPanIphc_GetSerializedSize, METH_NOARGS, "GetSerializedSize()\n\n" },
     {(char *) "GetSrcAddress", (PyCFunction) _wrap_PyNs3SixLowPanIphc_GetSrcAddress, METH_NOARGS, "GetSrcAddress()\n\n" },
+    {(char *) "GetSrcContextId", (PyCFunction) _wrap_PyNs3SixLowPanIphc_GetSrcContextId, METH_NOARGS, "GetSrcContextId()\n\n" },
+    {(char *) "GetTf", (PyCFunction) _wrap_PyNs3SixLowPanIphc_GetTf, METH_NOARGS, "GetTf()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3SixLowPanIphc_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3SixLowPanIphc_Serialize, METH_KEYWORDS|METH_VARARGS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
+    {(char *) "SetCid", (PyCFunction) _wrap_PyNs3SixLowPanIphc_SetCid, METH_KEYWORDS|METH_VARARGS, "SetCid(cidField)\n\ntype: cidField: bool" },
+    {(char *) "SetDac", (PyCFunction) _wrap_PyNs3SixLowPanIphc_SetDac, METH_KEYWORDS|METH_VARARGS, "SetDac(dacField)\n\ntype: dacField: bool" },
     {(char *) "SetDam", (PyCFunction) _wrap_PyNs3SixLowPanIphc_SetDam, METH_KEYWORDS|METH_VARARGS, "SetDam(damField)\n\ntype: damField: ns3::SixLowPanIphc::HeaderCompression_e" },
     {(char *) "SetDscp", (PyCFunction) _wrap_PyNs3SixLowPanIphc_SetDscp, METH_KEYWORDS|METH_VARARGS, "SetDscp(dscp)\n\ntype: dscp: uint8_t" },
-    {(char *) "SetNextHeader", (PyCFunction) _wrap_PyNs3SixLowPanIphc_SetNextHeader, METH_KEYWORDS|METH_VARARGS, "SetNextHeader(nextHeader)\n\ntype: nextHeader: uint8_t" },
-    {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3SixLowPanIphc_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
-    {(char *) "GetSerializedSize", (PyCFunction) _wrap_PyNs3SixLowPanIphc_GetSerializedSize, METH_NOARGS, "GetSerializedSize()\n\n" },
+    {(char *) "SetDstAddress", (PyCFunction) _wrap_PyNs3SixLowPanIphc_SetDstAddress, METH_KEYWORDS|METH_VARARGS, "SetDstAddress(dstAddress)\n\ntype: dstAddress: ns3::Ipv6Address" },
     {(char *) "SetDstContextId", (PyCFunction) _wrap_PyNs3SixLowPanIphc_SetDstContextId, METH_KEYWORDS|METH_VARARGS, "SetDstContextId(dstContextId)\n\ntype: dstContextId: uint8_t" },
-    {(char *) "GetDam", (PyCFunction) _wrap_PyNs3SixLowPanIphc_GetDam, METH_NOARGS, "GetDam()\n\n" },
-    {(char *) "SetCid", (PyCFunction) _wrap_PyNs3SixLowPanIphc_SetCid, METH_KEYWORDS|METH_VARARGS, "SetCid(cidField)\n\ntype: cidField: bool" },
+    {(char *) "SetEcn", (PyCFunction) _wrap_PyNs3SixLowPanIphc_SetEcn, METH_KEYWORDS|METH_VARARGS, "SetEcn(ecn)\n\ntype: ecn: uint8_t" },
+    {(char *) "SetFlowLabel", (PyCFunction) _wrap_PyNs3SixLowPanIphc_SetFlowLabel, METH_KEYWORDS|METH_VARARGS, "SetFlowLabel(flowLabel)\n\ntype: flowLabel: uint32_t" },
+    {(char *) "SetHlim", (PyCFunction) _wrap_PyNs3SixLowPanIphc_SetHlim, METH_KEYWORDS|METH_VARARGS, "SetHlim(hlimField)\n\ntype: hlimField: ns3::SixLowPanIphc::Hlim_e" },
+    {(char *) "SetHopLimit", (PyCFunction) _wrap_PyNs3SixLowPanIphc_SetHopLimit, METH_KEYWORDS|METH_VARARGS, "SetHopLimit(hopLimit)\n\ntype: hopLimit: uint8_t" },
     {(char *) "SetM", (PyCFunction) _wrap_PyNs3SixLowPanIphc_SetM, METH_KEYWORDS|METH_VARARGS, "SetM(mField)\n\ntype: mField: bool" },
-    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3SixLowPanIphc_Serialize, METH_KEYWORDS|METH_VARARGS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
-    {(char *) "GetNextHeader", (PyCFunction) _wrap_PyNs3SixLowPanIphc_GetNextHeader, METH_NOARGS, "GetNextHeader()\n\n" },
-    {(char *) "GetDac", (PyCFunction) _wrap_PyNs3SixLowPanIphc_GetDac, METH_NOARGS, "GetDac()\n\n" },
-    {(char *) "GetDscp", (PyCFunction) _wrap_PyNs3SixLowPanIphc_GetDscp, METH_NOARGS, "GetDscp()\n\n" },
-    {(char *) "GetSam", (PyCFunction) _wrap_PyNs3SixLowPanIphc_GetSam, METH_NOARGS, "GetSam()\n\n" },
+    {(char *) "SetNextHeader", (PyCFunction) _wrap_PyNs3SixLowPanIphc_SetNextHeader, METH_KEYWORDS|METH_VARARGS, "SetNextHeader(nextHeader)\n\ntype: nextHeader: uint8_t" },
+    {(char *) "SetNh", (PyCFunction) _wrap_PyNs3SixLowPanIphc_SetNh, METH_KEYWORDS|METH_VARARGS, "SetNh(nhField)\n\ntype: nhField: bool" },
+    {(char *) "SetSac", (PyCFunction) _wrap_PyNs3SixLowPanIphc_SetSac, METH_KEYWORDS|METH_VARARGS, "SetSac(sacField)\n\ntype: sacField: bool" },
+    {(char *) "SetSam", (PyCFunction) _wrap_PyNs3SixLowPanIphc_SetSam, METH_KEYWORDS|METH_VARARGS, "SetSam(samField)\n\ntype: samField: ns3::SixLowPanIphc::HeaderCompression_e" },
+    {(char *) "SetSrcAddress", (PyCFunction) _wrap_PyNs3SixLowPanIphc_SetSrcAddress, METH_KEYWORDS|METH_VARARGS, "SetSrcAddress(srcAddress)\n\ntype: srcAddress: ns3::Ipv6Address" },
+    {(char *) "SetSrcContextId", (PyCFunction) _wrap_PyNs3SixLowPanIphc_SetSrcContextId, METH_KEYWORDS|METH_VARARGS, "SetSrcContextId(srcContextId)\n\ntype: srcContextId: uint8_t" },
+    {(char *) "SetTf", (PyCFunction) _wrap_PyNs3SixLowPanIphc_SetTf, METH_KEYWORDS|METH_VARARGS, "SetTf(tfField)\n\ntype: tfField: ns3::SixLowPanIphc::TrafficClassFlowLabel_e" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3SixLowPanIphc__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -3325,7 +3325,7 @@ PyTypeObject PyNs3SixLowPanIphc_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_BASETYPE,                      /* tp_flags */
     "SixLowPanIphc(dispatch)\nSixLowPanIphc(arg0)\nSixLowPanIphc()",                        /* Documentation string */
     (traverseproc)PyNs3SixLowPanIphc__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3SixLowPanIphc__tp_clear,             /* tp_clear */
@@ -3423,6 +3423,39 @@ int _wrap_PyNs3SixLowPanIpv6__tp_init(PyNs3SixLowPanIpv6 *self, PyObject *args, 
 
 
 PyObject *
+_wrap_PyNs3SixLowPanIpv6_Deserialize(PyNs3SixLowPanIpv6 *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    PyNs3BufferIterator *start;
+    const char *keywords[] = {"start", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
+        return NULL;
+    }
+    retval = self->obj->Deserialize(*((PyNs3BufferIterator *) start)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanIpv6_GetInstanceTypeId(PyNs3SixLowPanIpv6 *self)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = self->obj->GetInstanceTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3SixLowPanIpv6_GetSerializedSize(PyNs3SixLowPanIpv6 *self)
 {
     PyObject *py_retval;
@@ -3467,39 +3500,6 @@ _wrap_PyNs3SixLowPanIpv6_Serialize(PyNs3SixLowPanIpv6 *self, PyObject *args, PyO
 }
 
 
-PyObject *
-_wrap_PyNs3SixLowPanIpv6_Deserialize(PyNs3SixLowPanIpv6 *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    PyNs3BufferIterator *start;
-    const char *keywords[] = {"start", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
-        return NULL;
-    }
-    retval = self->obj->Deserialize(*((PyNs3BufferIterator *) start)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanIpv6_GetInstanceTypeId(PyNs3SixLowPanIpv6 *self)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = self->obj->GetInstanceTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3SixLowPanIpv6__copy__(PyNs3SixLowPanIpv6 *self)
 {
@@ -3515,11 +3515,11 @@ _wrap_PyNs3SixLowPanIpv6__copy__(PyNs3SixLowPanIpv6 *self)
 }
 
 static PyMethodDef PyNs3SixLowPanIpv6_methods[] = {
+    {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3SixLowPanIpv6_Deserialize, METH_KEYWORDS|METH_VARARGS, "Deserialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
+    {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3SixLowPanIpv6_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
     {(char *) "GetSerializedSize", (PyCFunction) _wrap_PyNs3SixLowPanIpv6_GetSerializedSize, METH_NOARGS, "GetSerializedSize()\n\n" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3SixLowPanIpv6_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
     {(char *) "Serialize", (PyCFunction) _wrap_PyNs3SixLowPanIpv6_Serialize, METH_KEYWORDS|METH_VARARGS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
-    {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3SixLowPanIpv6_Deserialize, METH_KEYWORDS|METH_VARARGS, "Deserialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
-    {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3SixLowPanIpv6_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3SixLowPanIpv6__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -3627,7 +3627,7 @@ PyTypeObject PyNs3SixLowPanIpv6_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_BASETYPE,                      /* tp_flags */
     "SixLowPanIpv6(arg0)\nSixLowPanIpv6()",                        /* Documentation string */
     (traverseproc)PyNs3SixLowPanIpv6__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3SixLowPanIpv6__tp_clear,             /* tp_clear */
@@ -3725,42 +3725,6 @@ int _wrap_PyNs3SixLowPanNhcExtension__tp_init(PyNs3SixLowPanNhcExtension *self, 
 
 
 PyObject *
-_wrap_PyNs3SixLowPanNhcExtension_SetNh(PyNs3SixLowPanNhcExtension *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool nhField;
-    PyObject *py_nhField;
-    const char *keywords[] = {"nhField", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &py_nhField)) {
-        return NULL;
-    }
-    nhField = (bool) PyObject_IsTrue(py_nhField);
-    self->obj->SetNh(nhField);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanNhcExtension_Serialize(PyNs3SixLowPanNhcExtension *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3BufferIterator *start;
-    const char *keywords[] = {"start", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
-        return NULL;
-    }
-    self->obj->Serialize(*((PyNs3BufferIterator *) start)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3SixLowPanNhcExtension_Deserialize(PyNs3SixLowPanNhcExtension *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -3773,96 +3737,6 @@ _wrap_PyNs3SixLowPanNhcExtension_Deserialize(PyNs3SixLowPanNhcExtension *self, P
     }
     retval = self->obj->Deserialize(*((PyNs3BufferIterator *) start)->obj);
     py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanNhcExtension_SetNextHeader(PyNs3SixLowPanNhcExtension *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int nextHeader;
-    const char *keywords[] = {"nextHeader", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &nextHeader)) {
-        return NULL;
-    }
-    if (nextHeader > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SetNextHeader(nextHeader);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanNhcExtension_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::SixLowPanNhcExtension::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanNhcExtension_GetNh(PyNs3SixLowPanNhcExtension *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->GetNh();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanNhcExtension_GetNextHeader(PyNs3SixLowPanNhcExtension *self)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    
-    retval = self->obj->GetNextHeader();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanNhcExtension_SetEid(PyNs3SixLowPanNhcExtension *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    ns3::SixLowPanNhcExtension::Eid_e extensionHeaderType;
-    const char *keywords[] = {"extensionHeaderType", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &extensionHeaderType)) {
-        return NULL;
-    }
-    self->obj->SetEid(extensionHeaderType);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanNhcExtension_GetNhcDispatchType(PyNs3SixLowPanNhcExtension *self)
-{
-    PyObject *py_retval;
-    ns3::SixLowPanDispatch::NhcDispatch_e retval;
-    
-    retval = self->obj->GetNhcDispatchType();
-    py_retval = Py_BuildValue((char *) "i", retval);
     return py_retval;
 }
 
@@ -3896,6 +3770,42 @@ _wrap_PyNs3SixLowPanNhcExtension_GetInstanceTypeId(PyNs3SixLowPanNhcExtension *s
 
 
 PyObject *
+_wrap_PyNs3SixLowPanNhcExtension_GetNextHeader(PyNs3SixLowPanNhcExtension *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    
+    retval = self->obj->GetNextHeader();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanNhcExtension_GetNh(PyNs3SixLowPanNhcExtension *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->GetNh();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanNhcExtension_GetNhcDispatchType(PyNs3SixLowPanNhcExtension *self)
+{
+    PyObject *py_retval;
+    ns3::SixLowPanDispatch::NhcDispatch_e retval;
+    
+    retval = self->obj->GetNhcDispatchType();
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3SixLowPanNhcExtension_GetSerializedSize(PyNs3SixLowPanNhcExtension *self)
 {
     PyObject *py_retval;
@@ -3903,6 +3813,96 @@ _wrap_PyNs3SixLowPanNhcExtension_GetSerializedSize(PyNs3SixLowPanNhcExtension *s
     
     retval = self->obj->GetSerializedSize();
     py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanNhcExtension_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::SixLowPanNhcExtension::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanNhcExtension_Serialize(PyNs3SixLowPanNhcExtension *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3BufferIterator *start;
+    const char *keywords[] = {"start", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
+        return NULL;
+    }
+    self->obj->Serialize(*((PyNs3BufferIterator *) start)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanNhcExtension_SetEid(PyNs3SixLowPanNhcExtension *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    ns3::SixLowPanNhcExtension::Eid_e extensionHeaderType;
+    const char *keywords[] = {"extensionHeaderType", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &extensionHeaderType)) {
+        return NULL;
+    }
+    self->obj->SetEid(extensionHeaderType);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanNhcExtension_SetNextHeader(PyNs3SixLowPanNhcExtension *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int nextHeader;
+    const char *keywords[] = {"nextHeader", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &nextHeader)) {
+        return NULL;
+    }
+    if (nextHeader > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SetNextHeader(nextHeader);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanNhcExtension_SetNh(PyNs3SixLowPanNhcExtension *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool nhField;
+    PyObject *py_nhField;
+    const char *keywords[] = {"nhField", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &py_nhField)) {
+        return NULL;
+    }
+    nhField = (bool) PyObject_IsTrue(py_nhField);
+    self->obj->SetNh(nhField);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -3922,18 +3922,18 @@ _wrap_PyNs3SixLowPanNhcExtension__copy__(PyNs3SixLowPanNhcExtension *self)
 }
 
 static PyMethodDef PyNs3SixLowPanNhcExtension_methods[] = {
-    {(char *) "SetNh", (PyCFunction) _wrap_PyNs3SixLowPanNhcExtension_SetNh, METH_KEYWORDS|METH_VARARGS, "SetNh(nhField)\n\ntype: nhField: bool" },
-    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3SixLowPanNhcExtension_Serialize, METH_KEYWORDS|METH_VARARGS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
     {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3SixLowPanNhcExtension_Deserialize, METH_KEYWORDS|METH_VARARGS, "Deserialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
-    {(char *) "SetNextHeader", (PyCFunction) _wrap_PyNs3SixLowPanNhcExtension_SetNextHeader, METH_KEYWORDS|METH_VARARGS, "SetNextHeader(nextHeader)\n\ntype: nextHeader: uint8_t" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3SixLowPanNhcExtension_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "GetNh", (PyCFunction) _wrap_PyNs3SixLowPanNhcExtension_GetNh, METH_NOARGS, "GetNh()\n\n" },
-    {(char *) "GetNextHeader", (PyCFunction) _wrap_PyNs3SixLowPanNhcExtension_GetNextHeader, METH_NOARGS, "GetNextHeader()\n\n" },
-    {(char *) "SetEid", (PyCFunction) _wrap_PyNs3SixLowPanNhcExtension_SetEid, METH_KEYWORDS|METH_VARARGS, "SetEid(extensionHeaderType)\n\ntype: extensionHeaderType: ns3::SixLowPanNhcExtension::Eid_e" },
-    {(char *) "GetNhcDispatchType", (PyCFunction) _wrap_PyNs3SixLowPanNhcExtension_GetNhcDispatchType, METH_NOARGS, "GetNhcDispatchType()\n\n" },
     {(char *) "GetEid", (PyCFunction) _wrap_PyNs3SixLowPanNhcExtension_GetEid, METH_NOARGS, "GetEid()\n\n" },
     {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3SixLowPanNhcExtension_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
+    {(char *) "GetNextHeader", (PyCFunction) _wrap_PyNs3SixLowPanNhcExtension_GetNextHeader, METH_NOARGS, "GetNextHeader()\n\n" },
+    {(char *) "GetNh", (PyCFunction) _wrap_PyNs3SixLowPanNhcExtension_GetNh, METH_NOARGS, "GetNh()\n\n" },
+    {(char *) "GetNhcDispatchType", (PyCFunction) _wrap_PyNs3SixLowPanNhcExtension_GetNhcDispatchType, METH_NOARGS, "GetNhcDispatchType()\n\n" },
     {(char *) "GetSerializedSize", (PyCFunction) _wrap_PyNs3SixLowPanNhcExtension_GetSerializedSize, METH_NOARGS, "GetSerializedSize()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3SixLowPanNhcExtension_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3SixLowPanNhcExtension_Serialize, METH_KEYWORDS|METH_VARARGS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
+    {(char *) "SetEid", (PyCFunction) _wrap_PyNs3SixLowPanNhcExtension_SetEid, METH_KEYWORDS|METH_VARARGS, "SetEid(extensionHeaderType)\n\ntype: extensionHeaderType: ns3::SixLowPanNhcExtension::Eid_e" },
+    {(char *) "SetNextHeader", (PyCFunction) _wrap_PyNs3SixLowPanNhcExtension_SetNextHeader, METH_KEYWORDS|METH_VARARGS, "SetNextHeader(nextHeader)\n\ntype: nextHeader: uint8_t" },
+    {(char *) "SetNh", (PyCFunction) _wrap_PyNs3SixLowPanNhcExtension_SetNh, METH_KEYWORDS|METH_VARARGS, "SetNh(nhField)\n\ntype: nhField: bool" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3SixLowPanNhcExtension__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -4041,7 +4041,7 @@ PyTypeObject PyNs3SixLowPanNhcExtension_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_BASETYPE,                      /* tp_flags */
     "SixLowPanNhcExtension(arg0)\nSixLowPanNhcExtension()",                        /* Documentation string */
     (traverseproc)PyNs3SixLowPanNhcExtension__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3SixLowPanNhcExtension__tp_clear,             /* tp_clear */
@@ -4139,56 +4139,6 @@ int _wrap_PyNs3SixLowPanUdpNhcExtension__tp_init(PyNs3SixLowPanUdpNhcExtension *
 
 
 PyObject *
-_wrap_PyNs3SixLowPanUdpNhcExtension_SetSrcPort(PyNs3SixLowPanUdpNhcExtension *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int port;
-    const char *keywords[] = {"port", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &port)) {
-        return NULL;
-    }
-    if (port > 0xffff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SetSrcPort(port);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanUdpNhcExtension_GetDstPort(PyNs3SixLowPanUdpNhcExtension *self)
-{
-    PyObject *py_retval;
-    uint16_t retval;
-    
-    retval = self->obj->GetDstPort();
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanUdpNhcExtension_Serialize(PyNs3SixLowPanUdpNhcExtension *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3BufferIterator *start;
-    const char *keywords[] = {"start", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
-        return NULL;
-    }
-    self->obj->Serialize(*((PyNs3BufferIterator *) start)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3SixLowPanUdpNhcExtension_Deserialize(PyNs3SixLowPanUdpNhcExtension *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -4206,6 +4156,18 @@ _wrap_PyNs3SixLowPanUdpNhcExtension_Deserialize(PyNs3SixLowPanUdpNhcExtension *s
 
 
 PyObject *
+_wrap_PyNs3SixLowPanUdpNhcExtension_GetC(PyNs3SixLowPanUdpNhcExtension *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->GetC();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3SixLowPanUdpNhcExtension_GetChecksum(PyNs3SixLowPanUdpNhcExtension *self)
 {
     PyObject *py_retval;
@@ -4213,6 +4175,115 @@ _wrap_PyNs3SixLowPanUdpNhcExtension_GetChecksum(PyNs3SixLowPanUdpNhcExtension *s
     
     retval = self->obj->GetChecksum();
     py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanUdpNhcExtension_GetDstPort(PyNs3SixLowPanUdpNhcExtension *self)
+{
+    PyObject *py_retval;
+    uint16_t retval;
+    
+    retval = self->obj->GetDstPort();
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanUdpNhcExtension_GetInstanceTypeId(PyNs3SixLowPanUdpNhcExtension *self)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = self->obj->GetInstanceTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanUdpNhcExtension_GetNhcDispatchType(PyNs3SixLowPanUdpNhcExtension *self)
+{
+    PyObject *py_retval;
+    ns3::SixLowPanDispatch::NhcDispatch_e retval;
+    
+    retval = self->obj->GetNhcDispatchType();
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanUdpNhcExtension_GetPorts(PyNs3SixLowPanUdpNhcExtension *self)
+{
+    PyObject *py_retval;
+    ns3::SixLowPanUdpNhcExtension::Ports_e retval;
+    
+    retval = self->obj->GetPorts();
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanUdpNhcExtension_GetSerializedSize(PyNs3SixLowPanUdpNhcExtension *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetSerializedSize();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanUdpNhcExtension_GetSrcPort(PyNs3SixLowPanUdpNhcExtension *self)
+{
+    PyObject *py_retval;
+    uint16_t retval;
+    
+    retval = self->obj->GetSrcPort();
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanUdpNhcExtension_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::SixLowPanUdpNhcExtension::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanUdpNhcExtension_Serialize(PyNs3SixLowPanUdpNhcExtension *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3BufferIterator *start;
+    const char *keywords[] = {"start", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
+        return NULL;
+    }
+    self->obj->Serialize(*((PyNs3BufferIterator *) start)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -4237,82 +4308,22 @@ _wrap_PyNs3SixLowPanUdpNhcExtension_SetC(PyNs3SixLowPanUdpNhcExtension *self, Py
 
 
 PyObject *
-_wrap_PyNs3SixLowPanUdpNhcExtension_GetTypeId(void)
+_wrap_PyNs3SixLowPanUdpNhcExtension_SetChecksum(PyNs3SixLowPanUdpNhcExtension *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
+    int checksum;
+    const char *keywords[] = {"checksum", NULL};
     
-    ns3::TypeId retval = ns3::SixLowPanUdpNhcExtension::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanUdpNhcExtension_GetC(PyNs3SixLowPanUdpNhcExtension *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->GetC();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanUdpNhcExtension_GetPorts(PyNs3SixLowPanUdpNhcExtension *self)
-{
-    PyObject *py_retval;
-    ns3::SixLowPanUdpNhcExtension::Ports_e retval;
-    
-    retval = self->obj->GetPorts();
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanUdpNhcExtension_GetSrcPort(PyNs3SixLowPanUdpNhcExtension *self)
-{
-    PyObject *py_retval;
-    uint16_t retval;
-    
-    retval = self->obj->GetSrcPort();
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanUdpNhcExtension_SetPorts(PyNs3SixLowPanUdpNhcExtension *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    ns3::SixLowPanUdpNhcExtension::Ports_e port;
-    const char *keywords[] = {"port", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &port)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &checksum)) {
         return NULL;
     }
-    self->obj->SetPorts(port);
+    if (checksum > 0xffff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SetChecksum(checksum);
     Py_INCREF(Py_None);
     py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanUdpNhcExtension_GetNhcDispatchType(PyNs3SixLowPanUdpNhcExtension *self)
-{
-    PyObject *py_retval;
-    ns3::SixLowPanDispatch::NhcDispatch_e retval;
-    
-    retval = self->obj->GetNhcDispatchType();
-    py_retval = Py_BuildValue((char *) "i", retval);
     return py_retval;
 }
 
@@ -4339,48 +4350,37 @@ _wrap_PyNs3SixLowPanUdpNhcExtension_SetDstPort(PyNs3SixLowPanUdpNhcExtension *se
 
 
 PyObject *
-_wrap_PyNs3SixLowPanUdpNhcExtension_GetInstanceTypeId(PyNs3SixLowPanUdpNhcExtension *self)
+_wrap_PyNs3SixLowPanUdpNhcExtension_SetPorts(PyNs3SixLowPanUdpNhcExtension *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
+    ns3::SixLowPanUdpNhcExtension::Ports_e port;
+    const char *keywords[] = {"port", NULL};
     
-    ns3::TypeId retval = self->obj->GetInstanceTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanUdpNhcExtension_GetSerializedSize(PyNs3SixLowPanUdpNhcExtension *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetSerializedSize();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanUdpNhcExtension_SetChecksum(PyNs3SixLowPanUdpNhcExtension *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int checksum;
-    const char *keywords[] = {"checksum", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &checksum)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &port)) {
         return NULL;
     }
-    if (checksum > 0xffff) {
+    self->obj->SetPorts(port);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanUdpNhcExtension_SetSrcPort(PyNs3SixLowPanUdpNhcExtension *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int port;
+    const char *keywords[] = {"port", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &port)) {
+        return NULL;
+    }
+    if (port > 0xffff) {
         PyErr_SetString(PyExc_ValueError, "Out of range");
         return NULL;
     }
-    self->obj->SetChecksum(checksum);
+    self->obj->SetSrcPort(port);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -4402,22 +4402,22 @@ _wrap_PyNs3SixLowPanUdpNhcExtension__copy__(PyNs3SixLowPanUdpNhcExtension *self)
 }
 
 static PyMethodDef PyNs3SixLowPanUdpNhcExtension_methods[] = {
-    {(char *) "SetSrcPort", (PyCFunction) _wrap_PyNs3SixLowPanUdpNhcExtension_SetSrcPort, METH_KEYWORDS|METH_VARARGS, "SetSrcPort(port)\n\ntype: port: uint16_t" },
-    {(char *) "GetDstPort", (PyCFunction) _wrap_PyNs3SixLowPanUdpNhcExtension_GetDstPort, METH_NOARGS, "GetDstPort()\n\n" },
-    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3SixLowPanUdpNhcExtension_Serialize, METH_KEYWORDS|METH_VARARGS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
     {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3SixLowPanUdpNhcExtension_Deserialize, METH_KEYWORDS|METH_VARARGS, "Deserialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
-    {(char *) "GetChecksum", (PyCFunction) _wrap_PyNs3SixLowPanUdpNhcExtension_GetChecksum, METH_NOARGS, "GetChecksum()\n\n" },
-    {(char *) "SetC", (PyCFunction) _wrap_PyNs3SixLowPanUdpNhcExtension_SetC, METH_KEYWORDS|METH_VARARGS, "SetC(cField)\n\ntype: cField: bool" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3SixLowPanUdpNhcExtension_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
     {(char *) "GetC", (PyCFunction) _wrap_PyNs3SixLowPanUdpNhcExtension_GetC, METH_NOARGS, "GetC()\n\n" },
-    {(char *) "GetPorts", (PyCFunction) _wrap_PyNs3SixLowPanUdpNhcExtension_GetPorts, METH_NOARGS, "GetPorts()\n\n" },
-    {(char *) "GetSrcPort", (PyCFunction) _wrap_PyNs3SixLowPanUdpNhcExtension_GetSrcPort, METH_NOARGS, "GetSrcPort()\n\n" },
-    {(char *) "SetPorts", (PyCFunction) _wrap_PyNs3SixLowPanUdpNhcExtension_SetPorts, METH_KEYWORDS|METH_VARARGS, "SetPorts(port)\n\ntype: port: ns3::SixLowPanUdpNhcExtension::Ports_e" },
-    {(char *) "GetNhcDispatchType", (PyCFunction) _wrap_PyNs3SixLowPanUdpNhcExtension_GetNhcDispatchType, METH_NOARGS, "GetNhcDispatchType()\n\n" },
-    {(char *) "SetDstPort", (PyCFunction) _wrap_PyNs3SixLowPanUdpNhcExtension_SetDstPort, METH_KEYWORDS|METH_VARARGS, "SetDstPort(port)\n\ntype: port: uint16_t" },
+    {(char *) "GetChecksum", (PyCFunction) _wrap_PyNs3SixLowPanUdpNhcExtension_GetChecksum, METH_NOARGS, "GetChecksum()\n\n" },
+    {(char *) "GetDstPort", (PyCFunction) _wrap_PyNs3SixLowPanUdpNhcExtension_GetDstPort, METH_NOARGS, "GetDstPort()\n\n" },
     {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3SixLowPanUdpNhcExtension_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
+    {(char *) "GetNhcDispatchType", (PyCFunction) _wrap_PyNs3SixLowPanUdpNhcExtension_GetNhcDispatchType, METH_NOARGS, "GetNhcDispatchType()\n\n" },
+    {(char *) "GetPorts", (PyCFunction) _wrap_PyNs3SixLowPanUdpNhcExtension_GetPorts, METH_NOARGS, "GetPorts()\n\n" },
     {(char *) "GetSerializedSize", (PyCFunction) _wrap_PyNs3SixLowPanUdpNhcExtension_GetSerializedSize, METH_NOARGS, "GetSerializedSize()\n\n" },
+    {(char *) "GetSrcPort", (PyCFunction) _wrap_PyNs3SixLowPanUdpNhcExtension_GetSrcPort, METH_NOARGS, "GetSrcPort()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3SixLowPanUdpNhcExtension_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3SixLowPanUdpNhcExtension_Serialize, METH_KEYWORDS|METH_VARARGS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
+    {(char *) "SetC", (PyCFunction) _wrap_PyNs3SixLowPanUdpNhcExtension_SetC, METH_KEYWORDS|METH_VARARGS, "SetC(cField)\n\ntype: cField: bool" },
     {(char *) "SetChecksum", (PyCFunction) _wrap_PyNs3SixLowPanUdpNhcExtension_SetChecksum, METH_KEYWORDS|METH_VARARGS, "SetChecksum(checksum)\n\ntype: checksum: uint16_t" },
+    {(char *) "SetDstPort", (PyCFunction) _wrap_PyNs3SixLowPanUdpNhcExtension_SetDstPort, METH_KEYWORDS|METH_VARARGS, "SetDstPort(port)\n\ntype: port: uint16_t" },
+    {(char *) "SetPorts", (PyCFunction) _wrap_PyNs3SixLowPanUdpNhcExtension_SetPorts, METH_KEYWORDS|METH_VARARGS, "SetPorts(port)\n\ntype: port: ns3::SixLowPanUdpNhcExtension::Ports_e" },
+    {(char *) "SetSrcPort", (PyCFunction) _wrap_PyNs3SixLowPanUdpNhcExtension_SetSrcPort, METH_KEYWORDS|METH_VARARGS, "SetSrcPort(port)\n\ntype: port: uint16_t" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3SixLowPanUdpNhcExtension__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -4525,7 +4525,7 @@ PyTypeObject PyNs3SixLowPanUdpNhcExtension_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_BASETYPE,                      /* tp_flags */
     "SixLowPanUdpNhcExtension(arg0)\nSixLowPanUdpNhcExtension()",                        /* Documentation string */
     (traverseproc)PyNs3SixLowPanUdpNhcExtension__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3SixLowPanUdpNhcExtension__tp_clear,             /* tp_clear */
@@ -4570,6 +4570,79 @@ _wrap_PyNs3SixLowPanNetDevice__tp_init(PyNs3SixLowPanNetDevice *self, PyObject *
     ns3::CompleteConstruct(self->obj);
     self->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
     return 0;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanNetDevice_AssignStreams(PyNs3SixLowPanNetDevice *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int64_t retval;
+    int64_t stream;
+    const char *keywords[] = {"stream", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "L", (char **) keywords, &stream)) {
+        return NULL;
+    }
+    retval = self->obj->AssignStreams(stream);
+    py_retval = Py_BuildValue((char *) "L", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanNetDevice_GetAddress(PyNs3SixLowPanNetDevice *self)
+{
+    PyObject *py_retval;
+    PyNs3Address *py_Address;
+    
+    ns3::Address retval = self->obj->GetAddress();
+    py_Address = PyObject_New(PyNs3Address, &PyNs3Address_Type);
+    py_Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Address->obj = new ns3::Address(retval);
+    PyNs3Address_wrapper_registry[(void *) py_Address->obj] = (PyObject *) py_Address;
+    py_retval = Py_BuildValue((char *) "N", py_Address);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanNetDevice_GetBroadcast(PyNs3SixLowPanNetDevice *self)
+{
+    PyObject *py_retval;
+    PyNs3Address *py_Address;
+    
+    ns3::Address retval = self->obj->GetBroadcast();
+    py_Address = PyObject_New(PyNs3Address, &PyNs3Address_Type);
+    py_Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Address->obj = new ns3::Address(retval);
+    PyNs3Address_wrapper_registry[(void *) py_Address->obj] = (PyObject *) py_Address;
+    py_retval = Py_BuildValue((char *) "N", py_Address);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanNetDevice_GetIfIndex(PyNs3SixLowPanNetDevice *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetIfIndex();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanNetDevice_GetMtu(PyNs3SixLowPanNetDevice *self)
+{
+    PyObject *py_retval;
+    uint16_t retval;
+    
+    retval = self->obj->GetMtu();
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
 }
 
 
@@ -4652,13 +4725,39 @@ PyObject * _wrap_PyNs3SixLowPanNetDevice_GetMulticast(PyNs3SixLowPanNetDevice *s
 
 
 PyObject *
-_wrap_PyNs3SixLowPanNetDevice_IsPointToPoint(PyNs3SixLowPanNetDevice *self)
+_wrap_PyNs3SixLowPanNetDevice_GetNetDevice(PyNs3SixLowPanNetDevice *self)
 {
     PyObject *py_retval;
-    bool retval;
+    ns3::Ptr< ns3::NetDevice > retval;
+    PyNs3NetDevice *py_NetDevice;
+    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
+    PyTypeObject *wrapper_type = 0;
     
-    retval = self->obj->IsPointToPoint();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    retval = self->obj->GetNetDevice();
+    if (!(const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval)))) {
+        Py_INCREF(Py_None);
+        return Py_None;
+    }
+    wrapper_lookup_iter = PyNs3ObjectBase_wrapper_registry.find((void *) const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval)));
+    if (wrapper_lookup_iter == PyNs3ObjectBase_wrapper_registry.end()) {
+        py_NetDevice = NULL;
+    } else {
+        py_NetDevice = (PyNs3NetDevice *) wrapper_lookup_iter->second;
+        Py_INCREF(py_NetDevice);
+    }
+    
+    if (py_NetDevice == NULL) {
+        wrapper_type = PyNs3SimpleRefCount__Ns3Object_Ns3ObjectBase_Ns3ObjectDeleter__typeid_map.lookup_wrapper(typeid((*const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval)))), &PyNs3NetDevice_Type);
+        py_NetDevice = PyObject_GC_New(PyNs3NetDevice, wrapper_type);
+        py_NetDevice->inst_dict = NULL;
+    
+        py_NetDevice->inst_dict = NULL;
+        py_NetDevice->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+        const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval))->Ref();
+        py_NetDevice->obj = const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval));
+        PyNs3ObjectBase_wrapper_registry[(void *) py_NetDevice->obj] = (PyObject *) py_NetDevice;
+    }
+    py_retval = Py_BuildValue((char *) "N", py_NetDevice);
     return py_retval;
 }
 
@@ -4675,6 +4774,78 @@ _wrap_PyNs3SixLowPanNetDevice_GetTypeId(void)
     py_TypeId->obj = new ns3::TypeId(retval);
     PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
     py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanNetDevice_IsBridge(PyNs3SixLowPanNetDevice *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->IsBridge();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanNetDevice_IsBroadcast(PyNs3SixLowPanNetDevice *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->IsBroadcast();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanNetDevice_IsLinkUp(PyNs3SixLowPanNetDevice *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->IsLinkUp();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanNetDevice_IsMulticast(PyNs3SixLowPanNetDevice *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->IsMulticast();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanNetDevice_IsPointToPoint(PyNs3SixLowPanNetDevice *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->IsPointToPoint();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanNetDevice_NeedsArp(PyNs3SixLowPanNetDevice *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->NeedsArp();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
@@ -4716,53 +4887,6 @@ _wrap_PyNs3SixLowPanNetDevice_Send(PyNs3SixLowPanNetDevice *self, PyObject *args
     }
     retval = self->obj->Send(ns3::Ptr< ns3::Packet  > (packet_ptr), dest2, protocolNumber);
     py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanNetDevice_GetIfIndex(PyNs3SixLowPanNetDevice *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetIfIndex();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanNetDevice_NeedsArp(PyNs3SixLowPanNetDevice *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->NeedsArp();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanNetDevice_SetPromiscReceiveCallback(PyNs3SixLowPanNetDevice *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyObject *cb;
-    ns3::Ptr<PythonCallbackImpl2> cb_cb_impl;
-    const char *keywords[] = {"cb", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &cb)) {
-        return NULL;
-    }
-    if (!PyCallable_Check(cb)) {
-        PyErr_SetString(PyExc_TypeError, "parameter 'cb' must be callbale");
-        return NULL;
-    }
-    cb_cb_impl = ns3::Create<PythonCallbackImpl2> (cb);
-    self->obj->SetPromiscReceiveCallback(ns3::Callback<bool, ns3::Ptr<ns3::NetDevice>, ns3::Ptr<const ns3::Packet>, unsigned short, const ns3::Address &, const ns3::Address &, ns3::NetDevice::PacketType, ns3::empty, ns3::empty, ns3::empty> (cb_cb_impl));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
     return py_retval;
 }
 
@@ -4826,106 +4950,6 @@ _wrap_PyNs3SixLowPanNetDevice_SendFrom(PyNs3SixLowPanNetDevice *self, PyObject *
 
 
 PyObject *
-_wrap_PyNs3SixLowPanNetDevice_IsBroadcast(PyNs3SixLowPanNetDevice *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->IsBroadcast();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanNetDevice_GetMtu(PyNs3SixLowPanNetDevice *self)
-{
-    PyObject *py_retval;
-    uint16_t retval;
-    
-    retval = self->obj->GetMtu();
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanNetDevice_IsBridge(PyNs3SixLowPanNetDevice *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->IsBridge();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanNetDevice_GetAddress(PyNs3SixLowPanNetDevice *self)
-{
-    PyObject *py_retval;
-    PyNs3Address *py_Address;
-    
-    ns3::Address retval = self->obj->GetAddress();
-    py_Address = PyObject_New(PyNs3Address, &PyNs3Address_Type);
-    py_Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Address->obj = new ns3::Address(retval);
-    PyNs3Address_wrapper_registry[(void *) py_Address->obj] = (PyObject *) py_Address;
-    py_retval = Py_BuildValue((char *) "N", py_Address);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanNetDevice_IsLinkUp(PyNs3SixLowPanNetDevice *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->IsLinkUp();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanNetDevice_SetIfIndex(PyNs3SixLowPanNetDevice *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int index;
-    const char *keywords[] = {"index", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &index)) {
-        return NULL;
-    }
-    self->obj->SetIfIndex(index);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanNetDevice_SetNetDevice(PyNs3SixLowPanNetDevice *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3NetDevice *device;
-    ns3::NetDevice *device_ptr;
-    const char *keywords[] = {"device", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3NetDevice_Type, &device)) {
-        return NULL;
-    }
-    device_ptr = (device ? device->obj : NULL);
-    self->obj->SetNetDevice(ns3::Ptr< ns3::NetDevice  > (device_ptr));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3SixLowPanNetDevice_SetAddress(PyNs3SixLowPanNetDevice *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -4959,55 +4983,81 @@ _wrap_PyNs3SixLowPanNetDevice_SetAddress(PyNs3SixLowPanNetDevice *self, PyObject
 
 
 PyObject *
-_wrap_PyNs3SixLowPanNetDevice_GetBroadcast(PyNs3SixLowPanNetDevice *self)
+_wrap_PyNs3SixLowPanNetDevice_SetIfIndex(PyNs3SixLowPanNetDevice *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3Address *py_Address;
+    unsigned int index;
+    const char *keywords[] = {"index", NULL};
     
-    ns3::Address retval = self->obj->GetBroadcast();
-    py_Address = PyObject_New(PyNs3Address, &PyNs3Address_Type);
-    py_Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Address->obj = new ns3::Address(retval);
-    PyNs3Address_wrapper_registry[(void *) py_Address->obj] = (PyObject *) py_Address;
-    py_retval = Py_BuildValue((char *) "N", py_Address);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &index)) {
+        return NULL;
+    }
+    self->obj->SetIfIndex(index);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3SixLowPanNetDevice_GetNetDevice(PyNs3SixLowPanNetDevice *self)
+_wrap_PyNs3SixLowPanNetDevice_SetMtu(PyNs3SixLowPanNetDevice *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    ns3::Ptr< ns3::NetDevice > retval;
-    PyNs3NetDevice *py_NetDevice;
-    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
-    PyTypeObject *wrapper_type = 0;
+    bool retval;
+    int mtu;
+    const char *keywords[] = {"mtu", NULL};
     
-    retval = self->obj->GetNetDevice();
-    if (!(const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval)))) {
-        Py_INCREF(Py_None);
-        return Py_None;
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &mtu)) {
+        return NULL;
     }
-    wrapper_lookup_iter = PyNs3ObjectBase_wrapper_registry.find((void *) const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval)));
-    if (wrapper_lookup_iter == PyNs3ObjectBase_wrapper_registry.end()) {
-        py_NetDevice = NULL;
-    } else {
-        py_NetDevice = (PyNs3NetDevice *) wrapper_lookup_iter->second;
-        Py_INCREF(py_NetDevice);
+    if (mtu > 0xffff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
     }
+    retval = self->obj->SetMtu(mtu);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanNetDevice_SetNetDevice(PyNs3SixLowPanNetDevice *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3NetDevice *device;
+    ns3::NetDevice *device_ptr;
+    const char *keywords[] = {"device", NULL};
     
-    if (py_NetDevice == NULL) {
-        wrapper_type = PyNs3SimpleRefCount__Ns3Object_Ns3ObjectBase_Ns3ObjectDeleter__typeid_map.lookup_wrapper(typeid((*const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval)))), &PyNs3NetDevice_Type);
-        py_NetDevice = PyObject_GC_New(PyNs3NetDevice, wrapper_type);
-        py_NetDevice->inst_dict = NULL;
-    
-        py_NetDevice->inst_dict = NULL;
-        py_NetDevice->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-        const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval))->Ref();
-        py_NetDevice->obj = const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval));
-        PyNs3ObjectBase_wrapper_registry[(void *) py_NetDevice->obj] = (PyObject *) py_NetDevice;
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3NetDevice_Type, &device)) {
+        return NULL;
     }
-    py_retval = Py_BuildValue((char *) "N", py_NetDevice);
+    device_ptr = (device ? device->obj : NULL);
+    self->obj->SetNetDevice(ns3::Ptr< ns3::NetDevice  > (device_ptr));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SixLowPanNetDevice_SetPromiscReceiveCallback(PyNs3SixLowPanNetDevice *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyObject *cb;
+    ns3::Ptr<PythonCallbackImpl2> cb_cb_impl;
+    const char *keywords[] = {"cb", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &cb)) {
+        return NULL;
+    }
+    if (!PyCallable_Check(cb)) {
+        PyErr_SetString(PyExc_TypeError, "parameter 'cb' must be callbale");
+        return NULL;
+    }
+    cb_cb_impl = ns3::Create<PythonCallbackImpl2> (cb);
+    self->obj->SetPromiscReceiveCallback(ns3::Callback<bool, ns3::Ptr<ns3::NetDevice>, ns3::Ptr<const ns3::Packet>, unsigned short, const ns3::Address &, const ns3::Address &, ns3::NetDevice::PacketType, ns3::empty, ns3::empty, ns3::empty> (cb_cb_impl));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -5036,39 +5086,6 @@ _wrap_PyNs3SixLowPanNetDevice_SetReceiveCallback(PyNs3SixLowPanNetDevice *self, 
 
 
 PyObject *
-_wrap_PyNs3SixLowPanNetDevice_IsMulticast(PyNs3SixLowPanNetDevice *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->IsMulticast();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SixLowPanNetDevice_SetMtu(PyNs3SixLowPanNetDevice *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    int mtu;
-    const char *keywords[] = {"mtu", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &mtu)) {
-        return NULL;
-    }
-    if (mtu > 0xffff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    retval = self->obj->SetMtu(mtu);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3SixLowPanNetDevice_SupportsSendFrom(PyNs3SixLowPanNetDevice *self)
 {
     PyObject *py_retval;
@@ -5079,47 +5096,30 @@ _wrap_PyNs3SixLowPanNetDevice_SupportsSendFrom(PyNs3SixLowPanNetDevice *self)
     return py_retval;
 }
 
-
-PyObject *
-_wrap_PyNs3SixLowPanNetDevice_AssignStreams(PyNs3SixLowPanNetDevice *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int64_t retval;
-    int64_t stream;
-    const char *keywords[] = {"stream", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "L", (char **) keywords, &stream)) {
-        return NULL;
-    }
-    retval = self->obj->AssignStreams(stream);
-    py_retval = Py_BuildValue((char *) "L", retval);
-    return py_retval;
-}
-
 static PyMethodDef PyNs3SixLowPanNetDevice_methods[] = {
-    {(char *) "GetMulticast", (PyCFunction) _wrap_PyNs3SixLowPanNetDevice_GetMulticast, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "IsPointToPoint", (PyCFunction) _wrap_PyNs3SixLowPanNetDevice_IsPointToPoint, METH_NOARGS, "IsPointToPoint()\n\n" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3SixLowPanNetDevice_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "Send", (PyCFunction) _wrap_PyNs3SixLowPanNetDevice_Send, METH_KEYWORDS|METH_VARARGS, "Send(packet, dest, protocolNumber)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: dest: ns3::Address const &\ntype: protocolNumber: uint16_t" },
-    {(char *) "GetIfIndex", (PyCFunction) _wrap_PyNs3SixLowPanNetDevice_GetIfIndex, METH_NOARGS, "GetIfIndex()\n\n" },
-    {(char *) "NeedsArp", (PyCFunction) _wrap_PyNs3SixLowPanNetDevice_NeedsArp, METH_NOARGS, "NeedsArp()\n\n" },
-    {(char *) "SetPromiscReceiveCallback", (PyCFunction) _wrap_PyNs3SixLowPanNetDevice_SetPromiscReceiveCallback, METH_KEYWORDS|METH_VARARGS, "SetPromiscReceiveCallback(cb)\n\ntype: cb: ns3::Callback< bool, ns3::Ptr< ns3::NetDevice >, ns3::Ptr< ns3::Packet const >, unsigned short, ns3::Address const &, ns3::Address const &, ns3::NetDevice::PacketType, ns3::empty, ns3::empty, ns3::empty >" },
-    {(char *) "SendFrom", (PyCFunction) _wrap_PyNs3SixLowPanNetDevice_SendFrom, METH_KEYWORDS|METH_VARARGS, "SendFrom(packet, source, dest, protocolNumber)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: source: ns3::Address const &\ntype: dest: ns3::Address const &\ntype: protocolNumber: uint16_t" },
-    {(char *) "IsBroadcast", (PyCFunction) _wrap_PyNs3SixLowPanNetDevice_IsBroadcast, METH_NOARGS, "IsBroadcast()\n\n" },
-    {(char *) "GetMtu", (PyCFunction) _wrap_PyNs3SixLowPanNetDevice_GetMtu, METH_NOARGS, "GetMtu()\n\n" },
-    {(char *) "IsBridge", (PyCFunction) _wrap_PyNs3SixLowPanNetDevice_IsBridge, METH_NOARGS, "IsBridge()\n\n" },
-    {(char *) "GetAddress", (PyCFunction) _wrap_PyNs3SixLowPanNetDevice_GetAddress, METH_NOARGS, "GetAddress()\n\n" },
-    {(char *) "IsLinkUp", (PyCFunction) _wrap_PyNs3SixLowPanNetDevice_IsLinkUp, METH_NOARGS, "IsLinkUp()\n\n" },
-    {(char *) "SetIfIndex", (PyCFunction) _wrap_PyNs3SixLowPanNetDevice_SetIfIndex, METH_KEYWORDS|METH_VARARGS, "SetIfIndex(index)\n\ntype: index: uint32_t const" },
-    {(char *) "SetNetDevice", (PyCFunction) _wrap_PyNs3SixLowPanNetDevice_SetNetDevice, METH_KEYWORDS|METH_VARARGS, "SetNetDevice(device)\n\ntype: device: ns3::Ptr< ns3::NetDevice >" },
-    {(char *) "SetAddress", (PyCFunction) _wrap_PyNs3SixLowPanNetDevice_SetAddress, METH_KEYWORDS|METH_VARARGS, "SetAddress(address)\n\ntype: address: ns3::Address" },
-    {(char *) "GetBroadcast", (PyCFunction) _wrap_PyNs3SixLowPanNetDevice_GetBroadcast, METH_NOARGS, "GetBroadcast()\n\n" },
-    {(char *) "GetNetDevice", (PyCFunction) _wrap_PyNs3SixLowPanNetDevice_GetNetDevice, METH_NOARGS, "GetNetDevice()\n\n" },
-    {(char *) "SetReceiveCallback", (PyCFunction) _wrap_PyNs3SixLowPanNetDevice_SetReceiveCallback, METH_KEYWORDS|METH_VARARGS, "SetReceiveCallback(cb)\n\ntype: cb: ns3::Callback< bool, ns3::Ptr< ns3::NetDevice >, ns3::Ptr< ns3::Packet const >, unsigned short, ns3::Address const &, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty >" },
-    {(char *) "IsMulticast", (PyCFunction) _wrap_PyNs3SixLowPanNetDevice_IsMulticast, METH_NOARGS, "IsMulticast()\n\n" },
-    {(char *) "SetMtu", (PyCFunction) _wrap_PyNs3SixLowPanNetDevice_SetMtu, METH_KEYWORDS|METH_VARARGS, "SetMtu(mtu)\n\ntype: mtu: uint16_t const" },
-    {(char *) "SupportsSendFrom", (PyCFunction) _wrap_PyNs3SixLowPanNetDevice_SupportsSendFrom, METH_NOARGS, "SupportsSendFrom()\n\n" },
     {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3SixLowPanNetDevice_AssignStreams, METH_KEYWORDS|METH_VARARGS, "AssignStreams(stream)\n\ntype: stream: int64_t" },
+    {(char *) "GetAddress", (PyCFunction) _wrap_PyNs3SixLowPanNetDevice_GetAddress, METH_NOARGS, "GetAddress()\n\n" },
+    {(char *) "GetBroadcast", (PyCFunction) _wrap_PyNs3SixLowPanNetDevice_GetBroadcast, METH_NOARGS, "GetBroadcast()\n\n" },
+    {(char *) "GetIfIndex", (PyCFunction) _wrap_PyNs3SixLowPanNetDevice_GetIfIndex, METH_NOARGS, "GetIfIndex()\n\n" },
+    {(char *) "GetMtu", (PyCFunction) _wrap_PyNs3SixLowPanNetDevice_GetMtu, METH_NOARGS, "GetMtu()\n\n" },
+    {(char *) "GetMulticast", (PyCFunction) _wrap_PyNs3SixLowPanNetDevice_GetMulticast, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "GetNetDevice", (PyCFunction) _wrap_PyNs3SixLowPanNetDevice_GetNetDevice, METH_NOARGS, "GetNetDevice()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3SixLowPanNetDevice_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "IsBridge", (PyCFunction) _wrap_PyNs3SixLowPanNetDevice_IsBridge, METH_NOARGS, "IsBridge()\n\n" },
+    {(char *) "IsBroadcast", (PyCFunction) _wrap_PyNs3SixLowPanNetDevice_IsBroadcast, METH_NOARGS, "IsBroadcast()\n\n" },
+    {(char *) "IsLinkUp", (PyCFunction) _wrap_PyNs3SixLowPanNetDevice_IsLinkUp, METH_NOARGS, "IsLinkUp()\n\n" },
+    {(char *) "IsMulticast", (PyCFunction) _wrap_PyNs3SixLowPanNetDevice_IsMulticast, METH_NOARGS, "IsMulticast()\n\n" },
+    {(char *) "IsPointToPoint", (PyCFunction) _wrap_PyNs3SixLowPanNetDevice_IsPointToPoint, METH_NOARGS, "IsPointToPoint()\n\n" },
+    {(char *) "NeedsArp", (PyCFunction) _wrap_PyNs3SixLowPanNetDevice_NeedsArp, METH_NOARGS, "NeedsArp()\n\n" },
+    {(char *) "Send", (PyCFunction) _wrap_PyNs3SixLowPanNetDevice_Send, METH_KEYWORDS|METH_VARARGS, "Send(packet, dest, protocolNumber)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: dest: ns3::Address const &\ntype: protocolNumber: uint16_t" },
+    {(char *) "SendFrom", (PyCFunction) _wrap_PyNs3SixLowPanNetDevice_SendFrom, METH_KEYWORDS|METH_VARARGS, "SendFrom(packet, source, dest, protocolNumber)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: source: ns3::Address const &\ntype: dest: ns3::Address const &\ntype: protocolNumber: uint16_t" },
+    {(char *) "SetAddress", (PyCFunction) _wrap_PyNs3SixLowPanNetDevice_SetAddress, METH_KEYWORDS|METH_VARARGS, "SetAddress(address)\n\ntype: address: ns3::Address" },
+    {(char *) "SetIfIndex", (PyCFunction) _wrap_PyNs3SixLowPanNetDevice_SetIfIndex, METH_KEYWORDS|METH_VARARGS, "SetIfIndex(index)\n\ntype: index: uint32_t const" },
+    {(char *) "SetMtu", (PyCFunction) _wrap_PyNs3SixLowPanNetDevice_SetMtu, METH_KEYWORDS|METH_VARARGS, "SetMtu(mtu)\n\ntype: mtu: uint16_t const" },
+    {(char *) "SetNetDevice", (PyCFunction) _wrap_PyNs3SixLowPanNetDevice_SetNetDevice, METH_KEYWORDS|METH_VARARGS, "SetNetDevice(device)\n\ntype: device: ns3::Ptr< ns3::NetDevice >" },
+    {(char *) "SetPromiscReceiveCallback", (PyCFunction) _wrap_PyNs3SixLowPanNetDevice_SetPromiscReceiveCallback, METH_KEYWORDS|METH_VARARGS, "SetPromiscReceiveCallback(cb)\n\ntype: cb: ns3::Callback< bool, ns3::Ptr< ns3::NetDevice >, ns3::Ptr< ns3::Packet const >, unsigned short, ns3::Address const &, ns3::Address const &, ns3::NetDevice::PacketType, ns3::empty, ns3::empty, ns3::empty >" },
+    {(char *) "SetReceiveCallback", (PyCFunction) _wrap_PyNs3SixLowPanNetDevice_SetReceiveCallback, METH_KEYWORDS|METH_VARARGS, "SetReceiveCallback(cb)\n\ntype: cb: ns3::Callback< bool, ns3::Ptr< ns3::NetDevice >, ns3::Ptr< ns3::Packet const >, unsigned short, ns3::Address const &, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty >" },
+    {(char *) "SupportsSendFrom", (PyCFunction) _wrap_PyNs3SixLowPanNetDevice_SupportsSendFrom, METH_NOARGS, "SupportsSendFrom()\n\n" },
     {NULL, NULL, 0, NULL}
 };
 
@@ -5215,7 +5215,7 @@ PyTypeObject PyNs3SixLowPanNetDevice_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_BASETYPE,                      /* tp_flags */
     "SixLowPanNetDevice()",                        /* Documentation string */
     (traverseproc)PyNs3SixLowPanNetDevice__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3SixLowPanNetDevice__tp_clear,             /* tp_clear */
@@ -5256,30 +5256,6 @@ _wrap_PyNs3CallbackImpl__Void_Ns3SixLowPanNetDeviceDropReason_Ns3Ptr__lt__const_
 
 
 PyObject *
-_wrap_PyNs3CallbackImpl__Void_Ns3SixLowPanNetDeviceDropReason_Ns3Ptr__lt__const_ns3Packet__gt___Ns3Ptr__lt__ns3SixLowPanNetDevice__gt___Unsigned_int_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty___call__(PyNs3CallbackImpl__Void_Ns3SixLowPanNetDeviceDropReason_Ns3Ptr__lt__const_ns3Packet__gt___Ns3Ptr__lt__ns3SixLowPanNetDevice__gt___Unsigned_int_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    ns3::SixLowPanNetDevice::DropReason arg0;
-    PyNs3Packet *arg1;
-    ns3::Packet *arg1_ptr;
-    PyNs3SixLowPanNetDevice *arg2;
-    ns3::SixLowPanNetDevice *arg2_ptr;
-    unsigned int arg3;
-    const char *keywords[] = {"arg0", "arg1", "arg2", "arg3", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "iO!O!I", (char **) keywords, &arg0, &PyNs3Packet_Type, &arg1, &PyNs3SixLowPanNetDevice_Type, &arg2, &arg3)) {
-        return NULL;
-    }
-    arg1_ptr = (arg1 ? arg1->obj : NULL);
-    arg2_ptr = (arg2 ? arg2->obj : NULL);
-    self->obj->operator()(arg0, ns3::Ptr< ns3::Packet  > (arg1_ptr), ns3::Ptr< ns3::SixLowPanNetDevice  > (arg2_ptr), arg3);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3CallbackImpl__Void_Ns3SixLowPanNetDeviceDropReason_Ns3Ptr__lt__const_ns3Packet__gt___Ns3Ptr__lt__ns3SixLowPanNetDevice__gt___Unsigned_int_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_DoGetTypeid(void)
 {
     PyObject *py_retval;
@@ -5299,6 +5275,30 @@ _wrap_PyNs3CallbackImpl__Void_Ns3SixLowPanNetDeviceDropReason_Ns3Ptr__lt__const_
     
     retval = self->obj->GetTypeid();
     py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3CallbackImpl__Void_Ns3SixLowPanNetDeviceDropReason_Ns3Ptr__lt__const_ns3Packet__gt___Ns3Ptr__lt__ns3SixLowPanNetDevice__gt___Unsigned_int_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty___call__(PyNs3CallbackImpl__Void_Ns3SixLowPanNetDeviceDropReason_Ns3Ptr__lt__const_ns3Packet__gt___Ns3Ptr__lt__ns3SixLowPanNetDevice__gt___Unsigned_int_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    ns3::SixLowPanNetDevice::DropReason arg0;
+    PyNs3Packet *arg1;
+    ns3::Packet *arg1_ptr;
+    PyNs3SixLowPanNetDevice *arg2;
+    ns3::SixLowPanNetDevice *arg2_ptr;
+    unsigned int arg3;
+    const char *keywords[] = {"arg0", "arg1", "arg2", "arg3", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "iO!O!I", (char **) keywords, &arg0, &PyNs3Packet_Type, &arg1, &PyNs3SixLowPanNetDevice_Type, &arg2, &arg3)) {
+        return NULL;
+    }
+    arg1_ptr = (arg1 ? arg1->obj : NULL);
+    arg2_ptr = (arg2 ? arg2->obj : NULL);
+    self->obj->operator()(arg0, ns3::Ptr< ns3::Packet  > (arg1_ptr), ns3::Ptr< ns3::SixLowPanNetDevice  > (arg2_ptr), arg3);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 

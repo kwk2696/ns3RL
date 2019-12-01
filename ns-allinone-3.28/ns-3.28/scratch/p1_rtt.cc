@@ -221,7 +221,7 @@ int main (int argc, char ** argv)
 	_tcpsocketbase->TraceConnectWithoutContext ("Tx", MakeCallback (&TxTracer));
 	_tcpsocketbase->TraceConnectWithoutContext ("Rx", MakeCallback (&RxTracer));
 	Ptr<ClientApp> clientApps = CreateObject <ClientApp> ();
-	clientApps->Setup (clientSocket, serverAddress, _segsize, 10, DataRate ("500Mbps"));
+	clientApps->Setup (clientSocket, serverAddress, _segsize, 100, DataRate ("500Mbps"));
 	n0.Get(0)->AddApplication (clientApps);
 		
 	clientApps->SetStartTime (Seconds (0.1));
@@ -311,6 +311,7 @@ static void RxTracer (Ptr<const Packet> p, const TcpHeader& h, Ptr<const TcpSock
 	if(h.GetFlags () & TcpHeader::FIN) return;
 	
 	_rttCur = Simulator::Now ().GetMilliSeconds () - _rttHistory.find (ack) -> second;
+    std::cout << "rtt: " << _rttCur << std::endl;
 	_rttMax = (_rttCur > _rttMax) ? _rttCur : _rttMax;
 	if(_rttMin == 0) _rttMin = _rttCur;
 	else _rttMin = (_rttCur < _rttMin) ? _rttCur : _rttMin; 

@@ -4,51 +4,6 @@
 #include <stddef.h>
 
 
-#if PY_VERSION_HEX < 0x020400F0
-
-#define PyEval_ThreadsInitialized() 1
-
-#define Py_CLEAR(op)				\
-        do {                            	\
-                if (op) {			\
-                        PyObject *tmp = (PyObject *)(op);	\
-                        (op) = NULL;		\
-                        Py_DECREF(tmp);		\
-                }				\
-        } while (0)
-
-
-#define Py_VISIT(op)							\
-        do { 								\
-                if (op) {						\
-                        int vret = visit((PyObject *)(op), arg);	\
-                        if (vret)					\
-                                return vret;				\
-                }							\
-        } while (0)
-
-#endif
-
-
-
-#if PY_VERSION_HEX < 0x020500F0
-
-typedef int Py_ssize_t;
-# define PY_SSIZE_T_MAX INT_MAX
-# define PY_SSIZE_T_MIN INT_MIN
-typedef inquiry lenfunc;
-typedef intargfunc ssizeargfunc;
-typedef intobjargproc ssizeobjargproc;
-
-#endif
-
-
-#ifndef PyVarObject_HEAD_INIT
-#define PyVarObject_HEAD_INIT(type, size) \
-        PyObject_HEAD_INIT(type) size,
-#endif
-
-
 #if PY_VERSION_HEX >= 0x03000000
 typedef void* cmpfunc;
 #define PyCObject_FromVoidPtr(a, b) PyCapsule_New(a, NULL, b)
@@ -2484,9 +2439,9 @@ public:
     }
 
 
-    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3PacketFilter *self);
-    inline void NotifyConstructionCompleted__parent_caller()
-    { ns3::ObjectBase::NotifyConstructionCompleted(); }
+    static PyObject * _wrap_DoDispose(PyNs3PacketFilter *self);
+    inline void DoDispose__parent_caller()
+    { ns3::Object::DoDispose(); }
 
     static PyObject * _wrap_DoInitialize(PyNs3PacketFilter *self);
     inline void DoInitialize__parent_caller()
@@ -2496,9 +2451,9 @@ public:
     inline void NotifyNewAggregate__parent_caller()
     { ns3::Object::NotifyNewAggregate(); }
 
-    static PyObject * _wrap_DoDispose(PyNs3PacketFilter *self);
-    inline void DoDispose__parent_caller()
-    { ns3::Object::DoDispose(); }
+    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3PacketFilter *self);
+    inline void NotifyConstructionCompleted__parent_caller()
+    { ns3::ObjectBase::NotifyConstructionCompleted(); }
 
     virtual bool CheckProtocol(ns3::Ptr< ns3::QueueDiscItem > item) const;
 
@@ -2563,37 +2518,37 @@ public:
     }
 
 
-    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3QueueDisc *self);
-    inline void NotifyConstructionCompleted__parent_caller()
-    { ns3::ObjectBase::NotifyConstructionCompleted(); }
-
-    static PyObject * _wrap_DropAfterDequeue(PyNs3QueueDisc *self, PyObject *args, PyObject *kwargs);
-    inline void DropAfterDequeue__parent_caller(ns3::Ptr< ns3::QueueDiscItem const > item, char const *reason)
-    { ns3::QueueDisc::DropAfterDequeue(item, reason); }
+    static PyObject * _wrap_DoDispose(PyNs3QueueDisc *self);
+    inline void DoDispose__parent_caller()
+    { ns3::QueueDisc::DoDispose(); }
 
     static PyObject * _wrap_DoInitialize(PyNs3QueueDisc *self);
     inline void DoInitialize__parent_caller()
     { ns3::QueueDisc::DoInitialize(); }
 
-    static PyObject * _wrap_NotifyNewAggregate(PyNs3QueueDisc *self);
-    inline void NotifyNewAggregate__parent_caller()
-    { ns3::Object::NotifyNewAggregate(); }
-
-    static PyObject * _wrap_DoDispose(PyNs3QueueDisc *self);
-    inline void DoDispose__parent_caller()
-    { ns3::QueueDisc::DoDispose(); }
-
-    static PyObject * _wrap_Mark(PyNs3QueueDisc *self, PyObject *args, PyObject *kwargs);
-    inline bool Mark__parent_caller(ns3::Ptr< ns3::QueueDiscItem > item, char const *reason)
-    { return ns3::QueueDisc::Mark(item, reason); }
+    static PyObject * _wrap_DropAfterDequeue(PyNs3QueueDisc *self, PyObject *args, PyObject *kwargs);
+    inline void DropAfterDequeue__parent_caller(ns3::Ptr< ns3::QueueDiscItem const > item, char const *reason)
+    { ns3::QueueDisc::DropAfterDequeue(item, reason); }
 
     static PyObject * _wrap_DropBeforeEnqueue(PyNs3QueueDisc *self, PyObject *args, PyObject *kwargs);
     inline void DropBeforeEnqueue__parent_caller(ns3::Ptr< ns3::QueueDiscItem const > item, char const *reason)
     { ns3::QueueDisc::DropBeforeEnqueue(item, reason); }
 
+    static PyObject * _wrap_Mark(PyNs3QueueDisc *self, PyObject *args, PyObject *kwargs);
+    inline bool Mark__parent_caller(ns3::Ptr< ns3::QueueDiscItem > item, char const *reason)
+    { return ns3::QueueDisc::Mark(item, reason); }
+
     static PyObject * _wrap_PeekDequeued(PyNs3QueueDisc *self);
     inline ns3::Ptr< ns3::QueueDiscItem const > PeekDequeued__parent_caller()
     { return ns3::QueueDisc::PeekDequeued(); }
+
+    static PyObject * _wrap_NotifyNewAggregate(PyNs3QueueDisc *self);
+    inline void NotifyNewAggregate__parent_caller()
+    { ns3::Object::NotifyNewAggregate(); }
+
+    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3QueueDisc *self);
+    inline void NotifyConstructionCompleted__parent_caller()
+    { ns3::ObjectBase::NotifyConstructionCompleted(); }
 
     virtual uint32_t GetQuota() const;
 
@@ -2680,9 +2635,9 @@ public:
     }
 
 
-    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3QueueDiscClass *self);
-    inline void NotifyConstructionCompleted__parent_caller()
-    { ns3::ObjectBase::NotifyConstructionCompleted(); }
+    static PyObject * _wrap_DoDispose(PyNs3QueueDiscClass *self);
+    inline void DoDispose__parent_caller()
+    { ns3::QueueDiscClass::DoDispose(); }
 
     static PyObject * _wrap_DoInitialize(PyNs3QueueDiscClass *self);
     inline void DoInitialize__parent_caller()
@@ -2692,9 +2647,9 @@ public:
     inline void NotifyNewAggregate__parent_caller()
     { ns3::Object::NotifyNewAggregate(); }
 
-    static PyObject * _wrap_DoDispose(PyNs3QueueDiscClass *self);
-    inline void DoDispose__parent_caller()
-    { ns3::QueueDiscClass::DoDispose(); }
+    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3QueueDiscClass *self);
+    inline void NotifyConstructionCompleted__parent_caller()
+    { ns3::ObjectBase::NotifyConstructionCompleted(); }
 
     virtual void DoDispose();
 
@@ -2751,9 +2706,9 @@ public:
     }
 
 
-    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3RedQueueDisc *self);
-    inline void NotifyConstructionCompleted__parent_caller()
-    { ns3::ObjectBase::NotifyConstructionCompleted(); }
+    static PyObject * _wrap_DoDispose(PyNs3RedQueueDisc *self);
+    inline void DoDispose__parent_caller()
+    { ns3::RedQueueDisc::DoDispose(); }
 
     static PyObject * _wrap_DoInitialize(PyNs3RedQueueDisc *self);
     inline void DoInitialize__parent_caller()
@@ -2763,9 +2718,9 @@ public:
     inline void NotifyNewAggregate__parent_caller()
     { ns3::Object::NotifyNewAggregate(); }
 
-    static PyObject * _wrap_DoDispose(PyNs3RedQueueDisc *self);
-    inline void DoDispose__parent_caller()
-    { ns3::RedQueueDisc::DoDispose(); }
+    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3RedQueueDisc *self);
+    inline void NotifyConstructionCompleted__parent_caller()
+    { ns3::ObjectBase::NotifyConstructionCompleted(); }
 
     virtual void DoDispose();
 
@@ -2837,9 +2792,9 @@ public:
     }
 
 
-    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3TbfQueueDisc *self);
-    inline void NotifyConstructionCompleted__parent_caller()
-    { ns3::ObjectBase::NotifyConstructionCompleted(); }
+    static PyObject * _wrap_DoDispose(PyNs3TbfQueueDisc *self);
+    inline void DoDispose__parent_caller()
+    { ns3::TbfQueueDisc::DoDispose(); }
 
     static PyObject * _wrap_DoInitialize(PyNs3TbfQueueDisc *self);
     inline void DoInitialize__parent_caller()
@@ -2849,9 +2804,9 @@ public:
     inline void NotifyNewAggregate__parent_caller()
     { ns3::Object::NotifyNewAggregate(); }
 
-    static PyObject * _wrap_DoDispose(PyNs3TbfQueueDisc *self);
-    inline void DoDispose__parent_caller()
-    { ns3::TbfQueueDisc::DoDispose(); }
+    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3TbfQueueDisc *self);
+    inline void NotifyConstructionCompleted__parent_caller()
+    { ns3::ObjectBase::NotifyConstructionCompleted(); }
 
     virtual void DoDispose();
 
@@ -2923,9 +2878,9 @@ public:
     }
 
 
-    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3TrafficControlLayer *self);
-    inline void NotifyConstructionCompleted__parent_caller()
-    { ns3::ObjectBase::NotifyConstructionCompleted(); }
+    static PyObject * _wrap_DoDispose(PyNs3TrafficControlLayer *self);
+    inline void DoDispose__parent_caller()
+    { ns3::TrafficControlLayer::DoDispose(); }
 
     static PyObject * _wrap_DoInitialize(PyNs3TrafficControlLayer *self);
     inline void DoInitialize__parent_caller()
@@ -2935,9 +2890,9 @@ public:
     inline void NotifyNewAggregate__parent_caller()
     { ns3::TrafficControlLayer::NotifyNewAggregate(); }
 
-    static PyObject * _wrap_DoDispose(PyNs3TrafficControlLayer *self);
-    inline void DoDispose__parent_caller()
-    { ns3::TrafficControlLayer::DoDispose(); }
+    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3TrafficControlLayer *self);
+    inline void NotifyConstructionCompleted__parent_caller()
+    { ns3::ObjectBase::NotifyConstructionCompleted(); }
 
     virtual void DeleteRootQueueDiscOnDevice(ns3::Ptr< ns3::NetDevice > device);
 
@@ -3006,9 +2961,9 @@ public:
     }
 
 
-    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3CoDelQueueDisc *self);
-    inline void NotifyConstructionCompleted__parent_caller()
-    { ns3::ObjectBase::NotifyConstructionCompleted(); }
+    static PyObject * _wrap_DoDispose(PyNs3CoDelQueueDisc *self);
+    inline void DoDispose__parent_caller()
+    { ns3::QueueDisc::DoDispose(); }
 
     static PyObject * _wrap_DoInitialize(PyNs3CoDelQueueDisc *self);
     inline void DoInitialize__parent_caller()
@@ -3018,9 +2973,9 @@ public:
     inline void NotifyNewAggregate__parent_caller()
     { ns3::Object::NotifyNewAggregate(); }
 
-    static PyObject * _wrap_DoDispose(PyNs3CoDelQueueDisc *self);
-    inline void DoDispose__parent_caller()
-    { ns3::QueueDisc::DoDispose(); }
+    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3CoDelQueueDisc *self);
+    inline void NotifyConstructionCompleted__parent_caller()
+    { ns3::ObjectBase::NotifyConstructionCompleted(); }
 
     virtual bool DoEnqueue(ns3::Ptr< ns3::QueueDiscItem > item);
 
@@ -3093,9 +3048,9 @@ public:
     }
 
 
-    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3FifoQueueDisc *self);
-    inline void NotifyConstructionCompleted__parent_caller()
-    { ns3::ObjectBase::NotifyConstructionCompleted(); }
+    static PyObject * _wrap_DoDispose(PyNs3FifoQueueDisc *self);
+    inline void DoDispose__parent_caller()
+    { ns3::QueueDisc::DoDispose(); }
 
     static PyObject * _wrap_DoInitialize(PyNs3FifoQueueDisc *self);
     inline void DoInitialize__parent_caller()
@@ -3105,9 +3060,9 @@ public:
     inline void NotifyNewAggregate__parent_caller()
     { ns3::Object::NotifyNewAggregate(); }
 
-    static PyObject * _wrap_DoDispose(PyNs3FifoQueueDisc *self);
-    inline void DoDispose__parent_caller()
-    { ns3::QueueDisc::DoDispose(); }
+    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3FifoQueueDisc *self);
+    inline void NotifyConstructionCompleted__parent_caller()
+    { ns3::ObjectBase::NotifyConstructionCompleted(); }
 
     virtual bool DoEnqueue(ns3::Ptr< ns3::QueueDiscItem > item);
 
@@ -3191,9 +3146,9 @@ public:
     }
 
 
-    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3FqCoDelQueueDisc *self);
-    inline void NotifyConstructionCompleted__parent_caller()
-    { ns3::ObjectBase::NotifyConstructionCompleted(); }
+    static PyObject * _wrap_DoDispose(PyNs3FqCoDelQueueDisc *self);
+    inline void DoDispose__parent_caller()
+    { ns3::QueueDisc::DoDispose(); }
 
     static PyObject * _wrap_DoInitialize(PyNs3FqCoDelQueueDisc *self);
     inline void DoInitialize__parent_caller()
@@ -3203,9 +3158,9 @@ public:
     inline void NotifyNewAggregate__parent_caller()
     { ns3::Object::NotifyNewAggregate(); }
 
-    static PyObject * _wrap_DoDispose(PyNs3FqCoDelQueueDisc *self);
-    inline void DoDispose__parent_caller()
-    { ns3::QueueDisc::DoDispose(); }
+    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3FqCoDelQueueDisc *self);
+    inline void NotifyConstructionCompleted__parent_caller()
+    { ns3::ObjectBase::NotifyConstructionCompleted(); }
 
     virtual bool DoEnqueue(ns3::Ptr< ns3::QueueDiscItem > item);
 
@@ -3277,9 +3232,9 @@ public:
     }
 
 
-    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3MqQueueDisc *self);
-    inline void NotifyConstructionCompleted__parent_caller()
-    { ns3::ObjectBase::NotifyConstructionCompleted(); }
+    static PyObject * _wrap_DoDispose(PyNs3MqQueueDisc *self);
+    inline void DoDispose__parent_caller()
+    { ns3::QueueDisc::DoDispose(); }
 
     static PyObject * _wrap_DoInitialize(PyNs3MqQueueDisc *self);
     inline void DoInitialize__parent_caller()
@@ -3289,9 +3244,9 @@ public:
     inline void NotifyNewAggregate__parent_caller()
     { ns3::Object::NotifyNewAggregate(); }
 
-    static PyObject * _wrap_DoDispose(PyNs3MqQueueDisc *self);
-    inline void DoDispose__parent_caller()
-    { ns3::QueueDisc::DoDispose(); }
+    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3MqQueueDisc *self);
+    inline void NotifyConstructionCompleted__parent_caller()
+    { ns3::ObjectBase::NotifyConstructionCompleted(); }
 
     virtual ns3::QueueDisc::WakeMode GetWakeMode() const;
 
@@ -3364,9 +3319,9 @@ public:
     }
 
 
-    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3PfifoFastQueueDisc *self);
-    inline void NotifyConstructionCompleted__parent_caller()
-    { ns3::ObjectBase::NotifyConstructionCompleted(); }
+    static PyObject * _wrap_DoDispose(PyNs3PfifoFastQueueDisc *self);
+    inline void DoDispose__parent_caller()
+    { ns3::QueueDisc::DoDispose(); }
 
     static PyObject * _wrap_DoInitialize(PyNs3PfifoFastQueueDisc *self);
     inline void DoInitialize__parent_caller()
@@ -3376,9 +3331,9 @@ public:
     inline void NotifyNewAggregate__parent_caller()
     { ns3::Object::NotifyNewAggregate(); }
 
-    static PyObject * _wrap_DoDispose(PyNs3PfifoFastQueueDisc *self);
-    inline void DoDispose__parent_caller()
-    { ns3::QueueDisc::DoDispose(); }
+    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3PfifoFastQueueDisc *self);
+    inline void NotifyConstructionCompleted__parent_caller()
+    { ns3::ObjectBase::NotifyConstructionCompleted(); }
 
     virtual bool DoEnqueue(ns3::Ptr< ns3::QueueDiscItem > item);
 
@@ -3451,9 +3406,9 @@ public:
     }
 
 
-    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3PieQueueDisc *self);
-    inline void NotifyConstructionCompleted__parent_caller()
-    { ns3::ObjectBase::NotifyConstructionCompleted(); }
+    static PyObject * _wrap_DoDispose(PyNs3PieQueueDisc *self);
+    inline void DoDispose__parent_caller()
+    { ns3::PieQueueDisc::DoDispose(); }
 
     static PyObject * _wrap_DoInitialize(PyNs3PieQueueDisc *self);
     inline void DoInitialize__parent_caller()
@@ -3463,9 +3418,9 @@ public:
     inline void NotifyNewAggregate__parent_caller()
     { ns3::Object::NotifyNewAggregate(); }
 
-    static PyObject * _wrap_DoDispose(PyNs3PieQueueDisc *self);
-    inline void DoDispose__parent_caller()
-    { ns3::PieQueueDisc::DoDispose(); }
+    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3PieQueueDisc *self);
+    inline void NotifyConstructionCompleted__parent_caller()
+    { ns3::ObjectBase::NotifyConstructionCompleted(); }
 
     virtual void DoDispose();
 

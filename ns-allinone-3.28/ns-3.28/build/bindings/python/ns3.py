@@ -36,7 +36,6 @@ from ns.topology_read import *
 from ns.traffic_control import *
 from ns.uan import *
 from ns.virtual_net_device import *
-from ns.visualizer import *
 from ns.wave import *
 from ns.wifi import *
 from ns.wimax import *

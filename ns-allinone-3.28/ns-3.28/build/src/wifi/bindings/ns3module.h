@@ -4,51 +4,6 @@
 #include <stddef.h>
 
 
-#if PY_VERSION_HEX < 0x020400F0
-
-#define PyEval_ThreadsInitialized() 1
-
-#define Py_CLEAR(op)				\
-        do {                            	\
-                if (op) {			\
-                        PyObject *tmp = (PyObject *)(op);	\
-                        (op) = NULL;		\
-                        Py_DECREF(tmp);		\
-                }				\
-        } while (0)
-
-
-#define Py_VISIT(op)							\
-        do { 								\
-                if (op) {						\
-                        int vret = visit((PyObject *)(op), arg);	\
-                        if (vret)					\
-                                return vret;				\
-                }							\
-        } while (0)
-
-#endif
-
-
-
-#if PY_VERSION_HEX < 0x020500F0
-
-typedef int Py_ssize_t;
-# define PY_SSIZE_T_MAX INT_MAX
-# define PY_SSIZE_T_MIN INT_MIN
-typedef inquiry lenfunc;
-typedef intargfunc ssizeargfunc;
-typedef intobjargproc ssizeobjargproc;
-
-#endif
-
-
-#ifndef PyVarObject_HEAD_INIT
-#define PyVarObject_HEAD_INIT(type, size) \
-        PyObject_HEAD_INIT(type) size,
-#endif
-
-
 #if PY_VERSION_HEX >= 0x03000000
 typedef void* cmpfunc;
 #define PyCObject_FromVoidPtr(a, b) PyCapsule_New(a, NULL, b)
@@ -4994,25 +4949,9 @@ public:
     }
 
 
-    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3WifiPhy *self);
-    inline void NotifyConstructionCompleted__parent_caller()
-    { ns3::ObjectBase::NotifyConstructionCompleted(); }
-
-    static PyObject * _wrap_DoInitialize(PyNs3WifiPhy *self);
-    inline void DoInitialize__parent_caller()
-    { ns3::WifiPhy::DoInitialize(); }
-
-    static PyObject * _wrap_NotifyNewAggregate(PyNs3WifiPhy *self);
-    inline void NotifyNewAggregate__parent_caller()
-    { ns3::Object::NotifyNewAggregate(); }
-
     static PyObject * _wrap_DoChannelSwitch(PyNs3WifiPhy *self, PyObject *args, PyObject *kwargs);
     inline bool DoChannelSwitch__parent_caller(uint8_t id)
     { return ns3::WifiPhy::DoChannelSwitch(id); }
-
-    static PyObject * _wrap_SwitchMaybeToCcaBusy(PyNs3WifiPhy *self);
-    inline void SwitchMaybeToCcaBusy__parent_caller()
-    { ns3::WifiPhy::SwitchMaybeToCcaBusy(); }
 
     static PyObject * _wrap_DoDispose(PyNs3WifiPhy *self);
     inline void DoDispose__parent_caller()
@@ -5021,6 +4960,22 @@ public:
     static PyObject * _wrap_DoFrequencySwitch(PyNs3WifiPhy *self, PyObject *args, PyObject *kwargs);
     inline bool DoFrequencySwitch__parent_caller(uint16_t frequency)
     { return ns3::WifiPhy::DoFrequencySwitch(frequency); }
+
+    static PyObject * _wrap_DoInitialize(PyNs3WifiPhy *self);
+    inline void DoInitialize__parent_caller()
+    { ns3::WifiPhy::DoInitialize(); }
+
+    static PyObject * _wrap_SwitchMaybeToCcaBusy(PyNs3WifiPhy *self);
+    inline void SwitchMaybeToCcaBusy__parent_caller()
+    { ns3::WifiPhy::SwitchMaybeToCcaBusy(); }
+
+    static PyObject * _wrap_NotifyNewAggregate(PyNs3WifiPhy *self);
+    inline void NotifyNewAggregate__parent_caller()
+    { ns3::Object::NotifyNewAggregate(); }
+
+    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3WifiPhy *self);
+    inline void NotifyConstructionCompleted__parent_caller()
+    { ns3::ObjectBase::NotifyConstructionCompleted(); }
 
     virtual int64_t AssignStreams(int64_t stream);
 
@@ -5112,10 +5067,6 @@ public:
     }
 
 
-    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3WifiSpectrumPhyInterface *self);
-    inline void NotifyConstructionCompleted__parent_caller()
-    { ns3::ObjectBase::NotifyConstructionCompleted(); }
-
     static PyObject * _wrap_DoInitialize(PyNs3WifiSpectrumPhyInterface *self);
     inline void DoInitialize__parent_caller()
     { ns3::Object::DoInitialize(); }
@@ -5123,6 +5074,10 @@ public:
     static PyObject * _wrap_NotifyNewAggregate(PyNs3WifiSpectrumPhyInterface *self);
     inline void NotifyNewAggregate__parent_caller()
     { ns3::Object::NotifyNewAggregate(); }
+
+    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3WifiSpectrumPhyInterface *self);
+    inline void NotifyConstructionCompleted__parent_caller()
+    { ns3::ObjectBase::NotifyConstructionCompleted(); }
 
     virtual ns3::Ptr< ns3::NetDevice > GetDevice() const;
 
@@ -5136,11 +5091,11 @@ public:
 
     virtual void DoDispose();
 
+    virtual void SetDevice(ns3::Ptr< ns3::NetDevice > d);
+
     virtual void SetMobility(ns3::Ptr< ns3::MobilityModel > m);
 
     virtual void SetChannel(ns3::Ptr< ns3::SpectrumChannel > c);
-
-    virtual void SetDevice(ns3::Ptr< ns3::NetDevice > d);
 
     virtual ns3::TypeId GetInstanceTypeId() const;
 
@@ -5208,9 +5163,9 @@ public:
     }
 
 
-    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3WifiTxCurrentModel *self);
-    inline void NotifyConstructionCompleted__parent_caller()
-    { ns3::ObjectBase::NotifyConstructionCompleted(); }
+    static PyObject * _wrap_DoDispose(PyNs3WifiTxCurrentModel *self);
+    inline void DoDispose__parent_caller()
+    { ns3::Object::DoDispose(); }
 
     static PyObject * _wrap_DoInitialize(PyNs3WifiTxCurrentModel *self);
     inline void DoInitialize__parent_caller()
@@ -5220,9 +5175,9 @@ public:
     inline void NotifyNewAggregate__parent_caller()
     { ns3::Object::NotifyNewAggregate(); }
 
-    static PyObject * _wrap_DoDispose(PyNs3WifiTxCurrentModel *self);
-    inline void DoDispose__parent_caller()
-    { ns3::Object::DoDispose(); }
+    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3WifiTxCurrentModel *self);
+    inline void NotifyConstructionCompleted__parent_caller()
+    { ns3::ObjectBase::NotifyConstructionCompleted(); }
 
     virtual double CalcTxCurrent(double txPowerDbm) const;
 
@@ -5284,9 +5239,9 @@ public:
     }
 
 
-    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3YansWifiPhy *self);
-    inline void NotifyConstructionCompleted__parent_caller()
-    { ns3::ObjectBase::NotifyConstructionCompleted(); }
+    static PyObject * _wrap_DoDispose(PyNs3YansWifiPhy *self);
+    inline void DoDispose__parent_caller()
+    { ns3::YansWifiPhy::DoDispose(); }
 
     static PyObject * _wrap_DoInitialize(PyNs3YansWifiPhy *self);
     inline void DoInitialize__parent_caller()
@@ -5296,9 +5251,9 @@ public:
     inline void NotifyNewAggregate__parent_caller()
     { ns3::Object::NotifyNewAggregate(); }
 
-    static PyObject * _wrap_DoDispose(PyNs3YansWifiPhy *self);
-    inline void DoDispose__parent_caller()
-    { ns3::YansWifiPhy::DoDispose(); }
+    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3YansWifiPhy *self);
+    inline void NotifyConstructionCompleted__parent_caller()
+    { ns3::ObjectBase::NotifyConstructionCompleted(); }
 
     virtual ns3::Ptr< ns3::Channel > GetChannel() const;
 
@@ -5306,13 +5261,13 @@ public:
 
     virtual void DoDispose();
 
-    virtual void SetChannelWidth(uint8_t channelwidth);
-
-    virtual void SetChannelNumber(uint8_t id);
+    virtual int64_t AssignStreams(int64_t stream);
 
     virtual void ConfigureStandard(ns3::WifiPhyStandard standard);
 
-    virtual int64_t AssignStreams(int64_t stream);
+    virtual void SetChannelNumber(uint8_t id);
+
+    virtual void SetChannelWidth(uint8_t channelwidth);
 
     virtual void SetFrequency(uint16_t freq);
 
@@ -5515,33 +5470,33 @@ public:
     }
 
 
-    static PyObject * _wrap_RestartAccessIfNeeded(PyNs3DcaTxop *self);
-    inline void RestartAccessIfNeeded__parent_caller()
-    { ns3::DcaTxop::RestartAccessIfNeeded(); }
+    static PyObject * _wrap_DoDispose(PyNs3DcaTxop *self);
+    inline void DoDispose__parent_caller()
+    { ns3::DcaTxop::DoDispose(); }
 
-    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3DcaTxop *self);
-    inline void NotifyConstructionCompleted__parent_caller()
-    { ns3::ObjectBase::NotifyConstructionCompleted(); }
+    static PyObject * _wrap_DoInitialize(PyNs3DcaTxop *self);
+    inline void DoInitialize__parent_caller()
+    { ns3::DcaTxop::DoInitialize(); }
 
-    static PyObject * _wrap_NotifyInternalCollision(PyNs3DcaTxop *self);
-    inline void NotifyInternalCollision__parent_caller()
-    { ns3::DcaTxop::NotifyInternalCollision(); }
-
-    static PyObject * _wrap_NotifyAccessGranted(PyNs3DcaTxop *self);
-    inline void NotifyAccessGranted__parent_caller()
-    { ns3::DcaTxop::NotifyAccessGranted(); }
-
-    static PyObject * _wrap_NeedDataRetransmission(PyNs3DcaTxop *self, PyObject *args, PyObject *kwargs);
-    inline bool NeedDataRetransmission__parent_caller(ns3::Ptr< ns3::Packet const > packet, ns3::WifiMacHeader const & hdr)
-    { return ns3::DcaTxop::NeedDataRetransmission(packet, hdr); }
+    static PyObject * _wrap_GetFragmentOffset(PyNs3DcaTxop *self);
+    inline uint32_t GetFragmentOffset__parent_caller()
+    { return ns3::DcaTxop::GetFragmentOffset(); }
 
     static PyObject * _wrap_GetFragmentSize(PyNs3DcaTxop *self);
     inline uint32_t GetFragmentSize__parent_caller()
     { return ns3::DcaTxop::GetFragmentSize(); }
 
-    static PyObject * _wrap_DoInitialize(PyNs3DcaTxop *self);
-    inline void DoInitialize__parent_caller()
-    { ns3::DcaTxop::DoInitialize(); }
+    static PyObject * _wrap_GetNextFragmentSize(PyNs3DcaTxop *self);
+    inline uint32_t GetNextFragmentSize__parent_caller()
+    { return ns3::DcaTxop::GetNextFragmentSize(); }
+
+    static PyObject * _wrap_IsLastFragment(PyNs3DcaTxop *self);
+    inline bool IsLastFragment__parent_caller()
+    { return ns3::DcaTxop::IsLastFragment(); }
+
+    static PyObject * _wrap_NeedDataRetransmission(PyNs3DcaTxop *self, PyObject *args, PyObject *kwargs);
+    inline bool NeedDataRetransmission__parent_caller(ns3::Ptr< ns3::Packet const > packet, ns3::WifiMacHeader const & hdr)
+    { return ns3::DcaTxop::NeedDataRetransmission(packet, hdr); }
 
     static PyObject * _wrap_NeedFragmentation(PyNs3DcaTxop *self);
     inline bool NeedFragmentation__parent_caller()
@@ -5551,29 +5506,29 @@ public:
     inline bool NeedRtsRetransmission__parent_caller(ns3::Ptr< ns3::Packet const > packet, ns3::WifiMacHeader const & hdr)
     { return ns3::DcaTxop::NeedRtsRetransmission(packet, hdr); }
 
-    static PyObject * _wrap_GetFragmentOffset(PyNs3DcaTxop *self);
-    inline uint32_t GetFragmentOffset__parent_caller()
-    { return ns3::DcaTxop::GetFragmentOffset(); }
+    static PyObject * _wrap_NextFragment(PyNs3DcaTxop *self);
+    inline void NextFragment__parent_caller()
+    { ns3::DcaTxop::NextFragment(); }
+
+    static PyObject * _wrap_NotifyAccessGranted(PyNs3DcaTxop *self);
+    inline void NotifyAccessGranted__parent_caller()
+    { ns3::DcaTxop::NotifyAccessGranted(); }
 
     static PyObject * _wrap_NotifyCollision(PyNs3DcaTxop *self);
     inline void NotifyCollision__parent_caller()
     { ns3::DcaTxop::NotifyCollision(); }
 
-    static PyObject * _wrap_NextFragment(PyNs3DcaTxop *self);
-    inline void NextFragment__parent_caller()
-    { ns3::DcaTxop::NextFragment(); }
+    static PyObject * _wrap_NotifyInternalCollision(PyNs3DcaTxop *self);
+    inline void NotifyInternalCollision__parent_caller()
+    { ns3::DcaTxop::NotifyInternalCollision(); }
+
+    static PyObject * _wrap_RestartAccessIfNeeded(PyNs3DcaTxop *self);
+    inline void RestartAccessIfNeeded__parent_caller()
+    { ns3::DcaTxop::RestartAccessIfNeeded(); }
 
     static PyObject * _wrap_StartAccessIfNeeded(PyNs3DcaTxop *self);
     inline void StartAccessIfNeeded__parent_caller()
     { ns3::DcaTxop::StartAccessIfNeeded(); }
-
-    static PyObject * _wrap_IsLastFragment(PyNs3DcaTxop *self);
-    inline bool IsLastFragment__parent_caller()
-    { return ns3::DcaTxop::IsLastFragment(); }
-
-    static PyObject * _wrap_DoDispose(PyNs3DcaTxop *self);
-    inline void DoDispose__parent_caller()
-    { ns3::DcaTxop::DoDispose(); }
 
     static PyObject * _wrap_TxDroppedPacket(PyNs3DcaTxop *self, PyObject *args, PyObject *kwargs);
     inline void TxDroppedPacket__parent_caller(ns3::Ptr< ns3::WifiMacQueueItem const > item)
@@ -5583,9 +5538,9 @@ public:
     inline void NotifyNewAggregate__parent_caller()
     { ns3::Object::NotifyNewAggregate(); }
 
-    static PyObject * _wrap_GetNextFragmentSize(PyNs3DcaTxop *self);
-    inline uint32_t GetNextFragmentSize__parent_caller()
-    { return ns3::DcaTxop::GetNextFragmentSize(); }
+    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3DcaTxop *self);
+    inline void NotifyConstructionCompleted__parent_caller()
+    { ns3::ObjectBase::NotifyConstructionCompleted(); }
 
     virtual void Cancel();
 
@@ -5699,9 +5654,9 @@ public:
     }
 
 
-    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3DcfManager *self);
-    inline void NotifyConstructionCompleted__parent_caller()
-    { ns3::ObjectBase::NotifyConstructionCompleted(); }
+    static PyObject * _wrap_DoDispose(PyNs3DcfManager *self);
+    inline void DoDispose__parent_caller()
+    { ns3::DcfManager::DoDispose(); }
 
     static PyObject * _wrap_DoInitialize(PyNs3DcfManager *self);
     inline void DoInitialize__parent_caller()
@@ -5711,9 +5666,9 @@ public:
     inline void NotifyNewAggregate__parent_caller()
     { ns3::Object::NotifyNewAggregate(); }
 
-    static PyObject * _wrap_DoDispose(PyNs3DcfManager *self);
-    inline void DoDispose__parent_caller()
-    { ns3::DcfManager::DoDispose(); }
+    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3DcfManager *self);
+    inline void NotifyConstructionCompleted__parent_caller()
+    { ns3::ObjectBase::NotifyConstructionCompleted(); }
 
     virtual void DoDispose();
 
@@ -5773,25 +5728,13 @@ public:
     }
 
 
-    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3DcfState *self);
-    inline void NotifyConstructionCompleted__parent_caller()
-    { ns3::ObjectBase::NotifyConstructionCompleted(); }
+    static PyObject * _wrap_DoDispose(PyNs3DcfState *self);
+    inline void DoDispose__parent_caller()
+    { ns3::DcfState::DoDispose(); }
 
-    static PyObject * _wrap_NotifyChannelSwitching(PyNs3DcfState *self);
-    inline void NotifyChannelSwitching__parent_caller()
-    { ns3::DcfState::NotifyChannelSwitching(); }
-
-    static PyObject * _wrap_NotifyOff(PyNs3DcfState *self);
-    inline void NotifyOff__parent_caller()
-    { ns3::DcfState::NotifyOff(); }
-
-    static PyObject * _wrap_NotifyOn(PyNs3DcfState *self);
-    inline void NotifyOn__parent_caller()
-    { ns3::DcfState::NotifyOn(); }
-
-    static PyObject * _wrap_NotifyAccessRequested(PyNs3DcfState *self);
-    inline void NotifyAccessRequested__parent_caller()
-    { ns3::DcfState::NotifyAccessRequested(); }
+    static PyObject * _wrap_GetBackoffSlots(PyNs3DcfState *self);
+    inline uint32_t GetBackoffSlots__parent_caller()
+    { return ns3::DcfState::GetBackoffSlots(); }
 
     static PyObject * _wrap_GetBackoffStart(PyNs3DcfState *self);
     inline ns3::Time GetBackoffStart__parent_caller()
@@ -5801,17 +5744,29 @@ public:
     inline void NotifyAccessGranted__parent_caller()
     { ns3::DcfState::NotifyAccessGranted(); }
 
-    static PyObject * _wrap_NotifyNewAggregate(PyNs3DcfState *self);
-    inline void NotifyNewAggregate__parent_caller()
-    { ns3::Object::NotifyNewAggregate(); }
+    static PyObject * _wrap_NotifyAccessRequested(PyNs3DcfState *self);
+    inline void NotifyAccessRequested__parent_caller()
+    { ns3::DcfState::NotifyAccessRequested(); }
+
+    static PyObject * _wrap_NotifyChannelSwitching(PyNs3DcfState *self);
+    inline void NotifyChannelSwitching__parent_caller()
+    { ns3::DcfState::NotifyChannelSwitching(); }
+
+    static PyObject * _wrap_NotifyCollision(PyNs3DcfState *self);
+    inline void NotifyCollision__parent_caller()
+    { ns3::DcfState::NotifyCollision(); }
 
     static PyObject * _wrap_NotifyInternalCollision(PyNs3DcfState *self);
     inline void NotifyInternalCollision__parent_caller()
     { ns3::DcfState::NotifyInternalCollision(); }
 
-    static PyObject * _wrap_NotifyCollision(PyNs3DcfState *self);
-    inline void NotifyCollision__parent_caller()
-    { ns3::DcfState::NotifyCollision(); }
+    static PyObject * _wrap_NotifyOff(PyNs3DcfState *self);
+    inline void NotifyOff__parent_caller()
+    { ns3::DcfState::NotifyOff(); }
+
+    static PyObject * _wrap_NotifyOn(PyNs3DcfState *self);
+    inline void NotifyOn__parent_caller()
+    { ns3::DcfState::NotifyOn(); }
 
     static PyObject * _wrap_NotifySleep(PyNs3DcfState *self);
     inline void NotifySleep__parent_caller()
@@ -5821,14 +5776,6 @@ public:
     inline void NotifyWakeUp__parent_caller()
     { ns3::DcfState::NotifyWakeUp(); }
 
-    static PyObject * _wrap_GetBackoffSlots(PyNs3DcfState *self);
-    inline uint32_t GetBackoffSlots__parent_caller()
-    { return ns3::DcfState::GetBackoffSlots(); }
-
-    static PyObject * _wrap_DoDispose(PyNs3DcfState *self);
-    inline void DoDispose__parent_caller()
-    { ns3::DcfState::DoDispose(); }
-
     static PyObject * _wrap_UpdateBackoffSlotsNow(PyNs3DcfState *self, PyObject *args, PyObject *kwargs);
     inline void UpdateBackoffSlotsNow__parent_caller(uint32_t nSlots, ns3::Time backoffUpdateBound)
     { ns3::DcfState::UpdateBackoffSlotsNow(nSlots, backoffUpdateBound); }
@@ -5836,6 +5783,14 @@ public:
     static PyObject * _wrap_DoInitialize(PyNs3DcfState *self);
     inline void DoInitialize__parent_caller()
     { ns3::Object::DoInitialize(); }
+
+    static PyObject * _wrap_NotifyNewAggregate(PyNs3DcfState *self);
+    inline void NotifyNewAggregate__parent_caller()
+    { ns3::Object::NotifyNewAggregate(); }
+
+    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3DcfState *self);
+    inline void NotifyConstructionCompleted__parent_caller()
+    { ns3::ObjectBase::NotifyConstructionCompleted(); }
 
     virtual void DoDispose();
 
@@ -5915,13 +5870,13 @@ public:
     }
 
 
-    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3EdcaTxopN *self);
-    inline void NotifyConstructionCompleted__parent_caller()
-    { ns3::ObjectBase::NotifyConstructionCompleted(); }
-
     static PyObject * _wrap_NotifyNewAggregate(PyNs3EdcaTxopN *self);
     inline void NotifyNewAggregate__parent_caller()
     { ns3::Object::NotifyNewAggregate(); }
+
+    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3EdcaTxopN *self);
+    inline void NotifyConstructionCompleted__parent_caller()
+    { ns3::ObjectBase::NotifyConstructionCompleted(); }
 
     virtual void EndTxNoAck();
 
@@ -5965,21 +5920,21 @@ public:
 
     virtual bool IsLastFragment() const;
 
+    virtual void Cancel();
+
     virtual void NotifyChannelSwitching();
 
     virtual void NotifyOff();
 
-    virtual void StartNextFragment();
-
-    virtual void NotifyWakeUp();
+    virtual void NotifyOn();
 
     virtual void NotifySleep();
 
+    virtual void NotifyWakeUp();
+
     virtual void Queue(ns3::Ptr< ns3::Packet const > packet, ns3::WifiMacHeader const & hdr);
 
-    virtual void NotifyOn();
-
-    virtual void Cancel();
+    virtual void StartNextFragment();
 
     virtual ns3::TypeId GetInstanceTypeId() const;
 
@@ -6065,9 +6020,9 @@ public:
     }
 
 
-    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3ErrorRateModel *self);
-    inline void NotifyConstructionCompleted__parent_caller()
-    { ns3::ObjectBase::NotifyConstructionCompleted(); }
+    static PyObject * _wrap_DoDispose(PyNs3ErrorRateModel *self);
+    inline void DoDispose__parent_caller()
+    { ns3::Object::DoDispose(); }
 
     static PyObject * _wrap_DoInitialize(PyNs3ErrorRateModel *self);
     inline void DoInitialize__parent_caller()
@@ -6077,9 +6032,9 @@ public:
     inline void NotifyNewAggregate__parent_caller()
     { ns3::Object::NotifyNewAggregate(); }
 
-    static PyObject * _wrap_DoDispose(PyNs3ErrorRateModel *self);
-    inline void DoDispose__parent_caller()
-    { ns3::Object::DoDispose(); }
+    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3ErrorRateModel *self);
+    inline void NotifyConstructionCompleted__parent_caller()
+    { ns3::ObjectBase::NotifyConstructionCompleted(); }
 
     virtual double GetChunkSuccessRate(ns3::WifiMode mode, ns3::WifiTxVector txVector, double snr, uint64_t nbits) const;
 
@@ -6323,9 +6278,9 @@ public:
     }
 
 
-    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3LinearWifiTxCurrentModel *self);
-    inline void NotifyConstructionCompleted__parent_caller()
-    { ns3::ObjectBase::NotifyConstructionCompleted(); }
+    static PyObject * _wrap_DoDispose(PyNs3LinearWifiTxCurrentModel *self);
+    inline void DoDispose__parent_caller()
+    { ns3::Object::DoDispose(); }
 
     static PyObject * _wrap_DoInitialize(PyNs3LinearWifiTxCurrentModel *self);
     inline void DoInitialize__parent_caller()
@@ -6335,9 +6290,9 @@ public:
     inline void NotifyNewAggregate__parent_caller()
     { ns3::Object::NotifyNewAggregate(); }
 
-    static PyObject * _wrap_DoDispose(PyNs3LinearWifiTxCurrentModel *self);
-    inline void DoDispose__parent_caller()
-    { ns3::Object::DoDispose(); }
+    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3LinearWifiTxCurrentModel *self);
+    inline void NotifyConstructionCompleted__parent_caller()
+    { ns3::ObjectBase::NotifyConstructionCompleted(); }
 
     virtual double CalcTxCurrent(double txPowerDbm) const;
 
@@ -6399,10 +6354,6 @@ public:
     }
 
 
-    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3MacLow *self);
-    inline void NotifyConstructionCompleted__parent_caller()
-    { ns3::ObjectBase::NotifyConstructionCompleted(); }
-
     static PyObject * _wrap_DoInitialize(PyNs3MacLow *self);
     inline void DoInitialize__parent_caller()
     { ns3::Object::DoInitialize(); }
@@ -6410,6 +6361,10 @@ public:
     static PyObject * _wrap_NotifyNewAggregate(PyNs3MacLow *self);
     inline void NotifyNewAggregate__parent_caller()
     { ns3::Object::NotifyNewAggregate(); }
+
+    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3MacLow *self);
+    inline void NotifyConstructionCompleted__parent_caller()
+    { ns3::ObjectBase::NotifyConstructionCompleted(); }
 
     virtual ns3::WifiTxVector GetDataTxVector(ns3::Ptr< ns3::Packet const > packet, ns3::WifiMacHeader const *hdr) const;
 
@@ -6548,9 +6503,9 @@ public:
     }
 
 
-    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3NistErrorRateModel *self);
-    inline void NotifyConstructionCompleted__parent_caller()
-    { ns3::ObjectBase::NotifyConstructionCompleted(); }
+    static PyObject * _wrap_DoDispose(PyNs3NistErrorRateModel *self);
+    inline void DoDispose__parent_caller()
+    { ns3::Object::DoDispose(); }
 
     static PyObject * _wrap_DoInitialize(PyNs3NistErrorRateModel *self);
     inline void DoInitialize__parent_caller()
@@ -6560,9 +6515,9 @@ public:
     inline void NotifyNewAggregate__parent_caller()
     { ns3::Object::NotifyNewAggregate(); }
 
-    static PyObject * _wrap_DoDispose(PyNs3NistErrorRateModel *self);
-    inline void DoDispose__parent_caller()
-    { ns3::Object::DoDispose(); }
+    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3NistErrorRateModel *self);
+    inline void NotifyConstructionCompleted__parent_caller()
+    { ns3::ObjectBase::NotifyConstructionCompleted(); }
 
     virtual double GetChunkSuccessRate(ns3::WifiMode mode, ns3::WifiTxVector txVector, double snr, uint64_t nbits) const;
 
@@ -6656,21 +6611,13 @@ public:
     }
 
 
-    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3Queue__Ns3WifiMacQueueItem *self);
-    inline void NotifyConstructionCompleted__parent_caller()
-    { ns3::ObjectBase::NotifyConstructionCompleted(); }
-
-    static PyObject * _wrap_DropAfterDequeue(PyNs3Queue__Ns3WifiMacQueueItem *self, PyObject *args, PyObject *kwargs);
-    inline void DropAfterDequeue__parent_caller(ns3::Ptr< ns3::WifiMacQueueItem > item)
-    { ns3::Queue< ns3::WifiMacQueueItem >::DropAfterDequeue(item); }
-
     static PyObject * _wrap_DropBeforeEnqueue(PyNs3Queue__Ns3WifiMacQueueItem *self, PyObject *args, PyObject *kwargs);
     inline void DropBeforeEnqueue__parent_caller(ns3::Ptr< ns3::WifiMacQueueItem > item)
     { ns3::Queue< ns3::WifiMacQueueItem >::DropBeforeEnqueue(item); }
 
-    static PyObject * _wrap_NotifyNewAggregate(PyNs3Queue__Ns3WifiMacQueueItem *self);
-    inline void NotifyNewAggregate__parent_caller()
-    { ns3::Object::NotifyNewAggregate(); }
+    static PyObject * _wrap_DropAfterDequeue(PyNs3Queue__Ns3WifiMacQueueItem *self, PyObject *args, PyObject *kwargs);
+    inline void DropAfterDequeue__parent_caller(ns3::Ptr< ns3::WifiMacQueueItem > item)
+    { ns3::Queue< ns3::WifiMacQueueItem >::DropAfterDequeue(item); }
 
     static PyObject * _wrap_DoDispose(PyNs3Queue__Ns3WifiMacQueueItem *self);
     inline void DoDispose__parent_caller()
@@ -6679,6 +6626,14 @@ public:
     static PyObject * _wrap_DoInitialize(PyNs3Queue__Ns3WifiMacQueueItem *self);
     inline void DoInitialize__parent_caller()
     { ns3::Object::DoInitialize(); }
+
+    static PyObject * _wrap_NotifyNewAggregate(PyNs3Queue__Ns3WifiMacQueueItem *self);
+    inline void NotifyNewAggregate__parent_caller()
+    { ns3::Object::NotifyNewAggregate(); }
+
+    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3Queue__Ns3WifiMacQueueItem *self);
+    inline void NotifyConstructionCompleted__parent_caller()
+    { ns3::ObjectBase::NotifyConstructionCompleted(); }
 
     virtual bool Enqueue(ns3::Ptr< ns3::WifiMacQueueItem > item);
 
@@ -6742,125 +6697,125 @@ public:
     }
 
 
-    static PyObject * _wrap_GetVIQueue(PyNs3RegularWifiMac *self);
-    inline ns3::Ptr< ns3::EdcaTxopN > GetVIQueue__parent_caller()
-    { return ns3::RegularWifiMac::GetVIQueue(); }
-
-    static PyObject * _wrap_SetVhtSupported(PyNs3RegularWifiMac *self, PyObject *args, PyObject *kwargs);
-    inline void SetVhtSupported__parent_caller(bool enable)
-    { ns3::RegularWifiMac::SetVhtSupported(enable); }
-
-    static PyObject * _wrap_SetTypeOfStation(PyNs3RegularWifiMac *self, PyObject *args, PyObject *kwargs);
-    inline void SetTypeOfStation__parent_caller(ns3::TypeOfStation type)
-    { ns3::RegularWifiMac::SetTypeOfStation(type); }
-
-    static PyObject * _wrap_ForwardUp(PyNs3RegularWifiMac *self, PyObject *args, PyObject *kwargs);
-    inline void ForwardUp__parent_caller(ns3::Ptr< ns3::Packet > packet, ns3::Mac48Address from, ns3::Mac48Address to)
-    { ns3::RegularWifiMac::ForwardUp(packet, from, to); }
-
-    static PyObject * _wrap_GetDcaTxop(PyNs3RegularWifiMac *self);
-    inline ns3::Ptr< ns3::DcaTxop > GetDcaTxop__parent_caller()
-    { return ns3::RegularWifiMac::GetDcaTxop(); }
-
-    static PyObject * _wrap_GetDsssSupported(PyNs3RegularWifiMac *self);
-    inline bool GetDsssSupported__parent_caller()
-    { return ns3::RegularWifiMac::GetDsssSupported(); }
-
-    static PyObject * _wrap_NotifyNewAggregate(PyNs3RegularWifiMac *self);
-    inline void NotifyNewAggregate__parent_caller()
-    { ns3::Object::NotifyNewAggregate(); }
-
-    static PyObject * _wrap_SendAddBaResponse(PyNs3RegularWifiMac *self, PyObject *args, PyObject *kwargs);
-    inline void SendAddBaResponse__parent_caller(ns3::MgtAddBaRequestHeader const *reqHdr, ns3::Mac48Address originator)
-    { ns3::RegularWifiMac::SendAddBaResponse(reqHdr, originator); }
-
-    static PyObject * _wrap_GetErpSupported(PyNs3RegularWifiMac *self);
-    inline bool GetErpSupported__parent_caller()
-    { return ns3::RegularWifiMac::GetErpSupported(); }
-
-    static PyObject * _wrap_GetHeSupported(PyNs3RegularWifiMac *self);
-    inline bool GetHeSupported__parent_caller()
-    { return ns3::RegularWifiMac::GetHeSupported(); }
-
-    static PyObject * _wrap_GetVhtSupported(PyNs3RegularWifiMac *self);
-    inline bool GetVhtSupported__parent_caller()
-    { return ns3::RegularWifiMac::GetVhtSupported(); }
-
-    static PyObject * _wrap_GetQosSupported(PyNs3RegularWifiMac *self);
-    inline bool GetQosSupported__parent_caller()
-    { return ns3::RegularWifiMac::GetQosSupported(); }
-
-    static PyObject * _wrap_GetBEQueue(PyNs3RegularWifiMac *self);
-    inline ns3::Ptr< ns3::EdcaTxopN > GetBEQueue__parent_caller()
-    { return ns3::RegularWifiMac::GetBEQueue(); }
-
-    static PyObject * _wrap_FinishConfigureStandard(PyNs3RegularWifiMac *self, PyObject *args, PyObject *kwargs);
-    inline void FinishConfigureStandard__parent_caller(ns3::WifiPhyStandard standard)
-    { ns3::RegularWifiMac::FinishConfigureStandard(standard); }
-
-    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3RegularWifiMac *self);
-    inline void NotifyConstructionCompleted__parent_caller()
-    { ns3::ObjectBase::NotifyConstructionCompleted(); }
-
-    static PyObject * _wrap_Receive(PyNs3RegularWifiMac *self, PyObject *args, PyObject *kwargs);
-    inline void Receive__parent_caller(ns3::Ptr< ns3::Packet > packet, ns3::WifiMacHeader const *hdr)
-    { ns3::RegularWifiMac::Receive(packet, hdr); }
+    static PyObject * _wrap_DoInitialize(PyNs3RegularWifiMac *self);
+    inline void DoInitialize__parent_caller()
+    { ns3::RegularWifiMac::DoInitialize(); }
 
     static PyObject * _wrap_DoDispose(PyNs3RegularWifiMac *self);
     inline void DoDispose__parent_caller()
     { ns3::RegularWifiMac::DoDispose(); }
 
-    static PyObject * _wrap_SetQosSupported(PyNs3RegularWifiMac *self, PyObject *args, PyObject *kwargs);
-    inline void SetQosSupported__parent_caller(bool enable)
-    { ns3::RegularWifiMac::SetQosSupported(enable); }
-
-    static PyObject * _wrap_GetHtSupported(PyNs3RegularWifiMac *self);
-    inline bool GetHtSupported__parent_caller()
-    { return ns3::RegularWifiMac::GetHtSupported(); }
+    static PyObject * _wrap_GetDcaTxop(PyNs3RegularWifiMac *self);
+    inline ns3::Ptr< ns3::DcaTxop > GetDcaTxop__parent_caller()
+    { return ns3::RegularWifiMac::GetDcaTxop(); }
 
     static PyObject * _wrap_GetVOQueue(PyNs3RegularWifiMac *self);
     inline ns3::Ptr< ns3::EdcaTxopN > GetVOQueue__parent_caller()
     { return ns3::RegularWifiMac::GetVOQueue(); }
 
-    static PyObject * _wrap_SetDsssSupported(PyNs3RegularWifiMac *self, PyObject *args, PyObject *kwargs);
-    inline void SetDsssSupported__parent_caller(bool enable)
-    { ns3::RegularWifiMac::SetDsssSupported(enable); }
+    static PyObject * _wrap_GetVIQueue(PyNs3RegularWifiMac *self);
+    inline ns3::Ptr< ns3::EdcaTxopN > GetVIQueue__parent_caller()
+    { return ns3::RegularWifiMac::GetVIQueue(); }
 
-    static PyObject * _wrap_SetHtSupported(PyNs3RegularWifiMac *self, PyObject *args, PyObject *kwargs);
-    inline void SetHtSupported__parent_caller(bool enable)
-    { ns3::RegularWifiMac::SetHtSupported(enable); }
-
-    static PyObject * _wrap_ConfigureContentionWindow(PyNs3RegularWifiMac *self, PyObject *args, PyObject *kwargs);
-    inline void ConfigureContentionWindow__parent_caller(uint32_t cwMin, uint32_t cwMax)
-    { ns3::RegularWifiMac::ConfigureContentionWindow(cwMin, cwMax); }
-
-    static PyObject * _wrap_TxOk(PyNs3RegularWifiMac *self, PyObject *args, PyObject *kwargs);
-    inline void TxOk__parent_caller(ns3::WifiMacHeader const & hdr)
-    { ns3::RegularWifiMac::TxOk(hdr); }
-
-    static PyObject * _wrap_DoInitialize(PyNs3RegularWifiMac *self);
-    inline void DoInitialize__parent_caller()
-    { ns3::RegularWifiMac::DoInitialize(); }
-
-    static PyObject * _wrap_SetErpSupported(PyNs3RegularWifiMac *self, PyObject *args, PyObject *kwargs);
-    inline void SetErpSupported__parent_caller(bool enable)
-    { ns3::RegularWifiMac::SetErpSupported(enable); }
-
-    static PyObject * _wrap_TxFailed(PyNs3RegularWifiMac *self, PyObject *args, PyObject *kwargs);
-    inline void TxFailed__parent_caller(ns3::WifiMacHeader const & hdr)
-    { ns3::RegularWifiMac::TxFailed(hdr); }
-
-    static PyObject * _wrap_DeaggregateAmsduAndForward(PyNs3RegularWifiMac *self, PyObject *args, PyObject *kwargs);
-    inline void DeaggregateAmsduAndForward__parent_caller(ns3::Ptr< ns3::Packet > aggregatedPacket, ns3::WifiMacHeader const *hdr)
-    { ns3::RegularWifiMac::DeaggregateAmsduAndForward(aggregatedPacket, hdr); }
+    static PyObject * _wrap_GetBEQueue(PyNs3RegularWifiMac *self);
+    inline ns3::Ptr< ns3::EdcaTxopN > GetBEQueue__parent_caller()
+    { return ns3::RegularWifiMac::GetBEQueue(); }
 
     static PyObject * _wrap_GetBKQueue(PyNs3RegularWifiMac *self);
     inline ns3::Ptr< ns3::EdcaTxopN > GetBKQueue__parent_caller()
     { return ns3::RegularWifiMac::GetBKQueue(); }
 
+    static PyObject * _wrap_FinishConfigureStandard(PyNs3RegularWifiMac *self, PyObject *args, PyObject *kwargs);
+    inline void FinishConfigureStandard__parent_caller(ns3::WifiPhyStandard standard)
+    { ns3::RegularWifiMac::FinishConfigureStandard(standard); }
+
+    static PyObject * _wrap_ConfigureContentionWindow(PyNs3RegularWifiMac *self, PyObject *args, PyObject *kwargs);
+    inline void ConfigureContentionWindow__parent_caller(uint32_t cwMin, uint32_t cwMax)
+    { ns3::RegularWifiMac::ConfigureContentionWindow(cwMin, cwMax); }
+
+    static PyObject * _wrap_SetTypeOfStation(PyNs3RegularWifiMac *self, PyObject *args, PyObject *kwargs);
+    inline void SetTypeOfStation__parent_caller(ns3::TypeOfStation type)
+    { ns3::RegularWifiMac::SetTypeOfStation(type); }
+
+    static PyObject * _wrap_Receive(PyNs3RegularWifiMac *self, PyObject *args, PyObject *kwargs);
+    inline void Receive__parent_caller(ns3::Ptr< ns3::Packet > packet, ns3::WifiMacHeader const *hdr)
+    { ns3::RegularWifiMac::Receive(packet, hdr); }
+
+    static PyObject * _wrap_TxOk(PyNs3RegularWifiMac *self, PyObject *args, PyObject *kwargs);
+    inline void TxOk__parent_caller(ns3::WifiMacHeader const & hdr)
+    { ns3::RegularWifiMac::TxOk(hdr); }
+
+    static PyObject * _wrap_TxFailed(PyNs3RegularWifiMac *self, PyObject *args, PyObject *kwargs);
+    inline void TxFailed__parent_caller(ns3::WifiMacHeader const & hdr)
+    { ns3::RegularWifiMac::TxFailed(hdr); }
+
+    static PyObject * _wrap_ForwardUp(PyNs3RegularWifiMac *self, PyObject *args, PyObject *kwargs);
+    inline void ForwardUp__parent_caller(ns3::Ptr< ns3::Packet > packet, ns3::Mac48Address from, ns3::Mac48Address to)
+    { ns3::RegularWifiMac::ForwardUp(packet, from, to); }
+
+    static PyObject * _wrap_DeaggregateAmsduAndForward(PyNs3RegularWifiMac *self, PyObject *args, PyObject *kwargs);
+    inline void DeaggregateAmsduAndForward__parent_caller(ns3::Ptr< ns3::Packet > aggregatedPacket, ns3::WifiMacHeader const *hdr)
+    { ns3::RegularWifiMac::DeaggregateAmsduAndForward(aggregatedPacket, hdr); }
+
+    static PyObject * _wrap_SendAddBaResponse(PyNs3RegularWifiMac *self, PyObject *args, PyObject *kwargs);
+    inline void SendAddBaResponse__parent_caller(ns3::MgtAddBaRequestHeader const *reqHdr, ns3::Mac48Address originator)
+    { ns3::RegularWifiMac::SendAddBaResponse(reqHdr, originator); }
+
+    static PyObject * _wrap_SetQosSupported(PyNs3RegularWifiMac *self, PyObject *args, PyObject *kwargs);
+    inline void SetQosSupported__parent_caller(bool enable)
+    { ns3::RegularWifiMac::SetQosSupported(enable); }
+
+    static PyObject * _wrap_GetQosSupported(PyNs3RegularWifiMac *self);
+    inline bool GetQosSupported__parent_caller()
+    { return ns3::RegularWifiMac::GetQosSupported(); }
+
+    static PyObject * _wrap_SetHtSupported(PyNs3RegularWifiMac *self, PyObject *args, PyObject *kwargs);
+    inline void SetHtSupported__parent_caller(bool enable)
+    { ns3::RegularWifiMac::SetHtSupported(enable); }
+
+    static PyObject * _wrap_GetHtSupported(PyNs3RegularWifiMac *self);
+    inline bool GetHtSupported__parent_caller()
+    { return ns3::RegularWifiMac::GetHtSupported(); }
+
+    static PyObject * _wrap_SetVhtSupported(PyNs3RegularWifiMac *self, PyObject *args, PyObject *kwargs);
+    inline void SetVhtSupported__parent_caller(bool enable)
+    { ns3::RegularWifiMac::SetVhtSupported(enable); }
+
+    static PyObject * _wrap_GetVhtSupported(PyNs3RegularWifiMac *self);
+    inline bool GetVhtSupported__parent_caller()
+    { return ns3::RegularWifiMac::GetVhtSupported(); }
+
+    static PyObject * _wrap_SetErpSupported(PyNs3RegularWifiMac *self, PyObject *args, PyObject *kwargs);
+    inline void SetErpSupported__parent_caller(bool enable)
+    { ns3::RegularWifiMac::SetErpSupported(enable); }
+
+    static PyObject * _wrap_GetErpSupported(PyNs3RegularWifiMac *self);
+    inline bool GetErpSupported__parent_caller()
+    { return ns3::RegularWifiMac::GetErpSupported(); }
+
+    static PyObject * _wrap_SetDsssSupported(PyNs3RegularWifiMac *self, PyObject *args, PyObject *kwargs);
+    inline void SetDsssSupported__parent_caller(bool enable)
+    { ns3::RegularWifiMac::SetDsssSupported(enable); }
+
+    static PyObject * _wrap_GetDsssSupported(PyNs3RegularWifiMac *self);
+    inline bool GetDsssSupported__parent_caller()
+    { return ns3::RegularWifiMac::GetDsssSupported(); }
+
     static PyObject * _wrap_SetHeSupported(PyNs3RegularWifiMac *self, PyObject *args, PyObject *kwargs);
     inline void SetHeSupported__parent_caller(bool enable)
     { ns3::RegularWifiMac::SetHeSupported(enable); }
+
+    static PyObject * _wrap_GetHeSupported(PyNs3RegularWifiMac *self);
+    inline bool GetHeSupported__parent_caller()
+    { return ns3::RegularWifiMac::GetHeSupported(); }
+
+    static PyObject * _wrap_NotifyNewAggregate(PyNs3RegularWifiMac *self);
+    inline void NotifyNewAggregate__parent_caller()
+    { ns3::Object::NotifyNewAggregate(); }
+
+    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3RegularWifiMac *self);
+    inline void NotifyConstructionCompleted__parent_caller()
+    { ns3::ObjectBase::NotifyConstructionCompleted(); }
 
     virtual void SetSlot(ns3::Time slotTime);
 
@@ -7033,9 +6988,9 @@ public:
     }
 
 
-    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3SpectrumWifiPhy *self);
-    inline void NotifyConstructionCompleted__parent_caller()
-    { ns3::ObjectBase::NotifyConstructionCompleted(); }
+    static PyObject * _wrap_DoDispose(PyNs3SpectrumWifiPhy *self);
+    inline void DoDispose__parent_caller()
+    { ns3::SpectrumWifiPhy::DoDispose(); }
 
     static PyObject * _wrap_DoInitialize(PyNs3SpectrumWifiPhy *self);
     inline void DoInitialize__parent_caller()
@@ -7045,9 +7000,9 @@ public:
     inline void NotifyNewAggregate__parent_caller()
     { ns3::Object::NotifyNewAggregate(); }
 
-    static PyObject * _wrap_DoDispose(PyNs3SpectrumWifiPhy *self);
-    inline void DoDispose__parent_caller()
-    { ns3::SpectrumWifiPhy::DoDispose(); }
+    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3SpectrumWifiPhy *self);
+    inline void NotifyConstructionCompleted__parent_caller()
+    { ns3::ObjectBase::NotifyConstructionCompleted(); }
 
     virtual void ConfigureStandard(ns3::WifiPhyStandard standard);
 
@@ -7147,105 +7102,105 @@ public:
     }
 
 
-    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3StaWifiMac *self);
-    inline void NotifyConstructionCompleted__parent_caller()
-    { ns3::ObjectBase::NotifyConstructionCompleted(); }
-
-    static PyObject * _wrap_TxOk(PyNs3StaWifiMac *self, PyObject *args, PyObject *kwargs);
-    inline void TxOk__parent_caller(ns3::WifiMacHeader const & hdr)
-    { ns3::RegularWifiMac::TxOk(hdr); }
-
     static PyObject * _wrap_DoInitialize(PyNs3StaWifiMac *self);
     inline void DoInitialize__parent_caller()
     { ns3::RegularWifiMac::DoInitialize(); }
-
-    static PyObject * _wrap_NotifyNewAggregate(PyNs3StaWifiMac *self);
-    inline void NotifyNewAggregate__parent_caller()
-    { ns3::Object::NotifyNewAggregate(); }
-
-    static PyObject * _wrap_TxFailed(PyNs3StaWifiMac *self, PyObject *args, PyObject *kwargs);
-    inline void TxFailed__parent_caller(ns3::WifiMacHeader const & hdr)
-    { ns3::RegularWifiMac::TxFailed(hdr); }
 
     static PyObject * _wrap_DoDispose(PyNs3StaWifiMac *self);
     inline void DoDispose__parent_caller()
     { ns3::RegularWifiMac::DoDispose(); }
 
+    static PyObject * _wrap_FinishConfigureStandard(PyNs3StaWifiMac *self, PyObject *args, PyObject *kwargs);
+    inline void FinishConfigureStandard__parent_caller(ns3::WifiPhyStandard standard)
+    { ns3::RegularWifiMac::FinishConfigureStandard(standard); }
+
+    static PyObject * _wrap_TxOk(PyNs3StaWifiMac *self, PyObject *args, PyObject *kwargs);
+    inline void TxOk__parent_caller(ns3::WifiMacHeader const & hdr)
+    { ns3::RegularWifiMac::TxOk(hdr); }
+
+    static PyObject * _wrap_TxFailed(PyNs3StaWifiMac *self, PyObject *args, PyObject *kwargs);
+    inline void TxFailed__parent_caller(ns3::WifiMacHeader const & hdr)
+    { ns3::RegularWifiMac::TxFailed(hdr); }
+
     static PyObject * _wrap_DeaggregateAmsduAndForward(PyNs3StaWifiMac *self, PyObject *args, PyObject *kwargs);
     inline void DeaggregateAmsduAndForward__parent_caller(ns3::Ptr< ns3::Packet > aggregatedPacket, ns3::WifiMacHeader const *hdr)
     { ns3::RegularWifiMac::DeaggregateAmsduAndForward(aggregatedPacket, hdr); }
 
-    static PyObject * _wrap_FinishConfigureStandard(PyNs3StaWifiMac *self, PyObject *args, PyObject *kwargs);
-    inline void FinishConfigureStandard__parent_caller(ns3::WifiPhyStandard standard)
-    { ns3::RegularWifiMac::FinishConfigureStandard(standard); }
+    static PyObject * _wrap_NotifyNewAggregate(PyNs3StaWifiMac *self);
+    inline void NotifyNewAggregate__parent_caller()
+    { ns3::Object::NotifyNewAggregate(); }
+
+    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3StaWifiMac *self);
+    inline void NotifyConstructionCompleted__parent_caller()
+    { ns3::ObjectBase::NotifyConstructionCompleted(); }
 
     virtual void Enqueue(ns3::Ptr< ns3::Packet const > packet, ns3::Mac48Address to);
 
     virtual void Receive(ns3::Ptr< ns3::Packet > packet, ns3::WifiMacHeader const *hdr);
 
-    virtual ns3::Time GetBasicBlockAckTimeout() const;
-
-    virtual ns3::Mac48Address GetBssid() const;
-
-    virtual bool SupportsSendFrom() const;
-
-    virtual void SetPifs(ns3::Time pifs);
-
-    virtual ns3::Time GetEifsNoDifs() const;
-
-    virtual bool GetShortSlotTimeSupported() const;
-
-    virtual void SetPromisc();
-
-    virtual void SetShortSlotTimeSupported(bool enable);
-
     virtual void SetSlot(ns3::Time slotTime);
-
-    virtual void SetSsid(ns3::Ssid ssid);
-
-    virtual ns3::Time GetPifs() const;
-
-    virtual ns3::Time GetRifs() const;
-
-    virtual void Enqueue(ns3::Ptr< ns3::Packet const > packet, ns3::Mac48Address to, ns3::Mac48Address from);
-
-    virtual void SetCompressedBlockAckTimeout(ns3::Time blockAckTimeout);
-
-    virtual ns3::Ptr< ns3::WifiPhy > GetWifiPhy() const;
-
-    virtual void SetBasicBlockAckTimeout(ns3::Time blockAckTimeout);
-
-    virtual void SetCtsTimeout(ns3::Time ctsTimeout);
-
-    virtual ns3::Time GetCtsTimeout() const;
-
-    virtual ns3::Mac48Address GetAddress() const;
-
-    virtual bool GetRifsSupported() const;
-
-    virtual ns3::Time GetSlot() const;
 
     virtual void SetSifs(ns3::Time sifs);
 
-    virtual void SetAddress(ns3::Mac48Address address);
+    virtual void SetEifsNoDifs(ns3::Time eifsNoDifs);
 
-    virtual ns3::Time GetCompressedBlockAckTimeout() const;
-
-    virtual void ResetWifiPhy();
+    virtual void SetPifs(ns3::Time pifs);
 
     virtual void SetRifs(ns3::Time rifs);
 
+    virtual void SetCtsTimeout(ns3::Time ctsTimeout);
+
     virtual void SetAckTimeout(ns3::Time ackTimeout);
 
-    virtual ns3::Ssid GetSsid() const;
+    virtual ns3::Time GetRifs() const;
 
-    virtual void SetEifsNoDifs(ns3::Time eifsNoDifs);
-
-    virtual ns3::Time GetAckTimeout() const;
+    virtual ns3::Time GetPifs() const;
 
     virtual ns3::Time GetSifs() const;
 
+    virtual ns3::Time GetSlot() const;
+
+    virtual ns3::Time GetEifsNoDifs() const;
+
+    virtual ns3::Time GetCtsTimeout() const;
+
+    virtual ns3::Time GetAckTimeout() const;
+
+    virtual void SetShortSlotTimeSupported(bool enable);
+
+    virtual bool GetShortSlotTimeSupported() const;
+
+    virtual bool GetRifsSupported() const;
+
+    virtual ns3::Mac48Address GetAddress() const;
+
+    virtual ns3::Ssid GetSsid() const;
+
+    virtual void SetAddress(ns3::Mac48Address address);
+
+    virtual void SetSsid(ns3::Ssid ssid);
+
+    virtual ns3::Mac48Address GetBssid() const;
+
+    virtual void SetPromisc();
+
+    virtual void Enqueue(ns3::Ptr< ns3::Packet const > packet, ns3::Mac48Address to, ns3::Mac48Address from);
+
+    virtual bool SupportsSendFrom() const;
+
+    virtual ns3::Ptr< ns3::WifiPhy > GetWifiPhy() const;
+
+    virtual void ResetWifiPhy();
+
     virtual ns3::Ptr< ns3::WifiRemoteStationManager > GetWifiRemoteStationManager() const;
+
+    virtual void SetBasicBlockAckTimeout(ns3::Time blockAckTimeout);
+
+    virtual ns3::Time GetBasicBlockAckTimeout() const;
+
+    virtual void SetCompressedBlockAckTimeout(ns3::Time blockAckTimeout);
+
+    virtual ns3::Time GetCompressedBlockAckTimeout() const;
 
     virtual void DoInitialize();
 
@@ -7388,9 +7343,9 @@ public:
     }
 
 
-    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3WifiMacQueue *self);
-    inline void NotifyConstructionCompleted__parent_caller()
-    { ns3::ObjectBase::NotifyConstructionCompleted(); }
+    static PyObject * _wrap_DoDispose(PyNs3WifiMacQueue *self);
+    inline void DoDispose__parent_caller()
+    { ns3::Object::DoDispose(); }
 
     static PyObject * _wrap_DoInitialize(PyNs3WifiMacQueue *self);
     inline void DoInitialize__parent_caller()
@@ -7400,9 +7355,9 @@ public:
     inline void NotifyNewAggregate__parent_caller()
     { ns3::Object::NotifyNewAggregate(); }
 
-    static PyObject * _wrap_DoDispose(PyNs3WifiMacQueue *self);
-    inline void DoDispose__parent_caller()
-    { ns3::Object::DoDispose(); }
+    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3WifiMacQueue *self);
+    inline void NotifyConstructionCompleted__parent_caller()
+    { ns3::ObjectBase::NotifyConstructionCompleted(); }
 
     virtual bool Enqueue(ns3::Ptr< ns3::WifiMacQueueItem > item);
 
@@ -7486,9 +7441,9 @@ public:
     }
 
 
-    static PyObject * _wrap_ForwardUp(PyNs3WifiNetDevice *self, PyObject *args, PyObject *kwargs);
-    inline void ForwardUp__parent_caller(ns3::Ptr< ns3::Packet > packet, ns3::Mac48Address from, ns3::Mac48Address to)
-    { ns3::WifiNetDevice::ForwardUp(packet, from, to); }
+    static PyObject * _wrap_DoDispose(PyNs3WifiNetDevice *self);
+    inline void DoDispose__parent_caller()
+    { ns3::WifiNetDevice::DoDispose(); }
 
     static PyObject * _wrap_DoInitialize(PyNs3WifiNetDevice *self);
     inline void DoInitialize__parent_caller()
@@ -7498,13 +7453,13 @@ public:
     inline void NotifyNewAggregate__parent_caller()
     { ns3::WifiNetDevice::NotifyNewAggregate(); }
 
+    static PyObject * _wrap_ForwardUp(PyNs3WifiNetDevice *self, PyObject *args, PyObject *kwargs);
+    inline void ForwardUp__parent_caller(ns3::Ptr< ns3::Packet > packet, ns3::Mac48Address from, ns3::Mac48Address to)
+    { ns3::WifiNetDevice::ForwardUp(packet, from, to); }
+
     static PyObject * _wrap_NotifyConstructionCompleted(PyNs3WifiNetDevice *self);
     inline void NotifyConstructionCompleted__parent_caller()
     { ns3::ObjectBase::NotifyConstructionCompleted(); }
-
-    static PyObject * _wrap_DoDispose(PyNs3WifiNetDevice *self);
-    inline void DoDispose__parent_caller()
-    { ns3::WifiNetDevice::DoDispose(); }
 
     virtual void SetIfIndex(uint32_t const index);
 
@@ -7606,10 +7561,6 @@ public:
     }
 
 
-    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3WifiRadioEnergyModel *self);
-    inline void NotifyConstructionCompleted__parent_caller()
-    { ns3::ObjectBase::NotifyConstructionCompleted(); }
-
     static PyObject * _wrap_DoInitialize(PyNs3WifiRadioEnergyModel *self);
     inline void DoInitialize__parent_caller()
     { ns3::Object::DoInitialize(); }
@@ -7617,6 +7568,10 @@ public:
     static PyObject * _wrap_NotifyNewAggregate(PyNs3WifiRadioEnergyModel *self);
     inline void NotifyNewAggregate__parent_caller()
     { ns3::Object::NotifyNewAggregate(); }
+
+    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3WifiRadioEnergyModel *self);
+    inline void NotifyConstructionCompleted__parent_caller()
+    { ns3::ObjectBase::NotifyConstructionCompleted(); }
 
     virtual void ChangeState(int newState);
 
@@ -7690,9 +7645,9 @@ public:
     }
 
 
-    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3YansErrorRateModel *self);
-    inline void NotifyConstructionCompleted__parent_caller()
-    { ns3::ObjectBase::NotifyConstructionCompleted(); }
+    static PyObject * _wrap_DoDispose(PyNs3YansErrorRateModel *self);
+    inline void DoDispose__parent_caller()
+    { ns3::Object::DoDispose(); }
 
     static PyObject * _wrap_DoInitialize(PyNs3YansErrorRateModel *self);
     inline void DoInitialize__parent_caller()
@@ -7702,9 +7657,9 @@ public:
     inline void NotifyNewAggregate__parent_caller()
     { ns3::Object::NotifyNewAggregate(); }
 
-    static PyObject * _wrap_DoDispose(PyNs3YansErrorRateModel *self);
-    inline void DoDispose__parent_caller()
-    { ns3::Object::DoDispose(); }
+    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3YansErrorRateModel *self);
+    inline void NotifyConstructionCompleted__parent_caller()
+    { ns3::ObjectBase::NotifyConstructionCompleted(); }
 
     virtual double GetChunkSuccessRate(ns3::WifiMode mode, ns3::WifiTxVector txVector, double snr, uint64_t nbits) const;
 
@@ -7766,9 +7721,9 @@ public:
     }
 
 
-    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3YansWifiChannel *self);
-    inline void NotifyConstructionCompleted__parent_caller()
-    { ns3::ObjectBase::NotifyConstructionCompleted(); }
+    static PyObject * _wrap_DoDispose(PyNs3YansWifiChannel *self);
+    inline void DoDispose__parent_caller()
+    { ns3::Object::DoDispose(); }
 
     static PyObject * _wrap_DoInitialize(PyNs3YansWifiChannel *self);
     inline void DoInitialize__parent_caller()
@@ -7778,9 +7733,9 @@ public:
     inline void NotifyNewAggregate__parent_caller()
     { ns3::Object::NotifyNewAggregate(); }
 
-    static PyObject * _wrap_DoDispose(PyNs3YansWifiChannel *self);
-    inline void DoDispose__parent_caller()
-    { ns3::Object::DoDispose(); }
+    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3YansWifiChannel *self);
+    inline void NotifyConstructionCompleted__parent_caller()
+    { ns3::ObjectBase::NotifyConstructionCompleted(); }
 
     virtual ns3::Ptr< ns3::NetDevice > GetDevice(uint32_t i) const;
 
@@ -7840,37 +7795,37 @@ public:
     }
 
 
-    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3AdhocWifiMac *self);
-    inline void NotifyConstructionCompleted__parent_caller()
-    { ns3::ObjectBase::NotifyConstructionCompleted(); }
-
-    static PyObject * _wrap_TxOk(PyNs3AdhocWifiMac *self, PyObject *args, PyObject *kwargs);
-    inline void TxOk__parent_caller(ns3::WifiMacHeader const & hdr)
-    { ns3::RegularWifiMac::TxOk(hdr); }
-
     static PyObject * _wrap_DoInitialize(PyNs3AdhocWifiMac *self);
     inline void DoInitialize__parent_caller()
     { ns3::RegularWifiMac::DoInitialize(); }
-
-    static PyObject * _wrap_NotifyNewAggregate(PyNs3AdhocWifiMac *self);
-    inline void NotifyNewAggregate__parent_caller()
-    { ns3::Object::NotifyNewAggregate(); }
-
-    static PyObject * _wrap_TxFailed(PyNs3AdhocWifiMac *self, PyObject *args, PyObject *kwargs);
-    inline void TxFailed__parent_caller(ns3::WifiMacHeader const & hdr)
-    { ns3::RegularWifiMac::TxFailed(hdr); }
 
     static PyObject * _wrap_DoDispose(PyNs3AdhocWifiMac *self);
     inline void DoDispose__parent_caller()
     { ns3::RegularWifiMac::DoDispose(); }
 
+    static PyObject * _wrap_FinishConfigureStandard(PyNs3AdhocWifiMac *self, PyObject *args, PyObject *kwargs);
+    inline void FinishConfigureStandard__parent_caller(ns3::WifiPhyStandard standard)
+    { ns3::RegularWifiMac::FinishConfigureStandard(standard); }
+
+    static PyObject * _wrap_TxOk(PyNs3AdhocWifiMac *self, PyObject *args, PyObject *kwargs);
+    inline void TxOk__parent_caller(ns3::WifiMacHeader const & hdr)
+    { ns3::RegularWifiMac::TxOk(hdr); }
+
+    static PyObject * _wrap_TxFailed(PyNs3AdhocWifiMac *self, PyObject *args, PyObject *kwargs);
+    inline void TxFailed__parent_caller(ns3::WifiMacHeader const & hdr)
+    { ns3::RegularWifiMac::TxFailed(hdr); }
+
     static PyObject * _wrap_DeaggregateAmsduAndForward(PyNs3AdhocWifiMac *self, PyObject *args, PyObject *kwargs);
     inline void DeaggregateAmsduAndForward__parent_caller(ns3::Ptr< ns3::Packet > aggregatedPacket, ns3::WifiMacHeader const *hdr)
     { ns3::RegularWifiMac::DeaggregateAmsduAndForward(aggregatedPacket, hdr); }
 
-    static PyObject * _wrap_FinishConfigureStandard(PyNs3AdhocWifiMac *self, PyObject *args, PyObject *kwargs);
-    inline void FinishConfigureStandard__parent_caller(ns3::WifiPhyStandard standard)
-    { ns3::RegularWifiMac::FinishConfigureStandard(standard); }
+    static PyObject * _wrap_NotifyNewAggregate(PyNs3AdhocWifiMac *self);
+    inline void NotifyNewAggregate__parent_caller()
+    { ns3::Object::NotifyNewAggregate(); }
+
+    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3AdhocWifiMac *self);
+    inline void NotifyConstructionCompleted__parent_caller()
+    { ns3::ObjectBase::NotifyConstructionCompleted(); }
 
     virtual void SetAddress(ns3::Mac48Address address);
 
@@ -7878,67 +7833,67 @@ public:
 
     virtual void Receive(ns3::Ptr< ns3::Packet > packet, ns3::WifiMacHeader const *hdr);
 
-    virtual ns3::Time GetBasicBlockAckTimeout() const;
-
-    virtual ns3::Mac48Address GetBssid() const;
-
-    virtual bool SupportsSendFrom() const;
-
-    virtual void SetPifs(ns3::Time pifs);
-
-    virtual ns3::Time GetEifsNoDifs() const;
-
-    virtual bool GetShortSlotTimeSupported() const;
-
-    virtual void SetPromisc();
-
-    virtual void SetShortSlotTimeSupported(bool enable);
-
     virtual void SetSlot(ns3::Time slotTime);
-
-    virtual void SetSsid(ns3::Ssid ssid);
-
-    virtual ns3::Time GetPifs() const;
-
-    virtual ns3::Time GetRifs() const;
-
-    virtual void Enqueue(ns3::Ptr< ns3::Packet const > packet, ns3::Mac48Address to, ns3::Mac48Address from);
-
-    virtual void SetCompressedBlockAckTimeout(ns3::Time blockAckTimeout);
-
-    virtual ns3::Ptr< ns3::WifiPhy > GetWifiPhy() const;
-
-    virtual void SetBasicBlockAckTimeout(ns3::Time blockAckTimeout);
-
-    virtual void SetCtsTimeout(ns3::Time ctsTimeout);
-
-    virtual ns3::Time GetCtsTimeout() const;
-
-    virtual ns3::Mac48Address GetAddress() const;
-
-    virtual bool GetRifsSupported() const;
-
-    virtual ns3::Time GetSlot() const;
 
     virtual void SetSifs(ns3::Time sifs);
 
-    virtual ns3::Time GetCompressedBlockAckTimeout() const;
+    virtual void SetEifsNoDifs(ns3::Time eifsNoDifs);
 
-    virtual void ResetWifiPhy();
+    virtual void SetPifs(ns3::Time pifs);
 
     virtual void SetRifs(ns3::Time rifs);
 
+    virtual void SetCtsTimeout(ns3::Time ctsTimeout);
+
     virtual void SetAckTimeout(ns3::Time ackTimeout);
 
-    virtual ns3::Ssid GetSsid() const;
+    virtual ns3::Time GetRifs() const;
 
-    virtual void SetEifsNoDifs(ns3::Time eifsNoDifs);
-
-    virtual ns3::Time GetAckTimeout() const;
+    virtual ns3::Time GetPifs() const;
 
     virtual ns3::Time GetSifs() const;
 
+    virtual ns3::Time GetSlot() const;
+
+    virtual ns3::Time GetEifsNoDifs() const;
+
+    virtual ns3::Time GetCtsTimeout() const;
+
+    virtual ns3::Time GetAckTimeout() const;
+
+    virtual void SetShortSlotTimeSupported(bool enable);
+
+    virtual bool GetShortSlotTimeSupported() const;
+
+    virtual bool GetRifsSupported() const;
+
+    virtual ns3::Mac48Address GetAddress() const;
+
+    virtual ns3::Ssid GetSsid() const;
+
+    virtual void SetSsid(ns3::Ssid ssid);
+
+    virtual ns3::Mac48Address GetBssid() const;
+
+    virtual void SetPromisc();
+
+    virtual void Enqueue(ns3::Ptr< ns3::Packet const > packet, ns3::Mac48Address to, ns3::Mac48Address from);
+
+    virtual bool SupportsSendFrom() const;
+
+    virtual ns3::Ptr< ns3::WifiPhy > GetWifiPhy() const;
+
+    virtual void ResetWifiPhy();
+
     virtual ns3::Ptr< ns3::WifiRemoteStationManager > GetWifiRemoteStationManager() const;
+
+    virtual void SetBasicBlockAckTimeout(ns3::Time blockAckTimeout);
+
+    virtual ns3::Time GetBasicBlockAckTimeout() const;
+
+    virtual void SetCompressedBlockAckTimeout(ns3::Time blockAckTimeout);
+
+    virtual ns3::Time GetCompressedBlockAckTimeout() const;
 
     virtual void DoInitialize();
 
@@ -8006,17 +7961,17 @@ public:
     }
 
 
-    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3ApWifiMac *self);
-    inline void NotifyConstructionCompleted__parent_caller()
-    { ns3::ObjectBase::NotifyConstructionCompleted(); }
+    static PyObject * _wrap_FinishConfigureStandard(PyNs3ApWifiMac *self, PyObject *args, PyObject *kwargs);
+    inline void FinishConfigureStandard__parent_caller(ns3::WifiPhyStandard standard)
+    { ns3::RegularWifiMac::FinishConfigureStandard(standard); }
 
     static PyObject * _wrap_NotifyNewAggregate(PyNs3ApWifiMac *self);
     inline void NotifyNewAggregate__parent_caller()
     { ns3::Object::NotifyNewAggregate(); }
 
-    static PyObject * _wrap_FinishConfigureStandard(PyNs3ApWifiMac *self, PyObject *args, PyObject *kwargs);
-    inline void FinishConfigureStandard__parent_caller(ns3::WifiPhyStandard standard)
-    { ns3::RegularWifiMac::FinishConfigureStandard(standard); }
+    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3ApWifiMac *self);
+    inline void NotifyConstructionCompleted__parent_caller()
+    { ns3::ObjectBase::NotifyConstructionCompleted(); }
 
     virtual void Enqueue(ns3::Ptr< ns3::Packet const > packet, ns3::Mac48Address to);
 
@@ -8038,63 +7993,63 @@ public:
 
     virtual void DoInitialize();
 
-    virtual ns3::Time GetBasicBlockAckTimeout() const;
-
-    virtual ns3::Mac48Address GetBssid() const;
-
-    virtual void SetPifs(ns3::Time pifs);
-
-    virtual ns3::Time GetEifsNoDifs() const;
-
-    virtual bool GetShortSlotTimeSupported() const;
-
-    virtual void SetPromisc();
-
-    virtual void SetShortSlotTimeSupported(bool enable);
-
     virtual void SetSlot(ns3::Time slotTime);
-
-    virtual void SetSsid(ns3::Ssid ssid);
-
-    virtual ns3::Time GetPifs() const;
-
-    virtual ns3::Time GetRifs() const;
-
-    virtual void SetCompressedBlockAckTimeout(ns3::Time blockAckTimeout);
-
-    virtual ns3::Ptr< ns3::WifiPhy > GetWifiPhy() const;
-
-    virtual void SetBasicBlockAckTimeout(ns3::Time blockAckTimeout);
-
-    virtual void SetCtsTimeout(ns3::Time ctsTimeout);
-
-    virtual ns3::Time GetCtsTimeout() const;
-
-    virtual ns3::Mac48Address GetAddress() const;
-
-    virtual bool GetRifsSupported() const;
-
-    virtual ns3::Time GetSlot() const;
 
     virtual void SetSifs(ns3::Time sifs);
 
-    virtual ns3::Time GetCompressedBlockAckTimeout() const;
+    virtual void SetEifsNoDifs(ns3::Time eifsNoDifs);
 
-    virtual void ResetWifiPhy();
+    virtual void SetPifs(ns3::Time pifs);
 
     virtual void SetRifs(ns3::Time rifs);
 
+    virtual void SetCtsTimeout(ns3::Time ctsTimeout);
+
     virtual void SetAckTimeout(ns3::Time ackTimeout);
 
-    virtual ns3::Ssid GetSsid() const;
+    virtual ns3::Time GetRifs() const;
 
-    virtual void SetEifsNoDifs(ns3::Time eifsNoDifs);
-
-    virtual ns3::Time GetAckTimeout() const;
+    virtual ns3::Time GetPifs() const;
 
     virtual ns3::Time GetSifs() const;
 
+    virtual ns3::Time GetSlot() const;
+
+    virtual ns3::Time GetEifsNoDifs() const;
+
+    virtual ns3::Time GetCtsTimeout() const;
+
+    virtual ns3::Time GetAckTimeout() const;
+
+    virtual void SetShortSlotTimeSupported(bool enable);
+
+    virtual bool GetShortSlotTimeSupported() const;
+
+    virtual bool GetRifsSupported() const;
+
+    virtual ns3::Mac48Address GetAddress() const;
+
+    virtual ns3::Ssid GetSsid() const;
+
+    virtual void SetSsid(ns3::Ssid ssid);
+
+    virtual ns3::Mac48Address GetBssid() const;
+
+    virtual void SetPromisc();
+
+    virtual ns3::Ptr< ns3::WifiPhy > GetWifiPhy() const;
+
+    virtual void ResetWifiPhy();
+
     virtual ns3::Ptr< ns3::WifiRemoteStationManager > GetWifiRemoteStationManager() const;
+
+    virtual void SetBasicBlockAckTimeout(ns3::Time blockAckTimeout);
+
+    virtual ns3::Time GetBasicBlockAckTimeout() const;
+
+    virtual void SetCompressedBlockAckTimeout(ns3::Time blockAckTimeout);
+
+    virtual ns3::Time GetCompressedBlockAckTimeout() const;
 
     virtual void FinishConfigureStandard(ns3::WifiPhyStandard standard);
 

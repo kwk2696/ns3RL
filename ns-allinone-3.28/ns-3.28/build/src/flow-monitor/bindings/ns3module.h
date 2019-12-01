@@ -4,51 +4,6 @@
 #include <stddef.h>
 
 
-#if PY_VERSION_HEX < 0x020400F0
-
-#define PyEval_ThreadsInitialized() 1
-
-#define Py_CLEAR(op)				\
-        do {                            	\
-                if (op) {			\
-                        PyObject *tmp = (PyObject *)(op);	\
-                        (op) = NULL;		\
-                        Py_DECREF(tmp);		\
-                }				\
-        } while (0)
-
-
-#define Py_VISIT(op)							\
-        do { 								\
-                if (op) {						\
-                        int vret = visit((PyObject *)(op), arg);	\
-                        if (vret)					\
-                                return vret;				\
-                }							\
-        } while (0)
-
-#endif
-
-
-
-#if PY_VERSION_HEX < 0x020500F0
-
-typedef int Py_ssize_t;
-# define PY_SSIZE_T_MAX INT_MAX
-# define PY_SSIZE_T_MIN INT_MIN
-typedef inquiry lenfunc;
-typedef intargfunc ssizeargfunc;
-typedef intobjargproc ssizeobjargproc;
-
-#endif
-
-
-#ifndef PyVarObject_HEAD_INIT
-#define PyVarObject_HEAD_INIT(type, size) \
-        PyObject_HEAD_INIT(type) size,
-#endif
-
-
 #if PY_VERSION_HEX >= 0x03000000
 typedef void* cmpfunc;
 #define PyCObject_FromVoidPtr(a, b) PyCapsule_New(a, NULL, b)
@@ -2058,6 +2013,10 @@ public:
     }
 
 
+    static PyObject * _wrap_DoDispose(PyNs3FlowMonitor *self);
+    inline void DoDispose__parent_caller()
+    { ns3::FlowMonitor::DoDispose(); }
+
     static PyObject * _wrap_NotifyConstructionCompleted(PyNs3FlowMonitor *self);
     inline void NotifyConstructionCompleted__parent_caller()
     { ns3::FlowMonitor::NotifyConstructionCompleted(); }
@@ -2069,10 +2028,6 @@ public:
     static PyObject * _wrap_NotifyNewAggregate(PyNs3FlowMonitor *self);
     inline void NotifyNewAggregate__parent_caller()
     { ns3::Object::NotifyNewAggregate(); }
-
-    static PyObject * _wrap_DoDispose(PyNs3FlowMonitor *self);
-    inline void DoDispose__parent_caller()
-    { ns3::FlowMonitor::DoDispose(); }
 
     virtual ns3::TypeId GetInstanceTypeId() const;
 
@@ -2139,9 +2094,9 @@ public:
     }
 
 
-    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3FlowProbe *self);
-    inline void NotifyConstructionCompleted__parent_caller()
-    { ns3::ObjectBase::NotifyConstructionCompleted(); }
+    static PyObject * _wrap_DoDispose(PyNs3FlowProbe *self);
+    inline void DoDispose__parent_caller()
+    { ns3::FlowProbe::DoDispose(); }
 
     static PyObject * _wrap_DoInitialize(PyNs3FlowProbe *self);
     inline void DoInitialize__parent_caller()
@@ -2151,9 +2106,9 @@ public:
     inline void NotifyNewAggregate__parent_caller()
     { ns3::Object::NotifyNewAggregate(); }
 
-    static PyObject * _wrap_DoDispose(PyNs3FlowProbe *self);
-    inline void DoDispose__parent_caller()
-    { ns3::FlowProbe::DoDispose(); }
+    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3FlowProbe *self);
+    inline void NotifyConstructionCompleted__parent_caller()
+    { ns3::ObjectBase::NotifyConstructionCompleted(); }
 
     virtual void DoDispose();
 
@@ -2252,9 +2207,9 @@ public:
     }
 
 
-    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3Ipv4FlowProbe *self);
-    inline void NotifyConstructionCompleted__parent_caller()
-    { ns3::ObjectBase::NotifyConstructionCompleted(); }
+    static PyObject * _wrap_DoDispose(PyNs3Ipv4FlowProbe *self);
+    inline void DoDispose__parent_caller()
+    { ns3::Ipv4FlowProbe::DoDispose(); }
 
     static PyObject * _wrap_DoInitialize(PyNs3Ipv4FlowProbe *self);
     inline void DoInitialize__parent_caller()
@@ -2264,9 +2219,9 @@ public:
     inline void NotifyNewAggregate__parent_caller()
     { ns3::Object::NotifyNewAggregate(); }
 
-    static PyObject * _wrap_DoDispose(PyNs3Ipv4FlowProbe *self);
-    inline void DoDispose__parent_caller()
-    { ns3::Ipv4FlowProbe::DoDispose(); }
+    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3Ipv4FlowProbe *self);
+    inline void NotifyConstructionCompleted__parent_caller()
+    { ns3::ObjectBase::NotifyConstructionCompleted(); }
 
     virtual void DoDispose();
 
@@ -2354,9 +2309,9 @@ public:
     }
 
 
-    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3Ipv6FlowProbe *self);
-    inline void NotifyConstructionCompleted__parent_caller()
-    { ns3::ObjectBase::NotifyConstructionCompleted(); }
+    static PyObject * _wrap_DoDispose(PyNs3Ipv6FlowProbe *self);
+    inline void DoDispose__parent_caller()
+    { ns3::Ipv6FlowProbe::DoDispose(); }
 
     static PyObject * _wrap_DoInitialize(PyNs3Ipv6FlowProbe *self);
     inline void DoInitialize__parent_caller()
@@ -2366,9 +2321,9 @@ public:
     inline void NotifyNewAggregate__parent_caller()
     { ns3::Object::NotifyNewAggregate(); }
 
-    static PyObject * _wrap_DoDispose(PyNs3Ipv6FlowProbe *self);
-    inline void DoDispose__parent_caller()
-    { ns3::Ipv6FlowProbe::DoDispose(); }
+    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3Ipv6FlowProbe *self);
+    inline void NotifyConstructionCompleted__parent_caller()
+    { ns3::ObjectBase::NotifyConstructionCompleted(); }
 
     virtual void DoDispose();
 

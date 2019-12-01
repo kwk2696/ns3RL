@@ -76,63 +76,7 @@ init_core_CommandLineHelper(void)
 
 
 PyObject *
-_wrap__core_Config_LookupMatches(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    const char *path;
-    Py_ssize_t path_len;
-    const char *keywords[] = {"path", NULL};
-    PyNs3ConfigMatchContainer *py_MatchContainer;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#", (char **) keywords, &path, &path_len)) {
-        return NULL;
-    }
-    ns3::Config::MatchContainer retval = ns3::Config::LookupMatches(std::string(path, path_len));
-    py_MatchContainer = PyObject_New(PyNs3ConfigMatchContainer, &PyNs3ConfigMatchContainer_Type);
-    py_MatchContainer->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_MatchContainer->obj = new ns3::Config::MatchContainer(retval);
-    PyNs3ConfigMatchContainer_wrapper_registry[(void *) py_MatchContainer->obj] = (PyObject *) py_MatchContainer;
-    py_retval = Py_BuildValue((char *) "N", py_MatchContainer);
-    return py_retval;
-}
-PyObject * _wrap__core_Config_LookupMatches(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs);
-
-
-PyObject *
-_wrap__core_Config_Reset()
-{
-    PyObject *py_retval;
-    
-    ns3::Config::Reset();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-PyObject * _wrap__core_Config_Reset();
-
-
-PyObject *
-_wrap__core_Config_Set(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    const char *path;
-    Py_ssize_t path_len;
-    PyNs3AttributeValue *value;
-    const char *keywords[] = {"path", "value", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &path, &path_len, &PyNs3AttributeValue_Type, &value)) {
-        return NULL;
-    }
-    ns3::Config::Set(std::string(path, path_len), *((PyNs3AttributeValue *) value)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-PyObject * _wrap__core_Config_Set(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs);
-
-
-PyObject *
-_wrap__core_Config_Disconnect(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
+_wrap__core_Config_Connect(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
     const char *path;
@@ -143,32 +87,12 @@ _wrap__core_Config_Disconnect(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args
     if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &path, &path_len, &PyNs3CallbackBase_Type, &cb)) {
         return NULL;
     }
-    ns3::Config::Disconnect(std::string(path, path_len), *((PyNs3CallbackBase *) cb)->obj);
+    ns3::Config::Connect(std::string(path, path_len), *((PyNs3CallbackBase *) cb)->obj);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
 }
-PyObject * _wrap__core_Config_Disconnect(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs);
-
-
-PyObject *
-_wrap__core_Config_SetDefault(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    const char *name;
-    Py_ssize_t name_len;
-    PyNs3AttributeValue *value;
-    const char *keywords[] = {"name", "value", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3AttributeValue_Type, &value)) {
-        return NULL;
-    }
-    ns3::Config::SetDefault(std::string(name, name_len), *((PyNs3AttributeValue *) value)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-PyObject * _wrap__core_Config_SetDefault(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs);
+PyObject * _wrap__core_Config_Connect(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs);
 
 
 PyObject *
@@ -192,23 +116,43 @@ PyObject * _wrap__core_Config_ConnectWithoutContext(PyObject * PYBINDGEN_UNUSED(
 
 
 PyObject *
-_wrap__core_Config_SetGlobalFailSafe(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
+_wrap__core_Config_Disconnect(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    bool retval;
-    const char *name;
-    Py_ssize_t name_len;
-    PyNs3AttributeValue *value;
-    const char *keywords[] = {"name", "value", NULL};
+    const char *path;
+    Py_ssize_t path_len;
+    PyNs3CallbackBase *cb;
+    const char *keywords[] = {"path", "cb", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3AttributeValue_Type, &value)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &path, &path_len, &PyNs3CallbackBase_Type, &cb)) {
         return NULL;
     }
-    retval = ns3::Config::SetGlobalFailSafe(std::string(name, name_len), *((PyNs3AttributeValue *) value)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    ns3::Config::Disconnect(std::string(path, path_len), *((PyNs3CallbackBase *) cb)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
-PyObject * _wrap__core_Config_SetGlobalFailSafe(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs);
+PyObject * _wrap__core_Config_Disconnect(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs);
+
+
+PyObject *
+_wrap__core_Config_DisconnectWithoutContext(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    const char *path;
+    Py_ssize_t path_len;
+    PyNs3CallbackBase *cb;
+    const char *keywords[] = {"path", "cb", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &path, &path_len, &PyNs3CallbackBase_Type, &cb)) {
+        return NULL;
+    }
+    ns3::Config::DisconnectWithoutContext(std::string(path, path_len), *((PyNs3CallbackBase *) cb)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+PyObject * _wrap__core_Config_DisconnectWithoutContext(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs);
 
 
 PyObject *
@@ -263,26 +207,6 @@ PyObject * _wrap__core_Config_GetRootNamespaceObject(PyObject * PYBINDGEN_UNUSED
 
 
 PyObject *
-_wrap__core_Config_DisconnectWithoutContext(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    const char *path;
-    Py_ssize_t path_len;
-    PyNs3CallbackBase *cb;
-    const char *keywords[] = {"path", "cb", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &path, &path_len, &PyNs3CallbackBase_Type, &cb)) {
-        return NULL;
-    }
-    ns3::Config::DisconnectWithoutContext(std::string(path, path_len), *((PyNs3CallbackBase *) cb)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-PyObject * _wrap__core_Config_DisconnectWithoutContext(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs);
-
-
-PyObject *
 _wrap__core_Config_GetRootNamespaceObjectN()
 {
     PyObject *py_retval;
@@ -296,43 +220,26 @@ PyObject * _wrap__core_Config_GetRootNamespaceObjectN();
 
 
 PyObject *
-_wrap__core_Config_Connect(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
+_wrap__core_Config_LookupMatches(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
     const char *path;
     Py_ssize_t path_len;
-    PyNs3CallbackBase *cb;
-    const char *keywords[] = {"path", "cb", NULL};
+    const char *keywords[] = {"path", NULL};
+    PyNs3ConfigMatchContainer *py_MatchContainer;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &path, &path_len, &PyNs3CallbackBase_Type, &cb)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#", (char **) keywords, &path, &path_len)) {
         return NULL;
     }
-    ns3::Config::Connect(std::string(path, path_len), *((PyNs3CallbackBase *) cb)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    ns3::Config::MatchContainer retval = ns3::Config::LookupMatches(std::string(path, path_len));
+    py_MatchContainer = PyObject_New(PyNs3ConfigMatchContainer, &PyNs3ConfigMatchContainer_Type);
+    py_MatchContainer->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_MatchContainer->obj = new ns3::Config::MatchContainer(retval);
+    PyNs3ConfigMatchContainer_wrapper_registry[(void *) py_MatchContainer->obj] = (PyObject *) py_MatchContainer;
+    py_retval = Py_BuildValue((char *) "N", py_MatchContainer);
     return py_retval;
 }
-PyObject * _wrap__core_Config_Connect(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs);
-
-
-PyObject *
-_wrap__core_Config_SetGlobal(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    const char *name;
-    Py_ssize_t name_len;
-    PyNs3AttributeValue *value;
-    const char *keywords[] = {"name", "value", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3AttributeValue_Type, &value)) {
-        return NULL;
-    }
-    ns3::Config::SetGlobal(std::string(name, name_len), *((PyNs3AttributeValue *) value)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-PyObject * _wrap__core_Config_SetGlobal(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs);
+PyObject * _wrap__core_Config_LookupMatches(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs);
 
 
 PyObject *
@@ -356,6 +263,59 @@ PyObject * _wrap__core_Config_RegisterRootNamespaceObject(PyObject * PYBINDGEN_U
 
 
 PyObject *
+_wrap__core_Config_Reset()
+{
+    PyObject *py_retval;
+    
+    ns3::Config::Reset();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+PyObject * _wrap__core_Config_Reset();
+
+
+PyObject *
+_wrap__core_Config_Set(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    const char *path;
+    Py_ssize_t path_len;
+    PyNs3AttributeValue *value;
+    const char *keywords[] = {"path", "value", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &path, &path_len, &PyNs3AttributeValue_Type, &value)) {
+        return NULL;
+    }
+    ns3::Config::Set(std::string(path, path_len), *((PyNs3AttributeValue *) value)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+PyObject * _wrap__core_Config_Set(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs);
+
+
+PyObject *
+_wrap__core_Config_SetDefault(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    const char *name;
+    Py_ssize_t name_len;
+    PyNs3AttributeValue *value;
+    const char *keywords[] = {"name", "value", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3AttributeValue_Type, &value)) {
+        return NULL;
+    }
+    ns3::Config::SetDefault(std::string(name, name_len), *((PyNs3AttributeValue *) value)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+PyObject * _wrap__core_Config_SetDefault(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs);
+
+
+PyObject *
 _wrap__core_Config_SetDefaultFailSafe(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -373,6 +333,46 @@ _wrap__core_Config_SetDefaultFailSafe(PyObject * PYBINDGEN_UNUSED(dummy), PyObje
     return py_retval;
 }
 PyObject * _wrap__core_Config_SetDefaultFailSafe(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs);
+
+
+PyObject *
+_wrap__core_Config_SetGlobal(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    const char *name;
+    Py_ssize_t name_len;
+    PyNs3AttributeValue *value;
+    const char *keywords[] = {"name", "value", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3AttributeValue_Type, &value)) {
+        return NULL;
+    }
+    ns3::Config::SetGlobal(std::string(name, name_len), *((PyNs3AttributeValue *) value)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+PyObject * _wrap__core_Config_SetGlobal(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs);
+
+
+PyObject *
+_wrap__core_Config_SetGlobalFailSafe(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    const char *name;
+    Py_ssize_t name_len;
+    PyNs3AttributeValue *value;
+    const char *keywords[] = {"name", "value", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3AttributeValue_Type, &value)) {
+        return NULL;
+    }
+    retval = ns3::Config::SetGlobalFailSafe(std::string(name, name_len), *((PyNs3AttributeValue *) value)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+PyObject * _wrap__core_Config_SetGlobalFailSafe(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs);
 
 
 PyObject *
@@ -395,20 +395,20 @@ _wrap__core_Config_UnregisterRootNamespaceObject(PyObject * PYBINDGEN_UNUSED(dum
 PyObject * _wrap__core_Config_UnregisterRootNamespaceObject(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs);
 
 static PyMethodDef _core_Config_functions[] = {
+    {(char *) "Connect", (PyCFunction) _wrap__core_Config_Connect, METH_KEYWORDS|METH_VARARGS, "Connect(path, cb)\n\ntype: path: std::string\ntype: cb: ns3::CallbackBase const &" },
+    {(char *) "ConnectWithoutContext", (PyCFunction) _wrap__core_Config_ConnectWithoutContext, METH_KEYWORDS|METH_VARARGS, "ConnectWithoutContext(path, cb)\n\ntype: path: std::string\ntype: cb: ns3::CallbackBase const &" },
+    {(char *) "Disconnect", (PyCFunction) _wrap__core_Config_Disconnect, METH_KEYWORDS|METH_VARARGS, "Disconnect(path, cb)\n\ntype: path: std::string\ntype: cb: ns3::CallbackBase const &" },
+    {(char *) "DisconnectWithoutContext", (PyCFunction) _wrap__core_Config_DisconnectWithoutContext, METH_KEYWORDS|METH_VARARGS, "DisconnectWithoutContext(path, cb)\n\ntype: path: std::string\ntype: cb: ns3::CallbackBase const &" },
+    {(char *) "GetRootNamespaceObject", (PyCFunction) _wrap__core_Config_GetRootNamespaceObject, METH_KEYWORDS|METH_VARARGS, "GetRootNamespaceObject(i)\n\ntype: i: uint32_t" },
+    {(char *) "GetRootNamespaceObjectN", (PyCFunction) _wrap__core_Config_GetRootNamespaceObjectN, METH_NOARGS, "GetRootNamespaceObjectN()\n\n" },
     {(char *) "LookupMatches", (PyCFunction) _wrap__core_Config_LookupMatches, METH_KEYWORDS|METH_VARARGS, "LookupMatches(path)\n\ntype: path: std::string" },
+    {(char *) "RegisterRootNamespaceObject", (PyCFunction) _wrap__core_Config_RegisterRootNamespaceObject, METH_KEYWORDS|METH_VARARGS, "RegisterRootNamespaceObject(obj)\n\ntype: obj: ns3::Ptr< ns3::Object >" },
     {(char *) "Reset", (PyCFunction) _wrap__core_Config_Reset, METH_NOARGS, "Reset()\n\n" },
     {(char *) "Set", (PyCFunction) _wrap__core_Config_Set, METH_KEYWORDS|METH_VARARGS, "Set(path, value)\n\ntype: path: std::string\ntype: value: ns3::AttributeValue const &" },
-    {(char *) "Disconnect", (PyCFunction) _wrap__core_Config_Disconnect, METH_KEYWORDS|METH_VARARGS, "Disconnect(path, cb)\n\ntype: path: std::string\ntype: cb: ns3::CallbackBase const &" },
     {(char *) "SetDefault", (PyCFunction) _wrap__core_Config_SetDefault, METH_KEYWORDS|METH_VARARGS, "SetDefault(name, value)\n\ntype: name: std::string\ntype: value: ns3::AttributeValue const &" },
-    {(char *) "ConnectWithoutContext", (PyCFunction) _wrap__core_Config_ConnectWithoutContext, METH_KEYWORDS|METH_VARARGS, "ConnectWithoutContext(path, cb)\n\ntype: path: std::string\ntype: cb: ns3::CallbackBase const &" },
-    {(char *) "SetGlobalFailSafe", (PyCFunction) _wrap__core_Config_SetGlobalFailSafe, METH_KEYWORDS|METH_VARARGS, "SetGlobalFailSafe(name, value)\n\ntype: name: std::string\ntype: value: ns3::AttributeValue const &" },
-    {(char *) "GetRootNamespaceObject", (PyCFunction) _wrap__core_Config_GetRootNamespaceObject, METH_KEYWORDS|METH_VARARGS, "GetRootNamespaceObject(i)\n\ntype: i: uint32_t" },
-    {(char *) "DisconnectWithoutContext", (PyCFunction) _wrap__core_Config_DisconnectWithoutContext, METH_KEYWORDS|METH_VARARGS, "DisconnectWithoutContext(path, cb)\n\ntype: path: std::string\ntype: cb: ns3::CallbackBase const &" },
-    {(char *) "GetRootNamespaceObjectN", (PyCFunction) _wrap__core_Config_GetRootNamespaceObjectN, METH_NOARGS, "GetRootNamespaceObjectN()\n\n" },
-    {(char *) "Connect", (PyCFunction) _wrap__core_Config_Connect, METH_KEYWORDS|METH_VARARGS, "Connect(path, cb)\n\ntype: path: std::string\ntype: cb: ns3::CallbackBase const &" },
-    {(char *) "SetGlobal", (PyCFunction) _wrap__core_Config_SetGlobal, METH_KEYWORDS|METH_VARARGS, "SetGlobal(name, value)\n\ntype: name: std::string\ntype: value: ns3::AttributeValue const &" },
-    {(char *) "RegisterRootNamespaceObject", (PyCFunction) _wrap__core_Config_RegisterRootNamespaceObject, METH_KEYWORDS|METH_VARARGS, "RegisterRootNamespaceObject(obj)\n\ntype: obj: ns3::Ptr< ns3::Object >" },
     {(char *) "SetDefaultFailSafe", (PyCFunction) _wrap__core_Config_SetDefaultFailSafe, METH_KEYWORDS|METH_VARARGS, "SetDefaultFailSafe(name, value)\n\ntype: name: std::string\ntype: value: ns3::AttributeValue const &" },
+    {(char *) "SetGlobal", (PyCFunction) _wrap__core_Config_SetGlobal, METH_KEYWORDS|METH_VARARGS, "SetGlobal(name, value)\n\ntype: name: std::string\ntype: value: ns3::AttributeValue const &" },
+    {(char *) "SetGlobalFailSafe", (PyCFunction) _wrap__core_Config_SetGlobalFailSafe, METH_KEYWORDS|METH_VARARGS, "SetGlobalFailSafe(name, value)\n\ntype: name: std::string\ntype: value: ns3::AttributeValue const &" },
     {(char *) "UnregisterRootNamespaceObject", (PyCFunction) _wrap__core_Config_UnregisterRootNamespaceObject, METH_KEYWORDS|METH_VARARGS, "UnregisterRootNamespaceObject(obj)\n\ntype: obj: ns3::Ptr< ns3::Object >" },
     {NULL, NULL, 0, NULL}
 };
@@ -514,18 +514,37 @@ int _wrap_PyNs3ConfigMatchContainer__tp_init(PyNs3ConfigMatchContainer *self, Py
 
 
 PyObject *
-_wrap_PyNs3ConfigMatchContainer_Set(PyNs3ConfigMatchContainer *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3ConfigMatchContainer_Connect(PyNs3ConfigMatchContainer *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
     const char *name;
     Py_ssize_t name_len;
-    PyNs3AttributeValue *value;
-    const char *keywords[] = {"name", "value", NULL};
+    PyNs3CallbackBase *cb;
+    const char *keywords[] = {"name", "cb", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3AttributeValue_Type, &value)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3CallbackBase_Type, &cb)) {
         return NULL;
     }
-    self->obj->Set(std::string(name, name_len), *((PyNs3AttributeValue *) value)->obj);
+    self->obj->Connect(std::string(name, name_len), *((PyNs3CallbackBase *) cb)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3ConfigMatchContainer_ConnectWithoutContext(PyNs3ConfigMatchContainer *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    const char *name;
+    Py_ssize_t name_len;
+    PyNs3CallbackBase *cb;
+    const char *keywords[] = {"name", "cb", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3CallbackBase_Type, &cb)) {
+        return NULL;
+    }
+    self->obj->ConnectWithoutContext(std::string(name, name_len), *((PyNs3CallbackBase *) cb)->obj);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -552,30 +571,20 @@ _wrap_PyNs3ConfigMatchContainer_Disconnect(PyNs3ConfigMatchContainer *self, PyOb
 
 
 PyObject *
-_wrap_PyNs3ConfigMatchContainer_GetN(PyNs3ConfigMatchContainer *self)
+_wrap_PyNs3ConfigMatchContainer_DisconnectWithoutContext(PyNs3ConfigMatchContainer *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    uint32_t retval;
+    const char *name;
+    Py_ssize_t name_len;
+    PyNs3CallbackBase *cb;
+    const char *keywords[] = {"name", "cb", NULL};
     
-    retval = self->obj->GetN();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3ConfigMatchContainer_GetMatchedPath(PyNs3ConfigMatchContainer *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    std::string retval;
-    unsigned int i;
-    const char *keywords[] = {"i", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &i)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3CallbackBase_Type, &cb)) {
         return NULL;
     }
-    retval = self->obj->GetMatchedPath(i);
-    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    self->obj->DisconnectWithoutContext(std::string(name, name_len), *((PyNs3CallbackBase *) cb)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -631,39 +640,30 @@ _wrap_PyNs3ConfigMatchContainer_Get(PyNs3ConfigMatchContainer *self, PyObject *a
 
 
 PyObject *
-_wrap_PyNs3ConfigMatchContainer_ConnectWithoutContext(PyNs3ConfigMatchContainer *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3ConfigMatchContainer_GetMatchedPath(PyNs3ConfigMatchContainer *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    const char *name;
-    Py_ssize_t name_len;
-    PyNs3CallbackBase *cb;
-    const char *keywords[] = {"name", "cb", NULL};
+    std::string retval;
+    unsigned int i;
+    const char *keywords[] = {"i", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3CallbackBase_Type, &cb)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &i)) {
         return NULL;
     }
-    self->obj->ConnectWithoutContext(std::string(name, name_len), *((PyNs3CallbackBase *) cb)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    retval = self->obj->GetMatchedPath(i);
+    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3ConfigMatchContainer_DisconnectWithoutContext(PyNs3ConfigMatchContainer *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3ConfigMatchContainer_GetN(PyNs3ConfigMatchContainer *self)
 {
     PyObject *py_retval;
-    const char *name;
-    Py_ssize_t name_len;
-    PyNs3CallbackBase *cb;
-    const char *keywords[] = {"name", "cb", NULL};
+    uint32_t retval;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3CallbackBase_Type, &cb)) {
-        return NULL;
-    }
-    self->obj->DisconnectWithoutContext(std::string(name, name_len), *((PyNs3CallbackBase *) cb)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    retval = self->obj->GetN();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
 
@@ -681,18 +681,18 @@ _wrap_PyNs3ConfigMatchContainer_GetPath(PyNs3ConfigMatchContainer *self)
 
 
 PyObject *
-_wrap_PyNs3ConfigMatchContainer_Connect(PyNs3ConfigMatchContainer *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3ConfigMatchContainer_Set(PyNs3ConfigMatchContainer *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
     const char *name;
     Py_ssize_t name_len;
-    PyNs3CallbackBase *cb;
-    const char *keywords[] = {"name", "cb", NULL};
+    PyNs3AttributeValue *value;
+    const char *keywords[] = {"name", "value", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3CallbackBase_Type, &cb)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3AttributeValue_Type, &value)) {
         return NULL;
     }
-    self->obj->Connect(std::string(name, name_len), *((PyNs3CallbackBase *) cb)->obj);
+    self->obj->Set(std::string(name, name_len), *((PyNs3AttributeValue *) value)->obj);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -712,15 +712,15 @@ _wrap_PyNs3ConfigMatchContainer__copy__(PyNs3ConfigMatchContainer *self)
 }
 
 static PyMethodDef PyNs3ConfigMatchContainer_methods[] = {
-    {(char *) "Set", (PyCFunction) _wrap_PyNs3ConfigMatchContainer_Set, METH_KEYWORDS|METH_VARARGS, "Set(name, value)\n\ntype: name: std::string\ntype: value: ns3::AttributeValue const &" },
-    {(char *) "Disconnect", (PyCFunction) _wrap_PyNs3ConfigMatchContainer_Disconnect, METH_KEYWORDS|METH_VARARGS, "Disconnect(name, cb)\n\ntype: name: std::string\ntype: cb: ns3::CallbackBase const &" },
-    {(char *) "GetN", (PyCFunction) _wrap_PyNs3ConfigMatchContainer_GetN, METH_NOARGS, "GetN()\n\n" },
-    {(char *) "GetMatchedPath", (PyCFunction) _wrap_PyNs3ConfigMatchContainer_GetMatchedPath, METH_KEYWORDS|METH_VARARGS, "GetMatchedPath(i)\n\ntype: i: uint32_t" },
-    {(char *) "Get", (PyCFunction) _wrap_PyNs3ConfigMatchContainer_Get, METH_KEYWORDS|METH_VARARGS, "Get(i)\n\ntype: i: uint32_t" },
-    {(char *) "ConnectWithoutContext", (PyCFunction) _wrap_PyNs3ConfigMatchContainer_ConnectWithoutContext, METH_KEYWORDS|METH_VARARGS, "ConnectWithoutContext(name, cb)\n\ntype: name: std::string\ntype: cb: ns3::CallbackBase const &" },
-    {(char *) "DisconnectWithoutContext", (PyCFunction) _wrap_PyNs3ConfigMatchContainer_DisconnectWithoutContext, METH_KEYWORDS|METH_VARARGS, "DisconnectWithoutContext(name, cb)\n\ntype: name: std::string\ntype: cb: ns3::CallbackBase const &" },
-    {(char *) "GetPath", (PyCFunction) _wrap_PyNs3ConfigMatchContainer_GetPath, METH_NOARGS, "GetPath()\n\n" },
     {(char *) "Connect", (PyCFunction) _wrap_PyNs3ConfigMatchContainer_Connect, METH_KEYWORDS|METH_VARARGS, "Connect(name, cb)\n\ntype: name: std::string\ntype: cb: ns3::CallbackBase const &" },
+    {(char *) "ConnectWithoutContext", (PyCFunction) _wrap_PyNs3ConfigMatchContainer_ConnectWithoutContext, METH_KEYWORDS|METH_VARARGS, "ConnectWithoutContext(name, cb)\n\ntype: name: std::string\ntype: cb: ns3::CallbackBase const &" },
+    {(char *) "Disconnect", (PyCFunction) _wrap_PyNs3ConfigMatchContainer_Disconnect, METH_KEYWORDS|METH_VARARGS, "Disconnect(name, cb)\n\ntype: name: std::string\ntype: cb: ns3::CallbackBase const &" },
+    {(char *) "DisconnectWithoutContext", (PyCFunction) _wrap_PyNs3ConfigMatchContainer_DisconnectWithoutContext, METH_KEYWORDS|METH_VARARGS, "DisconnectWithoutContext(name, cb)\n\ntype: name: std::string\ntype: cb: ns3::CallbackBase const &" },
+    {(char *) "Get", (PyCFunction) _wrap_PyNs3ConfigMatchContainer_Get, METH_KEYWORDS|METH_VARARGS, "Get(i)\n\ntype: i: uint32_t" },
+    {(char *) "GetMatchedPath", (PyCFunction) _wrap_PyNs3ConfigMatchContainer_GetMatchedPath, METH_KEYWORDS|METH_VARARGS, "GetMatchedPath(i)\n\ntype: i: uint32_t" },
+    {(char *) "GetN", (PyCFunction) _wrap_PyNs3ConfigMatchContainer_GetN, METH_NOARGS, "GetN()\n\n" },
+    {(char *) "GetPath", (PyCFunction) _wrap_PyNs3ConfigMatchContainer_GetPath, METH_NOARGS, "GetPath()\n\n" },
+    {(char *) "Set", (PyCFunction) _wrap_PyNs3ConfigMatchContainer_Set, METH_KEYWORDS|METH_VARARGS, "Set(name, value)\n\ntype: name: std::string\ntype: value: ns3::AttributeValue const &" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3ConfigMatchContainer__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -1519,13 +1519,19 @@ int _wrap_PyNs3HashFunctionFnv1a__tp_init(PyNs3HashFunctionFnv1a *self, PyObject
 
 
 PyObject *
-_wrap_PyNs3HashFunctionFnv1a_clear(PyNs3HashFunctionFnv1a *self)
+_wrap_PyNs3HashFunctionFnv1a_GetHash32(PyNs3HashFunctionFnv1a *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
+    uint32_t retval;
+    char const *buffer;
+    unsigned PY_LONG_LONG size;
+    const char *keywords[] = {"buffer", "size", NULL};
     
-    self->obj->clear();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "sK", (char **) keywords, &buffer, &size)) {
+        return NULL;
+    }
+    retval = self->obj->GetHash32(buffer, size);
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
 
@@ -1549,19 +1555,13 @@ _wrap_PyNs3HashFunctionFnv1a_GetHash64(PyNs3HashFunctionFnv1a *self, PyObject *a
 
 
 PyObject *
-_wrap_PyNs3HashFunctionFnv1a_GetHash32(PyNs3HashFunctionFnv1a *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3HashFunctionFnv1a_clear(PyNs3HashFunctionFnv1a *self)
 {
     PyObject *py_retval;
-    uint32_t retval;
-    char const *buffer;
-    unsigned PY_LONG_LONG size;
-    const char *keywords[] = {"buffer", "size", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "sK", (char **) keywords, &buffer, &size)) {
-        return NULL;
-    }
-    retval = self->obj->GetHash32(buffer, size);
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    self->obj->clear();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -1580,9 +1580,9 @@ _wrap_PyNs3HashFunctionFnv1a__copy__(PyNs3HashFunctionFnv1a *self)
 }
 
 static PyMethodDef PyNs3HashFunctionFnv1a_methods[] = {
-    {(char *) "clear", (PyCFunction) _wrap_PyNs3HashFunctionFnv1a_clear, METH_NOARGS, "clear()\n\n" },
-    {(char *) "GetHash64", (PyCFunction) _wrap_PyNs3HashFunctionFnv1a_GetHash64, METH_KEYWORDS|METH_VARARGS, "GetHash64(buffer, size)\n\ntype: buffer: char const *\ntype: size: size_t const" },
     {(char *) "GetHash32", (PyCFunction) _wrap_PyNs3HashFunctionFnv1a_GetHash32, METH_KEYWORDS|METH_VARARGS, "GetHash32(buffer, size)\n\ntype: buffer: char const *\ntype: size: size_t const" },
+    {(char *) "GetHash64", (PyCFunction) _wrap_PyNs3HashFunctionFnv1a_GetHash64, METH_KEYWORDS|METH_VARARGS, "GetHash64(buffer, size)\n\ntype: buffer: char const *\ntype: size: size_t const" },
+    {(char *) "clear", (PyCFunction) _wrap_PyNs3HashFunctionFnv1a_clear, METH_NOARGS, "clear()\n\n" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3HashFunctionFnv1a__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -1710,18 +1710,6 @@ _wrap_PyNs3HashFunctionHash32__tp_init(PyNs3HashFunctionHash32 *self, PyObject *
 
 
 PyObject *
-_wrap_PyNs3HashFunctionHash32_clear(PyNs3HashFunctionHash32 *self)
-{
-    PyObject *py_retval;
-    
-    self->obj->clear();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3HashFunctionHash32_GetHash32(PyNs3HashFunctionHash32 *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -1735,6 +1723,18 @@ _wrap_PyNs3HashFunctionHash32_GetHash32(PyNs3HashFunctionHash32 *self, PyObject 
     }
     retval = self->obj->GetHash32(buffer, size);
     py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3HashFunctionHash32_clear(PyNs3HashFunctionHash32 *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->clear();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -1753,8 +1753,8 @@ _wrap_PyNs3HashFunctionHash32__copy__(PyNs3HashFunctionHash32 *self)
 }
 
 static PyMethodDef PyNs3HashFunctionHash32_methods[] = {
-    {(char *) "clear", (PyCFunction) _wrap_PyNs3HashFunctionHash32_clear, METH_NOARGS, "clear()\n\n" },
     {(char *) "GetHash32", (PyCFunction) _wrap_PyNs3HashFunctionHash32_GetHash32, METH_KEYWORDS|METH_VARARGS, "GetHash32(buffer, size)\n\ntype: buffer: char const *\ntype: size: size_t const" },
+    {(char *) "clear", (PyCFunction) _wrap_PyNs3HashFunctionHash32_clear, METH_NOARGS, "clear()\n\n" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3HashFunctionHash32__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -1882,13 +1882,19 @@ _wrap_PyNs3HashFunctionHash64__tp_init(PyNs3HashFunctionHash64 *self, PyObject *
 
 
 PyObject *
-_wrap_PyNs3HashFunctionHash64_clear(PyNs3HashFunctionHash64 *self)
+_wrap_PyNs3HashFunctionHash64_GetHash32(PyNs3HashFunctionHash64 *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
+    uint32_t retval;
+    char const *buffer;
+    unsigned PY_LONG_LONG size;
+    const char *keywords[] = {"buffer", "size", NULL};
     
-    self->obj->clear();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "sK", (char **) keywords, &buffer, &size)) {
+        return NULL;
+    }
+    retval = self->obj->GetHash32(buffer, size);
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
 
@@ -1912,19 +1918,13 @@ _wrap_PyNs3HashFunctionHash64_GetHash64(PyNs3HashFunctionHash64 *self, PyObject 
 
 
 PyObject *
-_wrap_PyNs3HashFunctionHash64_GetHash32(PyNs3HashFunctionHash64 *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3HashFunctionHash64_clear(PyNs3HashFunctionHash64 *self)
 {
     PyObject *py_retval;
-    uint32_t retval;
-    char const *buffer;
-    unsigned PY_LONG_LONG size;
-    const char *keywords[] = {"buffer", "size", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "sK", (char **) keywords, &buffer, &size)) {
-        return NULL;
-    }
-    retval = self->obj->GetHash32(buffer, size);
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    self->obj->clear();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -1943,9 +1943,9 @@ _wrap_PyNs3HashFunctionHash64__copy__(PyNs3HashFunctionHash64 *self)
 }
 
 static PyMethodDef PyNs3HashFunctionHash64_methods[] = {
-    {(char *) "clear", (PyCFunction) _wrap_PyNs3HashFunctionHash64_clear, METH_NOARGS, "clear()\n\n" },
-    {(char *) "GetHash64", (PyCFunction) _wrap_PyNs3HashFunctionHash64_GetHash64, METH_KEYWORDS|METH_VARARGS, "GetHash64(buffer, size)\n\ntype: buffer: char const *\ntype: size: size_t const" },
     {(char *) "GetHash32", (PyCFunction) _wrap_PyNs3HashFunctionHash64_GetHash32, METH_KEYWORDS|METH_VARARGS, "GetHash32(buffer, size)\n\ntype: buffer: char const *\ntype: size: size_t const" },
+    {(char *) "GetHash64", (PyCFunction) _wrap_PyNs3HashFunctionHash64_GetHash64, METH_KEYWORDS|METH_VARARGS, "GetHash64(buffer, size)\n\ntype: buffer: char const *\ntype: size: size_t const" },
+    {(char *) "clear", (PyCFunction) _wrap_PyNs3HashFunctionHash64_clear, METH_NOARGS, "clear()\n\n" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3HashFunctionHash64__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -2123,13 +2123,19 @@ int _wrap_PyNs3HashFunctionMurmur3__tp_init(PyNs3HashFunctionMurmur3 *self, PyOb
 
 
 PyObject *
-_wrap_PyNs3HashFunctionMurmur3_clear(PyNs3HashFunctionMurmur3 *self)
+_wrap_PyNs3HashFunctionMurmur3_GetHash32(PyNs3HashFunctionMurmur3 *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
+    uint32_t retval;
+    char const *buffer;
+    unsigned PY_LONG_LONG size;
+    const char *keywords[] = {"buffer", "size", NULL};
     
-    self->obj->clear();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "sK", (char **) keywords, &buffer, &size)) {
+        return NULL;
+    }
+    retval = self->obj->GetHash32(buffer, size);
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
 
@@ -2153,19 +2159,13 @@ _wrap_PyNs3HashFunctionMurmur3_GetHash64(PyNs3HashFunctionMurmur3 *self, PyObjec
 
 
 PyObject *
-_wrap_PyNs3HashFunctionMurmur3_GetHash32(PyNs3HashFunctionMurmur3 *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3HashFunctionMurmur3_clear(PyNs3HashFunctionMurmur3 *self)
 {
     PyObject *py_retval;
-    uint32_t retval;
-    char const *buffer;
-    unsigned PY_LONG_LONG size;
-    const char *keywords[] = {"buffer", "size", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "sK", (char **) keywords, &buffer, &size)) {
-        return NULL;
-    }
-    retval = self->obj->GetHash32(buffer, size);
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    self->obj->clear();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -2184,9 +2184,9 @@ _wrap_PyNs3HashFunctionMurmur3__copy__(PyNs3HashFunctionMurmur3 *self)
 }
 
 static PyMethodDef PyNs3HashFunctionMurmur3_methods[] = {
-    {(char *) "clear", (PyCFunction) _wrap_PyNs3HashFunctionMurmur3_clear, METH_NOARGS, "clear()\n\n" },
-    {(char *) "GetHash64", (PyCFunction) _wrap_PyNs3HashFunctionMurmur3_GetHash64, METH_KEYWORDS|METH_VARARGS, "GetHash64(buffer, size)\n\ntype: buffer: char const *\ntype: size: size_t const" },
     {(char *) "GetHash32", (PyCFunction) _wrap_PyNs3HashFunctionMurmur3_GetHash32, METH_KEYWORDS|METH_VARARGS, "GetHash32(buffer, size)\n\ntype: buffer: char const *\ntype: size: size_t const" },
+    {(char *) "GetHash64", (PyCFunction) _wrap_PyNs3HashFunctionMurmur3_GetHash64, METH_KEYWORDS|METH_VARARGS, "GetHash64(buffer, size)\n\ntype: buffer: char const *\ntype: size: size_t const" },
+    {(char *) "clear", (PyCFunction) _wrap_PyNs3HashFunctionMurmur3_clear, METH_NOARGS, "clear()\n\n" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3HashFunctionMurmur3__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -2364,13 +2364,19 @@ _wrap_PyNs3HashImplementation__tp_init(void)
 
 
 PyObject *
-_wrap_PyNs3HashImplementation_clear(PyNs3HashImplementation *self)
+_wrap_PyNs3HashImplementation_GetHash32(PyNs3HashImplementation *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
+    uint32_t retval;
+    char const *buffer;
+    unsigned PY_LONG_LONG size;
+    const char *keywords[] = {"buffer", "size", NULL};
     
-    self->obj->clear();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "sK", (char **) keywords, &buffer, &size)) {
+        return NULL;
+    }
+    retval = self->obj->GetHash32(buffer, size);
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
 
@@ -2394,26 +2400,20 @@ _wrap_PyNs3HashImplementation_GetHash64(PyNs3HashImplementation *self, PyObject 
 
 
 PyObject *
-_wrap_PyNs3HashImplementation_GetHash32(PyNs3HashImplementation *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3HashImplementation_clear(PyNs3HashImplementation *self)
 {
     PyObject *py_retval;
-    uint32_t retval;
-    char const *buffer;
-    unsigned PY_LONG_LONG size;
-    const char *keywords[] = {"buffer", "size", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "sK", (char **) keywords, &buffer, &size)) {
-        return NULL;
-    }
-    retval = self->obj->GetHash32(buffer, size);
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    self->obj->clear();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
 static PyMethodDef PyNs3HashImplementation_methods[] = {
-    {(char *) "clear", (PyCFunction) _wrap_PyNs3HashImplementation_clear, METH_NOARGS, "clear()\n\n" },
-    {(char *) "GetHash64", (PyCFunction) _wrap_PyNs3HashImplementation_GetHash64, METH_KEYWORDS|METH_VARARGS, "GetHash64(buffer, size)\n\ntype: buffer: char const *\ntype: size: size_t const" },
     {(char *) "GetHash32", (PyCFunction) _wrap_PyNs3HashImplementation_GetHash32, METH_KEYWORDS|METH_VARARGS, "GetHash32(buffer, size)\n\ntype: buffer: char const *\ntype: size: size_t const" },
+    {(char *) "GetHash64", (PyCFunction) _wrap_PyNs3HashImplementation_GetHash64, METH_KEYWORDS|METH_VARARGS, "GetHash64(buffer, size)\n\ntype: buffer: char const *\ntype: size: size_t const" },
+    {(char *) "clear", (PyCFunction) _wrap_PyNs3HashImplementation_clear, METH_NOARGS, "clear()\n\n" },
     {NULL, NULL, 0, NULL}
 };
 
@@ -2564,6 +2564,59 @@ init_core_Hash(void)
 
 
 PyObject *
+_wrap__core_SystemPath_Append(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    std::string retval;
+    const char *left;
+    Py_ssize_t left_len;
+    const char *right;
+    Py_ssize_t right_len;
+    const char *keywords[] = {"left", "right", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#s#", (char **) keywords, &left, &left_len, &right, &right_len)) {
+        return NULL;
+    }
+    retval = ns3::SystemPath::Append(std::string(left, left_len), std::string(right, right_len));
+    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    return py_retval;
+}
+PyObject * _wrap__core_SystemPath_Append(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs);
+
+
+PyObject *
+_wrap__core_SystemPath_FindSelfDirectory()
+{
+    PyObject *py_retval;
+    std::string retval;
+    
+    retval = ns3::SystemPath::FindSelfDirectory();
+    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    return py_retval;
+}
+PyObject * _wrap__core_SystemPath_FindSelfDirectory();
+
+
+PyObject *
+_wrap__core_SystemPath_MakeDirectories(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    const char *path;
+    Py_ssize_t path_len;
+    const char *keywords[] = {"path", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#", (char **) keywords, &path, &path_len)) {
+        return NULL;
+    }
+    ns3::SystemPath::MakeDirectories(std::string(path, path_len));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+PyObject * _wrap__core_SystemPath_MakeDirectories(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs);
+
+
+PyObject *
 _wrap__core_SystemPath_MakeTemporaryDirectoryName()
 {
     PyObject *py_retval;
@@ -2619,66 +2672,13 @@ _wrap__core_SystemPath_Split(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args,
 }
 PyObject * _wrap__core_SystemPath_Split(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs);
 
-
-PyObject *
-_wrap__core_SystemPath_MakeDirectories(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    const char *path;
-    Py_ssize_t path_len;
-    const char *keywords[] = {"path", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#", (char **) keywords, &path, &path_len)) {
-        return NULL;
-    }
-    ns3::SystemPath::MakeDirectories(std::string(path, path_len));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-PyObject * _wrap__core_SystemPath_MakeDirectories(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs);
-
-
-PyObject *
-_wrap__core_SystemPath_FindSelfDirectory()
-{
-    PyObject *py_retval;
-    std::string retval;
-    
-    retval = ns3::SystemPath::FindSelfDirectory();
-    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
-    return py_retval;
-}
-PyObject * _wrap__core_SystemPath_FindSelfDirectory();
-
-
-PyObject *
-_wrap__core_SystemPath_Append(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    std::string retval;
-    const char *left;
-    Py_ssize_t left_len;
-    const char *right;
-    Py_ssize_t right_len;
-    const char *keywords[] = {"left", "right", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#s#", (char **) keywords, &left, &left_len, &right, &right_len)) {
-        return NULL;
-    }
-    retval = ns3::SystemPath::Append(std::string(left, left_len), std::string(right, right_len));
-    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
-    return py_retval;
-}
-PyObject * _wrap__core_SystemPath_Append(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs);
-
 static PyMethodDef _core_SystemPath_functions[] = {
+    {(char *) "Append", (PyCFunction) _wrap__core_SystemPath_Append, METH_KEYWORDS|METH_VARARGS, "Append(left, right)\n\ntype: left: std::string\ntype: right: std::string" },
+    {(char *) "FindSelfDirectory", (PyCFunction) _wrap__core_SystemPath_FindSelfDirectory, METH_NOARGS, "FindSelfDirectory()\n\n" },
+    {(char *) "MakeDirectories", (PyCFunction) _wrap__core_SystemPath_MakeDirectories, METH_KEYWORDS|METH_VARARGS, "MakeDirectories(path)\n\ntype: path: std::string" },
     {(char *) "MakeTemporaryDirectoryName", (PyCFunction) _wrap__core_SystemPath_MakeTemporaryDirectoryName, METH_NOARGS, "MakeTemporaryDirectoryName()\n\n" },
     {(char *) "ReadFiles", (PyCFunction) _wrap__core_SystemPath_ReadFiles, METH_KEYWORDS|METH_VARARGS, "ReadFiles(path)\n\ntype: path: std::string" },
     {(char *) "Split", (PyCFunction) _wrap__core_SystemPath_Split, METH_KEYWORDS|METH_VARARGS, "Split(path)\n\ntype: path: std::string" },
-    {(char *) "MakeDirectories", (PyCFunction) _wrap__core_SystemPath_MakeDirectories, METH_KEYWORDS|METH_VARARGS, "MakeDirectories(path)\n\ntype: path: std::string" },
-    {(char *) "FindSelfDirectory", (PyCFunction) _wrap__core_SystemPath_FindSelfDirectory, METH_NOARGS, "FindSelfDirectory()\n\n" },
-    {(char *) "Append", (PyCFunction) _wrap__core_SystemPath_Append, METH_KEYWORDS|METH_VARARGS, "Append(left, right)\n\ntype: left: std::string\ntype: right: std::string" },
     {NULL, NULL, 0, NULL}
 };
 /* --- containers --- */
@@ -2975,6 +2975,51 @@ init_core_TracedValueCallback(void)
 
 
 PyObject *
+_wrap__core_internal_MakeDoubleChecker(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    ns3::Ptr< ns3::AttributeChecker const > retval;
+    double min;
+    double max;
+    const char *name;
+    Py_ssize_t name_len;
+    const char *keywords[] = {"min", "max", "name", NULL};
+    PyNs3AttributeChecker *py_AttributeChecker;
+    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
+    PyTypeObject *wrapper_type = 0;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "dds#", (char **) keywords, &min, &max, &name, &name_len)) {
+        return NULL;
+    }
+    retval = ns3::internal::MakeDoubleChecker(min, max, std::string(name, name_len));
+    if (!(const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval)))) {
+        Py_INCREF(Py_None);
+        return Py_None;
+    }
+    wrapper_lookup_iter = PyNs3Empty_wrapper_registry.find((void *) const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval)));
+    if (wrapper_lookup_iter == PyNs3Empty_wrapper_registry.end()) {
+        py_AttributeChecker = NULL;
+    } else {
+        py_AttributeChecker = (PyNs3AttributeChecker *) wrapper_lookup_iter->second;
+        Py_INCREF(py_AttributeChecker);
+    }
+    
+    if (py_AttributeChecker == NULL) {
+        wrapper_type = PyNs3SimpleRefCount__Ns3AttributeChecker_Ns3Empty_Ns3DefaultDeleter__lt__ns3AttributeChecker__gt____typeid_map.lookup_wrapper(typeid((*const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval)))), &PyNs3AttributeChecker_Type);
+        py_AttributeChecker = PyObject_New(PyNs3AttributeChecker, wrapper_type);
+    
+        py_AttributeChecker->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+        const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval))->Ref();
+        py_AttributeChecker->obj = const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval));
+        PyNs3Empty_wrapper_registry[(void *) py_AttributeChecker->obj] = (PyObject *) py_AttributeChecker;
+    }
+    py_retval = Py_BuildValue((char *) "N", py_AttributeChecker);
+    return py_retval;
+}
+PyObject * _wrap__core_internal_MakeDoubleChecker(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs);
+
+
+PyObject *
 _wrap__core_internal_MakeIntegerChecker(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -3063,55 +3108,10 @@ _wrap__core_internal_MakeUintegerChecker(PyObject * PYBINDGEN_UNUSED(dummy), PyO
 }
 PyObject * _wrap__core_internal_MakeUintegerChecker(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs);
 
-
-PyObject *
-_wrap__core_internal_MakeDoubleChecker(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    ns3::Ptr< ns3::AttributeChecker const > retval;
-    double min;
-    double max;
-    const char *name;
-    Py_ssize_t name_len;
-    const char *keywords[] = {"min", "max", "name", NULL};
-    PyNs3AttributeChecker *py_AttributeChecker;
-    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
-    PyTypeObject *wrapper_type = 0;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "dds#", (char **) keywords, &min, &max, &name, &name_len)) {
-        return NULL;
-    }
-    retval = ns3::internal::MakeDoubleChecker(min, max, std::string(name, name_len));
-    if (!(const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval)))) {
-        Py_INCREF(Py_None);
-        return Py_None;
-    }
-    wrapper_lookup_iter = PyNs3Empty_wrapper_registry.find((void *) const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval)));
-    if (wrapper_lookup_iter == PyNs3Empty_wrapper_registry.end()) {
-        py_AttributeChecker = NULL;
-    } else {
-        py_AttributeChecker = (PyNs3AttributeChecker *) wrapper_lookup_iter->second;
-        Py_INCREF(py_AttributeChecker);
-    }
-    
-    if (py_AttributeChecker == NULL) {
-        wrapper_type = PyNs3SimpleRefCount__Ns3AttributeChecker_Ns3Empty_Ns3DefaultDeleter__lt__ns3AttributeChecker__gt____typeid_map.lookup_wrapper(typeid((*const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval)))), &PyNs3AttributeChecker_Type);
-        py_AttributeChecker = PyObject_New(PyNs3AttributeChecker, wrapper_type);
-    
-        py_AttributeChecker->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-        const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval))->Ref();
-        py_AttributeChecker->obj = const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval));
-        PyNs3Empty_wrapper_registry[(void *) py_AttributeChecker->obj] = (PyObject *) py_AttributeChecker;
-    }
-    py_retval = Py_BuildValue((char *) "N", py_AttributeChecker);
-    return py_retval;
-}
-PyObject * _wrap__core_internal_MakeDoubleChecker(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs);
-
 static PyMethodDef _core_internal_functions[] = {
+    {(char *) "MakeDoubleChecker", (PyCFunction) _wrap__core_internal_MakeDoubleChecker, METH_KEYWORDS|METH_VARARGS, "MakeDoubleChecker(min, max, name)\n\ntype: min: double\ntype: max: double\ntype: name: std::string" },
     {(char *) "MakeIntegerChecker", (PyCFunction) _wrap__core_internal_MakeIntegerChecker, METH_KEYWORDS|METH_VARARGS, "MakeIntegerChecker(min, max, name)\n\ntype: min: int64_t\ntype: max: int64_t\ntype: name: std::string" },
     {(char *) "MakeUintegerChecker", (PyCFunction) _wrap__core_internal_MakeUintegerChecker, METH_KEYWORDS|METH_VARARGS, "MakeUintegerChecker(min, max, name)\n\ntype: min: uint64_t\ntype: max: uint64_t\ntype: name: std::string" },
-    {(char *) "MakeDoubleChecker", (PyCFunction) _wrap__core_internal_MakeDoubleChecker, METH_KEYWORDS|METH_VARARGS, "MakeDoubleChecker(min, max, name)\n\ntype: min: double\ntype: max: double\ntype: name: std::string" },
     {NULL, NULL, 0, NULL}
 };
 #if PY_VERSION_HEX >= 0x03000000
@@ -3166,238 +3166,6 @@ init_core_tests(void)
     return m;
 }
 /* --- module functions --- */
-
-
-PyObject *
-_wrap__core_MakeVectorChecker()
-{
-    PyObject *py_retval;
-    ns3::Ptr< ns3::AttributeChecker const > retval;
-    PyNs3AttributeChecker *py_AttributeChecker;
-    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
-    PyTypeObject *wrapper_type = 0;
-    
-    retval = ns3::MakeVectorChecker();
-    if (!(const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval)))) {
-        Py_INCREF(Py_None);
-        return Py_None;
-    }
-    wrapper_lookup_iter = PyNs3Empty_wrapper_registry.find((void *) const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval)));
-    if (wrapper_lookup_iter == PyNs3Empty_wrapper_registry.end()) {
-        py_AttributeChecker = NULL;
-    } else {
-        py_AttributeChecker = (PyNs3AttributeChecker *) wrapper_lookup_iter->second;
-        Py_INCREF(py_AttributeChecker);
-    }
-    
-    if (py_AttributeChecker == NULL) {
-        wrapper_type = PyNs3SimpleRefCount__Ns3AttributeChecker_Ns3Empty_Ns3DefaultDeleter__lt__ns3AttributeChecker__gt____typeid_map.lookup_wrapper(typeid((*const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval)))), &PyNs3AttributeChecker_Type);
-        py_AttributeChecker = PyObject_New(PyNs3AttributeChecker, wrapper_type);
-    
-        py_AttributeChecker->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-        const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval))->Ref();
-        py_AttributeChecker->obj = const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval));
-        PyNs3Empty_wrapper_registry[(void *) py_AttributeChecker->obj] = (PyObject *) py_AttributeChecker;
-    }
-    py_retval = Py_BuildValue((char *) "N", py_AttributeChecker);
-    return py_retval;
-}
-PyObject * _wrap__core_MakeVectorChecker();
-
-
-PyObject *
-_wrap__core_MakeTypeIdChecker()
-{
-    PyObject *py_retval;
-    ns3::Ptr< ns3::AttributeChecker const > retval;
-    PyNs3AttributeChecker *py_AttributeChecker;
-    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
-    PyTypeObject *wrapper_type = 0;
-    
-    retval = ns3::MakeTypeIdChecker();
-    if (!(const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval)))) {
-        Py_INCREF(Py_None);
-        return Py_None;
-    }
-    wrapper_lookup_iter = PyNs3Empty_wrapper_registry.find((void *) const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval)));
-    if (wrapper_lookup_iter == PyNs3Empty_wrapper_registry.end()) {
-        py_AttributeChecker = NULL;
-    } else {
-        py_AttributeChecker = (PyNs3AttributeChecker *) wrapper_lookup_iter->second;
-        Py_INCREF(py_AttributeChecker);
-    }
-    
-    if (py_AttributeChecker == NULL) {
-        wrapper_type = PyNs3SimpleRefCount__Ns3AttributeChecker_Ns3Empty_Ns3DefaultDeleter__lt__ns3AttributeChecker__gt____typeid_map.lookup_wrapper(typeid((*const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval)))), &PyNs3AttributeChecker_Type);
-        py_AttributeChecker = PyObject_New(PyNs3AttributeChecker, wrapper_type);
-    
-        py_AttributeChecker->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-        const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval))->Ref();
-        py_AttributeChecker->obj = const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval));
-        PyNs3Empty_wrapper_registry[(void *) py_AttributeChecker->obj] = (PyObject *) py_AttributeChecker;
-    }
-    py_retval = Py_BuildValue((char *) "N", py_AttributeChecker);
-    return py_retval;
-}
-PyObject * _wrap__core_MakeTypeIdChecker();
-
-
-PyObject *
-_wrap__core_TimeStep(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    uint64_t ts;
-    const char *keywords[] = {"ts", NULL};
-    PyNs3Time *py_Time;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "K", (char **) keywords, &ts)) {
-        return NULL;
-    }
-    ns3::Time retval = ns3::TimeStep(ts);
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
-    return py_retval;
-}
-PyObject * _wrap__core_TimeStep(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs);
-
-
-
-PyObject *
-_wrap__core_Hash32__0(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    const char *s;
-    Py_ssize_t s_len;
-    const char *keywords[] = {"s", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#", (char **) keywords, &s, &s_len)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    retval = ns3::Hash32(std::string(s, s_len));
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-PyObject *
-_wrap__core_Hash32__1(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    char const *buffer;
-    unsigned PY_LONG_LONG size;
-    const char *keywords[] = {"buffer", "size", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "sK", (char **) keywords, &buffer, &size)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    retval = ns3::Hash32(buffer, size);
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-PyObject * _wrap__core_Hash32(PyObject *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject * retval;
-    PyObject *error_list;
-    PyObject *exceptions[2] = {0,};
-    retval = _wrap__core_Hash32__0(self, args, kwargs, &exceptions[0]);
-    if (!exceptions[0]) {
-        return retval;
-    }
-    retval = _wrap__core_Hash32__1(self, args, kwargs, &exceptions[1]);
-    if (!exceptions[1]) {
-        Py_DECREF(exceptions[0]);
-        return retval;
-    }
-    error_list = PyList_New(2);
-    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
-    Py_DECREF(exceptions[0]);
-    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
-    Py_DECREF(exceptions[1]);
-    PyErr_SetObject(PyExc_TypeError, error_list);
-    Py_DECREF(error_list);
-    return NULL;
-}
-PyObject * _wrap__core_Hash32(PyObject *self, PyObject *args, PyObject *kwargs);
-
-
-PyObject *
-_wrap__core_Create__lt__ns3__PointerValue__gt__()
-{
-    PyObject *py_retval;
-    ns3::Ptr< ns3::PointerValue > retval;
-    PyNs3PointerValue *py_PointerValue;
-    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
-    PyTypeObject *wrapper_type = 0;
-    
-    retval = ns3::Create< ns3::PointerValue >();
-    if (!(const_cast<ns3::PointerValue *> (ns3::PeekPointer (retval)))) {
-        Py_INCREF(Py_None);
-        return Py_None;
-    }
-    wrapper_lookup_iter = PyNs3Empty_wrapper_registry.find((void *) const_cast<ns3::PointerValue *> (ns3::PeekPointer (retval)));
-    if (wrapper_lookup_iter == PyNs3Empty_wrapper_registry.end()) {
-        py_PointerValue = NULL;
-    } else {
-        py_PointerValue = (PyNs3PointerValue *) wrapper_lookup_iter->second;
-        Py_INCREF(py_PointerValue);
-    }
-    
-    if (py_PointerValue == NULL) {
-        wrapper_type = PyNs3SimpleRefCount__Ns3AttributeValue_Ns3Empty_Ns3DefaultDeleter__lt__ns3AttributeValue__gt____typeid_map.lookup_wrapper(typeid((*const_cast<ns3::PointerValue *> (ns3::PeekPointer (retval)))), &PyNs3PointerValue_Type);
-        py_PointerValue = PyObject_New(PyNs3PointerValue, wrapper_type);
-    
-        py_PointerValue->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-        const_cast<ns3::PointerValue *> (ns3::PeekPointer (retval))->Ref();
-        py_PointerValue->obj = const_cast<ns3::PointerValue *> (ns3::PeekPointer (retval));
-        PyNs3Empty_wrapper_registry[(void *) py_PointerValue->obj] = (PyObject *) py_PointerValue;
-    }
-    py_retval = Py_BuildValue((char *) "N", py_PointerValue);
-    return py_retval;
-}
-PyObject * _wrap__core_Create__lt__ns3__PointerValue__gt__();
-
-
-PyObject *
-_wrap__core_TypeNameGet__lt__unsigned_char__gt__()
-{
-    PyObject *py_retval;
-    std::string retval;
-    
-    retval = ns3::TypeNameGet< unsigned char >();
-    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
-    return py_retval;
-}
-PyObject * _wrap__core_TypeNameGet__lt__unsigned_char__gt__();
-
-
-PyObject *
-_wrap__core_TypeNameGet__lt__int__gt__()
-{
-    PyObject *py_retval;
-    std::string retval;
-    
-    retval = ns3::TypeNameGet< int >();
-    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
-    return py_retval;
-}
-PyObject * _wrap__core_TypeNameGet__lt__int__gt__();
 
 
 
@@ -3496,744 +3264,16 @@ PyObject * _wrap__core_Abs(PyObject *self, PyObject *args, PyObject *kwargs);
 
 
 PyObject *
-_wrap__core_MakeEmptyAttributeAccessor()
+_wrap__core_BreakpointFallback()
 {
     PyObject *py_retval;
-    ns3::Ptr< ns3::AttributeAccessor const > retval;
-    PyNs3AttributeAccessor *py_AttributeAccessor;
-    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
-    PyTypeObject *wrapper_type = 0;
     
-    retval = ns3::MakeEmptyAttributeAccessor();
-    if (!(const_cast<ns3::AttributeAccessor *> (ns3::PeekPointer (retval)))) {
-        Py_INCREF(Py_None);
-        return Py_None;
-    }
-    wrapper_lookup_iter = PyNs3Empty_wrapper_registry.find((void *) const_cast<ns3::AttributeAccessor *> (ns3::PeekPointer (retval)));
-    if (wrapper_lookup_iter == PyNs3Empty_wrapper_registry.end()) {
-        py_AttributeAccessor = NULL;
-    } else {
-        py_AttributeAccessor = (PyNs3AttributeAccessor *) wrapper_lookup_iter->second;
-        Py_INCREF(py_AttributeAccessor);
-    }
-    
-    if (py_AttributeAccessor == NULL) {
-        wrapper_type = PyNs3SimpleRefCount__Ns3AttributeAccessor_Ns3Empty_Ns3DefaultDeleter__lt__ns3AttributeAccessor__gt____typeid_map.lookup_wrapper(typeid((*const_cast<ns3::AttributeAccessor *> (ns3::PeekPointer (retval)))), &PyNs3AttributeAccessor_Type);
-        py_AttributeAccessor = PyObject_New(PyNs3AttributeAccessor, wrapper_type);
-    
-        py_AttributeAccessor->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-        const_cast<ns3::AttributeAccessor *> (ns3::PeekPointer (retval))->Ref();
-        py_AttributeAccessor->obj = const_cast<ns3::AttributeAccessor *> (ns3::PeekPointer (retval));
-        PyNs3Empty_wrapper_registry[(void *) py_AttributeAccessor->obj] = (PyObject *) py_AttributeAccessor;
-    }
-    py_retval = Py_BuildValue((char *) "N", py_AttributeAccessor);
+    ns3::BreakpointFallback();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
-PyObject * _wrap__core_MakeEmptyAttributeAccessor();
-
-
-
-PyObject *
-_wrap__core_PicoSeconds__0(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    PyObject *value;
-    ns3::int64x64_t value2;
-    const char *keywords[] = {"value", NULL};
-    PyNs3Time *py_Time;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &value)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    if (PyObject_IsInstance(value, (PyObject*) &PyNs3Int64x64_t_Type)) {
-        value2 = *((PyNs3Int64x64_t *) value)->obj;
-    } else if (PyObject_IsInstance(value, (PyObject*) &PyNs3Time_Type)) {
-        value2 = *((PyNs3Time *) value)->obj;
-    } else {
-    
-        PyErr_Format(PyExc_TypeError, "parameter must an instance of one of the types (int64x64_t, Time), not %s", Py_TYPE(value)->tp_name);
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    ns3::Time retval = ns3::PicoSeconds(value2);
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
-    return py_retval;
-}
-
-PyObject *
-_wrap__core_PicoSeconds__1(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    uint64_t value;
-    const char *keywords[] = {"value", NULL};
-    PyNs3Time *py_Time;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "K", (char **) keywords, &value)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    ns3::Time retval = ns3::PicoSeconds(value);
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
-    return py_retval;
-}
-
-PyObject * _wrap__core_PicoSeconds(PyObject *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject * retval;
-    PyObject *error_list;
-    PyObject *exceptions[2] = {0,};
-    retval = _wrap__core_PicoSeconds__0(self, args, kwargs, &exceptions[0]);
-    if (!exceptions[0]) {
-        return retval;
-    }
-    retval = _wrap__core_PicoSeconds__1(self, args, kwargs, &exceptions[1]);
-    if (!exceptions[1]) {
-        Py_DECREF(exceptions[0]);
-        return retval;
-    }
-    error_list = PyList_New(2);
-    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
-    Py_DECREF(exceptions[0]);
-    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
-    Py_DECREF(exceptions[1]);
-    PyErr_SetObject(PyExc_TypeError, error_list);
-    Py_DECREF(error_list);
-    return NULL;
-}
-PyObject * _wrap__core_PicoSeconds(PyObject *self, PyObject *args, PyObject *kwargs);
-
-
-
-PyObject *
-_wrap__core_Hash64__0(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    uint64_t retval;
-    const char *s;
-    Py_ssize_t s_len;
-    const char *keywords[] = {"s", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#", (char **) keywords, &s, &s_len)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    retval = ns3::Hash64(std::string(s, s_len));
-    py_retval = Py_BuildValue((char *) "K", retval);
-    return py_retval;
-}
-
-PyObject *
-_wrap__core_Hash64__1(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    uint64_t retval;
-    char const *buffer;
-    unsigned PY_LONG_LONG size;
-    const char *keywords[] = {"buffer", "size", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "sK", (char **) keywords, &buffer, &size)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    retval = ns3::Hash64(buffer, size);
-    py_retval = Py_BuildValue((char *) "K", retval);
-    return py_retval;
-}
-
-PyObject * _wrap__core_Hash64(PyObject *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject * retval;
-    PyObject *error_list;
-    PyObject *exceptions[2] = {0,};
-    retval = _wrap__core_Hash64__0(self, args, kwargs, &exceptions[0]);
-    if (!exceptions[0]) {
-        return retval;
-    }
-    retval = _wrap__core_Hash64__1(self, args, kwargs, &exceptions[1]);
-    if (!exceptions[1]) {
-        Py_DECREF(exceptions[0]);
-        return retval;
-    }
-    error_list = PyList_New(2);
-    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
-    Py_DECREF(exceptions[0]);
-    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
-    Py_DECREF(exceptions[1]);
-    PyErr_SetObject(PyExc_TypeError, error_list);
-    Py_DECREF(error_list);
-    return NULL;
-}
-PyObject * _wrap__core_Hash64(PyObject *self, PyObject *args, PyObject *kwargs);
-
-
-PyObject *
-_wrap__core_TestDoubleIsEqual(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    double a;
-    double b;
-    double epsilon = std::numeric_limits<double>::epsilon();
-    const char *keywords[] = {"a", "b", "epsilon", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "dd|d", (char **) keywords, &a, &b, &epsilon)) {
-        return NULL;
-    }
-    retval = ns3::TestDoubleIsEqual(a, b, epsilon);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-PyObject * _wrap__core_TestDoubleIsEqual(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs);
-
-
-PyObject *
-_wrap__core_MakeEmptyTraceSourceAccessor()
-{
-    PyObject *py_retval;
-    ns3::Ptr< ns3::TraceSourceAccessor const > retval;
-    PyNs3TraceSourceAccessor *py_TraceSourceAccessor;
-    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
-    PyTypeObject *wrapper_type = 0;
-    
-    retval = ns3::MakeEmptyTraceSourceAccessor();
-    if (!(const_cast<ns3::TraceSourceAccessor *> (ns3::PeekPointer (retval)))) {
-        Py_INCREF(Py_None);
-        return Py_None;
-    }
-    wrapper_lookup_iter = PyNs3Empty_wrapper_registry.find((void *) const_cast<ns3::TraceSourceAccessor *> (ns3::PeekPointer (retval)));
-    if (wrapper_lookup_iter == PyNs3Empty_wrapper_registry.end()) {
-        py_TraceSourceAccessor = NULL;
-    } else {
-        py_TraceSourceAccessor = (PyNs3TraceSourceAccessor *) wrapper_lookup_iter->second;
-        Py_INCREF(py_TraceSourceAccessor);
-    }
-    
-    if (py_TraceSourceAccessor == NULL) {
-        wrapper_type = PyNs3SimpleRefCount__Ns3TraceSourceAccessor_Ns3Empty_Ns3DefaultDeleter__lt__ns3TraceSourceAccessor__gt____typeid_map.lookup_wrapper(typeid((*const_cast<ns3::TraceSourceAccessor *> (ns3::PeekPointer (retval)))), &PyNs3TraceSourceAccessor_Type);
-        py_TraceSourceAccessor = PyObject_New(PyNs3TraceSourceAccessor, wrapper_type);
-    
-        py_TraceSourceAccessor->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-        const_cast<ns3::TraceSourceAccessor *> (ns3::PeekPointer (retval))->Ref();
-        py_TraceSourceAccessor->obj = const_cast<ns3::TraceSourceAccessor *> (ns3::PeekPointer (retval));
-        PyNs3Empty_wrapper_registry[(void *) py_TraceSourceAccessor->obj] = (PyObject *) py_TraceSourceAccessor;
-    }
-    py_retval = Py_BuildValue((char *) "N", py_TraceSourceAccessor);
-    return py_retval;
-}
-PyObject * _wrap__core_MakeEmptyTraceSourceAccessor();
-
-
-
-PyObject *
-_wrap__core_Seconds__0(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    PyObject *value;
-    ns3::int64x64_t value2;
-    const char *keywords[] = {"value", NULL};
-    PyNs3Time *py_Time;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &value)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    if (PyObject_IsInstance(value, (PyObject*) &PyNs3Int64x64_t_Type)) {
-        value2 = *((PyNs3Int64x64_t *) value)->obj;
-    } else if (PyObject_IsInstance(value, (PyObject*) &PyNs3Time_Type)) {
-        value2 = *((PyNs3Time *) value)->obj;
-    } else {
-    
-        PyErr_Format(PyExc_TypeError, "parameter must an instance of one of the types (int64x64_t, Time), not %s", Py_TYPE(value)->tp_name);
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    ns3::Time retval = ns3::Seconds(value2);
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
-    return py_retval;
-}
-
-PyObject *
-_wrap__core_Seconds__1(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    double value;
-    const char *keywords[] = {"value", NULL};
-    PyNs3Time *py_Time;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "d", (char **) keywords, &value)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    ns3::Time retval = ns3::Seconds(value);
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
-    return py_retval;
-}
-
-PyObject * _wrap__core_Seconds(PyObject *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject * retval;
-    PyObject *error_list;
-    PyObject *exceptions[2] = {0,};
-    retval = _wrap__core_Seconds__0(self, args, kwargs, &exceptions[0]);
-    if (!exceptions[0]) {
-        return retval;
-    }
-    retval = _wrap__core_Seconds__1(self, args, kwargs, &exceptions[1]);
-    if (!exceptions[1]) {
-        Py_DECREF(exceptions[0]);
-        return retval;
-    }
-    error_list = PyList_New(2);
-    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
-    Py_DECREF(exceptions[0]);
-    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
-    Py_DECREF(exceptions[1]);
-    PyErr_SetObject(PyExc_TypeError, error_list);
-    Py_DECREF(error_list);
-    return NULL;
-}
-PyObject * _wrap__core_Seconds(PyObject *self, PyObject *args, PyObject *kwargs);
-
-
-
-PyObject *
-_wrap__core_Max__0(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    PyNs3Time *ta;
-    PyNs3Time *tb;
-    const char *keywords[] = {"ta", "tb", NULL};
-    PyNs3Time *py_Time;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3Time_Type, &ta, &PyNs3Time_Type, &tb)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    ns3::Time retval = ns3::Max(*((PyNs3Time *) ta)->obj, *((PyNs3Time *) tb)->obj);
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
-    return py_retval;
-}
-
-PyObject *
-_wrap__core_Max__1(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    PyObject *a;
-    ns3::int64x64_t a2;
-    PyObject *b;
-    ns3::int64x64_t b2;
-    const char *keywords[] = {"a", "b", NULL};
-    PyNs3Int64x64_t *py_int64x64_t;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "OO", (char **) keywords, &a, &b)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    if (PyObject_IsInstance(a, (PyObject*) &PyNs3Int64x64_t_Type)) {
-        a2 = *((PyNs3Int64x64_t *) a)->obj;
-    } else if (PyObject_IsInstance(a, (PyObject*) &PyNs3Time_Type)) {
-        a2 = *((PyNs3Time *) a)->obj;
-    } else {
-    
-        PyErr_Format(PyExc_TypeError, "parameter must an instance of one of the types (int64x64_t, Time), not %s", Py_TYPE(a)->tp_name);
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    if (PyObject_IsInstance(b, (PyObject*) &PyNs3Int64x64_t_Type)) {
-        b2 = *((PyNs3Int64x64_t *) b)->obj;
-    } else if (PyObject_IsInstance(b, (PyObject*) &PyNs3Time_Type)) {
-        b2 = *((PyNs3Time *) b)->obj;
-    } else {
-    
-        PyErr_Format(PyExc_TypeError, "parameter must an instance of one of the types (int64x64_t, Time), not %s", Py_TYPE(b)->tp_name);
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    ns3::int64x64_t retval = ns3::Max(a2, b2);
-    py_int64x64_t = PyObject_New(PyNs3Int64x64_t, &PyNs3Int64x64_t_Type);
-    py_int64x64_t->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_int64x64_t->obj = new ns3::int64x64_t(retval);
-    PyNs3Int64x64_t_wrapper_registry[(void *) py_int64x64_t->obj] = (PyObject *) py_int64x64_t;
-    py_retval = Py_BuildValue((char *) "N", py_int64x64_t);
-    return py_retval;
-}
-
-PyObject * _wrap__core_Max(PyObject *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject * retval;
-    PyObject *error_list;
-    PyObject *exceptions[2] = {0,};
-    retval = _wrap__core_Max__0(self, args, kwargs, &exceptions[0]);
-    if (!exceptions[0]) {
-        return retval;
-    }
-    retval = _wrap__core_Max__1(self, args, kwargs, &exceptions[1]);
-    if (!exceptions[1]) {
-        Py_DECREF(exceptions[0]);
-        return retval;
-    }
-    error_list = PyList_New(2);
-    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
-    Py_DECREF(exceptions[0]);
-    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
-    Py_DECREF(exceptions[1]);
-    PyErr_SetObject(PyExc_TypeError, error_list);
-    Py_DECREF(error_list);
-    return NULL;
-}
-PyObject * _wrap__core_Max(PyObject *self, PyObject *args, PyObject *kwargs);
-
-
-
-PyObject *
-_wrap__core_Min__0(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    PyNs3Time *ta;
-    PyNs3Time *tb;
-    const char *keywords[] = {"ta", "tb", NULL};
-    PyNs3Time *py_Time;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3Time_Type, &ta, &PyNs3Time_Type, &tb)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    ns3::Time retval = ns3::Min(*((PyNs3Time *) ta)->obj, *((PyNs3Time *) tb)->obj);
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
-    return py_retval;
-}
-
-PyObject *
-_wrap__core_Min__1(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    PyObject *a;
-    ns3::int64x64_t a2;
-    PyObject *b;
-    ns3::int64x64_t b2;
-    const char *keywords[] = {"a", "b", NULL};
-    PyNs3Int64x64_t *py_int64x64_t;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "OO", (char **) keywords, &a, &b)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    if (PyObject_IsInstance(a, (PyObject*) &PyNs3Int64x64_t_Type)) {
-        a2 = *((PyNs3Int64x64_t *) a)->obj;
-    } else if (PyObject_IsInstance(a, (PyObject*) &PyNs3Time_Type)) {
-        a2 = *((PyNs3Time *) a)->obj;
-    } else {
-    
-        PyErr_Format(PyExc_TypeError, "parameter must an instance of one of the types (int64x64_t, Time), not %s", Py_TYPE(a)->tp_name);
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    if (PyObject_IsInstance(b, (PyObject*) &PyNs3Int64x64_t_Type)) {
-        b2 = *((PyNs3Int64x64_t *) b)->obj;
-    } else if (PyObject_IsInstance(b, (PyObject*) &PyNs3Time_Type)) {
-        b2 = *((PyNs3Time *) b)->obj;
-    } else {
-    
-        PyErr_Format(PyExc_TypeError, "parameter must an instance of one of the types (int64x64_t, Time), not %s", Py_TYPE(b)->tp_name);
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    ns3::int64x64_t retval = ns3::Min(a2, b2);
-    py_int64x64_t = PyObject_New(PyNs3Int64x64_t, &PyNs3Int64x64_t_Type);
-    py_int64x64_t->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_int64x64_t->obj = new ns3::int64x64_t(retval);
-    PyNs3Int64x64_t_wrapper_registry[(void *) py_int64x64_t->obj] = (PyObject *) py_int64x64_t;
-    py_retval = Py_BuildValue((char *) "N", py_int64x64_t);
-    return py_retval;
-}
-
-PyObject * _wrap__core_Min(PyObject *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject * retval;
-    PyObject *error_list;
-    PyObject *exceptions[2] = {0,};
-    retval = _wrap__core_Min__0(self, args, kwargs, &exceptions[0]);
-    if (!exceptions[0]) {
-        return retval;
-    }
-    retval = _wrap__core_Min__1(self, args, kwargs, &exceptions[1]);
-    if (!exceptions[1]) {
-        Py_DECREF(exceptions[0]);
-        return retval;
-    }
-    error_list = PyList_New(2);
-    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
-    Py_DECREF(exceptions[0]);
-    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
-    Py_DECREF(exceptions[1]);
-    PyErr_SetObject(PyExc_TypeError, error_list);
-    Py_DECREF(error_list);
-    return NULL;
-}
-PyObject * _wrap__core_Min(PyObject *self, PyObject *args, PyObject *kwargs);
-
-
-PyObject *
-_wrap__core_MakeEmptyAttributeChecker()
-{
-    PyObject *py_retval;
-    ns3::Ptr< ns3::AttributeChecker > retval;
-    PyNs3AttributeChecker *py_AttributeChecker;
-    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
-    PyTypeObject *wrapper_type = 0;
-    
-    retval = ns3::MakeEmptyAttributeChecker();
-    if (!(const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval)))) {
-        Py_INCREF(Py_None);
-        return Py_None;
-    }
-    wrapper_lookup_iter = PyNs3Empty_wrapper_registry.find((void *) const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval)));
-    if (wrapper_lookup_iter == PyNs3Empty_wrapper_registry.end()) {
-        py_AttributeChecker = NULL;
-    } else {
-        py_AttributeChecker = (PyNs3AttributeChecker *) wrapper_lookup_iter->second;
-        Py_INCREF(py_AttributeChecker);
-    }
-    
-    if (py_AttributeChecker == NULL) {
-        wrapper_type = PyNs3SimpleRefCount__Ns3AttributeChecker_Ns3Empty_Ns3DefaultDeleter__lt__ns3AttributeChecker__gt____typeid_map.lookup_wrapper(typeid((*const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval)))), &PyNs3AttributeChecker_Type);
-        py_AttributeChecker = PyObject_New(PyNs3AttributeChecker, wrapper_type);
-    
-        py_AttributeChecker->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-        const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval))->Ref();
-        py_AttributeChecker->obj = const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval));
-        PyNs3Empty_wrapper_registry[(void *) py_AttributeChecker->obj] = (PyObject *) py_AttributeChecker;
-    }
-    py_retval = Py_BuildValue((char *) "N", py_AttributeChecker);
-    return py_retval;
-}
-PyObject * _wrap__core_MakeEmptyAttributeChecker();
-
-
-PyObject *
-_wrap__core_TypeNameGet__lt__long__gt__()
-{
-    PyObject *py_retval;
-    std::string retval;
-    
-    retval = ns3::TypeNameGet< long >();
-    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
-    return py_retval;
-}
-PyObject * _wrap__core_TypeNameGet__lt__long__gt__();
-
-
-
-PyObject *
-_wrap__core_Hours__0(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    PyObject *value;
-    ns3::int64x64_t value2;
-    const char *keywords[] = {"value", NULL};
-    PyNs3Time *py_Time;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &value)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    if (PyObject_IsInstance(value, (PyObject*) &PyNs3Int64x64_t_Type)) {
-        value2 = *((PyNs3Int64x64_t *) value)->obj;
-    } else if (PyObject_IsInstance(value, (PyObject*) &PyNs3Time_Type)) {
-        value2 = *((PyNs3Time *) value)->obj;
-    } else {
-    
-        PyErr_Format(PyExc_TypeError, "parameter must an instance of one of the types (int64x64_t, Time), not %s", Py_TYPE(value)->tp_name);
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    ns3::Time retval = ns3::Hours(value2);
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
-    return py_retval;
-}
-
-PyObject *
-_wrap__core_Hours__1(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    double value;
-    const char *keywords[] = {"value", NULL};
-    PyNs3Time *py_Time;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "d", (char **) keywords, &value)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    ns3::Time retval = ns3::Hours(value);
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
-    return py_retval;
-}
-
-PyObject * _wrap__core_Hours(PyObject *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject * retval;
-    PyObject *error_list;
-    PyObject *exceptions[2] = {0,};
-    retval = _wrap__core_Hours__0(self, args, kwargs, &exceptions[0]);
-    if (!exceptions[0]) {
-        return retval;
-    }
-    retval = _wrap__core_Hours__1(self, args, kwargs, &exceptions[1]);
-    if (!exceptions[1]) {
-        Py_DECREF(exceptions[0]);
-        return retval;
-    }
-    error_list = PyList_New(2);
-    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
-    Py_DECREF(exceptions[0]);
-    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
-    Py_DECREF(exceptions[1]);
-    PyErr_SetObject(PyExc_TypeError, error_list);
-    Py_DECREF(error_list);
-    return NULL;
-}
-PyObject * _wrap__core_Hours(PyObject *self, PyObject *args, PyObject *kwargs);
-
-
-PyObject *
-_wrap__core_TypeNameGet__lt__short__gt__()
-{
-    PyObject *py_retval;
-    std::string retval;
-    
-    retval = ns3::TypeNameGet< short >();
-    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
-    return py_retval;
-}
-PyObject * _wrap__core_TypeNameGet__lt__short__gt__();
+PyObject * _wrap__core_BreakpointFallback();
 
 
 
@@ -4310,16 +3350,172 @@ PyObject * _wrap__core_CalculateDistance(PyObject *self, PyObject *args, PyObjec
 
 
 PyObject *
-_wrap__core_BreakpointFallback()
+_wrap__core_Create__lt__ns3__ObjectPtrContainerValue__gt__()
 {
     PyObject *py_retval;
+    ns3::Ptr< ns3::ObjectPtrContainerValue > retval;
+    PyNs3ObjectPtrContainerValue *py_ObjectPtrContainerValue;
+    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
+    PyTypeObject *wrapper_type = 0;
     
-    ns3::BreakpointFallback();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    retval = ns3::Create< ns3::ObjectPtrContainerValue >();
+    if (!(const_cast<ns3::ObjectPtrContainerValue *> (ns3::PeekPointer (retval)))) {
+        Py_INCREF(Py_None);
+        return Py_None;
+    }
+    wrapper_lookup_iter = PyNs3Empty_wrapper_registry.find((void *) const_cast<ns3::ObjectPtrContainerValue *> (ns3::PeekPointer (retval)));
+    if (wrapper_lookup_iter == PyNs3Empty_wrapper_registry.end()) {
+        py_ObjectPtrContainerValue = NULL;
+    } else {
+        py_ObjectPtrContainerValue = (PyNs3ObjectPtrContainerValue *) wrapper_lookup_iter->second;
+        Py_INCREF(py_ObjectPtrContainerValue);
+    }
+    
+    if (py_ObjectPtrContainerValue == NULL) {
+        wrapper_type = PyNs3SimpleRefCount__Ns3AttributeValue_Ns3Empty_Ns3DefaultDeleter__lt__ns3AttributeValue__gt____typeid_map.lookup_wrapper(typeid((*const_cast<ns3::ObjectPtrContainerValue *> (ns3::PeekPointer (retval)))), &PyNs3ObjectPtrContainerValue_Type);
+        py_ObjectPtrContainerValue = PyObject_New(PyNs3ObjectPtrContainerValue, wrapper_type);
+    
+        py_ObjectPtrContainerValue->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+        const_cast<ns3::ObjectPtrContainerValue *> (ns3::PeekPointer (retval))->Ref();
+        py_ObjectPtrContainerValue->obj = const_cast<ns3::ObjectPtrContainerValue *> (ns3::PeekPointer (retval));
+        PyNs3Empty_wrapper_registry[(void *) py_ObjectPtrContainerValue->obj] = (PyObject *) py_ObjectPtrContainerValue;
+    }
+    py_retval = Py_BuildValue((char *) "N", py_ObjectPtrContainerValue);
     return py_retval;
 }
-PyObject * _wrap__core_BreakpointFallback();
+PyObject * _wrap__core_Create__lt__ns3__ObjectPtrContainerValue__gt__();
+
+
+PyObject *
+_wrap__core_Create__lt__ns3__PointerValue__gt__()
+{
+    PyObject *py_retval;
+    ns3::Ptr< ns3::PointerValue > retval;
+    PyNs3PointerValue *py_PointerValue;
+    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
+    PyTypeObject *wrapper_type = 0;
+    
+    retval = ns3::Create< ns3::PointerValue >();
+    if (!(const_cast<ns3::PointerValue *> (ns3::PeekPointer (retval)))) {
+        Py_INCREF(Py_None);
+        return Py_None;
+    }
+    wrapper_lookup_iter = PyNs3Empty_wrapper_registry.find((void *) const_cast<ns3::PointerValue *> (ns3::PeekPointer (retval)));
+    if (wrapper_lookup_iter == PyNs3Empty_wrapper_registry.end()) {
+        py_PointerValue = NULL;
+    } else {
+        py_PointerValue = (PyNs3PointerValue *) wrapper_lookup_iter->second;
+        Py_INCREF(py_PointerValue);
+    }
+    
+    if (py_PointerValue == NULL) {
+        wrapper_type = PyNs3SimpleRefCount__Ns3AttributeValue_Ns3Empty_Ns3DefaultDeleter__lt__ns3AttributeValue__gt____typeid_map.lookup_wrapper(typeid((*const_cast<ns3::PointerValue *> (ns3::PeekPointer (retval)))), &PyNs3PointerValue_Type);
+        py_PointerValue = PyObject_New(PyNs3PointerValue, wrapper_type);
+    
+        py_PointerValue->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+        const_cast<ns3::PointerValue *> (ns3::PeekPointer (retval))->Ref();
+        py_PointerValue->obj = const_cast<ns3::PointerValue *> (ns3::PeekPointer (retval));
+        PyNs3Empty_wrapper_registry[(void *) py_PointerValue->obj] = (PyObject *) py_PointerValue;
+    }
+    py_retval = Py_BuildValue((char *) "N", py_PointerValue);
+    return py_retval;
+}
+PyObject * _wrap__core_Create__lt__ns3__PointerValue__gt__();
+
+
+
+PyObject *
+_wrap__core_Days__0(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    PyObject *value;
+    ns3::int64x64_t value2;
+    const char *keywords[] = {"value", NULL};
+    PyNs3Time *py_Time;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &value)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    if (PyObject_IsInstance(value, (PyObject*) &PyNs3Int64x64_t_Type)) {
+        value2 = *((PyNs3Int64x64_t *) value)->obj;
+    } else if (PyObject_IsInstance(value, (PyObject*) &PyNs3Time_Type)) {
+        value2 = *((PyNs3Time *) value)->obj;
+    } else {
+    
+        PyErr_Format(PyExc_TypeError, "parameter must an instance of one of the types (int64x64_t, Time), not %s", Py_TYPE(value)->tp_name);
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    ns3::Time retval = ns3::Days(value2);
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+PyObject *
+_wrap__core_Days__1(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    double value;
+    const char *keywords[] = {"value", NULL};
+    PyNs3Time *py_Time;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "d", (char **) keywords, &value)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    ns3::Time retval = ns3::Days(value);
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+PyObject * _wrap__core_Days(PyObject *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject * retval;
+    PyObject *error_list;
+    PyObject *exceptions[2] = {0,};
+    retval = _wrap__core_Days__0(self, args, kwargs, &exceptions[0]);
+    if (!exceptions[0]) {
+        return retval;
+    }
+    retval = _wrap__core_Days__1(self, args, kwargs, &exceptions[1]);
+    if (!exceptions[1]) {
+        Py_DECREF(exceptions[0]);
+        return retval;
+    }
+    error_list = PyList_New(2);
+    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
+    Py_DECREF(exceptions[0]);
+    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
+    Py_DECREF(exceptions[1]);
+    PyErr_SetObject(PyExc_TypeError, error_list);
+    Py_DECREF(error_list);
+    return NULL;
+}
+PyObject * _wrap__core_Days(PyObject *self, PyObject *args, PyObject *kwargs);
 
 
 
@@ -4418,81 +3614,177 @@ PyObject * _wrap__core_FemtoSeconds(PyObject *self, PyObject *args, PyObject *kw
 
 
 PyObject *
-_wrap__core_MakeVector3DChecker()
+_wrap__core_GetLogComponent(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    ns3::Ptr< ns3::AttributeChecker const > retval;
-    PyNs3AttributeChecker *py_AttributeChecker;
-    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
-    PyTypeObject *wrapper_type = 0;
+    const char *name;
+    Py_ssize_t name_len;
+    const char *keywords[] = {"name", NULL};
+    PyNs3LogComponent *py_LogComponent;
     
-    retval = ns3::MakeVector3DChecker();
-    if (!(const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval)))) {
-        Py_INCREF(Py_None);
-        return Py_None;
-    }
-    wrapper_lookup_iter = PyNs3Empty_wrapper_registry.find((void *) const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval)));
-    if (wrapper_lookup_iter == PyNs3Empty_wrapper_registry.end()) {
-        py_AttributeChecker = NULL;
-    } else {
-        py_AttributeChecker = (PyNs3AttributeChecker *) wrapper_lookup_iter->second;
-        Py_INCREF(py_AttributeChecker);
-    }
-    
-    if (py_AttributeChecker == NULL) {
-        wrapper_type = PyNs3SimpleRefCount__Ns3AttributeChecker_Ns3Empty_Ns3DefaultDeleter__lt__ns3AttributeChecker__gt____typeid_map.lookup_wrapper(typeid((*const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval)))), &PyNs3AttributeChecker_Type);
-        py_AttributeChecker = PyObject_New(PyNs3AttributeChecker, wrapper_type);
-    
-        py_AttributeChecker->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-        const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval))->Ref();
-        py_AttributeChecker->obj = const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval));
-        PyNs3Empty_wrapper_registry[(void *) py_AttributeChecker->obj] = (PyObject *) py_AttributeChecker;
-    }
-    py_retval = Py_BuildValue((char *) "N", py_AttributeChecker);
-    return py_retval;
-}
-PyObject * _wrap__core_MakeVector3DChecker();
-
-
-PyObject *
-_wrap__core_Now()
-{
-    PyObject *py_retval;
-    PyNs3Time *py_Time;
-    
-    ns3::Time retval = ns3::Now();
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
-    return py_retval;
-}
-PyObject * _wrap__core_Now();
-
-
-PyObject *
-_wrap__core_LogComponentEnable(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    char const *name;
-    ns3::LogLevel level;
-    const char *keywords[] = {"name", "level", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "si", (char **) keywords, &name, &level)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#", (char **) keywords, &name, &name_len)) {
         return NULL;
     }
-    ns3::LogComponentEnable(name, level);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    ns3::LogComponent & retval = ns3::GetLogComponent(std::string(name, name_len));
+    py_LogComponent = PyObject_New(PyNs3LogComponent, &PyNs3LogComponent_Type);
+    py_LogComponent->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_LogComponent->obj = new ns3::LogComponent(retval);
+    PyNs3LogComponent_wrapper_registry[(void *) py_LogComponent->obj] = (PyObject *) py_LogComponent;
+    py_retval = Py_BuildValue((char *) "N", py_LogComponent);
     return py_retval;
 }
-PyObject * _wrap__core_LogComponentEnable(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs);
+PyObject * _wrap__core_GetLogComponent(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs);
 
 
 
 PyObject *
-_wrap__core_MilliSeconds__0(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
+_wrap__core_Hash32__0(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    const char *s;
+    Py_ssize_t s_len;
+    const char *keywords[] = {"s", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#", (char **) keywords, &s, &s_len)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    retval = ns3::Hash32(std::string(s, s_len));
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+PyObject *
+_wrap__core_Hash32__1(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    char const *buffer;
+    unsigned PY_LONG_LONG size;
+    const char *keywords[] = {"buffer", "size", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "sK", (char **) keywords, &buffer, &size)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    retval = ns3::Hash32(buffer, size);
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+PyObject * _wrap__core_Hash32(PyObject *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject * retval;
+    PyObject *error_list;
+    PyObject *exceptions[2] = {0,};
+    retval = _wrap__core_Hash32__0(self, args, kwargs, &exceptions[0]);
+    if (!exceptions[0]) {
+        return retval;
+    }
+    retval = _wrap__core_Hash32__1(self, args, kwargs, &exceptions[1]);
+    if (!exceptions[1]) {
+        Py_DECREF(exceptions[0]);
+        return retval;
+    }
+    error_list = PyList_New(2);
+    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
+    Py_DECREF(exceptions[0]);
+    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
+    Py_DECREF(exceptions[1]);
+    PyErr_SetObject(PyExc_TypeError, error_list);
+    Py_DECREF(error_list);
+    return NULL;
+}
+PyObject * _wrap__core_Hash32(PyObject *self, PyObject *args, PyObject *kwargs);
+
+
+
+PyObject *
+_wrap__core_Hash64__0(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    uint64_t retval;
+    const char *s;
+    Py_ssize_t s_len;
+    const char *keywords[] = {"s", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#", (char **) keywords, &s, &s_len)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    retval = ns3::Hash64(std::string(s, s_len));
+    py_retval = Py_BuildValue((char *) "K", retval);
+    return py_retval;
+}
+
+PyObject *
+_wrap__core_Hash64__1(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    uint64_t retval;
+    char const *buffer;
+    unsigned PY_LONG_LONG size;
+    const char *keywords[] = {"buffer", "size", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "sK", (char **) keywords, &buffer, &size)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    retval = ns3::Hash64(buffer, size);
+    py_retval = Py_BuildValue((char *) "K", retval);
+    return py_retval;
+}
+
+PyObject * _wrap__core_Hash64(PyObject *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject * retval;
+    PyObject *error_list;
+    PyObject *exceptions[2] = {0,};
+    retval = _wrap__core_Hash64__0(self, args, kwargs, &exceptions[0]);
+    if (!exceptions[0]) {
+        return retval;
+    }
+    retval = _wrap__core_Hash64__1(self, args, kwargs, &exceptions[1]);
+    if (!exceptions[1]) {
+        Py_DECREF(exceptions[0]);
+        return retval;
+    }
+    error_list = PyList_New(2);
+    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
+    Py_DECREF(exceptions[0]);
+    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
+    Py_DECREF(exceptions[1]);
+    PyErr_SetObject(PyExc_TypeError, error_list);
+    Py_DECREF(error_list);
+    return NULL;
+}
+PyObject * _wrap__core_Hash64(PyObject *self, PyObject *args, PyObject *kwargs);
+
+
+
+PyObject *
+_wrap__core_Hours__0(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
 {
     PyObject *py_retval;
     PyObject *value;
@@ -4524,7 +3816,7 @@ _wrap__core_MilliSeconds__0(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, 
         }
         return NULL;
     }
-    ns3::Time retval = ns3::MilliSeconds(value2);
+    ns3::Time retval = ns3::Hours(value2);
     py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
     py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
     py_Time->obj = new ns3::Time(retval);
@@ -4534,14 +3826,14 @@ _wrap__core_MilliSeconds__0(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, 
 }
 
 PyObject *
-_wrap__core_MilliSeconds__1(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
+_wrap__core_Hours__1(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
 {
     PyObject *py_retval;
-    uint64_t value;
+    double value;
     const char *keywords[] = {"value", NULL};
     PyNs3Time *py_Time;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "K", (char **) keywords, &value)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "d", (char **) keywords, &value)) {
         {
             PyObject *exc_type, *traceback;
             PyErr_Fetch(&exc_type, return_exception, &traceback);
@@ -4550,7 +3842,7 @@ _wrap__core_MilliSeconds__1(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, 
         }
         return NULL;
     }
-    ns3::Time retval = ns3::MilliSeconds(value);
+    ns3::Time retval = ns3::Hours(value);
     py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
     py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
     py_Time->obj = new ns3::Time(retval);
@@ -4559,16 +3851,16 @@ _wrap__core_MilliSeconds__1(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, 
     return py_retval;
 }
 
-PyObject * _wrap__core_MilliSeconds(PyObject *self, PyObject *args, PyObject *kwargs)
+PyObject * _wrap__core_Hours(PyObject *self, PyObject *args, PyObject *kwargs)
 {
     PyObject * retval;
     PyObject *error_list;
     PyObject *exceptions[2] = {0,};
-    retval = _wrap__core_MilliSeconds__0(self, args, kwargs, &exceptions[0]);
+    retval = _wrap__core_Hours__0(self, args, kwargs, &exceptions[0]);
     if (!exceptions[0]) {
         return retval;
     }
-    retval = _wrap__core_MilliSeconds__1(self, args, kwargs, &exceptions[1]);
+    retval = _wrap__core_Hours__1(self, args, kwargs, &exceptions[1]);
     if (!exceptions[1]) {
         Py_DECREF(exceptions[0]);
         return retval;
@@ -4582,7 +3874,131 @@ PyObject * _wrap__core_MilliSeconds(PyObject *self, PyObject *args, PyObject *kw
     Py_DECREF(error_list);
     return NULL;
 }
-PyObject * _wrap__core_MilliSeconds(PyObject *self, PyObject *args, PyObject *kwargs);
+PyObject * _wrap__core_Hours(PyObject *self, PyObject *args, PyObject *kwargs);
+
+
+PyObject *
+_wrap__core_LogComponentDisable(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    char const *name;
+    ns3::LogLevel level;
+    const char *keywords[] = {"name", "level", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "si", (char **) keywords, &name, &level)) {
+        return NULL;
+    }
+    ns3::LogComponentDisable(name, level);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+PyObject * _wrap__core_LogComponentDisable(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs);
+
+
+PyObject *
+_wrap__core_LogComponentDisableAll(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    ns3::LogLevel level;
+    const char *keywords[] = {"level", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &level)) {
+        return NULL;
+    }
+    ns3::LogComponentDisableAll(level);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+PyObject * _wrap__core_LogComponentDisableAll(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs);
+
+
+PyObject *
+_wrap__core_LogComponentEnable(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    char const *name;
+    ns3::LogLevel level;
+    const char *keywords[] = {"name", "level", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "si", (char **) keywords, &name, &level)) {
+        return NULL;
+    }
+    ns3::LogComponentEnable(name, level);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+PyObject * _wrap__core_LogComponentEnable(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs);
+
+
+PyObject *
+_wrap__core_LogComponentEnableAll(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    ns3::LogLevel level;
+    const char *keywords[] = {"level", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &level)) {
+        return NULL;
+    }
+    ns3::LogComponentEnableAll(level);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+PyObject * _wrap__core_LogComponentEnableAll(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs);
+
+
+PyObject *
+_wrap__core_LogComponentPrintList()
+{
+    PyObject *py_retval;
+    
+    ns3::LogComponentPrintList();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+PyObject * _wrap__core_LogComponentPrintList();
+
+
+PyObject *
+_wrap__core_MakeBooleanChecker()
+{
+    PyObject *py_retval;
+    ns3::Ptr< ns3::AttributeChecker const > retval;
+    PyNs3AttributeChecker *py_AttributeChecker;
+    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
+    PyTypeObject *wrapper_type = 0;
+    
+    retval = ns3::MakeBooleanChecker();
+    if (!(const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval)))) {
+        Py_INCREF(Py_None);
+        return Py_None;
+    }
+    wrapper_lookup_iter = PyNs3Empty_wrapper_registry.find((void *) const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval)));
+    if (wrapper_lookup_iter == PyNs3Empty_wrapper_registry.end()) {
+        py_AttributeChecker = NULL;
+    } else {
+        py_AttributeChecker = (PyNs3AttributeChecker *) wrapper_lookup_iter->second;
+        Py_INCREF(py_AttributeChecker);
+    }
+    
+    if (py_AttributeChecker == NULL) {
+        wrapper_type = PyNs3SimpleRefCount__Ns3AttributeChecker_Ns3Empty_Ns3DefaultDeleter__lt__ns3AttributeChecker__gt____typeid_map.lookup_wrapper(typeid((*const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval)))), &PyNs3AttributeChecker_Type);
+        py_AttributeChecker = PyObject_New(PyNs3AttributeChecker, wrapper_type);
+    
+        py_AttributeChecker->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+        const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval))->Ref();
+        py_AttributeChecker->obj = const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval));
+        PyNs3Empty_wrapper_registry[(void *) py_AttributeChecker->obj] = (PyObject *) py_AttributeChecker;
+    }
+    py_retval = Py_BuildValue((char *) "N", py_AttributeChecker);
+    return py_retval;
+}
+PyObject * _wrap__core_MakeBooleanChecker();
 
 
 PyObject *
@@ -4623,26 +4039,258 @@ PyObject * _wrap__core_MakeCallbackChecker();
 
 
 PyObject *
-_wrap__core_GetLogComponent(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
+_wrap__core_MakeEmptyAttributeAccessor()
 {
     PyObject *py_retval;
-    const char *name;
-    Py_ssize_t name_len;
-    const char *keywords[] = {"name", NULL};
-    PyNs3LogComponent *py_LogComponent;
+    ns3::Ptr< ns3::AttributeAccessor const > retval;
+    PyNs3AttributeAccessor *py_AttributeAccessor;
+    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
+    PyTypeObject *wrapper_type = 0;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#", (char **) keywords, &name, &name_len)) {
-        return NULL;
+    retval = ns3::MakeEmptyAttributeAccessor();
+    if (!(const_cast<ns3::AttributeAccessor *> (ns3::PeekPointer (retval)))) {
+        Py_INCREF(Py_None);
+        return Py_None;
     }
-    ns3::LogComponent & retval = ns3::GetLogComponent(std::string(name, name_len));
-    py_LogComponent = PyObject_New(PyNs3LogComponent, &PyNs3LogComponent_Type);
-    py_LogComponent->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_LogComponent->obj = new ns3::LogComponent(retval);
-    PyNs3LogComponent_wrapper_registry[(void *) py_LogComponent->obj] = (PyObject *) py_LogComponent;
-    py_retval = Py_BuildValue((char *) "N", py_LogComponent);
+    wrapper_lookup_iter = PyNs3Empty_wrapper_registry.find((void *) const_cast<ns3::AttributeAccessor *> (ns3::PeekPointer (retval)));
+    if (wrapper_lookup_iter == PyNs3Empty_wrapper_registry.end()) {
+        py_AttributeAccessor = NULL;
+    } else {
+        py_AttributeAccessor = (PyNs3AttributeAccessor *) wrapper_lookup_iter->second;
+        Py_INCREF(py_AttributeAccessor);
+    }
+    
+    if (py_AttributeAccessor == NULL) {
+        wrapper_type = PyNs3SimpleRefCount__Ns3AttributeAccessor_Ns3Empty_Ns3DefaultDeleter__lt__ns3AttributeAccessor__gt____typeid_map.lookup_wrapper(typeid((*const_cast<ns3::AttributeAccessor *> (ns3::PeekPointer (retval)))), &PyNs3AttributeAccessor_Type);
+        py_AttributeAccessor = PyObject_New(PyNs3AttributeAccessor, wrapper_type);
+    
+        py_AttributeAccessor->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+        const_cast<ns3::AttributeAccessor *> (ns3::PeekPointer (retval))->Ref();
+        py_AttributeAccessor->obj = const_cast<ns3::AttributeAccessor *> (ns3::PeekPointer (retval));
+        PyNs3Empty_wrapper_registry[(void *) py_AttributeAccessor->obj] = (PyObject *) py_AttributeAccessor;
+    }
+    py_retval = Py_BuildValue((char *) "N", py_AttributeAccessor);
     return py_retval;
 }
-PyObject * _wrap__core_GetLogComponent(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs);
+PyObject * _wrap__core_MakeEmptyAttributeAccessor();
+
+
+PyObject *
+_wrap__core_MakeEmptyAttributeChecker()
+{
+    PyObject *py_retval;
+    ns3::Ptr< ns3::AttributeChecker > retval;
+    PyNs3AttributeChecker *py_AttributeChecker;
+    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
+    PyTypeObject *wrapper_type = 0;
+    
+    retval = ns3::MakeEmptyAttributeChecker();
+    if (!(const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval)))) {
+        Py_INCREF(Py_None);
+        return Py_None;
+    }
+    wrapper_lookup_iter = PyNs3Empty_wrapper_registry.find((void *) const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval)));
+    if (wrapper_lookup_iter == PyNs3Empty_wrapper_registry.end()) {
+        py_AttributeChecker = NULL;
+    } else {
+        py_AttributeChecker = (PyNs3AttributeChecker *) wrapper_lookup_iter->second;
+        Py_INCREF(py_AttributeChecker);
+    }
+    
+    if (py_AttributeChecker == NULL) {
+        wrapper_type = PyNs3SimpleRefCount__Ns3AttributeChecker_Ns3Empty_Ns3DefaultDeleter__lt__ns3AttributeChecker__gt____typeid_map.lookup_wrapper(typeid((*const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval)))), &PyNs3AttributeChecker_Type);
+        py_AttributeChecker = PyObject_New(PyNs3AttributeChecker, wrapper_type);
+    
+        py_AttributeChecker->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+        const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval))->Ref();
+        py_AttributeChecker->obj = const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval));
+        PyNs3Empty_wrapper_registry[(void *) py_AttributeChecker->obj] = (PyObject *) py_AttributeChecker;
+    }
+    py_retval = Py_BuildValue((char *) "N", py_AttributeChecker);
+    return py_retval;
+}
+PyObject * _wrap__core_MakeEmptyAttributeChecker();
+
+
+PyObject *
+_wrap__core_MakeEmptyTraceSourceAccessor()
+{
+    PyObject *py_retval;
+    ns3::Ptr< ns3::TraceSourceAccessor const > retval;
+    PyNs3TraceSourceAccessor *py_TraceSourceAccessor;
+    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
+    PyTypeObject *wrapper_type = 0;
+    
+    retval = ns3::MakeEmptyTraceSourceAccessor();
+    if (!(const_cast<ns3::TraceSourceAccessor *> (ns3::PeekPointer (retval)))) {
+        Py_INCREF(Py_None);
+        return Py_None;
+    }
+    wrapper_lookup_iter = PyNs3Empty_wrapper_registry.find((void *) const_cast<ns3::TraceSourceAccessor *> (ns3::PeekPointer (retval)));
+    if (wrapper_lookup_iter == PyNs3Empty_wrapper_registry.end()) {
+        py_TraceSourceAccessor = NULL;
+    } else {
+        py_TraceSourceAccessor = (PyNs3TraceSourceAccessor *) wrapper_lookup_iter->second;
+        Py_INCREF(py_TraceSourceAccessor);
+    }
+    
+    if (py_TraceSourceAccessor == NULL) {
+        wrapper_type = PyNs3SimpleRefCount__Ns3TraceSourceAccessor_Ns3Empty_Ns3DefaultDeleter__lt__ns3TraceSourceAccessor__gt____typeid_map.lookup_wrapper(typeid((*const_cast<ns3::TraceSourceAccessor *> (ns3::PeekPointer (retval)))), &PyNs3TraceSourceAccessor_Type);
+        py_TraceSourceAccessor = PyObject_New(PyNs3TraceSourceAccessor, wrapper_type);
+    
+        py_TraceSourceAccessor->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+        const_cast<ns3::TraceSourceAccessor *> (ns3::PeekPointer (retval))->Ref();
+        py_TraceSourceAccessor->obj = const_cast<ns3::TraceSourceAccessor *> (ns3::PeekPointer (retval));
+        PyNs3Empty_wrapper_registry[(void *) py_TraceSourceAccessor->obj] = (PyObject *) py_TraceSourceAccessor;
+    }
+    py_retval = Py_BuildValue((char *) "N", py_TraceSourceAccessor);
+    return py_retval;
+}
+PyObject * _wrap__core_MakeEmptyTraceSourceAccessor();
+
+
+PyObject *
+_wrap__core_MakeEnumChecker(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    ns3::Ptr< ns3::AttributeChecker const > retval;
+    int v1;
+    const char *n1;
+    Py_ssize_t n1_len;
+    int v2 = 0;
+    const char *n2 = NULL;
+    Py_ssize_t n2_len;
+    int v3 = 0;
+    const char *n3 = NULL;
+    Py_ssize_t n3_len;
+    int v4 = 0;
+    const char *n4 = NULL;
+    Py_ssize_t n4_len;
+    int v5 = 0;
+    const char *n5 = NULL;
+    Py_ssize_t n5_len;
+    int v6 = 0;
+    const char *n6 = NULL;
+    Py_ssize_t n6_len;
+    int v7 = 0;
+    const char *n7 = NULL;
+    Py_ssize_t n7_len;
+    int v8 = 0;
+    const char *n8 = NULL;
+    Py_ssize_t n8_len;
+    int v9 = 0;
+    const char *n9 = NULL;
+    Py_ssize_t n9_len;
+    int v10 = 0;
+    const char *n10 = NULL;
+    Py_ssize_t n10_len;
+    int v11 = 0;
+    const char *n11 = NULL;
+    Py_ssize_t n11_len;
+    int v12 = 0;
+    const char *n12 = NULL;
+    Py_ssize_t n12_len;
+    int v13 = 0;
+    const char *n13 = NULL;
+    Py_ssize_t n13_len;
+    int v14 = 0;
+    const char *n14 = NULL;
+    Py_ssize_t n14_len;
+    int v15 = 0;
+    const char *n15 = NULL;
+    Py_ssize_t n15_len;
+    int v16 = 0;
+    const char *n16 = NULL;
+    Py_ssize_t n16_len;
+    int v17 = 0;
+    const char *n17 = NULL;
+    Py_ssize_t n17_len;
+    int v18 = 0;
+    const char *n18 = NULL;
+    Py_ssize_t n18_len;
+    int v19 = 0;
+    const char *n19 = NULL;
+    Py_ssize_t n19_len;
+    int v20 = 0;
+    const char *n20 = NULL;
+    Py_ssize_t n20_len;
+    int v21 = 0;
+    const char *n21 = NULL;
+    Py_ssize_t n21_len;
+    int v22 = 0;
+    const char *n22 = NULL;
+    Py_ssize_t n22_len;
+    const char *keywords[] = {"v1", "n1", "v2", "n2", "v3", "n3", "v4", "n4", "v5", "n5", "v6", "n6", "v7", "n7", "v8", "n8", "v9", "n9", "v10", "n10", "v11", "n11", "v12", "n12", "v13", "n13", "v14", "n14", "v15", "n15", "v16", "n16", "v17", "n17", "v18", "n18", "v19", "n19", "v20", "n20", "v21", "n21", "v22", "n22", NULL};
+    PyNs3AttributeChecker *py_AttributeChecker;
+    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
+    PyTypeObject *wrapper_type = 0;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "is#|is#is#is#is#is#is#is#is#is#is#is#is#is#is#is#is#is#is#is#is#is#", (char **) keywords, &v1, &n1, &n1_len, &v2, &n2, &n2_len, &v3, &n3, &n3_len, &v4, &n4, &n4_len, &v5, &n5, &n5_len, &v6, &n6, &n6_len, &v7, &n7, &n7_len, &v8, &n8, &n8_len, &v9, &n9, &n9_len, &v10, &n10, &n10_len, &v11, &n11, &n11_len, &v12, &n12, &n12_len, &v13, &n13, &n13_len, &v14, &n14, &n14_len, &v15, &n15, &n15_len, &v16, &n16, &n16_len, &v17, &n17, &n17_len, &v18, &n18, &n18_len, &v19, &n19, &n19_len, &v20, &n20, &n20_len, &v21, &n21, &n21_len, &v22, &n22, &n22_len)) {
+        return NULL;
+    }
+    retval = ns3::MakeEnumChecker(v1, std::string(n1, n1_len), v2, (n2 ? std::string(n2, n2_len) : ""), v3, (n3 ? std::string(n3, n3_len) : ""), v4, (n4 ? std::string(n4, n4_len) : ""), v5, (n5 ? std::string(n5, n5_len) : ""), v6, (n6 ? std::string(n6, n6_len) : ""), v7, (n7 ? std::string(n7, n7_len) : ""), v8, (n8 ? std::string(n8, n8_len) : ""), v9, (n9 ? std::string(n9, n9_len) : ""), v10, (n10 ? std::string(n10, n10_len) : ""), v11, (n11 ? std::string(n11, n11_len) : ""), v12, (n12 ? std::string(n12, n12_len) : ""), v13, (n13 ? std::string(n13, n13_len) : ""), v14, (n14 ? std::string(n14, n14_len) : ""), v15, (n15 ? std::string(n15, n15_len) : ""), v16, (n16 ? std::string(n16, n16_len) : ""), v17, (n17 ? std::string(n17, n17_len) : ""), v18, (n18 ? std::string(n18, n18_len) : ""), v19, (n19 ? std::string(n19, n19_len) : ""), v20, (n20 ? std::string(n20, n20_len) : ""), v21, (n21 ? std::string(n21, n21_len) : ""), v22, (n22 ? std::string(n22, n22_len) : ""));
+    if (!(const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval)))) {
+        Py_INCREF(Py_None);
+        return Py_None;
+    }
+    wrapper_lookup_iter = PyNs3Empty_wrapper_registry.find((void *) const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval)));
+    if (wrapper_lookup_iter == PyNs3Empty_wrapper_registry.end()) {
+        py_AttributeChecker = NULL;
+    } else {
+        py_AttributeChecker = (PyNs3AttributeChecker *) wrapper_lookup_iter->second;
+        Py_INCREF(py_AttributeChecker);
+    }
+    
+    if (py_AttributeChecker == NULL) {
+        wrapper_type = PyNs3SimpleRefCount__Ns3AttributeChecker_Ns3Empty_Ns3DefaultDeleter__lt__ns3AttributeChecker__gt____typeid_map.lookup_wrapper(typeid((*const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval)))), &PyNs3AttributeChecker_Type);
+        py_AttributeChecker = PyObject_New(PyNs3AttributeChecker, wrapper_type);
+    
+        py_AttributeChecker->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+        const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval))->Ref();
+        py_AttributeChecker->obj = const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval));
+        PyNs3Empty_wrapper_registry[(void *) py_AttributeChecker->obj] = (PyObject *) py_AttributeChecker;
+    }
+    py_retval = Py_BuildValue((char *) "N", py_AttributeChecker);
+    return py_retval;
+}
+PyObject * _wrap__core_MakeEnumChecker(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs);
+
+
+PyObject *
+_wrap__core_MakeObjectFactoryChecker()
+{
+    PyObject *py_retval;
+    ns3::Ptr< ns3::AttributeChecker const > retval;
+    PyNs3AttributeChecker *py_AttributeChecker;
+    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
+    PyTypeObject *wrapper_type = 0;
+    
+    retval = ns3::MakeObjectFactoryChecker();
+    if (!(const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval)))) {
+        Py_INCREF(Py_None);
+        return Py_None;
+    }
+    wrapper_lookup_iter = PyNs3Empty_wrapper_registry.find((void *) const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval)));
+    if (wrapper_lookup_iter == PyNs3Empty_wrapper_registry.end()) {
+        py_AttributeChecker = NULL;
+    } else {
+        py_AttributeChecker = (PyNs3AttributeChecker *) wrapper_lookup_iter->second;
+        Py_INCREF(py_AttributeChecker);
+    }
+    
+    if (py_AttributeChecker == NULL) {
+        wrapper_type = PyNs3SimpleRefCount__Ns3AttributeChecker_Ns3Empty_Ns3DefaultDeleter__lt__ns3AttributeChecker__gt____typeid_map.lookup_wrapper(typeid((*const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval)))), &PyNs3AttributeChecker_Type);
+        py_AttributeChecker = PyObject_New(PyNs3AttributeChecker, wrapper_type);
+    
+        py_AttributeChecker->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+        const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval))->Ref();
+        py_AttributeChecker->obj = const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval));
+        PyNs3Empty_wrapper_registry[(void *) py_AttributeChecker->obj] = (PyObject *) py_AttributeChecker;
+    }
+    py_retval = Py_BuildValue((char *) "N", py_AttributeChecker);
+    return py_retval;
+}
+PyObject * _wrap__core_MakeObjectFactoryChecker();
 
 
 PyObject *
@@ -4680,272 +4328,6 @@ _wrap__core_MakeStringChecker()
     return py_retval;
 }
 PyObject * _wrap__core_MakeStringChecker();
-
-
-PyObject *
-_wrap__core_Create__lt__ns3__ObjectPtrContainerValue__gt__()
-{
-    PyObject *py_retval;
-    ns3::Ptr< ns3::ObjectPtrContainerValue > retval;
-    PyNs3ObjectPtrContainerValue *py_ObjectPtrContainerValue;
-    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
-    PyTypeObject *wrapper_type = 0;
-    
-    retval = ns3::Create< ns3::ObjectPtrContainerValue >();
-    if (!(const_cast<ns3::ObjectPtrContainerValue *> (ns3::PeekPointer (retval)))) {
-        Py_INCREF(Py_None);
-        return Py_None;
-    }
-    wrapper_lookup_iter = PyNs3Empty_wrapper_registry.find((void *) const_cast<ns3::ObjectPtrContainerValue *> (ns3::PeekPointer (retval)));
-    if (wrapper_lookup_iter == PyNs3Empty_wrapper_registry.end()) {
-        py_ObjectPtrContainerValue = NULL;
-    } else {
-        py_ObjectPtrContainerValue = (PyNs3ObjectPtrContainerValue *) wrapper_lookup_iter->second;
-        Py_INCREF(py_ObjectPtrContainerValue);
-    }
-    
-    if (py_ObjectPtrContainerValue == NULL) {
-        wrapper_type = PyNs3SimpleRefCount__Ns3AttributeValue_Ns3Empty_Ns3DefaultDeleter__lt__ns3AttributeValue__gt____typeid_map.lookup_wrapper(typeid((*const_cast<ns3::ObjectPtrContainerValue *> (ns3::PeekPointer (retval)))), &PyNs3ObjectPtrContainerValue_Type);
-        py_ObjectPtrContainerValue = PyObject_New(PyNs3ObjectPtrContainerValue, wrapper_type);
-    
-        py_ObjectPtrContainerValue->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-        const_cast<ns3::ObjectPtrContainerValue *> (ns3::PeekPointer (retval))->Ref();
-        py_ObjectPtrContainerValue->obj = const_cast<ns3::ObjectPtrContainerValue *> (ns3::PeekPointer (retval));
-        PyNs3Empty_wrapper_registry[(void *) py_ObjectPtrContainerValue->obj] = (PyObject *) py_ObjectPtrContainerValue;
-    }
-    py_retval = Py_BuildValue((char *) "N", py_ObjectPtrContainerValue);
-    return py_retval;
-}
-PyObject * _wrap__core_Create__lt__ns3__ObjectPtrContainerValue__gt__();
-
-
-PyObject *
-_wrap__core_LogComponentPrintList()
-{
-    PyObject *py_retval;
-    
-    ns3::LogComponentPrintList();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-PyObject * _wrap__core_LogComponentPrintList();
-
-
-
-PyObject *
-_wrap__core_NanoSeconds__0(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    PyObject *value;
-    ns3::int64x64_t value2;
-    const char *keywords[] = {"value", NULL};
-    PyNs3Time *py_Time;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &value)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    if (PyObject_IsInstance(value, (PyObject*) &PyNs3Int64x64_t_Type)) {
-        value2 = *((PyNs3Int64x64_t *) value)->obj;
-    } else if (PyObject_IsInstance(value, (PyObject*) &PyNs3Time_Type)) {
-        value2 = *((PyNs3Time *) value)->obj;
-    } else {
-    
-        PyErr_Format(PyExc_TypeError, "parameter must an instance of one of the types (int64x64_t, Time), not %s", Py_TYPE(value)->tp_name);
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    ns3::Time retval = ns3::NanoSeconds(value2);
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
-    return py_retval;
-}
-
-PyObject *
-_wrap__core_NanoSeconds__1(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    uint64_t value;
-    const char *keywords[] = {"value", NULL};
-    PyNs3Time *py_Time;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "K", (char **) keywords, &value)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    ns3::Time retval = ns3::NanoSeconds(value);
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
-    return py_retval;
-}
-
-PyObject * _wrap__core_NanoSeconds(PyObject *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject * retval;
-    PyObject *error_list;
-    PyObject *exceptions[2] = {0,};
-    retval = _wrap__core_NanoSeconds__0(self, args, kwargs, &exceptions[0]);
-    if (!exceptions[0]) {
-        return retval;
-    }
-    retval = _wrap__core_NanoSeconds__1(self, args, kwargs, &exceptions[1]);
-    if (!exceptions[1]) {
-        Py_DECREF(exceptions[0]);
-        return retval;
-    }
-    error_list = PyList_New(2);
-    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
-    Py_DECREF(exceptions[0]);
-    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
-    Py_DECREF(exceptions[1]);
-    PyErr_SetObject(PyExc_TypeError, error_list);
-    Py_DECREF(error_list);
-    return NULL;
-}
-PyObject * _wrap__core_NanoSeconds(PyObject *self, PyObject *args, PyObject *kwargs);
-
-
-
-PyObject *
-_wrap__core_Days__0(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    PyObject *value;
-    ns3::int64x64_t value2;
-    const char *keywords[] = {"value", NULL};
-    PyNs3Time *py_Time;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &value)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    if (PyObject_IsInstance(value, (PyObject*) &PyNs3Int64x64_t_Type)) {
-        value2 = *((PyNs3Int64x64_t *) value)->obj;
-    } else if (PyObject_IsInstance(value, (PyObject*) &PyNs3Time_Type)) {
-        value2 = *((PyNs3Time *) value)->obj;
-    } else {
-    
-        PyErr_Format(PyExc_TypeError, "parameter must an instance of one of the types (int64x64_t, Time), not %s", Py_TYPE(value)->tp_name);
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    ns3::Time retval = ns3::Days(value2);
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
-    return py_retval;
-}
-
-PyObject *
-_wrap__core_Days__1(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    double value;
-    const char *keywords[] = {"value", NULL};
-    PyNs3Time *py_Time;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "d", (char **) keywords, &value)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    ns3::Time retval = ns3::Days(value);
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
-    return py_retval;
-}
-
-PyObject * _wrap__core_Days(PyObject *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject * retval;
-    PyObject *error_list;
-    PyObject *exceptions[2] = {0,};
-    retval = _wrap__core_Days__0(self, args, kwargs, &exceptions[0]);
-    if (!exceptions[0]) {
-        return retval;
-    }
-    retval = _wrap__core_Days__1(self, args, kwargs, &exceptions[1]);
-    if (!exceptions[1]) {
-        Py_DECREF(exceptions[0]);
-        return retval;
-    }
-    error_list = PyList_New(2);
-    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
-    Py_DECREF(exceptions[0]);
-    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
-    Py_DECREF(exceptions[1]);
-    PyErr_SetObject(PyExc_TypeError, error_list);
-    Py_DECREF(error_list);
-    return NULL;
-}
-PyObject * _wrap__core_Days(PyObject *self, PyObject *args, PyObject *kwargs);
-
-
-PyObject *
-_wrap__core_TypeNameGet__lt__signed_char__gt__()
-{
-    PyObject *py_retval;
-    std::string retval;
-    
-    retval = ns3::TypeNameGet< signed char >();
-    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
-    return py_retval;
-}
-PyObject * _wrap__core_TypeNameGet__lt__signed_char__gt__();
-
-
-PyObject *
-_wrap__core_TypeNameGet__lt__unsigned_int__gt__()
-{
-    PyObject *py_retval;
-    std::string retval;
-    
-    retval = ns3::TypeNameGet< unsigned int >();
-    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
-    return py_retval;
-}
-PyObject * _wrap__core_TypeNameGet__lt__unsigned_int__gt__();
 
 
 
@@ -5122,120 +4504,7 @@ PyObject * _wrap__core_MakeTimeChecker(PyObject *self, PyObject *args, PyObject 
 
 
 PyObject *
-_wrap__core_LogComponentDisableAll(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    ns3::LogLevel level;
-    const char *keywords[] = {"level", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &level)) {
-        return NULL;
-    }
-    ns3::LogComponentDisableAll(level);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-PyObject * _wrap__core_LogComponentDisableAll(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs);
-
-
-
-PyObject *
-_wrap__core_Minutes__0(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    PyObject *value;
-    ns3::int64x64_t value2;
-    const char *keywords[] = {"value", NULL};
-    PyNs3Time *py_Time;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &value)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    if (PyObject_IsInstance(value, (PyObject*) &PyNs3Int64x64_t_Type)) {
-        value2 = *((PyNs3Int64x64_t *) value)->obj;
-    } else if (PyObject_IsInstance(value, (PyObject*) &PyNs3Time_Type)) {
-        value2 = *((PyNs3Time *) value)->obj;
-    } else {
-    
-        PyErr_Format(PyExc_TypeError, "parameter must an instance of one of the types (int64x64_t, Time), not %s", Py_TYPE(value)->tp_name);
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    ns3::Time retval = ns3::Minutes(value2);
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
-    return py_retval;
-}
-
-PyObject *
-_wrap__core_Minutes__1(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    double value;
-    const char *keywords[] = {"value", NULL};
-    PyNs3Time *py_Time;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "d", (char **) keywords, &value)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    ns3::Time retval = ns3::Minutes(value);
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
-    return py_retval;
-}
-
-PyObject * _wrap__core_Minutes(PyObject *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject * retval;
-    PyObject *error_list;
-    PyObject *exceptions[2] = {0,};
-    retval = _wrap__core_Minutes__0(self, args, kwargs, &exceptions[0]);
-    if (!exceptions[0]) {
-        return retval;
-    }
-    retval = _wrap__core_Minutes__1(self, args, kwargs, &exceptions[1]);
-    if (!exceptions[1]) {
-        Py_DECREF(exceptions[0]);
-        return retval;
-    }
-    error_list = PyList_New(2);
-    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
-    Py_DECREF(exceptions[0]);
-    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
-    Py_DECREF(exceptions[1]);
-    PyErr_SetObject(PyExc_TypeError, error_list);
-    Py_DECREF(error_list);
-    return NULL;
-}
-PyObject * _wrap__core_Minutes(PyObject *self, PyObject *args, PyObject *kwargs);
-
-
-PyObject *
-_wrap__core_MakeBooleanChecker()
+_wrap__core_MakeTypeIdChecker()
 {
     PyObject *py_retval;
     ns3::Ptr< ns3::AttributeChecker const > retval;
@@ -5243,7 +4512,7 @@ _wrap__core_MakeBooleanChecker()
     std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
     PyTypeObject *wrapper_type = 0;
     
-    retval = ns3::MakeBooleanChecker();
+    retval = ns3::MakeTypeIdChecker();
     if (!(const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval)))) {
         Py_INCREF(Py_None);
         return Py_None;
@@ -5268,25 +4537,7 @@ _wrap__core_MakeBooleanChecker()
     py_retval = Py_BuildValue((char *) "N", py_AttributeChecker);
     return py_retval;
 }
-PyObject * _wrap__core_MakeBooleanChecker();
-
-
-PyObject *
-_wrap__core_LogComponentEnableAll(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    ns3::LogLevel level;
-    const char *keywords[] = {"level", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &level)) {
-        return NULL;
-    }
-    ns3::LogComponentEnableAll(level);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-PyObject * _wrap__core_LogComponentEnableAll(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs);
+PyObject * _wrap__core_MakeTypeIdChecker();
 
 
 PyObject *
@@ -5327,61 +4578,90 @@ PyObject * _wrap__core_MakeVector2DChecker();
 
 
 PyObject *
-_wrap__core_TypeNameGet__lt__double__gt__()
+_wrap__core_MakeVector3DChecker()
 {
     PyObject *py_retval;
-    std::string retval;
+    ns3::Ptr< ns3::AttributeChecker const > retval;
+    PyNs3AttributeChecker *py_AttributeChecker;
+    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
+    PyTypeObject *wrapper_type = 0;
     
-    retval = ns3::TypeNameGet< double >();
-    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
-    return py_retval;
-}
-PyObject * _wrap__core_TypeNameGet__lt__double__gt__();
-
-
-PyObject *
-_wrap__core_LogComponentDisable(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    char const *name;
-    ns3::LogLevel level;
-    const char *keywords[] = {"name", "level", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "si", (char **) keywords, &name, &level)) {
-        return NULL;
+    retval = ns3::MakeVector3DChecker();
+    if (!(const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval)))) {
+        Py_INCREF(Py_None);
+        return Py_None;
     }
-    ns3::LogComponentDisable(name, level);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-PyObject * _wrap__core_LogComponentDisable(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs);
-
-
-PyObject *
-_wrap__core_TypeNameGet__lt__unsigned_long__gt__()
-{
-    PyObject *py_retval;
-    std::string retval;
+    wrapper_lookup_iter = PyNs3Empty_wrapper_registry.find((void *) const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval)));
+    if (wrapper_lookup_iter == PyNs3Empty_wrapper_registry.end()) {
+        py_AttributeChecker = NULL;
+    } else {
+        py_AttributeChecker = (PyNs3AttributeChecker *) wrapper_lookup_iter->second;
+        Py_INCREF(py_AttributeChecker);
+    }
     
-    retval = ns3::TypeNameGet< unsigned long >();
-    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    if (py_AttributeChecker == NULL) {
+        wrapper_type = PyNs3SimpleRefCount__Ns3AttributeChecker_Ns3Empty_Ns3DefaultDeleter__lt__ns3AttributeChecker__gt____typeid_map.lookup_wrapper(typeid((*const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval)))), &PyNs3AttributeChecker_Type);
+        py_AttributeChecker = PyObject_New(PyNs3AttributeChecker, wrapper_type);
+    
+        py_AttributeChecker->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+        const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval))->Ref();
+        py_AttributeChecker->obj = const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval));
+        PyNs3Empty_wrapper_registry[(void *) py_AttributeChecker->obj] = (PyObject *) py_AttributeChecker;
+    }
+    py_retval = Py_BuildValue((char *) "N", py_AttributeChecker);
     return py_retval;
 }
-PyObject * _wrap__core_TypeNameGet__lt__unsigned_long__gt__();
+PyObject * _wrap__core_MakeVector3DChecker();
+
+
+PyObject *
+_wrap__core_MakeVectorChecker()
+{
+    PyObject *py_retval;
+    ns3::Ptr< ns3::AttributeChecker const > retval;
+    PyNs3AttributeChecker *py_AttributeChecker;
+    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
+    PyTypeObject *wrapper_type = 0;
+    
+    retval = ns3::MakeVectorChecker();
+    if (!(const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval)))) {
+        Py_INCREF(Py_None);
+        return Py_None;
+    }
+    wrapper_lookup_iter = PyNs3Empty_wrapper_registry.find((void *) const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval)));
+    if (wrapper_lookup_iter == PyNs3Empty_wrapper_registry.end()) {
+        py_AttributeChecker = NULL;
+    } else {
+        py_AttributeChecker = (PyNs3AttributeChecker *) wrapper_lookup_iter->second;
+        Py_INCREF(py_AttributeChecker);
+    }
+    
+    if (py_AttributeChecker == NULL) {
+        wrapper_type = PyNs3SimpleRefCount__Ns3AttributeChecker_Ns3Empty_Ns3DefaultDeleter__lt__ns3AttributeChecker__gt____typeid_map.lookup_wrapper(typeid((*const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval)))), &PyNs3AttributeChecker_Type);
+        py_AttributeChecker = PyObject_New(PyNs3AttributeChecker, wrapper_type);
+    
+        py_AttributeChecker->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+        const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval))->Ref();
+        py_AttributeChecker->obj = const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval));
+        PyNs3Empty_wrapper_registry[(void *) py_AttributeChecker->obj] = (PyObject *) py_AttributeChecker;
+    }
+    py_retval = Py_BuildValue((char *) "N", py_AttributeChecker);
+    return py_retval;
+}
+PyObject * _wrap__core_MakeVectorChecker();
 
 
 
 PyObject *
-_wrap__core_Years__0(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
+_wrap__core_Max__0(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
 {
     PyObject *py_retval;
-    PyObject *value;
-    ns3::int64x64_t value2;
-    const char *keywords[] = {"value", NULL};
+    PyNs3Time *ta;
+    PyNs3Time *tb;
+    const char *keywords[] = {"ta", "tb", NULL};
     PyNs3Time *py_Time;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &value)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3Time_Type, &ta, &PyNs3Time_Type, &tb)) {
         {
             PyObject *exc_type, *traceback;
             PyErr_Fetch(&exc_type, return_exception, &traceback);
@@ -5390,13 +4670,42 @@ _wrap__core_Years__0(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObjec
         }
         return NULL;
     }
-    if (PyObject_IsInstance(value, (PyObject*) &PyNs3Int64x64_t_Type)) {
-        value2 = *((PyNs3Int64x64_t *) value)->obj;
-    } else if (PyObject_IsInstance(value, (PyObject*) &PyNs3Time_Type)) {
-        value2 = *((PyNs3Time *) value)->obj;
+    ns3::Time retval = ns3::Max(*((PyNs3Time *) ta)->obj, *((PyNs3Time *) tb)->obj);
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+PyObject *
+_wrap__core_Max__1(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    PyObject *a;
+    ns3::int64x64_t a2;
+    PyObject *b;
+    ns3::int64x64_t b2;
+    const char *keywords[] = {"a", "b", NULL};
+    PyNs3Int64x64_t *py_int64x64_t;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "OO", (char **) keywords, &a, &b)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    if (PyObject_IsInstance(a, (PyObject*) &PyNs3Int64x64_t_Type)) {
+        a2 = *((PyNs3Int64x64_t *) a)->obj;
+    } else if (PyObject_IsInstance(a, (PyObject*) &PyNs3Time_Type)) {
+        a2 = *((PyNs3Time *) a)->obj;
     } else {
     
-        PyErr_Format(PyExc_TypeError, "parameter must an instance of one of the types (int64x64_t, Time), not %s", Py_TYPE(value)->tp_name);
+        PyErr_Format(PyExc_TypeError, "parameter must an instance of one of the types (int64x64_t, Time), not %s", Py_TYPE(a)->tp_name);
         {
             PyObject *exc_type, *traceback;
             PyErr_Fetch(&exc_type, return_exception, &traceback);
@@ -5405,24 +4714,13 @@ _wrap__core_Years__0(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObjec
         }
         return NULL;
     }
-    ns3::Time retval = ns3::Years(value2);
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
-    return py_retval;
-}
-
-PyObject *
-_wrap__core_Years__1(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    double value;
-    const char *keywords[] = {"value", NULL};
-    PyNs3Time *py_Time;
+    if (PyObject_IsInstance(b, (PyObject*) &PyNs3Int64x64_t_Type)) {
+        b2 = *((PyNs3Int64x64_t *) b)->obj;
+    } else if (PyObject_IsInstance(b, (PyObject*) &PyNs3Time_Type)) {
+        b2 = *((PyNs3Time *) b)->obj;
+    } else {
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "d", (char **) keywords, &value)) {
+        PyErr_Format(PyExc_TypeError, "parameter must an instance of one of the types (int64x64_t, Time), not %s", Py_TYPE(b)->tp_name);
         {
             PyObject *exc_type, *traceback;
             PyErr_Fetch(&exc_type, return_exception, &traceback);
@@ -5431,25 +4729,25 @@ _wrap__core_Years__1(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObjec
         }
         return NULL;
     }
-    ns3::Time retval = ns3::Years(value);
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
+    ns3::int64x64_t retval = ns3::Max(a2, b2);
+    py_int64x64_t = PyObject_New(PyNs3Int64x64_t, &PyNs3Int64x64_t_Type);
+    py_int64x64_t->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_int64x64_t->obj = new ns3::int64x64_t(retval);
+    PyNs3Int64x64_t_wrapper_registry[(void *) py_int64x64_t->obj] = (PyObject *) py_int64x64_t;
+    py_retval = Py_BuildValue((char *) "N", py_int64x64_t);
     return py_retval;
 }
 
-PyObject * _wrap__core_Years(PyObject *self, PyObject *args, PyObject *kwargs)
+PyObject * _wrap__core_Max(PyObject *self, PyObject *args, PyObject *kwargs)
 {
     PyObject * retval;
     PyObject *error_list;
     PyObject *exceptions[2] = {0,};
-    retval = _wrap__core_Years__0(self, args, kwargs, &exceptions[0]);
+    retval = _wrap__core_Max__0(self, args, kwargs, &exceptions[0]);
     if (!exceptions[0]) {
         return retval;
     }
-    retval = _wrap__core_Years__1(self, args, kwargs, &exceptions[1]);
+    retval = _wrap__core_Max__1(self, args, kwargs, &exceptions[1]);
     if (!exceptions[1]) {
         Py_DECREF(exceptions[0]);
         return retval;
@@ -5463,164 +4761,7 @@ PyObject * _wrap__core_Years(PyObject *self, PyObject *args, PyObject *kwargs)
     Py_DECREF(error_list);
     return NULL;
 }
-PyObject * _wrap__core_Years(PyObject *self, PyObject *args, PyObject *kwargs);
-
-
-PyObject *
-_wrap__core_TypeNameGet__lt__unsigned_short__gt__()
-{
-    PyObject *py_retval;
-    std::string retval;
-    
-    retval = ns3::TypeNameGet< unsigned short >();
-    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
-    return py_retval;
-}
-PyObject * _wrap__core_TypeNameGet__lt__unsigned_short__gt__();
-
-
-PyObject *
-_wrap__core_MakeObjectFactoryChecker()
-{
-    PyObject *py_retval;
-    ns3::Ptr< ns3::AttributeChecker const > retval;
-    PyNs3AttributeChecker *py_AttributeChecker;
-    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
-    PyTypeObject *wrapper_type = 0;
-    
-    retval = ns3::MakeObjectFactoryChecker();
-    if (!(const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval)))) {
-        Py_INCREF(Py_None);
-        return Py_None;
-    }
-    wrapper_lookup_iter = PyNs3Empty_wrapper_registry.find((void *) const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval)));
-    if (wrapper_lookup_iter == PyNs3Empty_wrapper_registry.end()) {
-        py_AttributeChecker = NULL;
-    } else {
-        py_AttributeChecker = (PyNs3AttributeChecker *) wrapper_lookup_iter->second;
-        Py_INCREF(py_AttributeChecker);
-    }
-    
-    if (py_AttributeChecker == NULL) {
-        wrapper_type = PyNs3SimpleRefCount__Ns3AttributeChecker_Ns3Empty_Ns3DefaultDeleter__lt__ns3AttributeChecker__gt____typeid_map.lookup_wrapper(typeid((*const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval)))), &PyNs3AttributeChecker_Type);
-        py_AttributeChecker = PyObject_New(PyNs3AttributeChecker, wrapper_type);
-    
-        py_AttributeChecker->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-        const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval))->Ref();
-        py_AttributeChecker->obj = const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval));
-        PyNs3Empty_wrapper_registry[(void *) py_AttributeChecker->obj] = (PyObject *) py_AttributeChecker;
-    }
-    py_retval = Py_BuildValue((char *) "N", py_AttributeChecker);
-    return py_retval;
-}
-PyObject * _wrap__core_MakeObjectFactoryChecker();
-
-
-PyObject *
-_wrap__core_MakeEnumChecker(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    ns3::Ptr< ns3::AttributeChecker const > retval;
-    int v1;
-    const char *n1;
-    Py_ssize_t n1_len;
-    int v2 = 0;
-    const char *n2 = NULL;
-    Py_ssize_t n2_len;
-    int v3 = 0;
-    const char *n3 = NULL;
-    Py_ssize_t n3_len;
-    int v4 = 0;
-    const char *n4 = NULL;
-    Py_ssize_t n4_len;
-    int v5 = 0;
-    const char *n5 = NULL;
-    Py_ssize_t n5_len;
-    int v6 = 0;
-    const char *n6 = NULL;
-    Py_ssize_t n6_len;
-    int v7 = 0;
-    const char *n7 = NULL;
-    Py_ssize_t n7_len;
-    int v8 = 0;
-    const char *n8 = NULL;
-    Py_ssize_t n8_len;
-    int v9 = 0;
-    const char *n9 = NULL;
-    Py_ssize_t n9_len;
-    int v10 = 0;
-    const char *n10 = NULL;
-    Py_ssize_t n10_len;
-    int v11 = 0;
-    const char *n11 = NULL;
-    Py_ssize_t n11_len;
-    int v12 = 0;
-    const char *n12 = NULL;
-    Py_ssize_t n12_len;
-    int v13 = 0;
-    const char *n13 = NULL;
-    Py_ssize_t n13_len;
-    int v14 = 0;
-    const char *n14 = NULL;
-    Py_ssize_t n14_len;
-    int v15 = 0;
-    const char *n15 = NULL;
-    Py_ssize_t n15_len;
-    int v16 = 0;
-    const char *n16 = NULL;
-    Py_ssize_t n16_len;
-    int v17 = 0;
-    const char *n17 = NULL;
-    Py_ssize_t n17_len;
-    int v18 = 0;
-    const char *n18 = NULL;
-    Py_ssize_t n18_len;
-    int v19 = 0;
-    const char *n19 = NULL;
-    Py_ssize_t n19_len;
-    int v20 = 0;
-    const char *n20 = NULL;
-    Py_ssize_t n20_len;
-    int v21 = 0;
-    const char *n21 = NULL;
-    Py_ssize_t n21_len;
-    int v22 = 0;
-    const char *n22 = NULL;
-    Py_ssize_t n22_len;
-    const char *keywords[] = {"v1", "n1", "v2", "n2", "v3", "n3", "v4", "n4", "v5", "n5", "v6", "n6", "v7", "n7", "v8", "n8", "v9", "n9", "v10", "n10", "v11", "n11", "v12", "n12", "v13", "n13", "v14", "n14", "v15", "n15", "v16", "n16", "v17", "n17", "v18", "n18", "v19", "n19", "v20", "n20", "v21", "n21", "v22", "n22", NULL};
-    PyNs3AttributeChecker *py_AttributeChecker;
-    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
-    PyTypeObject *wrapper_type = 0;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "is#|is#is#is#is#is#is#is#is#is#is#is#is#is#is#is#is#is#is#is#is#is#", (char **) keywords, &v1, &n1, &n1_len, &v2, &n2, &n2_len, &v3, &n3, &n3_len, &v4, &n4, &n4_len, &v5, &n5, &n5_len, &v6, &n6, &n6_len, &v7, &n7, &n7_len, &v8, &n8, &n8_len, &v9, &n9, &n9_len, &v10, &n10, &n10_len, &v11, &n11, &n11_len, &v12, &n12, &n12_len, &v13, &n13, &n13_len, &v14, &n14, &n14_len, &v15, &n15, &n15_len, &v16, &n16, &n16_len, &v17, &n17, &n17_len, &v18, &n18, &n18_len, &v19, &n19, &n19_len, &v20, &n20, &n20_len, &v21, &n21, &n21_len, &v22, &n22, &n22_len)) {
-        return NULL;
-    }
-    retval = ns3::MakeEnumChecker(v1, std::string(n1, n1_len), v2, (n2 ? std::string(n2, n2_len) : ""), v3, (n3 ? std::string(n3, n3_len) : ""), v4, (n4 ? std::string(n4, n4_len) : ""), v5, (n5 ? std::string(n5, n5_len) : ""), v6, (n6 ? std::string(n6, n6_len) : ""), v7, (n7 ? std::string(n7, n7_len) : ""), v8, (n8 ? std::string(n8, n8_len) : ""), v9, (n9 ? std::string(n9, n9_len) : ""), v10, (n10 ? std::string(n10, n10_len) : ""), v11, (n11 ? std::string(n11, n11_len) : ""), v12, (n12 ? std::string(n12, n12_len) : ""), v13, (n13 ? std::string(n13, n13_len) : ""), v14, (n14 ? std::string(n14, n14_len) : ""), v15, (n15 ? std::string(n15, n15_len) : ""), v16, (n16 ? std::string(n16, n16_len) : ""), v17, (n17 ? std::string(n17, n17_len) : ""), v18, (n18 ? std::string(n18, n18_len) : ""), v19, (n19 ? std::string(n19, n19_len) : ""), v20, (n20 ? std::string(n20, n20_len) : ""), v21, (n21 ? std::string(n21, n21_len) : ""), v22, (n22 ? std::string(n22, n22_len) : ""));
-    if (!(const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval)))) {
-        Py_INCREF(Py_None);
-        return Py_None;
-    }
-    wrapper_lookup_iter = PyNs3Empty_wrapper_registry.find((void *) const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval)));
-    if (wrapper_lookup_iter == PyNs3Empty_wrapper_registry.end()) {
-        py_AttributeChecker = NULL;
-    } else {
-        py_AttributeChecker = (PyNs3AttributeChecker *) wrapper_lookup_iter->second;
-        Py_INCREF(py_AttributeChecker);
-    }
-    
-    if (py_AttributeChecker == NULL) {
-        wrapper_type = PyNs3SimpleRefCount__Ns3AttributeChecker_Ns3Empty_Ns3DefaultDeleter__lt__ns3AttributeChecker__gt____typeid_map.lookup_wrapper(typeid((*const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval)))), &PyNs3AttributeChecker_Type);
-        py_AttributeChecker = PyObject_New(PyNs3AttributeChecker, wrapper_type);
-    
-        py_AttributeChecker->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-        const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval))->Ref();
-        py_AttributeChecker->obj = const_cast<ns3::AttributeChecker *> (ns3::PeekPointer (retval));
-        PyNs3Empty_wrapper_registry[(void *) py_AttributeChecker->obj] = (PyObject *) py_AttributeChecker;
-    }
-    py_retval = Py_BuildValue((char *) "N", py_AttributeChecker);
-    return py_retval;
-}
-PyObject * _wrap__core_MakeEnumChecker(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs);
+PyObject * _wrap__core_Max(PyObject *self, PyObject *args, PyObject *kwargs);
 
 
 
@@ -5718,6 +4859,757 @@ PyObject * _wrap__core_MicroSeconds(PyObject *self, PyObject *args, PyObject *kw
 PyObject * _wrap__core_MicroSeconds(PyObject *self, PyObject *args, PyObject *kwargs);
 
 
+
+PyObject *
+_wrap__core_MilliSeconds__0(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    PyObject *value;
+    ns3::int64x64_t value2;
+    const char *keywords[] = {"value", NULL};
+    PyNs3Time *py_Time;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &value)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    if (PyObject_IsInstance(value, (PyObject*) &PyNs3Int64x64_t_Type)) {
+        value2 = *((PyNs3Int64x64_t *) value)->obj;
+    } else if (PyObject_IsInstance(value, (PyObject*) &PyNs3Time_Type)) {
+        value2 = *((PyNs3Time *) value)->obj;
+    } else {
+    
+        PyErr_Format(PyExc_TypeError, "parameter must an instance of one of the types (int64x64_t, Time), not %s", Py_TYPE(value)->tp_name);
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    ns3::Time retval = ns3::MilliSeconds(value2);
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+PyObject *
+_wrap__core_MilliSeconds__1(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    uint64_t value;
+    const char *keywords[] = {"value", NULL};
+    PyNs3Time *py_Time;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "K", (char **) keywords, &value)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    ns3::Time retval = ns3::MilliSeconds(value);
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+PyObject * _wrap__core_MilliSeconds(PyObject *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject * retval;
+    PyObject *error_list;
+    PyObject *exceptions[2] = {0,};
+    retval = _wrap__core_MilliSeconds__0(self, args, kwargs, &exceptions[0]);
+    if (!exceptions[0]) {
+        return retval;
+    }
+    retval = _wrap__core_MilliSeconds__1(self, args, kwargs, &exceptions[1]);
+    if (!exceptions[1]) {
+        Py_DECREF(exceptions[0]);
+        return retval;
+    }
+    error_list = PyList_New(2);
+    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
+    Py_DECREF(exceptions[0]);
+    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
+    Py_DECREF(exceptions[1]);
+    PyErr_SetObject(PyExc_TypeError, error_list);
+    Py_DECREF(error_list);
+    return NULL;
+}
+PyObject * _wrap__core_MilliSeconds(PyObject *self, PyObject *args, PyObject *kwargs);
+
+
+
+PyObject *
+_wrap__core_Min__0(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    PyNs3Time *ta;
+    PyNs3Time *tb;
+    const char *keywords[] = {"ta", "tb", NULL};
+    PyNs3Time *py_Time;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3Time_Type, &ta, &PyNs3Time_Type, &tb)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    ns3::Time retval = ns3::Min(*((PyNs3Time *) ta)->obj, *((PyNs3Time *) tb)->obj);
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+PyObject *
+_wrap__core_Min__1(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    PyObject *a;
+    ns3::int64x64_t a2;
+    PyObject *b;
+    ns3::int64x64_t b2;
+    const char *keywords[] = {"a", "b", NULL};
+    PyNs3Int64x64_t *py_int64x64_t;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "OO", (char **) keywords, &a, &b)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    if (PyObject_IsInstance(a, (PyObject*) &PyNs3Int64x64_t_Type)) {
+        a2 = *((PyNs3Int64x64_t *) a)->obj;
+    } else if (PyObject_IsInstance(a, (PyObject*) &PyNs3Time_Type)) {
+        a2 = *((PyNs3Time *) a)->obj;
+    } else {
+    
+        PyErr_Format(PyExc_TypeError, "parameter must an instance of one of the types (int64x64_t, Time), not %s", Py_TYPE(a)->tp_name);
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    if (PyObject_IsInstance(b, (PyObject*) &PyNs3Int64x64_t_Type)) {
+        b2 = *((PyNs3Int64x64_t *) b)->obj;
+    } else if (PyObject_IsInstance(b, (PyObject*) &PyNs3Time_Type)) {
+        b2 = *((PyNs3Time *) b)->obj;
+    } else {
+    
+        PyErr_Format(PyExc_TypeError, "parameter must an instance of one of the types (int64x64_t, Time), not %s", Py_TYPE(b)->tp_name);
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    ns3::int64x64_t retval = ns3::Min(a2, b2);
+    py_int64x64_t = PyObject_New(PyNs3Int64x64_t, &PyNs3Int64x64_t_Type);
+    py_int64x64_t->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_int64x64_t->obj = new ns3::int64x64_t(retval);
+    PyNs3Int64x64_t_wrapper_registry[(void *) py_int64x64_t->obj] = (PyObject *) py_int64x64_t;
+    py_retval = Py_BuildValue((char *) "N", py_int64x64_t);
+    return py_retval;
+}
+
+PyObject * _wrap__core_Min(PyObject *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject * retval;
+    PyObject *error_list;
+    PyObject *exceptions[2] = {0,};
+    retval = _wrap__core_Min__0(self, args, kwargs, &exceptions[0]);
+    if (!exceptions[0]) {
+        return retval;
+    }
+    retval = _wrap__core_Min__1(self, args, kwargs, &exceptions[1]);
+    if (!exceptions[1]) {
+        Py_DECREF(exceptions[0]);
+        return retval;
+    }
+    error_list = PyList_New(2);
+    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
+    Py_DECREF(exceptions[0]);
+    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
+    Py_DECREF(exceptions[1]);
+    PyErr_SetObject(PyExc_TypeError, error_list);
+    Py_DECREF(error_list);
+    return NULL;
+}
+PyObject * _wrap__core_Min(PyObject *self, PyObject *args, PyObject *kwargs);
+
+
+
+PyObject *
+_wrap__core_Minutes__0(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    PyObject *value;
+    ns3::int64x64_t value2;
+    const char *keywords[] = {"value", NULL};
+    PyNs3Time *py_Time;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &value)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    if (PyObject_IsInstance(value, (PyObject*) &PyNs3Int64x64_t_Type)) {
+        value2 = *((PyNs3Int64x64_t *) value)->obj;
+    } else if (PyObject_IsInstance(value, (PyObject*) &PyNs3Time_Type)) {
+        value2 = *((PyNs3Time *) value)->obj;
+    } else {
+    
+        PyErr_Format(PyExc_TypeError, "parameter must an instance of one of the types (int64x64_t, Time), not %s", Py_TYPE(value)->tp_name);
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    ns3::Time retval = ns3::Minutes(value2);
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+PyObject *
+_wrap__core_Minutes__1(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    double value;
+    const char *keywords[] = {"value", NULL};
+    PyNs3Time *py_Time;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "d", (char **) keywords, &value)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    ns3::Time retval = ns3::Minutes(value);
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+PyObject * _wrap__core_Minutes(PyObject *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject * retval;
+    PyObject *error_list;
+    PyObject *exceptions[2] = {0,};
+    retval = _wrap__core_Minutes__0(self, args, kwargs, &exceptions[0]);
+    if (!exceptions[0]) {
+        return retval;
+    }
+    retval = _wrap__core_Minutes__1(self, args, kwargs, &exceptions[1]);
+    if (!exceptions[1]) {
+        Py_DECREF(exceptions[0]);
+        return retval;
+    }
+    error_list = PyList_New(2);
+    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
+    Py_DECREF(exceptions[0]);
+    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
+    Py_DECREF(exceptions[1]);
+    PyErr_SetObject(PyExc_TypeError, error_list);
+    Py_DECREF(error_list);
+    return NULL;
+}
+PyObject * _wrap__core_Minutes(PyObject *self, PyObject *args, PyObject *kwargs);
+
+
+
+PyObject *
+_wrap__core_NanoSeconds__0(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    PyObject *value;
+    ns3::int64x64_t value2;
+    const char *keywords[] = {"value", NULL};
+    PyNs3Time *py_Time;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &value)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    if (PyObject_IsInstance(value, (PyObject*) &PyNs3Int64x64_t_Type)) {
+        value2 = *((PyNs3Int64x64_t *) value)->obj;
+    } else if (PyObject_IsInstance(value, (PyObject*) &PyNs3Time_Type)) {
+        value2 = *((PyNs3Time *) value)->obj;
+    } else {
+    
+        PyErr_Format(PyExc_TypeError, "parameter must an instance of one of the types (int64x64_t, Time), not %s", Py_TYPE(value)->tp_name);
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    ns3::Time retval = ns3::NanoSeconds(value2);
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+PyObject *
+_wrap__core_NanoSeconds__1(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    uint64_t value;
+    const char *keywords[] = {"value", NULL};
+    PyNs3Time *py_Time;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "K", (char **) keywords, &value)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    ns3::Time retval = ns3::NanoSeconds(value);
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+PyObject * _wrap__core_NanoSeconds(PyObject *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject * retval;
+    PyObject *error_list;
+    PyObject *exceptions[2] = {0,};
+    retval = _wrap__core_NanoSeconds__0(self, args, kwargs, &exceptions[0]);
+    if (!exceptions[0]) {
+        return retval;
+    }
+    retval = _wrap__core_NanoSeconds__1(self, args, kwargs, &exceptions[1]);
+    if (!exceptions[1]) {
+        Py_DECREF(exceptions[0]);
+        return retval;
+    }
+    error_list = PyList_New(2);
+    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
+    Py_DECREF(exceptions[0]);
+    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
+    Py_DECREF(exceptions[1]);
+    PyErr_SetObject(PyExc_TypeError, error_list);
+    Py_DECREF(error_list);
+    return NULL;
+}
+PyObject * _wrap__core_NanoSeconds(PyObject *self, PyObject *args, PyObject *kwargs);
+
+
+PyObject *
+_wrap__core_Now()
+{
+    PyObject *py_retval;
+    PyNs3Time *py_Time;
+    
+    ns3::Time retval = ns3::Now();
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+PyObject * _wrap__core_Now();
+
+
+
+PyObject *
+_wrap__core_PicoSeconds__0(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    PyObject *value;
+    ns3::int64x64_t value2;
+    const char *keywords[] = {"value", NULL};
+    PyNs3Time *py_Time;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &value)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    if (PyObject_IsInstance(value, (PyObject*) &PyNs3Int64x64_t_Type)) {
+        value2 = *((PyNs3Int64x64_t *) value)->obj;
+    } else if (PyObject_IsInstance(value, (PyObject*) &PyNs3Time_Type)) {
+        value2 = *((PyNs3Time *) value)->obj;
+    } else {
+    
+        PyErr_Format(PyExc_TypeError, "parameter must an instance of one of the types (int64x64_t, Time), not %s", Py_TYPE(value)->tp_name);
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    ns3::Time retval = ns3::PicoSeconds(value2);
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+PyObject *
+_wrap__core_PicoSeconds__1(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    uint64_t value;
+    const char *keywords[] = {"value", NULL};
+    PyNs3Time *py_Time;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "K", (char **) keywords, &value)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    ns3::Time retval = ns3::PicoSeconds(value);
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+PyObject * _wrap__core_PicoSeconds(PyObject *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject * retval;
+    PyObject *error_list;
+    PyObject *exceptions[2] = {0,};
+    retval = _wrap__core_PicoSeconds__0(self, args, kwargs, &exceptions[0]);
+    if (!exceptions[0]) {
+        return retval;
+    }
+    retval = _wrap__core_PicoSeconds__1(self, args, kwargs, &exceptions[1]);
+    if (!exceptions[1]) {
+        Py_DECREF(exceptions[0]);
+        return retval;
+    }
+    error_list = PyList_New(2);
+    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
+    Py_DECREF(exceptions[0]);
+    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
+    Py_DECREF(exceptions[1]);
+    PyErr_SetObject(PyExc_TypeError, error_list);
+    Py_DECREF(error_list);
+    return NULL;
+}
+PyObject * _wrap__core_PicoSeconds(PyObject *self, PyObject *args, PyObject *kwargs);
+
+
+
+PyObject *
+_wrap__core_Seconds__0(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    PyObject *value;
+    ns3::int64x64_t value2;
+    const char *keywords[] = {"value", NULL};
+    PyNs3Time *py_Time;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &value)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    if (PyObject_IsInstance(value, (PyObject*) &PyNs3Int64x64_t_Type)) {
+        value2 = *((PyNs3Int64x64_t *) value)->obj;
+    } else if (PyObject_IsInstance(value, (PyObject*) &PyNs3Time_Type)) {
+        value2 = *((PyNs3Time *) value)->obj;
+    } else {
+    
+        PyErr_Format(PyExc_TypeError, "parameter must an instance of one of the types (int64x64_t, Time), not %s", Py_TYPE(value)->tp_name);
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    ns3::Time retval = ns3::Seconds(value2);
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+PyObject *
+_wrap__core_Seconds__1(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    double value;
+    const char *keywords[] = {"value", NULL};
+    PyNs3Time *py_Time;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "d", (char **) keywords, &value)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    ns3::Time retval = ns3::Seconds(value);
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+PyObject * _wrap__core_Seconds(PyObject *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject * retval;
+    PyObject *error_list;
+    PyObject *exceptions[2] = {0,};
+    retval = _wrap__core_Seconds__0(self, args, kwargs, &exceptions[0]);
+    if (!exceptions[0]) {
+        return retval;
+    }
+    retval = _wrap__core_Seconds__1(self, args, kwargs, &exceptions[1]);
+    if (!exceptions[1]) {
+        Py_DECREF(exceptions[0]);
+        return retval;
+    }
+    error_list = PyList_New(2);
+    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
+    Py_DECREF(exceptions[0]);
+    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
+    Py_DECREF(exceptions[1]);
+    PyErr_SetObject(PyExc_TypeError, error_list);
+    Py_DECREF(error_list);
+    return NULL;
+}
+PyObject * _wrap__core_Seconds(PyObject *self, PyObject *args, PyObject *kwargs);
+
+
+PyObject *
+_wrap__core_TestDoubleIsEqual(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    double a;
+    double b;
+    double epsilon = std::numeric_limits<double>::epsilon();
+    const char *keywords[] = {"a", "b", "epsilon", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "dd|d", (char **) keywords, &a, &b, &epsilon)) {
+        return NULL;
+    }
+    retval = ns3::TestDoubleIsEqual(a, b, epsilon);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+PyObject * _wrap__core_TestDoubleIsEqual(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs);
+
+
+PyObject *
+_wrap__core_TimeStep(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    uint64_t ts;
+    const char *keywords[] = {"ts", NULL};
+    PyNs3Time *py_Time;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "K", (char **) keywords, &ts)) {
+        return NULL;
+    }
+    ns3::Time retval = ns3::TimeStep(ts);
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+PyObject * _wrap__core_TimeStep(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs);
+
+
+PyObject *
+_wrap__core_TypeNameGet__lt__signed_char__gt__()
+{
+    PyObject *py_retval;
+    std::string retval;
+    
+    retval = ns3::TypeNameGet< signed char >();
+    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    return py_retval;
+}
+PyObject * _wrap__core_TypeNameGet__lt__signed_char__gt__();
+
+
+PyObject *
+_wrap__core_TypeNameGet__lt__short__gt__()
+{
+    PyObject *py_retval;
+    std::string retval;
+    
+    retval = ns3::TypeNameGet< short >();
+    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    return py_retval;
+}
+PyObject * _wrap__core_TypeNameGet__lt__short__gt__();
+
+
+PyObject *
+_wrap__core_TypeNameGet__lt__int__gt__()
+{
+    PyObject *py_retval;
+    std::string retval;
+    
+    retval = ns3::TypeNameGet< int >();
+    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    return py_retval;
+}
+PyObject * _wrap__core_TypeNameGet__lt__int__gt__();
+
+
+PyObject *
+_wrap__core_TypeNameGet__lt__long__gt__()
+{
+    PyObject *py_retval;
+    std::string retval;
+    
+    retval = ns3::TypeNameGet< long >();
+    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    return py_retval;
+}
+PyObject * _wrap__core_TypeNameGet__lt__long__gt__();
+
+
+PyObject *
+_wrap__core_TypeNameGet__lt__unsigned_char__gt__()
+{
+    PyObject *py_retval;
+    std::string retval;
+    
+    retval = ns3::TypeNameGet< unsigned char >();
+    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    return py_retval;
+}
+PyObject * _wrap__core_TypeNameGet__lt__unsigned_char__gt__();
+
+
+PyObject *
+_wrap__core_TypeNameGet__lt__unsigned_short__gt__()
+{
+    PyObject *py_retval;
+    std::string retval;
+    
+    retval = ns3::TypeNameGet< unsigned short >();
+    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    return py_retval;
+}
+PyObject * _wrap__core_TypeNameGet__lt__unsigned_short__gt__();
+
+
+PyObject *
+_wrap__core_TypeNameGet__lt__unsigned_int__gt__()
+{
+    PyObject *py_retval;
+    std::string retval;
+    
+    retval = ns3::TypeNameGet< unsigned int >();
+    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    return py_retval;
+}
+PyObject * _wrap__core_TypeNameGet__lt__unsigned_int__gt__();
+
+
+PyObject *
+_wrap__core_TypeNameGet__lt__unsigned_long__gt__()
+{
+    PyObject *py_retval;
+    std::string retval;
+    
+    retval = ns3::TypeNameGet< unsigned long >();
+    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    return py_retval;
+}
+PyObject * _wrap__core_TypeNameGet__lt__unsigned_long__gt__();
+
+
 PyObject *
 _wrap__core_TypeNameGet__lt__float__gt__()
 {
@@ -5730,58 +5622,166 @@ _wrap__core_TypeNameGet__lt__float__gt__()
 }
 PyObject * _wrap__core_TypeNameGet__lt__float__gt__();
 
+
+PyObject *
+_wrap__core_TypeNameGet__lt__double__gt__()
+{
+    PyObject *py_retval;
+    std::string retval;
+    
+    retval = ns3::TypeNameGet< double >();
+    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    return py_retval;
+}
+PyObject * _wrap__core_TypeNameGet__lt__double__gt__();
+
+
+
+PyObject *
+_wrap__core_Years__0(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    PyObject *value;
+    ns3::int64x64_t value2;
+    const char *keywords[] = {"value", NULL};
+    PyNs3Time *py_Time;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &value)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    if (PyObject_IsInstance(value, (PyObject*) &PyNs3Int64x64_t_Type)) {
+        value2 = *((PyNs3Int64x64_t *) value)->obj;
+    } else if (PyObject_IsInstance(value, (PyObject*) &PyNs3Time_Type)) {
+        value2 = *((PyNs3Time *) value)->obj;
+    } else {
+    
+        PyErr_Format(PyExc_TypeError, "parameter must an instance of one of the types (int64x64_t, Time), not %s", Py_TYPE(value)->tp_name);
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    ns3::Time retval = ns3::Years(value2);
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+PyObject *
+_wrap__core_Years__1(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    double value;
+    const char *keywords[] = {"value", NULL};
+    PyNs3Time *py_Time;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "d", (char **) keywords, &value)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    ns3::Time retval = ns3::Years(value);
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+PyObject * _wrap__core_Years(PyObject *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject * retval;
+    PyObject *error_list;
+    PyObject *exceptions[2] = {0,};
+    retval = _wrap__core_Years__0(self, args, kwargs, &exceptions[0]);
+    if (!exceptions[0]) {
+        return retval;
+    }
+    retval = _wrap__core_Years__1(self, args, kwargs, &exceptions[1]);
+    if (!exceptions[1]) {
+        Py_DECREF(exceptions[0]);
+        return retval;
+    }
+    error_list = PyList_New(2);
+    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
+    Py_DECREF(exceptions[0]);
+    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
+    Py_DECREF(exceptions[1]);
+    PyErr_SetObject(PyExc_TypeError, error_list);
+    Py_DECREF(error_list);
+    return NULL;
+}
+PyObject * _wrap__core_Years(PyObject *self, PyObject *args, PyObject *kwargs);
+
 static PyMethodDef _core_functions[] = {
-    {(char *) "MakeVectorChecker", (PyCFunction) _wrap__core_MakeVectorChecker, METH_NOARGS, "MakeVectorChecker()\n\n" },
-    {(char *) "MakeTypeIdChecker", (PyCFunction) _wrap__core_MakeTypeIdChecker, METH_NOARGS, "MakeTypeIdChecker()\n\n" },
-    {(char *) "TimeStep", (PyCFunction) _wrap__core_TimeStep, METH_KEYWORDS|METH_VARARGS, "TimeStep(ts)\n\ntype: ts: uint64_t" },
-    {(char *) "Hash32", (PyCFunction) _wrap__core_Hash32, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "Create__lt__ns3__PointerValue__gt__", (PyCFunction) _wrap__core_Create__lt__ns3__PointerValue__gt__, METH_NOARGS, "Create__lt__ns3__PointerValue__gt__()\n\n" },
-    {(char *) "TypeNameGet__lt__unsigned_char__gt__", (PyCFunction) _wrap__core_TypeNameGet__lt__unsigned_char__gt__, METH_NOARGS, "TypeNameGet__lt__unsigned_char__gt__()\n\n" },
-    {(char *) "TypeNameGet__lt__int__gt__", (PyCFunction) _wrap__core_TypeNameGet__lt__int__gt__, METH_NOARGS, "TypeNameGet__lt__int__gt__()\n\n" },
     {(char *) "Abs", (PyCFunction) _wrap__core_Abs, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "MakeEmptyAttributeAccessor", (PyCFunction) _wrap__core_MakeEmptyAttributeAccessor, METH_NOARGS, "MakeEmptyAttributeAccessor()\n\n" },
-    {(char *) "PicoSeconds", (PyCFunction) _wrap__core_PicoSeconds, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "Hash64", (PyCFunction) _wrap__core_Hash64, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "TestDoubleIsEqual", (PyCFunction) _wrap__core_TestDoubleIsEqual, METH_KEYWORDS|METH_VARARGS, "TestDoubleIsEqual(a, b, epsilon)\n\ntype: a: double const\ntype: b: double const\ntype: epsilon: double const" },
-    {(char *) "MakeEmptyTraceSourceAccessor", (PyCFunction) _wrap__core_MakeEmptyTraceSourceAccessor, METH_NOARGS, "MakeEmptyTraceSourceAccessor()\n\n" },
-    {(char *) "Seconds", (PyCFunction) _wrap__core_Seconds, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "Max", (PyCFunction) _wrap__core_Max, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "Min", (PyCFunction) _wrap__core_Min, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "MakeEmptyAttributeChecker", (PyCFunction) _wrap__core_MakeEmptyAttributeChecker, METH_NOARGS, "MakeEmptyAttributeChecker()\n\n" },
-    {(char *) "TypeNameGet__lt__long__gt__", (PyCFunction) _wrap__core_TypeNameGet__lt__long__gt__, METH_NOARGS, "TypeNameGet__lt__long__gt__()\n\n" },
-    {(char *) "Hours", (PyCFunction) _wrap__core_Hours, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "TypeNameGet__lt__short__gt__", (PyCFunction) _wrap__core_TypeNameGet__lt__short__gt__, METH_NOARGS, "TypeNameGet__lt__short__gt__()\n\n" },
-    {(char *) "CalculateDistance", (PyCFunction) _wrap__core_CalculateDistance, METH_KEYWORDS|METH_VARARGS, NULL },
     {(char *) "BreakpointFallback", (PyCFunction) _wrap__core_BreakpointFallback, METH_NOARGS, "BreakpointFallback()\n\n" },
-    {(char *) "FemtoSeconds", (PyCFunction) _wrap__core_FemtoSeconds, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "MakeVector3DChecker", (PyCFunction) _wrap__core_MakeVector3DChecker, METH_NOARGS, "MakeVector3DChecker()\n\n" },
-    {(char *) "Now", (PyCFunction) _wrap__core_Now, METH_NOARGS, "Now()\n\n" },
-    {(char *) "LogComponentEnable", (PyCFunction) _wrap__core_LogComponentEnable, METH_KEYWORDS|METH_VARARGS, "LogComponentEnable(name, level)\n\ntype: name: char const *\ntype: level: ns3::LogLevel" },
-    {(char *) "MilliSeconds", (PyCFunction) _wrap__core_MilliSeconds, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "MakeCallbackChecker", (PyCFunction) _wrap__core_MakeCallbackChecker, METH_NOARGS, "MakeCallbackChecker()\n\n" },
-    {(char *) "GetLogComponent", (PyCFunction) _wrap__core_GetLogComponent, METH_KEYWORDS|METH_VARARGS, "GetLogComponent(name)\n\ntype: name: std::string const" },
-    {(char *) "MakeStringChecker", (PyCFunction) _wrap__core_MakeStringChecker, METH_NOARGS, "MakeStringChecker()\n\n" },
+    {(char *) "CalculateDistance", (PyCFunction) _wrap__core_CalculateDistance, METH_KEYWORDS|METH_VARARGS, NULL },
     {(char *) "Create__lt__ns3__ObjectPtrContainerValue__gt__", (PyCFunction) _wrap__core_Create__lt__ns3__ObjectPtrContainerValue__gt__, METH_NOARGS, "Create__lt__ns3__ObjectPtrContainerValue__gt__()\n\n" },
-    {(char *) "LogComponentPrintList", (PyCFunction) _wrap__core_LogComponentPrintList, METH_NOARGS, "LogComponentPrintList()\n\n" },
-    {(char *) "NanoSeconds", (PyCFunction) _wrap__core_NanoSeconds, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "Create__lt__ns3__PointerValue__gt__", (PyCFunction) _wrap__core_Create__lt__ns3__PointerValue__gt__, METH_NOARGS, "Create__lt__ns3__PointerValue__gt__()\n\n" },
     {(char *) "Days", (PyCFunction) _wrap__core_Days, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "TypeNameGet__lt__signed_char__gt__", (PyCFunction) _wrap__core_TypeNameGet__lt__signed_char__gt__, METH_NOARGS, "TypeNameGet__lt__signed_char__gt__()\n\n" },
-    {(char *) "TypeNameGet__lt__unsigned_int__gt__", (PyCFunction) _wrap__core_TypeNameGet__lt__unsigned_int__gt__, METH_NOARGS, "TypeNameGet__lt__unsigned_int__gt__()\n\n" },
-    {(char *) "MakeTimeChecker", (PyCFunction) _wrap__core_MakeTimeChecker, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "LogComponentDisableAll", (PyCFunction) _wrap__core_LogComponentDisableAll, METH_KEYWORDS|METH_VARARGS, "LogComponentDisableAll(level)\n\ntype: level: ns3::LogLevel" },
-    {(char *) "Minutes", (PyCFunction) _wrap__core_Minutes, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "MakeBooleanChecker", (PyCFunction) _wrap__core_MakeBooleanChecker, METH_NOARGS, "MakeBooleanChecker()\n\n" },
-    {(char *) "LogComponentEnableAll", (PyCFunction) _wrap__core_LogComponentEnableAll, METH_KEYWORDS|METH_VARARGS, "LogComponentEnableAll(level)\n\ntype: level: ns3::LogLevel" },
-    {(char *) "MakeVector2DChecker", (PyCFunction) _wrap__core_MakeVector2DChecker, METH_NOARGS, "MakeVector2DChecker()\n\n" },
-    {(char *) "TypeNameGet__lt__double__gt__", (PyCFunction) _wrap__core_TypeNameGet__lt__double__gt__, METH_NOARGS, "TypeNameGet__lt__double__gt__()\n\n" },
+    {(char *) "FemtoSeconds", (PyCFunction) _wrap__core_FemtoSeconds, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "GetLogComponent", (PyCFunction) _wrap__core_GetLogComponent, METH_KEYWORDS|METH_VARARGS, "GetLogComponent(name)\n\ntype: name: std::string const" },
+    {(char *) "Hash32", (PyCFunction) _wrap__core_Hash32, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "Hash64", (PyCFunction) _wrap__core_Hash64, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "Hours", (PyCFunction) _wrap__core_Hours, METH_KEYWORDS|METH_VARARGS, NULL },
     {(char *) "LogComponentDisable", (PyCFunction) _wrap__core_LogComponentDisable, METH_KEYWORDS|METH_VARARGS, "LogComponentDisable(name, level)\n\ntype: name: char const *\ntype: level: ns3::LogLevel" },
-    {(char *) "TypeNameGet__lt__unsigned_long__gt__", (PyCFunction) _wrap__core_TypeNameGet__lt__unsigned_long__gt__, METH_NOARGS, "TypeNameGet__lt__unsigned_long__gt__()\n\n" },
-    {(char *) "Years", (PyCFunction) _wrap__core_Years, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "TypeNameGet__lt__unsigned_short__gt__", (PyCFunction) _wrap__core_TypeNameGet__lt__unsigned_short__gt__, METH_NOARGS, "TypeNameGet__lt__unsigned_short__gt__()\n\n" },
-    {(char *) "MakeObjectFactoryChecker", (PyCFunction) _wrap__core_MakeObjectFactoryChecker, METH_NOARGS, "MakeObjectFactoryChecker()\n\n" },
+    {(char *) "LogComponentDisableAll", (PyCFunction) _wrap__core_LogComponentDisableAll, METH_KEYWORDS|METH_VARARGS, "LogComponentDisableAll(level)\n\ntype: level: ns3::LogLevel" },
+    {(char *) "LogComponentEnable", (PyCFunction) _wrap__core_LogComponentEnable, METH_KEYWORDS|METH_VARARGS, "LogComponentEnable(name, level)\n\ntype: name: char const *\ntype: level: ns3::LogLevel" },
+    {(char *) "LogComponentEnableAll", (PyCFunction) _wrap__core_LogComponentEnableAll, METH_KEYWORDS|METH_VARARGS, "LogComponentEnableAll(level)\n\ntype: level: ns3::LogLevel" },
+    {(char *) "LogComponentPrintList", (PyCFunction) _wrap__core_LogComponentPrintList, METH_NOARGS, "LogComponentPrintList()\n\n" },
+    {(char *) "MakeBooleanChecker", (PyCFunction) _wrap__core_MakeBooleanChecker, METH_NOARGS, "MakeBooleanChecker()\n\n" },
+    {(char *) "MakeCallbackChecker", (PyCFunction) _wrap__core_MakeCallbackChecker, METH_NOARGS, "MakeCallbackChecker()\n\n" },
+    {(char *) "MakeEmptyAttributeAccessor", (PyCFunction) _wrap__core_MakeEmptyAttributeAccessor, METH_NOARGS, "MakeEmptyAttributeAccessor()\n\n" },
+    {(char *) "MakeEmptyAttributeChecker", (PyCFunction) _wrap__core_MakeEmptyAttributeChecker, METH_NOARGS, "MakeEmptyAttributeChecker()\n\n" },
+    {(char *) "MakeEmptyTraceSourceAccessor", (PyCFunction) _wrap__core_MakeEmptyTraceSourceAccessor, METH_NOARGS, "MakeEmptyTraceSourceAccessor()\n\n" },
     {(char *) "MakeEnumChecker", (PyCFunction) _wrap__core_MakeEnumChecker, METH_KEYWORDS|METH_VARARGS, "MakeEnumChecker(v1, n1, v2, n2, v3, n3, v4, n4, v5, n5, v6, n6, v7, n7, v8, n8, v9, n9, v10, n10, v11, n11, v12, n12, v13, n13, v14, n14, v15, n15, v16, n16, v17, n17, v18, n18, v19, n19, v20, n20, v21, n21, v22, n22)\n\ntype: v1: int\ntype: n1: std::string\ntype: v2: int\ntype: n2: std::string\ntype: v3: int\ntype: n3: std::string\ntype: v4: int\ntype: n4: std::string\ntype: v5: int\ntype: n5: std::string\ntype: v6: int\ntype: n6: std::string\ntype: v7: int\ntype: n7: std::string\ntype: v8: int\ntype: n8: std::string\ntype: v9: int\ntype: n9: std::string\ntype: v10: int\ntype: n10: std::string\ntype: v11: int\ntype: n11: std::string\ntype: v12: int\ntype: n12: std::string\ntype: v13: int\ntype: n13: std::string\ntype: v14: int\ntype: n14: std::string\ntype: v15: int\ntype: n15: std::string\ntype: v16: int\ntype: n16: std::string\ntype: v17: int\ntype: n17: std::string\ntype: v18: int\ntype: n18: std::string\ntype: v19: int\ntype: n19: std::string\ntype: v20: int\ntype: n20: std::string\ntype: v21: int\ntype: n21: std::string\ntype: v22: int\ntype: n22: std::string" },
+    {(char *) "MakeObjectFactoryChecker", (PyCFunction) _wrap__core_MakeObjectFactoryChecker, METH_NOARGS, "MakeObjectFactoryChecker()\n\n" },
+    {(char *) "MakeStringChecker", (PyCFunction) _wrap__core_MakeStringChecker, METH_NOARGS, "MakeStringChecker()\n\n" },
+    {(char *) "MakeTimeChecker", (PyCFunction) _wrap__core_MakeTimeChecker, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "MakeTypeIdChecker", (PyCFunction) _wrap__core_MakeTypeIdChecker, METH_NOARGS, "MakeTypeIdChecker()\n\n" },
+    {(char *) "MakeVector2DChecker", (PyCFunction) _wrap__core_MakeVector2DChecker, METH_NOARGS, "MakeVector2DChecker()\n\n" },
+    {(char *) "MakeVector3DChecker", (PyCFunction) _wrap__core_MakeVector3DChecker, METH_NOARGS, "MakeVector3DChecker()\n\n" },
+    {(char *) "MakeVectorChecker", (PyCFunction) _wrap__core_MakeVectorChecker, METH_NOARGS, "MakeVectorChecker()\n\n" },
+    {(char *) "Max", (PyCFunction) _wrap__core_Max, METH_KEYWORDS|METH_VARARGS, NULL },
     {(char *) "MicroSeconds", (PyCFunction) _wrap__core_MicroSeconds, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "MilliSeconds", (PyCFunction) _wrap__core_MilliSeconds, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "Min", (PyCFunction) _wrap__core_Min, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "Minutes", (PyCFunction) _wrap__core_Minutes, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "NanoSeconds", (PyCFunction) _wrap__core_NanoSeconds, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "Now", (PyCFunction) _wrap__core_Now, METH_NOARGS, "Now()\n\n" },
+    {(char *) "PicoSeconds", (PyCFunction) _wrap__core_PicoSeconds, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "Seconds", (PyCFunction) _wrap__core_Seconds, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "TestDoubleIsEqual", (PyCFunction) _wrap__core_TestDoubleIsEqual, METH_KEYWORDS|METH_VARARGS, "TestDoubleIsEqual(a, b, epsilon)\n\ntype: a: double const\ntype: b: double const\ntype: epsilon: double const" },
+    {(char *) "TimeStep", (PyCFunction) _wrap__core_TimeStep, METH_KEYWORDS|METH_VARARGS, "TimeStep(ts)\n\ntype: ts: uint64_t" },
+    {(char *) "TypeNameGet__lt__signed_char__gt__", (PyCFunction) _wrap__core_TypeNameGet__lt__signed_char__gt__, METH_NOARGS, "TypeNameGet__lt__signed_char__gt__()\n\n" },
+    {(char *) "TypeNameGet__lt__short__gt__", (PyCFunction) _wrap__core_TypeNameGet__lt__short__gt__, METH_NOARGS, "TypeNameGet__lt__short__gt__()\n\n" },
+    {(char *) "TypeNameGet__lt__int__gt__", (PyCFunction) _wrap__core_TypeNameGet__lt__int__gt__, METH_NOARGS, "TypeNameGet__lt__int__gt__()\n\n" },
+    {(char *) "TypeNameGet__lt__long__gt__", (PyCFunction) _wrap__core_TypeNameGet__lt__long__gt__, METH_NOARGS, "TypeNameGet__lt__long__gt__()\n\n" },
+    {(char *) "TypeNameGet__lt__unsigned_char__gt__", (PyCFunction) _wrap__core_TypeNameGet__lt__unsigned_char__gt__, METH_NOARGS, "TypeNameGet__lt__unsigned_char__gt__()\n\n" },
+    {(char *) "TypeNameGet__lt__unsigned_short__gt__", (PyCFunction) _wrap__core_TypeNameGet__lt__unsigned_short__gt__, METH_NOARGS, "TypeNameGet__lt__unsigned_short__gt__()\n\n" },
+    {(char *) "TypeNameGet__lt__unsigned_int__gt__", (PyCFunction) _wrap__core_TypeNameGet__lt__unsigned_int__gt__, METH_NOARGS, "TypeNameGet__lt__unsigned_int__gt__()\n\n" },
+    {(char *) "TypeNameGet__lt__unsigned_long__gt__", (PyCFunction) _wrap__core_TypeNameGet__lt__unsigned_long__gt__, METH_NOARGS, "TypeNameGet__lt__unsigned_long__gt__()\n\n" },
     {(char *) "TypeNameGet__lt__float__gt__", (PyCFunction) _wrap__core_TypeNameGet__lt__float__gt__, METH_NOARGS, "TypeNameGet__lt__float__gt__()\n\n" },
+    {(char *) "TypeNameGet__lt__double__gt__", (PyCFunction) _wrap__core_TypeNameGet__lt__double__gt__, METH_NOARGS, "TypeNameGet__lt__double__gt__()\n\n" },
+    {(char *) "Years", (PyCFunction) _wrap__core_Years, METH_KEYWORDS|METH_VARARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 /* --- classes --- */
@@ -6948,7 +6948,7 @@ PyTypeObject PyNs3CommandLine_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE,                      /* tp_flags */
     "CommandLine(cmd)\nCommandLine()",                        /* Documentation string */
     (traverseproc)PyNs3CommandLine__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3CommandLine__tp_clear,             /* tp_clear */
@@ -8966,13 +8966,13 @@ int _wrap_PyNs3EventId__tp_init(PyNs3EventId *self, PyObject *args, PyObject *kw
 
 
 PyObject *
-_wrap_PyNs3EventId_IsRunning(PyNs3EventId *self)
+_wrap_PyNs3EventId_Cancel(PyNs3EventId *self)
 {
     PyObject *py_retval;
-    bool retval;
     
-    retval = self->obj->IsRunning();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    self->obj->Cancel();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -8990,13 +8990,13 @@ _wrap_PyNs3EventId_GetContext(PyNs3EventId *self)
 
 
 PyObject *
-_wrap_PyNs3EventId_Cancel(PyNs3EventId *self)
+_wrap_PyNs3EventId_GetTs(PyNs3EventId *self)
 {
     PyObject *py_retval;
+    uint64_t retval;
     
-    self->obj->Cancel();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    retval = self->obj->GetTs();
+    py_retval = Py_BuildValue((char *) "K", retval);
     return py_retval;
 }
 
@@ -9026,13 +9026,13 @@ _wrap_PyNs3EventId_IsExpired(PyNs3EventId *self)
 
 
 PyObject *
-_wrap_PyNs3EventId_GetTs(PyNs3EventId *self)
+_wrap_PyNs3EventId_IsRunning(PyNs3EventId *self)
 {
     PyObject *py_retval;
-    uint64_t retval;
+    bool retval;
     
-    retval = self->obj->GetTs();
-    py_retval = Py_BuildValue((char *) "K", retval);
+    retval = self->obj->IsRunning();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
@@ -9050,12 +9050,12 @@ _wrap_PyNs3EventId__copy__(PyNs3EventId *self)
 }
 
 static PyMethodDef PyNs3EventId_methods[] = {
-    {(char *) "IsRunning", (PyCFunction) _wrap_PyNs3EventId_IsRunning, METH_NOARGS, "IsRunning()\n\n" },
-    {(char *) "GetContext", (PyCFunction) _wrap_PyNs3EventId_GetContext, METH_NOARGS, "GetContext()\n\n" },
     {(char *) "Cancel", (PyCFunction) _wrap_PyNs3EventId_Cancel, METH_NOARGS, "Cancel()\n\n" },
+    {(char *) "GetContext", (PyCFunction) _wrap_PyNs3EventId_GetContext, METH_NOARGS, "GetContext()\n\n" },
+    {(char *) "GetTs", (PyCFunction) _wrap_PyNs3EventId_GetTs, METH_NOARGS, "GetTs()\n\n" },
     {(char *) "GetUid", (PyCFunction) _wrap_PyNs3EventId_GetUid, METH_NOARGS, "GetUid()\n\n" },
     {(char *) "IsExpired", (PyCFunction) _wrap_PyNs3EventId_IsExpired, METH_NOARGS, "IsExpired()\n\n" },
-    {(char *) "GetTs", (PyCFunction) _wrap_PyNs3EventId_GetTs, METH_NOARGS, "GetTs()\n\n" },
+    {(char *) "IsRunning", (PyCFunction) _wrap_PyNs3EventId_IsRunning, METH_NOARGS, "IsRunning()\n\n" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3EventId__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -9257,44 +9257,6 @@ int _wrap_PyNs3GlobalValue__tp_init(PyNs3GlobalValue *self, PyObject *args, PyOb
 
 
 PyObject *
-_wrap_PyNs3GlobalValue_GetValueByName(PyNs3GlobalValue *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    const char *name;
-    Py_ssize_t name_len;
-    PyNs3AttributeValue *value;
-    const char *keywords[] = {"name", "value", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3AttributeValue_Type, &value)) {
-        return NULL;
-    }
-    ns3::GlobalValue::GetValueByName(std::string(name, name_len), *((PyNs3AttributeValue *) value)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3GlobalValue_GetValueByNameFailSafe(PyNs3GlobalValue *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    const char *name;
-    Py_ssize_t name_len;
-    PyNs3AttributeValue *value;
-    const char *keywords[] = {"name", "value", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3AttributeValue_Type, &value)) {
-        return NULL;
-    }
-    retval = ns3::GlobalValue::GetValueByNameFailSafe(std::string(name, name_len), *((PyNs3AttributeValue *) value)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3GlobalValue_Bind(PyNs3GlobalValue *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -9314,13 +9276,20 @@ _wrap_PyNs3GlobalValue_Bind(PyNs3GlobalValue *PYBINDGEN_UNUSED(dummy), PyObject 
 
 
 PyObject *
-_wrap_PyNs3GlobalValue_GetName(PyNs3GlobalValue *self)
+_wrap_PyNs3GlobalValue_BindFailSafe(PyNs3GlobalValue *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    std::string retval;
+    bool retval;
+    const char *name;
+    Py_ssize_t name_len;
+    PyNs3AttributeValue *value;
+    const char *keywords[] = {"name", "value", NULL};
     
-    retval = self->obj->GetName();
-    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3AttributeValue_Type, &value)) {
+        return NULL;
+    }
+    retval = ns3::GlobalValue::BindFailSafe(std::string(name, name_len), *((PyNs3AttributeValue *) value)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
@@ -9362,6 +9331,30 @@ _wrap_PyNs3GlobalValue_GetChecker(PyNs3GlobalValue *self)
 
 
 PyObject *
+_wrap_PyNs3GlobalValue_GetHelp(PyNs3GlobalValue *self)
+{
+    PyObject *py_retval;
+    std::string retval;
+    
+    retval = self->obj->GetHelp();
+    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3GlobalValue_GetName(PyNs3GlobalValue *self)
+{
+    PyObject *py_retval;
+    std::string retval;
+    
+    retval = self->obj->GetName();
+    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3GlobalValue_GetValue(PyNs3GlobalValue *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -9379,13 +9372,51 @@ _wrap_PyNs3GlobalValue_GetValue(PyNs3GlobalValue *self, PyObject *args, PyObject
 
 
 PyObject *
-_wrap_PyNs3GlobalValue_GetHelp(PyNs3GlobalValue *self)
+_wrap_PyNs3GlobalValue_GetValueByName(PyNs3GlobalValue *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    std::string retval;
+    const char *name;
+    Py_ssize_t name_len;
+    PyNs3AttributeValue *value;
+    const char *keywords[] = {"name", "value", NULL};
     
-    retval = self->obj->GetHelp();
-    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3AttributeValue_Type, &value)) {
+        return NULL;
+    }
+    ns3::GlobalValue::GetValueByName(std::string(name, name_len), *((PyNs3AttributeValue *) value)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3GlobalValue_GetValueByNameFailSafe(PyNs3GlobalValue *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    const char *name;
+    Py_ssize_t name_len;
+    PyNs3AttributeValue *value;
+    const char *keywords[] = {"name", "value", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3AttributeValue_Type, &value)) {
+        return NULL;
+    }
+    retval = ns3::GlobalValue::GetValueByNameFailSafe(std::string(name, name_len), *((PyNs3AttributeValue *) value)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3GlobalValue_ResetInitialValue(PyNs3GlobalValue *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->ResetInitialValue();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -9407,37 +9438,6 @@ _wrap_PyNs3GlobalValue_SetValue(PyNs3GlobalValue *self, PyObject *args, PyObject
 }
 
 
-PyObject *
-_wrap_PyNs3GlobalValue_BindFailSafe(PyNs3GlobalValue *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    const char *name;
-    Py_ssize_t name_len;
-    PyNs3AttributeValue *value;
-    const char *keywords[] = {"name", "value", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3AttributeValue_Type, &value)) {
-        return NULL;
-    }
-    retval = ns3::GlobalValue::BindFailSafe(std::string(name, name_len), *((PyNs3AttributeValue *) value)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3GlobalValue_ResetInitialValue(PyNs3GlobalValue *self)
-{
-    PyObject *py_retval;
-    
-    self->obj->ResetInitialValue();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3GlobalValue__copy__(PyNs3GlobalValue *self)
 {
@@ -9451,16 +9451,16 @@ _wrap_PyNs3GlobalValue__copy__(PyNs3GlobalValue *self)
 }
 
 static PyMethodDef PyNs3GlobalValue_methods[] = {
+    {(char *) "Bind", (PyCFunction) _wrap_PyNs3GlobalValue_Bind, METH_KEYWORDS|METH_VARARGS|METH_STATIC, "Bind(name, value)\n\ntype: name: std::string\ntype: value: ns3::AttributeValue const &" },
+    {(char *) "BindFailSafe", (PyCFunction) _wrap_PyNs3GlobalValue_BindFailSafe, METH_KEYWORDS|METH_VARARGS|METH_STATIC, "BindFailSafe(name, value)\n\ntype: name: std::string\ntype: value: ns3::AttributeValue const &" },
+    {(char *) "GetChecker", (PyCFunction) _wrap_PyNs3GlobalValue_GetChecker, METH_NOARGS, "GetChecker()\n\n" },
+    {(char *) "GetHelp", (PyCFunction) _wrap_PyNs3GlobalValue_GetHelp, METH_NOARGS, "GetHelp()\n\n" },
+    {(char *) "GetName", (PyCFunction) _wrap_PyNs3GlobalValue_GetName, METH_NOARGS, "GetName()\n\n" },
+    {(char *) "GetValue", (PyCFunction) _wrap_PyNs3GlobalValue_GetValue, METH_KEYWORDS|METH_VARARGS, "GetValue(value)\n\ntype: value: ns3::AttributeValue &" },
     {(char *) "GetValueByName", (PyCFunction) _wrap_PyNs3GlobalValue_GetValueByName, METH_KEYWORDS|METH_VARARGS|METH_STATIC, "GetValueByName(name, value)\n\ntype: name: std::string\ntype: value: ns3::AttributeValue &" },
     {(char *) "GetValueByNameFailSafe", (PyCFunction) _wrap_PyNs3GlobalValue_GetValueByNameFailSafe, METH_KEYWORDS|METH_VARARGS|METH_STATIC, "GetValueByNameFailSafe(name, value)\n\ntype: name: std::string\ntype: value: ns3::AttributeValue &" },
-    {(char *) "Bind", (PyCFunction) _wrap_PyNs3GlobalValue_Bind, METH_KEYWORDS|METH_VARARGS|METH_STATIC, "Bind(name, value)\n\ntype: name: std::string\ntype: value: ns3::AttributeValue const &" },
-    {(char *) "GetName", (PyCFunction) _wrap_PyNs3GlobalValue_GetName, METH_NOARGS, "GetName()\n\n" },
-    {(char *) "GetChecker", (PyCFunction) _wrap_PyNs3GlobalValue_GetChecker, METH_NOARGS, "GetChecker()\n\n" },
-    {(char *) "GetValue", (PyCFunction) _wrap_PyNs3GlobalValue_GetValue, METH_KEYWORDS|METH_VARARGS, "GetValue(value)\n\ntype: value: ns3::AttributeValue &" },
-    {(char *) "GetHelp", (PyCFunction) _wrap_PyNs3GlobalValue_GetHelp, METH_NOARGS, "GetHelp()\n\n" },
-    {(char *) "SetValue", (PyCFunction) _wrap_PyNs3GlobalValue_SetValue, METH_KEYWORDS|METH_VARARGS, "SetValue(value)\n\ntype: value: ns3::AttributeValue const &" },
-    {(char *) "BindFailSafe", (PyCFunction) _wrap_PyNs3GlobalValue_BindFailSafe, METH_KEYWORDS|METH_VARARGS|METH_STATIC, "BindFailSafe(name, value)\n\ntype: name: std::string\ntype: value: ns3::AttributeValue const &" },
     {(char *) "ResetInitialValue", (PyCFunction) _wrap_PyNs3GlobalValue_ResetInitialValue, METH_NOARGS, "ResetInitialValue()\n\n" },
+    {(char *) "SetValue", (PyCFunction) _wrap_PyNs3GlobalValue_SetValue, METH_KEYWORDS|METH_VARARGS, "SetValue(value)\n\ntype: value: ns3::AttributeValue const &" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3GlobalValue__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -9668,19 +9668,75 @@ int _wrap_PyNs3Hasher__tp_init(PyNs3Hasher *self, PyObject *args, PyObject *kwar
 }
 
 
+
 PyObject *
-_wrap_PyNs3Hasher_clear(PyNs3Hasher *self)
+_wrap_PyNs3Hasher_GetHash32__0(PyNs3Hasher *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
 {
     PyObject *py_retval;
-    PyNs3Hasher *py_Hasher;
+    uint32_t retval;
+    char const *buffer;
+    unsigned PY_LONG_LONG size;
+    const char *keywords[] = {"buffer", "size", NULL};
     
-    ns3::Hasher & retval = self->obj->clear();
-    py_Hasher = PyObject_New(PyNs3Hasher, &PyNs3Hasher_Type);
-    py_Hasher->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Hasher->obj = new ns3::Hasher(retval);
-    PyNs3Hasher_wrapper_registry[(void *) py_Hasher->obj] = (PyObject *) py_Hasher;
-    py_retval = Py_BuildValue((char *) "N", py_Hasher);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "sK", (char **) keywords, &buffer, &size)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    retval = self->obj->GetHash32(buffer, size);
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
+}
+
+PyObject *
+_wrap_PyNs3Hasher_GetHash32__1(PyNs3Hasher *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    const char *s;
+    Py_ssize_t s_len;
+    const char *keywords[] = {"s", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#", (char **) keywords, &s, &s_len)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    retval = self->obj->GetHash32(std::string(s, s_len));
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+PyObject * _wrap_PyNs3Hasher_GetHash32(PyNs3Hasher *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject * retval;
+    PyObject *error_list;
+    PyObject *exceptions[2] = {0,};
+    retval = _wrap_PyNs3Hasher_GetHash32__0(self, args, kwargs, &exceptions[0]);
+    if (!exceptions[0]) {
+        return retval;
+    }
+    retval = _wrap_PyNs3Hasher_GetHash32__1(self, args, kwargs, &exceptions[1]);
+    if (!exceptions[1]) {
+        Py_DECREF(exceptions[0]);
+        return retval;
+    }
+    error_list = PyList_New(2);
+    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
+    Py_DECREF(exceptions[0]);
+    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
+    Py_DECREF(exceptions[1]);
+    PyErr_SetObject(PyExc_TypeError, error_list);
+    Py_DECREF(error_list);
+    return NULL;
 }
 
 
@@ -9756,75 +9812,19 @@ PyObject * _wrap_PyNs3Hasher_GetHash64(PyNs3Hasher *self, PyObject *args, PyObje
 }
 
 
-
 PyObject *
-_wrap_PyNs3Hasher_GetHash32__0(PyNs3Hasher *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
+_wrap_PyNs3Hasher_clear(PyNs3Hasher *self)
 {
     PyObject *py_retval;
-    uint32_t retval;
-    char const *buffer;
-    unsigned PY_LONG_LONG size;
-    const char *keywords[] = {"buffer", "size", NULL};
+    PyNs3Hasher *py_Hasher;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "sK", (char **) keywords, &buffer, &size)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    retval = self->obj->GetHash32(buffer, size);
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    ns3::Hasher & retval = self->obj->clear();
+    py_Hasher = PyObject_New(PyNs3Hasher, &PyNs3Hasher_Type);
+    py_Hasher->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Hasher->obj = new ns3::Hasher(retval);
+    PyNs3Hasher_wrapper_registry[(void *) py_Hasher->obj] = (PyObject *) py_Hasher;
+    py_retval = Py_BuildValue((char *) "N", py_Hasher);
     return py_retval;
-}
-
-PyObject *
-_wrap_PyNs3Hasher_GetHash32__1(PyNs3Hasher *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    const char *s;
-    Py_ssize_t s_len;
-    const char *keywords[] = {"s", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#", (char **) keywords, &s, &s_len)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    retval = self->obj->GetHash32(std::string(s, s_len));
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-PyObject * _wrap_PyNs3Hasher_GetHash32(PyNs3Hasher *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject * retval;
-    PyObject *error_list;
-    PyObject *exceptions[2] = {0,};
-    retval = _wrap_PyNs3Hasher_GetHash32__0(self, args, kwargs, &exceptions[0]);
-    if (!exceptions[0]) {
-        return retval;
-    }
-    retval = _wrap_PyNs3Hasher_GetHash32__1(self, args, kwargs, &exceptions[1]);
-    if (!exceptions[1]) {
-        Py_DECREF(exceptions[0]);
-        return retval;
-    }
-    error_list = PyList_New(2);
-    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
-    Py_DECREF(exceptions[0]);
-    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
-    Py_DECREF(exceptions[1]);
-    PyErr_SetObject(PyExc_TypeError, error_list);
-    Py_DECREF(error_list);
-    return NULL;
 }
 
 
@@ -9841,9 +9841,9 @@ _wrap_PyNs3Hasher__copy__(PyNs3Hasher *self)
 }
 
 static PyMethodDef PyNs3Hasher_methods[] = {
-    {(char *) "clear", (PyCFunction) _wrap_PyNs3Hasher_clear, METH_NOARGS, "clear()\n\n" },
-    {(char *) "GetHash64", (PyCFunction) _wrap_PyNs3Hasher_GetHash64, METH_KEYWORDS|METH_VARARGS, NULL },
     {(char *) "GetHash32", (PyCFunction) _wrap_PyNs3Hasher_GetHash32, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "GetHash64", (PyCFunction) _wrap_PyNs3Hasher_GetHash64, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "clear", (PyCFunction) _wrap_PyNs3Hasher_clear, METH_NOARGS, "clear()\n\n" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3Hasher__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -11361,6 +11361,23 @@ int _wrap_PyNs3LogComponent__tp_init(PyNs3LogComponent *self, PyObject *args, Py
 
 
 PyObject *
+_wrap_PyNs3LogComponent_Disable(PyNs3LogComponent *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    ns3::LogLevel level;
+    const char *keywords[] = {"level", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &level)) {
+        return NULL;
+    }
+    self->obj->Disable(level);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3LogComponent_Enable(PyNs3LogComponent *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -11378,76 +11395,13 @@ _wrap_PyNs3LogComponent_Enable(PyNs3LogComponent *self, PyObject *args, PyObject
 
 
 PyObject *
-_wrap_PyNs3LogComponent_Name(PyNs3LogComponent *self)
+_wrap_PyNs3LogComponent_File(PyNs3LogComponent *self)
 {
     PyObject *py_retval;
-    char const *retval;
+    std::string retval;
     
-    retval = self->obj->Name();
-    py_retval = Py_BuildValue((char *) "s", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3LogComponent_IsEnabled(PyNs3LogComponent *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    ns3::LogLevel level;
-    const char *keywords[] = {"level", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &level)) {
-        return NULL;
-    }
-    retval = self->obj->IsEnabled(level);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3LogComponent_SetMask(PyNs3LogComponent *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    ns3::LogLevel level;
-    const char *keywords[] = {"level", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &level)) {
-        return NULL;
-    }
-    self->obj->SetMask(level);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3LogComponent_IsNoneEnabled(PyNs3LogComponent *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->IsNoneEnabled();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3LogComponent_Disable(PyNs3LogComponent *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    ns3::LogLevel level;
-    const char *keywords[] = {"level", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &level)) {
-        return NULL;
-    }
-    self->obj->Disable(level);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    retval = self->obj->File();
+    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
     return py_retval;
 }
 
@@ -11470,13 +11424,59 @@ _wrap_PyNs3LogComponent_GetLevelLabel(PyNs3LogComponent *PYBINDGEN_UNUSED(dummy)
 
 
 PyObject *
-_wrap_PyNs3LogComponent_File(PyNs3LogComponent *self)
+_wrap_PyNs3LogComponent_IsEnabled(PyNs3LogComponent *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    std::string retval;
+    bool retval;
+    ns3::LogLevel level;
+    const char *keywords[] = {"level", NULL};
     
-    retval = self->obj->File();
-    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &level)) {
+        return NULL;
+    }
+    retval = self->obj->IsEnabled(level);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3LogComponent_IsNoneEnabled(PyNs3LogComponent *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->IsNoneEnabled();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3LogComponent_Name(PyNs3LogComponent *self)
+{
+    PyObject *py_retval;
+    char const *retval;
+    
+    retval = self->obj->Name();
+    py_retval = Py_BuildValue((char *) "s", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3LogComponent_SetMask(PyNs3LogComponent *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    ns3::LogLevel level;
+    const char *keywords[] = {"level", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &level)) {
+        return NULL;
+    }
+    self->obj->SetMask(level);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -11494,14 +11494,14 @@ _wrap_PyNs3LogComponent__copy__(PyNs3LogComponent *self)
 }
 
 static PyMethodDef PyNs3LogComponent_methods[] = {
-    {(char *) "Enable", (PyCFunction) _wrap_PyNs3LogComponent_Enable, METH_KEYWORDS|METH_VARARGS, "Enable(level)\n\ntype: level: ns3::LogLevel" },
-    {(char *) "Name", (PyCFunction) _wrap_PyNs3LogComponent_Name, METH_NOARGS, "Name()\n\n" },
-    {(char *) "IsEnabled", (PyCFunction) _wrap_PyNs3LogComponent_IsEnabled, METH_KEYWORDS|METH_VARARGS, "IsEnabled(level)\n\ntype: level: ns3::LogLevel" },
-    {(char *) "SetMask", (PyCFunction) _wrap_PyNs3LogComponent_SetMask, METH_KEYWORDS|METH_VARARGS, "SetMask(level)\n\ntype: level: ns3::LogLevel" },
-    {(char *) "IsNoneEnabled", (PyCFunction) _wrap_PyNs3LogComponent_IsNoneEnabled, METH_NOARGS, "IsNoneEnabled()\n\n" },
     {(char *) "Disable", (PyCFunction) _wrap_PyNs3LogComponent_Disable, METH_KEYWORDS|METH_VARARGS, "Disable(level)\n\ntype: level: ns3::LogLevel" },
-    {(char *) "GetLevelLabel", (PyCFunction) _wrap_PyNs3LogComponent_GetLevelLabel, METH_KEYWORDS|METH_VARARGS|METH_STATIC, "GetLevelLabel(level)\n\ntype: level: ns3::LogLevel" },
+    {(char *) "Enable", (PyCFunction) _wrap_PyNs3LogComponent_Enable, METH_KEYWORDS|METH_VARARGS, "Enable(level)\n\ntype: level: ns3::LogLevel" },
     {(char *) "File", (PyCFunction) _wrap_PyNs3LogComponent_File, METH_NOARGS, "File()\n\n" },
+    {(char *) "GetLevelLabel", (PyCFunction) _wrap_PyNs3LogComponent_GetLevelLabel, METH_KEYWORDS|METH_VARARGS|METH_STATIC, "GetLevelLabel(level)\n\ntype: level: ns3::LogLevel" },
+    {(char *) "IsEnabled", (PyCFunction) _wrap_PyNs3LogComponent_IsEnabled, METH_KEYWORDS|METH_VARARGS, "IsEnabled(level)\n\ntype: level: ns3::LogLevel" },
+    {(char *) "IsNoneEnabled", (PyCFunction) _wrap_PyNs3LogComponent_IsNoneEnabled, METH_NOARGS, "IsNoneEnabled()\n\n" },
+    {(char *) "Name", (PyCFunction) _wrap_PyNs3LogComponent_Name, METH_NOARGS, "Name()\n\n" },
+    {(char *) "SetMask", (PyCFunction) _wrap_PyNs3LogComponent_SetMask, METH_KEYWORDS|METH_VARARGS, "SetMask(level)\n\ntype: level: ns3::LogLevel" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3LogComponent__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -11679,6 +11679,135 @@ int _wrap_PyNs3Names__tp_init(PyNs3Names *self, PyObject *args, PyObject *kwargs
 }
 
 
+
+PyObject *
+_wrap_PyNs3Names_Add__0(PyNs3Names *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    const char *name;
+    Py_ssize_t name_len;
+    PyNs3Object *object;
+    ns3::Object *object_ptr;
+    const char *keywords[] = {"name", "object", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3Object_Type, &object)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    object_ptr = (object ? object->obj : NULL);
+    ns3::Names::Add(std::string(name, name_len), ns3::Ptr< ns3::Object  > (object_ptr));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject *
+_wrap_PyNs3Names_Add__1(PyNs3Names *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    const char *path;
+    Py_ssize_t path_len;
+    const char *name;
+    Py_ssize_t name_len;
+    PyNs3Object *object;
+    ns3::Object *object_ptr;
+    const char *keywords[] = {"path", "name", "object", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#s#O!", (char **) keywords, &path, &path_len, &name, &name_len, &PyNs3Object_Type, &object)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    object_ptr = (object ? object->obj : NULL);
+    ns3::Names::Add(std::string(path, path_len), std::string(name, name_len), ns3::Ptr< ns3::Object  > (object_ptr));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject *
+_wrap_PyNs3Names_Add__2(PyNs3Names *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    PyNs3Object *context;
+    ns3::Object *context_ptr;
+    const char *name;
+    Py_ssize_t name_len;
+    PyNs3Object *object;
+    ns3::Object *object_ptr;
+    const char *keywords[] = {"context", "name", "object", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!s#O!", (char **) keywords, &PyNs3Object_Type, &context, &name, &name_len, &PyNs3Object_Type, &object)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    context_ptr = (context ? context->obj : NULL);
+    object_ptr = (object ? object->obj : NULL);
+    ns3::Names::Add(ns3::Ptr< ns3::Object  > (context_ptr), std::string(name, name_len), ns3::Ptr< ns3::Object  > (object_ptr));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject * _wrap_PyNs3Names_Add(PyNs3Names *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject * retval;
+    PyObject *error_list;
+    PyObject *exceptions[3] = {0,};
+    retval = _wrap_PyNs3Names_Add__0(self, args, kwargs, &exceptions[0]);
+    if (!exceptions[0]) {
+        return retval;
+    }
+    retval = _wrap_PyNs3Names_Add__1(self, args, kwargs, &exceptions[1]);
+    if (!exceptions[1]) {
+        Py_DECREF(exceptions[0]);
+        return retval;
+    }
+    retval = _wrap_PyNs3Names_Add__2(self, args, kwargs, &exceptions[2]);
+    if (!exceptions[2]) {
+        Py_DECREF(exceptions[0]);
+        Py_DECREF(exceptions[1]);
+        return retval;
+    }
+    error_list = PyList_New(3);
+    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
+    Py_DECREF(exceptions[0]);
+    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
+    Py_DECREF(exceptions[1]);
+    PyList_SET_ITEM(error_list, 2, PyObject_Str(exceptions[2]));
+    Py_DECREF(exceptions[2]);
+    PyErr_SetObject(PyExc_TypeError, error_list);
+    Py_DECREF(error_list);
+    return NULL;
+}
+
+
+PyObject *
+_wrap_PyNs3Names_Clear(void)
+{
+    PyObject *py_retval;
+    
+    ns3::Names::Clear();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
 PyObject *
 _wrap_PyNs3Names_FindName(PyNs3Names *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
 {
@@ -11693,6 +11822,25 @@ _wrap_PyNs3Names_FindName(PyNs3Names *PYBINDGEN_UNUSED(dummy), PyObject *args, P
     }
     object_ptr = (object ? object->obj : NULL);
     retval = ns3::Names::FindName(ns3::Ptr< ns3::Object  > (object_ptr));
+    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Names_FindPath(PyNs3Names *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    std::string retval;
+    PyNs3Object *object;
+    ns3::Object *object_ptr;
+    const char *keywords[] = {"object", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Object_Type, &object)) {
+        return NULL;
+    }
+    object_ptr = (object ? object->obj : NULL);
+    retval = ns3::Names::FindPath(ns3::Ptr< ns3::Object  > (object_ptr));
     py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
     return py_retval;
 }
@@ -11812,154 +11960,6 @@ PyObject * _wrap_PyNs3Names_Rename(PyNs3Names *self, PyObject *args, PyObject *k
 }
 
 
-
-PyObject *
-_wrap_PyNs3Names_Add__0(PyNs3Names *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    const char *name;
-    Py_ssize_t name_len;
-    PyNs3Object *object;
-    ns3::Object *object_ptr;
-    const char *keywords[] = {"name", "object", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3Object_Type, &object)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    object_ptr = (object ? object->obj : NULL);
-    ns3::Names::Add(std::string(name, name_len), ns3::Ptr< ns3::Object  > (object_ptr));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject *
-_wrap_PyNs3Names_Add__1(PyNs3Names *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    const char *path;
-    Py_ssize_t path_len;
-    const char *name;
-    Py_ssize_t name_len;
-    PyNs3Object *object;
-    ns3::Object *object_ptr;
-    const char *keywords[] = {"path", "name", "object", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#s#O!", (char **) keywords, &path, &path_len, &name, &name_len, &PyNs3Object_Type, &object)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    object_ptr = (object ? object->obj : NULL);
-    ns3::Names::Add(std::string(path, path_len), std::string(name, name_len), ns3::Ptr< ns3::Object  > (object_ptr));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject *
-_wrap_PyNs3Names_Add__2(PyNs3Names *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    PyNs3Object *context;
-    ns3::Object *context_ptr;
-    const char *name;
-    Py_ssize_t name_len;
-    PyNs3Object *object;
-    ns3::Object *object_ptr;
-    const char *keywords[] = {"context", "name", "object", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!s#O!", (char **) keywords, &PyNs3Object_Type, &context, &name, &name_len, &PyNs3Object_Type, &object)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    context_ptr = (context ? context->obj : NULL);
-    object_ptr = (object ? object->obj : NULL);
-    ns3::Names::Add(ns3::Ptr< ns3::Object  > (context_ptr), std::string(name, name_len), ns3::Ptr< ns3::Object  > (object_ptr));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject * _wrap_PyNs3Names_Add(PyNs3Names *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject * retval;
-    PyObject *error_list;
-    PyObject *exceptions[3] = {0,};
-    retval = _wrap_PyNs3Names_Add__0(self, args, kwargs, &exceptions[0]);
-    if (!exceptions[0]) {
-        return retval;
-    }
-    retval = _wrap_PyNs3Names_Add__1(self, args, kwargs, &exceptions[1]);
-    if (!exceptions[1]) {
-        Py_DECREF(exceptions[0]);
-        return retval;
-    }
-    retval = _wrap_PyNs3Names_Add__2(self, args, kwargs, &exceptions[2]);
-    if (!exceptions[2]) {
-        Py_DECREF(exceptions[0]);
-        Py_DECREF(exceptions[1]);
-        return retval;
-    }
-    error_list = PyList_New(3);
-    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
-    Py_DECREF(exceptions[0]);
-    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
-    Py_DECREF(exceptions[1]);
-    PyList_SET_ITEM(error_list, 2, PyObject_Str(exceptions[2]));
-    Py_DECREF(exceptions[2]);
-    PyErr_SetObject(PyExc_TypeError, error_list);
-    Py_DECREF(error_list);
-    return NULL;
-}
-
-
-PyObject *
-_wrap_PyNs3Names_FindPath(PyNs3Names *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    std::string retval;
-    PyNs3Object *object;
-    ns3::Object *object_ptr;
-    const char *keywords[] = {"object", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Object_Type, &object)) {
-        return NULL;
-    }
-    object_ptr = (object ? object->obj : NULL);
-    retval = ns3::Names::FindPath(ns3::Ptr< ns3::Object  > (object_ptr));
-    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Names_Clear(void)
-{
-    PyObject *py_retval;
-    
-    ns3::Names::Clear();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3Names__copy__(PyNs3Names *self)
 {
@@ -11973,11 +11973,11 @@ _wrap_PyNs3Names__copy__(PyNs3Names *self)
 }
 
 static PyMethodDef PyNs3Names_methods[] = {
-    {(char *) "FindName", (PyCFunction) _wrap_PyNs3Names_FindName, METH_KEYWORDS|METH_VARARGS|METH_STATIC, "FindName(object)\n\ntype: object: ns3::Ptr< ns3::Object >" },
-    {(char *) "Rename", (PyCFunction) _wrap_PyNs3Names_Rename, METH_KEYWORDS|METH_VARARGS|METH_STATIC, NULL },
     {(char *) "Add", (PyCFunction) _wrap_PyNs3Names_Add, METH_KEYWORDS|METH_VARARGS|METH_STATIC, NULL },
-    {(char *) "FindPath", (PyCFunction) _wrap_PyNs3Names_FindPath, METH_KEYWORDS|METH_VARARGS|METH_STATIC, "FindPath(object)\n\ntype: object: ns3::Ptr< ns3::Object >" },
     {(char *) "Clear", (PyCFunction) _wrap_PyNs3Names_Clear, METH_NOARGS|METH_STATIC, "Clear()\n\n" },
+    {(char *) "FindName", (PyCFunction) _wrap_PyNs3Names_FindName, METH_KEYWORDS|METH_VARARGS|METH_STATIC, "FindName(object)\n\ntype: object: ns3::Ptr< ns3::Object >" },
+    {(char *) "FindPath", (PyCFunction) _wrap_PyNs3Names_FindPath, METH_KEYWORDS|METH_VARARGS|METH_STATIC, "FindPath(object)\n\ntype: object: ns3::Ptr< ns3::Object >" },
+    {(char *) "Rename", (PyCFunction) _wrap_PyNs3Names_Rename, METH_KEYWORDS|METH_VARARGS|METH_STATIC, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3Names__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -12410,27 +12410,6 @@ int _wrap_PyNs3ObjectBase__tp_init(PyNs3ObjectBase *self, PyObject *args, PyObje
 
 
 PyObject *
-_wrap_PyNs3ObjectBase_TraceConnect(PyNs3ObjectBase *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    const char *name;
-    Py_ssize_t name_len;
-    const char *context;
-    Py_ssize_t context_len;
-    PyNs3CallbackBase *cb;
-    const char *keywords[] = {"name", "context", "cb", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#s#O!", (char **) keywords, &name, &name_len, &context, &context_len, &PyNs3CallbackBase_Type, &cb)) {
-        return NULL;
-    }
-    retval = self->obj->TraceConnect(std::string(name, name_len), std::string(context, context_len), *((PyNs3CallbackBase *) cb)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3ObjectBase_GetAttribute(PyNs3ObjectBase *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -12445,22 +12424,6 @@ _wrap_PyNs3ObjectBase_GetAttribute(PyNs3ObjectBase *self, PyObject *args, PyObje
     self->obj->GetAttribute(std::string(name, name_len), *((PyNs3AttributeValue *) value)->obj);
     Py_INCREF(Py_None);
     py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3ObjectBase_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::ObjectBase::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
     return py_retval;
 }
 
@@ -12485,6 +12448,38 @@ _wrap_PyNs3ObjectBase_GetAttributeFailSafe(PyNs3ObjectBase *self, PyObject *args
 
 
 PyObject *
+_wrap_PyNs3ObjectBase_GetInstanceTypeId(PyNs3ObjectBase *self)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = self->obj->GetInstanceTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3ObjectBase_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::ObjectBase::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3ObjectBase_SetAttribute(PyNs3ObjectBase *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -12504,36 +12499,41 @@ _wrap_PyNs3ObjectBase_SetAttribute(PyNs3ObjectBase *self, PyObject *args, PyObje
 
 
 PyObject *
-_wrap_PyNs3ObjectBase_TraceDisconnectWithoutContext(PyNs3ObjectBase *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3ObjectBase_SetAttributeFailSafe(PyNs3ObjectBase *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
     bool retval;
     const char *name;
     Py_ssize_t name_len;
-    PyNs3CallbackBase *cb;
-    const char *keywords[] = {"name", "cb", NULL};
+    PyNs3AttributeValue *value;
+    const char *keywords[] = {"name", "value", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3CallbackBase_Type, &cb)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3AttributeValue_Type, &value)) {
         return NULL;
     }
-    retval = self->obj->TraceDisconnectWithoutContext(std::string(name, name_len), *((PyNs3CallbackBase *) cb)->obj);
+    retval = self->obj->SetAttributeFailSafe(std::string(name, name_len), *((PyNs3AttributeValue *) value)->obj);
     py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3ObjectBase_GetInstanceTypeId(PyNs3ObjectBase *self)
+_wrap_PyNs3ObjectBase_TraceConnect(PyNs3ObjectBase *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
+    bool retval;
+    const char *name;
+    Py_ssize_t name_len;
+    const char *context;
+    Py_ssize_t context_len;
+    PyNs3CallbackBase *cb;
+    const char *keywords[] = {"name", "context", "cb", NULL};
     
-    ns3::TypeId retval = self->obj->GetInstanceTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#s#O!", (char **) keywords, &name, &name_len, &context, &context_len, &PyNs3CallbackBase_Type, &cb)) {
+        return NULL;
+    }
+    retval = self->obj->TraceConnect(std::string(name, name_len), std::string(context, context_len), *((PyNs3CallbackBase *) cb)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
@@ -12579,34 +12579,34 @@ _wrap_PyNs3ObjectBase_TraceDisconnect(PyNs3ObjectBase *self, PyObject *args, PyO
 
 
 PyObject *
-_wrap_PyNs3ObjectBase_SetAttributeFailSafe(PyNs3ObjectBase *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3ObjectBase_TraceDisconnectWithoutContext(PyNs3ObjectBase *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
     bool retval;
     const char *name;
     Py_ssize_t name_len;
-    PyNs3AttributeValue *value;
-    const char *keywords[] = {"name", "value", NULL};
+    PyNs3CallbackBase *cb;
+    const char *keywords[] = {"name", "cb", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3AttributeValue_Type, &value)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3CallbackBase_Type, &cb)) {
         return NULL;
     }
-    retval = self->obj->SetAttributeFailSafe(std::string(name, name_len), *((PyNs3AttributeValue *) value)->obj);
+    retval = self->obj->TraceDisconnectWithoutContext(std::string(name, name_len), *((PyNs3CallbackBase *) cb)->obj);
     py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
 static PyMethodDef PyNs3ObjectBase_methods[] = {
-    {(char *) "TraceConnect", (PyCFunction) _wrap_PyNs3ObjectBase_TraceConnect, METH_KEYWORDS|METH_VARARGS, "TraceConnect(name, context, cb)\n\ntype: name: std::string\ntype: context: std::string\ntype: cb: ns3::CallbackBase const &" },
     {(char *) "GetAttribute", (PyCFunction) _wrap_PyNs3ObjectBase_GetAttribute, METH_KEYWORDS|METH_VARARGS, "GetAttribute(name, value)\n\ntype: name: std::string\ntype: value: ns3::AttributeValue &" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3ObjectBase_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
     {(char *) "GetAttributeFailSafe", (PyCFunction) _wrap_PyNs3ObjectBase_GetAttributeFailSafe, METH_KEYWORDS|METH_VARARGS, "GetAttributeFailSafe(name, value)\n\ntype: name: std::string\ntype: value: ns3::AttributeValue &" },
-    {(char *) "SetAttribute", (PyCFunction) _wrap_PyNs3ObjectBase_SetAttribute, METH_KEYWORDS|METH_VARARGS, "SetAttribute(name, value)\n\ntype: name: std::string\ntype: value: ns3::AttributeValue const &" },
-    {(char *) "TraceDisconnectWithoutContext", (PyCFunction) _wrap_PyNs3ObjectBase_TraceDisconnectWithoutContext, METH_KEYWORDS|METH_VARARGS, "TraceDisconnectWithoutContext(name, cb)\n\ntype: name: std::string\ntype: cb: ns3::CallbackBase const &" },
     {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3ObjectBase_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3ObjectBase_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "SetAttribute", (PyCFunction) _wrap_PyNs3ObjectBase_SetAttribute, METH_KEYWORDS|METH_VARARGS, "SetAttribute(name, value)\n\ntype: name: std::string\ntype: value: ns3::AttributeValue const &" },
+    {(char *) "SetAttributeFailSafe", (PyCFunction) _wrap_PyNs3ObjectBase_SetAttributeFailSafe, METH_KEYWORDS|METH_VARARGS, "SetAttributeFailSafe(name, value)\n\ntype: name: std::string\ntype: value: ns3::AttributeValue const &" },
+    {(char *) "TraceConnect", (PyCFunction) _wrap_PyNs3ObjectBase_TraceConnect, METH_KEYWORDS|METH_VARARGS, "TraceConnect(name, context, cb)\n\ntype: name: std::string\ntype: context: std::string\ntype: cb: ns3::CallbackBase const &" },
     {(char *) "TraceConnectWithoutContext", (PyCFunction) _wrap_PyNs3ObjectBase_TraceConnectWithoutContext, METH_KEYWORDS|METH_VARARGS, "TraceConnectWithoutContext(name, cb)\n\ntype: name: std::string\ntype: cb: ns3::CallbackBase const &" },
     {(char *) "TraceDisconnect", (PyCFunction) _wrap_PyNs3ObjectBase_TraceDisconnect, METH_KEYWORDS|METH_VARARGS, "TraceDisconnect(name, context, cb)\n\ntype: name: std::string\ntype: context: std::string\ntype: cb: ns3::CallbackBase const &" },
-    {(char *) "SetAttributeFailSafe", (PyCFunction) _wrap_PyNs3ObjectBase_SetAttributeFailSafe, METH_KEYWORDS|METH_VARARGS, "SetAttributeFailSafe(name, value)\n\ntype: name: std::string\ntype: value: ns3::AttributeValue const &" },
+    {(char *) "TraceDisconnectWithoutContext", (PyCFunction) _wrap_PyNs3ObjectBase_TraceDisconnectWithoutContext, METH_KEYWORDS|METH_VARARGS, "TraceDisconnectWithoutContext(name, cb)\n\ntype: name: std::string\ntype: cb: ns3::CallbackBase const &" },
     {(char *) "ConstructSelf", (PyCFunction) PyNs3ObjectBase__PythonHelper::_wrap_ConstructSelf, METH_KEYWORDS|METH_VARARGS, NULL },
     {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3ObjectBase__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
@@ -12707,7 +12707,7 @@ PyTypeObject PyNs3ObjectBase_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE,                      /* tp_flags */
     "ObjectBase(arg0)\nObjectBase()",                        /* Documentation string */
     (traverseproc)PyNs3ObjectBase__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3ObjectBase__tp_clear,             /* tp_clear */
@@ -13070,6 +13070,22 @@ _wrap_PyNs3ObjectFactory_Create(PyNs3ObjectFactory *self)
 
 
 PyObject *
+_wrap_PyNs3ObjectFactory_GetTypeId(PyNs3ObjectFactory *self)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = self->obj->GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3ObjectFactory_Set(PyNs3ObjectFactory *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -13084,22 +13100,6 @@ _wrap_PyNs3ObjectFactory_Set(PyNs3ObjectFactory *self, PyObject *args, PyObject 
     self->obj->Set(std::string(name, name_len), *((PyNs3AttributeValue *) value)->obj);
     Py_INCREF(Py_None);
     py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3ObjectFactory_GetTypeId(PyNs3ObjectFactory *self)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = self->obj->GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
     return py_retval;
 }
 
@@ -13219,8 +13219,8 @@ _wrap_PyNs3ObjectFactory__copy__(PyNs3ObjectFactory *self)
 
 static PyMethodDef PyNs3ObjectFactory_methods[] = {
     {(char *) "Create", (PyCFunction) _wrap_PyNs3ObjectFactory_Create, METH_NOARGS, "Create()\n\n" },
-    {(char *) "Set", (PyCFunction) _wrap_PyNs3ObjectFactory_Set, METH_KEYWORDS|METH_VARARGS, "Set(name, value)\n\ntype: name: std::string\ntype: value: ns3::AttributeValue const &" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3ObjectFactory_GetTypeId, METH_NOARGS, "GetTypeId()\n\n" },
+    {(char *) "Set", (PyCFunction) _wrap_PyNs3ObjectFactory_Set, METH_KEYWORDS|METH_VARARGS, "Set(name, value)\n\ntype: name: std::string\ntype: value: ns3::AttributeValue const &" },
     {(char *) "SetTypeId", (PyCFunction) _wrap_PyNs3ObjectFactory_SetTypeId, METH_KEYWORDS|METH_VARARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3ObjectFactory__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
@@ -13812,18 +13812,37 @@ int _wrap_PyNs3RngSeedManager__tp_init(PyNs3RngSeedManager *self, PyObject *args
 
 
 PyObject *
-_wrap_PyNs3RngSeedManager_SetSeed(PyNs3RngSeedManager *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
+_wrap_PyNs3RngSeedManager_GetNextStreamIndex(void)
 {
     PyObject *py_retval;
-    unsigned int seed;
-    const char *keywords[] = {"seed", NULL};
+    uint64_t retval;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &seed)) {
-        return NULL;
-    }
-    ns3::RngSeedManager::SetSeed(seed);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    retval = ns3::RngSeedManager::GetNextStreamIndex();
+    py_retval = Py_BuildValue((char *) "K", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RngSeedManager_GetRun(void)
+{
+    PyObject *py_retval;
+    uint64_t retval;
+    
+    retval = ns3::RngSeedManager::GetRun();
+    py_retval = Py_BuildValue((char *) "K", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RngSeedManager_GetSeed(void)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = ns3::RngSeedManager::GetSeed();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
 
@@ -13846,37 +13865,18 @@ _wrap_PyNs3RngSeedManager_SetRun(PyNs3RngSeedManager *PYBINDGEN_UNUSED(dummy), P
 
 
 PyObject *
-_wrap_PyNs3RngSeedManager_GetNextStreamIndex(void)
+_wrap_PyNs3RngSeedManager_SetSeed(PyNs3RngSeedManager *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    uint64_t retval;
+    unsigned int seed;
+    const char *keywords[] = {"seed", NULL};
     
-    retval = ns3::RngSeedManager::GetNextStreamIndex();
-    py_retval = Py_BuildValue((char *) "K", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RngSeedManager_GetSeed(void)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = ns3::RngSeedManager::GetSeed();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RngSeedManager_GetRun(void)
-{
-    PyObject *py_retval;
-    uint64_t retval;
-    
-    retval = ns3::RngSeedManager::GetRun();
-    py_retval = Py_BuildValue((char *) "K", retval);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &seed)) {
+        return NULL;
+    }
+    ns3::RngSeedManager::SetSeed(seed);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -13894,11 +13894,11 @@ _wrap_PyNs3RngSeedManager__copy__(PyNs3RngSeedManager *self)
 }
 
 static PyMethodDef PyNs3RngSeedManager_methods[] = {
-    {(char *) "SetSeed", (PyCFunction) _wrap_PyNs3RngSeedManager_SetSeed, METH_KEYWORDS|METH_VARARGS|METH_STATIC, "SetSeed(seed)\n\ntype: seed: uint32_t" },
-    {(char *) "SetRun", (PyCFunction) _wrap_PyNs3RngSeedManager_SetRun, METH_KEYWORDS|METH_VARARGS|METH_STATIC, "SetRun(run)\n\ntype: run: uint64_t" },
     {(char *) "GetNextStreamIndex", (PyCFunction) _wrap_PyNs3RngSeedManager_GetNextStreamIndex, METH_NOARGS|METH_STATIC, "GetNextStreamIndex()\n\n" },
-    {(char *) "GetSeed", (PyCFunction) _wrap_PyNs3RngSeedManager_GetSeed, METH_NOARGS|METH_STATIC, "GetSeed()\n\n" },
     {(char *) "GetRun", (PyCFunction) _wrap_PyNs3RngSeedManager_GetRun, METH_NOARGS|METH_STATIC, "GetRun()\n\n" },
+    {(char *) "GetSeed", (PyCFunction) _wrap_PyNs3RngSeedManager_GetSeed, METH_NOARGS|METH_STATIC, "GetSeed()\n\n" },
+    {(char *) "SetRun", (PyCFunction) _wrap_PyNs3RngSeedManager_SetRun, METH_KEYWORDS|METH_VARARGS|METH_STATIC, "SetRun(run)\n\ntype: run: uint64_t" },
+    {(char *) "SetSeed", (PyCFunction) _wrap_PyNs3RngSeedManager_SetSeed, METH_KEYWORDS|METH_VARARGS|METH_STATIC, "SetSeed(seed)\n\ntype: seed: uint32_t" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3RngSeedManager__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -14322,7 +14322,7 @@ PyTypeObject PyNs3SimpleRefCount__Ns3Object_Ns3ObjectBase_Ns3ObjectDeleter_Type 
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE,                      /* tp_flags */
     "SimpleRefCount__Ns3Object_Ns3ObjectBase_Ns3ObjectDeleter(o)\nSimpleRefCount__Ns3Object_Ns3ObjectBase_Ns3ObjectDeleter()",                        /* Documentation string */
     (traverseproc)PyNs3SimpleRefCount__Ns3Object_Ns3ObjectBase_Ns3ObjectDeleter__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3SimpleRefCount__Ns3Object_Ns3ObjectBase_Ns3ObjectDeleter__tp_clear,             /* tp_clear */
@@ -14371,6 +14371,69 @@ _wrap_PyNs3Simulator__tp_init(PyNs3Simulator *self, PyObject *args, PyObject *kw
 
 
 
+PyObject * _wrap_Simulator_Schedule(PyNs3Simulator *self, PyObject *args, PyObject *kwargs, PyObject **return_exception);
+
+PyObject * _wrap_PyNs3Simulator_Schedule(PyNs3Simulator *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject * retval;
+    PyObject *error_list;
+    PyObject *exceptions[1] = {0,};
+    retval = _wrap_Simulator_Schedule(self, args, kwargs, &exceptions[0]);
+    if (!exceptions[0]) {
+        return retval;
+    }
+    error_list = PyList_New(1);
+    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
+    Py_DECREF(exceptions[0]);
+    PyErr_SetObject(PyExc_TypeError, error_list);
+    Py_DECREF(error_list);
+    return NULL;
+}
+
+
+
+PyObject * _wrap_Simulator_ScheduleNow(PyNs3Simulator *self, PyObject *args, PyObject *kwargs, PyObject **return_exception);
+
+PyObject * _wrap_PyNs3Simulator_ScheduleNow(PyNs3Simulator *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject * retval;
+    PyObject *error_list;
+    PyObject *exceptions[1] = {0,};
+    retval = _wrap_Simulator_ScheduleNow(self, args, kwargs, &exceptions[0]);
+    if (!exceptions[0]) {
+        return retval;
+    }
+    error_list = PyList_New(1);
+    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
+    Py_DECREF(exceptions[0]);
+    PyErr_SetObject(PyExc_TypeError, error_list);
+    Py_DECREF(error_list);
+    return NULL;
+}
+
+
+
+PyObject * _wrap_Simulator_ScheduleWithContext(PyNs3Simulator *self, PyObject *args, PyObject *kwargs, PyObject **return_exception);
+
+PyObject * _wrap_PyNs3Simulator_ScheduleWithContext(PyNs3Simulator *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject * retval;
+    PyObject *error_list;
+    PyObject *exceptions[1] = {0,};
+    retval = _wrap_Simulator_ScheduleWithContext(self, args, kwargs, &exceptions[0]);
+    if (!exceptions[0]) {
+        return retval;
+    }
+    error_list = PyList_New(1);
+    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
+    Py_DECREF(exceptions[0]);
+    PyErr_SetObject(PyExc_TypeError, error_list);
+    Py_DECREF(error_list);
+    return NULL;
+}
+
+
+
 PyObject * _wrap_Simulator_ScheduleDestroy(PyNs3Simulator *self, PyObject *args, PyObject *kwargs, PyObject **return_exception);
 
 PyObject * _wrap_PyNs3Simulator_ScheduleDestroy(PyNs3Simulator *self, PyObject *args, PyObject *kwargs)
@@ -14388,6 +14451,89 @@ PyObject * _wrap_PyNs3Simulator_ScheduleDestroy(PyNs3Simulator *self, PyObject *
     PyErr_SetObject(PyExc_TypeError, error_list);
     Py_DECREF(error_list);
     return NULL;
+}
+
+
+
+PyObject * _wrap_Simulator_Run(PyNs3Simulator *self, PyObject *args, PyObject *kwargs, PyObject **return_exception);
+
+PyObject * _wrap_PyNs3Simulator_Run(PyNs3Simulator *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject * retval;
+    PyObject *error_list;
+    PyObject *exceptions[1] = {0,};
+    retval = _wrap_Simulator_Run(self, args, kwargs, &exceptions[0]);
+    if (!exceptions[0]) {
+        return retval;
+    }
+    error_list = PyList_New(1);
+    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
+    Py_DECREF(exceptions[0]);
+    PyErr_SetObject(PyExc_TypeError, error_list);
+    Py_DECREF(error_list);
+    return NULL;
+}
+
+
+PyObject *
+_wrap_PyNs3Simulator_Cancel(PyNs3Simulator *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3EventId *id;
+    const char *keywords[] = {"id", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3EventId_Type, &id)) {
+        return NULL;
+    }
+    ns3::Simulator::Cancel(*((PyNs3EventId *) id)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Simulator_Destroy(void)
+{
+    PyObject *py_retval;
+    
+    ns3::Simulator::Destroy();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Simulator_GetContext(void)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = ns3::Simulator::GetContext();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Simulator_GetDelayLeft(PyNs3Simulator *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3EventId *id;
+    const char *keywords[] = {"id", NULL};
+    PyNs3Time *py_Time;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3EventId_Type, &id)) {
+        return NULL;
+    }
+    ns3::Time retval = ns3::Simulator::GetDelayLeft(*((PyNs3EventId *) id)->obj);
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
 }
 
 
@@ -14429,72 +14575,13 @@ _wrap_PyNs3Simulator_GetImplementation(void)
 }
 
 
-
-PyObject * _wrap_Simulator_Run(PyNs3Simulator *self, PyObject *args, PyObject *kwargs, PyObject **return_exception);
-
-PyObject * _wrap_PyNs3Simulator_Run(PyNs3Simulator *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject * retval;
-    PyObject *error_list;
-    PyObject *exceptions[1] = {0,};
-    retval = _wrap_Simulator_Run(self, args, kwargs, &exceptions[0]);
-    if (!exceptions[0]) {
-        return retval;
-    }
-    error_list = PyList_New(1);
-    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
-    Py_DECREF(exceptions[0]);
-    PyErr_SetObject(PyExc_TypeError, error_list);
-    Py_DECREF(error_list);
-    return NULL;
-}
-
-
-
-PyObject * _wrap_Simulator_Schedule(PyNs3Simulator *self, PyObject *args, PyObject *kwargs, PyObject **return_exception);
-
-PyObject * _wrap_PyNs3Simulator_Schedule(PyNs3Simulator *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject * retval;
-    PyObject *error_list;
-    PyObject *exceptions[1] = {0,};
-    retval = _wrap_Simulator_Schedule(self, args, kwargs, &exceptions[0]);
-    if (!exceptions[0]) {
-        return retval;
-    }
-    error_list = PyList_New(1);
-    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
-    Py_DECREF(exceptions[0]);
-    PyErr_SetObject(PyExc_TypeError, error_list);
-    Py_DECREF(error_list);
-    return NULL;
-}
-
-
 PyObject *
-_wrap_PyNs3Simulator_IsFinished(void)
+_wrap_PyNs3Simulator_GetMaximumSimulationTime(void)
 {
     PyObject *py_retval;
-    bool retval;
-    
-    retval = ns3::Simulator::IsFinished();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Simulator_GetDelayLeft(PyNs3Simulator *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3EventId *id;
-    const char *keywords[] = {"id", NULL};
     PyNs3Time *py_Time;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3EventId_Type, &id)) {
-        return NULL;
-    }
-    ns3::Time retval = ns3::Simulator::GetDelayLeft(*((PyNs3EventId *) id)->obj);
+    ns3::Time retval = ns3::Simulator::GetMaximumSimulationTime();
     py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
     py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
     py_Time->obj = new ns3::Time(retval);
@@ -14512,6 +14599,104 @@ _wrap_PyNs3Simulator_GetSystemId(void)
     
     retval = ns3::Simulator::GetSystemId();
     py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Simulator_IsExpired(PyNs3Simulator *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3EventId *id;
+    const char *keywords[] = {"id", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3EventId_Type, &id)) {
+        return NULL;
+    }
+    retval = ns3::Simulator::IsExpired(*((PyNs3EventId *) id)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Simulator_IsFinished(void)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = ns3::Simulator::IsFinished();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Simulator_Now(void)
+{
+    PyObject *py_retval;
+    PyNs3Time *py_Time;
+    
+    ns3::Time retval = ns3::Simulator::Now();
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Simulator_Remove(PyNs3Simulator *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3EventId *id;
+    const char *keywords[] = {"id", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3EventId_Type, &id)) {
+        return NULL;
+    }
+    ns3::Simulator::Remove(*((PyNs3EventId *) id)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Simulator_SetImplementation(PyNs3Simulator *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3SimulatorImpl *impl;
+    ns3::SimulatorImpl *impl_ptr;
+    const char *keywords[] = {"impl", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3SimulatorImpl_Type, &impl)) {
+        return NULL;
+    }
+    impl_ptr = (impl ? impl->obj : NULL);
+    ns3::Simulator::SetImplementation(ns3::Ptr< ns3::SimulatorImpl  > (impl_ptr));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Simulator_SetScheduler(PyNs3Simulator *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3ObjectFactory *schedulerFactory;
+    const char *keywords[] = {"schedulerFactory", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3ObjectFactory_Type, &schedulerFactory)) {
+        return NULL;
+    }
+    ns3::Simulator::SetScheduler(*((PyNs3ObjectFactory *) schedulerFactory)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -14585,191 +14770,6 @@ PyObject * _wrap_PyNs3Simulator_Stop(PyNs3Simulator *self, PyObject *args, PyObj
 }
 
 
-
-PyObject * _wrap_Simulator_ScheduleNow(PyNs3Simulator *self, PyObject *args, PyObject *kwargs, PyObject **return_exception);
-
-PyObject * _wrap_PyNs3Simulator_ScheduleNow(PyNs3Simulator *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject * retval;
-    PyObject *error_list;
-    PyObject *exceptions[1] = {0,};
-    retval = _wrap_Simulator_ScheduleNow(self, args, kwargs, &exceptions[0]);
-    if (!exceptions[0]) {
-        return retval;
-    }
-    error_list = PyList_New(1);
-    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
-    Py_DECREF(exceptions[0]);
-    PyErr_SetObject(PyExc_TypeError, error_list);
-    Py_DECREF(error_list);
-    return NULL;
-}
-
-
-PyObject *
-_wrap_PyNs3Simulator_GetContext(void)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = ns3::Simulator::GetContext();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Simulator_GetMaximumSimulationTime(void)
-{
-    PyObject *py_retval;
-    PyNs3Time *py_Time;
-    
-    ns3::Time retval = ns3::Simulator::GetMaximumSimulationTime();
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Simulator_Now(void)
-{
-    PyObject *py_retval;
-    PyNs3Time *py_Time;
-    
-    ns3::Time retval = ns3::Simulator::Now();
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Simulator_SetScheduler(PyNs3Simulator *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3ObjectFactory *schedulerFactory;
-    const char *keywords[] = {"schedulerFactory", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3ObjectFactory_Type, &schedulerFactory)) {
-        return NULL;
-    }
-    ns3::Simulator::SetScheduler(*((PyNs3ObjectFactory *) schedulerFactory)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Simulator_Remove(PyNs3Simulator *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3EventId *id;
-    const char *keywords[] = {"id", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3EventId_Type, &id)) {
-        return NULL;
-    }
-    ns3::Simulator::Remove(*((PyNs3EventId *) id)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Simulator_SetImplementation(PyNs3Simulator *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3SimulatorImpl *impl;
-    ns3::SimulatorImpl *impl_ptr;
-    const char *keywords[] = {"impl", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3SimulatorImpl_Type, &impl)) {
-        return NULL;
-    }
-    impl_ptr = (impl ? impl->obj : NULL);
-    ns3::Simulator::SetImplementation(ns3::Ptr< ns3::SimulatorImpl  > (impl_ptr));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Simulator_Cancel(PyNs3Simulator *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3EventId *id;
-    const char *keywords[] = {"id", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3EventId_Type, &id)) {
-        return NULL;
-    }
-    ns3::Simulator::Cancel(*((PyNs3EventId *) id)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Simulator_Destroy(void)
-{
-    PyObject *py_retval;
-    
-    ns3::Simulator::Destroy();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Simulator_IsExpired(PyNs3Simulator *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3EventId *id;
-    const char *keywords[] = {"id", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3EventId_Type, &id)) {
-        return NULL;
-    }
-    retval = ns3::Simulator::IsExpired(*((PyNs3EventId *) id)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-
-PyObject * _wrap_Simulator_ScheduleWithContext(PyNs3Simulator *self, PyObject *args, PyObject *kwargs, PyObject **return_exception);
-
-PyObject * _wrap_PyNs3Simulator_ScheduleWithContext(PyNs3Simulator *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject * retval;
-    PyObject *error_list;
-    PyObject *exceptions[1] = {0,};
-    retval = _wrap_Simulator_ScheduleWithContext(self, args, kwargs, &exceptions[0]);
-    if (!exceptions[0]) {
-        return retval;
-    }
-    error_list = PyList_New(1);
-    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
-    Py_DECREF(exceptions[0]);
-    PyErr_SetObject(PyExc_TypeError, error_list);
-    Py_DECREF(error_list);
-    return NULL;
-}
-
-
 static PyObject*
 _wrap_PyNs3Simulator__copy__(PyNs3Simulator *self)
 {
@@ -14783,25 +14783,25 @@ _wrap_PyNs3Simulator__copy__(PyNs3Simulator *self)
 }
 
 static PyMethodDef PyNs3Simulator_methods[] = {
-    {(char *) "ScheduleDestroy", (PyCFunction) _wrap_PyNs3Simulator_ScheduleDestroy, METH_STATIC|METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "GetImplementation", (PyCFunction) _wrap_PyNs3Simulator_GetImplementation, METH_NOARGS|METH_STATIC, "GetImplementation()\n\n" },
-    {(char *) "Run", (PyCFunction) _wrap_PyNs3Simulator_Run, METH_STATIC|METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "Schedule", (PyCFunction) _wrap_PyNs3Simulator_Schedule, METH_STATIC|METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "IsFinished", (PyCFunction) _wrap_PyNs3Simulator_IsFinished, METH_NOARGS|METH_STATIC, "IsFinished()\n\n" },
-    {(char *) "GetDelayLeft", (PyCFunction) _wrap_PyNs3Simulator_GetDelayLeft, METH_KEYWORDS|METH_VARARGS|METH_STATIC, "GetDelayLeft(id)\n\ntype: id: ns3::EventId const &" },
-    {(char *) "GetSystemId", (PyCFunction) _wrap_PyNs3Simulator_GetSystemId, METH_NOARGS|METH_STATIC, "GetSystemId()\n\n" },
-    {(char *) "Stop", (PyCFunction) _wrap_PyNs3Simulator_Stop, METH_KEYWORDS|METH_VARARGS|METH_STATIC, NULL },
-    {(char *) "ScheduleNow", (PyCFunction) _wrap_PyNs3Simulator_ScheduleNow, METH_STATIC|METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "GetContext", (PyCFunction) _wrap_PyNs3Simulator_GetContext, METH_NOARGS|METH_STATIC, "GetContext()\n\n" },
-    {(char *) "GetMaximumSimulationTime", (PyCFunction) _wrap_PyNs3Simulator_GetMaximumSimulationTime, METH_NOARGS|METH_STATIC, "GetMaximumSimulationTime()\n\n" },
-    {(char *) "Now", (PyCFunction) _wrap_PyNs3Simulator_Now, METH_NOARGS|METH_STATIC, "Now()\n\n" },
-    {(char *) "SetScheduler", (PyCFunction) _wrap_PyNs3Simulator_SetScheduler, METH_KEYWORDS|METH_VARARGS|METH_STATIC, "SetScheduler(schedulerFactory)\n\ntype: schedulerFactory: ns3::ObjectFactory" },
-    {(char *) "Remove", (PyCFunction) _wrap_PyNs3Simulator_Remove, METH_KEYWORDS|METH_VARARGS|METH_STATIC, "Remove(id)\n\ntype: id: ns3::EventId const &" },
-    {(char *) "SetImplementation", (PyCFunction) _wrap_PyNs3Simulator_SetImplementation, METH_KEYWORDS|METH_VARARGS|METH_STATIC, "SetImplementation(impl)\n\ntype: impl: ns3::Ptr< ns3::SimulatorImpl >" },
+    {(char *) "Schedule", (PyCFunction) _wrap_PyNs3Simulator_Schedule, METH_KEYWORDS|METH_VARARGS|METH_STATIC, NULL },
+    {(char *) "ScheduleNow", (PyCFunction) _wrap_PyNs3Simulator_ScheduleNow, METH_KEYWORDS|METH_VARARGS|METH_STATIC, NULL },
+    {(char *) "ScheduleWithContext", (PyCFunction) _wrap_PyNs3Simulator_ScheduleWithContext, METH_KEYWORDS|METH_VARARGS|METH_STATIC, NULL },
+    {(char *) "ScheduleDestroy", (PyCFunction) _wrap_PyNs3Simulator_ScheduleDestroy, METH_KEYWORDS|METH_VARARGS|METH_STATIC, NULL },
+    {(char *) "Run", (PyCFunction) _wrap_PyNs3Simulator_Run, METH_KEYWORDS|METH_VARARGS|METH_STATIC, NULL },
     {(char *) "Cancel", (PyCFunction) _wrap_PyNs3Simulator_Cancel, METH_KEYWORDS|METH_VARARGS|METH_STATIC, "Cancel(id)\n\ntype: id: ns3::EventId const &" },
     {(char *) "Destroy", (PyCFunction) _wrap_PyNs3Simulator_Destroy, METH_NOARGS|METH_STATIC, "Destroy()\n\n" },
+    {(char *) "GetContext", (PyCFunction) _wrap_PyNs3Simulator_GetContext, METH_NOARGS|METH_STATIC, "GetContext()\n\n" },
+    {(char *) "GetDelayLeft", (PyCFunction) _wrap_PyNs3Simulator_GetDelayLeft, METH_KEYWORDS|METH_VARARGS|METH_STATIC, "GetDelayLeft(id)\n\ntype: id: ns3::EventId const &" },
+    {(char *) "GetImplementation", (PyCFunction) _wrap_PyNs3Simulator_GetImplementation, METH_NOARGS|METH_STATIC, "GetImplementation()\n\n" },
+    {(char *) "GetMaximumSimulationTime", (PyCFunction) _wrap_PyNs3Simulator_GetMaximumSimulationTime, METH_NOARGS|METH_STATIC, "GetMaximumSimulationTime()\n\n" },
+    {(char *) "GetSystemId", (PyCFunction) _wrap_PyNs3Simulator_GetSystemId, METH_NOARGS|METH_STATIC, "GetSystemId()\n\n" },
     {(char *) "IsExpired", (PyCFunction) _wrap_PyNs3Simulator_IsExpired, METH_KEYWORDS|METH_VARARGS|METH_STATIC, "IsExpired(id)\n\ntype: id: ns3::EventId const &" },
-    {(char *) "ScheduleWithContext", (PyCFunction) _wrap_PyNs3Simulator_ScheduleWithContext, METH_STATIC|METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "IsFinished", (PyCFunction) _wrap_PyNs3Simulator_IsFinished, METH_NOARGS|METH_STATIC, "IsFinished()\n\n" },
+    {(char *) "Now", (PyCFunction) _wrap_PyNs3Simulator_Now, METH_NOARGS|METH_STATIC, "Now()\n\n" },
+    {(char *) "Remove", (PyCFunction) _wrap_PyNs3Simulator_Remove, METH_KEYWORDS|METH_VARARGS|METH_STATIC, "Remove(id)\n\ntype: id: ns3::EventId const &" },
+    {(char *) "SetImplementation", (PyCFunction) _wrap_PyNs3Simulator_SetImplementation, METH_KEYWORDS|METH_VARARGS|METH_STATIC, "SetImplementation(impl)\n\ntype: impl: ns3::Ptr< ns3::SimulatorImpl >" },
+    {(char *) "SetScheduler", (PyCFunction) _wrap_PyNs3Simulator_SetScheduler, METH_KEYWORDS|METH_VARARGS|METH_STATIC, "SetScheduler(schedulerFactory)\n\ntype: schedulerFactory: ns3::ObjectFactory" },
+    {(char *) "Stop", (PyCFunction) _wrap_PyNs3Simulator_Stop, METH_KEYWORDS|METH_VARARGS|METH_STATIC, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3Simulator__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -15101,28 +15101,11 @@ int _wrap_PyNs3SystemCondition__tp_init(PyNs3SystemCondition *self, PyObject *ar
 
 
 PyObject *
-_wrap_PyNs3SystemCondition_TimedWait(PyNs3SystemCondition *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    uint64_t ns;
-    const char *keywords[] = {"ns", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "K", (char **) keywords, &ns)) {
-        return NULL;
-    }
-    retval = self->obj->TimedWait(ns);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SystemCondition_Signal(PyNs3SystemCondition *self)
+_wrap_PyNs3SystemCondition_Broadcast(PyNs3SystemCondition *self)
 {
     PyObject *py_retval;
     
-    self->obj->Signal();
+    self->obj->Broadcast();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -15142,18 +15125,6 @@ _wrap_PyNs3SystemCondition_GetCondition(PyNs3SystemCondition *self)
 
 
 PyObject *
-_wrap_PyNs3SystemCondition_Broadcast(PyNs3SystemCondition *self)
-{
-    PyObject *py_retval;
-    
-    self->obj->Broadcast();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3SystemCondition_SetCondition(PyNs3SystemCondition *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -15168,6 +15139,35 @@ _wrap_PyNs3SystemCondition_SetCondition(PyNs3SystemCondition *self, PyObject *ar
     self->obj->SetCondition(condition);
     Py_INCREF(Py_None);
     py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SystemCondition_Signal(PyNs3SystemCondition *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->Signal();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SystemCondition_TimedWait(PyNs3SystemCondition *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    uint64_t ns;
+    const char *keywords[] = {"ns", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "K", (char **) keywords, &ns)) {
+        return NULL;
+    }
+    retval = self->obj->TimedWait(ns);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
@@ -15197,11 +15197,11 @@ _wrap_PyNs3SystemCondition__copy__(PyNs3SystemCondition *self)
 }
 
 static PyMethodDef PyNs3SystemCondition_methods[] = {
-    {(char *) "TimedWait", (PyCFunction) _wrap_PyNs3SystemCondition_TimedWait, METH_KEYWORDS|METH_VARARGS, "TimedWait(ns)\n\ntype: ns: uint64_t" },
-    {(char *) "Signal", (PyCFunction) _wrap_PyNs3SystemCondition_Signal, METH_NOARGS, "Signal()\n\n" },
-    {(char *) "GetCondition", (PyCFunction) _wrap_PyNs3SystemCondition_GetCondition, METH_NOARGS, "GetCondition()\n\n" },
     {(char *) "Broadcast", (PyCFunction) _wrap_PyNs3SystemCondition_Broadcast, METH_NOARGS, "Broadcast()\n\n" },
+    {(char *) "GetCondition", (PyCFunction) _wrap_PyNs3SystemCondition_GetCondition, METH_NOARGS, "GetCondition()\n\n" },
     {(char *) "SetCondition", (PyCFunction) _wrap_PyNs3SystemCondition_SetCondition, METH_KEYWORDS|METH_VARARGS, "SetCondition(condition)\n\ntype: condition: bool" },
+    {(char *) "Signal", (PyCFunction) _wrap_PyNs3SystemCondition_Signal, METH_NOARGS, "Signal()\n\n" },
+    {(char *) "TimedWait", (PyCFunction) _wrap_PyNs3SystemCondition_TimedWait, METH_KEYWORDS|METH_VARARGS, "TimedWait(ns)\n\ntype: ns: uint64_t" },
     {(char *) "Wait", (PyCFunction) _wrap_PyNs3SystemCondition_Wait, METH_NOARGS, "Wait()\n\n" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3SystemCondition__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
@@ -15597,30 +15597,6 @@ int _wrap_PyNs3SystemWallClockMs__tp_init(PyNs3SystemWallClockMs *self, PyObject
 
 
 PyObject *
-_wrap_PyNs3SystemWallClockMs_Start(PyNs3SystemWallClockMs *self)
-{
-    PyObject *py_retval;
-    
-    self->obj->Start();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SystemWallClockMs_GetElapsedUser(PyNs3SystemWallClockMs *self)
-{
-    PyObject *py_retval;
-    int64_t retval;
-    
-    retval = self->obj->GetElapsedUser();
-    py_retval = Py_BuildValue((char *) "L", retval);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3SystemWallClockMs_End(PyNs3SystemWallClockMs *self)
 {
     PyObject *py_retval;
@@ -15656,6 +15632,30 @@ _wrap_PyNs3SystemWallClockMs_GetElapsedSystem(PyNs3SystemWallClockMs *self)
 }
 
 
+PyObject *
+_wrap_PyNs3SystemWallClockMs_GetElapsedUser(PyNs3SystemWallClockMs *self)
+{
+    PyObject *py_retval;
+    int64_t retval;
+    
+    retval = self->obj->GetElapsedUser();
+    py_retval = Py_BuildValue((char *) "L", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SystemWallClockMs_Start(PyNs3SystemWallClockMs *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->Start();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
 static PyObject*
 _wrap_PyNs3SystemWallClockMs__copy__(PyNs3SystemWallClockMs *self)
 {
@@ -15669,11 +15669,11 @@ _wrap_PyNs3SystemWallClockMs__copy__(PyNs3SystemWallClockMs *self)
 }
 
 static PyMethodDef PyNs3SystemWallClockMs_methods[] = {
-    {(char *) "Start", (PyCFunction) _wrap_PyNs3SystemWallClockMs_Start, METH_NOARGS, "Start()\n\n" },
-    {(char *) "GetElapsedUser", (PyCFunction) _wrap_PyNs3SystemWallClockMs_GetElapsedUser, METH_NOARGS, "GetElapsedUser()\n\n" },
     {(char *) "End", (PyCFunction) _wrap_PyNs3SystemWallClockMs_End, METH_NOARGS, "End()\n\n" },
     {(char *) "GetElapsedReal", (PyCFunction) _wrap_PyNs3SystemWallClockMs_GetElapsedReal, METH_NOARGS, "GetElapsedReal()\n\n" },
     {(char *) "GetElapsedSystem", (PyCFunction) _wrap_PyNs3SystemWallClockMs_GetElapsedSystem, METH_NOARGS, "GetElapsedSystem()\n\n" },
+    {(char *) "GetElapsedUser", (PyCFunction) _wrap_PyNs3SystemWallClockMs_GetElapsedUser, METH_NOARGS, "GetElapsedUser()\n\n" },
+    {(char *) "Start", (PyCFunction) _wrap_PyNs3SystemWallClockMs_Start, METH_NOARGS, "Start()\n\n" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3SystemWallClockMs__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -16083,12 +16083,40 @@ int _wrap_PyNs3Timer__tp_init(PyNs3Timer *self, PyObject *args, PyObject *kwargs
 
 
 PyObject *
+_wrap_PyNs3Timer_Cancel(PyNs3Timer *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->Cancel();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3Timer_GetDelay(PyNs3Timer *self)
 {
     PyObject *py_retval;
     PyNs3Time *py_Time;
     
     ns3::Time retval = self->obj->GetDelay();
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Timer_GetDelayLeft(PyNs3Timer *self)
+{
+    PyObject *py_retval;
+    PyNs3Time *py_Time;
+    
+    ns3::Time retval = self->obj->GetDelayLeft();
     py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
     py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
     py_Time->obj = new ns3::Time(retval);
@@ -16111,6 +16139,18 @@ _wrap_PyNs3Timer_GetState(PyNs3Timer *self)
 
 
 PyObject *
+_wrap_PyNs3Timer_IsExpired(PyNs3Timer *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->IsExpired();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3Timer_IsRunning(PyNs3Timer *self)
 {
     PyObject *py_retval;
@@ -16123,11 +16163,23 @@ _wrap_PyNs3Timer_IsRunning(PyNs3Timer *self)
 
 
 PyObject *
-_wrap_PyNs3Timer_Resume(PyNs3Timer *self)
+_wrap_PyNs3Timer_IsSuspended(PyNs3Timer *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->IsSuspended();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Timer_Remove(PyNs3Timer *self)
 {
     PyObject *py_retval;
     
-    self->obj->Resume();
+    self->obj->Remove();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -16135,17 +16187,13 @@ _wrap_PyNs3Timer_Resume(PyNs3Timer *self)
 
 
 PyObject *
-_wrap_PyNs3Timer_GetDelayLeft(PyNs3Timer *self)
+_wrap_PyNs3Timer_Resume(PyNs3Timer *self)
 {
     PyObject *py_retval;
-    PyNs3Time *py_Time;
     
-    ns3::Time retval = self->obj->GetDelayLeft();
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
+    self->obj->Resume();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -16220,23 +16268,16 @@ PyObject * _wrap_PyNs3Timer_Schedule(PyNs3Timer *self, PyObject *args, PyObject 
 
 
 PyObject *
-_wrap_PyNs3Timer_IsSuspended(PyNs3Timer *self)
+_wrap_PyNs3Timer_SetDelay(PyNs3Timer *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    bool retval;
+    PyNs3Time *delay;
+    const char *keywords[] = {"delay", NULL};
     
-    retval = self->obj->IsSuspended();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Timer_Remove(PyNs3Timer *self)
-{
-    PyObject *py_retval;
-    
-    self->obj->Remove();
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Time_Type, &delay)) {
+        return NULL;
+    }
+    self->obj->SetDelay(*((PyNs3Time *) delay)->obj);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -16249,47 +16290,6 @@ _wrap_PyNs3Timer_Suspend(PyNs3Timer *self)
     PyObject *py_retval;
     
     self->obj->Suspend();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Timer_Cancel(PyNs3Timer *self)
-{
-    PyObject *py_retval;
-    
-    self->obj->Cancel();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Timer_IsExpired(PyNs3Timer *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->IsExpired();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Timer_SetDelay(PyNs3Timer *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Time *delay;
-    const char *keywords[] = {"delay", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Time_Type, &delay)) {
-        return NULL;
-    }
-    self->obj->SetDelay(*((PyNs3Time *) delay)->obj);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -16309,18 +16309,18 @@ _wrap_PyNs3Timer__copy__(PyNs3Timer *self)
 }
 
 static PyMethodDef PyNs3Timer_methods[] = {
+    {(char *) "Cancel", (PyCFunction) _wrap_PyNs3Timer_Cancel, METH_NOARGS, "Cancel()\n\n" },
     {(char *) "GetDelay", (PyCFunction) _wrap_PyNs3Timer_GetDelay, METH_NOARGS, "GetDelay()\n\n" },
-    {(char *) "GetState", (PyCFunction) _wrap_PyNs3Timer_GetState, METH_NOARGS, "GetState()\n\n" },
-    {(char *) "IsRunning", (PyCFunction) _wrap_PyNs3Timer_IsRunning, METH_NOARGS, "IsRunning()\n\n" },
-    {(char *) "Resume", (PyCFunction) _wrap_PyNs3Timer_Resume, METH_NOARGS, "Resume()\n\n" },
     {(char *) "GetDelayLeft", (PyCFunction) _wrap_PyNs3Timer_GetDelayLeft, METH_NOARGS, "GetDelayLeft()\n\n" },
-    {(char *) "Schedule", (PyCFunction) _wrap_PyNs3Timer_Schedule, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "GetState", (PyCFunction) _wrap_PyNs3Timer_GetState, METH_NOARGS, "GetState()\n\n" },
+    {(char *) "IsExpired", (PyCFunction) _wrap_PyNs3Timer_IsExpired, METH_NOARGS, "IsExpired()\n\n" },
+    {(char *) "IsRunning", (PyCFunction) _wrap_PyNs3Timer_IsRunning, METH_NOARGS, "IsRunning()\n\n" },
     {(char *) "IsSuspended", (PyCFunction) _wrap_PyNs3Timer_IsSuspended, METH_NOARGS, "IsSuspended()\n\n" },
     {(char *) "Remove", (PyCFunction) _wrap_PyNs3Timer_Remove, METH_NOARGS, "Remove()\n\n" },
-    {(char *) "Suspend", (PyCFunction) _wrap_PyNs3Timer_Suspend, METH_NOARGS, "Suspend()\n\n" },
-    {(char *) "Cancel", (PyCFunction) _wrap_PyNs3Timer_Cancel, METH_NOARGS, "Cancel()\n\n" },
-    {(char *) "IsExpired", (PyCFunction) _wrap_PyNs3Timer_IsExpired, METH_NOARGS, "IsExpired()\n\n" },
+    {(char *) "Resume", (PyCFunction) _wrap_PyNs3Timer_Resume, METH_NOARGS, "Resume()\n\n" },
+    {(char *) "Schedule", (PyCFunction) _wrap_PyNs3Timer_Schedule, METH_KEYWORDS|METH_VARARGS, NULL },
     {(char *) "SetDelay", (PyCFunction) _wrap_PyNs3Timer_SetDelay, METH_KEYWORDS|METH_VARARGS, "SetDelay(delay)\n\ntype: delay: ns3::Time const &" },
+    {(char *) "Suspend", (PyCFunction) _wrap_PyNs3Timer_Suspend, METH_NOARGS, "Suspend()\n\n" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3Timer__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -16743,7 +16743,7 @@ PyTypeObject PyNs3TimerImpl_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE,                      /* tp_flags */
     "TimerImpl(arg0)\nTimerImpl()",                        /* Documentation string */
     (traverseproc)PyNs3TimerImpl__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3TimerImpl__tp_clear,             /* tp_clear */
@@ -16869,93 +16869,24 @@ int _wrap_PyNs3TypeId__tp_init(PyNs3TypeId *self, PyObject *args, PyObject *kwar
 }
 
 
-PyObject *
-_wrap_PyNs3TypeId_SetUid(PyNs3TypeId *self, PyObject *args, PyObject *kwargs)
+
+PyObject * _wrap_TypeId_LookupByNameFailSafe(PyNs3TypeId *self, PyObject *args, PyObject *kwargs, PyObject **return_exception);
+
+PyObject * _wrap_PyNs3TypeId_LookupByNameFailSafe(PyNs3TypeId *self, PyObject *args, PyObject *kwargs)
 {
-    PyObject *py_retval;
-    int uid;
-    const char *keywords[] = {"uid", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &uid)) {
-        return NULL;
+    PyObject * retval;
+    PyObject *error_list;
+    PyObject *exceptions[1] = {0,};
+    retval = _wrap_TypeId_LookupByNameFailSafe(self, args, kwargs, &exceptions[0]);
+    if (!exceptions[0]) {
+        return retval;
     }
-    if (uid > 0xffff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SetUid(uid);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3TypeId_GetParent(PyNs3TypeId *self)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = self->obj->GetParent();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3TypeId_GetAttributeFullName(PyNs3TypeId *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    std::string retval;
-    unsigned int i;
-    const char *keywords[] = {"i", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &i)) {
-        return NULL;
-    }
-    retval = self->obj->GetAttributeFullName(i);
-    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3TypeId_GetRegisteredN(void)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = ns3::TypeId::GetRegisteredN();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3TypeId_GetTraceSourceN(PyNs3TypeId *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetTraceSourceN();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3TypeId_HasConstructor(PyNs3TypeId *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->HasConstructor();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
+    error_list = PyList_New(1);
+    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
+    Py_DECREF(exceptions[0]);
+    PyErr_SetObject(PyExc_TypeError, error_list);
+    Py_DECREF(error_list);
+    return NULL;
 }
 
 
@@ -17074,313 +17005,6 @@ PyObject * _wrap_PyNs3TypeId_AddAttribute(PyNs3TypeId *self, PyObject *args, PyO
 }
 
 
-PyObject *
-_wrap_PyNs3TypeId_SetSize(PyNs3TypeId *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned PY_LONG_LONG size;
-    const char *keywords[] = {"size", NULL};
-    PyNs3TypeId *py_TypeId;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "K", (char **) keywords, &size)) {
-        return NULL;
-    }
-    ns3::TypeId retval = self->obj->SetSize(size);
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3TypeId_LookupAttributeByName(PyNs3TypeId *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    const char *name;
-    Py_ssize_t name_len;
-    PyNs3TypeIdAttributeInformation *info;
-    ns3::TypeId::AttributeInformation *info_ptr;
-    const char *keywords[] = {"name", "info", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3TypeIdAttributeInformation_Type, &info)) {
-        return NULL;
-    }
-    info_ptr = (info ? info->obj : NULL);
-    retval = self->obj->LookupAttributeByName(std::string(name, name_len), info_ptr);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3TypeId_GetAttribute(PyNs3TypeId *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int i;
-    const char *keywords[] = {"i", NULL};
-    PyNs3TypeIdAttributeInformation *py_AttributeInformation;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &i)) {
-        return NULL;
-    }
-    ns3::TypeId::AttributeInformation retval = self->obj->GetAttribute(i);
-    py_AttributeInformation = PyObject_New(PyNs3TypeIdAttributeInformation, &PyNs3TypeIdAttributeInformation_Type);
-    py_AttributeInformation->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_AttributeInformation->obj = new ns3::TypeId::AttributeInformation(retval);
-    PyNs3TypeIdAttributeInformation_wrapper_registry[(void *) py_AttributeInformation->obj] = (PyObject *) py_AttributeInformation;
-    py_retval = Py_BuildValue((char *) "N", py_AttributeInformation);
-    return py_retval;
-}
-
-
-
-PyObject * _wrap_TypeId_LookupByNameFailSafe(PyNs3TypeId *self, PyObject *args, PyObject *kwargs, PyObject **return_exception);
-
-PyObject * _wrap_PyNs3TypeId_LookupByNameFailSafe(PyNs3TypeId *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject * retval;
-    PyObject *error_list;
-    PyObject *exceptions[1] = {0,};
-    retval = _wrap_TypeId_LookupByNameFailSafe(self, args, kwargs, &exceptions[0]);
-    if (!exceptions[0]) {
-        return retval;
-    }
-    error_list = PyList_New(1);
-    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
-    Py_DECREF(exceptions[0]);
-    PyErr_SetObject(PyExc_TypeError, error_list);
-    Py_DECREF(error_list);
-    return NULL;
-}
-
-
-PyObject *
-_wrap_PyNs3TypeId_GetAttributeN(PyNs3TypeId *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetAttributeN();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3TypeId_GetSize(PyNs3TypeId *self)
-{
-    PyObject *py_retval;
-    std::size_t retval;
-    
-    retval = self->obj->GetSize();
-    py_retval = Py_BuildValue((char *) "K", ((unsigned PY_LONG_LONG) retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3TypeId_SetGroupName(PyNs3TypeId *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    const char *groupName;
-    Py_ssize_t groupName_len;
-    const char *keywords[] = {"groupName", NULL};
-    PyNs3TypeId *py_TypeId;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#", (char **) keywords, &groupName, &groupName_len)) {
-        return NULL;
-    }
-    ns3::TypeId retval = self->obj->SetGroupName(std::string(groupName, groupName_len));
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3TypeId_LookupByHash(PyNs3TypeId *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int hash;
-    const char *keywords[] = {"hash", NULL};
-    PyNs3TypeId *py_TypeId;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &hash)) {
-        return NULL;
-    }
-    ns3::TypeId retval = ns3::TypeId::LookupByHash(hash);
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3TypeId_GetGroupName(PyNs3TypeId *self)
-{
-    PyObject *py_retval;
-    std::string retval;
-    
-    retval = self->obj->GetGroupName();
-    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3TypeId_HasParent(PyNs3TypeId *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->HasParent();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3TypeId_GetRegistered(PyNs3TypeId *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int i;
-    const char *keywords[] = {"i", NULL};
-    PyNs3TypeId *py_TypeId;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &i)) {
-        return NULL;
-    }
-    ns3::TypeId retval = ns3::TypeId::GetRegistered(i);
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3TypeId_GetName(PyNs3TypeId *self)
-{
-    PyObject *py_retval;
-    std::string retval;
-    
-    retval = self->obj->GetName();
-    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3TypeId_LookupTraceSourceByName(PyNs3TypeId *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    ns3::Ptr< ns3::TraceSourceAccessor const > retval;
-    const char *name;
-    Py_ssize_t name_len;
-    const char *keywords[] = {"name", NULL};
-    PyNs3TraceSourceAccessor *py_TraceSourceAccessor;
-    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
-    PyTypeObject *wrapper_type = 0;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#", (char **) keywords, &name, &name_len)) {
-        return NULL;
-    }
-    retval = self->obj->LookupTraceSourceByName(std::string(name, name_len));
-    if (!(const_cast<ns3::TraceSourceAccessor *> (ns3::PeekPointer (retval)))) {
-        Py_INCREF(Py_None);
-        return Py_None;
-    }
-    wrapper_lookup_iter = PyNs3Empty_wrapper_registry.find((void *) const_cast<ns3::TraceSourceAccessor *> (ns3::PeekPointer (retval)));
-    if (wrapper_lookup_iter == PyNs3Empty_wrapper_registry.end()) {
-        py_TraceSourceAccessor = NULL;
-    } else {
-        py_TraceSourceAccessor = (PyNs3TraceSourceAccessor *) wrapper_lookup_iter->second;
-        Py_INCREF(py_TraceSourceAccessor);
-    }
-    
-    if (py_TraceSourceAccessor == NULL) {
-        wrapper_type = PyNs3SimpleRefCount__Ns3TraceSourceAccessor_Ns3Empty_Ns3DefaultDeleter__lt__ns3TraceSourceAccessor__gt____typeid_map.lookup_wrapper(typeid((*const_cast<ns3::TraceSourceAccessor *> (ns3::PeekPointer (retval)))), &PyNs3TraceSourceAccessor_Type);
-        py_TraceSourceAccessor = PyObject_New(PyNs3TraceSourceAccessor, wrapper_type);
-    
-        py_TraceSourceAccessor->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-        const_cast<ns3::TraceSourceAccessor *> (ns3::PeekPointer (retval))->Ref();
-        py_TraceSourceAccessor->obj = const_cast<ns3::TraceSourceAccessor *> (ns3::PeekPointer (retval));
-        PyNs3Empty_wrapper_registry[(void *) py_TraceSourceAccessor->obj] = (PyObject *) py_TraceSourceAccessor;
-    }
-    py_retval = Py_BuildValue((char *) "N", py_TraceSourceAccessor);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3TypeId_IsChildOf(PyNs3TypeId *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3TypeId *other;
-    const char *keywords[] = {"other", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3TypeId_Type, &other)) {
-        return NULL;
-    }
-    retval = self->obj->IsChildOf(*((PyNs3TypeId *) other)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3TypeId_MustHideFromDocumentation(PyNs3TypeId *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->MustHideFromDocumentation();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3TypeId_HideFromDocumentation(PyNs3TypeId *self)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = self->obj->HideFromDocumentation();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3TypeId_GetUid(PyNs3TypeId *self)
-{
-    PyObject *py_retval;
-    uint16_t retval;
-    
-    retval = self->obj->GetUid();
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
 
 PyObject *
 _wrap_PyNs3TypeId_AddTraceSource__0(PyNs3TypeId *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
@@ -17491,6 +17115,285 @@ PyObject * _wrap_PyNs3TypeId_AddTraceSource(PyNs3TypeId *self, PyObject *args, P
 
 
 PyObject *
+_wrap_PyNs3TypeId_GetAttribute(PyNs3TypeId *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int i;
+    const char *keywords[] = {"i", NULL};
+    PyNs3TypeIdAttributeInformation *py_AttributeInformation;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &i)) {
+        return NULL;
+    }
+    ns3::TypeId::AttributeInformation retval = self->obj->GetAttribute(i);
+    py_AttributeInformation = PyObject_New(PyNs3TypeIdAttributeInformation, &PyNs3TypeIdAttributeInformation_Type);
+    py_AttributeInformation->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_AttributeInformation->obj = new ns3::TypeId::AttributeInformation(retval);
+    PyNs3TypeIdAttributeInformation_wrapper_registry[(void *) py_AttributeInformation->obj] = (PyObject *) py_AttributeInformation;
+    py_retval = Py_BuildValue((char *) "N", py_AttributeInformation);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3TypeId_GetAttributeFullName(PyNs3TypeId *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    std::string retval;
+    unsigned int i;
+    const char *keywords[] = {"i", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &i)) {
+        return NULL;
+    }
+    retval = self->obj->GetAttributeFullName(i);
+    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3TypeId_GetAttributeN(PyNs3TypeId *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetAttributeN();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3TypeId_GetGroupName(PyNs3TypeId *self)
+{
+    PyObject *py_retval;
+    std::string retval;
+    
+    retval = self->obj->GetGroupName();
+    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3TypeId_GetName(PyNs3TypeId *self)
+{
+    PyObject *py_retval;
+    std::string retval;
+    
+    retval = self->obj->GetName();
+    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3TypeId_GetParent(PyNs3TypeId *self)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = self->obj->GetParent();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3TypeId_GetRegistered(PyNs3TypeId *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int i;
+    const char *keywords[] = {"i", NULL};
+    PyNs3TypeId *py_TypeId;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &i)) {
+        return NULL;
+    }
+    ns3::TypeId retval = ns3::TypeId::GetRegistered(i);
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3TypeId_GetRegisteredN(void)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = ns3::TypeId::GetRegisteredN();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3TypeId_GetSize(PyNs3TypeId *self)
+{
+    PyObject *py_retval;
+    std::size_t retval;
+    
+    retval = self->obj->GetSize();
+    py_retval = Py_BuildValue((char *) "K", ((unsigned PY_LONG_LONG) retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3TypeId_GetTraceSource(PyNs3TypeId *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int i;
+    const char *keywords[] = {"i", NULL};
+    PyNs3TypeIdTraceSourceInformation *py_TraceSourceInformation;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &i)) {
+        return NULL;
+    }
+    ns3::TypeId::TraceSourceInformation retval = self->obj->GetTraceSource(i);
+    py_TraceSourceInformation = PyObject_New(PyNs3TypeIdTraceSourceInformation, &PyNs3TypeIdTraceSourceInformation_Type);
+    py_TraceSourceInformation->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TraceSourceInformation->obj = new ns3::TypeId::TraceSourceInformation(retval);
+    PyNs3TypeIdTraceSourceInformation_wrapper_registry[(void *) py_TraceSourceInformation->obj] = (PyObject *) py_TraceSourceInformation;
+    py_retval = Py_BuildValue((char *) "N", py_TraceSourceInformation);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3TypeId_GetTraceSourceN(PyNs3TypeId *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetTraceSourceN();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3TypeId_GetUid(PyNs3TypeId *self)
+{
+    PyObject *py_retval;
+    uint16_t retval;
+    
+    retval = self->obj->GetUid();
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3TypeId_HasConstructor(PyNs3TypeId *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->HasConstructor();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3TypeId_HasParent(PyNs3TypeId *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->HasParent();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3TypeId_HideFromDocumentation(PyNs3TypeId *self)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = self->obj->HideFromDocumentation();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3TypeId_IsChildOf(PyNs3TypeId *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3TypeId *other;
+    const char *keywords[] = {"other", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3TypeId_Type, &other)) {
+        return NULL;
+    }
+    retval = self->obj->IsChildOf(*((PyNs3TypeId *) other)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3TypeId_LookupAttributeByName(PyNs3TypeId *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    const char *name;
+    Py_ssize_t name_len;
+    PyNs3TypeIdAttributeInformation *info;
+    ns3::TypeId::AttributeInformation *info_ptr;
+    const char *keywords[] = {"name", "info", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3TypeIdAttributeInformation_Type, &info)) {
+        return NULL;
+    }
+    info_ptr = (info ? info->obj : NULL);
+    retval = self->obj->LookupAttributeByName(std::string(name, name_len), info_ptr);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3TypeId_LookupByHash(PyNs3TypeId *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int hash;
+    const char *keywords[] = {"hash", NULL};
+    PyNs3TypeId *py_TypeId;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &hash)) {
+        return NULL;
+    }
+    ns3::TypeId retval = ns3::TypeId::LookupByHash(hash);
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3TypeId_LookupByName(PyNs3TypeId *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -17503,6 +17406,102 @@ _wrap_PyNs3TypeId_LookupByName(PyNs3TypeId *PYBINDGEN_UNUSED(dummy), PyObject *a
         return NULL;
     }
     ns3::TypeId retval = ns3::TypeId::LookupByName(std::string(name, name_len));
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3TypeId_LookupTraceSourceByName(PyNs3TypeId *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    ns3::Ptr< ns3::TraceSourceAccessor const > retval;
+    const char *name;
+    Py_ssize_t name_len;
+    const char *keywords[] = {"name", NULL};
+    PyNs3TraceSourceAccessor *py_TraceSourceAccessor;
+    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
+    PyTypeObject *wrapper_type = 0;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#", (char **) keywords, &name, &name_len)) {
+        return NULL;
+    }
+    retval = self->obj->LookupTraceSourceByName(std::string(name, name_len));
+    if (!(const_cast<ns3::TraceSourceAccessor *> (ns3::PeekPointer (retval)))) {
+        Py_INCREF(Py_None);
+        return Py_None;
+    }
+    wrapper_lookup_iter = PyNs3Empty_wrapper_registry.find((void *) const_cast<ns3::TraceSourceAccessor *> (ns3::PeekPointer (retval)));
+    if (wrapper_lookup_iter == PyNs3Empty_wrapper_registry.end()) {
+        py_TraceSourceAccessor = NULL;
+    } else {
+        py_TraceSourceAccessor = (PyNs3TraceSourceAccessor *) wrapper_lookup_iter->second;
+        Py_INCREF(py_TraceSourceAccessor);
+    }
+    
+    if (py_TraceSourceAccessor == NULL) {
+        wrapper_type = PyNs3SimpleRefCount__Ns3TraceSourceAccessor_Ns3Empty_Ns3DefaultDeleter__lt__ns3TraceSourceAccessor__gt____typeid_map.lookup_wrapper(typeid((*const_cast<ns3::TraceSourceAccessor *> (ns3::PeekPointer (retval)))), &PyNs3TraceSourceAccessor_Type);
+        py_TraceSourceAccessor = PyObject_New(PyNs3TraceSourceAccessor, wrapper_type);
+    
+        py_TraceSourceAccessor->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+        const_cast<ns3::TraceSourceAccessor *> (ns3::PeekPointer (retval))->Ref();
+        py_TraceSourceAccessor->obj = const_cast<ns3::TraceSourceAccessor *> (ns3::PeekPointer (retval));
+        PyNs3Empty_wrapper_registry[(void *) py_TraceSourceAccessor->obj] = (PyObject *) py_TraceSourceAccessor;
+    }
+    py_retval = Py_BuildValue((char *) "N", py_TraceSourceAccessor);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3TypeId_MustHideFromDocumentation(PyNs3TypeId *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->MustHideFromDocumentation();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3TypeId_SetAttributeInitialValue(PyNs3TypeId *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    unsigned int i;
+    PyNs3AttributeValue *initialValue;
+    ns3::AttributeValue *initialValue_ptr;
+    const char *keywords[] = {"i", "initialValue", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "IO!", (char **) keywords, &i, &PyNs3AttributeValue_Type, &initialValue)) {
+        return NULL;
+    }
+    initialValue_ptr = (initialValue ? initialValue->obj : NULL);
+    retval = self->obj->SetAttributeInitialValue(i, ns3::Ptr< ns3::AttributeValue  > (initialValue_ptr));
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3TypeId_SetGroupName(PyNs3TypeId *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    const char *groupName;
+    Py_ssize_t groupName_len;
+    const char *keywords[] = {"groupName", NULL};
+    PyNs3TypeId *py_TypeId;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#", (char **) keywords, &groupName, &groupName_len)) {
+        return NULL;
+    }
+    ns3::TypeId retval = self->obj->SetGroupName(std::string(groupName, groupName_len));
     py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
     py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
     py_TypeId->obj = new ns3::TypeId(retval);
@@ -17534,42 +17533,43 @@ _wrap_PyNs3TypeId_SetParent(PyNs3TypeId *self, PyObject *args, PyObject *kwargs)
 
 
 PyObject *
-_wrap_PyNs3TypeId_SetAttributeInitialValue(PyNs3TypeId *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3TypeId_SetSize(PyNs3TypeId *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    bool retval;
-    unsigned int i;
-    PyNs3AttributeValue *initialValue;
-    ns3::AttributeValue *initialValue_ptr;
-    const char *keywords[] = {"i", "initialValue", NULL};
+    unsigned PY_LONG_LONG size;
+    const char *keywords[] = {"size", NULL};
+    PyNs3TypeId *py_TypeId;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "IO!", (char **) keywords, &i, &PyNs3AttributeValue_Type, &initialValue)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "K", (char **) keywords, &size)) {
         return NULL;
     }
-    initialValue_ptr = (initialValue ? initialValue->obj : NULL);
-    retval = self->obj->SetAttributeInitialValue(i, ns3::Ptr< ns3::AttributeValue  > (initialValue_ptr));
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    ns3::TypeId retval = self->obj->SetSize(size);
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3TypeId_GetTraceSource(PyNs3TypeId *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3TypeId_SetUid(PyNs3TypeId *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    unsigned int i;
-    const char *keywords[] = {"i", NULL};
-    PyNs3TypeIdTraceSourceInformation *py_TraceSourceInformation;
+    int uid;
+    const char *keywords[] = {"uid", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &i)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &uid)) {
         return NULL;
     }
-    ns3::TypeId::TraceSourceInformation retval = self->obj->GetTraceSource(i);
-    py_TraceSourceInformation = PyObject_New(PyNs3TypeIdTraceSourceInformation, &PyNs3TypeIdTraceSourceInformation_Type);
-    py_TraceSourceInformation->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TraceSourceInformation->obj = new ns3::TypeId::TraceSourceInformation(retval);
-    PyNs3TypeIdTraceSourceInformation_wrapper_registry[(void *) py_TraceSourceInformation->obj] = (PyObject *) py_TraceSourceInformation;
-    py_retval = Py_BuildValue((char *) "N", py_TraceSourceInformation);
+    if (uid > 0xffff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SetUid(uid);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -17587,35 +17587,35 @@ _wrap_PyNs3TypeId__copy__(PyNs3TypeId *self)
 }
 
 static PyMethodDef PyNs3TypeId_methods[] = {
-    {(char *) "SetUid", (PyCFunction) _wrap_PyNs3TypeId_SetUid, METH_KEYWORDS|METH_VARARGS, "SetUid(uid)\n\ntype: uid: uint16_t" },
-    {(char *) "GetParent", (PyCFunction) _wrap_PyNs3TypeId_GetParent, METH_NOARGS, "GetParent()\n\n" },
-    {(char *) "GetAttributeFullName", (PyCFunction) _wrap_PyNs3TypeId_GetAttributeFullName, METH_KEYWORDS|METH_VARARGS, "GetAttributeFullName(i)\n\ntype: i: uint32_t" },
-    {(char *) "GetRegisteredN", (PyCFunction) _wrap_PyNs3TypeId_GetRegisteredN, METH_NOARGS|METH_STATIC, "GetRegisteredN()\n\n" },
-    {(char *) "GetTraceSourceN", (PyCFunction) _wrap_PyNs3TypeId_GetTraceSourceN, METH_NOARGS, "GetTraceSourceN()\n\n" },
-    {(char *) "HasConstructor", (PyCFunction) _wrap_PyNs3TypeId_HasConstructor, METH_NOARGS, "HasConstructor()\n\n" },
+    {(char *) "LookupByNameFailSafe", (PyCFunction) _wrap_PyNs3TypeId_LookupByNameFailSafe, METH_KEYWORDS|METH_VARARGS|METH_STATIC, NULL },
     {(char *) "AddAttribute", (PyCFunction) _wrap_PyNs3TypeId_AddAttribute, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "SetSize", (PyCFunction) _wrap_PyNs3TypeId_SetSize, METH_KEYWORDS|METH_VARARGS, "SetSize(size)\n\ntype: size: std::size_t" },
-    {(char *) "LookupAttributeByName", (PyCFunction) _wrap_PyNs3TypeId_LookupAttributeByName, METH_KEYWORDS|METH_VARARGS, "LookupAttributeByName(name, info)\n\ntype: name: std::string\ntype: info: ns3::TypeId::AttributeInformation *" },
-    {(char *) "GetAttribute", (PyCFunction) _wrap_PyNs3TypeId_GetAttribute, METH_KEYWORDS|METH_VARARGS, "GetAttribute(i)\n\ntype: i: uint32_t" },
-    {(char *) "LookupByNameFailSafe", (PyCFunction) _wrap_PyNs3TypeId_LookupByNameFailSafe, METH_STATIC|METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "GetAttributeN", (PyCFunction) _wrap_PyNs3TypeId_GetAttributeN, METH_NOARGS, "GetAttributeN()\n\n" },
-    {(char *) "GetSize", (PyCFunction) _wrap_PyNs3TypeId_GetSize, METH_NOARGS, "GetSize()\n\n" },
-    {(char *) "SetGroupName", (PyCFunction) _wrap_PyNs3TypeId_SetGroupName, METH_KEYWORDS|METH_VARARGS, "SetGroupName(groupName)\n\ntype: groupName: std::string" },
-    {(char *) "LookupByHash", (PyCFunction) _wrap_PyNs3TypeId_LookupByHash, METH_KEYWORDS|METH_VARARGS|METH_STATIC, "LookupByHash(hash)\n\ntype: hash: uint32_t" },
-    {(char *) "GetGroupName", (PyCFunction) _wrap_PyNs3TypeId_GetGroupName, METH_NOARGS, "GetGroupName()\n\n" },
-    {(char *) "HasParent", (PyCFunction) _wrap_PyNs3TypeId_HasParent, METH_NOARGS, "HasParent()\n\n" },
-    {(char *) "GetRegistered", (PyCFunction) _wrap_PyNs3TypeId_GetRegistered, METH_KEYWORDS|METH_VARARGS|METH_STATIC, "GetRegistered(i)\n\ntype: i: uint32_t" },
-    {(char *) "GetName", (PyCFunction) _wrap_PyNs3TypeId_GetName, METH_NOARGS, "GetName()\n\n" },
-    {(char *) "LookupTraceSourceByName", (PyCFunction) _wrap_PyNs3TypeId_LookupTraceSourceByName, METH_KEYWORDS|METH_VARARGS, "LookupTraceSourceByName(name)\n\ntype: name: std::string" },
-    {(char *) "IsChildOf", (PyCFunction) _wrap_PyNs3TypeId_IsChildOf, METH_KEYWORDS|METH_VARARGS, "IsChildOf(other)\n\ntype: other: ns3::TypeId" },
-    {(char *) "MustHideFromDocumentation", (PyCFunction) _wrap_PyNs3TypeId_MustHideFromDocumentation, METH_NOARGS, "MustHideFromDocumentation()\n\n" },
-    {(char *) "HideFromDocumentation", (PyCFunction) _wrap_PyNs3TypeId_HideFromDocumentation, METH_NOARGS, "HideFromDocumentation()\n\n" },
-    {(char *) "GetUid", (PyCFunction) _wrap_PyNs3TypeId_GetUid, METH_NOARGS, "GetUid()\n\n" },
     {(char *) "AddTraceSource", (PyCFunction) _wrap_PyNs3TypeId_AddTraceSource, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "LookupByName", (PyCFunction) _wrap_PyNs3TypeId_LookupByName, METH_KEYWORDS|METH_VARARGS|METH_STATIC, "LookupByName(name)\n\ntype: name: std::string" },
-    {(char *) "SetParent", (PyCFunction) _wrap_PyNs3TypeId_SetParent, METH_KEYWORDS|METH_VARARGS, "SetParent(tid)\n\ntype: tid: ns3::TypeId" },
-    {(char *) "SetAttributeInitialValue", (PyCFunction) _wrap_PyNs3TypeId_SetAttributeInitialValue, METH_KEYWORDS|METH_VARARGS, "SetAttributeInitialValue(i, initialValue)\n\ntype: i: uint32_t\ntype: initialValue: ns3::Ptr< ns3::AttributeValue const >" },
+    {(char *) "GetAttribute", (PyCFunction) _wrap_PyNs3TypeId_GetAttribute, METH_KEYWORDS|METH_VARARGS, "GetAttribute(i)\n\ntype: i: uint32_t" },
+    {(char *) "GetAttributeFullName", (PyCFunction) _wrap_PyNs3TypeId_GetAttributeFullName, METH_KEYWORDS|METH_VARARGS, "GetAttributeFullName(i)\n\ntype: i: uint32_t" },
+    {(char *) "GetAttributeN", (PyCFunction) _wrap_PyNs3TypeId_GetAttributeN, METH_NOARGS, "GetAttributeN()\n\n" },
+    {(char *) "GetGroupName", (PyCFunction) _wrap_PyNs3TypeId_GetGroupName, METH_NOARGS, "GetGroupName()\n\n" },
+    {(char *) "GetName", (PyCFunction) _wrap_PyNs3TypeId_GetName, METH_NOARGS, "GetName()\n\n" },
+    {(char *) "GetParent", (PyCFunction) _wrap_PyNs3TypeId_GetParent, METH_NOARGS, "GetParent()\n\n" },
+    {(char *) "GetRegistered", (PyCFunction) _wrap_PyNs3TypeId_GetRegistered, METH_KEYWORDS|METH_VARARGS|METH_STATIC, "GetRegistered(i)\n\ntype: i: uint32_t" },
+    {(char *) "GetRegisteredN", (PyCFunction) _wrap_PyNs3TypeId_GetRegisteredN, METH_NOARGS|METH_STATIC, "GetRegisteredN()\n\n" },
+    {(char *) "GetSize", (PyCFunction) _wrap_PyNs3TypeId_GetSize, METH_NOARGS, "GetSize()\n\n" },
     {(char *) "GetTraceSource", (PyCFunction) _wrap_PyNs3TypeId_GetTraceSource, METH_KEYWORDS|METH_VARARGS, "GetTraceSource(i)\n\ntype: i: uint32_t" },
+    {(char *) "GetTraceSourceN", (PyCFunction) _wrap_PyNs3TypeId_GetTraceSourceN, METH_NOARGS, "GetTraceSourceN()\n\n" },
+    {(char *) "GetUid", (PyCFunction) _wrap_PyNs3TypeId_GetUid, METH_NOARGS, "GetUid()\n\n" },
+    {(char *) "HasConstructor", (PyCFunction) _wrap_PyNs3TypeId_HasConstructor, METH_NOARGS, "HasConstructor()\n\n" },
+    {(char *) "HasParent", (PyCFunction) _wrap_PyNs3TypeId_HasParent, METH_NOARGS, "HasParent()\n\n" },
+    {(char *) "HideFromDocumentation", (PyCFunction) _wrap_PyNs3TypeId_HideFromDocumentation, METH_NOARGS, "HideFromDocumentation()\n\n" },
+    {(char *) "IsChildOf", (PyCFunction) _wrap_PyNs3TypeId_IsChildOf, METH_KEYWORDS|METH_VARARGS, "IsChildOf(other)\n\ntype: other: ns3::TypeId" },
+    {(char *) "LookupAttributeByName", (PyCFunction) _wrap_PyNs3TypeId_LookupAttributeByName, METH_KEYWORDS|METH_VARARGS, "LookupAttributeByName(name, info)\n\ntype: name: std::string\ntype: info: ns3::TypeId::AttributeInformation *" },
+    {(char *) "LookupByHash", (PyCFunction) _wrap_PyNs3TypeId_LookupByHash, METH_KEYWORDS|METH_VARARGS|METH_STATIC, "LookupByHash(hash)\n\ntype: hash: uint32_t" },
+    {(char *) "LookupByName", (PyCFunction) _wrap_PyNs3TypeId_LookupByName, METH_KEYWORDS|METH_VARARGS|METH_STATIC, "LookupByName(name)\n\ntype: name: std::string" },
+    {(char *) "LookupTraceSourceByName", (PyCFunction) _wrap_PyNs3TypeId_LookupTraceSourceByName, METH_KEYWORDS|METH_VARARGS, "LookupTraceSourceByName(name)\n\ntype: name: std::string" },
+    {(char *) "MustHideFromDocumentation", (PyCFunction) _wrap_PyNs3TypeId_MustHideFromDocumentation, METH_NOARGS, "MustHideFromDocumentation()\n\n" },
+    {(char *) "SetAttributeInitialValue", (PyCFunction) _wrap_PyNs3TypeId_SetAttributeInitialValue, METH_KEYWORDS|METH_VARARGS, "SetAttributeInitialValue(i, initialValue)\n\ntype: i: uint32_t\ntype: initialValue: ns3::Ptr< ns3::AttributeValue const >" },
+    {(char *) "SetGroupName", (PyCFunction) _wrap_PyNs3TypeId_SetGroupName, METH_KEYWORDS|METH_VARARGS, "SetGroupName(groupName)\n\ntype: groupName: std::string" },
+    {(char *) "SetParent", (PyCFunction) _wrap_PyNs3TypeId_SetParent, METH_KEYWORDS|METH_VARARGS, "SetParent(tid)\n\ntype: tid: ns3::TypeId" },
+    {(char *) "SetSize", (PyCFunction) _wrap_PyNs3TypeId_SetSize, METH_KEYWORDS|METH_VARARGS, "SetSize(size)\n\ntype: size: std::size_t" },
+    {(char *) "SetUid", (PyCFunction) _wrap_PyNs3TypeId_SetUid, METH_KEYWORDS|METH_VARARGS, "SetUid(uid)\n\ntype: uid: uint16_t" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3TypeId__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -18043,37 +18043,9 @@ static int _wrap_PyNs3TypeIdAttributeInformation__set_supportMsg(PyNs3TypeIdAttr
 }
 static PyGetSetDef PyNs3TypeIdAttributeInformation__getsets[] = {
     {
-        (char*) "supportLevel", /* attribute name */
-        (getter) _wrap_PyNs3TypeIdAttributeInformation__get_supportLevel, /* C function to get the attribute */
-        (setter) _wrap_PyNs3TypeIdAttributeInformation__set_supportLevel, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
-        (char*) "originalInitialValue", /* attribute name */
-        (getter) _wrap_PyNs3TypeIdAttributeInformation__get_originalInitialValue, /* C function to get the attribute */
-        (setter) _wrap_PyNs3TypeIdAttributeInformation__set_originalInitialValue, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
-        (char*) "initialValue", /* attribute name */
-        (getter) _wrap_PyNs3TypeIdAttributeInformation__get_initialValue, /* C function to get the attribute */
-        (setter) _wrap_PyNs3TypeIdAttributeInformation__set_initialValue, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
-        (char*) "name", /* attribute name */
-        (getter) _wrap_PyNs3TypeIdAttributeInformation__get_name, /* C function to get the attribute */
-        (setter) _wrap_PyNs3TypeIdAttributeInformation__set_name, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
-        (char*) "supportMsg", /* attribute name */
-        (getter) _wrap_PyNs3TypeIdAttributeInformation__get_supportMsg, /* C function to get the attribute */
-        (setter) _wrap_PyNs3TypeIdAttributeInformation__set_supportMsg, /* C function to set the attribute */
+        (char*) "accessor", /* attribute name */
+        (getter) _wrap_PyNs3TypeIdAttributeInformation__get_accessor, /* C function to get the attribute */
+        (setter) _wrap_PyNs3TypeIdAttributeInformation__set_accessor, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -18092,16 +18064,44 @@ static PyGetSetDef PyNs3TypeIdAttributeInformation__getsets[] = {
         NULL /* optional additional data for getter and setter */
     },
     {
-        (char*) "accessor", /* attribute name */
-        (getter) _wrap_PyNs3TypeIdAttributeInformation__get_accessor, /* C function to get the attribute */
-        (setter) _wrap_PyNs3TypeIdAttributeInformation__set_accessor, /* C function to set the attribute */
+        (char*) "help", /* attribute name */
+        (getter) _wrap_PyNs3TypeIdAttributeInformation__get_help, /* C function to get the attribute */
+        (setter) _wrap_PyNs3TypeIdAttributeInformation__set_help, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
     {
-        (char*) "help", /* attribute name */
-        (getter) _wrap_PyNs3TypeIdAttributeInformation__get_help, /* C function to get the attribute */
-        (setter) _wrap_PyNs3TypeIdAttributeInformation__set_help, /* C function to set the attribute */
+        (char*) "initialValue", /* attribute name */
+        (getter) _wrap_PyNs3TypeIdAttributeInformation__get_initialValue, /* C function to get the attribute */
+        (setter) _wrap_PyNs3TypeIdAttributeInformation__set_initialValue, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "name", /* attribute name */
+        (getter) _wrap_PyNs3TypeIdAttributeInformation__get_name, /* C function to get the attribute */
+        (setter) _wrap_PyNs3TypeIdAttributeInformation__set_name, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "originalInitialValue", /* attribute name */
+        (getter) _wrap_PyNs3TypeIdAttributeInformation__get_originalInitialValue, /* C function to get the attribute */
+        (setter) _wrap_PyNs3TypeIdAttributeInformation__set_originalInitialValue, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "supportLevel", /* attribute name */
+        (getter) _wrap_PyNs3TypeIdAttributeInformation__get_supportLevel, /* C function to get the attribute */
+        (setter) _wrap_PyNs3TypeIdAttributeInformation__set_supportLevel, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "supportMsg", /* attribute name */
+        (getter) _wrap_PyNs3TypeIdAttributeInformation__get_supportMsg, /* C function to get the attribute */
+        (setter) _wrap_PyNs3TypeIdAttributeInformation__set_supportMsg, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -18452,23 +18452,9 @@ static int _wrap_PyNs3TypeIdTraceSourceInformation__set_supportMsg(PyNs3TypeIdTr
 }
 static PyGetSetDef PyNs3TypeIdTraceSourceInformation__getsets[] = {
     {
-        (char*) "supportLevel", /* attribute name */
-        (getter) _wrap_PyNs3TypeIdTraceSourceInformation__get_supportLevel, /* C function to get the attribute */
-        (setter) _wrap_PyNs3TypeIdTraceSourceInformation__set_supportLevel, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
-        (char*) "name", /* attribute name */
-        (getter) _wrap_PyNs3TypeIdTraceSourceInformation__get_name, /* C function to get the attribute */
-        (setter) _wrap_PyNs3TypeIdTraceSourceInformation__set_name, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
-        (char*) "supportMsg", /* attribute name */
-        (getter) _wrap_PyNs3TypeIdTraceSourceInformation__get_supportMsg, /* C function to get the attribute */
-        (setter) _wrap_PyNs3TypeIdTraceSourceInformation__set_supportMsg, /* C function to set the attribute */
+        (char*) "accessor", /* attribute name */
+        (getter) _wrap_PyNs3TypeIdTraceSourceInformation__get_accessor, /* C function to get the attribute */
+        (setter) _wrap_PyNs3TypeIdTraceSourceInformation__set_accessor, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -18480,16 +18466,30 @@ static PyGetSetDef PyNs3TypeIdTraceSourceInformation__getsets[] = {
         NULL /* optional additional data for getter and setter */
     },
     {
-        (char*) "accessor", /* attribute name */
-        (getter) _wrap_PyNs3TypeIdTraceSourceInformation__get_accessor, /* C function to get the attribute */
-        (setter) _wrap_PyNs3TypeIdTraceSourceInformation__set_accessor, /* C function to set the attribute */
+        (char*) "help", /* attribute name */
+        (getter) _wrap_PyNs3TypeIdTraceSourceInformation__get_help, /* C function to get the attribute */
+        (setter) _wrap_PyNs3TypeIdTraceSourceInformation__set_help, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
     {
-        (char*) "help", /* attribute name */
-        (getter) _wrap_PyNs3TypeIdTraceSourceInformation__get_help, /* C function to get the attribute */
-        (setter) _wrap_PyNs3TypeIdTraceSourceInformation__set_help, /* C function to set the attribute */
+        (char*) "name", /* attribute name */
+        (getter) _wrap_PyNs3TypeIdTraceSourceInformation__get_name, /* C function to get the attribute */
+        (setter) _wrap_PyNs3TypeIdTraceSourceInformation__set_name, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "supportLevel", /* attribute name */
+        (getter) _wrap_PyNs3TypeIdTraceSourceInformation__get_supportLevel, /* C function to get the attribute */
+        (setter) _wrap_PyNs3TypeIdTraceSourceInformation__set_supportLevel, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "supportMsg", /* attribute name */
+        (getter) _wrap_PyNs3TypeIdTraceSourceInformation__get_supportMsg, /* C function to get the attribute */
+        (setter) _wrap_PyNs3TypeIdTraceSourceInformation__set_supportMsg, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -18725,16 +18725,16 @@ static int _wrap_PyNs3Vector2D__set_y(PyNs3Vector2D *self, PyObject *value, void
 }
 static PyGetSetDef PyNs3Vector2D__getsets[] = {
     {
-        (char*) "y", /* attribute name */
-        (getter) _wrap_PyNs3Vector2D__get_y, /* C function to get the attribute */
-        (setter) _wrap_PyNs3Vector2D__set_y, /* C function to set the attribute */
+        (char*) "x", /* attribute name */
+        (getter) _wrap_PyNs3Vector2D__get_x, /* C function to get the attribute */
+        (setter) _wrap_PyNs3Vector2D__set_x, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
     {
-        (char*) "x", /* attribute name */
-        (getter) _wrap_PyNs3Vector2D__get_x, /* C function to get the attribute */
-        (setter) _wrap_PyNs3Vector2D__set_x, /* C function to set the attribute */
+        (char*) "y", /* attribute name */
+        (getter) _wrap_PyNs3Vector2D__get_y, /* C function to get the attribute */
+        (setter) _wrap_PyNs3Vector2D__set_y, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -19198,16 +19198,16 @@ static int _wrap_PyNs3Vector3D__set_z(PyNs3Vector3D *self, PyObject *value, void
 }
 static PyGetSetDef PyNs3Vector3D__getsets[] = {
     {
-        (char*) "y", /* attribute name */
-        (getter) _wrap_PyNs3Vector3D__get_y, /* C function to get the attribute */
-        (setter) _wrap_PyNs3Vector3D__set_y, /* C function to set the attribute */
+        (char*) "x", /* attribute name */
+        (getter) _wrap_PyNs3Vector3D__get_x, /* C function to get the attribute */
+        (setter) _wrap_PyNs3Vector3D__set_x, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
     {
-        (char*) "x", /* attribute name */
-        (getter) _wrap_PyNs3Vector3D__get_x, /* C function to get the attribute */
-        (setter) _wrap_PyNs3Vector3D__set_x, /* C function to set the attribute */
+        (char*) "y", /* attribute name */
+        (getter) _wrap_PyNs3Vector3D__get_y, /* C function to get the attribute */
+        (setter) _wrap_PyNs3Vector3D__set_y, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -20433,6 +20433,18 @@ _wrap_PyNs3Int64x64_t_GetDouble(PyNs3Int64x64_t *self)
 
 
 PyObject *
+_wrap_PyNs3Int64x64_t_GetHigh(PyNs3Int64x64_t *self)
+{
+    PyObject *py_retval;
+    int64_t retval;
+    
+    retval = self->obj->GetHigh();
+    py_retval = Py_BuildValue((char *) "L", retval);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3Int64x64_t_GetLow(PyNs3Int64x64_t *self)
 {
     PyObject *py_retval;
@@ -20492,18 +20504,6 @@ _wrap_PyNs3Int64x64_t_MulByInvert(PyNs3Int64x64_t *self, PyObject *args, PyObjec
 }
 
 
-PyObject *
-_wrap_PyNs3Int64x64_t_GetHigh(PyNs3Int64x64_t *self)
-{
-    PyObject *py_retval;
-    int64_t retval;
-    
-    retval = self->obj->GetHigh();
-    py_retval = Py_BuildValue((char *) "L", retval);
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3Int64x64_t__copy__(PyNs3Int64x64_t *self)
 {
@@ -20518,10 +20518,10 @@ _wrap_PyNs3Int64x64_t__copy__(PyNs3Int64x64_t *self)
 
 static PyMethodDef PyNs3Int64x64_t_methods[] = {
     {(char *) "GetDouble", (PyCFunction) _wrap_PyNs3Int64x64_t_GetDouble, METH_NOARGS, "GetDouble()\n\n" },
+    {(char *) "GetHigh", (PyCFunction) _wrap_PyNs3Int64x64_t_GetHigh, METH_NOARGS, "GetHigh()\n\n" },
     {(char *) "GetLow", (PyCFunction) _wrap_PyNs3Int64x64_t_GetLow, METH_NOARGS, "GetLow()\n\n" },
     {(char *) "Invert", (PyCFunction) _wrap_PyNs3Int64x64_t_Invert, METH_KEYWORDS|METH_VARARGS|METH_STATIC, "Invert(v)\n\ntype: v: uint64_t const" },
     {(char *) "MulByInvert", (PyCFunction) _wrap_PyNs3Int64x64_t_MulByInvert, METH_KEYWORDS|METH_VARARGS, "MulByInvert(o)\n\ntype: o: ns3::int64x64_t const &" },
-    {(char *) "GetHigh", (PyCFunction) _wrap_PyNs3Int64x64_t_GetHigh, METH_NOARGS, "GetHigh()\n\n" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3Int64x64_t__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -20944,6 +20944,24 @@ _wrap_PyNs3DesMetrics__tp_init(PyNs3DesMetrics *self, PyObject *args, PyObject *
 
 
 PyObject *
+_wrap_PyNs3DesMetrics_Trace(PyNs3DesMetrics *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Time *now;
+    PyNs3Time *delay;
+    const char *keywords[] = {"now", "delay", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3Time_Type, &now, &PyNs3Time_Type, &delay)) {
+        return NULL;
+    }
+    self->obj->Trace(*((PyNs3Time *) now)->obj, *((PyNs3Time *) delay)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3DesMetrics_TraceWithContext(PyNs3DesMetrics *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -20961,27 +20979,9 @@ _wrap_PyNs3DesMetrics_TraceWithContext(PyNs3DesMetrics *self, PyObject *args, Py
     return py_retval;
 }
 
-
-PyObject *
-_wrap_PyNs3DesMetrics_Trace(PyNs3DesMetrics *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Time *now;
-    PyNs3Time *delay;
-    const char *keywords[] = {"now", "delay", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3Time_Type, &now, &PyNs3Time_Type, &delay)) {
-        return NULL;
-    }
-    self->obj->Trace(*((PyNs3Time *) now)->obj, *((PyNs3Time *) delay)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
 static PyMethodDef PyNs3DesMetrics_methods[] = {
-    {(char *) "TraceWithContext", (PyCFunction) _wrap_PyNs3DesMetrics_TraceWithContext, METH_KEYWORDS|METH_VARARGS, "TraceWithContext(context, now, delay)\n\ntype: context: uint32_t\ntype: now: ns3::Time const &\ntype: delay: ns3::Time const &" },
     {(char *) "Trace", (PyCFunction) _wrap_PyNs3DesMetrics_Trace, METH_KEYWORDS|METH_VARARGS, "Trace(now, delay)\n\ntype: now: ns3::Time const &\ntype: delay: ns3::Time const &" },
+    {(char *) "TraceWithContext", (PyCFunction) _wrap_PyNs3DesMetrics_TraceWithContext, METH_KEYWORDS|METH_VARARGS, "TraceWithContext(context, now, delay)\n\ntype: context: uint32_t\ntype: now: ns3::Time const &\ntype: delay: ns3::Time const &" },
     {NULL, NULL, 0, NULL}
 };
 
@@ -21093,16 +21093,16 @@ PyTypeObject PyNs3DesMetrics_Type = {
 
 
 PyObject *
-PyNs3Object__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3Object *self)
+PyNs3Object__PythonHelper::_wrap_DoDispose(PyNs3Object *self)
 {
     PyObject *py_retval;
     PyNs3Object__PythonHelper *helper = dynamic_cast< PyNs3Object__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -21141,16 +21141,16 @@ PyNs3Object__PythonHelper::_wrap_NotifyNewAggregate(PyNs3Object *self)
 }
 
 PyObject *
-PyNs3Object__PythonHelper::_wrap_DoDispose(PyNs3Object *self)
+PyNs3Object__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3Object *self)
 {
     PyObject *py_retval;
     PyNs3Object__PythonHelper *helper = dynamic_cast< PyNs3Object__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -21490,34 +21490,6 @@ _wrap_PyNs3Object_AggregateObject(PyNs3Object *self, PyObject *args, PyObject *k
 
 
 PyObject *
-_wrap_PyNs3Object_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::Object::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Object_IsInitialized(PyNs3Object *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->IsInitialized();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3Object_Dispose(PyNs3Object *self)
 {
     PyObject *py_retval;
@@ -21525,6 +21497,39 @@ _wrap_PyNs3Object_Dispose(PyNs3Object *self)
     self->obj->Dispose();
     Py_INCREF(Py_None);
     py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Object_GetAggregateIterator(PyNs3Object *self)
+{
+    PyObject *py_retval;
+    PyNs3ObjectAggregateIterator *py_AggregateIterator;
+    
+    ns3::Object::AggregateIterator retval = self->obj->GetAggregateIterator();
+    py_AggregateIterator = PyObject_New(PyNs3ObjectAggregateIterator, &PyNs3ObjectAggregateIterator_Type);
+    py_AggregateIterator->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_AggregateIterator->obj = new ns3::Object::AggregateIterator(retval);
+    PyNs3ObjectAggregateIterator_wrapper_registry[(void *) py_AggregateIterator->obj] = (PyObject *) py_AggregateIterator;
+    py_retval = Py_BuildValue((char *) "N", py_AggregateIterator);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Object_GetInstanceTypeId(PyNs3Object *self)
+{
+    PyObject *py_retval;
+    PyNs3Object__PythonHelper *helper_class = dynamic_cast<PyNs3Object__PythonHelper*> (self->obj);
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = (helper_class == NULL)? (self->obj->GetInstanceTypeId()) : (self->obj->ns3::Object::GetInstanceTypeId());
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
     return py_retval;
 }
 
@@ -21580,13 +21585,12 @@ _wrap_PyNs3Object_GetObject(PyNs3Object *self, PyObject *args, PyObject *kwargs)
 
 
 PyObject *
-_wrap_PyNs3Object_GetInstanceTypeId(PyNs3Object *self)
+_wrap_PyNs3Object_GetTypeId(void)
 {
     PyObject *py_retval;
-    PyNs3Object__PythonHelper *helper_class = dynamic_cast<PyNs3Object__PythonHelper*> (self->obj);
     PyNs3TypeId *py_TypeId;
     
-    ns3::TypeId retval = (helper_class == NULL)? (self->obj->GetInstanceTypeId()) : (self->obj->ns3::Object::GetInstanceTypeId());
+    ns3::TypeId retval = ns3::Object::GetTypeId();
     py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
     py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
     py_TypeId->obj = new ns3::TypeId(retval);
@@ -21609,33 +21613,29 @@ _wrap_PyNs3Object_Initialize(PyNs3Object *self)
 
 
 PyObject *
-_wrap_PyNs3Object_GetAggregateIterator(PyNs3Object *self)
+_wrap_PyNs3Object_IsInitialized(PyNs3Object *self)
 {
     PyObject *py_retval;
-    PyNs3ObjectAggregateIterator *py_AggregateIterator;
+    bool retval;
     
-    ns3::Object::AggregateIterator retval = self->obj->GetAggregateIterator();
-    py_AggregateIterator = PyObject_New(PyNs3ObjectAggregateIterator, &PyNs3ObjectAggregateIterator_Type);
-    py_AggregateIterator->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_AggregateIterator->obj = new ns3::Object::AggregateIterator(retval);
-    PyNs3ObjectAggregateIterator_wrapper_registry[(void *) py_AggregateIterator->obj] = (PyObject *) py_AggregateIterator;
-    py_retval = Py_BuildValue((char *) "N", py_AggregateIterator);
+    retval = self->obj->IsInitialized();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
 static PyMethodDef PyNs3Object_methods[] = {
     {(char *) "AggregateObject", (PyCFunction) _wrap_PyNs3Object_AggregateObject, METH_KEYWORDS|METH_VARARGS, "AggregateObject(other)\n\ntype: other: ns3::Ptr< ns3::Object >" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3Object_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "IsInitialized", (PyCFunction) _wrap_PyNs3Object_IsInitialized, METH_NOARGS, "IsInitialized()\n\n" },
     {(char *) "Dispose", (PyCFunction) _wrap_PyNs3Object_Dispose, METH_NOARGS, "Dispose()\n\n" },
-    {(char *) "GetObject", (PyCFunction) _wrap_PyNs3Object_GetObject, METH_KEYWORDS|METH_VARARGS, "GetObject(tid)\n\ntype: tid: ns3::TypeId" },
-    {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3Object_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
-    {(char *) "Initialize", (PyCFunction) _wrap_PyNs3Object_Initialize, METH_NOARGS, "Initialize()\n\n" },
     {(char *) "GetAggregateIterator", (PyCFunction) _wrap_PyNs3Object_GetAggregateIterator, METH_NOARGS, "GetAggregateIterator()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3Object__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3Object_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
+    {(char *) "GetObject", (PyCFunction) _wrap_PyNs3Object_GetObject, METH_KEYWORDS|METH_VARARGS, "GetObject(tid)\n\ntype: tid: ns3::TypeId" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3Object_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "Initialize", (PyCFunction) _wrap_PyNs3Object_Initialize, METH_NOARGS, "Initialize()\n\n" },
+    {(char *) "IsInitialized", (PyCFunction) _wrap_PyNs3Object_IsInitialized, METH_NOARGS, "IsInitialized()\n\n" },
+    {(char *) "DoDispose", (PyCFunction) PyNs3Object__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3Object__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3Object__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3Object__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3Object__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 
@@ -21734,7 +21734,7 @@ PyTypeObject PyNs3Object_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE,                      /* tp_flags */
     "Object(o)\nObject()",                        /* Documentation string */
     (traverseproc)PyNs3Object__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3Object__tp_clear,             /* tp_clear */
@@ -22016,16 +22016,16 @@ PyTypeObject PyNs3ObjectAggregateIterator_Type = {
 
 
 PyObject *
-PyNs3RandomVariableStream__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3RandomVariableStream *self)
+PyNs3RandomVariableStream__PythonHelper::_wrap_DoDispose(PyNs3RandomVariableStream *self)
 {
     PyObject *py_retval;
     PyNs3RandomVariableStream__PythonHelper *helper = dynamic_cast< PyNs3RandomVariableStream__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -22064,16 +22064,16 @@ PyNs3RandomVariableStream__PythonHelper::_wrap_NotifyNewAggregate(PyNs3RandomVar
 }
 
 PyObject *
-PyNs3RandomVariableStream__PythonHelper::_wrap_DoDispose(PyNs3RandomVariableStream *self)
+PyNs3RandomVariableStream__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3RandomVariableStream *self)
 {
     PyObject *py_retval;
     PyNs3RandomVariableStream__PythonHelper *helper = dynamic_cast< PyNs3RandomVariableStream__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -22441,32 +22441,17 @@ _wrap_PyNs3RandomVariableStream__tp_init(PyNs3RandomVariableStream *self, PyObje
 
 
 PyObject *
-_wrap_PyNs3RandomVariableStream_SetAntithetic(PyNs3RandomVariableStream *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3RandomVariableStream_GetTypeId(void)
 {
     PyObject *py_retval;
-    bool isAntithetic;
-    PyObject *py_isAntithetic;
-    const char *keywords[] = {"isAntithetic", NULL};
+    PyNs3TypeId *py_TypeId;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &py_isAntithetic)) {
-        return NULL;
-    }
-    isAntithetic = (bool) PyObject_IsTrue(py_isAntithetic);
-    self->obj->SetAntithetic(isAntithetic);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RandomVariableStream_GetInteger(PyNs3RandomVariableStream *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetInteger();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    ns3::TypeId retval = ns3::RandomVariableStream::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
     return py_retval;
 }
 
@@ -22489,17 +22474,44 @@ _wrap_PyNs3RandomVariableStream_SetStream(PyNs3RandomVariableStream *self, PyObj
 
 
 PyObject *
-_wrap_PyNs3RandomVariableStream_GetTypeId(void)
+_wrap_PyNs3RandomVariableStream_GetStream(PyNs3RandomVariableStream *self)
 {
     PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
+    int64_t retval;
     
-    ns3::TypeId retval = ns3::RandomVariableStream::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    retval = self->obj->GetStream();
+    py_retval = Py_BuildValue((char *) "L", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RandomVariableStream_SetAntithetic(PyNs3RandomVariableStream *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool isAntithetic;
+    PyObject *py_isAntithetic;
+    const char *keywords[] = {"isAntithetic", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &py_isAntithetic)) {
+        return NULL;
+    }
+    isAntithetic = (bool) PyObject_IsTrue(py_isAntithetic);
+    self->obj->SetAntithetic(isAntithetic);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RandomVariableStream_IsAntithetic(PyNs3RandomVariableStream *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->IsAntithetic();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
@@ -22517,40 +22529,28 @@ _wrap_PyNs3RandomVariableStream_GetValue(PyNs3RandomVariableStream *self)
 
 
 PyObject *
-_wrap_PyNs3RandomVariableStream_GetStream(PyNs3RandomVariableStream *self)
+_wrap_PyNs3RandomVariableStream_GetInteger(PyNs3RandomVariableStream *self)
 {
     PyObject *py_retval;
-    int64_t retval;
+    uint32_t retval;
     
-    retval = self->obj->GetStream();
-    py_retval = Py_BuildValue((char *) "L", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RandomVariableStream_IsAntithetic(PyNs3RandomVariableStream *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->IsAntithetic();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    retval = self->obj->GetInteger();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
 
 static PyMethodDef PyNs3RandomVariableStream_methods[] = {
-    {(char *) "SetAntithetic", (PyCFunction) _wrap_PyNs3RandomVariableStream_SetAntithetic, METH_KEYWORDS|METH_VARARGS, "SetAntithetic(isAntithetic)\n\ntype: isAntithetic: bool" },
-    {(char *) "GetInteger", (PyCFunction) _wrap_PyNs3RandomVariableStream_GetInteger, METH_NOARGS, "GetInteger()\n\n" },
-    {(char *) "SetStream", (PyCFunction) _wrap_PyNs3RandomVariableStream_SetStream, METH_KEYWORDS|METH_VARARGS, "SetStream(stream)\n\ntype: stream: int64_t" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3RandomVariableStream_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "GetValue", (PyCFunction) _wrap_PyNs3RandomVariableStream_GetValue, METH_NOARGS, "GetValue()\n\n" },
+    {(char *) "SetStream", (PyCFunction) _wrap_PyNs3RandomVariableStream_SetStream, METH_KEYWORDS|METH_VARARGS, "SetStream(stream)\n\ntype: stream: int64_t" },
     {(char *) "GetStream", (PyCFunction) _wrap_PyNs3RandomVariableStream_GetStream, METH_NOARGS, "GetStream()\n\n" },
+    {(char *) "SetAntithetic", (PyCFunction) _wrap_PyNs3RandomVariableStream_SetAntithetic, METH_KEYWORDS|METH_VARARGS, "SetAntithetic(isAntithetic)\n\ntype: isAntithetic: bool" },
     {(char *) "IsAntithetic", (PyCFunction) _wrap_PyNs3RandomVariableStream_IsAntithetic, METH_NOARGS, "IsAntithetic()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3RandomVariableStream__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "GetValue", (PyCFunction) _wrap_PyNs3RandomVariableStream_GetValue, METH_NOARGS, "GetValue()\n\n" },
+    {(char *) "GetInteger", (PyCFunction) _wrap_PyNs3RandomVariableStream_GetInteger, METH_NOARGS, "GetInteger()\n\n" },
+    {(char *) "DoDispose", (PyCFunction) PyNs3RandomVariableStream__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3RandomVariableStream__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3RandomVariableStream__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3RandomVariableStream__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3RandomVariableStream__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 
@@ -22649,7 +22649,7 @@ PyTypeObject PyNs3RandomVariableStream_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE,                      /* tp_flags */
     "RandomVariableStream()",                        /* Documentation string */
     (traverseproc)PyNs3RandomVariableStream__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3RandomVariableStream__tp_clear,             /* tp_clear */
@@ -22682,16 +22682,16 @@ PyTypeObject PyNs3RandomVariableStream_Type = {
 
 
 PyObject *
-PyNs3Scheduler__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3Scheduler *self)
+PyNs3Scheduler__PythonHelper::_wrap_DoDispose(PyNs3Scheduler *self)
 {
     PyObject *py_retval;
     PyNs3Scheduler__PythonHelper *helper = dynamic_cast< PyNs3Scheduler__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -22730,16 +22730,16 @@ PyNs3Scheduler__PythonHelper::_wrap_NotifyNewAggregate(PyNs3Scheduler *self)
 }
 
 PyObject *
-PyNs3Scheduler__PythonHelper::_wrap_DoDispose(PyNs3Scheduler *self)
+PyNs3Scheduler__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3Scheduler *self)
 {
     PyObject *py_retval;
     PyNs3Scheduler__PythonHelper *helper = dynamic_cast< PyNs3Scheduler__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -23307,6 +23307,22 @@ int _wrap_PyNs3Scheduler__tp_init(PyNs3Scheduler *self, PyObject *args, PyObject
 
 
 PyObject *
+_wrap_PyNs3Scheduler_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::Scheduler::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3Scheduler_Insert(PyNs3Scheduler *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -23324,6 +23340,18 @@ _wrap_PyNs3Scheduler_Insert(PyNs3Scheduler *self, PyObject *args, PyObject *kwar
 
 
 PyObject *
+_wrap_PyNs3Scheduler_IsEmpty(PyNs3Scheduler *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->IsEmpty();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3Scheduler_PeekNext(PyNs3Scheduler *self)
 {
     PyObject *py_retval;
@@ -23335,22 +23363,6 @@ _wrap_PyNs3Scheduler_PeekNext(PyNs3Scheduler *self)
     py_Event->obj = new ns3::Scheduler::Event(retval);
     PyNs3SchedulerEvent_wrapper_registry[(void *) py_Event->obj] = (PyObject *) py_Event;
     py_retval = Py_BuildValue((char *) "N", py_Event);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Scheduler_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::Scheduler::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
     return py_retval;
 }
 
@@ -23373,18 +23385,6 @@ _wrap_PyNs3Scheduler_Remove(PyNs3Scheduler *self, PyObject *args, PyObject *kwar
 
 
 PyObject *
-_wrap_PyNs3Scheduler_IsEmpty(PyNs3Scheduler *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->IsEmpty();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3Scheduler_RemoveNext(PyNs3Scheduler *self)
 {
     PyObject *py_retval;
@@ -23400,16 +23400,16 @@ _wrap_PyNs3Scheduler_RemoveNext(PyNs3Scheduler *self)
 }
 
 static PyMethodDef PyNs3Scheduler_methods[] = {
-    {(char *) "Insert", (PyCFunction) _wrap_PyNs3Scheduler_Insert, METH_KEYWORDS|METH_VARARGS, "Insert(ev)\n\ntype: ev: ns3::Scheduler::Event const &" },
-    {(char *) "PeekNext", (PyCFunction) _wrap_PyNs3Scheduler_PeekNext, METH_NOARGS, "PeekNext()\n\n" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3Scheduler_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "Remove", (PyCFunction) _wrap_PyNs3Scheduler_Remove, METH_KEYWORDS|METH_VARARGS, "Remove(ev)\n\ntype: ev: ns3::Scheduler::Event const &" },
+    {(char *) "Insert", (PyCFunction) _wrap_PyNs3Scheduler_Insert, METH_KEYWORDS|METH_VARARGS, "Insert(ev)\n\ntype: ev: ns3::Scheduler::Event const &" },
     {(char *) "IsEmpty", (PyCFunction) _wrap_PyNs3Scheduler_IsEmpty, METH_NOARGS, "IsEmpty()\n\n" },
+    {(char *) "PeekNext", (PyCFunction) _wrap_PyNs3Scheduler_PeekNext, METH_NOARGS, "PeekNext()\n\n" },
+    {(char *) "Remove", (PyCFunction) _wrap_PyNs3Scheduler_Remove, METH_KEYWORDS|METH_VARARGS, "Remove(ev)\n\ntype: ev: ns3::Scheduler::Event const &" },
     {(char *) "RemoveNext", (PyCFunction) _wrap_PyNs3Scheduler_RemoveNext, METH_NOARGS, "RemoveNext()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3Scheduler__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "DoDispose", (PyCFunction) PyNs3Scheduler__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3Scheduler__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3Scheduler__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3Scheduler__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3Scheduler__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 
@@ -23508,7 +23508,7 @@ PyTypeObject PyNs3Scheduler_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE,                      /* tp_flags */
     "Scheduler(arg0)\nScheduler()",                        /* Documentation string */
     (traverseproc)PyNs3Scheduler__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3Scheduler__tp_clear,             /* tp_clear */
@@ -24058,16 +24058,16 @@ PyTypeObject PyNs3SchedulerEventKey_Type = {
 
 
 PyObject *
-PyNs3SequentialRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3SequentialRandomVariable *self)
+PyNs3SequentialRandomVariable__PythonHelper::_wrap_DoDispose(PyNs3SequentialRandomVariable *self)
 {
     PyObject *py_retval;
     PyNs3SequentialRandomVariable__PythonHelper *helper = dynamic_cast< PyNs3SequentialRandomVariable__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -24106,16 +24106,16 @@ PyNs3SequentialRandomVariable__PythonHelper::_wrap_NotifyNewAggregate(PyNs3Seque
 }
 
 PyObject *
-PyNs3SequentialRandomVariable__PythonHelper::_wrap_DoDispose(PyNs3SequentialRandomVariable *self)
+PyNs3SequentialRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3SequentialRandomVariable *self)
 {
     PyObject *py_retval;
     PyNs3SequentialRandomVariable__PythonHelper *helper = dynamic_cast< PyNs3SequentialRandomVariable__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -24467,18 +24467,6 @@ _wrap_PyNs3SequentialRandomVariable__tp_init(PyNs3SequentialRandomVariable *self
 
 
 PyObject *
-_wrap_PyNs3SequentialRandomVariable_GetConsecutive(PyNs3SequentialRandomVariable *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetConsecutive();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3SequentialRandomVariable_GetTypeId(void)
 {
     PyObject *py_retval;
@@ -24495,38 +24483,24 @@ _wrap_PyNs3SequentialRandomVariable_GetTypeId(void)
 
 
 PyObject *
-_wrap_PyNs3SequentialRandomVariable_GetValue(PyNs3SequentialRandomVariable *self)
-{
-    PyObject *py_retval;
-    double retval;
-    PyNs3SequentialRandomVariable__PythonHelper *helper_class = dynamic_cast<PyNs3SequentialRandomVariable__PythonHelper*> (self->obj);
-    
-    retval = (helper_class == NULL)? (self->obj->GetValue()) : (self->obj->ns3::SequentialRandomVariable::GetValue());
-    py_retval = Py_BuildValue((char *) "d", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SequentialRandomVariable_GetInteger(PyNs3SequentialRandomVariable *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    PyNs3SequentialRandomVariable__PythonHelper *helper_class = dynamic_cast<PyNs3SequentialRandomVariable__PythonHelper*> (self->obj);
-    
-    retval = (helper_class == NULL)? (self->obj->GetInteger()) : (self->obj->ns3::SequentialRandomVariable::GetInteger());
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3SequentialRandomVariable_GetMin(PyNs3SequentialRandomVariable *self)
 {
     PyObject *py_retval;
     double retval;
     
     retval = self->obj->GetMin();
+    py_retval = Py_BuildValue((char *) "d", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SequentialRandomVariable_GetMax(PyNs3SequentialRandomVariable *self)
+{
+    PyObject *py_retval;
+    double retval;
+    
+    retval = self->obj->GetMax();
     py_retval = Py_BuildValue((char *) "d", retval);
     return py_retval;
 }
@@ -24578,28 +24552,54 @@ _wrap_PyNs3SequentialRandomVariable_GetIncrement(PyNs3SequentialRandomVariable *
 
 
 PyObject *
-_wrap_PyNs3SequentialRandomVariable_GetMax(PyNs3SequentialRandomVariable *self)
+_wrap_PyNs3SequentialRandomVariable_GetConsecutive(PyNs3SequentialRandomVariable *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetConsecutive();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SequentialRandomVariable_GetValue(PyNs3SequentialRandomVariable *self)
 {
     PyObject *py_retval;
     double retval;
+    PyNs3SequentialRandomVariable__PythonHelper *helper_class = dynamic_cast<PyNs3SequentialRandomVariable__PythonHelper*> (self->obj);
     
-    retval = self->obj->GetMax();
+    retval = (helper_class == NULL)? (self->obj->GetValue()) : (self->obj->ns3::SequentialRandomVariable::GetValue());
     py_retval = Py_BuildValue((char *) "d", retval);
     return py_retval;
 }
 
+
+PyObject *
+_wrap_PyNs3SequentialRandomVariable_GetInteger(PyNs3SequentialRandomVariable *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    PyNs3SequentialRandomVariable__PythonHelper *helper_class = dynamic_cast<PyNs3SequentialRandomVariable__PythonHelper*> (self->obj);
+    
+    retval = (helper_class == NULL)? (self->obj->GetInteger()) : (self->obj->ns3::SequentialRandomVariable::GetInteger());
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
 static PyMethodDef PyNs3SequentialRandomVariable_methods[] = {
-    {(char *) "GetConsecutive", (PyCFunction) _wrap_PyNs3SequentialRandomVariable_GetConsecutive, METH_NOARGS, "GetConsecutive()\n\n" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3SequentialRandomVariable_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "GetMin", (PyCFunction) _wrap_PyNs3SequentialRandomVariable_GetMin, METH_NOARGS, "GetMin()\n\n" },
+    {(char *) "GetMax", (PyCFunction) _wrap_PyNs3SequentialRandomVariable_GetMax, METH_NOARGS, "GetMax()\n\n" },
+    {(char *) "GetIncrement", (PyCFunction) _wrap_PyNs3SequentialRandomVariable_GetIncrement, METH_NOARGS, "GetIncrement()\n\n" },
+    {(char *) "GetConsecutive", (PyCFunction) _wrap_PyNs3SequentialRandomVariable_GetConsecutive, METH_NOARGS, "GetConsecutive()\n\n" },
     {(char *) "GetValue", (PyCFunction) _wrap_PyNs3SequentialRandomVariable_GetValue, METH_NOARGS, "GetValue()\n\n" },
     {(char *) "GetInteger", (PyCFunction) _wrap_PyNs3SequentialRandomVariable_GetInteger, METH_NOARGS, "GetInteger()\n\n" },
-    {(char *) "GetMin", (PyCFunction) _wrap_PyNs3SequentialRandomVariable_GetMin, METH_NOARGS, "GetMin()\n\n" },
-    {(char *) "GetIncrement", (PyCFunction) _wrap_PyNs3SequentialRandomVariable_GetIncrement, METH_NOARGS, "GetIncrement()\n\n" },
-    {(char *) "GetMax", (PyCFunction) _wrap_PyNs3SequentialRandomVariable_GetMax, METH_NOARGS, "GetMax()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3SequentialRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "DoDispose", (PyCFunction) PyNs3SequentialRandomVariable__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3SequentialRandomVariable__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3SequentialRandomVariable__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3SequentialRandomVariable__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3SequentialRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 
@@ -24698,7 +24698,7 @@ PyTypeObject PyNs3SequentialRandomVariable_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE,                      /* tp_flags */
     "SequentialRandomVariable()",                        /* Documentation string */
     (traverseproc)PyNs3SequentialRandomVariable__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3SequentialRandomVariable__tp_clear,             /* tp_clear */
@@ -26669,11 +26669,16 @@ _wrap_PyNs3SimulatorImpl__tp_init(void)
 
 
 PyObject *
-_wrap_PyNs3SimulatorImpl_Run(PyNs3SimulatorImpl *self)
+_wrap_PyNs3SimulatorImpl_Cancel(PyNs3SimulatorImpl *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
+    PyNs3EventId *id;
+    const char *keywords[] = {"id", NULL};
     
-    self->obj->Run();
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3EventId_Type, &id)) {
+        return NULL;
+    }
+    self->obj->Cancel(*((PyNs3EventId *) id)->obj);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -26681,29 +26686,25 @@ _wrap_PyNs3SimulatorImpl_Run(PyNs3SimulatorImpl *self)
 
 
 PyObject *
-_wrap_PyNs3SimulatorImpl_GetMaximumSimulationTime(PyNs3SimulatorImpl *self)
+_wrap_PyNs3SimulatorImpl_Destroy(PyNs3SimulatorImpl *self)
 {
     PyObject *py_retval;
-    PyNs3Time *py_Time;
     
-    ns3::Time retval = self->obj->GetMaximumSimulationTime();
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
+    self->obj->Destroy();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3SimulatorImpl_IsFinished(PyNs3SimulatorImpl *self)
+_wrap_PyNs3SimulatorImpl_GetContext(PyNs3SimulatorImpl *self)
 {
     PyObject *py_retval;
-    bool retval;
+    uint32_t retval;
     
-    retval = self->obj->IsFinished();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    retval = self->obj->GetContext();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
 
@@ -26730,6 +26731,22 @@ _wrap_PyNs3SimulatorImpl_GetDelayLeft(PyNs3SimulatorImpl *self, PyObject *args, 
 
 
 PyObject *
+_wrap_PyNs3SimulatorImpl_GetMaximumSimulationTime(PyNs3SimulatorImpl *self)
+{
+    PyObject *py_retval;
+    PyNs3Time *py_Time;
+    
+    ns3::Time retval = self->obj->GetMaximumSimulationTime();
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3SimulatorImpl_GetSystemId(PyNs3SimulatorImpl *self)
 {
     PyObject *py_retval;
@@ -26737,6 +26754,113 @@ _wrap_PyNs3SimulatorImpl_GetSystemId(PyNs3SimulatorImpl *self)
     
     retval = self->obj->GetSystemId();
     py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SimulatorImpl_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::SimulatorImpl::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SimulatorImpl_IsExpired(PyNs3SimulatorImpl *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3EventId *id;
+    const char *keywords[] = {"id", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3EventId_Type, &id)) {
+        return NULL;
+    }
+    retval = self->obj->IsExpired(*((PyNs3EventId *) id)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SimulatorImpl_IsFinished(PyNs3SimulatorImpl *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->IsFinished();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SimulatorImpl_Now(PyNs3SimulatorImpl *self)
+{
+    PyObject *py_retval;
+    PyNs3Time *py_Time;
+    
+    ns3::Time retval = self->obj->Now();
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SimulatorImpl_Remove(PyNs3SimulatorImpl *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3EventId *id;
+    const char *keywords[] = {"id", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3EventId_Type, &id)) {
+        return NULL;
+    }
+    self->obj->Remove(*((PyNs3EventId *) id)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SimulatorImpl_Run(PyNs3SimulatorImpl *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->Run();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SimulatorImpl_SetScheduler(PyNs3SimulatorImpl *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3ObjectFactory *schedulerFactory;
+    const char *keywords[] = {"schedulerFactory", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3ObjectFactory_Type, &schedulerFactory)) {
+        return NULL;
+    }
+    self->obj->SetScheduler(*((PyNs3ObjectFactory *) schedulerFactory)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -26809,145 +26933,21 @@ PyObject * _wrap_PyNs3SimulatorImpl_Stop(PyNs3SimulatorImpl *self, PyObject *arg
     return NULL;
 }
 
-
-PyObject *
-_wrap_PyNs3SimulatorImpl_Remove(PyNs3SimulatorImpl *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3EventId *id;
-    const char *keywords[] = {"id", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3EventId_Type, &id)) {
-        return NULL;
-    }
-    self->obj->Remove(*((PyNs3EventId *) id)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SimulatorImpl_GetContext(PyNs3SimulatorImpl *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetContext();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SimulatorImpl_SetScheduler(PyNs3SimulatorImpl *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3ObjectFactory *schedulerFactory;
-    const char *keywords[] = {"schedulerFactory", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3ObjectFactory_Type, &schedulerFactory)) {
-        return NULL;
-    }
-    self->obj->SetScheduler(*((PyNs3ObjectFactory *) schedulerFactory)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SimulatorImpl_Cancel(PyNs3SimulatorImpl *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3EventId *id;
-    const char *keywords[] = {"id", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3EventId_Type, &id)) {
-        return NULL;
-    }
-    self->obj->Cancel(*((PyNs3EventId *) id)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SimulatorImpl_Destroy(PyNs3SimulatorImpl *self)
-{
-    PyObject *py_retval;
-    
-    self->obj->Destroy();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SimulatorImpl_IsExpired(PyNs3SimulatorImpl *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3EventId *id;
-    const char *keywords[] = {"id", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3EventId_Type, &id)) {
-        return NULL;
-    }
-    retval = self->obj->IsExpired(*((PyNs3EventId *) id)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SimulatorImpl_Now(PyNs3SimulatorImpl *self)
-{
-    PyObject *py_retval;
-    PyNs3Time *py_Time;
-    
-    ns3::Time retval = self->obj->Now();
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SimulatorImpl_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::SimulatorImpl::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
 static PyMethodDef PyNs3SimulatorImpl_methods[] = {
-    {(char *) "Run", (PyCFunction) _wrap_PyNs3SimulatorImpl_Run, METH_NOARGS, "Run()\n\n" },
-    {(char *) "GetMaximumSimulationTime", (PyCFunction) _wrap_PyNs3SimulatorImpl_GetMaximumSimulationTime, METH_NOARGS, "GetMaximumSimulationTime()\n\n" },
-    {(char *) "IsFinished", (PyCFunction) _wrap_PyNs3SimulatorImpl_IsFinished, METH_NOARGS, "IsFinished()\n\n" },
-    {(char *) "GetDelayLeft", (PyCFunction) _wrap_PyNs3SimulatorImpl_GetDelayLeft, METH_KEYWORDS|METH_VARARGS, "GetDelayLeft(id)\n\ntype: id: ns3::EventId const &" },
-    {(char *) "GetSystemId", (PyCFunction) _wrap_PyNs3SimulatorImpl_GetSystemId, METH_NOARGS, "GetSystemId()\n\n" },
-    {(char *) "Stop", (PyCFunction) _wrap_PyNs3SimulatorImpl_Stop, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "Remove", (PyCFunction) _wrap_PyNs3SimulatorImpl_Remove, METH_KEYWORDS|METH_VARARGS, "Remove(id)\n\ntype: id: ns3::EventId const &" },
-    {(char *) "GetContext", (PyCFunction) _wrap_PyNs3SimulatorImpl_GetContext, METH_NOARGS, "GetContext()\n\n" },
-    {(char *) "SetScheduler", (PyCFunction) _wrap_PyNs3SimulatorImpl_SetScheduler, METH_KEYWORDS|METH_VARARGS, "SetScheduler(schedulerFactory)\n\ntype: schedulerFactory: ns3::ObjectFactory" },
     {(char *) "Cancel", (PyCFunction) _wrap_PyNs3SimulatorImpl_Cancel, METH_KEYWORDS|METH_VARARGS, "Cancel(id)\n\ntype: id: ns3::EventId const &" },
     {(char *) "Destroy", (PyCFunction) _wrap_PyNs3SimulatorImpl_Destroy, METH_NOARGS, "Destroy()\n\n" },
-    {(char *) "IsExpired", (PyCFunction) _wrap_PyNs3SimulatorImpl_IsExpired, METH_KEYWORDS|METH_VARARGS, "IsExpired(id)\n\ntype: id: ns3::EventId const &" },
-    {(char *) "Now", (PyCFunction) _wrap_PyNs3SimulatorImpl_Now, METH_NOARGS, "Now()\n\n" },
+    {(char *) "GetContext", (PyCFunction) _wrap_PyNs3SimulatorImpl_GetContext, METH_NOARGS, "GetContext()\n\n" },
+    {(char *) "GetDelayLeft", (PyCFunction) _wrap_PyNs3SimulatorImpl_GetDelayLeft, METH_KEYWORDS|METH_VARARGS, "GetDelayLeft(id)\n\ntype: id: ns3::EventId const &" },
+    {(char *) "GetMaximumSimulationTime", (PyCFunction) _wrap_PyNs3SimulatorImpl_GetMaximumSimulationTime, METH_NOARGS, "GetMaximumSimulationTime()\n\n" },
+    {(char *) "GetSystemId", (PyCFunction) _wrap_PyNs3SimulatorImpl_GetSystemId, METH_NOARGS, "GetSystemId()\n\n" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3SimulatorImpl_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "IsExpired", (PyCFunction) _wrap_PyNs3SimulatorImpl_IsExpired, METH_KEYWORDS|METH_VARARGS, "IsExpired(id)\n\ntype: id: ns3::EventId const &" },
+    {(char *) "IsFinished", (PyCFunction) _wrap_PyNs3SimulatorImpl_IsFinished, METH_NOARGS, "IsFinished()\n\n" },
+    {(char *) "Now", (PyCFunction) _wrap_PyNs3SimulatorImpl_Now, METH_NOARGS, "Now()\n\n" },
+    {(char *) "Remove", (PyCFunction) _wrap_PyNs3SimulatorImpl_Remove, METH_KEYWORDS|METH_VARARGS, "Remove(id)\n\ntype: id: ns3::EventId const &" },
+    {(char *) "Run", (PyCFunction) _wrap_PyNs3SimulatorImpl_Run, METH_NOARGS, "Run()\n\n" },
+    {(char *) "SetScheduler", (PyCFunction) _wrap_PyNs3SimulatorImpl_SetScheduler, METH_KEYWORDS|METH_VARARGS, "SetScheduler(schedulerFactory)\n\ntype: schedulerFactory: ns3::ObjectFactory" },
+    {(char *) "Stop", (PyCFunction) _wrap_PyNs3SimulatorImpl_Stop, METH_KEYWORDS|METH_VARARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 
@@ -27043,7 +27043,7 @@ PyTypeObject PyNs3SimulatorImpl_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE,                      /* tp_flags */
     "SimulatorImpl(arg0)\nSimulatorImpl()",                        /* Documentation string */
     (traverseproc)PyNs3SimulatorImpl__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3SimulatorImpl__tp_clear,             /* tp_clear */
@@ -27076,16 +27076,16 @@ PyTypeObject PyNs3SimulatorImpl_Type = {
 
 
 PyObject *
-PyNs3Synchronizer__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3Synchronizer *self)
+PyNs3Synchronizer__PythonHelper::_wrap_DoDispose(PyNs3Synchronizer *self)
 {
     PyObject *py_retval;
     PyNs3Synchronizer__PythonHelper *helper = dynamic_cast< PyNs3Synchronizer__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -27124,16 +27124,16 @@ PyNs3Synchronizer__PythonHelper::_wrap_NotifyNewAggregate(PyNs3Synchronizer *sel
 }
 
 PyObject *
-PyNs3Synchronizer__PythonHelper::_wrap_DoDispose(PyNs3Synchronizer *self)
+PyNs3Synchronizer__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3Synchronizer *self)
 {
     PyObject *py_retval;
     PyNs3Synchronizer__PythonHelper *helper = dynamic_cast< PyNs3Synchronizer__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -27907,68 +27907,23 @@ int _wrap_PyNs3Synchronizer__tp_init(PyNs3Synchronizer *self, PyObject *args, Py
 
 
 PyObject *
-_wrap_PyNs3Synchronizer_Signal(PyNs3Synchronizer *self)
-{
-    PyObject *py_retval;
-    
-    self->obj->Signal();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Synchronizer_Realtime(PyNs3Synchronizer *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->Realtime();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Synchronizer_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::Synchronizer::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Synchronizer_GetOrigin(PyNs3Synchronizer *self)
+_wrap_PyNs3Synchronizer_EventEnd(PyNs3Synchronizer *self)
 {
     PyObject *py_retval;
     uint64_t retval;
     
-    retval = self->obj->GetOrigin();
+    retval = self->obj->EventEnd();
     py_retval = Py_BuildValue((char *) "K", retval);
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3Synchronizer_SetOrigin(PyNs3Synchronizer *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3Synchronizer_EventStart(PyNs3Synchronizer *self)
 {
     PyObject *py_retval;
-    uint64_t ts;
-    const char *keywords[] = {"ts", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "K", (char **) keywords, &ts)) {
-        return NULL;
-    }
-    self->obj->SetOrigin(ts);
+    self->obj->EventStart();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -27976,19 +27931,13 @@ _wrap_PyNs3Synchronizer_SetOrigin(PyNs3Synchronizer *self, PyObject *args, PyObj
 
 
 PyObject *
-_wrap_PyNs3Synchronizer_Synchronize(PyNs3Synchronizer *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3Synchronizer_GetCurrentRealtime(PyNs3Synchronizer *self)
 {
     PyObject *py_retval;
-    bool retval;
-    uint64_t tsCurrent;
-    uint64_t tsDelay;
-    const char *keywords[] = {"tsCurrent", "tsDelay", NULL};
+    uint64_t retval;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "KK", (char **) keywords, &tsCurrent, &tsDelay)) {
-        return NULL;
-    }
-    retval = self->obj->Synchronize(tsCurrent, tsDelay);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    retval = self->obj->GetCurrentRealtime();
+    py_retval = Py_BuildValue((char *) "K", retval);
     return py_retval;
 }
 
@@ -28011,25 +27960,41 @@ _wrap_PyNs3Synchronizer_GetDrift(PyNs3Synchronizer *self, PyObject *args, PyObje
 
 
 PyObject *
-_wrap_PyNs3Synchronizer_EventStart(PyNs3Synchronizer *self)
+_wrap_PyNs3Synchronizer_GetOrigin(PyNs3Synchronizer *self)
 {
     PyObject *py_retval;
+    uint64_t retval;
     
-    self->obj->EventStart();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    retval = self->obj->GetOrigin();
+    py_retval = Py_BuildValue((char *) "K", retval);
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3Synchronizer_EventEnd(PyNs3Synchronizer *self)
+_wrap_PyNs3Synchronizer_GetTypeId(void)
 {
     PyObject *py_retval;
-    uint64_t retval;
+    PyNs3TypeId *py_TypeId;
     
-    retval = self->obj->EventEnd();
-    py_retval = Py_BuildValue((char *) "K", retval);
+    ns3::TypeId retval = ns3::Synchronizer::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Synchronizer_Realtime(PyNs3Synchronizer *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->Realtime();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
@@ -28054,32 +28019,67 @@ _wrap_PyNs3Synchronizer_SetCondition(PyNs3Synchronizer *self, PyObject *args, Py
 
 
 PyObject *
-_wrap_PyNs3Synchronizer_GetCurrentRealtime(PyNs3Synchronizer *self)
+_wrap_PyNs3Synchronizer_SetOrigin(PyNs3Synchronizer *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    uint64_t retval;
+    uint64_t ts;
+    const char *keywords[] = {"ts", NULL};
     
-    retval = self->obj->GetCurrentRealtime();
-    py_retval = Py_BuildValue((char *) "K", retval);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "K", (char **) keywords, &ts)) {
+        return NULL;
+    }
+    self->obj->SetOrigin(ts);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Synchronizer_Signal(PyNs3Synchronizer *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->Signal();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Synchronizer_Synchronize(PyNs3Synchronizer *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    uint64_t tsCurrent;
+    uint64_t tsDelay;
+    const char *keywords[] = {"tsCurrent", "tsDelay", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "KK", (char **) keywords, &tsCurrent, &tsDelay)) {
+        return NULL;
+    }
+    retval = self->obj->Synchronize(tsCurrent, tsDelay);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
 static PyMethodDef PyNs3Synchronizer_methods[] = {
-    {(char *) "Signal", (PyCFunction) _wrap_PyNs3Synchronizer_Signal, METH_NOARGS, "Signal()\n\n" },
-    {(char *) "Realtime", (PyCFunction) _wrap_PyNs3Synchronizer_Realtime, METH_NOARGS, "Realtime()\n\n" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3Synchronizer_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "GetOrigin", (PyCFunction) _wrap_PyNs3Synchronizer_GetOrigin, METH_NOARGS, "GetOrigin()\n\n" },
-    {(char *) "SetOrigin", (PyCFunction) _wrap_PyNs3Synchronizer_SetOrigin, METH_KEYWORDS|METH_VARARGS, "SetOrigin(ts)\n\ntype: ts: uint64_t" },
-    {(char *) "Synchronize", (PyCFunction) _wrap_PyNs3Synchronizer_Synchronize, METH_KEYWORDS|METH_VARARGS, "Synchronize(tsCurrent, tsDelay)\n\ntype: tsCurrent: uint64_t\ntype: tsDelay: uint64_t" },
-    {(char *) "GetDrift", (PyCFunction) _wrap_PyNs3Synchronizer_GetDrift, METH_KEYWORDS|METH_VARARGS, "GetDrift(ts)\n\ntype: ts: uint64_t" },
-    {(char *) "EventStart", (PyCFunction) _wrap_PyNs3Synchronizer_EventStart, METH_NOARGS, "EventStart()\n\n" },
     {(char *) "EventEnd", (PyCFunction) _wrap_PyNs3Synchronizer_EventEnd, METH_NOARGS, "EventEnd()\n\n" },
-    {(char *) "SetCondition", (PyCFunction) _wrap_PyNs3Synchronizer_SetCondition, METH_KEYWORDS|METH_VARARGS, "SetCondition(arg0)\n\ntype: arg0: bool" },
+    {(char *) "EventStart", (PyCFunction) _wrap_PyNs3Synchronizer_EventStart, METH_NOARGS, "EventStart()\n\n" },
     {(char *) "GetCurrentRealtime", (PyCFunction) _wrap_PyNs3Synchronizer_GetCurrentRealtime, METH_NOARGS, "GetCurrentRealtime()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3Synchronizer__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "GetDrift", (PyCFunction) _wrap_PyNs3Synchronizer_GetDrift, METH_KEYWORDS|METH_VARARGS, "GetDrift(ts)\n\ntype: ts: uint64_t" },
+    {(char *) "GetOrigin", (PyCFunction) _wrap_PyNs3Synchronizer_GetOrigin, METH_NOARGS, "GetOrigin()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3Synchronizer_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "Realtime", (PyCFunction) _wrap_PyNs3Synchronizer_Realtime, METH_NOARGS, "Realtime()\n\n" },
+    {(char *) "SetCondition", (PyCFunction) _wrap_PyNs3Synchronizer_SetCondition, METH_KEYWORDS|METH_VARARGS, "SetCondition(arg0)\n\ntype: arg0: bool" },
+    {(char *) "SetOrigin", (PyCFunction) _wrap_PyNs3Synchronizer_SetOrigin, METH_KEYWORDS|METH_VARARGS, "SetOrigin(ts)\n\ntype: ts: uint64_t" },
+    {(char *) "Signal", (PyCFunction) _wrap_PyNs3Synchronizer_Signal, METH_NOARGS, "Signal()\n\n" },
+    {(char *) "Synchronize", (PyCFunction) _wrap_PyNs3Synchronizer_Synchronize, METH_KEYWORDS|METH_VARARGS, "Synchronize(tsCurrent, tsDelay)\n\ntype: tsCurrent: uint64_t\ntype: tsDelay: uint64_t" },
+    {(char *) "DoDispose", (PyCFunction) PyNs3Synchronizer__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3Synchronizer__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3Synchronizer__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3Synchronizer__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3Synchronizer__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 
@@ -28178,7 +28178,7 @@ PyTypeObject PyNs3Synchronizer_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE,                      /* tp_flags */
     "Synchronizer(arg0)\nSynchronizer()",                        /* Documentation string */
     (traverseproc)PyNs3Synchronizer__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3Synchronizer__tp_clear,             /* tp_clear */
@@ -28289,11 +28289,11 @@ int _wrap_PyNs3SystemThread__tp_init(PyNs3SystemThread *self, PyObject *args, Py
 
 
 PyObject *
-_wrap_PyNs3SystemThread_Start(PyNs3SystemThread *self)
+_wrap_PyNs3SystemThread_Join(PyNs3SystemThread *self)
 {
     PyObject *py_retval;
     
-    self->obj->Start();
+    self->obj->Join();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -28301,11 +28301,11 @@ _wrap_PyNs3SystemThread_Start(PyNs3SystemThread *self)
 
 
 PyObject *
-_wrap_PyNs3SystemThread_Join(PyNs3SystemThread *self)
+_wrap_PyNs3SystemThread_Start(PyNs3SystemThread *self)
 {
     PyObject *py_retval;
     
-    self->obj->Join();
+    self->obj->Start();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -28326,8 +28326,8 @@ _wrap_PyNs3SystemThread__copy__(PyNs3SystemThread *self)
 }
 
 static PyMethodDef PyNs3SystemThread_methods[] = {
-    {(char *) "Start", (PyCFunction) _wrap_PyNs3SystemThread_Start, METH_NOARGS, "Start()\n\n" },
     {(char *) "Join", (PyCFunction) _wrap_PyNs3SystemThread_Join, METH_NOARGS, "Join()\n\n" },
+    {(char *) "Start", (PyCFunction) _wrap_PyNs3SystemThread_Start, METH_NOARGS, "Start()\n\n" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3SystemThread__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -28813,25 +28813,39 @@ int _wrap_PyNs3Time__tp_init(PyNs3Time *self, PyObject *args, PyObject *kwargs)
 
 
 PyObject *
-_wrap_PyNs3Time_GetMicroSeconds(PyNs3Time *self)
+_wrap_PyNs3Time_As(PyNs3Time *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    int64_t retval;
+    ns3::Time::Unit unit;
+    const char *keywords[] = {"unit", NULL};
+    PyNs3TimeWithUnit *py_TimeWithUnit;
     
-    retval = self->obj->GetMicroSeconds();
-    py_retval = Py_BuildValue((char *) "L", retval);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &unit)) {
+        return NULL;
+    }
+    ns3::TimeWithUnit retval = self->obj->As(unit);
+    py_TimeWithUnit = PyObject_New(PyNs3TimeWithUnit, &PyNs3TimeWithUnit_Type);
+    py_TimeWithUnit->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TimeWithUnit->obj = new ns3::TimeWithUnit(retval);
+    PyNs3TimeWithUnit_wrapper_registry[(void *) py_TimeWithUnit->obj] = (PyObject *) py_TimeWithUnit;
+    py_retval = Py_BuildValue((char *) "N", py_TimeWithUnit);
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3Time_GetDouble(PyNs3Time *self)
+_wrap_PyNs3Time_Compare(PyNs3Time *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    double retval;
+    int retval;
+    PyNs3Time *o;
+    const char *keywords[] = {"o", NULL};
     
-    retval = self->obj->GetDouble();
-    py_retval = Py_BuildValue((char *) "d", retval);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Time_Type, &o)) {
+        return NULL;
+    }
+    retval = self->obj->Compare(*((PyNs3Time *) o)->obj);
+    py_retval = Py_BuildValue((char *) "i", retval);
     return py_retval;
 }
 
@@ -28948,13 +28962,93 @@ PyObject * _wrap_PyNs3Time_From(PyNs3Time *self, PyObject *args, PyObject *kwarg
 
 
 PyObject *
-_wrap_PyNs3Time_IsNegative(PyNs3Time *self)
+_wrap_PyNs3Time_FromDouble(PyNs3Time *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    bool retval;
+    double value;
+    ns3::Time::Unit unit;
+    const char *keywords[] = {"value", "unit", NULL};
+    PyNs3Time *py_Time;
     
-    retval = self->obj->IsNegative();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "di", (char **) keywords, &value, &unit)) {
+        return NULL;
+    }
+    ns3::Time retval = ns3::Time::FromDouble(value, unit);
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Time_FromInteger(PyNs3Time *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    uint64_t value;
+    ns3::Time::Unit unit;
+    const char *keywords[] = {"value", "unit", NULL};
+    PyNs3Time *py_Time;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "Ki", (char **) keywords, &value, &unit)) {
+        return NULL;
+    }
+    ns3::Time retval = ns3::Time::FromInteger(value, unit);
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Time_GetDays(PyNs3Time *self)
+{
+    PyObject *py_retval;
+    double retval;
+    
+    retval = self->obj->GetDays();
+    py_retval = Py_BuildValue((char *) "d", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Time_GetDouble(PyNs3Time *self)
+{
+    PyObject *py_retval;
+    double retval;
+    
+    retval = self->obj->GetDouble();
+    py_retval = Py_BuildValue((char *) "d", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Time_GetFemtoSeconds(PyNs3Time *self)
+{
+    PyObject *py_retval;
+    int64_t retval;
+    
+    retval = self->obj->GetFemtoSeconds();
+    py_retval = Py_BuildValue((char *) "L", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Time_GetHours(PyNs3Time *self)
+{
+    PyObject *py_retval;
+    double retval;
+    
+    retval = self->obj->GetHours();
+    py_retval = Py_BuildValue((char *) "d", retval);
     return py_retval;
 }
 
@@ -28972,18 +29066,230 @@ _wrap_PyNs3Time_GetInteger(PyNs3Time *self)
 
 
 PyObject *
-_wrap_PyNs3Time_ToInteger(PyNs3Time *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3Time_GetMicroSeconds(PyNs3Time *self)
 {
     PyObject *py_retval;
     int64_t retval;
-    ns3::Time::Unit unit;
-    const char *keywords[] = {"unit", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &unit)) {
+    retval = self->obj->GetMicroSeconds();
+    py_retval = Py_BuildValue((char *) "L", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Time_GetMilliSeconds(PyNs3Time *self)
+{
+    PyObject *py_retval;
+    int64_t retval;
+    
+    retval = self->obj->GetMilliSeconds();
+    py_retval = Py_BuildValue((char *) "L", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Time_GetMinutes(PyNs3Time *self)
+{
+    PyObject *py_retval;
+    double retval;
+    
+    retval = self->obj->GetMinutes();
+    py_retval = Py_BuildValue((char *) "d", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Time_GetNanoSeconds(PyNs3Time *self)
+{
+    PyObject *py_retval;
+    int64_t retval;
+    
+    retval = self->obj->GetNanoSeconds();
+    py_retval = Py_BuildValue((char *) "L", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Time_GetPicoSeconds(PyNs3Time *self)
+{
+    PyObject *py_retval;
+    int64_t retval;
+    
+    retval = self->obj->GetPicoSeconds();
+    py_retval = Py_BuildValue((char *) "L", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Time_GetResolution(void)
+{
+    PyObject *py_retval;
+    ns3::Time::Unit retval;
+    
+    retval = ns3::Time::GetResolution();
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Time_GetSeconds(PyNs3Time *self)
+{
+    PyObject *py_retval;
+    double retval;
+    
+    retval = self->obj->GetSeconds();
+    py_retval = Py_BuildValue((char *) "d", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Time_GetTimeStep(PyNs3Time *self)
+{
+    PyObject *py_retval;
+    int64_t retval;
+    
+    retval = self->obj->GetTimeStep();
+    py_retval = Py_BuildValue((char *) "L", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Time_GetYears(PyNs3Time *self)
+{
+    PyObject *py_retval;
+    double retval;
+    
+    retval = self->obj->GetYears();
+    py_retval = Py_BuildValue((char *) "d", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Time_IsNegative(PyNs3Time *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->IsNegative();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Time_IsPositive(PyNs3Time *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->IsPositive();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Time_IsStrictlyNegative(PyNs3Time *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->IsStrictlyNegative();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Time_IsStrictlyPositive(PyNs3Time *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->IsStrictlyPositive();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Time_IsZero(PyNs3Time *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->IsZero();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Time_Max(void)
+{
+    PyObject *py_retval;
+    PyNs3Time *py_Time;
+    
+    ns3::Time retval = ns3::Time::Max();
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Time_Min(void)
+{
+    PyObject *py_retval;
+    PyNs3Time *py_Time;
+    
+    ns3::Time retval = ns3::Time::Min();
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Time_SetResolution(PyNs3Time *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    ns3::Time::Unit resolution;
+    const char *keywords[] = {"resolution", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &resolution)) {
         return NULL;
     }
-    retval = self->obj->ToInteger(unit);
-    py_retval = Py_BuildValue((char *) "L", retval);
+    ns3::Time::SetResolution(resolution);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Time_StaticInit(void)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = ns3::Time::StaticInit();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
@@ -29027,324 +29333,18 @@ _wrap_PyNs3Time_ToDouble(PyNs3Time *self, PyObject *args, PyObject *kwargs)
 
 
 PyObject *
-_wrap_PyNs3Time_GetResolution(void)
-{
-    PyObject *py_retval;
-    ns3::Time::Unit retval;
-    
-    retval = ns3::Time::GetResolution();
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Time_GetSeconds(PyNs3Time *self)
-{
-    PyObject *py_retval;
-    double retval;
-    
-    retval = self->obj->GetSeconds();
-    py_retval = Py_BuildValue((char *) "d", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Time_GetDays(PyNs3Time *self)
-{
-    PyObject *py_retval;
-    double retval;
-    
-    retval = self->obj->GetDays();
-    py_retval = Py_BuildValue((char *) "d", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Time_GetMinutes(PyNs3Time *self)
-{
-    PyObject *py_retval;
-    double retval;
-    
-    retval = self->obj->GetMinutes();
-    py_retval = Py_BuildValue((char *) "d", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Time_GetYears(PyNs3Time *self)
-{
-    PyObject *py_retval;
-    double retval;
-    
-    retval = self->obj->GetYears();
-    py_retval = Py_BuildValue((char *) "d", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Time_GetHours(PyNs3Time *self)
-{
-    PyObject *py_retval;
-    double retval;
-    
-    retval = self->obj->GetHours();
-    py_retval = Py_BuildValue((char *) "d", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Time_Min(void)
-{
-    PyObject *py_retval;
-    PyNs3Time *py_Time;
-    
-    ns3::Time retval = ns3::Time::Min();
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Time_StaticInit(void)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = ns3::Time::StaticInit();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Time_IsPositive(PyNs3Time *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->IsPositive();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Time_FromInteger(PyNs3Time *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    uint64_t value;
-    ns3::Time::Unit unit;
-    const char *keywords[] = {"value", "unit", NULL};
-    PyNs3Time *py_Time;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "Ki", (char **) keywords, &value, &unit)) {
-        return NULL;
-    }
-    ns3::Time retval = ns3::Time::FromInteger(value, unit);
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Time_FromDouble(PyNs3Time *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    double value;
-    ns3::Time::Unit unit;
-    const char *keywords[] = {"value", "unit", NULL};
-    PyNs3Time *py_Time;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "di", (char **) keywords, &value, &unit)) {
-        return NULL;
-    }
-    ns3::Time retval = ns3::Time::FromDouble(value, unit);
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Time_IsZero(PyNs3Time *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->IsZero();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Time_GetFemtoSeconds(PyNs3Time *self)
+_wrap_PyNs3Time_ToInteger(PyNs3Time *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
     int64_t retval;
-    
-    retval = self->obj->GetFemtoSeconds();
-    py_retval = Py_BuildValue((char *) "L", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Time_GetNanoSeconds(PyNs3Time *self)
-{
-    PyObject *py_retval;
-    int64_t retval;
-    
-    retval = self->obj->GetNanoSeconds();
-    py_retval = Py_BuildValue((char *) "L", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Time_GetPicoSeconds(PyNs3Time *self)
-{
-    PyObject *py_retval;
-    int64_t retval;
-    
-    retval = self->obj->GetPicoSeconds();
-    py_retval = Py_BuildValue((char *) "L", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Time_IsStrictlyPositive(PyNs3Time *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->IsStrictlyPositive();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Time_Compare(PyNs3Time *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int retval;
-    PyNs3Time *o;
-    const char *keywords[] = {"o", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Time_Type, &o)) {
-        return NULL;
-    }
-    retval = self->obj->Compare(*((PyNs3Time *) o)->obj);
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Time_IsStrictlyNegative(PyNs3Time *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->IsStrictlyNegative();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Time_GetMilliSeconds(PyNs3Time *self)
-{
-    PyObject *py_retval;
-    int64_t retval;
-    
-    retval = self->obj->GetMilliSeconds();
-    py_retval = Py_BuildValue((char *) "L", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Time_As(PyNs3Time *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
     ns3::Time::Unit unit;
     const char *keywords[] = {"unit", NULL};
-    PyNs3TimeWithUnit *py_TimeWithUnit;
     
     if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &unit)) {
         return NULL;
     }
-    ns3::TimeWithUnit retval = self->obj->As(unit);
-    py_TimeWithUnit = PyObject_New(PyNs3TimeWithUnit, &PyNs3TimeWithUnit_Type);
-    py_TimeWithUnit->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TimeWithUnit->obj = new ns3::TimeWithUnit(retval);
-    PyNs3TimeWithUnit_wrapper_registry[(void *) py_TimeWithUnit->obj] = (PyObject *) py_TimeWithUnit;
-    py_retval = Py_BuildValue((char *) "N", py_TimeWithUnit);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Time_GetTimeStep(PyNs3Time *self)
-{
-    PyObject *py_retval;
-    int64_t retval;
-    
-    retval = self->obj->GetTimeStep();
+    retval = self->obj->ToInteger(unit);
     py_retval = Py_BuildValue((char *) "L", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Time_Max(void)
-{
-    PyObject *py_retval;
-    PyNs3Time *py_Time;
-    
-    ns3::Time retval = ns3::Time::Max();
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Time_SetResolution(PyNs3Time *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    ns3::Time::Unit resolution;
-    const char *keywords[] = {"resolution", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &resolution)) {
-        return NULL;
-    }
-    ns3::Time::SetResolution(resolution);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
     return py_retval;
 }
 
@@ -29362,37 +29362,37 @@ _wrap_PyNs3Time__copy__(PyNs3Time *self)
 }
 
 static PyMethodDef PyNs3Time_methods[] = {
-    {(char *) "GetMicroSeconds", (PyCFunction) _wrap_PyNs3Time_GetMicroSeconds, METH_NOARGS, "GetMicroSeconds()\n\n" },
-    {(char *) "GetDouble", (PyCFunction) _wrap_PyNs3Time_GetDouble, METH_NOARGS, "GetDouble()\n\n" },
+    {(char *) "As", (PyCFunction) _wrap_PyNs3Time_As, METH_KEYWORDS|METH_VARARGS, "As(unit)\n\ntype: unit: ns3::Time::Unit" },
+    {(char *) "Compare", (PyCFunction) _wrap_PyNs3Time_Compare, METH_KEYWORDS|METH_VARARGS, "Compare(o)\n\ntype: o: ns3::Time const &" },
     {(char *) "From", (PyCFunction) _wrap_PyNs3Time_From, METH_KEYWORDS|METH_VARARGS|METH_STATIC, NULL },
-    {(char *) "IsNegative", (PyCFunction) _wrap_PyNs3Time_IsNegative, METH_NOARGS, "IsNegative()\n\n" },
-    {(char *) "GetInteger", (PyCFunction) _wrap_PyNs3Time_GetInteger, METH_NOARGS, "GetInteger()\n\n" },
-    {(char *) "ToInteger", (PyCFunction) _wrap_PyNs3Time_ToInteger, METH_KEYWORDS|METH_VARARGS, "ToInteger(unit)\n\ntype: unit: ns3::Time::Unit" },
-    {(char *) "To", (PyCFunction) _wrap_PyNs3Time_To, METH_KEYWORDS|METH_VARARGS, "To(unit)\n\ntype: unit: ns3::Time::Unit" },
-    {(char *) "ToDouble", (PyCFunction) _wrap_PyNs3Time_ToDouble, METH_KEYWORDS|METH_VARARGS, "ToDouble(unit)\n\ntype: unit: ns3::Time::Unit" },
-    {(char *) "GetResolution", (PyCFunction) _wrap_PyNs3Time_GetResolution, METH_NOARGS|METH_STATIC, "GetResolution()\n\n" },
-    {(char *) "GetSeconds", (PyCFunction) _wrap_PyNs3Time_GetSeconds, METH_NOARGS, "GetSeconds()\n\n" },
-    {(char *) "GetDays", (PyCFunction) _wrap_PyNs3Time_GetDays, METH_NOARGS, "GetDays()\n\n" },
-    {(char *) "GetMinutes", (PyCFunction) _wrap_PyNs3Time_GetMinutes, METH_NOARGS, "GetMinutes()\n\n" },
-    {(char *) "GetYears", (PyCFunction) _wrap_PyNs3Time_GetYears, METH_NOARGS, "GetYears()\n\n" },
-    {(char *) "GetHours", (PyCFunction) _wrap_PyNs3Time_GetHours, METH_NOARGS, "GetHours()\n\n" },
-    {(char *) "Min", (PyCFunction) _wrap_PyNs3Time_Min, METH_NOARGS|METH_STATIC, "Min()\n\n" },
-    {(char *) "StaticInit", (PyCFunction) _wrap_PyNs3Time_StaticInit, METH_NOARGS|METH_STATIC, "StaticInit()\n\n" },
-    {(char *) "IsPositive", (PyCFunction) _wrap_PyNs3Time_IsPositive, METH_NOARGS, "IsPositive()\n\n" },
-    {(char *) "FromInteger", (PyCFunction) _wrap_PyNs3Time_FromInteger, METH_KEYWORDS|METH_VARARGS|METH_STATIC, "FromInteger(value, unit)\n\ntype: value: uint64_t\ntype: unit: ns3::Time::Unit" },
     {(char *) "FromDouble", (PyCFunction) _wrap_PyNs3Time_FromDouble, METH_KEYWORDS|METH_VARARGS|METH_STATIC, "FromDouble(value, unit)\n\ntype: value: double\ntype: unit: ns3::Time::Unit" },
-    {(char *) "IsZero", (PyCFunction) _wrap_PyNs3Time_IsZero, METH_NOARGS, "IsZero()\n\n" },
+    {(char *) "FromInteger", (PyCFunction) _wrap_PyNs3Time_FromInteger, METH_KEYWORDS|METH_VARARGS|METH_STATIC, "FromInteger(value, unit)\n\ntype: value: uint64_t\ntype: unit: ns3::Time::Unit" },
+    {(char *) "GetDays", (PyCFunction) _wrap_PyNs3Time_GetDays, METH_NOARGS, "GetDays()\n\n" },
+    {(char *) "GetDouble", (PyCFunction) _wrap_PyNs3Time_GetDouble, METH_NOARGS, "GetDouble()\n\n" },
     {(char *) "GetFemtoSeconds", (PyCFunction) _wrap_PyNs3Time_GetFemtoSeconds, METH_NOARGS, "GetFemtoSeconds()\n\n" },
+    {(char *) "GetHours", (PyCFunction) _wrap_PyNs3Time_GetHours, METH_NOARGS, "GetHours()\n\n" },
+    {(char *) "GetInteger", (PyCFunction) _wrap_PyNs3Time_GetInteger, METH_NOARGS, "GetInteger()\n\n" },
+    {(char *) "GetMicroSeconds", (PyCFunction) _wrap_PyNs3Time_GetMicroSeconds, METH_NOARGS, "GetMicroSeconds()\n\n" },
+    {(char *) "GetMilliSeconds", (PyCFunction) _wrap_PyNs3Time_GetMilliSeconds, METH_NOARGS, "GetMilliSeconds()\n\n" },
+    {(char *) "GetMinutes", (PyCFunction) _wrap_PyNs3Time_GetMinutes, METH_NOARGS, "GetMinutes()\n\n" },
     {(char *) "GetNanoSeconds", (PyCFunction) _wrap_PyNs3Time_GetNanoSeconds, METH_NOARGS, "GetNanoSeconds()\n\n" },
     {(char *) "GetPicoSeconds", (PyCFunction) _wrap_PyNs3Time_GetPicoSeconds, METH_NOARGS, "GetPicoSeconds()\n\n" },
-    {(char *) "IsStrictlyPositive", (PyCFunction) _wrap_PyNs3Time_IsStrictlyPositive, METH_NOARGS, "IsStrictlyPositive()\n\n" },
-    {(char *) "Compare", (PyCFunction) _wrap_PyNs3Time_Compare, METH_KEYWORDS|METH_VARARGS, "Compare(o)\n\ntype: o: ns3::Time const &" },
-    {(char *) "IsStrictlyNegative", (PyCFunction) _wrap_PyNs3Time_IsStrictlyNegative, METH_NOARGS, "IsStrictlyNegative()\n\n" },
-    {(char *) "GetMilliSeconds", (PyCFunction) _wrap_PyNs3Time_GetMilliSeconds, METH_NOARGS, "GetMilliSeconds()\n\n" },
-    {(char *) "As", (PyCFunction) _wrap_PyNs3Time_As, METH_KEYWORDS|METH_VARARGS, "As(unit)\n\ntype: unit: ns3::Time::Unit" },
+    {(char *) "GetResolution", (PyCFunction) _wrap_PyNs3Time_GetResolution, METH_NOARGS|METH_STATIC, "GetResolution()\n\n" },
+    {(char *) "GetSeconds", (PyCFunction) _wrap_PyNs3Time_GetSeconds, METH_NOARGS, "GetSeconds()\n\n" },
     {(char *) "GetTimeStep", (PyCFunction) _wrap_PyNs3Time_GetTimeStep, METH_NOARGS, "GetTimeStep()\n\n" },
+    {(char *) "GetYears", (PyCFunction) _wrap_PyNs3Time_GetYears, METH_NOARGS, "GetYears()\n\n" },
+    {(char *) "IsNegative", (PyCFunction) _wrap_PyNs3Time_IsNegative, METH_NOARGS, "IsNegative()\n\n" },
+    {(char *) "IsPositive", (PyCFunction) _wrap_PyNs3Time_IsPositive, METH_NOARGS, "IsPositive()\n\n" },
+    {(char *) "IsStrictlyNegative", (PyCFunction) _wrap_PyNs3Time_IsStrictlyNegative, METH_NOARGS, "IsStrictlyNegative()\n\n" },
+    {(char *) "IsStrictlyPositive", (PyCFunction) _wrap_PyNs3Time_IsStrictlyPositive, METH_NOARGS, "IsStrictlyPositive()\n\n" },
+    {(char *) "IsZero", (PyCFunction) _wrap_PyNs3Time_IsZero, METH_NOARGS, "IsZero()\n\n" },
     {(char *) "Max", (PyCFunction) _wrap_PyNs3Time_Max, METH_NOARGS|METH_STATIC, "Max()\n\n" },
+    {(char *) "Min", (PyCFunction) _wrap_PyNs3Time_Min, METH_NOARGS|METH_STATIC, "Min()\n\n" },
     {(char *) "SetResolution", (PyCFunction) _wrap_PyNs3Time_SetResolution, METH_KEYWORDS|METH_VARARGS|METH_STATIC, "SetResolution(resolution)\n\ntype: resolution: ns3::Time::Unit" },
+    {(char *) "StaticInit", (PyCFunction) _wrap_PyNs3Time_StaticInit, METH_NOARGS|METH_STATIC, "StaticInit()\n\n" },
+    {(char *) "To", (PyCFunction) _wrap_PyNs3Time_To, METH_KEYWORDS|METH_VARARGS, "To(unit)\n\ntype: unit: ns3::Time::Unit" },
+    {(char *) "ToDouble", (PyCFunction) _wrap_PyNs3Time_ToDouble, METH_KEYWORDS|METH_VARARGS, "ToDouble(unit)\n\ntype: unit: ns3::Time::Unit" },
+    {(char *) "ToInteger", (PyCFunction) _wrap_PyNs3Time_ToInteger, METH_KEYWORDS|METH_VARARGS, "ToInteger(unit)\n\ntype: unit: ns3::Time::Unit" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3Time__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -29779,28 +29779,6 @@ _wrap_PyNs3TraceSourceAccessor__tp_init(void)
 
 
 PyObject *
-_wrap_PyNs3TraceSourceAccessor_Disconnect(PyNs3TraceSourceAccessor *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3ObjectBase *obj;
-    ns3::ObjectBase *obj_ptr;
-    const char *context;
-    Py_ssize_t context_len;
-    PyNs3CallbackBase *cb;
-    const char *keywords[] = {"obj", "context", "cb", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!s#O!", (char **) keywords, &PyNs3ObjectBase_Type, &obj, &context, &context_len, &PyNs3CallbackBase_Type, &cb)) {
-        return NULL;
-    }
-    obj_ptr = (obj ? obj->obj : NULL);
-    retval = self->obj->Disconnect(obj_ptr, std::string(context, context_len), *((PyNs3CallbackBase *) cb)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3TraceSourceAccessor_Connect(PyNs3TraceSourceAccessor *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -29843,6 +29821,28 @@ _wrap_PyNs3TraceSourceAccessor_ConnectWithoutContext(PyNs3TraceSourceAccessor *s
 
 
 PyObject *
+_wrap_PyNs3TraceSourceAccessor_Disconnect(PyNs3TraceSourceAccessor *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3ObjectBase *obj;
+    ns3::ObjectBase *obj_ptr;
+    const char *context;
+    Py_ssize_t context_len;
+    PyNs3CallbackBase *cb;
+    const char *keywords[] = {"obj", "context", "cb", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!s#O!", (char **) keywords, &PyNs3ObjectBase_Type, &obj, &context, &context_len, &PyNs3CallbackBase_Type, &cb)) {
+        return NULL;
+    }
+    obj_ptr = (obj ? obj->obj : NULL);
+    retval = self->obj->Disconnect(obj_ptr, std::string(context, context_len), *((PyNs3CallbackBase *) cb)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3TraceSourceAccessor_DisconnectWithoutContext(PyNs3TraceSourceAccessor *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -29862,9 +29862,9 @@ _wrap_PyNs3TraceSourceAccessor_DisconnectWithoutContext(PyNs3TraceSourceAccessor
 }
 
 static PyMethodDef PyNs3TraceSourceAccessor_methods[] = {
-    {(char *) "Disconnect", (PyCFunction) _wrap_PyNs3TraceSourceAccessor_Disconnect, METH_KEYWORDS|METH_VARARGS, "Disconnect(obj, context, cb)\n\ntype: obj: ns3::ObjectBase *\ntype: context: std::string\ntype: cb: ns3::CallbackBase const &" },
     {(char *) "Connect", (PyCFunction) _wrap_PyNs3TraceSourceAccessor_Connect, METH_KEYWORDS|METH_VARARGS, "Connect(obj, context, cb)\n\ntype: obj: ns3::ObjectBase *\ntype: context: std::string\ntype: cb: ns3::CallbackBase const &" },
     {(char *) "ConnectWithoutContext", (PyCFunction) _wrap_PyNs3TraceSourceAccessor_ConnectWithoutContext, METH_KEYWORDS|METH_VARARGS, "ConnectWithoutContext(obj, cb)\n\ntype: obj: ns3::ObjectBase *\ntype: cb: ns3::CallbackBase const &" },
+    {(char *) "Disconnect", (PyCFunction) _wrap_PyNs3TraceSourceAccessor_Disconnect, METH_KEYWORDS|METH_VARARGS, "Disconnect(obj, context, cb)\n\ntype: obj: ns3::ObjectBase *\ntype: context: std::string\ntype: cb: ns3::CallbackBase const &" },
     {(char *) "DisconnectWithoutContext", (PyCFunction) _wrap_PyNs3TraceSourceAccessor_DisconnectWithoutContext, METH_KEYWORDS|METH_VARARGS, "DisconnectWithoutContext(obj, cb)\n\ntype: obj: ns3::ObjectBase *\ntype: cb: ns3::CallbackBase const &" },
     {NULL, NULL, 0, NULL}
 };
@@ -29977,16 +29977,16 @@ PyTypeObject PyNs3TraceSourceAccessor_Type = {
 
 
 PyObject *
-PyNs3TriangularRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3TriangularRandomVariable *self)
+PyNs3TriangularRandomVariable__PythonHelper::_wrap_DoDispose(PyNs3TriangularRandomVariable *self)
 {
     PyObject *py_retval;
     PyNs3TriangularRandomVariable__PythonHelper *helper = dynamic_cast< PyNs3TriangularRandomVariable__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -30025,16 +30025,16 @@ PyNs3TriangularRandomVariable__PythonHelper::_wrap_NotifyNewAggregate(PyNs3Trian
 }
 
 PyObject *
-PyNs3TriangularRandomVariable__PythonHelper::_wrap_DoDispose(PyNs3TriangularRandomVariable *self)
+PyNs3TriangularRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3TriangularRandomVariable *self)
 {
     PyObject *py_retval;
     PyNs3TriangularRandomVariable__PythonHelper *helper = dynamic_cast< PyNs3TriangularRandomVariable__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -30385,78 +30385,6 @@ _wrap_PyNs3TriangularRandomVariable__tp_init(PyNs3TriangularRandomVariable *self
 }
 
 
-
-PyObject *
-_wrap_PyNs3TriangularRandomVariable_GetInteger__0(PyNs3TriangularRandomVariable *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    unsigned int mean;
-    unsigned int min;
-    unsigned int max;
-    const char *keywords[] = {"mean", "min", "max", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "III", (char **) keywords, &mean, &min, &max)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    retval = self->obj->GetInteger(mean, min, max);
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-PyObject *
-_wrap_PyNs3TriangularRandomVariable_GetInteger__1(PyNs3TriangularRandomVariable *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    PyNs3TriangularRandomVariable__PythonHelper *helper_class = dynamic_cast<PyNs3TriangularRandomVariable__PythonHelper*> (self->obj);
-    const char *keywords[] = {NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "", (char **) keywords)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    retval = (helper_class == NULL)? (self->obj->GetInteger()) : (self->obj->ns3::TriangularRandomVariable::GetInteger());
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-PyObject * _wrap_PyNs3TriangularRandomVariable_GetInteger(PyNs3TriangularRandomVariable *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject * retval;
-    PyObject *error_list;
-    PyObject *exceptions[2] = {0,};
-    retval = _wrap_PyNs3TriangularRandomVariable_GetInteger__0(self, args, kwargs, &exceptions[0]);
-    if (!exceptions[0]) {
-        return retval;
-    }
-    retval = _wrap_PyNs3TriangularRandomVariable_GetInteger__1(self, args, kwargs, &exceptions[1]);
-    if (!exceptions[1]) {
-        Py_DECREF(exceptions[0]);
-        return retval;
-    }
-    error_list = PyList_New(2);
-    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
-    Py_DECREF(exceptions[0]);
-    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
-    Py_DECREF(exceptions[1]);
-    PyErr_SetObject(PyExc_TypeError, error_list);
-    Py_DECREF(error_list);
-    return NULL;
-}
-
-
 PyObject *
 _wrap_PyNs3TriangularRandomVariable_GetTypeId(void)
 {
@@ -30469,6 +30397,42 @@ _wrap_PyNs3TriangularRandomVariable_GetTypeId(void)
     py_TypeId->obj = new ns3::TypeId(retval);
     PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
     py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3TriangularRandomVariable_GetMean(PyNs3TriangularRandomVariable *self)
+{
+    PyObject *py_retval;
+    double retval;
+    
+    retval = self->obj->GetMean();
+    py_retval = Py_BuildValue((char *) "d", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3TriangularRandomVariable_GetMin(PyNs3TriangularRandomVariable *self)
+{
+    PyObject *py_retval;
+    double retval;
+    
+    retval = self->obj->GetMin();
+    py_retval = Py_BuildValue((char *) "d", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3TriangularRandomVariable_GetMax(PyNs3TriangularRandomVariable *self)
+{
+    PyObject *py_retval;
+    double retval;
+    
+    retval = self->obj->GetMax();
+    py_retval = Py_BuildValue((char *) "d", retval);
     return py_retval;
 }
 
@@ -30545,52 +30509,88 @@ PyObject * _wrap_PyNs3TriangularRandomVariable_GetValue(PyNs3TriangularRandomVar
 }
 
 
+
 PyObject *
-_wrap_PyNs3TriangularRandomVariable_GetMean(PyNs3TriangularRandomVariable *self)
+_wrap_PyNs3TriangularRandomVariable_GetInteger__0(PyNs3TriangularRandomVariable *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
 {
     PyObject *py_retval;
-    double retval;
+    uint32_t retval;
+    unsigned int mean;
+    unsigned int min;
+    unsigned int max;
+    const char *keywords[] = {"mean", "min", "max", NULL};
     
-    retval = self->obj->GetMean();
-    py_retval = Py_BuildValue((char *) "d", retval);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "III", (char **) keywords, &mean, &min, &max)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    retval = self->obj->GetInteger(mean, min, max);
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
 
-
 PyObject *
-_wrap_PyNs3TriangularRandomVariable_GetMin(PyNs3TriangularRandomVariable *self)
+_wrap_PyNs3TriangularRandomVariable_GetInteger__1(PyNs3TriangularRandomVariable *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
 {
     PyObject *py_retval;
-    double retval;
+    uint32_t retval;
+    PyNs3TriangularRandomVariable__PythonHelper *helper_class = dynamic_cast<PyNs3TriangularRandomVariable__PythonHelper*> (self->obj);
+    const char *keywords[] = {NULL};
     
-    retval = self->obj->GetMin();
-    py_retval = Py_BuildValue((char *) "d", retval);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "", (char **) keywords)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    retval = (helper_class == NULL)? (self->obj->GetInteger()) : (self->obj->ns3::TriangularRandomVariable::GetInteger());
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
 
-
-PyObject *
-_wrap_PyNs3TriangularRandomVariable_GetMax(PyNs3TriangularRandomVariable *self)
+PyObject * _wrap_PyNs3TriangularRandomVariable_GetInteger(PyNs3TriangularRandomVariable *self, PyObject *args, PyObject *kwargs)
 {
-    PyObject *py_retval;
-    double retval;
-    
-    retval = self->obj->GetMax();
-    py_retval = Py_BuildValue((char *) "d", retval);
-    return py_retval;
+    PyObject * retval;
+    PyObject *error_list;
+    PyObject *exceptions[2] = {0,};
+    retval = _wrap_PyNs3TriangularRandomVariable_GetInteger__0(self, args, kwargs, &exceptions[0]);
+    if (!exceptions[0]) {
+        return retval;
+    }
+    retval = _wrap_PyNs3TriangularRandomVariable_GetInteger__1(self, args, kwargs, &exceptions[1]);
+    if (!exceptions[1]) {
+        Py_DECREF(exceptions[0]);
+        return retval;
+    }
+    error_list = PyList_New(2);
+    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
+    Py_DECREF(exceptions[0]);
+    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
+    Py_DECREF(exceptions[1]);
+    PyErr_SetObject(PyExc_TypeError, error_list);
+    Py_DECREF(error_list);
+    return NULL;
 }
 
 static PyMethodDef PyNs3TriangularRandomVariable_methods[] = {
-    {(char *) "GetInteger", (PyCFunction) _wrap_PyNs3TriangularRandomVariable_GetInteger, METH_KEYWORDS|METH_VARARGS, NULL },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3TriangularRandomVariable_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "GetValue", (PyCFunction) _wrap_PyNs3TriangularRandomVariable_GetValue, METH_KEYWORDS|METH_VARARGS, NULL },
     {(char *) "GetMean", (PyCFunction) _wrap_PyNs3TriangularRandomVariable_GetMean, METH_NOARGS, "GetMean()\n\n" },
     {(char *) "GetMin", (PyCFunction) _wrap_PyNs3TriangularRandomVariable_GetMin, METH_NOARGS, "GetMin()\n\n" },
     {(char *) "GetMax", (PyCFunction) _wrap_PyNs3TriangularRandomVariable_GetMax, METH_NOARGS, "GetMax()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3TriangularRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "GetValue", (PyCFunction) _wrap_PyNs3TriangularRandomVariable_GetValue, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "GetInteger", (PyCFunction) _wrap_PyNs3TriangularRandomVariable_GetInteger, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "DoDispose", (PyCFunction) PyNs3TriangularRandomVariable__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3TriangularRandomVariable__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3TriangularRandomVariable__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3TriangularRandomVariable__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3TriangularRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 
@@ -30689,7 +30689,7 @@ PyTypeObject PyNs3TriangularRandomVariable_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE,                      /* tp_flags */
     "TriangularRandomVariable()",                        /* Documentation string */
     (traverseproc)PyNs3TriangularRandomVariable__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3TriangularRandomVariable__tp_clear,             /* tp_clear */
@@ -30722,16 +30722,16 @@ PyTypeObject PyNs3TriangularRandomVariable_Type = {
 
 
 PyObject *
-PyNs3UniformRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3UniformRandomVariable *self)
+PyNs3UniformRandomVariable__PythonHelper::_wrap_DoDispose(PyNs3UniformRandomVariable *self)
 {
     PyObject *py_retval;
     PyNs3UniformRandomVariable__PythonHelper *helper = dynamic_cast< PyNs3UniformRandomVariable__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -30770,16 +30770,16 @@ PyNs3UniformRandomVariable__PythonHelper::_wrap_NotifyNewAggregate(PyNs3UniformR
 }
 
 PyObject *
-PyNs3UniformRandomVariable__PythonHelper::_wrap_DoDispose(PyNs3UniformRandomVariable *self)
+PyNs3UniformRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3UniformRandomVariable *self)
 {
     PyObject *py_retval;
     PyNs3UniformRandomVariable__PythonHelper *helper = dynamic_cast< PyNs3UniformRandomVariable__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -31131,89 +31131,6 @@ _wrap_PyNs3UniformRandomVariable__tp_init(PyNs3UniformRandomVariable *self, PyOb
 
 
 PyObject *
-_wrap_PyNs3UniformRandomVariable_GetMax(PyNs3UniformRandomVariable *self)
-{
-    PyObject *py_retval;
-    double retval;
-    
-    retval = self->obj->GetMax();
-    py_retval = Py_BuildValue((char *) "d", retval);
-    return py_retval;
-}
-
-
-
-PyObject *
-_wrap_PyNs3UniformRandomVariable_GetInteger__0(PyNs3UniformRandomVariable *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    unsigned int min;
-    unsigned int max;
-    const char *keywords[] = {"min", "max", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "II", (char **) keywords, &min, &max)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    retval = self->obj->GetInteger(min, max);
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-PyObject *
-_wrap_PyNs3UniformRandomVariable_GetInteger__1(PyNs3UniformRandomVariable *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    PyNs3UniformRandomVariable__PythonHelper *helper_class = dynamic_cast<PyNs3UniformRandomVariable__PythonHelper*> (self->obj);
-    const char *keywords[] = {NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "", (char **) keywords)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    retval = (helper_class == NULL)? (self->obj->GetInteger()) : (self->obj->ns3::UniformRandomVariable::GetInteger());
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-PyObject * _wrap_PyNs3UniformRandomVariable_GetInteger(PyNs3UniformRandomVariable *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject * retval;
-    PyObject *error_list;
-    PyObject *exceptions[2] = {0,};
-    retval = _wrap_PyNs3UniformRandomVariable_GetInteger__0(self, args, kwargs, &exceptions[0]);
-    if (!exceptions[0]) {
-        return retval;
-    }
-    retval = _wrap_PyNs3UniformRandomVariable_GetInteger__1(self, args, kwargs, &exceptions[1]);
-    if (!exceptions[1]) {
-        Py_DECREF(exceptions[0]);
-        return retval;
-    }
-    error_list = PyList_New(2);
-    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
-    Py_DECREF(exceptions[0]);
-    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
-    Py_DECREF(exceptions[1]);
-    PyErr_SetObject(PyExc_TypeError, error_list);
-    Py_DECREF(error_list);
-    return NULL;
-}
-
-
-PyObject *
 _wrap_PyNs3UniformRandomVariable_GetTypeId(void)
 {
     PyObject *py_retval;
@@ -31236,6 +31153,18 @@ _wrap_PyNs3UniformRandomVariable_GetMin(PyNs3UniformRandomVariable *self)
     double retval;
     
     retval = self->obj->GetMin();
+    py_retval = Py_BuildValue((char *) "d", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3UniformRandomVariable_GetMax(PyNs3UniformRandomVariable *self)
+{
+    PyObject *py_retval;
+    double retval;
+    
+    retval = self->obj->GetMax();
     py_retval = Py_BuildValue((char *) "d", retval);
     return py_retval;
 }
@@ -31311,16 +31240,87 @@ PyObject * _wrap_PyNs3UniformRandomVariable_GetValue(PyNs3UniformRandomVariable 
     return NULL;
 }
 
+
+
+PyObject *
+_wrap_PyNs3UniformRandomVariable_GetInteger__0(PyNs3UniformRandomVariable *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    unsigned int min;
+    unsigned int max;
+    const char *keywords[] = {"min", "max", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "II", (char **) keywords, &min, &max)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    retval = self->obj->GetInteger(min, max);
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+PyObject *
+_wrap_PyNs3UniformRandomVariable_GetInteger__1(PyNs3UniformRandomVariable *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    PyNs3UniformRandomVariable__PythonHelper *helper_class = dynamic_cast<PyNs3UniformRandomVariable__PythonHelper*> (self->obj);
+    const char *keywords[] = {NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "", (char **) keywords)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    retval = (helper_class == NULL)? (self->obj->GetInteger()) : (self->obj->ns3::UniformRandomVariable::GetInteger());
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+PyObject * _wrap_PyNs3UniformRandomVariable_GetInteger(PyNs3UniformRandomVariable *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject * retval;
+    PyObject *error_list;
+    PyObject *exceptions[2] = {0,};
+    retval = _wrap_PyNs3UniformRandomVariable_GetInteger__0(self, args, kwargs, &exceptions[0]);
+    if (!exceptions[0]) {
+        return retval;
+    }
+    retval = _wrap_PyNs3UniformRandomVariable_GetInteger__1(self, args, kwargs, &exceptions[1]);
+    if (!exceptions[1]) {
+        Py_DECREF(exceptions[0]);
+        return retval;
+    }
+    error_list = PyList_New(2);
+    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
+    Py_DECREF(exceptions[0]);
+    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
+    Py_DECREF(exceptions[1]);
+    PyErr_SetObject(PyExc_TypeError, error_list);
+    Py_DECREF(error_list);
+    return NULL;
+}
+
 static PyMethodDef PyNs3UniformRandomVariable_methods[] = {
-    {(char *) "GetMax", (PyCFunction) _wrap_PyNs3UniformRandomVariable_GetMax, METH_NOARGS, "GetMax()\n\n" },
-    {(char *) "GetInteger", (PyCFunction) _wrap_PyNs3UniformRandomVariable_GetInteger, METH_KEYWORDS|METH_VARARGS, NULL },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3UniformRandomVariable_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
     {(char *) "GetMin", (PyCFunction) _wrap_PyNs3UniformRandomVariable_GetMin, METH_NOARGS, "GetMin()\n\n" },
+    {(char *) "GetMax", (PyCFunction) _wrap_PyNs3UniformRandomVariable_GetMax, METH_NOARGS, "GetMax()\n\n" },
     {(char *) "GetValue", (PyCFunction) _wrap_PyNs3UniformRandomVariable_GetValue, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3UniformRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "GetInteger", (PyCFunction) _wrap_PyNs3UniformRandomVariable_GetInteger, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "DoDispose", (PyCFunction) PyNs3UniformRandomVariable__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3UniformRandomVariable__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3UniformRandomVariable__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3UniformRandomVariable__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3UniformRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 
@@ -31419,7 +31419,7 @@ PyTypeObject PyNs3UniformRandomVariable_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE,                      /* tp_flags */
     "UniformRandomVariable()",                        /* Documentation string */
     (traverseproc)PyNs3UniformRandomVariable__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3UniformRandomVariable__tp_clear,             /* tp_clear */
@@ -31450,134 +31450,6 @@ PyTypeObject PyNs3UniformRandomVariable_Type = {
 
 
 
-
-PyObject *
-PyNs3WallClockSynchronizer__PythonHelper::_wrap_DoSetOrigin(PyNs3WallClockSynchronizer *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    uint64_t ns;
-    PyNs3WallClockSynchronizer__PythonHelper *helper = dynamic_cast< PyNs3WallClockSynchronizer__PythonHelper* >(self->obj);
-    const char *keywords[] = {"ns", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "K", (char **) keywords, &ns)) {
-        return NULL;
-    }
-    if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoSetOrigin of class WallClockSynchronizer is protected and can only be called by a subclass");
-        return NULL;
-    }
-    helper->DoSetOrigin__parent_caller(ns);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject *
-PyNs3WallClockSynchronizer__PythonHelper::_wrap_DriftCorrect(PyNs3WallClockSynchronizer *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    uint64_t retval;
-    uint64_t nsNow;
-    uint64_t nsDelay;
-    PyNs3WallClockSynchronizer__PythonHelper *helper = dynamic_cast< PyNs3WallClockSynchronizer__PythonHelper* >(self->obj);
-    const char *keywords[] = {"nsNow", "nsDelay", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "KK", (char **) keywords, &nsNow, &nsDelay)) {
-        return NULL;
-    }
-    if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DriftCorrect of class WallClockSynchronizer is protected and can only be called by a subclass");
-        return NULL;
-    }
-    retval = helper->DriftCorrect__parent_caller(nsNow, nsDelay);
-    py_retval = Py_BuildValue((char *) "K", retval);
-    return py_retval;
-}
-
-PyObject *
-PyNs3WallClockSynchronizer__PythonHelper::_wrap_SpinWait(PyNs3WallClockSynchronizer *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    uint64_t ns;
-    PyNs3WallClockSynchronizer__PythonHelper *helper = dynamic_cast< PyNs3WallClockSynchronizer__PythonHelper* >(self->obj);
-    const char *keywords[] = {"ns", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "K", (char **) keywords, &ns)) {
-        return NULL;
-    }
-    if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method SpinWait of class WallClockSynchronizer is protected and can only be called by a subclass");
-        return NULL;
-    }
-    retval = helper->SpinWait__parent_caller(ns);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-PyObject *
-PyNs3WallClockSynchronizer__PythonHelper::_wrap_DoDispose(PyNs3WallClockSynchronizer *self)
-{
-    PyObject *py_retval;
-    PyNs3WallClockSynchronizer__PythonHelper *helper = dynamic_cast< PyNs3WallClockSynchronizer__PythonHelper* >(self->obj);
-    
-    if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
-        return NULL;
-    }
-    helper->DoDispose__parent_caller();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject *
-PyNs3WallClockSynchronizer__PythonHelper::_wrap_GetRealtime(PyNs3WallClockSynchronizer *self)
-{
-    PyObject *py_retval;
-    uint64_t retval;
-    PyNs3WallClockSynchronizer__PythonHelper *helper = dynamic_cast< PyNs3WallClockSynchronizer__PythonHelper* >(self->obj);
-    
-    if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method GetRealtime of class WallClockSynchronizer is protected and can only be called by a subclass");
-        return NULL;
-    }
-    retval = helper->GetRealtime__parent_caller();
-    py_retval = Py_BuildValue((char *) "K", retval);
-    return py_retval;
-}
-
-PyObject *
-PyNs3WallClockSynchronizer__PythonHelper::_wrap_NotifyNewAggregate(PyNs3WallClockSynchronizer *self)
-{
-    PyObject *py_retval;
-    PyNs3WallClockSynchronizer__PythonHelper *helper = dynamic_cast< PyNs3WallClockSynchronizer__PythonHelper* >(self->obj);
-    
-    if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyNewAggregate of class Object is protected and can only be called by a subclass");
-        return NULL;
-    }
-    helper->NotifyNewAggregate__parent_caller();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject *
-PyNs3WallClockSynchronizer__PythonHelper::_wrap_DoInitialize(PyNs3WallClockSynchronizer *self)
-{
-    PyObject *py_retval;
-    PyNs3WallClockSynchronizer__PythonHelper *helper = dynamic_cast< PyNs3WallClockSynchronizer__PythonHelper* >(self->obj);
-    
-    if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoInitialize of class Object is protected and can only be called by a subclass");
-        return NULL;
-    }
-    helper->DoInitialize__parent_caller();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
 
 PyObject *
 PyNs3WallClockSynchronizer__PythonHelper::_wrap_DoEventEnd(PyNs3WallClockSynchronizer *self)
@@ -31612,18 +31484,18 @@ PyNs3WallClockSynchronizer__PythonHelper::_wrap_DoEventStart(PyNs3WallClockSynch
 }
 
 PyObject *
-PyNs3WallClockSynchronizer__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3WallClockSynchronizer *self)
+PyNs3WallClockSynchronizer__PythonHelper::_wrap_DoGetCurrentRealtime(PyNs3WallClockSynchronizer *self)
 {
     PyObject *py_retval;
+    uint64_t retval;
     PyNs3WallClockSynchronizer__PythonHelper *helper = dynamic_cast< PyNs3WallClockSynchronizer__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoGetCurrentRealtime of class WallClockSynchronizer is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    retval = helper->DoGetCurrentRealtime__parent_caller();
+    py_retval = Py_BuildValue((char *) "K", retval);
     return py_retval;
 }
 
@@ -31688,26 +31560,9 @@ PyNs3WallClockSynchronizer__PythonHelper::_wrap_DoSetCondition(PyNs3WallClockSyn
 }
 
 PyObject *
-PyNs3WallClockSynchronizer__PythonHelper::_wrap_DoGetCurrentRealtime(PyNs3WallClockSynchronizer *self)
+PyNs3WallClockSynchronizer__PythonHelper::_wrap_DoSetOrigin(PyNs3WallClockSynchronizer *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    uint64_t retval;
-    PyNs3WallClockSynchronizer__PythonHelper *helper = dynamic_cast< PyNs3WallClockSynchronizer__PythonHelper* >(self->obj);
-    
-    if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoGetCurrentRealtime of class WallClockSynchronizer is protected and can only be called by a subclass");
-        return NULL;
-    }
-    retval = helper->DoGetCurrentRealtime__parent_caller();
-    py_retval = Py_BuildValue((char *) "K", retval);
-    return py_retval;
-}
-
-PyObject *
-PyNs3WallClockSynchronizer__PythonHelper::_wrap_SleepWait(PyNs3WallClockSynchronizer *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
     uint64_t ns;
     PyNs3WallClockSynchronizer__PythonHelper *helper = dynamic_cast< PyNs3WallClockSynchronizer__PythonHelper* >(self->obj);
     const char *keywords[] = {"ns", NULL};
@@ -31716,27 +31571,28 @@ PyNs3WallClockSynchronizer__PythonHelper::_wrap_SleepWait(PyNs3WallClockSynchron
         return NULL;
     }
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method SleepWait of class WallClockSynchronizer is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoSetOrigin of class WallClockSynchronizer is protected and can only be called by a subclass");
         return NULL;
     }
-    retval = helper->SleepWait__parent_caller(ns);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    helper->DoSetOrigin__parent_caller(ns);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
 PyObject *
-PyNs3WallClockSynchronizer__PythonHelper::_wrap_GetNormalizedRealtime(PyNs3WallClockSynchronizer *self)
+PyNs3WallClockSynchronizer__PythonHelper::_wrap_DoSignal(PyNs3WallClockSynchronizer *self)
 {
     PyObject *py_retval;
-    uint64_t retval;
     PyNs3WallClockSynchronizer__PythonHelper *helper = dynamic_cast< PyNs3WallClockSynchronizer__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method GetNormalizedRealtime of class WallClockSynchronizer is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoSignal of class WallClockSynchronizer is protected and can only be called by a subclass");
         return NULL;
     }
-    retval = helper->GetNormalizedRealtime__parent_caller();
-    py_retval = Py_BuildValue((char *) "K", retval);
+    helper->DoSignal__parent_caller();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -31763,16 +31619,160 @@ PyNs3WallClockSynchronizer__PythonHelper::_wrap_DoSynchronize(PyNs3WallClockSync
 }
 
 PyObject *
-PyNs3WallClockSynchronizer__PythonHelper::_wrap_DoSignal(PyNs3WallClockSynchronizer *self)
+PyNs3WallClockSynchronizer__PythonHelper::_wrap_DriftCorrect(PyNs3WallClockSynchronizer *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    uint64_t retval;
+    uint64_t nsNow;
+    uint64_t nsDelay;
+    PyNs3WallClockSynchronizer__PythonHelper *helper = dynamic_cast< PyNs3WallClockSynchronizer__PythonHelper* >(self->obj);
+    const char *keywords[] = {"nsNow", "nsDelay", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "KK", (char **) keywords, &nsNow, &nsDelay)) {
+        return NULL;
+    }
+    if (helper == NULL) {
+        PyErr_SetString(PyExc_TypeError, "Method DriftCorrect of class WallClockSynchronizer is protected and can only be called by a subclass");
+        return NULL;
+    }
+    retval = helper->DriftCorrect__parent_caller(nsNow, nsDelay);
+    py_retval = Py_BuildValue((char *) "K", retval);
+    return py_retval;
+}
+
+PyObject *
+PyNs3WallClockSynchronizer__PythonHelper::_wrap_GetNormalizedRealtime(PyNs3WallClockSynchronizer *self)
+{
+    PyObject *py_retval;
+    uint64_t retval;
+    PyNs3WallClockSynchronizer__PythonHelper *helper = dynamic_cast< PyNs3WallClockSynchronizer__PythonHelper* >(self->obj);
+    
+    if (helper == NULL) {
+        PyErr_SetString(PyExc_TypeError, "Method GetNormalizedRealtime of class WallClockSynchronizer is protected and can only be called by a subclass");
+        return NULL;
+    }
+    retval = helper->GetNormalizedRealtime__parent_caller();
+    py_retval = Py_BuildValue((char *) "K", retval);
+    return py_retval;
+}
+
+PyObject *
+PyNs3WallClockSynchronizer__PythonHelper::_wrap_GetRealtime(PyNs3WallClockSynchronizer *self)
+{
+    PyObject *py_retval;
+    uint64_t retval;
+    PyNs3WallClockSynchronizer__PythonHelper *helper = dynamic_cast< PyNs3WallClockSynchronizer__PythonHelper* >(self->obj);
+    
+    if (helper == NULL) {
+        PyErr_SetString(PyExc_TypeError, "Method GetRealtime of class WallClockSynchronizer is protected and can only be called by a subclass");
+        return NULL;
+    }
+    retval = helper->GetRealtime__parent_caller();
+    py_retval = Py_BuildValue((char *) "K", retval);
+    return py_retval;
+}
+
+PyObject *
+PyNs3WallClockSynchronizer__PythonHelper::_wrap_SleepWait(PyNs3WallClockSynchronizer *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    uint64_t ns;
+    PyNs3WallClockSynchronizer__PythonHelper *helper = dynamic_cast< PyNs3WallClockSynchronizer__PythonHelper* >(self->obj);
+    const char *keywords[] = {"ns", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "K", (char **) keywords, &ns)) {
+        return NULL;
+    }
+    if (helper == NULL) {
+        PyErr_SetString(PyExc_TypeError, "Method SleepWait of class WallClockSynchronizer is protected and can only be called by a subclass");
+        return NULL;
+    }
+    retval = helper->SleepWait__parent_caller(ns);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+PyObject *
+PyNs3WallClockSynchronizer__PythonHelper::_wrap_SpinWait(PyNs3WallClockSynchronizer *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    uint64_t ns;
+    PyNs3WallClockSynchronizer__PythonHelper *helper = dynamic_cast< PyNs3WallClockSynchronizer__PythonHelper* >(self->obj);
+    const char *keywords[] = {"ns", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "K", (char **) keywords, &ns)) {
+        return NULL;
+    }
+    if (helper == NULL) {
+        PyErr_SetString(PyExc_TypeError, "Method SpinWait of class WallClockSynchronizer is protected and can only be called by a subclass");
+        return NULL;
+    }
+    retval = helper->SpinWait__parent_caller(ns);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+PyObject *
+PyNs3WallClockSynchronizer__PythonHelper::_wrap_DoDispose(PyNs3WallClockSynchronizer *self)
 {
     PyObject *py_retval;
     PyNs3WallClockSynchronizer__PythonHelper *helper = dynamic_cast< PyNs3WallClockSynchronizer__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoSignal of class WallClockSynchronizer is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoSignal__parent_caller();
+    helper->DoDispose__parent_caller();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject *
+PyNs3WallClockSynchronizer__PythonHelper::_wrap_DoInitialize(PyNs3WallClockSynchronizer *self)
+{
+    PyObject *py_retval;
+    PyNs3WallClockSynchronizer__PythonHelper *helper = dynamic_cast< PyNs3WallClockSynchronizer__PythonHelper* >(self->obj);
+    
+    if (helper == NULL) {
+        PyErr_SetString(PyExc_TypeError, "Method DoInitialize of class Object is protected and can only be called by a subclass");
+        return NULL;
+    }
+    helper->DoInitialize__parent_caller();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject *
+PyNs3WallClockSynchronizer__PythonHelper::_wrap_NotifyNewAggregate(PyNs3WallClockSynchronizer *self)
+{
+    PyObject *py_retval;
+    PyNs3WallClockSynchronizer__PythonHelper *helper = dynamic_cast< PyNs3WallClockSynchronizer__PythonHelper* >(self->obj);
+    
+    if (helper == NULL) {
+        PyErr_SetString(PyExc_TypeError, "Method NotifyNewAggregate of class Object is protected and can only be called by a subclass");
+        return NULL;
+    }
+    helper->NotifyNewAggregate__parent_caller();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject *
+PyNs3WallClockSynchronizer__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3WallClockSynchronizer *self)
+{
+    PyObject *py_retval;
+    PyNs3WallClockSynchronizer__PythonHelper *helper = dynamic_cast< PyNs3WallClockSynchronizer__PythonHelper* >(self->obj);
+    
+    if (helper == NULL) {
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        return NULL;
+    }
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -32636,24 +32636,24 @@ _wrap_PyNs3WallClockSynchronizer__copy__(PyNs3WallClockSynchronizer *self)
 
 static PyMethodDef PyNs3WallClockSynchronizer_methods[] = {
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3WallClockSynchronizer_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "DoSetOrigin", (PyCFunction) PyNs3WallClockSynchronizer__PythonHelper::_wrap_DoSetOrigin, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "DriftCorrect", (PyCFunction) PyNs3WallClockSynchronizer__PythonHelper::_wrap_DriftCorrect, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "SpinWait", (PyCFunction) PyNs3WallClockSynchronizer__PythonHelper::_wrap_SpinWait, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3WallClockSynchronizer__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
-    {(char *) "GetRealtime", (PyCFunction) PyNs3WallClockSynchronizer__PythonHelper::_wrap_GetRealtime, METH_NOARGS, NULL },
-    {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3WallClockSynchronizer__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoInitialize", (PyCFunction) PyNs3WallClockSynchronizer__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "DoEventEnd", (PyCFunction) PyNs3WallClockSynchronizer__PythonHelper::_wrap_DoEventEnd, METH_NOARGS, NULL },
     {(char *) "DoEventStart", (PyCFunction) PyNs3WallClockSynchronizer__PythonHelper::_wrap_DoEventStart, METH_NOARGS, NULL },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3WallClockSynchronizer__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "DoGetCurrentRealtime", (PyCFunction) PyNs3WallClockSynchronizer__PythonHelper::_wrap_DoGetCurrentRealtime, METH_NOARGS, NULL },
     {(char *) "DoGetDrift", (PyCFunction) PyNs3WallClockSynchronizer__PythonHelper::_wrap_DoGetDrift, METH_KEYWORDS|METH_VARARGS, NULL },
     {(char *) "DoRealtime", (PyCFunction) PyNs3WallClockSynchronizer__PythonHelper::_wrap_DoRealtime, METH_NOARGS, NULL },
     {(char *) "DoSetCondition", (PyCFunction) PyNs3WallClockSynchronizer__PythonHelper::_wrap_DoSetCondition, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "DoGetCurrentRealtime", (PyCFunction) PyNs3WallClockSynchronizer__PythonHelper::_wrap_DoGetCurrentRealtime, METH_NOARGS, NULL },
-    {(char *) "SleepWait", (PyCFunction) PyNs3WallClockSynchronizer__PythonHelper::_wrap_SleepWait, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "GetNormalizedRealtime", (PyCFunction) PyNs3WallClockSynchronizer__PythonHelper::_wrap_GetNormalizedRealtime, METH_NOARGS, NULL },
-    {(char *) "DoSynchronize", (PyCFunction) PyNs3WallClockSynchronizer__PythonHelper::_wrap_DoSynchronize, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "DoSetOrigin", (PyCFunction) PyNs3WallClockSynchronizer__PythonHelper::_wrap_DoSetOrigin, METH_KEYWORDS|METH_VARARGS, NULL },
     {(char *) "DoSignal", (PyCFunction) PyNs3WallClockSynchronizer__PythonHelper::_wrap_DoSignal, METH_NOARGS, NULL },
+    {(char *) "DoSynchronize", (PyCFunction) PyNs3WallClockSynchronizer__PythonHelper::_wrap_DoSynchronize, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "DriftCorrect", (PyCFunction) PyNs3WallClockSynchronizer__PythonHelper::_wrap_DriftCorrect, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "GetNormalizedRealtime", (PyCFunction) PyNs3WallClockSynchronizer__PythonHelper::_wrap_GetNormalizedRealtime, METH_NOARGS, NULL },
+    {(char *) "GetRealtime", (PyCFunction) PyNs3WallClockSynchronizer__PythonHelper::_wrap_GetRealtime, METH_NOARGS, NULL },
+    {(char *) "SleepWait", (PyCFunction) PyNs3WallClockSynchronizer__PythonHelper::_wrap_SleepWait, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "SpinWait", (PyCFunction) PyNs3WallClockSynchronizer__PythonHelper::_wrap_SpinWait, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "DoDispose", (PyCFunction) PyNs3WallClockSynchronizer__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "DoInitialize", (PyCFunction) PyNs3WallClockSynchronizer__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
+    {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3WallClockSynchronizer__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3WallClockSynchronizer__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3WallClockSynchronizer__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -32753,7 +32753,7 @@ PyTypeObject PyNs3WallClockSynchronizer_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE,                      /* tp_flags */
     "WallClockSynchronizer(arg0)\nWallClockSynchronizer()",                        /* Documentation string */
     (traverseproc)PyNs3WallClockSynchronizer__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3WallClockSynchronizer__tp_clear,             /* tp_clear */
@@ -32786,16 +32786,16 @@ PyTypeObject PyNs3WallClockSynchronizer_Type = {
 
 
 PyObject *
-PyNs3WeibullRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3WeibullRandomVariable *self)
+PyNs3WeibullRandomVariable__PythonHelper::_wrap_DoDispose(PyNs3WeibullRandomVariable *self)
 {
     PyObject *py_retval;
     PyNs3WeibullRandomVariable__PythonHelper *helper = dynamic_cast< PyNs3WeibullRandomVariable__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -32834,16 +32834,16 @@ PyNs3WeibullRandomVariable__PythonHelper::_wrap_NotifyNewAggregate(PyNs3WeibullR
 }
 
 PyObject *
-PyNs3WeibullRandomVariable__PythonHelper::_wrap_DoDispose(PyNs3WeibullRandomVariable *self)
+PyNs3WeibullRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3WeibullRandomVariable *self)
 {
     PyObject *py_retval;
     PyNs3WeibullRandomVariable__PythonHelper *helper = dynamic_cast< PyNs3WeibullRandomVariable__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -33194,78 +33194,6 @@ _wrap_PyNs3WeibullRandomVariable__tp_init(PyNs3WeibullRandomVariable *self, PyOb
 }
 
 
-
-PyObject *
-_wrap_PyNs3WeibullRandomVariable_GetInteger__0(PyNs3WeibullRandomVariable *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    unsigned int scale;
-    unsigned int shape;
-    unsigned int bound;
-    const char *keywords[] = {"scale", "shape", "bound", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "III", (char **) keywords, &scale, &shape, &bound)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    retval = self->obj->GetInteger(scale, shape, bound);
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-PyObject *
-_wrap_PyNs3WeibullRandomVariable_GetInteger__1(PyNs3WeibullRandomVariable *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    PyNs3WeibullRandomVariable__PythonHelper *helper_class = dynamic_cast<PyNs3WeibullRandomVariable__PythonHelper*> (self->obj);
-    const char *keywords[] = {NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "", (char **) keywords)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    retval = (helper_class == NULL)? (self->obj->GetInteger()) : (self->obj->ns3::WeibullRandomVariable::GetInteger());
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-PyObject * _wrap_PyNs3WeibullRandomVariable_GetInteger(PyNs3WeibullRandomVariable *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject * retval;
-    PyObject *error_list;
-    PyObject *exceptions[2] = {0,};
-    retval = _wrap_PyNs3WeibullRandomVariable_GetInteger__0(self, args, kwargs, &exceptions[0]);
-    if (!exceptions[0]) {
-        return retval;
-    }
-    retval = _wrap_PyNs3WeibullRandomVariable_GetInteger__1(self, args, kwargs, &exceptions[1]);
-    if (!exceptions[1]) {
-        Py_DECREF(exceptions[0]);
-        return retval;
-    }
-    error_list = PyList_New(2);
-    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
-    Py_DECREF(exceptions[0]);
-    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
-    Py_DECREF(exceptions[1]);
-    PyErr_SetObject(PyExc_TypeError, error_list);
-    Py_DECREF(error_list);
-    return NULL;
-}
-
-
 PyObject *
 _wrap_PyNs3WeibullRandomVariable_GetTypeId(void)
 {
@@ -33278,6 +33206,30 @@ _wrap_PyNs3WeibullRandomVariable_GetTypeId(void)
     py_TypeId->obj = new ns3::TypeId(retval);
     PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
     py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3WeibullRandomVariable_GetScale(PyNs3WeibullRandomVariable *self)
+{
+    PyObject *py_retval;
+    double retval;
+    
+    retval = self->obj->GetScale();
+    py_retval = Py_BuildValue((char *) "d", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3WeibullRandomVariable_GetShape(PyNs3WeibullRandomVariable *self)
+{
+    PyObject *py_retval;
+    double retval;
+    
+    retval = self->obj->GetShape();
+    py_retval = Py_BuildValue((char *) "d", retval);
     return py_retval;
 }
 
@@ -33366,40 +33318,88 @@ PyObject * _wrap_PyNs3WeibullRandomVariable_GetValue(PyNs3WeibullRandomVariable 
 }
 
 
+
 PyObject *
-_wrap_PyNs3WeibullRandomVariable_GetShape(PyNs3WeibullRandomVariable *self)
+_wrap_PyNs3WeibullRandomVariable_GetInteger__0(PyNs3WeibullRandomVariable *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
 {
     PyObject *py_retval;
-    double retval;
+    uint32_t retval;
+    unsigned int scale;
+    unsigned int shape;
+    unsigned int bound;
+    const char *keywords[] = {"scale", "shape", "bound", NULL};
     
-    retval = self->obj->GetShape();
-    py_retval = Py_BuildValue((char *) "d", retval);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "III", (char **) keywords, &scale, &shape, &bound)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    retval = self->obj->GetInteger(scale, shape, bound);
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
 
-
 PyObject *
-_wrap_PyNs3WeibullRandomVariable_GetScale(PyNs3WeibullRandomVariable *self)
+_wrap_PyNs3WeibullRandomVariable_GetInteger__1(PyNs3WeibullRandomVariable *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
 {
     PyObject *py_retval;
-    double retval;
+    uint32_t retval;
+    PyNs3WeibullRandomVariable__PythonHelper *helper_class = dynamic_cast<PyNs3WeibullRandomVariable__PythonHelper*> (self->obj);
+    const char *keywords[] = {NULL};
     
-    retval = self->obj->GetScale();
-    py_retval = Py_BuildValue((char *) "d", retval);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "", (char **) keywords)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    retval = (helper_class == NULL)? (self->obj->GetInteger()) : (self->obj->ns3::WeibullRandomVariable::GetInteger());
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
+}
+
+PyObject * _wrap_PyNs3WeibullRandomVariable_GetInteger(PyNs3WeibullRandomVariable *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject * retval;
+    PyObject *error_list;
+    PyObject *exceptions[2] = {0,};
+    retval = _wrap_PyNs3WeibullRandomVariable_GetInteger__0(self, args, kwargs, &exceptions[0]);
+    if (!exceptions[0]) {
+        return retval;
+    }
+    retval = _wrap_PyNs3WeibullRandomVariable_GetInteger__1(self, args, kwargs, &exceptions[1]);
+    if (!exceptions[1]) {
+        Py_DECREF(exceptions[0]);
+        return retval;
+    }
+    error_list = PyList_New(2);
+    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
+    Py_DECREF(exceptions[0]);
+    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
+    Py_DECREF(exceptions[1]);
+    PyErr_SetObject(PyExc_TypeError, error_list);
+    Py_DECREF(error_list);
+    return NULL;
 }
 
 static PyMethodDef PyNs3WeibullRandomVariable_methods[] = {
-    {(char *) "GetInteger", (PyCFunction) _wrap_PyNs3WeibullRandomVariable_GetInteger, METH_KEYWORDS|METH_VARARGS, NULL },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3WeibullRandomVariable_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "GetScale", (PyCFunction) _wrap_PyNs3WeibullRandomVariable_GetScale, METH_NOARGS, "GetScale()\n\n" },
+    {(char *) "GetShape", (PyCFunction) _wrap_PyNs3WeibullRandomVariable_GetShape, METH_NOARGS, "GetShape()\n\n" },
     {(char *) "GetBound", (PyCFunction) _wrap_PyNs3WeibullRandomVariable_GetBound, METH_NOARGS, "GetBound()\n\n" },
     {(char *) "GetValue", (PyCFunction) _wrap_PyNs3WeibullRandomVariable_GetValue, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "GetShape", (PyCFunction) _wrap_PyNs3WeibullRandomVariable_GetShape, METH_NOARGS, "GetShape()\n\n" },
-    {(char *) "GetScale", (PyCFunction) _wrap_PyNs3WeibullRandomVariable_GetScale, METH_NOARGS, "GetScale()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3WeibullRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "GetInteger", (PyCFunction) _wrap_PyNs3WeibullRandomVariable_GetInteger, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "DoDispose", (PyCFunction) PyNs3WeibullRandomVariable__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3WeibullRandomVariable__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3WeibullRandomVariable__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3WeibullRandomVariable__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3WeibullRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 
@@ -33498,7 +33498,7 @@ PyTypeObject PyNs3WeibullRandomVariable_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE,                      /* tp_flags */
     "WeibullRandomVariable()",                        /* Documentation string */
     (traverseproc)PyNs3WeibullRandomVariable__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3WeibullRandomVariable__tp_clear,             /* tp_clear */
@@ -33531,16 +33531,16 @@ PyTypeObject PyNs3WeibullRandomVariable_Type = {
 
 
 PyObject *
-PyNs3ZetaRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3ZetaRandomVariable *self)
+PyNs3ZetaRandomVariable__PythonHelper::_wrap_DoDispose(PyNs3ZetaRandomVariable *self)
 {
     PyObject *py_retval;
     PyNs3ZetaRandomVariable__PythonHelper *helper = dynamic_cast< PyNs3ZetaRandomVariable__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -33579,16 +33579,16 @@ PyNs3ZetaRandomVariable__PythonHelper::_wrap_NotifyNewAggregate(PyNs3ZetaRandomV
 }
 
 PyObject *
-PyNs3ZetaRandomVariable__PythonHelper::_wrap_DoDispose(PyNs3ZetaRandomVariable *self)
+PyNs3ZetaRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3ZetaRandomVariable *self)
 {
     PyObject *py_retval;
     PyNs3ZetaRandomVariable__PythonHelper *helper = dynamic_cast< PyNs3ZetaRandomVariable__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -33940,88 +33940,6 @@ _wrap_PyNs3ZetaRandomVariable__tp_init(PyNs3ZetaRandomVariable *self, PyObject *
 
 
 PyObject *
-_wrap_PyNs3ZetaRandomVariable_GetAlpha(PyNs3ZetaRandomVariable *self)
-{
-    PyObject *py_retval;
-    double retval;
-    
-    retval = self->obj->GetAlpha();
-    py_retval = Py_BuildValue((char *) "d", retval);
-    return py_retval;
-}
-
-
-
-PyObject *
-_wrap_PyNs3ZetaRandomVariable_GetInteger__0(PyNs3ZetaRandomVariable *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    unsigned int alpha;
-    const char *keywords[] = {"alpha", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &alpha)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    retval = self->obj->GetInteger(alpha);
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-PyObject *
-_wrap_PyNs3ZetaRandomVariable_GetInteger__1(PyNs3ZetaRandomVariable *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    PyNs3ZetaRandomVariable__PythonHelper *helper_class = dynamic_cast<PyNs3ZetaRandomVariable__PythonHelper*> (self->obj);
-    const char *keywords[] = {NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "", (char **) keywords)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    retval = (helper_class == NULL)? (self->obj->GetInteger()) : (self->obj->ns3::ZetaRandomVariable::GetInteger());
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-PyObject * _wrap_PyNs3ZetaRandomVariable_GetInteger(PyNs3ZetaRandomVariable *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject * retval;
-    PyObject *error_list;
-    PyObject *exceptions[2] = {0,};
-    retval = _wrap_PyNs3ZetaRandomVariable_GetInteger__0(self, args, kwargs, &exceptions[0]);
-    if (!exceptions[0]) {
-        return retval;
-    }
-    retval = _wrap_PyNs3ZetaRandomVariable_GetInteger__1(self, args, kwargs, &exceptions[1]);
-    if (!exceptions[1]) {
-        Py_DECREF(exceptions[0]);
-        return retval;
-    }
-    error_list = PyList_New(2);
-    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
-    Py_DECREF(exceptions[0]);
-    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
-    Py_DECREF(exceptions[1]);
-    PyErr_SetObject(PyExc_TypeError, error_list);
-    Py_DECREF(error_list);
-    return NULL;
-}
-
-
-PyObject *
 _wrap_PyNs3ZetaRandomVariable_GetTypeId(void)
 {
     PyObject *py_retval;
@@ -34033,6 +33951,18 @@ _wrap_PyNs3ZetaRandomVariable_GetTypeId(void)
     py_TypeId->obj = new ns3::TypeId(retval);
     PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
     py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3ZetaRandomVariable_GetAlpha(PyNs3ZetaRandomVariable *self)
+{
+    PyObject *py_retval;
+    double retval;
+    
+    retval = self->obj->GetAlpha();
+    py_retval = Py_BuildValue((char *) "d", retval);
     return py_retval;
 }
 
@@ -34106,15 +34036,85 @@ PyObject * _wrap_PyNs3ZetaRandomVariable_GetValue(PyNs3ZetaRandomVariable *self,
     return NULL;
 }
 
+
+
+PyObject *
+_wrap_PyNs3ZetaRandomVariable_GetInteger__0(PyNs3ZetaRandomVariable *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    unsigned int alpha;
+    const char *keywords[] = {"alpha", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &alpha)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    retval = self->obj->GetInteger(alpha);
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+PyObject *
+_wrap_PyNs3ZetaRandomVariable_GetInteger__1(PyNs3ZetaRandomVariable *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    PyNs3ZetaRandomVariable__PythonHelper *helper_class = dynamic_cast<PyNs3ZetaRandomVariable__PythonHelper*> (self->obj);
+    const char *keywords[] = {NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "", (char **) keywords)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    retval = (helper_class == NULL)? (self->obj->GetInteger()) : (self->obj->ns3::ZetaRandomVariable::GetInteger());
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+PyObject * _wrap_PyNs3ZetaRandomVariable_GetInteger(PyNs3ZetaRandomVariable *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject * retval;
+    PyObject *error_list;
+    PyObject *exceptions[2] = {0,};
+    retval = _wrap_PyNs3ZetaRandomVariable_GetInteger__0(self, args, kwargs, &exceptions[0]);
+    if (!exceptions[0]) {
+        return retval;
+    }
+    retval = _wrap_PyNs3ZetaRandomVariable_GetInteger__1(self, args, kwargs, &exceptions[1]);
+    if (!exceptions[1]) {
+        Py_DECREF(exceptions[0]);
+        return retval;
+    }
+    error_list = PyList_New(2);
+    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
+    Py_DECREF(exceptions[0]);
+    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
+    Py_DECREF(exceptions[1]);
+    PyErr_SetObject(PyExc_TypeError, error_list);
+    Py_DECREF(error_list);
+    return NULL;
+}
+
 static PyMethodDef PyNs3ZetaRandomVariable_methods[] = {
-    {(char *) "GetAlpha", (PyCFunction) _wrap_PyNs3ZetaRandomVariable_GetAlpha, METH_NOARGS, "GetAlpha()\n\n" },
-    {(char *) "GetInteger", (PyCFunction) _wrap_PyNs3ZetaRandomVariable_GetInteger, METH_KEYWORDS|METH_VARARGS, NULL },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3ZetaRandomVariable_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "GetAlpha", (PyCFunction) _wrap_PyNs3ZetaRandomVariable_GetAlpha, METH_NOARGS, "GetAlpha()\n\n" },
     {(char *) "GetValue", (PyCFunction) _wrap_PyNs3ZetaRandomVariable_GetValue, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3ZetaRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "GetInteger", (PyCFunction) _wrap_PyNs3ZetaRandomVariable_GetInteger, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "DoDispose", (PyCFunction) PyNs3ZetaRandomVariable__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3ZetaRandomVariable__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3ZetaRandomVariable__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3ZetaRandomVariable__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3ZetaRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 
@@ -34213,7 +34213,7 @@ PyTypeObject PyNs3ZetaRandomVariable_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE,                      /* tp_flags */
     "ZetaRandomVariable()",                        /* Documentation string */
     (traverseproc)PyNs3ZetaRandomVariable__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3ZetaRandomVariable__tp_clear,             /* tp_clear */
@@ -34246,16 +34246,16 @@ PyTypeObject PyNs3ZetaRandomVariable_Type = {
 
 
 PyObject *
-PyNs3ZipfRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3ZipfRandomVariable *self)
+PyNs3ZipfRandomVariable__PythonHelper::_wrap_DoDispose(PyNs3ZipfRandomVariable *self)
 {
     PyObject *py_retval;
     PyNs3ZipfRandomVariable__PythonHelper *helper = dynamic_cast< PyNs3ZipfRandomVariable__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -34294,16 +34294,16 @@ PyNs3ZipfRandomVariable__PythonHelper::_wrap_NotifyNewAggregate(PyNs3ZipfRandomV
 }
 
 PyObject *
-PyNs3ZipfRandomVariable__PythonHelper::_wrap_DoDispose(PyNs3ZipfRandomVariable *self)
+PyNs3ZipfRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3ZipfRandomVariable *self)
 {
     PyObject *py_retval;
     PyNs3ZipfRandomVariable__PythonHelper *helper = dynamic_cast< PyNs3ZipfRandomVariable__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -34655,89 +34655,6 @@ _wrap_PyNs3ZipfRandomVariable__tp_init(PyNs3ZipfRandomVariable *self, PyObject *
 
 
 PyObject *
-_wrap_PyNs3ZipfRandomVariable_GetAlpha(PyNs3ZipfRandomVariable *self)
-{
-    PyObject *py_retval;
-    double retval;
-    
-    retval = self->obj->GetAlpha();
-    py_retval = Py_BuildValue((char *) "d", retval);
-    return py_retval;
-}
-
-
-
-PyObject *
-_wrap_PyNs3ZipfRandomVariable_GetInteger__0(PyNs3ZipfRandomVariable *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    unsigned int n;
-    unsigned int alpha;
-    const char *keywords[] = {"n", "alpha", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "II", (char **) keywords, &n, &alpha)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    retval = self->obj->GetInteger(n, alpha);
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-PyObject *
-_wrap_PyNs3ZipfRandomVariable_GetInteger__1(PyNs3ZipfRandomVariable *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    PyNs3ZipfRandomVariable__PythonHelper *helper_class = dynamic_cast<PyNs3ZipfRandomVariable__PythonHelper*> (self->obj);
-    const char *keywords[] = {NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "", (char **) keywords)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    retval = (helper_class == NULL)? (self->obj->GetInteger()) : (self->obj->ns3::ZipfRandomVariable::GetInteger());
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-PyObject * _wrap_PyNs3ZipfRandomVariable_GetInteger(PyNs3ZipfRandomVariable *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject * retval;
-    PyObject *error_list;
-    PyObject *exceptions[2] = {0,};
-    retval = _wrap_PyNs3ZipfRandomVariable_GetInteger__0(self, args, kwargs, &exceptions[0]);
-    if (!exceptions[0]) {
-        return retval;
-    }
-    retval = _wrap_PyNs3ZipfRandomVariable_GetInteger__1(self, args, kwargs, &exceptions[1]);
-    if (!exceptions[1]) {
-        Py_DECREF(exceptions[0]);
-        return retval;
-    }
-    error_list = PyList_New(2);
-    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
-    Py_DECREF(exceptions[0]);
-    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
-    Py_DECREF(exceptions[1]);
-    PyErr_SetObject(PyExc_TypeError, error_list);
-    Py_DECREF(error_list);
-    return NULL;
-}
-
-
-PyObject *
 _wrap_PyNs3ZipfRandomVariable_GetTypeId(void)
 {
     PyObject *py_retval;
@@ -34761,6 +34678,18 @@ _wrap_PyNs3ZipfRandomVariable_GetN(PyNs3ZipfRandomVariable *self)
     
     retval = self->obj->GetN();
     py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3ZipfRandomVariable_GetAlpha(PyNs3ZipfRandomVariable *self)
+{
+    PyObject *py_retval;
+    double retval;
+    
+    retval = self->obj->GetAlpha();
+    py_retval = Py_BuildValue((char *) "d", retval);
     return py_retval;
 }
 
@@ -34835,16 +34764,87 @@ PyObject * _wrap_PyNs3ZipfRandomVariable_GetValue(PyNs3ZipfRandomVariable *self,
     return NULL;
 }
 
+
+
+PyObject *
+_wrap_PyNs3ZipfRandomVariable_GetInteger__0(PyNs3ZipfRandomVariable *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    unsigned int n;
+    unsigned int alpha;
+    const char *keywords[] = {"n", "alpha", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "II", (char **) keywords, &n, &alpha)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    retval = self->obj->GetInteger(n, alpha);
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+PyObject *
+_wrap_PyNs3ZipfRandomVariable_GetInteger__1(PyNs3ZipfRandomVariable *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    PyNs3ZipfRandomVariable__PythonHelper *helper_class = dynamic_cast<PyNs3ZipfRandomVariable__PythonHelper*> (self->obj);
+    const char *keywords[] = {NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "", (char **) keywords)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    retval = (helper_class == NULL)? (self->obj->GetInteger()) : (self->obj->ns3::ZipfRandomVariable::GetInteger());
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+PyObject * _wrap_PyNs3ZipfRandomVariable_GetInteger(PyNs3ZipfRandomVariable *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject * retval;
+    PyObject *error_list;
+    PyObject *exceptions[2] = {0,};
+    retval = _wrap_PyNs3ZipfRandomVariable_GetInteger__0(self, args, kwargs, &exceptions[0]);
+    if (!exceptions[0]) {
+        return retval;
+    }
+    retval = _wrap_PyNs3ZipfRandomVariable_GetInteger__1(self, args, kwargs, &exceptions[1]);
+    if (!exceptions[1]) {
+        Py_DECREF(exceptions[0]);
+        return retval;
+    }
+    error_list = PyList_New(2);
+    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
+    Py_DECREF(exceptions[0]);
+    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
+    Py_DECREF(exceptions[1]);
+    PyErr_SetObject(PyExc_TypeError, error_list);
+    Py_DECREF(error_list);
+    return NULL;
+}
+
 static PyMethodDef PyNs3ZipfRandomVariable_methods[] = {
-    {(char *) "GetAlpha", (PyCFunction) _wrap_PyNs3ZipfRandomVariable_GetAlpha, METH_NOARGS, "GetAlpha()\n\n" },
-    {(char *) "GetInteger", (PyCFunction) _wrap_PyNs3ZipfRandomVariable_GetInteger, METH_KEYWORDS|METH_VARARGS, NULL },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3ZipfRandomVariable_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
     {(char *) "GetN", (PyCFunction) _wrap_PyNs3ZipfRandomVariable_GetN, METH_NOARGS, "GetN()\n\n" },
+    {(char *) "GetAlpha", (PyCFunction) _wrap_PyNs3ZipfRandomVariable_GetAlpha, METH_NOARGS, "GetAlpha()\n\n" },
     {(char *) "GetValue", (PyCFunction) _wrap_PyNs3ZipfRandomVariable_GetValue, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3ZipfRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "GetInteger", (PyCFunction) _wrap_PyNs3ZipfRandomVariable_GetInteger, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "DoDispose", (PyCFunction) PyNs3ZipfRandomVariable__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3ZipfRandomVariable__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3ZipfRandomVariable__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3ZipfRandomVariable__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3ZipfRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 
@@ -34943,7 +34943,7 @@ PyTypeObject PyNs3ZipfRandomVariable_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE,                      /* tp_flags */
     "ZipfRandomVariable()",                        /* Documentation string */
     (traverseproc)PyNs3ZipfRandomVariable__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3ZipfRandomVariable__tp_clear,             /* tp_clear */
@@ -34984,6 +34984,38 @@ _wrap_PyNs3AttributeAccessor__tp_init(void)
 
 
 PyObject *
+_wrap_PyNs3AttributeAccessor_Get(PyNs3AttributeAccessor *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3ObjectBase *object;
+    ns3::ObjectBase *object_ptr;
+    PyNs3AttributeValue *attribute;
+    const char *keywords[] = {"object", "attribute", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3ObjectBase_Type, &object, &PyNs3AttributeValue_Type, &attribute)) {
+        return NULL;
+    }
+    object_ptr = (object ? object->obj : NULL);
+    retval = self->obj->Get(object_ptr, *((PyNs3AttributeValue *) attribute)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3AttributeAccessor_HasGetter(PyNs3AttributeAccessor *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->HasGetter();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3AttributeAccessor_HasSetter(PyNs3AttributeAccessor *self)
 {
     PyObject *py_retval;
@@ -35014,43 +35046,11 @@ _wrap_PyNs3AttributeAccessor_Set(PyNs3AttributeAccessor *self, PyObject *args, P
     return py_retval;
 }
 
-
-PyObject *
-_wrap_PyNs3AttributeAccessor_HasGetter(PyNs3AttributeAccessor *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->HasGetter();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3AttributeAccessor_Get(PyNs3AttributeAccessor *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3ObjectBase *object;
-    ns3::ObjectBase *object_ptr;
-    PyNs3AttributeValue *attribute;
-    const char *keywords[] = {"object", "attribute", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3ObjectBase_Type, &object, &PyNs3AttributeValue_Type, &attribute)) {
-        return NULL;
-    }
-    object_ptr = (object ? object->obj : NULL);
-    retval = self->obj->Get(object_ptr, *((PyNs3AttributeValue *) attribute)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
 static PyMethodDef PyNs3AttributeAccessor_methods[] = {
+    {(char *) "Get", (PyCFunction) _wrap_PyNs3AttributeAccessor_Get, METH_KEYWORDS|METH_VARARGS, "Get(object, attribute)\n\ntype: object: ns3::ObjectBase const *\ntype: attribute: ns3::AttributeValue &" },
+    {(char *) "HasGetter", (PyCFunction) _wrap_PyNs3AttributeAccessor_HasGetter, METH_NOARGS, "HasGetter()\n\n" },
     {(char *) "HasSetter", (PyCFunction) _wrap_PyNs3AttributeAccessor_HasSetter, METH_NOARGS, "HasSetter()\n\n" },
     {(char *) "Set", (PyCFunction) _wrap_PyNs3AttributeAccessor_Set, METH_KEYWORDS|METH_VARARGS, "Set(object, value)\n\ntype: object: ns3::ObjectBase *\ntype: value: ns3::AttributeValue const &" },
-    {(char *) "HasGetter", (PyCFunction) _wrap_PyNs3AttributeAccessor_HasGetter, METH_NOARGS, "HasGetter()\n\n" },
-    {(char *) "Get", (PyCFunction) _wrap_PyNs3AttributeAccessor_Get, METH_KEYWORDS|METH_VARARGS, "Get(object, attribute)\n\ntype: object: ns3::ObjectBase const *\ntype: attribute: ns3::AttributeValue &" },
     {NULL, NULL, 0, NULL}
 };
 
@@ -35170,12 +35170,35 @@ _wrap_PyNs3AttributeChecker__tp_init(void)
 
 
 PyObject *
-_wrap_PyNs3AttributeChecker_HasUnderlyingTypeInformation(PyNs3AttributeChecker *self)
+_wrap_PyNs3AttributeChecker_Check(PyNs3AttributeChecker *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
     bool retval;
+    PyNs3AttributeValue *value;
+    const char *keywords[] = {"value", NULL};
     
-    retval = self->obj->HasUnderlyingTypeInformation();
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3AttributeValue_Type, &value)) {
+        return NULL;
+    }
+    retval = self->obj->Check(*((PyNs3AttributeValue *) value)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3AttributeChecker_Copy(PyNs3AttributeChecker *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3AttributeValue *source;
+    PyNs3AttributeValue *destination;
+    const char *keywords[] = {"source", "destination", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3AttributeValue_Type, &source, &PyNs3AttributeValue_Type, &destination)) {
+        return NULL;
+    }
+    retval = self->obj->Copy(*((PyNs3AttributeValue *) source)->obj, *((PyNs3AttributeValue *) destination)->obj);
     py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
@@ -35283,47 +35306,24 @@ _wrap_PyNs3AttributeChecker_GetValueTypeName(PyNs3AttributeChecker *self)
 
 
 PyObject *
-_wrap_PyNs3AttributeChecker_Copy(PyNs3AttributeChecker *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3AttributeChecker_HasUnderlyingTypeInformation(PyNs3AttributeChecker *self)
 {
     PyObject *py_retval;
     bool retval;
-    PyNs3AttributeValue *source;
-    PyNs3AttributeValue *destination;
-    const char *keywords[] = {"source", "destination", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3AttributeValue_Type, &source, &PyNs3AttributeValue_Type, &destination)) {
-        return NULL;
-    }
-    retval = self->obj->Copy(*((PyNs3AttributeValue *) source)->obj, *((PyNs3AttributeValue *) destination)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3AttributeChecker_Check(PyNs3AttributeChecker *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3AttributeValue *value;
-    const char *keywords[] = {"value", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3AttributeValue_Type, &value)) {
-        return NULL;
-    }
-    retval = self->obj->Check(*((PyNs3AttributeValue *) value)->obj);
+    retval = self->obj->HasUnderlyingTypeInformation();
     py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
 static PyMethodDef PyNs3AttributeChecker_methods[] = {
-    {(char *) "HasUnderlyingTypeInformation", (PyCFunction) _wrap_PyNs3AttributeChecker_HasUnderlyingTypeInformation, METH_NOARGS, "HasUnderlyingTypeInformation()\n\n" },
+    {(char *) "Check", (PyCFunction) _wrap_PyNs3AttributeChecker_Check, METH_KEYWORDS|METH_VARARGS, "Check(value)\n\ntype: value: ns3::AttributeValue const &" },
+    {(char *) "Copy", (PyCFunction) _wrap_PyNs3AttributeChecker_Copy, METH_KEYWORDS|METH_VARARGS, "Copy(source, destination)\n\ntype: source: ns3::AttributeValue const &\ntype: destination: ns3::AttributeValue &" },
     {(char *) "Create", (PyCFunction) _wrap_PyNs3AttributeChecker_Create, METH_NOARGS, "Create()\n\n" },
     {(char *) "CreateValidValue", (PyCFunction) _wrap_PyNs3AttributeChecker_CreateValidValue, METH_KEYWORDS|METH_VARARGS, "CreateValidValue(value)\n\ntype: value: ns3::AttributeValue const &" },
     {(char *) "GetUnderlyingTypeInformation", (PyCFunction) _wrap_PyNs3AttributeChecker_GetUnderlyingTypeInformation, METH_NOARGS, "GetUnderlyingTypeInformation()\n\n" },
     {(char *) "GetValueTypeName", (PyCFunction) _wrap_PyNs3AttributeChecker_GetValueTypeName, METH_NOARGS, "GetValueTypeName()\n\n" },
-    {(char *) "Copy", (PyCFunction) _wrap_PyNs3AttributeChecker_Copy, METH_KEYWORDS|METH_VARARGS, "Copy(source, destination)\n\ntype: source: ns3::AttributeValue const &\ntype: destination: ns3::AttributeValue &" },
-    {(char *) "Check", (PyCFunction) _wrap_PyNs3AttributeChecker_Check, METH_KEYWORDS|METH_VARARGS, "Check(value)\n\ntype: value: ns3::AttributeValue const &" },
+    {(char *) "HasUnderlyingTypeInformation", (PyCFunction) _wrap_PyNs3AttributeChecker_HasUnderlyingTypeInformation, METH_NOARGS, "HasUnderlyingTypeInformation()\n\n" },
     {NULL, NULL, 0, NULL}
 };
 
@@ -35479,25 +35479,6 @@ _wrap_PyNs3AttributeValue_Copy(PyNs3AttributeValue *self)
 
 
 PyObject *
-_wrap_PyNs3AttributeValue_SerializeToString(PyNs3AttributeValue *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    std::string retval;
-    PyNs3AttributeChecker *checker;
-    ns3::AttributeChecker *checker_ptr;
-    const char *keywords[] = {"checker", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3AttributeChecker_Type, &checker)) {
-        return NULL;
-    }
-    checker_ptr = (checker ? checker->obj : NULL);
-    retval = self->obj->SerializeToString(ns3::Ptr< ns3::AttributeChecker  > (checker_ptr));
-    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3AttributeValue_DeserializeFromString(PyNs3AttributeValue *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -35517,10 +35498,29 @@ _wrap_PyNs3AttributeValue_DeserializeFromString(PyNs3AttributeValue *self, PyObj
     return py_retval;
 }
 
+
+PyObject *
+_wrap_PyNs3AttributeValue_SerializeToString(PyNs3AttributeValue *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    std::string retval;
+    PyNs3AttributeChecker *checker;
+    ns3::AttributeChecker *checker_ptr;
+    const char *keywords[] = {"checker", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3AttributeChecker_Type, &checker)) {
+        return NULL;
+    }
+    checker_ptr = (checker ? checker->obj : NULL);
+    retval = self->obj->SerializeToString(ns3::Ptr< ns3::AttributeChecker  > (checker_ptr));
+    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    return py_retval;
+}
+
 static PyMethodDef PyNs3AttributeValue_methods[] = {
     {(char *) "Copy", (PyCFunction) _wrap_PyNs3AttributeValue_Copy, METH_NOARGS, "Copy()\n\n" },
-    {(char *) "SerializeToString", (PyCFunction) _wrap_PyNs3AttributeValue_SerializeToString, METH_KEYWORDS|METH_VARARGS, "SerializeToString(checker)\n\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
     {(char *) "DeserializeFromString", (PyCFunction) _wrap_PyNs3AttributeValue_DeserializeFromString, METH_KEYWORDS|METH_VARARGS, "DeserializeFromString(value, checker)\n\ntype: value: std::string\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
+    {(char *) "SerializeToString", (PyCFunction) _wrap_PyNs3AttributeValue_SerializeToString, METH_KEYWORDS|METH_VARARGS, "SerializeToString(checker)\n\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
     {NULL, NULL, 0, NULL}
 };
 
@@ -35845,37 +35845,6 @@ int _wrap_PyNs3BooleanValue__tp_init(PyNs3BooleanValue *self, PyObject *args, Py
 
 
 PyObject *
-_wrap_PyNs3BooleanValue_Set(PyNs3BooleanValue *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool value;
-    PyObject *py_value;
-    const char *keywords[] = {"value", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &py_value)) {
-        return NULL;
-    }
-    value = (bool) PyObject_IsTrue(py_value);
-    self->obj->Set(value);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3BooleanValue_Get(PyNs3BooleanValue *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->Get();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3BooleanValue_Copy(PyNs3BooleanValue *self)
 {
     PyObject *py_retval;
@@ -35912,25 +35881,6 @@ _wrap_PyNs3BooleanValue_Copy(PyNs3BooleanValue *self)
 
 
 PyObject *
-_wrap_PyNs3BooleanValue_SerializeToString(PyNs3BooleanValue *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    std::string retval;
-    PyNs3AttributeChecker *checker;
-    ns3::AttributeChecker *checker_ptr;
-    const char *keywords[] = {"checker", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3AttributeChecker_Type, &checker)) {
-        return NULL;
-    }
-    checker_ptr = (checker ? checker->obj : NULL);
-    retval = self->obj->SerializeToString(ns3::Ptr< ns3::AttributeChecker  > (checker_ptr));
-    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3BooleanValue_DeserializeFromString(PyNs3BooleanValue *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -35951,6 +35901,56 @@ _wrap_PyNs3BooleanValue_DeserializeFromString(PyNs3BooleanValue *self, PyObject 
 }
 
 
+PyObject *
+_wrap_PyNs3BooleanValue_Get(PyNs3BooleanValue *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->Get();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3BooleanValue_SerializeToString(PyNs3BooleanValue *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    std::string retval;
+    PyNs3AttributeChecker *checker;
+    ns3::AttributeChecker *checker_ptr;
+    const char *keywords[] = {"checker", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3AttributeChecker_Type, &checker)) {
+        return NULL;
+    }
+    checker_ptr = (checker ? checker->obj : NULL);
+    retval = self->obj->SerializeToString(ns3::Ptr< ns3::AttributeChecker  > (checker_ptr));
+    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3BooleanValue_Set(PyNs3BooleanValue *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool value;
+    PyObject *py_value;
+    const char *keywords[] = {"value", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &py_value)) {
+        return NULL;
+    }
+    value = (bool) PyObject_IsTrue(py_value);
+    self->obj->Set(value);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
 static PyObject*
 _wrap_PyNs3BooleanValue__copy__(PyNs3BooleanValue *self)
 {
@@ -35965,11 +35965,11 @@ _wrap_PyNs3BooleanValue__copy__(PyNs3BooleanValue *self)
 }
 
 static PyMethodDef PyNs3BooleanValue_methods[] = {
-    {(char *) "Set", (PyCFunction) _wrap_PyNs3BooleanValue_Set, METH_KEYWORDS|METH_VARARGS, "Set(value)\n\ntype: value: bool" },
-    {(char *) "Get", (PyCFunction) _wrap_PyNs3BooleanValue_Get, METH_NOARGS, "Get()\n\n" },
     {(char *) "Copy", (PyCFunction) _wrap_PyNs3BooleanValue_Copy, METH_NOARGS, "Copy()\n\n" },
-    {(char *) "SerializeToString", (PyCFunction) _wrap_PyNs3BooleanValue_SerializeToString, METH_KEYWORDS|METH_VARARGS, "SerializeToString(checker)\n\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
     {(char *) "DeserializeFromString", (PyCFunction) _wrap_PyNs3BooleanValue_DeserializeFromString, METH_KEYWORDS|METH_VARARGS, "DeserializeFromString(value, checker)\n\ntype: value: std::string\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
+    {(char *) "Get", (PyCFunction) _wrap_PyNs3BooleanValue_Get, METH_NOARGS, "Get()\n\n" },
+    {(char *) "SerializeToString", (PyCFunction) _wrap_PyNs3BooleanValue_SerializeToString, METH_KEYWORDS|METH_VARARGS, "SerializeToString(checker)\n\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
+    {(char *) "Set", (PyCFunction) _wrap_PyNs3BooleanValue_Set, METH_KEYWORDS|METH_VARARGS, "Set(value)\n\ntype: value: bool" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3BooleanValue__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -36093,16 +36093,16 @@ PyTypeObject PyNs3BooleanValue_Type = {
 
 
 PyObject *
-PyNs3CalendarScheduler__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3CalendarScheduler *self)
+PyNs3CalendarScheduler__PythonHelper::_wrap_DoDispose(PyNs3CalendarScheduler *self)
 {
     PyObject *py_retval;
     PyNs3CalendarScheduler__PythonHelper *helper = dynamic_cast< PyNs3CalendarScheduler__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -36141,16 +36141,16 @@ PyNs3CalendarScheduler__PythonHelper::_wrap_NotifyNewAggregate(PyNs3CalendarSche
 }
 
 PyObject *
-PyNs3CalendarScheduler__PythonHelper::_wrap_DoDispose(PyNs3CalendarScheduler *self)
+PyNs3CalendarScheduler__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3CalendarScheduler *self)
 {
     PyObject *py_retval;
     PyNs3CalendarScheduler__PythonHelper *helper = dynamic_cast< PyNs3CalendarScheduler__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -36715,6 +36715,22 @@ int _wrap_PyNs3CalendarScheduler__tp_init(PyNs3CalendarScheduler *self, PyObject
 
 
 PyObject *
+_wrap_PyNs3CalendarScheduler_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::CalendarScheduler::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3CalendarScheduler_Insert(PyNs3CalendarScheduler *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -36728,6 +36744,19 @@ _wrap_PyNs3CalendarScheduler_Insert(PyNs3CalendarScheduler *self, PyObject *args
     (helper_class == NULL)? (self->obj->Insert(*((PyNs3SchedulerEvent *) ev)->obj)) : (self->obj->ns3::CalendarScheduler::Insert(*((PyNs3SchedulerEvent *) ev)->obj));
     Py_INCREF(Py_None);
     py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3CalendarScheduler_IsEmpty(PyNs3CalendarScheduler *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3CalendarScheduler__PythonHelper *helper_class = dynamic_cast<PyNs3CalendarScheduler__PythonHelper*> (self->obj);
+    
+    retval = (helper_class == NULL)? (self->obj->IsEmpty()) : (self->obj->ns3::CalendarScheduler::IsEmpty());
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
@@ -36750,22 +36779,6 @@ _wrap_PyNs3CalendarScheduler_PeekNext(PyNs3CalendarScheduler *self)
 
 
 PyObject *
-_wrap_PyNs3CalendarScheduler_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::CalendarScheduler::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3CalendarScheduler_Remove(PyNs3CalendarScheduler *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -36779,19 +36792,6 @@ _wrap_PyNs3CalendarScheduler_Remove(PyNs3CalendarScheduler *self, PyObject *args
     (helper_class == NULL)? (self->obj->Remove(*((PyNs3SchedulerEvent *) ev)->obj)) : (self->obj->ns3::CalendarScheduler::Remove(*((PyNs3SchedulerEvent *) ev)->obj));
     Py_INCREF(Py_None);
     py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3CalendarScheduler_IsEmpty(PyNs3CalendarScheduler *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3CalendarScheduler__PythonHelper *helper_class = dynamic_cast<PyNs3CalendarScheduler__PythonHelper*> (self->obj);
-    
-    retval = (helper_class == NULL)? (self->obj->IsEmpty()) : (self->obj->ns3::CalendarScheduler::IsEmpty());
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
@@ -36829,16 +36829,16 @@ _wrap_PyNs3CalendarScheduler__copy__(PyNs3CalendarScheduler *self)
 }
 
 static PyMethodDef PyNs3CalendarScheduler_methods[] = {
-    {(char *) "Insert", (PyCFunction) _wrap_PyNs3CalendarScheduler_Insert, METH_KEYWORDS|METH_VARARGS, "Insert(ev)\n\ntype: ev: ns3::Scheduler::Event const &" },
-    {(char *) "PeekNext", (PyCFunction) _wrap_PyNs3CalendarScheduler_PeekNext, METH_NOARGS, "PeekNext()\n\n" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3CalendarScheduler_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "Remove", (PyCFunction) _wrap_PyNs3CalendarScheduler_Remove, METH_KEYWORDS|METH_VARARGS, "Remove(ev)\n\ntype: ev: ns3::Scheduler::Event const &" },
+    {(char *) "Insert", (PyCFunction) _wrap_PyNs3CalendarScheduler_Insert, METH_KEYWORDS|METH_VARARGS, "Insert(ev)\n\ntype: ev: ns3::Scheduler::Event const &" },
     {(char *) "IsEmpty", (PyCFunction) _wrap_PyNs3CalendarScheduler_IsEmpty, METH_NOARGS, "IsEmpty()\n\n" },
+    {(char *) "PeekNext", (PyCFunction) _wrap_PyNs3CalendarScheduler_PeekNext, METH_NOARGS, "PeekNext()\n\n" },
+    {(char *) "Remove", (PyCFunction) _wrap_PyNs3CalendarScheduler_Remove, METH_KEYWORDS|METH_VARARGS, "Remove(ev)\n\ntype: ev: ns3::Scheduler::Event const &" },
     {(char *) "RemoveNext", (PyCFunction) _wrap_PyNs3CalendarScheduler_RemoveNext, METH_NOARGS, "RemoveNext()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3CalendarScheduler__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "DoDispose", (PyCFunction) PyNs3CalendarScheduler__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3CalendarScheduler__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3CalendarScheduler__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3CalendarScheduler__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3CalendarScheduler__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3CalendarScheduler__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -36938,7 +36938,7 @@ PyTypeObject PyNs3CalendarScheduler_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE,                      /* tp_flags */
     "CalendarScheduler(arg0)\nCalendarScheduler()",                        /* Documentation string */
     (traverseproc)PyNs3CalendarScheduler__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3CalendarScheduler__tp_clear,             /* tp_clear */
@@ -37333,23 +37333,6 @@ int _wrap_PyNs3CallbackValue__tp_init(PyNs3CallbackValue *self, PyObject *args, 
 
 
 PyObject *
-_wrap_PyNs3CallbackValue_Set(PyNs3CallbackValue *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3CallbackBase *base;
-    const char *keywords[] = {"base", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3CallbackBase_Type, &base)) {
-        return NULL;
-    }
-    self->obj->Set(*((PyNs3CallbackBase *) base)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3CallbackValue_Copy(PyNs3CallbackValue *self)
 {
     PyObject *py_retval;
@@ -37386,25 +37369,6 @@ _wrap_PyNs3CallbackValue_Copy(PyNs3CallbackValue *self)
 
 
 PyObject *
-_wrap_PyNs3CallbackValue_SerializeToString(PyNs3CallbackValue *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    std::string retval;
-    PyNs3AttributeChecker *checker;
-    ns3::AttributeChecker *checker_ptr;
-    const char *keywords[] = {"checker", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3AttributeChecker_Type, &checker)) {
-        return NULL;
-    }
-    checker_ptr = (checker ? checker->obj : NULL);
-    retval = self->obj->SerializeToString(ns3::Ptr< ns3::AttributeChecker  > (checker_ptr));
-    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3CallbackValue_DeserializeFromString(PyNs3CallbackValue *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -37425,6 +37389,42 @@ _wrap_PyNs3CallbackValue_DeserializeFromString(PyNs3CallbackValue *self, PyObjec
 }
 
 
+PyObject *
+_wrap_PyNs3CallbackValue_SerializeToString(PyNs3CallbackValue *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    std::string retval;
+    PyNs3AttributeChecker *checker;
+    ns3::AttributeChecker *checker_ptr;
+    const char *keywords[] = {"checker", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3AttributeChecker_Type, &checker)) {
+        return NULL;
+    }
+    checker_ptr = (checker ? checker->obj : NULL);
+    retval = self->obj->SerializeToString(ns3::Ptr< ns3::AttributeChecker  > (checker_ptr));
+    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3CallbackValue_Set(PyNs3CallbackValue *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3CallbackBase *base;
+    const char *keywords[] = {"base", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3CallbackBase_Type, &base)) {
+        return NULL;
+    }
+    self->obj->Set(*((PyNs3CallbackBase *) base)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
 static PyObject*
 _wrap_PyNs3CallbackValue__copy__(PyNs3CallbackValue *self)
 {
@@ -37439,10 +37439,10 @@ _wrap_PyNs3CallbackValue__copy__(PyNs3CallbackValue *self)
 }
 
 static PyMethodDef PyNs3CallbackValue_methods[] = {
-    {(char *) "Set", (PyCFunction) _wrap_PyNs3CallbackValue_Set, METH_KEYWORDS|METH_VARARGS, "Set(base)\n\ntype: base: ns3::CallbackBase" },
     {(char *) "Copy", (PyCFunction) _wrap_PyNs3CallbackValue_Copy, METH_NOARGS, "Copy()\n\n" },
-    {(char *) "SerializeToString", (PyCFunction) _wrap_PyNs3CallbackValue_SerializeToString, METH_KEYWORDS|METH_VARARGS, "SerializeToString(checker)\n\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
     {(char *) "DeserializeFromString", (PyCFunction) _wrap_PyNs3CallbackValue_DeserializeFromString, METH_KEYWORDS|METH_VARARGS, "DeserializeFromString(value, checker)\n\ntype: value: std::string\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
+    {(char *) "SerializeToString", (PyCFunction) _wrap_PyNs3CallbackValue_SerializeToString, METH_KEYWORDS|METH_VARARGS, "SerializeToString(checker)\n\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
+    {(char *) "Set", (PyCFunction) _wrap_PyNs3CallbackValue_Set, METH_KEYWORDS|METH_VARARGS, "Set(base)\n\ntype: base: ns3::CallbackBase" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3CallbackValue__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -37555,16 +37555,16 @@ PyTypeObject PyNs3CallbackValue_Type = {
 
 
 PyObject *
-PyNs3ConstantRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3ConstantRandomVariable *self)
+PyNs3ConstantRandomVariable__PythonHelper::_wrap_DoDispose(PyNs3ConstantRandomVariable *self)
 {
     PyObject *py_retval;
     PyNs3ConstantRandomVariable__PythonHelper *helper = dynamic_cast< PyNs3ConstantRandomVariable__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -37603,16 +37603,16 @@ PyNs3ConstantRandomVariable__PythonHelper::_wrap_NotifyNewAggregate(PyNs3Constan
 }
 
 PyObject *
-PyNs3ConstantRandomVariable__PythonHelper::_wrap_DoDispose(PyNs3ConstantRandomVariable *self)
+PyNs3ConstantRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3ConstantRandomVariable *self)
 {
     PyObject *py_retval;
     PyNs3ConstantRandomVariable__PythonHelper *helper = dynamic_cast< PyNs3ConstantRandomVariable__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -37963,76 +37963,6 @@ _wrap_PyNs3ConstantRandomVariable__tp_init(PyNs3ConstantRandomVariable *self, Py
 }
 
 
-
-PyObject *
-_wrap_PyNs3ConstantRandomVariable_GetInteger__0(PyNs3ConstantRandomVariable *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    unsigned int constant;
-    const char *keywords[] = {"constant", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &constant)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    retval = self->obj->GetInteger(constant);
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-PyObject *
-_wrap_PyNs3ConstantRandomVariable_GetInteger__1(PyNs3ConstantRandomVariable *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    PyNs3ConstantRandomVariable__PythonHelper *helper_class = dynamic_cast<PyNs3ConstantRandomVariable__PythonHelper*> (self->obj);
-    const char *keywords[] = {NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "", (char **) keywords)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    retval = (helper_class == NULL)? (self->obj->GetInteger()) : (self->obj->ns3::ConstantRandomVariable::GetInteger());
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-PyObject * _wrap_PyNs3ConstantRandomVariable_GetInteger(PyNs3ConstantRandomVariable *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject * retval;
-    PyObject *error_list;
-    PyObject *exceptions[2] = {0,};
-    retval = _wrap_PyNs3ConstantRandomVariable_GetInteger__0(self, args, kwargs, &exceptions[0]);
-    if (!exceptions[0]) {
-        return retval;
-    }
-    retval = _wrap_PyNs3ConstantRandomVariable_GetInteger__1(self, args, kwargs, &exceptions[1]);
-    if (!exceptions[1]) {
-        Py_DECREF(exceptions[0]);
-        return retval;
-    }
-    error_list = PyList_New(2);
-    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
-    Py_DECREF(exceptions[0]);
-    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
-    Py_DECREF(exceptions[1]);
-    PyErr_SetObject(PyExc_TypeError, error_list);
-    Py_DECREF(error_list);
-    return NULL;
-}
-
-
 PyObject *
 _wrap_PyNs3ConstantRandomVariable_GetTypeId(void)
 {
@@ -38130,15 +38060,85 @@ PyObject * _wrap_PyNs3ConstantRandomVariable_GetValue(PyNs3ConstantRandomVariabl
     return NULL;
 }
 
+
+
+PyObject *
+_wrap_PyNs3ConstantRandomVariable_GetInteger__0(PyNs3ConstantRandomVariable *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    unsigned int constant;
+    const char *keywords[] = {"constant", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &constant)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    retval = self->obj->GetInteger(constant);
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+PyObject *
+_wrap_PyNs3ConstantRandomVariable_GetInteger__1(PyNs3ConstantRandomVariable *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    PyNs3ConstantRandomVariable__PythonHelper *helper_class = dynamic_cast<PyNs3ConstantRandomVariable__PythonHelper*> (self->obj);
+    const char *keywords[] = {NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "", (char **) keywords)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    retval = (helper_class == NULL)? (self->obj->GetInteger()) : (self->obj->ns3::ConstantRandomVariable::GetInteger());
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+PyObject * _wrap_PyNs3ConstantRandomVariable_GetInteger(PyNs3ConstantRandomVariable *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject * retval;
+    PyObject *error_list;
+    PyObject *exceptions[2] = {0,};
+    retval = _wrap_PyNs3ConstantRandomVariable_GetInteger__0(self, args, kwargs, &exceptions[0]);
+    if (!exceptions[0]) {
+        return retval;
+    }
+    retval = _wrap_PyNs3ConstantRandomVariable_GetInteger__1(self, args, kwargs, &exceptions[1]);
+    if (!exceptions[1]) {
+        Py_DECREF(exceptions[0]);
+        return retval;
+    }
+    error_list = PyList_New(2);
+    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
+    Py_DECREF(exceptions[0]);
+    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
+    Py_DECREF(exceptions[1]);
+    PyErr_SetObject(PyExc_TypeError, error_list);
+    Py_DECREF(error_list);
+    return NULL;
+}
+
 static PyMethodDef PyNs3ConstantRandomVariable_methods[] = {
-    {(char *) "GetInteger", (PyCFunction) _wrap_PyNs3ConstantRandomVariable_GetInteger, METH_KEYWORDS|METH_VARARGS, NULL },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3ConstantRandomVariable_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
     {(char *) "GetConstant", (PyCFunction) _wrap_PyNs3ConstantRandomVariable_GetConstant, METH_NOARGS, "GetConstant()\n\n" },
     {(char *) "GetValue", (PyCFunction) _wrap_PyNs3ConstantRandomVariable_GetValue, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3ConstantRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "GetInteger", (PyCFunction) _wrap_PyNs3ConstantRandomVariable_GetInteger, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "DoDispose", (PyCFunction) PyNs3ConstantRandomVariable__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3ConstantRandomVariable__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3ConstantRandomVariable__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3ConstantRandomVariable__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3ConstantRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 
@@ -38237,7 +38237,7 @@ PyTypeObject PyNs3ConstantRandomVariable_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE,                      /* tp_flags */
     "ConstantRandomVariable()",                        /* Documentation string */
     (traverseproc)PyNs3ConstantRandomVariable__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3ConstantRandomVariable__tp_clear,             /* tp_clear */
@@ -38339,11 +38339,16 @@ int _wrap_PyNs3DefaultSimulatorImpl__tp_init(PyNs3DefaultSimulatorImpl *self, Py
 
 
 PyObject *
-_wrap_PyNs3DefaultSimulatorImpl_Run(PyNs3DefaultSimulatorImpl *self)
+_wrap_PyNs3DefaultSimulatorImpl_Cancel(PyNs3DefaultSimulatorImpl *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
+    PyNs3EventId *id;
+    const char *keywords[] = {"id", NULL};
     
-    self->obj->Run();
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3EventId_Type, &id)) {
+        return NULL;
+    }
+    self->obj->Cancel(*((PyNs3EventId *) id)->obj);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -38351,29 +38356,25 @@ _wrap_PyNs3DefaultSimulatorImpl_Run(PyNs3DefaultSimulatorImpl *self)
 
 
 PyObject *
-_wrap_PyNs3DefaultSimulatorImpl_GetMaximumSimulationTime(PyNs3DefaultSimulatorImpl *self)
+_wrap_PyNs3DefaultSimulatorImpl_Destroy(PyNs3DefaultSimulatorImpl *self)
 {
     PyObject *py_retval;
-    PyNs3Time *py_Time;
     
-    ns3::Time retval = self->obj->GetMaximumSimulationTime();
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
+    self->obj->Destroy();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3DefaultSimulatorImpl_IsFinished(PyNs3DefaultSimulatorImpl *self)
+_wrap_PyNs3DefaultSimulatorImpl_GetContext(PyNs3DefaultSimulatorImpl *self)
 {
     PyObject *py_retval;
-    bool retval;
+    uint32_t retval;
     
-    retval = self->obj->IsFinished();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    retval = self->obj->GetContext();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
 
@@ -38400,6 +38401,22 @@ _wrap_PyNs3DefaultSimulatorImpl_GetDelayLeft(PyNs3DefaultSimulatorImpl *self, Py
 
 
 PyObject *
+_wrap_PyNs3DefaultSimulatorImpl_GetMaximumSimulationTime(PyNs3DefaultSimulatorImpl *self)
+{
+    PyObject *py_retval;
+    PyNs3Time *py_Time;
+    
+    ns3::Time retval = self->obj->GetMaximumSimulationTime();
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3DefaultSimulatorImpl_GetSystemId(PyNs3DefaultSimulatorImpl *self)
 {
     PyObject *py_retval;
@@ -38407,6 +38424,113 @@ _wrap_PyNs3DefaultSimulatorImpl_GetSystemId(PyNs3DefaultSimulatorImpl *self)
     
     retval = self->obj->GetSystemId();
     py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DefaultSimulatorImpl_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::DefaultSimulatorImpl::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DefaultSimulatorImpl_IsExpired(PyNs3DefaultSimulatorImpl *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3EventId *id;
+    const char *keywords[] = {"id", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3EventId_Type, &id)) {
+        return NULL;
+    }
+    retval = self->obj->IsExpired(*((PyNs3EventId *) id)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DefaultSimulatorImpl_IsFinished(PyNs3DefaultSimulatorImpl *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->IsFinished();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DefaultSimulatorImpl_Now(PyNs3DefaultSimulatorImpl *self)
+{
+    PyObject *py_retval;
+    PyNs3Time *py_Time;
+    
+    ns3::Time retval = self->obj->Now();
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DefaultSimulatorImpl_Remove(PyNs3DefaultSimulatorImpl *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3EventId *id;
+    const char *keywords[] = {"id", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3EventId_Type, &id)) {
+        return NULL;
+    }
+    self->obj->Remove(*((PyNs3EventId *) id)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DefaultSimulatorImpl_Run(PyNs3DefaultSimulatorImpl *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->Run();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DefaultSimulatorImpl_SetScheduler(PyNs3DefaultSimulatorImpl *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3ObjectFactory *schedulerFactory;
+    const char *keywords[] = {"schedulerFactory", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3ObjectFactory_Type, &schedulerFactory)) {
+        return NULL;
+    }
+    self->obj->SetScheduler(*((PyNs3ObjectFactory *) schedulerFactory)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -38480,130 +38604,6 @@ PyObject * _wrap_PyNs3DefaultSimulatorImpl_Stop(PyNs3DefaultSimulatorImpl *self,
 }
 
 
-PyObject *
-_wrap_PyNs3DefaultSimulatorImpl_Remove(PyNs3DefaultSimulatorImpl *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3EventId *id;
-    const char *keywords[] = {"id", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3EventId_Type, &id)) {
-        return NULL;
-    }
-    self->obj->Remove(*((PyNs3EventId *) id)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DefaultSimulatorImpl_GetContext(PyNs3DefaultSimulatorImpl *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetContext();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DefaultSimulatorImpl_SetScheduler(PyNs3DefaultSimulatorImpl *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3ObjectFactory *schedulerFactory;
-    const char *keywords[] = {"schedulerFactory", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3ObjectFactory_Type, &schedulerFactory)) {
-        return NULL;
-    }
-    self->obj->SetScheduler(*((PyNs3ObjectFactory *) schedulerFactory)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DefaultSimulatorImpl_Cancel(PyNs3DefaultSimulatorImpl *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3EventId *id;
-    const char *keywords[] = {"id", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3EventId_Type, &id)) {
-        return NULL;
-    }
-    self->obj->Cancel(*((PyNs3EventId *) id)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DefaultSimulatorImpl_Destroy(PyNs3DefaultSimulatorImpl *self)
-{
-    PyObject *py_retval;
-    
-    self->obj->Destroy();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DefaultSimulatorImpl_IsExpired(PyNs3DefaultSimulatorImpl *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3EventId *id;
-    const char *keywords[] = {"id", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3EventId_Type, &id)) {
-        return NULL;
-    }
-    retval = self->obj->IsExpired(*((PyNs3EventId *) id)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DefaultSimulatorImpl_Now(PyNs3DefaultSimulatorImpl *self)
-{
-    PyObject *py_retval;
-    PyNs3Time *py_Time;
-    
-    ns3::Time retval = self->obj->Now();
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DefaultSimulatorImpl_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::DefaultSimulatorImpl::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3DefaultSimulatorImpl__copy__(PyNs3DefaultSimulatorImpl *self)
 {
@@ -38620,20 +38620,20 @@ _wrap_PyNs3DefaultSimulatorImpl__copy__(PyNs3DefaultSimulatorImpl *self)
 }
 
 static PyMethodDef PyNs3DefaultSimulatorImpl_methods[] = {
-    {(char *) "Run", (PyCFunction) _wrap_PyNs3DefaultSimulatorImpl_Run, METH_NOARGS, "Run()\n\n" },
-    {(char *) "GetMaximumSimulationTime", (PyCFunction) _wrap_PyNs3DefaultSimulatorImpl_GetMaximumSimulationTime, METH_NOARGS, "GetMaximumSimulationTime()\n\n" },
-    {(char *) "IsFinished", (PyCFunction) _wrap_PyNs3DefaultSimulatorImpl_IsFinished, METH_NOARGS, "IsFinished()\n\n" },
-    {(char *) "GetDelayLeft", (PyCFunction) _wrap_PyNs3DefaultSimulatorImpl_GetDelayLeft, METH_KEYWORDS|METH_VARARGS, "GetDelayLeft(id)\n\ntype: id: ns3::EventId const &" },
-    {(char *) "GetSystemId", (PyCFunction) _wrap_PyNs3DefaultSimulatorImpl_GetSystemId, METH_NOARGS, "GetSystemId()\n\n" },
-    {(char *) "Stop", (PyCFunction) _wrap_PyNs3DefaultSimulatorImpl_Stop, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "Remove", (PyCFunction) _wrap_PyNs3DefaultSimulatorImpl_Remove, METH_KEYWORDS|METH_VARARGS, "Remove(id)\n\ntype: id: ns3::EventId const &" },
-    {(char *) "GetContext", (PyCFunction) _wrap_PyNs3DefaultSimulatorImpl_GetContext, METH_NOARGS, "GetContext()\n\n" },
-    {(char *) "SetScheduler", (PyCFunction) _wrap_PyNs3DefaultSimulatorImpl_SetScheduler, METH_KEYWORDS|METH_VARARGS, "SetScheduler(schedulerFactory)\n\ntype: schedulerFactory: ns3::ObjectFactory" },
     {(char *) "Cancel", (PyCFunction) _wrap_PyNs3DefaultSimulatorImpl_Cancel, METH_KEYWORDS|METH_VARARGS, "Cancel(id)\n\ntype: id: ns3::EventId const &" },
     {(char *) "Destroy", (PyCFunction) _wrap_PyNs3DefaultSimulatorImpl_Destroy, METH_NOARGS, "Destroy()\n\n" },
-    {(char *) "IsExpired", (PyCFunction) _wrap_PyNs3DefaultSimulatorImpl_IsExpired, METH_KEYWORDS|METH_VARARGS, "IsExpired(id)\n\ntype: id: ns3::EventId const &" },
-    {(char *) "Now", (PyCFunction) _wrap_PyNs3DefaultSimulatorImpl_Now, METH_NOARGS, "Now()\n\n" },
+    {(char *) "GetContext", (PyCFunction) _wrap_PyNs3DefaultSimulatorImpl_GetContext, METH_NOARGS, "GetContext()\n\n" },
+    {(char *) "GetDelayLeft", (PyCFunction) _wrap_PyNs3DefaultSimulatorImpl_GetDelayLeft, METH_KEYWORDS|METH_VARARGS, "GetDelayLeft(id)\n\ntype: id: ns3::EventId const &" },
+    {(char *) "GetMaximumSimulationTime", (PyCFunction) _wrap_PyNs3DefaultSimulatorImpl_GetMaximumSimulationTime, METH_NOARGS, "GetMaximumSimulationTime()\n\n" },
+    {(char *) "GetSystemId", (PyCFunction) _wrap_PyNs3DefaultSimulatorImpl_GetSystemId, METH_NOARGS, "GetSystemId()\n\n" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DefaultSimulatorImpl_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "IsExpired", (PyCFunction) _wrap_PyNs3DefaultSimulatorImpl_IsExpired, METH_KEYWORDS|METH_VARARGS, "IsExpired(id)\n\ntype: id: ns3::EventId const &" },
+    {(char *) "IsFinished", (PyCFunction) _wrap_PyNs3DefaultSimulatorImpl_IsFinished, METH_NOARGS, "IsFinished()\n\n" },
+    {(char *) "Now", (PyCFunction) _wrap_PyNs3DefaultSimulatorImpl_Now, METH_NOARGS, "Now()\n\n" },
+    {(char *) "Remove", (PyCFunction) _wrap_PyNs3DefaultSimulatorImpl_Remove, METH_KEYWORDS|METH_VARARGS, "Remove(id)\n\ntype: id: ns3::EventId const &" },
+    {(char *) "Run", (PyCFunction) _wrap_PyNs3DefaultSimulatorImpl_Run, METH_NOARGS, "Run()\n\n" },
+    {(char *) "SetScheduler", (PyCFunction) _wrap_PyNs3DefaultSimulatorImpl_SetScheduler, METH_KEYWORDS|METH_VARARGS, "SetScheduler(schedulerFactory)\n\ntype: schedulerFactory: ns3::ObjectFactory" },
+    {(char *) "Stop", (PyCFunction) _wrap_PyNs3DefaultSimulatorImpl_Stop, METH_KEYWORDS|METH_VARARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3DefaultSimulatorImpl__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -38730,7 +38730,7 @@ PyTypeObject PyNs3DefaultSimulatorImpl_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE,                      /* tp_flags */
     "DefaultSimulatorImpl(arg0)\nDefaultSimulatorImpl()",                        /* Documentation string */
     (traverseproc)PyNs3DefaultSimulatorImpl__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3DefaultSimulatorImpl__tp_clear,             /* tp_clear */
@@ -38763,16 +38763,16 @@ PyTypeObject PyNs3DefaultSimulatorImpl_Type = {
 
 
 PyObject *
-PyNs3DeterministicRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3DeterministicRandomVariable *self)
+PyNs3DeterministicRandomVariable__PythonHelper::_wrap_DoDispose(PyNs3DeterministicRandomVariable *self)
 {
     PyObject *py_retval;
     PyNs3DeterministicRandomVariable__PythonHelper *helper = dynamic_cast< PyNs3DeterministicRandomVariable__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -38811,16 +38811,16 @@ PyNs3DeterministicRandomVariable__PythonHelper::_wrap_NotifyNewAggregate(PyNs3De
 }
 
 PyObject *
-PyNs3DeterministicRandomVariable__PythonHelper::_wrap_DoDispose(PyNs3DeterministicRandomVariable *self)
+PyNs3DeterministicRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3DeterministicRandomVariable *self)
 {
     PyObject *py_retval;
     PyNs3DeterministicRandomVariable__PythonHelper *helper = dynamic_cast< PyNs3DeterministicRandomVariable__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -39172,19 +39172,6 @@ _wrap_PyNs3DeterministicRandomVariable__tp_init(PyNs3DeterministicRandomVariable
 
 
 PyObject *
-_wrap_PyNs3DeterministicRandomVariable_GetInteger(PyNs3DeterministicRandomVariable *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    PyNs3DeterministicRandomVariable__PythonHelper *helper_class = dynamic_cast<PyNs3DeterministicRandomVariable__PythonHelper*> (self->obj);
-    
-    retval = (helper_class == NULL)? (self->obj->GetInteger()) : (self->obj->ns3::DeterministicRandomVariable::GetInteger());
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3DeterministicRandomVariable_GetTypeId(void)
 {
     PyObject *py_retval;
@@ -39230,15 +39217,28 @@ _wrap_PyNs3DeterministicRandomVariable_GetValue(PyNs3DeterministicRandomVariable
     return py_retval;
 }
 
+
+PyObject *
+_wrap_PyNs3DeterministicRandomVariable_GetInteger(PyNs3DeterministicRandomVariable *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    PyNs3DeterministicRandomVariable__PythonHelper *helper_class = dynamic_cast<PyNs3DeterministicRandomVariable__PythonHelper*> (self->obj);
+    
+    retval = (helper_class == NULL)? (self->obj->GetInteger()) : (self->obj->ns3::DeterministicRandomVariable::GetInteger());
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
 static PyMethodDef PyNs3DeterministicRandomVariable_methods[] = {
-    {(char *) "GetInteger", (PyCFunction) _wrap_PyNs3DeterministicRandomVariable_GetInteger, METH_NOARGS, "GetInteger()\n\n" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DeterministicRandomVariable_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
     {(char *) "SetValueArray", (PyCFunction) _wrap_PyNs3DeterministicRandomVariable_SetValueArray, METH_KEYWORDS|METH_VARARGS, "SetValueArray(values, length)\n\ntype: values: double *\ntype: length: uint64_t" },
     {(char *) "GetValue", (PyCFunction) _wrap_PyNs3DeterministicRandomVariable_GetValue, METH_NOARGS, "GetValue()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3DeterministicRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "GetInteger", (PyCFunction) _wrap_PyNs3DeterministicRandomVariable_GetInteger, METH_NOARGS, "GetInteger()\n\n" },
+    {(char *) "DoDispose", (PyCFunction) PyNs3DeterministicRandomVariable__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3DeterministicRandomVariable__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3DeterministicRandomVariable__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3DeterministicRandomVariable__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3DeterministicRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 
@@ -39337,7 +39337,7 @@ PyTypeObject PyNs3DeterministicRandomVariable_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE,                      /* tp_flags */
     "DeterministicRandomVariable()",                        /* Documentation string */
     (traverseproc)PyNs3DeterministicRandomVariable__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3DeterministicRandomVariable__tp_clear,             /* tp_clear */
@@ -39463,35 +39463,6 @@ int _wrap_PyNs3DoubleValue__tp_init(PyNs3DoubleValue *self, PyObject *args, PyOb
 
 
 PyObject *
-_wrap_PyNs3DoubleValue_Set(PyNs3DoubleValue *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    double value;
-    const char *keywords[] = {"value", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "d", (char **) keywords, &value)) {
-        return NULL;
-    }
-    self->obj->Set(value);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DoubleValue_Get(PyNs3DoubleValue *self)
-{
-    PyObject *py_retval;
-    double retval;
-    
-    retval = self->obj->Get();
-    py_retval = Py_BuildValue((char *) "d", retval);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3DoubleValue_Copy(PyNs3DoubleValue *self)
 {
     PyObject *py_retval;
@@ -39528,25 +39499,6 @@ _wrap_PyNs3DoubleValue_Copy(PyNs3DoubleValue *self)
 
 
 PyObject *
-_wrap_PyNs3DoubleValue_SerializeToString(PyNs3DoubleValue *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    std::string retval;
-    PyNs3AttributeChecker *checker;
-    ns3::AttributeChecker *checker_ptr;
-    const char *keywords[] = {"checker", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3AttributeChecker_Type, &checker)) {
-        return NULL;
-    }
-    checker_ptr = (checker ? checker->obj : NULL);
-    retval = self->obj->SerializeToString(ns3::Ptr< ns3::AttributeChecker  > (checker_ptr));
-    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3DoubleValue_DeserializeFromString(PyNs3DoubleValue *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -39567,6 +39519,54 @@ _wrap_PyNs3DoubleValue_DeserializeFromString(PyNs3DoubleValue *self, PyObject *a
 }
 
 
+PyObject *
+_wrap_PyNs3DoubleValue_Get(PyNs3DoubleValue *self)
+{
+    PyObject *py_retval;
+    double retval;
+    
+    retval = self->obj->Get();
+    py_retval = Py_BuildValue((char *) "d", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DoubleValue_SerializeToString(PyNs3DoubleValue *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    std::string retval;
+    PyNs3AttributeChecker *checker;
+    ns3::AttributeChecker *checker_ptr;
+    const char *keywords[] = {"checker", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3AttributeChecker_Type, &checker)) {
+        return NULL;
+    }
+    checker_ptr = (checker ? checker->obj : NULL);
+    retval = self->obj->SerializeToString(ns3::Ptr< ns3::AttributeChecker  > (checker_ptr));
+    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DoubleValue_Set(PyNs3DoubleValue *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    double value;
+    const char *keywords[] = {"value", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "d", (char **) keywords, &value)) {
+        return NULL;
+    }
+    self->obj->Set(value);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
 static PyObject*
 _wrap_PyNs3DoubleValue__copy__(PyNs3DoubleValue *self)
 {
@@ -39581,11 +39581,11 @@ _wrap_PyNs3DoubleValue__copy__(PyNs3DoubleValue *self)
 }
 
 static PyMethodDef PyNs3DoubleValue_methods[] = {
-    {(char *) "Set", (PyCFunction) _wrap_PyNs3DoubleValue_Set, METH_KEYWORDS|METH_VARARGS, "Set(value)\n\ntype: value: double const &" },
-    {(char *) "Get", (PyCFunction) _wrap_PyNs3DoubleValue_Get, METH_NOARGS, "Get()\n\n" },
     {(char *) "Copy", (PyCFunction) _wrap_PyNs3DoubleValue_Copy, METH_NOARGS, "Copy()\n\n" },
-    {(char *) "SerializeToString", (PyCFunction) _wrap_PyNs3DoubleValue_SerializeToString, METH_KEYWORDS|METH_VARARGS, "SerializeToString(checker)\n\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
     {(char *) "DeserializeFromString", (PyCFunction) _wrap_PyNs3DoubleValue_DeserializeFromString, METH_KEYWORDS|METH_VARARGS, "DeserializeFromString(value, checker)\n\ntype: value: std::string\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
+    {(char *) "Get", (PyCFunction) _wrap_PyNs3DoubleValue_Get, METH_NOARGS, "Get()\n\n" },
+    {(char *) "SerializeToString", (PyCFunction) _wrap_PyNs3DoubleValue_SerializeToString, METH_KEYWORDS|METH_VARARGS, "SerializeToString(checker)\n\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
+    {(char *) "Set", (PyCFunction) _wrap_PyNs3DoubleValue_Set, METH_KEYWORDS|METH_VARARGS, "Set(value)\n\ntype: value: double const &" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3DoubleValue__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -39698,16 +39698,16 @@ PyTypeObject PyNs3DoubleValue_Type = {
 
 
 PyObject *
-PyNs3EmpiricalRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3EmpiricalRandomVariable *self)
+PyNs3EmpiricalRandomVariable__PythonHelper::_wrap_DoDispose(PyNs3EmpiricalRandomVariable *self)
 {
     PyObject *py_retval;
     PyNs3EmpiricalRandomVariable__PythonHelper *helper = dynamic_cast< PyNs3EmpiricalRandomVariable__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -39746,16 +39746,16 @@ PyNs3EmpiricalRandomVariable__PythonHelper::_wrap_NotifyNewAggregate(PyNs3Empiri
 }
 
 PyObject *
-PyNs3EmpiricalRandomVariable__PythonHelper::_wrap_DoDispose(PyNs3EmpiricalRandomVariable *self)
+PyNs3EmpiricalRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3EmpiricalRandomVariable *self)
 {
     PyObject *py_retval;
     PyNs3EmpiricalRandomVariable__PythonHelper *helper = dynamic_cast< PyNs3EmpiricalRandomVariable__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -40206,19 +40206,6 @@ _wrap_PyNs3EmpiricalRandomVariable__tp_init(PyNs3EmpiricalRandomVariable *self, 
 
 
 PyObject *
-_wrap_PyNs3EmpiricalRandomVariable_GetInteger(PyNs3EmpiricalRandomVariable *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    PyNs3EmpiricalRandomVariable__PythonHelper *helper_class = dynamic_cast<PyNs3EmpiricalRandomVariable__PythonHelper*> (self->obj);
-    
-    retval = (helper_class == NULL)? (self->obj->GetInteger()) : (self->obj->ns3::EmpiricalRandomVariable::GetInteger());
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3EmpiricalRandomVariable_CDF(PyNs3EmpiricalRandomVariable *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -40232,6 +40219,19 @@ _wrap_PyNs3EmpiricalRandomVariable_CDF(PyNs3EmpiricalRandomVariable *self, PyObj
     self->obj->CDF(v, c);
     Py_INCREF(Py_None);
     py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3EmpiricalRandomVariable_GetInteger(PyNs3EmpiricalRandomVariable *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    PyNs3EmpiricalRandomVariable__PythonHelper *helper_class = dynamic_cast<PyNs3EmpiricalRandomVariable__PythonHelper*> (self->obj);
+    
+    retval = (helper_class == NULL)? (self->obj->GetInteger()) : (self->obj->ns3::EmpiricalRandomVariable::GetInteger());
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
 
@@ -40265,14 +40265,14 @@ _wrap_PyNs3EmpiricalRandomVariable_GetValue(PyNs3EmpiricalRandomVariable *self)
 }
 
 static PyMethodDef PyNs3EmpiricalRandomVariable_methods[] = {
-    {(char *) "GetInteger", (PyCFunction) _wrap_PyNs3EmpiricalRandomVariable_GetInteger, METH_NOARGS, "GetInteger()\n\n" },
     {(char *) "CDF", (PyCFunction) _wrap_PyNs3EmpiricalRandomVariable_CDF, METH_KEYWORDS|METH_VARARGS, "CDF(v, c)\n\ntype: v: double\ntype: c: double" },
+    {(char *) "GetInteger", (PyCFunction) _wrap_PyNs3EmpiricalRandomVariable_GetInteger, METH_NOARGS, "GetInteger()\n\n" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3EmpiricalRandomVariable_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
     {(char *) "GetValue", (PyCFunction) _wrap_PyNs3EmpiricalRandomVariable_GetValue, METH_NOARGS, "GetValue()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3EmpiricalRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "DoDispose", (PyCFunction) PyNs3EmpiricalRandomVariable__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3EmpiricalRandomVariable__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3EmpiricalRandomVariable__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3EmpiricalRandomVariable__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3EmpiricalRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 
@@ -40371,7 +40371,7 @@ PyTypeObject PyNs3EmpiricalRandomVariable_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE,                      /* tp_flags */
     "EmpiricalRandomVariable()",                        /* Documentation string */
     (traverseproc)PyNs3EmpiricalRandomVariable__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3EmpiricalRandomVariable__tp_clear,             /* tp_clear */
@@ -40469,30 +40469,6 @@ int _wrap_PyNs3EmptyAttributeAccessor__tp_init(PyNs3EmptyAttributeAccessor *self
 
 
 PyObject *
-_wrap_PyNs3EmptyAttributeAccessor_HasSetter(PyNs3EmptyAttributeAccessor *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->HasSetter();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3EmptyAttributeAccessor_HasGetter(PyNs3EmptyAttributeAccessor *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->HasGetter();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3EmptyAttributeAccessor_Get(PyNs3EmptyAttributeAccessor *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -40512,6 +40488,30 @@ _wrap_PyNs3EmptyAttributeAccessor_Get(PyNs3EmptyAttributeAccessor *self, PyObjec
 }
 
 
+PyObject *
+_wrap_PyNs3EmptyAttributeAccessor_HasGetter(PyNs3EmptyAttributeAccessor *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->HasGetter();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3EmptyAttributeAccessor_HasSetter(PyNs3EmptyAttributeAccessor *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->HasSetter();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
 static PyObject*
 _wrap_PyNs3EmptyAttributeAccessor__copy__(PyNs3EmptyAttributeAccessor *self)
 {
@@ -40526,9 +40526,9 @@ _wrap_PyNs3EmptyAttributeAccessor__copy__(PyNs3EmptyAttributeAccessor *self)
 }
 
 static PyMethodDef PyNs3EmptyAttributeAccessor_methods[] = {
-    {(char *) "HasSetter", (PyCFunction) _wrap_PyNs3EmptyAttributeAccessor_HasSetter, METH_NOARGS, "HasSetter()\n\n" },
-    {(char *) "HasGetter", (PyCFunction) _wrap_PyNs3EmptyAttributeAccessor_HasGetter, METH_NOARGS, "HasGetter()\n\n" },
     {(char *) "Get", (PyCFunction) _wrap_PyNs3EmptyAttributeAccessor_Get, METH_KEYWORDS|METH_VARARGS, "Get(object, attribute)\n\ntype: object: ns3::ObjectBase const *\ntype: attribute: ns3::AttributeValue &" },
+    {(char *) "HasGetter", (PyCFunction) _wrap_PyNs3EmptyAttributeAccessor_HasGetter, METH_NOARGS, "HasGetter()\n\n" },
+    {(char *) "HasSetter", (PyCFunction) _wrap_PyNs3EmptyAttributeAccessor_HasSetter, METH_NOARGS, "HasSetter()\n\n" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3EmptyAttributeAccessor__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -40706,12 +40706,35 @@ int _wrap_PyNs3EmptyAttributeChecker__tp_init(PyNs3EmptyAttributeChecker *self, 
 
 
 PyObject *
-_wrap_PyNs3EmptyAttributeChecker_HasUnderlyingTypeInformation(PyNs3EmptyAttributeChecker *self)
+_wrap_PyNs3EmptyAttributeChecker_Check(PyNs3EmptyAttributeChecker *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
     bool retval;
+    PyNs3AttributeValue *value;
+    const char *keywords[] = {"value", NULL};
     
-    retval = self->obj->HasUnderlyingTypeInformation();
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3AttributeValue_Type, &value)) {
+        return NULL;
+    }
+    retval = self->obj->Check(*((PyNs3AttributeValue *) value)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3EmptyAttributeChecker_Copy(PyNs3EmptyAttributeChecker *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3AttributeValue *source;
+    PyNs3AttributeValue *destination;
+    const char *keywords[] = {"source", "destination", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3AttributeValue_Type, &source, &PyNs3AttributeValue_Type, &destination)) {
+        return NULL;
+    }
+    retval = self->obj->Copy(*((PyNs3AttributeValue *) source)->obj, *((PyNs3AttributeValue *) destination)->obj);
     py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
@@ -40778,35 +40801,12 @@ _wrap_PyNs3EmptyAttributeChecker_GetValueTypeName(PyNs3EmptyAttributeChecker *se
 
 
 PyObject *
-_wrap_PyNs3EmptyAttributeChecker_Copy(PyNs3EmptyAttributeChecker *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3EmptyAttributeChecker_HasUnderlyingTypeInformation(PyNs3EmptyAttributeChecker *self)
 {
     PyObject *py_retval;
     bool retval;
-    PyNs3AttributeValue *source;
-    PyNs3AttributeValue *destination;
-    const char *keywords[] = {"source", "destination", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3AttributeValue_Type, &source, &PyNs3AttributeValue_Type, &destination)) {
-        return NULL;
-    }
-    retval = self->obj->Copy(*((PyNs3AttributeValue *) source)->obj, *((PyNs3AttributeValue *) destination)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3EmptyAttributeChecker_Check(PyNs3EmptyAttributeChecker *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3AttributeValue *value;
-    const char *keywords[] = {"value", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3AttributeValue_Type, &value)) {
-        return NULL;
-    }
-    retval = self->obj->Check(*((PyNs3AttributeValue *) value)->obj);
+    retval = self->obj->HasUnderlyingTypeInformation();
     py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
@@ -40826,12 +40826,12 @@ _wrap_PyNs3EmptyAttributeChecker__copy__(PyNs3EmptyAttributeChecker *self)
 }
 
 static PyMethodDef PyNs3EmptyAttributeChecker_methods[] = {
-    {(char *) "HasUnderlyingTypeInformation", (PyCFunction) _wrap_PyNs3EmptyAttributeChecker_HasUnderlyingTypeInformation, METH_NOARGS, "HasUnderlyingTypeInformation()\n\n" },
+    {(char *) "Check", (PyCFunction) _wrap_PyNs3EmptyAttributeChecker_Check, METH_KEYWORDS|METH_VARARGS, "Check(value)\n\ntype: value: ns3::AttributeValue const &" },
+    {(char *) "Copy", (PyCFunction) _wrap_PyNs3EmptyAttributeChecker_Copy, METH_KEYWORDS|METH_VARARGS, "Copy(source, destination)\n\ntype: source: ns3::AttributeValue const &\ntype: destination: ns3::AttributeValue &" },
     {(char *) "Create", (PyCFunction) _wrap_PyNs3EmptyAttributeChecker_Create, METH_NOARGS, "Create()\n\n" },
     {(char *) "GetUnderlyingTypeInformation", (PyCFunction) _wrap_PyNs3EmptyAttributeChecker_GetUnderlyingTypeInformation, METH_NOARGS, "GetUnderlyingTypeInformation()\n\n" },
     {(char *) "GetValueTypeName", (PyCFunction) _wrap_PyNs3EmptyAttributeChecker_GetValueTypeName, METH_NOARGS, "GetValueTypeName()\n\n" },
-    {(char *) "Copy", (PyCFunction) _wrap_PyNs3EmptyAttributeChecker_Copy, METH_KEYWORDS|METH_VARARGS, "Copy(source, destination)\n\ntype: source: ns3::AttributeValue const &\ntype: destination: ns3::AttributeValue &" },
-    {(char *) "Check", (PyCFunction) _wrap_PyNs3EmptyAttributeChecker_Check, METH_KEYWORDS|METH_VARARGS, "Check(value)\n\ntype: value: ns3::AttributeValue const &" },
+    {(char *) "HasUnderlyingTypeInformation", (PyCFunction) _wrap_PyNs3EmptyAttributeChecker_HasUnderlyingTypeInformation, METH_NOARGS, "HasUnderlyingTypeInformation()\n\n" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3EmptyAttributeChecker__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -41199,6 +41199,25 @@ int _wrap_PyNs3EnumChecker__tp_init(PyNs3EnumChecker *self, PyObject *args, PyOb
 
 
 PyObject *
+_wrap_PyNs3EnumChecker_Add(PyNs3EnumChecker *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int value;
+    const char *name;
+    Py_ssize_t name_len;
+    const char *keywords[] = {"value", "name", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "is#", (char **) keywords, &value, &name, &name_len)) {
+        return NULL;
+    }
+    self->obj->Add(value, std::string(name, name_len));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3EnumChecker_AddDefault(PyNs3EnumChecker *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -41218,12 +41237,35 @@ _wrap_PyNs3EnumChecker_AddDefault(PyNs3EnumChecker *self, PyObject *args, PyObje
 
 
 PyObject *
-_wrap_PyNs3EnumChecker_HasUnderlyingTypeInformation(PyNs3EnumChecker *self)
+_wrap_PyNs3EnumChecker_Check(PyNs3EnumChecker *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
     bool retval;
+    PyNs3AttributeValue *value;
+    const char *keywords[] = {"value", NULL};
     
-    retval = self->obj->HasUnderlyingTypeInformation();
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3AttributeValue_Type, &value)) {
+        return NULL;
+    }
+    retval = self->obj->Check(*((PyNs3AttributeValue *) value)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3EnumChecker_Copy(PyNs3EnumChecker *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3AttributeValue *src;
+    PyNs3AttributeValue *dst;
+    const char *keywords[] = {"src", "dst", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3AttributeValue_Type, &src, &PyNs3AttributeValue_Type, &dst)) {
+        return NULL;
+    }
+    retval = self->obj->Copy(*((PyNs3AttributeValue *) src)->obj, *((PyNs3AttributeValue *) dst)->obj);
     py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
@@ -41266,25 +41308,6 @@ _wrap_PyNs3EnumChecker_Create(PyNs3EnumChecker *self)
 
 
 PyObject *
-_wrap_PyNs3EnumChecker_Add(PyNs3EnumChecker *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int value;
-    const char *name;
-    Py_ssize_t name_len;
-    const char *keywords[] = {"value", "name", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "is#", (char **) keywords, &value, &name, &name_len)) {
-        return NULL;
-    }
-    self->obj->Add(value, std::string(name, name_len));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3EnumChecker_GetUnderlyingTypeInformation(PyNs3EnumChecker *self)
 {
     PyObject *py_retval;
@@ -41309,35 +41332,12 @@ _wrap_PyNs3EnumChecker_GetValueTypeName(PyNs3EnumChecker *self)
 
 
 PyObject *
-_wrap_PyNs3EnumChecker_Copy(PyNs3EnumChecker *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3EnumChecker_HasUnderlyingTypeInformation(PyNs3EnumChecker *self)
 {
     PyObject *py_retval;
     bool retval;
-    PyNs3AttributeValue *src;
-    PyNs3AttributeValue *dst;
-    const char *keywords[] = {"src", "dst", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3AttributeValue_Type, &src, &PyNs3AttributeValue_Type, &dst)) {
-        return NULL;
-    }
-    retval = self->obj->Copy(*((PyNs3AttributeValue *) src)->obj, *((PyNs3AttributeValue *) dst)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3EnumChecker_Check(PyNs3EnumChecker *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3AttributeValue *value;
-    const char *keywords[] = {"value", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3AttributeValue_Type, &value)) {
-        return NULL;
-    }
-    retval = self->obj->Check(*((PyNs3AttributeValue *) value)->obj);
+    retval = self->obj->HasUnderlyingTypeInformation();
     py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
@@ -41357,14 +41357,14 @@ _wrap_PyNs3EnumChecker__copy__(PyNs3EnumChecker *self)
 }
 
 static PyMethodDef PyNs3EnumChecker_methods[] = {
-    {(char *) "AddDefault", (PyCFunction) _wrap_PyNs3EnumChecker_AddDefault, METH_KEYWORDS|METH_VARARGS, "AddDefault(value, name)\n\ntype: value: int\ntype: name: std::string" },
-    {(char *) "HasUnderlyingTypeInformation", (PyCFunction) _wrap_PyNs3EnumChecker_HasUnderlyingTypeInformation, METH_NOARGS, "HasUnderlyingTypeInformation()\n\n" },
-    {(char *) "Create", (PyCFunction) _wrap_PyNs3EnumChecker_Create, METH_NOARGS, "Create()\n\n" },
     {(char *) "Add", (PyCFunction) _wrap_PyNs3EnumChecker_Add, METH_KEYWORDS|METH_VARARGS, "Add(value, name)\n\ntype: value: int\ntype: name: std::string" },
+    {(char *) "AddDefault", (PyCFunction) _wrap_PyNs3EnumChecker_AddDefault, METH_KEYWORDS|METH_VARARGS, "AddDefault(value, name)\n\ntype: value: int\ntype: name: std::string" },
+    {(char *) "Check", (PyCFunction) _wrap_PyNs3EnumChecker_Check, METH_KEYWORDS|METH_VARARGS, "Check(value)\n\ntype: value: ns3::AttributeValue const &" },
+    {(char *) "Copy", (PyCFunction) _wrap_PyNs3EnumChecker_Copy, METH_KEYWORDS|METH_VARARGS, "Copy(src, dst)\n\ntype: src: ns3::AttributeValue const &\ntype: dst: ns3::AttributeValue &" },
+    {(char *) "Create", (PyCFunction) _wrap_PyNs3EnumChecker_Create, METH_NOARGS, "Create()\n\n" },
     {(char *) "GetUnderlyingTypeInformation", (PyCFunction) _wrap_PyNs3EnumChecker_GetUnderlyingTypeInformation, METH_NOARGS, "GetUnderlyingTypeInformation()\n\n" },
     {(char *) "GetValueTypeName", (PyCFunction) _wrap_PyNs3EnumChecker_GetValueTypeName, METH_NOARGS, "GetValueTypeName()\n\n" },
-    {(char *) "Copy", (PyCFunction) _wrap_PyNs3EnumChecker_Copy, METH_KEYWORDS|METH_VARARGS, "Copy(src, dst)\n\ntype: src: ns3::AttributeValue const &\ntype: dst: ns3::AttributeValue &" },
-    {(char *) "Check", (PyCFunction) _wrap_PyNs3EnumChecker_Check, METH_KEYWORDS|METH_VARARGS, "Check(value)\n\ntype: value: ns3::AttributeValue const &" },
+    {(char *) "HasUnderlyingTypeInformation", (PyCFunction) _wrap_PyNs3EnumChecker_HasUnderlyingTypeInformation, METH_NOARGS, "HasUnderlyingTypeInformation()\n\n" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3EnumChecker__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -41570,35 +41570,6 @@ int _wrap_PyNs3EnumValue__tp_init(PyNs3EnumValue *self, PyObject *args, PyObject
 
 
 PyObject *
-_wrap_PyNs3EnumValue_Set(PyNs3EnumValue *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int value;
-    const char *keywords[] = {"value", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &value)) {
-        return NULL;
-    }
-    self->obj->Set(value);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3EnumValue_Get(PyNs3EnumValue *self)
-{
-    PyObject *py_retval;
-    int retval;
-    
-    retval = self->obj->Get();
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3EnumValue_Copy(PyNs3EnumValue *self)
 {
     PyObject *py_retval;
@@ -41635,25 +41606,6 @@ _wrap_PyNs3EnumValue_Copy(PyNs3EnumValue *self)
 
 
 PyObject *
-_wrap_PyNs3EnumValue_SerializeToString(PyNs3EnumValue *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    std::string retval;
-    PyNs3AttributeChecker *checker;
-    ns3::AttributeChecker *checker_ptr;
-    const char *keywords[] = {"checker", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3AttributeChecker_Type, &checker)) {
-        return NULL;
-    }
-    checker_ptr = (checker ? checker->obj : NULL);
-    retval = self->obj->SerializeToString(ns3::Ptr< ns3::AttributeChecker  > (checker_ptr));
-    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3EnumValue_DeserializeFromString(PyNs3EnumValue *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -41674,6 +41626,54 @@ _wrap_PyNs3EnumValue_DeserializeFromString(PyNs3EnumValue *self, PyObject *args,
 }
 
 
+PyObject *
+_wrap_PyNs3EnumValue_Get(PyNs3EnumValue *self)
+{
+    PyObject *py_retval;
+    int retval;
+    
+    retval = self->obj->Get();
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3EnumValue_SerializeToString(PyNs3EnumValue *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    std::string retval;
+    PyNs3AttributeChecker *checker;
+    ns3::AttributeChecker *checker_ptr;
+    const char *keywords[] = {"checker", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3AttributeChecker_Type, &checker)) {
+        return NULL;
+    }
+    checker_ptr = (checker ? checker->obj : NULL);
+    retval = self->obj->SerializeToString(ns3::Ptr< ns3::AttributeChecker  > (checker_ptr));
+    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3EnumValue_Set(PyNs3EnumValue *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int value;
+    const char *keywords[] = {"value", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &value)) {
+        return NULL;
+    }
+    self->obj->Set(value);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
 static PyObject*
 _wrap_PyNs3EnumValue__copy__(PyNs3EnumValue *self)
 {
@@ -41688,11 +41688,11 @@ _wrap_PyNs3EnumValue__copy__(PyNs3EnumValue *self)
 }
 
 static PyMethodDef PyNs3EnumValue_methods[] = {
-    {(char *) "Set", (PyCFunction) _wrap_PyNs3EnumValue_Set, METH_KEYWORDS|METH_VARARGS, "Set(value)\n\ntype: value: int" },
-    {(char *) "Get", (PyCFunction) _wrap_PyNs3EnumValue_Get, METH_NOARGS, "Get()\n\n" },
     {(char *) "Copy", (PyCFunction) _wrap_PyNs3EnumValue_Copy, METH_NOARGS, "Copy()\n\n" },
-    {(char *) "SerializeToString", (PyCFunction) _wrap_PyNs3EnumValue_SerializeToString, METH_KEYWORDS|METH_VARARGS, "SerializeToString(checker)\n\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
     {(char *) "DeserializeFromString", (PyCFunction) _wrap_PyNs3EnumValue_DeserializeFromString, METH_KEYWORDS|METH_VARARGS, "DeserializeFromString(value, checker)\n\ntype: value: std::string\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
+    {(char *) "Get", (PyCFunction) _wrap_PyNs3EnumValue_Get, METH_NOARGS, "Get()\n\n" },
+    {(char *) "SerializeToString", (PyCFunction) _wrap_PyNs3EnumValue_SerializeToString, METH_KEYWORDS|METH_VARARGS, "SerializeToString(checker)\n\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
+    {(char *) "Set", (PyCFunction) _wrap_PyNs3EnumValue_Set, METH_KEYWORDS|METH_VARARGS, "Set(value)\n\ntype: value: int" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3EnumValue__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -41805,16 +41805,16 @@ PyTypeObject PyNs3EnumValue_Type = {
 
 
 PyObject *
-PyNs3ErlangRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3ErlangRandomVariable *self)
+PyNs3ErlangRandomVariable__PythonHelper::_wrap_DoDispose(PyNs3ErlangRandomVariable *self)
 {
     PyObject *py_retval;
     PyNs3ErlangRandomVariable__PythonHelper *helper = dynamic_cast< PyNs3ErlangRandomVariable__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -41853,16 +41853,16 @@ PyNs3ErlangRandomVariable__PythonHelper::_wrap_NotifyNewAggregate(PyNs3ErlangRan
 }
 
 PyObject *
-PyNs3ErlangRandomVariable__PythonHelper::_wrap_DoDispose(PyNs3ErlangRandomVariable *self)
+PyNs3ErlangRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3ErlangRandomVariable *self)
 {
     PyObject *py_retval;
     PyNs3ErlangRandomVariable__PythonHelper *helper = dynamic_cast< PyNs3ErlangRandomVariable__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -42213,77 +42213,6 @@ _wrap_PyNs3ErlangRandomVariable__tp_init(PyNs3ErlangRandomVariable *self, PyObje
 }
 
 
-
-PyObject *
-_wrap_PyNs3ErlangRandomVariable_GetInteger__0(PyNs3ErlangRandomVariable *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    unsigned int k;
-    unsigned int lambda;
-    const char *keywords[] = {"k", "lambda", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "II", (char **) keywords, &k, &lambda)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    retval = self->obj->GetInteger(k, lambda);
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-PyObject *
-_wrap_PyNs3ErlangRandomVariable_GetInteger__1(PyNs3ErlangRandomVariable *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    PyNs3ErlangRandomVariable__PythonHelper *helper_class = dynamic_cast<PyNs3ErlangRandomVariable__PythonHelper*> (self->obj);
-    const char *keywords[] = {NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "", (char **) keywords)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    retval = (helper_class == NULL)? (self->obj->GetInteger()) : (self->obj->ns3::ErlangRandomVariable::GetInteger());
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-PyObject * _wrap_PyNs3ErlangRandomVariable_GetInteger(PyNs3ErlangRandomVariable *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject * retval;
-    PyObject *error_list;
-    PyObject *exceptions[2] = {0,};
-    retval = _wrap_PyNs3ErlangRandomVariable_GetInteger__0(self, args, kwargs, &exceptions[0]);
-    if (!exceptions[0]) {
-        return retval;
-    }
-    retval = _wrap_PyNs3ErlangRandomVariable_GetInteger__1(self, args, kwargs, &exceptions[1]);
-    if (!exceptions[1]) {
-        Py_DECREF(exceptions[0]);
-        return retval;
-    }
-    error_list = PyList_New(2);
-    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
-    Py_DECREF(exceptions[0]);
-    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
-    Py_DECREF(exceptions[1]);
-    PyErr_SetObject(PyExc_TypeError, error_list);
-    Py_DECREF(error_list);
-    return NULL;
-}
-
-
 PyObject *
 _wrap_PyNs3ErlangRandomVariable_GetTypeId(void)
 {
@@ -42394,16 +42323,87 @@ PyObject * _wrap_PyNs3ErlangRandomVariable_GetValue(PyNs3ErlangRandomVariable *s
     return NULL;
 }
 
+
+
+PyObject *
+_wrap_PyNs3ErlangRandomVariable_GetInteger__0(PyNs3ErlangRandomVariable *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    unsigned int k;
+    unsigned int lambda;
+    const char *keywords[] = {"k", "lambda", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "II", (char **) keywords, &k, &lambda)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    retval = self->obj->GetInteger(k, lambda);
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+PyObject *
+_wrap_PyNs3ErlangRandomVariable_GetInteger__1(PyNs3ErlangRandomVariable *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    PyNs3ErlangRandomVariable__PythonHelper *helper_class = dynamic_cast<PyNs3ErlangRandomVariable__PythonHelper*> (self->obj);
+    const char *keywords[] = {NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "", (char **) keywords)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    retval = (helper_class == NULL)? (self->obj->GetInteger()) : (self->obj->ns3::ErlangRandomVariable::GetInteger());
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+PyObject * _wrap_PyNs3ErlangRandomVariable_GetInteger(PyNs3ErlangRandomVariable *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject * retval;
+    PyObject *error_list;
+    PyObject *exceptions[2] = {0,};
+    retval = _wrap_PyNs3ErlangRandomVariable_GetInteger__0(self, args, kwargs, &exceptions[0]);
+    if (!exceptions[0]) {
+        return retval;
+    }
+    retval = _wrap_PyNs3ErlangRandomVariable_GetInteger__1(self, args, kwargs, &exceptions[1]);
+    if (!exceptions[1]) {
+        Py_DECREF(exceptions[0]);
+        return retval;
+    }
+    error_list = PyList_New(2);
+    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
+    Py_DECREF(exceptions[0]);
+    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
+    Py_DECREF(exceptions[1]);
+    PyErr_SetObject(PyExc_TypeError, error_list);
+    Py_DECREF(error_list);
+    return NULL;
+}
+
 static PyMethodDef PyNs3ErlangRandomVariable_methods[] = {
-    {(char *) "GetInteger", (PyCFunction) _wrap_PyNs3ErlangRandomVariable_GetInteger, METH_KEYWORDS|METH_VARARGS, NULL },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3ErlangRandomVariable_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
     {(char *) "GetK", (PyCFunction) _wrap_PyNs3ErlangRandomVariable_GetK, METH_NOARGS, "GetK()\n\n" },
     {(char *) "GetLambda", (PyCFunction) _wrap_PyNs3ErlangRandomVariable_GetLambda, METH_NOARGS, "GetLambda()\n\n" },
     {(char *) "GetValue", (PyCFunction) _wrap_PyNs3ErlangRandomVariable_GetValue, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3ErlangRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "GetInteger", (PyCFunction) _wrap_PyNs3ErlangRandomVariable_GetInteger, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "DoDispose", (PyCFunction) PyNs3ErlangRandomVariable__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3ErlangRandomVariable__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3ErlangRandomVariable__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3ErlangRandomVariable__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3ErlangRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 
@@ -42502,7 +42502,7 @@ PyTypeObject PyNs3ErlangRandomVariable_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE,                      /* tp_flags */
     "ErlangRandomVariable()",                        /* Documentation string */
     (traverseproc)PyNs3ErlangRandomVariable__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3ErlangRandomVariable__tp_clear,             /* tp_clear */
@@ -42555,18 +42555,6 @@ _wrap_PyNs3EventImpl_Cancel(PyNs3EventImpl *self)
 
 
 PyObject *
-_wrap_PyNs3EventImpl_IsCancelled(PyNs3EventImpl *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->IsCancelled();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3EventImpl_Invoke(PyNs3EventImpl *self)
 {
     PyObject *py_retval;
@@ -42577,10 +42565,22 @@ _wrap_PyNs3EventImpl_Invoke(PyNs3EventImpl *self)
     return py_retval;
 }
 
+
+PyObject *
+_wrap_PyNs3EventImpl_IsCancelled(PyNs3EventImpl *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->IsCancelled();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
 static PyMethodDef PyNs3EventImpl_methods[] = {
     {(char *) "Cancel", (PyCFunction) _wrap_PyNs3EventImpl_Cancel, METH_NOARGS, "Cancel()\n\n" },
-    {(char *) "IsCancelled", (PyCFunction) _wrap_PyNs3EventImpl_IsCancelled, METH_NOARGS, "IsCancelled()\n\n" },
     {(char *) "Invoke", (PyCFunction) _wrap_PyNs3EventImpl_Invoke, METH_NOARGS, "Invoke()\n\n" },
+    {(char *) "IsCancelled", (PyCFunction) _wrap_PyNs3EventImpl_IsCancelled, METH_NOARGS, "IsCancelled()\n\n" },
     {NULL, NULL, 0, NULL}
 };
 
@@ -42692,16 +42692,16 @@ PyTypeObject PyNs3EventImpl_Type = {
 
 
 PyObject *
-PyNs3ExponentialRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3ExponentialRandomVariable *self)
+PyNs3ExponentialRandomVariable__PythonHelper::_wrap_DoDispose(PyNs3ExponentialRandomVariable *self)
 {
     PyObject *py_retval;
     PyNs3ExponentialRandomVariable__PythonHelper *helper = dynamic_cast< PyNs3ExponentialRandomVariable__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -42740,16 +42740,16 @@ PyNs3ExponentialRandomVariable__PythonHelper::_wrap_NotifyNewAggregate(PyNs3Expo
 }
 
 PyObject *
-PyNs3ExponentialRandomVariable__PythonHelper::_wrap_DoDispose(PyNs3ExponentialRandomVariable *self)
+PyNs3ExponentialRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3ExponentialRandomVariable *self)
 {
     PyObject *py_retval;
     PyNs3ExponentialRandomVariable__PythonHelper *helper = dynamic_cast< PyNs3ExponentialRandomVariable__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -43101,89 +43101,6 @@ _wrap_PyNs3ExponentialRandomVariable__tp_init(PyNs3ExponentialRandomVariable *se
 
 
 PyObject *
-_wrap_PyNs3ExponentialRandomVariable_GetMean(PyNs3ExponentialRandomVariable *self)
-{
-    PyObject *py_retval;
-    double retval;
-    
-    retval = self->obj->GetMean();
-    py_retval = Py_BuildValue((char *) "d", retval);
-    return py_retval;
-}
-
-
-
-PyObject *
-_wrap_PyNs3ExponentialRandomVariable_GetInteger__0(PyNs3ExponentialRandomVariable *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    unsigned int mean;
-    unsigned int bound;
-    const char *keywords[] = {"mean", "bound", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "II", (char **) keywords, &mean, &bound)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    retval = self->obj->GetInteger(mean, bound);
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-PyObject *
-_wrap_PyNs3ExponentialRandomVariable_GetInteger__1(PyNs3ExponentialRandomVariable *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    PyNs3ExponentialRandomVariable__PythonHelper *helper_class = dynamic_cast<PyNs3ExponentialRandomVariable__PythonHelper*> (self->obj);
-    const char *keywords[] = {NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "", (char **) keywords)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    retval = (helper_class == NULL)? (self->obj->GetInteger()) : (self->obj->ns3::ExponentialRandomVariable::GetInteger());
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-PyObject * _wrap_PyNs3ExponentialRandomVariable_GetInteger(PyNs3ExponentialRandomVariable *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject * retval;
-    PyObject *error_list;
-    PyObject *exceptions[2] = {0,};
-    retval = _wrap_PyNs3ExponentialRandomVariable_GetInteger__0(self, args, kwargs, &exceptions[0]);
-    if (!exceptions[0]) {
-        return retval;
-    }
-    retval = _wrap_PyNs3ExponentialRandomVariable_GetInteger__1(self, args, kwargs, &exceptions[1]);
-    if (!exceptions[1]) {
-        Py_DECREF(exceptions[0]);
-        return retval;
-    }
-    error_list = PyList_New(2);
-    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
-    Py_DECREF(exceptions[0]);
-    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
-    Py_DECREF(exceptions[1]);
-    PyErr_SetObject(PyExc_TypeError, error_list);
-    Py_DECREF(error_list);
-    return NULL;
-}
-
-
-PyObject *
 _wrap_PyNs3ExponentialRandomVariable_GetTypeId(void)
 {
     PyObject *py_retval;
@@ -43195,6 +43112,18 @@ _wrap_PyNs3ExponentialRandomVariable_GetTypeId(void)
     py_TypeId->obj = new ns3::TypeId(retval);
     PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
     py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3ExponentialRandomVariable_GetMean(PyNs3ExponentialRandomVariable *self)
+{
+    PyObject *py_retval;
+    double retval;
+    
+    retval = self->obj->GetMean();
+    py_retval = Py_BuildValue((char *) "d", retval);
     return py_retval;
 }
 
@@ -43281,16 +43210,87 @@ PyObject * _wrap_PyNs3ExponentialRandomVariable_GetValue(PyNs3ExponentialRandomV
     return NULL;
 }
 
+
+
+PyObject *
+_wrap_PyNs3ExponentialRandomVariable_GetInteger__0(PyNs3ExponentialRandomVariable *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    unsigned int mean;
+    unsigned int bound;
+    const char *keywords[] = {"mean", "bound", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "II", (char **) keywords, &mean, &bound)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    retval = self->obj->GetInteger(mean, bound);
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+PyObject *
+_wrap_PyNs3ExponentialRandomVariable_GetInteger__1(PyNs3ExponentialRandomVariable *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    PyNs3ExponentialRandomVariable__PythonHelper *helper_class = dynamic_cast<PyNs3ExponentialRandomVariable__PythonHelper*> (self->obj);
+    const char *keywords[] = {NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "", (char **) keywords)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    retval = (helper_class == NULL)? (self->obj->GetInteger()) : (self->obj->ns3::ExponentialRandomVariable::GetInteger());
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+PyObject * _wrap_PyNs3ExponentialRandomVariable_GetInteger(PyNs3ExponentialRandomVariable *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject * retval;
+    PyObject *error_list;
+    PyObject *exceptions[2] = {0,};
+    retval = _wrap_PyNs3ExponentialRandomVariable_GetInteger__0(self, args, kwargs, &exceptions[0]);
+    if (!exceptions[0]) {
+        return retval;
+    }
+    retval = _wrap_PyNs3ExponentialRandomVariable_GetInteger__1(self, args, kwargs, &exceptions[1]);
+    if (!exceptions[1]) {
+        Py_DECREF(exceptions[0]);
+        return retval;
+    }
+    error_list = PyList_New(2);
+    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
+    Py_DECREF(exceptions[0]);
+    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
+    Py_DECREF(exceptions[1]);
+    PyErr_SetObject(PyExc_TypeError, error_list);
+    Py_DECREF(error_list);
+    return NULL;
+}
+
 static PyMethodDef PyNs3ExponentialRandomVariable_methods[] = {
-    {(char *) "GetMean", (PyCFunction) _wrap_PyNs3ExponentialRandomVariable_GetMean, METH_NOARGS, "GetMean()\n\n" },
-    {(char *) "GetInteger", (PyCFunction) _wrap_PyNs3ExponentialRandomVariable_GetInteger, METH_KEYWORDS|METH_VARARGS, NULL },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3ExponentialRandomVariable_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "GetMean", (PyCFunction) _wrap_PyNs3ExponentialRandomVariable_GetMean, METH_NOARGS, "GetMean()\n\n" },
     {(char *) "GetBound", (PyCFunction) _wrap_PyNs3ExponentialRandomVariable_GetBound, METH_NOARGS, "GetBound()\n\n" },
     {(char *) "GetValue", (PyCFunction) _wrap_PyNs3ExponentialRandomVariable_GetValue, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3ExponentialRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "GetInteger", (PyCFunction) _wrap_PyNs3ExponentialRandomVariable_GetInteger, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "DoDispose", (PyCFunction) PyNs3ExponentialRandomVariable__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3ExponentialRandomVariable__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3ExponentialRandomVariable__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3ExponentialRandomVariable__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3ExponentialRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 
@@ -43389,7 +43389,7 @@ PyTypeObject PyNs3ExponentialRandomVariable_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE,                      /* tp_flags */
     "ExponentialRandomVariable()",                        /* Documentation string */
     (traverseproc)PyNs3ExponentialRandomVariable__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3ExponentialRandomVariable__tp_clear,             /* tp_clear */
@@ -43554,16 +43554,16 @@ PyTypeObject PyNs3FdReader_Type = {
 
 
 PyObject *
-PyNs3GammaRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3GammaRandomVariable *self)
+PyNs3GammaRandomVariable__PythonHelper::_wrap_DoDispose(PyNs3GammaRandomVariable *self)
 {
     PyObject *py_retval;
     PyNs3GammaRandomVariable__PythonHelper *helper = dynamic_cast< PyNs3GammaRandomVariable__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -43602,16 +43602,16 @@ PyNs3GammaRandomVariable__PythonHelper::_wrap_NotifyNewAggregate(PyNs3GammaRando
 }
 
 PyObject *
-PyNs3GammaRandomVariable__PythonHelper::_wrap_DoDispose(PyNs3GammaRandomVariable *self)
+PyNs3GammaRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3GammaRandomVariable *self)
 {
     PyObject *py_retval;
     PyNs3GammaRandomVariable__PythonHelper *helper = dynamic_cast< PyNs3GammaRandomVariable__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -43963,89 +43963,6 @@ _wrap_PyNs3GammaRandomVariable__tp_init(PyNs3GammaRandomVariable *self, PyObject
 
 
 PyObject *
-_wrap_PyNs3GammaRandomVariable_GetAlpha(PyNs3GammaRandomVariable *self)
-{
-    PyObject *py_retval;
-    double retval;
-    
-    retval = self->obj->GetAlpha();
-    py_retval = Py_BuildValue((char *) "d", retval);
-    return py_retval;
-}
-
-
-
-PyObject *
-_wrap_PyNs3GammaRandomVariable_GetInteger__0(PyNs3GammaRandomVariable *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    unsigned int alpha;
-    unsigned int beta;
-    const char *keywords[] = {"alpha", "beta", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "II", (char **) keywords, &alpha, &beta)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    retval = self->obj->GetInteger(alpha, beta);
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-PyObject *
-_wrap_PyNs3GammaRandomVariable_GetInteger__1(PyNs3GammaRandomVariable *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    PyNs3GammaRandomVariable__PythonHelper *helper_class = dynamic_cast<PyNs3GammaRandomVariable__PythonHelper*> (self->obj);
-    const char *keywords[] = {NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "", (char **) keywords)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    retval = (helper_class == NULL)? (self->obj->GetInteger()) : (self->obj->ns3::GammaRandomVariable::GetInteger());
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-PyObject * _wrap_PyNs3GammaRandomVariable_GetInteger(PyNs3GammaRandomVariable *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject * retval;
-    PyObject *error_list;
-    PyObject *exceptions[2] = {0,};
-    retval = _wrap_PyNs3GammaRandomVariable_GetInteger__0(self, args, kwargs, &exceptions[0]);
-    if (!exceptions[0]) {
-        return retval;
-    }
-    retval = _wrap_PyNs3GammaRandomVariable_GetInteger__1(self, args, kwargs, &exceptions[1]);
-    if (!exceptions[1]) {
-        Py_DECREF(exceptions[0]);
-        return retval;
-    }
-    error_list = PyList_New(2);
-    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
-    Py_DECREF(exceptions[0]);
-    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
-    Py_DECREF(exceptions[1]);
-    PyErr_SetObject(PyExc_TypeError, error_list);
-    Py_DECREF(error_list);
-    return NULL;
-}
-
-
-PyObject *
 _wrap_PyNs3GammaRandomVariable_GetTypeId(void)
 {
     PyObject *py_retval;
@@ -44057,6 +43974,18 @@ _wrap_PyNs3GammaRandomVariable_GetTypeId(void)
     py_TypeId->obj = new ns3::TypeId(retval);
     PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
     py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3GammaRandomVariable_GetAlpha(PyNs3GammaRandomVariable *self)
+{
+    PyObject *py_retval;
+    double retval;
+    
+    retval = self->obj->GetAlpha();
+    py_retval = Py_BuildValue((char *) "d", retval);
     return py_retval;
 }
 
@@ -44143,16 +44072,87 @@ PyObject * _wrap_PyNs3GammaRandomVariable_GetValue(PyNs3GammaRandomVariable *sel
     return NULL;
 }
 
+
+
+PyObject *
+_wrap_PyNs3GammaRandomVariable_GetInteger__0(PyNs3GammaRandomVariable *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    unsigned int alpha;
+    unsigned int beta;
+    const char *keywords[] = {"alpha", "beta", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "II", (char **) keywords, &alpha, &beta)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    retval = self->obj->GetInteger(alpha, beta);
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+PyObject *
+_wrap_PyNs3GammaRandomVariable_GetInteger__1(PyNs3GammaRandomVariable *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    PyNs3GammaRandomVariable__PythonHelper *helper_class = dynamic_cast<PyNs3GammaRandomVariable__PythonHelper*> (self->obj);
+    const char *keywords[] = {NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "", (char **) keywords)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    retval = (helper_class == NULL)? (self->obj->GetInteger()) : (self->obj->ns3::GammaRandomVariable::GetInteger());
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+PyObject * _wrap_PyNs3GammaRandomVariable_GetInteger(PyNs3GammaRandomVariable *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject * retval;
+    PyObject *error_list;
+    PyObject *exceptions[2] = {0,};
+    retval = _wrap_PyNs3GammaRandomVariable_GetInteger__0(self, args, kwargs, &exceptions[0]);
+    if (!exceptions[0]) {
+        return retval;
+    }
+    retval = _wrap_PyNs3GammaRandomVariable_GetInteger__1(self, args, kwargs, &exceptions[1]);
+    if (!exceptions[1]) {
+        Py_DECREF(exceptions[0]);
+        return retval;
+    }
+    error_list = PyList_New(2);
+    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
+    Py_DECREF(exceptions[0]);
+    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
+    Py_DECREF(exceptions[1]);
+    PyErr_SetObject(PyExc_TypeError, error_list);
+    Py_DECREF(error_list);
+    return NULL;
+}
+
 static PyMethodDef PyNs3GammaRandomVariable_methods[] = {
-    {(char *) "GetAlpha", (PyCFunction) _wrap_PyNs3GammaRandomVariable_GetAlpha, METH_NOARGS, "GetAlpha()\n\n" },
-    {(char *) "GetInteger", (PyCFunction) _wrap_PyNs3GammaRandomVariable_GetInteger, METH_KEYWORDS|METH_VARARGS, NULL },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3GammaRandomVariable_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "GetAlpha", (PyCFunction) _wrap_PyNs3GammaRandomVariable_GetAlpha, METH_NOARGS, "GetAlpha()\n\n" },
     {(char *) "GetBeta", (PyCFunction) _wrap_PyNs3GammaRandomVariable_GetBeta, METH_NOARGS, "GetBeta()\n\n" },
     {(char *) "GetValue", (PyCFunction) _wrap_PyNs3GammaRandomVariable_GetValue, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3GammaRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "GetInteger", (PyCFunction) _wrap_PyNs3GammaRandomVariable_GetInteger, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "DoDispose", (PyCFunction) PyNs3GammaRandomVariable__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3GammaRandomVariable__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3GammaRandomVariable__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3GammaRandomVariable__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3GammaRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 
@@ -44251,7 +44251,7 @@ PyTypeObject PyNs3GammaRandomVariable_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE,                      /* tp_flags */
     "GammaRandomVariable()",                        /* Documentation string */
     (traverseproc)PyNs3GammaRandomVariable__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3GammaRandomVariable__tp_clear,             /* tp_clear */
@@ -44284,16 +44284,16 @@ PyTypeObject PyNs3GammaRandomVariable_Type = {
 
 
 PyObject *
-PyNs3HeapScheduler__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3HeapScheduler *self)
+PyNs3HeapScheduler__PythonHelper::_wrap_DoDispose(PyNs3HeapScheduler *self)
 {
     PyObject *py_retval;
     PyNs3HeapScheduler__PythonHelper *helper = dynamic_cast< PyNs3HeapScheduler__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -44332,16 +44332,16 @@ PyNs3HeapScheduler__PythonHelper::_wrap_NotifyNewAggregate(PyNs3HeapScheduler *s
 }
 
 PyObject *
-PyNs3HeapScheduler__PythonHelper::_wrap_DoDispose(PyNs3HeapScheduler *self)
+PyNs3HeapScheduler__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3HeapScheduler *self)
 {
     PyObject *py_retval;
     PyNs3HeapScheduler__PythonHelper *helper = dynamic_cast< PyNs3HeapScheduler__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -44906,6 +44906,22 @@ int _wrap_PyNs3HeapScheduler__tp_init(PyNs3HeapScheduler *self, PyObject *args, 
 
 
 PyObject *
+_wrap_PyNs3HeapScheduler_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::HeapScheduler::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3HeapScheduler_Insert(PyNs3HeapScheduler *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -44919,6 +44935,19 @@ _wrap_PyNs3HeapScheduler_Insert(PyNs3HeapScheduler *self, PyObject *args, PyObje
     (helper_class == NULL)? (self->obj->Insert(*((PyNs3SchedulerEvent *) ev)->obj)) : (self->obj->ns3::HeapScheduler::Insert(*((PyNs3SchedulerEvent *) ev)->obj));
     Py_INCREF(Py_None);
     py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3HeapScheduler_IsEmpty(PyNs3HeapScheduler *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3HeapScheduler__PythonHelper *helper_class = dynamic_cast<PyNs3HeapScheduler__PythonHelper*> (self->obj);
+    
+    retval = (helper_class == NULL)? (self->obj->IsEmpty()) : (self->obj->ns3::HeapScheduler::IsEmpty());
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
@@ -44941,22 +44970,6 @@ _wrap_PyNs3HeapScheduler_PeekNext(PyNs3HeapScheduler *self)
 
 
 PyObject *
-_wrap_PyNs3HeapScheduler_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::HeapScheduler::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3HeapScheduler_Remove(PyNs3HeapScheduler *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -44970,19 +44983,6 @@ _wrap_PyNs3HeapScheduler_Remove(PyNs3HeapScheduler *self, PyObject *args, PyObje
     (helper_class == NULL)? (self->obj->Remove(*((PyNs3SchedulerEvent *) ev)->obj)) : (self->obj->ns3::HeapScheduler::Remove(*((PyNs3SchedulerEvent *) ev)->obj));
     Py_INCREF(Py_None);
     py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3HeapScheduler_IsEmpty(PyNs3HeapScheduler *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3HeapScheduler__PythonHelper *helper_class = dynamic_cast<PyNs3HeapScheduler__PythonHelper*> (self->obj);
-    
-    retval = (helper_class == NULL)? (self->obj->IsEmpty()) : (self->obj->ns3::HeapScheduler::IsEmpty());
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
@@ -45020,16 +45020,16 @@ _wrap_PyNs3HeapScheduler__copy__(PyNs3HeapScheduler *self)
 }
 
 static PyMethodDef PyNs3HeapScheduler_methods[] = {
-    {(char *) "Insert", (PyCFunction) _wrap_PyNs3HeapScheduler_Insert, METH_KEYWORDS|METH_VARARGS, "Insert(ev)\n\ntype: ev: ns3::Scheduler::Event const &" },
-    {(char *) "PeekNext", (PyCFunction) _wrap_PyNs3HeapScheduler_PeekNext, METH_NOARGS, "PeekNext()\n\n" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3HeapScheduler_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "Remove", (PyCFunction) _wrap_PyNs3HeapScheduler_Remove, METH_KEYWORDS|METH_VARARGS, "Remove(ev)\n\ntype: ev: ns3::Scheduler::Event const &" },
+    {(char *) "Insert", (PyCFunction) _wrap_PyNs3HeapScheduler_Insert, METH_KEYWORDS|METH_VARARGS, "Insert(ev)\n\ntype: ev: ns3::Scheduler::Event const &" },
     {(char *) "IsEmpty", (PyCFunction) _wrap_PyNs3HeapScheduler_IsEmpty, METH_NOARGS, "IsEmpty()\n\n" },
+    {(char *) "PeekNext", (PyCFunction) _wrap_PyNs3HeapScheduler_PeekNext, METH_NOARGS, "PeekNext()\n\n" },
+    {(char *) "Remove", (PyCFunction) _wrap_PyNs3HeapScheduler_Remove, METH_KEYWORDS|METH_VARARGS, "Remove(ev)\n\ntype: ev: ns3::Scheduler::Event const &" },
     {(char *) "RemoveNext", (PyCFunction) _wrap_PyNs3HeapScheduler_RemoveNext, METH_NOARGS, "RemoveNext()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3HeapScheduler__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "DoDispose", (PyCFunction) PyNs3HeapScheduler__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3HeapScheduler__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3HeapScheduler__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3HeapScheduler__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3HeapScheduler__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3HeapScheduler__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -45129,7 +45129,7 @@ PyTypeObject PyNs3HeapScheduler_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE,                      /* tp_flags */
     "HeapScheduler(arg0)\nHeapScheduler()",                        /* Documentation string */
     (traverseproc)PyNs3HeapScheduler__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3HeapScheduler__tp_clear,             /* tp_clear */
@@ -45255,35 +45255,6 @@ int _wrap_PyNs3IntegerValue__tp_init(PyNs3IntegerValue *self, PyObject *args, Py
 
 
 PyObject *
-_wrap_PyNs3IntegerValue_Set(PyNs3IntegerValue *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int64_t value;
-    const char *keywords[] = {"value", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "L", (char **) keywords, &value)) {
-        return NULL;
-    }
-    self->obj->Set(value);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3IntegerValue_Get(PyNs3IntegerValue *self)
-{
-    PyObject *py_retval;
-    int64_t retval;
-    
-    retval = self->obj->Get();
-    py_retval = Py_BuildValue((char *) "L", retval);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3IntegerValue_Copy(PyNs3IntegerValue *self)
 {
     PyObject *py_retval;
@@ -45320,25 +45291,6 @@ _wrap_PyNs3IntegerValue_Copy(PyNs3IntegerValue *self)
 
 
 PyObject *
-_wrap_PyNs3IntegerValue_SerializeToString(PyNs3IntegerValue *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    std::string retval;
-    PyNs3AttributeChecker *checker;
-    ns3::AttributeChecker *checker_ptr;
-    const char *keywords[] = {"checker", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3AttributeChecker_Type, &checker)) {
-        return NULL;
-    }
-    checker_ptr = (checker ? checker->obj : NULL);
-    retval = self->obj->SerializeToString(ns3::Ptr< ns3::AttributeChecker  > (checker_ptr));
-    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3IntegerValue_DeserializeFromString(PyNs3IntegerValue *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -45359,6 +45311,54 @@ _wrap_PyNs3IntegerValue_DeserializeFromString(PyNs3IntegerValue *self, PyObject 
 }
 
 
+PyObject *
+_wrap_PyNs3IntegerValue_Get(PyNs3IntegerValue *self)
+{
+    PyObject *py_retval;
+    int64_t retval;
+    
+    retval = self->obj->Get();
+    py_retval = Py_BuildValue((char *) "L", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3IntegerValue_SerializeToString(PyNs3IntegerValue *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    std::string retval;
+    PyNs3AttributeChecker *checker;
+    ns3::AttributeChecker *checker_ptr;
+    const char *keywords[] = {"checker", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3AttributeChecker_Type, &checker)) {
+        return NULL;
+    }
+    checker_ptr = (checker ? checker->obj : NULL);
+    retval = self->obj->SerializeToString(ns3::Ptr< ns3::AttributeChecker  > (checker_ptr));
+    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3IntegerValue_Set(PyNs3IntegerValue *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int64_t value;
+    const char *keywords[] = {"value", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "L", (char **) keywords, &value)) {
+        return NULL;
+    }
+    self->obj->Set(value);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
 static PyObject*
 _wrap_PyNs3IntegerValue__copy__(PyNs3IntegerValue *self)
 {
@@ -45373,11 +45373,11 @@ _wrap_PyNs3IntegerValue__copy__(PyNs3IntegerValue *self)
 }
 
 static PyMethodDef PyNs3IntegerValue_methods[] = {
-    {(char *) "Set", (PyCFunction) _wrap_PyNs3IntegerValue_Set, METH_KEYWORDS|METH_VARARGS, "Set(value)\n\ntype: value: int64_t const &" },
-    {(char *) "Get", (PyCFunction) _wrap_PyNs3IntegerValue_Get, METH_NOARGS, "Get()\n\n" },
     {(char *) "Copy", (PyCFunction) _wrap_PyNs3IntegerValue_Copy, METH_NOARGS, "Copy()\n\n" },
-    {(char *) "SerializeToString", (PyCFunction) _wrap_PyNs3IntegerValue_SerializeToString, METH_KEYWORDS|METH_VARARGS, "SerializeToString(checker)\n\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
     {(char *) "DeserializeFromString", (PyCFunction) _wrap_PyNs3IntegerValue_DeserializeFromString, METH_KEYWORDS|METH_VARARGS, "DeserializeFromString(value, checker)\n\ntype: value: std::string\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
+    {(char *) "Get", (PyCFunction) _wrap_PyNs3IntegerValue_Get, METH_NOARGS, "Get()\n\n" },
+    {(char *) "SerializeToString", (PyCFunction) _wrap_PyNs3IntegerValue_SerializeToString, METH_KEYWORDS|METH_VARARGS, "SerializeToString(checker)\n\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
+    {(char *) "Set", (PyCFunction) _wrap_PyNs3IntegerValue_Set, METH_KEYWORDS|METH_VARARGS, "Set(value)\n\ntype: value: int64_t const &" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3IntegerValue__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -45490,16 +45490,16 @@ PyTypeObject PyNs3IntegerValue_Type = {
 
 
 PyObject *
-PyNs3ListScheduler__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3ListScheduler *self)
+PyNs3ListScheduler__PythonHelper::_wrap_DoDispose(PyNs3ListScheduler *self)
 {
     PyObject *py_retval;
     PyNs3ListScheduler__PythonHelper *helper = dynamic_cast< PyNs3ListScheduler__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -45538,16 +45538,16 @@ PyNs3ListScheduler__PythonHelper::_wrap_NotifyNewAggregate(PyNs3ListScheduler *s
 }
 
 PyObject *
-PyNs3ListScheduler__PythonHelper::_wrap_DoDispose(PyNs3ListScheduler *self)
+PyNs3ListScheduler__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3ListScheduler *self)
 {
     PyObject *py_retval;
     PyNs3ListScheduler__PythonHelper *helper = dynamic_cast< PyNs3ListScheduler__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -46112,6 +46112,22 @@ int _wrap_PyNs3ListScheduler__tp_init(PyNs3ListScheduler *self, PyObject *args, 
 
 
 PyObject *
+_wrap_PyNs3ListScheduler_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::ListScheduler::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3ListScheduler_Insert(PyNs3ListScheduler *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -46125,6 +46141,19 @@ _wrap_PyNs3ListScheduler_Insert(PyNs3ListScheduler *self, PyObject *args, PyObje
     (helper_class == NULL)? (self->obj->Insert(*((PyNs3SchedulerEvent *) ev)->obj)) : (self->obj->ns3::ListScheduler::Insert(*((PyNs3SchedulerEvent *) ev)->obj));
     Py_INCREF(Py_None);
     py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3ListScheduler_IsEmpty(PyNs3ListScheduler *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3ListScheduler__PythonHelper *helper_class = dynamic_cast<PyNs3ListScheduler__PythonHelper*> (self->obj);
+    
+    retval = (helper_class == NULL)? (self->obj->IsEmpty()) : (self->obj->ns3::ListScheduler::IsEmpty());
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
@@ -46147,22 +46176,6 @@ _wrap_PyNs3ListScheduler_PeekNext(PyNs3ListScheduler *self)
 
 
 PyObject *
-_wrap_PyNs3ListScheduler_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::ListScheduler::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3ListScheduler_Remove(PyNs3ListScheduler *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -46176,19 +46189,6 @@ _wrap_PyNs3ListScheduler_Remove(PyNs3ListScheduler *self, PyObject *args, PyObje
     (helper_class == NULL)? (self->obj->Remove(*((PyNs3SchedulerEvent *) ev)->obj)) : (self->obj->ns3::ListScheduler::Remove(*((PyNs3SchedulerEvent *) ev)->obj));
     Py_INCREF(Py_None);
     py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3ListScheduler_IsEmpty(PyNs3ListScheduler *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3ListScheduler__PythonHelper *helper_class = dynamic_cast<PyNs3ListScheduler__PythonHelper*> (self->obj);
-    
-    retval = (helper_class == NULL)? (self->obj->IsEmpty()) : (self->obj->ns3::ListScheduler::IsEmpty());
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
@@ -46226,16 +46226,16 @@ _wrap_PyNs3ListScheduler__copy__(PyNs3ListScheduler *self)
 }
 
 static PyMethodDef PyNs3ListScheduler_methods[] = {
-    {(char *) "Insert", (PyCFunction) _wrap_PyNs3ListScheduler_Insert, METH_KEYWORDS|METH_VARARGS, "Insert(ev)\n\ntype: ev: ns3::Scheduler::Event const &" },
-    {(char *) "PeekNext", (PyCFunction) _wrap_PyNs3ListScheduler_PeekNext, METH_NOARGS, "PeekNext()\n\n" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3ListScheduler_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "Remove", (PyCFunction) _wrap_PyNs3ListScheduler_Remove, METH_KEYWORDS|METH_VARARGS, "Remove(ev)\n\ntype: ev: ns3::Scheduler::Event const &" },
+    {(char *) "Insert", (PyCFunction) _wrap_PyNs3ListScheduler_Insert, METH_KEYWORDS|METH_VARARGS, "Insert(ev)\n\ntype: ev: ns3::Scheduler::Event const &" },
     {(char *) "IsEmpty", (PyCFunction) _wrap_PyNs3ListScheduler_IsEmpty, METH_NOARGS, "IsEmpty()\n\n" },
+    {(char *) "PeekNext", (PyCFunction) _wrap_PyNs3ListScheduler_PeekNext, METH_NOARGS, "PeekNext()\n\n" },
+    {(char *) "Remove", (PyCFunction) _wrap_PyNs3ListScheduler_Remove, METH_KEYWORDS|METH_VARARGS, "Remove(ev)\n\ntype: ev: ns3::Scheduler::Event const &" },
     {(char *) "RemoveNext", (PyCFunction) _wrap_PyNs3ListScheduler_RemoveNext, METH_NOARGS, "RemoveNext()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3ListScheduler__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "DoDispose", (PyCFunction) PyNs3ListScheduler__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3ListScheduler__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3ListScheduler__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3ListScheduler__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3ListScheduler__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3ListScheduler__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -46335,7 +46335,7 @@ PyTypeObject PyNs3ListScheduler_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE,                      /* tp_flags */
     "ListScheduler(arg0)\nListScheduler()",                        /* Documentation string */
     (traverseproc)PyNs3ListScheduler__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3ListScheduler__tp_clear,             /* tp_clear */
@@ -46368,16 +46368,16 @@ PyTypeObject PyNs3ListScheduler_Type = {
 
 
 PyObject *
-PyNs3LogNormalRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3LogNormalRandomVariable *self)
+PyNs3LogNormalRandomVariable__PythonHelper::_wrap_DoDispose(PyNs3LogNormalRandomVariable *self)
 {
     PyObject *py_retval;
     PyNs3LogNormalRandomVariable__PythonHelper *helper = dynamic_cast< PyNs3LogNormalRandomVariable__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -46416,16 +46416,16 @@ PyNs3LogNormalRandomVariable__PythonHelper::_wrap_NotifyNewAggregate(PyNs3LogNor
 }
 
 PyObject *
-PyNs3LogNormalRandomVariable__PythonHelper::_wrap_DoDispose(PyNs3LogNormalRandomVariable *self)
+PyNs3LogNormalRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3LogNormalRandomVariable *self)
 {
     PyObject *py_retval;
     PyNs3LogNormalRandomVariable__PythonHelper *helper = dynamic_cast< PyNs3LogNormalRandomVariable__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -46776,77 +46776,6 @@ _wrap_PyNs3LogNormalRandomVariable__tp_init(PyNs3LogNormalRandomVariable *self, 
 }
 
 
-
-PyObject *
-_wrap_PyNs3LogNormalRandomVariable_GetInteger__0(PyNs3LogNormalRandomVariable *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    unsigned int mu;
-    unsigned int sigma;
-    const char *keywords[] = {"mu", "sigma", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "II", (char **) keywords, &mu, &sigma)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    retval = self->obj->GetInteger(mu, sigma);
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-PyObject *
-_wrap_PyNs3LogNormalRandomVariable_GetInteger__1(PyNs3LogNormalRandomVariable *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    PyNs3LogNormalRandomVariable__PythonHelper *helper_class = dynamic_cast<PyNs3LogNormalRandomVariable__PythonHelper*> (self->obj);
-    const char *keywords[] = {NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "", (char **) keywords)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    retval = (helper_class == NULL)? (self->obj->GetInteger()) : (self->obj->ns3::LogNormalRandomVariable::GetInteger());
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-PyObject * _wrap_PyNs3LogNormalRandomVariable_GetInteger(PyNs3LogNormalRandomVariable *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject * retval;
-    PyObject *error_list;
-    PyObject *exceptions[2] = {0,};
-    retval = _wrap_PyNs3LogNormalRandomVariable_GetInteger__0(self, args, kwargs, &exceptions[0]);
-    if (!exceptions[0]) {
-        return retval;
-    }
-    retval = _wrap_PyNs3LogNormalRandomVariable_GetInteger__1(self, args, kwargs, &exceptions[1]);
-    if (!exceptions[1]) {
-        Py_DECREF(exceptions[0]);
-        return retval;
-    }
-    error_list = PyList_New(2);
-    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
-    Py_DECREF(exceptions[0]);
-    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
-    Py_DECREF(exceptions[1]);
-    PyErr_SetObject(PyExc_TypeError, error_list);
-    Py_DECREF(error_list);
-    return NULL;
-}
-
-
 PyObject *
 _wrap_PyNs3LogNormalRandomVariable_GetTypeId(void)
 {
@@ -46957,16 +46886,87 @@ PyObject * _wrap_PyNs3LogNormalRandomVariable_GetValue(PyNs3LogNormalRandomVaria
     return NULL;
 }
 
+
+
+PyObject *
+_wrap_PyNs3LogNormalRandomVariable_GetInteger__0(PyNs3LogNormalRandomVariable *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    unsigned int mu;
+    unsigned int sigma;
+    const char *keywords[] = {"mu", "sigma", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "II", (char **) keywords, &mu, &sigma)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    retval = self->obj->GetInteger(mu, sigma);
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+PyObject *
+_wrap_PyNs3LogNormalRandomVariable_GetInteger__1(PyNs3LogNormalRandomVariable *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    PyNs3LogNormalRandomVariable__PythonHelper *helper_class = dynamic_cast<PyNs3LogNormalRandomVariable__PythonHelper*> (self->obj);
+    const char *keywords[] = {NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "", (char **) keywords)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    retval = (helper_class == NULL)? (self->obj->GetInteger()) : (self->obj->ns3::LogNormalRandomVariable::GetInteger());
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+PyObject * _wrap_PyNs3LogNormalRandomVariable_GetInteger(PyNs3LogNormalRandomVariable *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject * retval;
+    PyObject *error_list;
+    PyObject *exceptions[2] = {0,};
+    retval = _wrap_PyNs3LogNormalRandomVariable_GetInteger__0(self, args, kwargs, &exceptions[0]);
+    if (!exceptions[0]) {
+        return retval;
+    }
+    retval = _wrap_PyNs3LogNormalRandomVariable_GetInteger__1(self, args, kwargs, &exceptions[1]);
+    if (!exceptions[1]) {
+        Py_DECREF(exceptions[0]);
+        return retval;
+    }
+    error_list = PyList_New(2);
+    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
+    Py_DECREF(exceptions[0]);
+    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
+    Py_DECREF(exceptions[1]);
+    PyErr_SetObject(PyExc_TypeError, error_list);
+    Py_DECREF(error_list);
+    return NULL;
+}
+
 static PyMethodDef PyNs3LogNormalRandomVariable_methods[] = {
-    {(char *) "GetInteger", (PyCFunction) _wrap_PyNs3LogNormalRandomVariable_GetInteger, METH_KEYWORDS|METH_VARARGS, NULL },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3LogNormalRandomVariable_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
     {(char *) "GetMu", (PyCFunction) _wrap_PyNs3LogNormalRandomVariable_GetMu, METH_NOARGS, "GetMu()\n\n" },
     {(char *) "GetSigma", (PyCFunction) _wrap_PyNs3LogNormalRandomVariable_GetSigma, METH_NOARGS, "GetSigma()\n\n" },
     {(char *) "GetValue", (PyCFunction) _wrap_PyNs3LogNormalRandomVariable_GetValue, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3LogNormalRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "GetInteger", (PyCFunction) _wrap_PyNs3LogNormalRandomVariable_GetInteger, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "DoDispose", (PyCFunction) PyNs3LogNormalRandomVariable__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3LogNormalRandomVariable__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3LogNormalRandomVariable__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3LogNormalRandomVariable__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3LogNormalRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 
@@ -47065,7 +47065,7 @@ PyTypeObject PyNs3LogNormalRandomVariable_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE,                      /* tp_flags */
     "LogNormalRandomVariable()",                        /* Documentation string */
     (traverseproc)PyNs3LogNormalRandomVariable__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3LogNormalRandomVariable__tp_clear,             /* tp_clear */
@@ -47098,16 +47098,16 @@ PyTypeObject PyNs3LogNormalRandomVariable_Type = {
 
 
 PyObject *
-PyNs3MapScheduler__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3MapScheduler *self)
+PyNs3MapScheduler__PythonHelper::_wrap_DoDispose(PyNs3MapScheduler *self)
 {
     PyObject *py_retval;
     PyNs3MapScheduler__PythonHelper *helper = dynamic_cast< PyNs3MapScheduler__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -47146,16 +47146,16 @@ PyNs3MapScheduler__PythonHelper::_wrap_NotifyNewAggregate(PyNs3MapScheduler *sel
 }
 
 PyObject *
-PyNs3MapScheduler__PythonHelper::_wrap_DoDispose(PyNs3MapScheduler *self)
+PyNs3MapScheduler__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3MapScheduler *self)
 {
     PyObject *py_retval;
     PyNs3MapScheduler__PythonHelper *helper = dynamic_cast< PyNs3MapScheduler__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -47720,6 +47720,22 @@ int _wrap_PyNs3MapScheduler__tp_init(PyNs3MapScheduler *self, PyObject *args, Py
 
 
 PyObject *
+_wrap_PyNs3MapScheduler_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::MapScheduler::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3MapScheduler_Insert(PyNs3MapScheduler *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -47733,6 +47749,19 @@ _wrap_PyNs3MapScheduler_Insert(PyNs3MapScheduler *self, PyObject *args, PyObject
     (helper_class == NULL)? (self->obj->Insert(*((PyNs3SchedulerEvent *) ev)->obj)) : (self->obj->ns3::MapScheduler::Insert(*((PyNs3SchedulerEvent *) ev)->obj));
     Py_INCREF(Py_None);
     py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3MapScheduler_IsEmpty(PyNs3MapScheduler *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3MapScheduler__PythonHelper *helper_class = dynamic_cast<PyNs3MapScheduler__PythonHelper*> (self->obj);
+    
+    retval = (helper_class == NULL)? (self->obj->IsEmpty()) : (self->obj->ns3::MapScheduler::IsEmpty());
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
@@ -47755,22 +47784,6 @@ _wrap_PyNs3MapScheduler_PeekNext(PyNs3MapScheduler *self)
 
 
 PyObject *
-_wrap_PyNs3MapScheduler_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::MapScheduler::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3MapScheduler_Remove(PyNs3MapScheduler *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -47784,19 +47797,6 @@ _wrap_PyNs3MapScheduler_Remove(PyNs3MapScheduler *self, PyObject *args, PyObject
     (helper_class == NULL)? (self->obj->Remove(*((PyNs3SchedulerEvent *) ev)->obj)) : (self->obj->ns3::MapScheduler::Remove(*((PyNs3SchedulerEvent *) ev)->obj));
     Py_INCREF(Py_None);
     py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MapScheduler_IsEmpty(PyNs3MapScheduler *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3MapScheduler__PythonHelper *helper_class = dynamic_cast<PyNs3MapScheduler__PythonHelper*> (self->obj);
-    
-    retval = (helper_class == NULL)? (self->obj->IsEmpty()) : (self->obj->ns3::MapScheduler::IsEmpty());
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
@@ -47834,16 +47834,16 @@ _wrap_PyNs3MapScheduler__copy__(PyNs3MapScheduler *self)
 }
 
 static PyMethodDef PyNs3MapScheduler_methods[] = {
-    {(char *) "Insert", (PyCFunction) _wrap_PyNs3MapScheduler_Insert, METH_KEYWORDS|METH_VARARGS, "Insert(ev)\n\ntype: ev: ns3::Scheduler::Event const &" },
-    {(char *) "PeekNext", (PyCFunction) _wrap_PyNs3MapScheduler_PeekNext, METH_NOARGS, "PeekNext()\n\n" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3MapScheduler_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "Remove", (PyCFunction) _wrap_PyNs3MapScheduler_Remove, METH_KEYWORDS|METH_VARARGS, "Remove(ev)\n\ntype: ev: ns3::Scheduler::Event const &" },
+    {(char *) "Insert", (PyCFunction) _wrap_PyNs3MapScheduler_Insert, METH_KEYWORDS|METH_VARARGS, "Insert(ev)\n\ntype: ev: ns3::Scheduler::Event const &" },
     {(char *) "IsEmpty", (PyCFunction) _wrap_PyNs3MapScheduler_IsEmpty, METH_NOARGS, "IsEmpty()\n\n" },
+    {(char *) "PeekNext", (PyCFunction) _wrap_PyNs3MapScheduler_PeekNext, METH_NOARGS, "PeekNext()\n\n" },
+    {(char *) "Remove", (PyCFunction) _wrap_PyNs3MapScheduler_Remove, METH_KEYWORDS|METH_VARARGS, "Remove(ev)\n\ntype: ev: ns3::Scheduler::Event const &" },
     {(char *) "RemoveNext", (PyCFunction) _wrap_PyNs3MapScheduler_RemoveNext, METH_NOARGS, "RemoveNext()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3MapScheduler__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "DoDispose", (PyCFunction) PyNs3MapScheduler__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3MapScheduler__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3MapScheduler__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3MapScheduler__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3MapScheduler__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3MapScheduler__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -47943,7 +47943,7 @@ PyTypeObject PyNs3MapScheduler_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE,                      /* tp_flags */
     "MapScheduler(arg0)\nMapScheduler()",                        /* Documentation string */
     (traverseproc)PyNs3MapScheduler__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3MapScheduler__tp_clear,             /* tp_clear */
@@ -47976,16 +47976,16 @@ PyTypeObject PyNs3MapScheduler_Type = {
 
 
 PyObject *
-PyNs3NormalRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3NormalRandomVariable *self)
+PyNs3NormalRandomVariable__PythonHelper::_wrap_DoDispose(PyNs3NormalRandomVariable *self)
 {
     PyObject *py_retval;
     PyNs3NormalRandomVariable__PythonHelper *helper = dynamic_cast< PyNs3NormalRandomVariable__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -48024,16 +48024,16 @@ PyNs3NormalRandomVariable__PythonHelper::_wrap_NotifyNewAggregate(PyNs3NormalRan
 }
 
 PyObject *
-PyNs3NormalRandomVariable__PythonHelper::_wrap_DoDispose(PyNs3NormalRandomVariable *self)
+PyNs3NormalRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3NormalRandomVariable *self)
 {
     PyObject *py_retval;
     PyNs3NormalRandomVariable__PythonHelper *helper = dynamic_cast< PyNs3NormalRandomVariable__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -48451,78 +48451,6 @@ _wrap_PyNs3NormalRandomVariable__tp_init(PyNs3NormalRandomVariable *self, PyObje
 }
 
 
-
-PyObject *
-_wrap_PyNs3NormalRandomVariable_GetInteger__0(PyNs3NormalRandomVariable *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    unsigned int mean;
-    unsigned int variance;
-    unsigned int bound;
-    const char *keywords[] = {"mean", "variance", "bound", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "III", (char **) keywords, &mean, &variance, &bound)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    retval = self->obj->GetInteger(mean, variance, bound);
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-PyObject *
-_wrap_PyNs3NormalRandomVariable_GetInteger__1(PyNs3NormalRandomVariable *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    PyNs3NormalRandomVariable__PythonHelper *helper_class = dynamic_cast<PyNs3NormalRandomVariable__PythonHelper*> (self->obj);
-    const char *keywords[] = {NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "", (char **) keywords)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    retval = (helper_class == NULL)? (self->obj->GetInteger()) : (self->obj->ns3::NormalRandomVariable::GetInteger());
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-PyObject * _wrap_PyNs3NormalRandomVariable_GetInteger(PyNs3NormalRandomVariable *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject * retval;
-    PyObject *error_list;
-    PyObject *exceptions[2] = {0,};
-    retval = _wrap_PyNs3NormalRandomVariable_GetInteger__0(self, args, kwargs, &exceptions[0]);
-    if (!exceptions[0]) {
-        return retval;
-    }
-    retval = _wrap_PyNs3NormalRandomVariable_GetInteger__1(self, args, kwargs, &exceptions[1]);
-    if (!exceptions[1]) {
-        Py_DECREF(exceptions[0]);
-        return retval;
-    }
-    error_list = PyList_New(2);
-    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
-    Py_DECREF(exceptions[0]);
-    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
-    Py_DECREF(exceptions[1]);
-    PyErr_SetObject(PyExc_TypeError, error_list);
-    Py_DECREF(error_list);
-    return NULL;
-}
-
-
 PyObject *
 _wrap_PyNs3NormalRandomVariable_GetTypeId(void)
 {
@@ -48535,6 +48463,30 @@ _wrap_PyNs3NormalRandomVariable_GetTypeId(void)
     py_TypeId->obj = new ns3::TypeId(retval);
     PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
     py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3NormalRandomVariable_GetMean(PyNs3NormalRandomVariable *self)
+{
+    PyObject *py_retval;
+    double retval;
+    
+    retval = self->obj->GetMean();
+    py_retval = Py_BuildValue((char *) "d", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3NormalRandomVariable_GetVariance(PyNs3NormalRandomVariable *self)
+{
+    PyObject *py_retval;
+    double retval;
+    
+    retval = self->obj->GetVariance();
+    py_retval = Py_BuildValue((char *) "d", retval);
     return py_retval;
 }
 
@@ -48623,40 +48575,88 @@ PyObject * _wrap_PyNs3NormalRandomVariable_GetValue(PyNs3NormalRandomVariable *s
 }
 
 
+
 PyObject *
-_wrap_PyNs3NormalRandomVariable_GetMean(PyNs3NormalRandomVariable *self)
+_wrap_PyNs3NormalRandomVariable_GetInteger__0(PyNs3NormalRandomVariable *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
 {
     PyObject *py_retval;
-    double retval;
+    uint32_t retval;
+    unsigned int mean;
+    unsigned int variance;
+    unsigned int bound;
+    const char *keywords[] = {"mean", "variance", "bound", NULL};
     
-    retval = self->obj->GetMean();
-    py_retval = Py_BuildValue((char *) "d", retval);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "III", (char **) keywords, &mean, &variance, &bound)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    retval = self->obj->GetInteger(mean, variance, bound);
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
 
-
 PyObject *
-_wrap_PyNs3NormalRandomVariable_GetVariance(PyNs3NormalRandomVariable *self)
+_wrap_PyNs3NormalRandomVariable_GetInteger__1(PyNs3NormalRandomVariable *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
 {
     PyObject *py_retval;
-    double retval;
+    uint32_t retval;
+    PyNs3NormalRandomVariable__PythonHelper *helper_class = dynamic_cast<PyNs3NormalRandomVariable__PythonHelper*> (self->obj);
+    const char *keywords[] = {NULL};
     
-    retval = self->obj->GetVariance();
-    py_retval = Py_BuildValue((char *) "d", retval);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "", (char **) keywords)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    retval = (helper_class == NULL)? (self->obj->GetInteger()) : (self->obj->ns3::NormalRandomVariable::GetInteger());
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
+}
+
+PyObject * _wrap_PyNs3NormalRandomVariable_GetInteger(PyNs3NormalRandomVariable *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject * retval;
+    PyObject *error_list;
+    PyObject *exceptions[2] = {0,};
+    retval = _wrap_PyNs3NormalRandomVariable_GetInteger__0(self, args, kwargs, &exceptions[0]);
+    if (!exceptions[0]) {
+        return retval;
+    }
+    retval = _wrap_PyNs3NormalRandomVariable_GetInteger__1(self, args, kwargs, &exceptions[1]);
+    if (!exceptions[1]) {
+        Py_DECREF(exceptions[0]);
+        return retval;
+    }
+    error_list = PyList_New(2);
+    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
+    Py_DECREF(exceptions[0]);
+    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
+    Py_DECREF(exceptions[1]);
+    PyErr_SetObject(PyExc_TypeError, error_list);
+    Py_DECREF(error_list);
+    return NULL;
 }
 
 static PyMethodDef PyNs3NormalRandomVariable_methods[] = {
-    {(char *) "GetInteger", (PyCFunction) _wrap_PyNs3NormalRandomVariable_GetInteger, METH_KEYWORDS|METH_VARARGS, NULL },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3NormalRandomVariable_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "GetBound", (PyCFunction) _wrap_PyNs3NormalRandomVariable_GetBound, METH_NOARGS, "GetBound()\n\n" },
-    {(char *) "GetValue", (PyCFunction) _wrap_PyNs3NormalRandomVariable_GetValue, METH_KEYWORDS|METH_VARARGS, NULL },
     {(char *) "GetMean", (PyCFunction) _wrap_PyNs3NormalRandomVariable_GetMean, METH_NOARGS, "GetMean()\n\n" },
     {(char *) "GetVariance", (PyCFunction) _wrap_PyNs3NormalRandomVariable_GetVariance, METH_NOARGS, "GetVariance()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3NormalRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "GetBound", (PyCFunction) _wrap_PyNs3NormalRandomVariable_GetBound, METH_NOARGS, "GetBound()\n\n" },
+    {(char *) "GetValue", (PyCFunction) _wrap_PyNs3NormalRandomVariable_GetValue, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "GetInteger", (PyCFunction) _wrap_PyNs3NormalRandomVariable_GetInteger, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "DoDispose", (PyCFunction) PyNs3NormalRandomVariable__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3NormalRandomVariable__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3NormalRandomVariable__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3NormalRandomVariable__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3NormalRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 
@@ -48755,7 +48755,7 @@ PyTypeObject PyNs3NormalRandomVariable_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE,                      /* tp_flags */
     "NormalRandomVariable()",                        /* Documentation string */
     (traverseproc)PyNs3NormalRandomVariable__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3NormalRandomVariable__tp_clear,             /* tp_clear */
@@ -48999,39 +48999,6 @@ int _wrap_PyNs3ObjectFactoryValue__tp_init(PyNs3ObjectFactoryValue *self, PyObje
 
 
 PyObject *
-_wrap_PyNs3ObjectFactoryValue_Set(PyNs3ObjectFactoryValue *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3ObjectFactory *value;
-    const char *keywords[] = {"value", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3ObjectFactory_Type, &value)) {
-        return NULL;
-    }
-    self->obj->Set(*((PyNs3ObjectFactory *) value)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3ObjectFactoryValue_Get(PyNs3ObjectFactoryValue *self)
-{
-    PyObject *py_retval;
-    PyNs3ObjectFactory *py_ObjectFactory;
-    
-    ns3::ObjectFactory retval = self->obj->Get();
-    py_ObjectFactory = PyObject_New(PyNs3ObjectFactory, &PyNs3ObjectFactory_Type);
-    py_ObjectFactory->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_ObjectFactory->obj = new ns3::ObjectFactory(retval);
-    PyNs3ObjectFactory_wrapper_registry[(void *) py_ObjectFactory->obj] = (PyObject *) py_ObjectFactory;
-    py_retval = Py_BuildValue((char *) "N", py_ObjectFactory);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3ObjectFactoryValue_Copy(PyNs3ObjectFactoryValue *self)
 {
     PyObject *py_retval;
@@ -49068,25 +49035,6 @@ _wrap_PyNs3ObjectFactoryValue_Copy(PyNs3ObjectFactoryValue *self)
 
 
 PyObject *
-_wrap_PyNs3ObjectFactoryValue_SerializeToString(PyNs3ObjectFactoryValue *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    std::string retval;
-    PyNs3AttributeChecker *checker;
-    ns3::AttributeChecker *checker_ptr;
-    const char *keywords[] = {"checker", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3AttributeChecker_Type, &checker)) {
-        return NULL;
-    }
-    checker_ptr = (checker ? checker->obj : NULL);
-    retval = self->obj->SerializeToString(ns3::Ptr< ns3::AttributeChecker  > (checker_ptr));
-    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3ObjectFactoryValue_DeserializeFromString(PyNs3ObjectFactoryValue *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -49107,6 +49055,58 @@ _wrap_PyNs3ObjectFactoryValue_DeserializeFromString(PyNs3ObjectFactoryValue *sel
 }
 
 
+PyObject *
+_wrap_PyNs3ObjectFactoryValue_Get(PyNs3ObjectFactoryValue *self)
+{
+    PyObject *py_retval;
+    PyNs3ObjectFactory *py_ObjectFactory;
+    
+    ns3::ObjectFactory retval = self->obj->Get();
+    py_ObjectFactory = PyObject_New(PyNs3ObjectFactory, &PyNs3ObjectFactory_Type);
+    py_ObjectFactory->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_ObjectFactory->obj = new ns3::ObjectFactory(retval);
+    PyNs3ObjectFactory_wrapper_registry[(void *) py_ObjectFactory->obj] = (PyObject *) py_ObjectFactory;
+    py_retval = Py_BuildValue((char *) "N", py_ObjectFactory);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3ObjectFactoryValue_SerializeToString(PyNs3ObjectFactoryValue *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    std::string retval;
+    PyNs3AttributeChecker *checker;
+    ns3::AttributeChecker *checker_ptr;
+    const char *keywords[] = {"checker", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3AttributeChecker_Type, &checker)) {
+        return NULL;
+    }
+    checker_ptr = (checker ? checker->obj : NULL);
+    retval = self->obj->SerializeToString(ns3::Ptr< ns3::AttributeChecker  > (checker_ptr));
+    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3ObjectFactoryValue_Set(PyNs3ObjectFactoryValue *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3ObjectFactory *value;
+    const char *keywords[] = {"value", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3ObjectFactory_Type, &value)) {
+        return NULL;
+    }
+    self->obj->Set(*((PyNs3ObjectFactory *) value)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
 static PyObject*
 _wrap_PyNs3ObjectFactoryValue__copy__(PyNs3ObjectFactoryValue *self)
 {
@@ -49121,11 +49121,11 @@ _wrap_PyNs3ObjectFactoryValue__copy__(PyNs3ObjectFactoryValue *self)
 }
 
 static PyMethodDef PyNs3ObjectFactoryValue_methods[] = {
-    {(char *) "Set", (PyCFunction) _wrap_PyNs3ObjectFactoryValue_Set, METH_KEYWORDS|METH_VARARGS, "Set(value)\n\ntype: value: ns3::ObjectFactory const &" },
-    {(char *) "Get", (PyCFunction) _wrap_PyNs3ObjectFactoryValue_Get, METH_NOARGS, "Get()\n\n" },
     {(char *) "Copy", (PyCFunction) _wrap_PyNs3ObjectFactoryValue_Copy, METH_NOARGS, "Copy()\n\n" },
-    {(char *) "SerializeToString", (PyCFunction) _wrap_PyNs3ObjectFactoryValue_SerializeToString, METH_KEYWORDS|METH_VARARGS, "SerializeToString(checker)\n\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
     {(char *) "DeserializeFromString", (PyCFunction) _wrap_PyNs3ObjectFactoryValue_DeserializeFromString, METH_KEYWORDS|METH_VARARGS, "DeserializeFromString(value, checker)\n\ntype: value: std::string\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
+    {(char *) "Get", (PyCFunction) _wrap_PyNs3ObjectFactoryValue_Get, METH_NOARGS, "Get()\n\n" },
+    {(char *) "SerializeToString", (PyCFunction) _wrap_PyNs3ObjectFactoryValue_SerializeToString, METH_KEYWORDS|METH_VARARGS, "SerializeToString(checker)\n\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
+    {(char *) "Set", (PyCFunction) _wrap_PyNs3ObjectFactoryValue_Set, METH_KEYWORDS|METH_VARARGS, "Set(value)\n\ntype: value: ns3::ObjectFactory const &" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3ObjectFactoryValue__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -49246,30 +49246,6 @@ _wrap_PyNs3ObjectPtrContainerAccessor__tp_init(void)
 
 
 PyObject *
-_wrap_PyNs3ObjectPtrContainerAccessor_HasSetter(PyNs3ObjectPtrContainerAccessor *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->HasSetter();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3ObjectPtrContainerAccessor_HasGetter(PyNs3ObjectPtrContainerAccessor *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->HasGetter();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3ObjectPtrContainerAccessor_Get(PyNs3ObjectPtrContainerAccessor *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -49288,10 +49264,34 @@ _wrap_PyNs3ObjectPtrContainerAccessor_Get(PyNs3ObjectPtrContainerAccessor *self,
     return py_retval;
 }
 
+
+PyObject *
+_wrap_PyNs3ObjectPtrContainerAccessor_HasGetter(PyNs3ObjectPtrContainerAccessor *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->HasGetter();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3ObjectPtrContainerAccessor_HasSetter(PyNs3ObjectPtrContainerAccessor *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->HasSetter();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
 static PyMethodDef PyNs3ObjectPtrContainerAccessor_methods[] = {
-    {(char *) "HasSetter", (PyCFunction) _wrap_PyNs3ObjectPtrContainerAccessor_HasSetter, METH_NOARGS, "HasSetter()\n\n" },
-    {(char *) "HasGetter", (PyCFunction) _wrap_PyNs3ObjectPtrContainerAccessor_HasGetter, METH_NOARGS, "HasGetter()\n\n" },
     {(char *) "Get", (PyCFunction) _wrap_PyNs3ObjectPtrContainerAccessor_Get, METH_KEYWORDS|METH_VARARGS, "Get(object, value)\n\ntype: object: ns3::ObjectBase const *\ntype: value: ns3::AttributeValue &" },
+    {(char *) "HasGetter", (PyCFunction) _wrap_PyNs3ObjectPtrContainerAccessor_HasGetter, METH_NOARGS, "HasGetter()\n\n" },
+    {(char *) "HasSetter", (PyCFunction) _wrap_PyNs3ObjectPtrContainerAccessor_HasSetter, METH_NOARGS, "HasSetter()\n\n" },
     {NULL, NULL, 0, NULL}
 };
 
@@ -49603,6 +49603,63 @@ int _wrap_PyNs3ObjectPtrContainerValue__tp_init(PyNs3ObjectPtrContainerValue *se
 
 
 PyObject *
+_wrap_PyNs3ObjectPtrContainerValue_Copy(PyNs3ObjectPtrContainerValue *self)
+{
+    PyObject *py_retval;
+    ns3::Ptr< ns3::AttributeValue > retval;
+    PyNs3AttributeValue *py_AttributeValue;
+    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
+    PyTypeObject *wrapper_type = 0;
+    
+    retval = self->obj->Copy();
+    if (!(const_cast<ns3::AttributeValue *> (ns3::PeekPointer (retval)))) {
+        Py_INCREF(Py_None);
+        return Py_None;
+    }
+    wrapper_lookup_iter = PyNs3Empty_wrapper_registry.find((void *) const_cast<ns3::AttributeValue *> (ns3::PeekPointer (retval)));
+    if (wrapper_lookup_iter == PyNs3Empty_wrapper_registry.end()) {
+        py_AttributeValue = NULL;
+    } else {
+        py_AttributeValue = (PyNs3AttributeValue *) wrapper_lookup_iter->second;
+        Py_INCREF(py_AttributeValue);
+    }
+    
+    if (py_AttributeValue == NULL) {
+        wrapper_type = PyNs3SimpleRefCount__Ns3AttributeValue_Ns3Empty_Ns3DefaultDeleter__lt__ns3AttributeValue__gt____typeid_map.lookup_wrapper(typeid((*const_cast<ns3::AttributeValue *> (ns3::PeekPointer (retval)))), &PyNs3AttributeValue_Type);
+        py_AttributeValue = PyObject_New(PyNs3AttributeValue, wrapper_type);
+    
+        py_AttributeValue->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+        const_cast<ns3::AttributeValue *> (ns3::PeekPointer (retval))->Ref();
+        py_AttributeValue->obj = const_cast<ns3::AttributeValue *> (ns3::PeekPointer (retval));
+        PyNs3Empty_wrapper_registry[(void *) py_AttributeValue->obj] = (PyObject *) py_AttributeValue;
+    }
+    py_retval = Py_BuildValue((char *) "N", py_AttributeValue);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3ObjectPtrContainerValue_DeserializeFromString(PyNs3ObjectPtrContainerValue *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    const char *value;
+    Py_ssize_t value_len;
+    PyNs3AttributeChecker *checker;
+    ns3::AttributeChecker *checker_ptr;
+    const char *keywords[] = {"value", "checker", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &value, &value_len, &PyNs3AttributeChecker_Type, &checker)) {
+        return NULL;
+    }
+    checker_ptr = (checker ? checker->obj : NULL);
+    retval = self->obj->DeserializeFromString(std::string(value, value_len), ns3::Ptr< ns3::AttributeChecker  > (checker_ptr));
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3ObjectPtrContainerValue_Get(PyNs3ObjectPtrContainerValue *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -49653,37 +49710,13 @@ _wrap_PyNs3ObjectPtrContainerValue_Get(PyNs3ObjectPtrContainerValue *self, PyObj
 
 
 PyObject *
-_wrap_PyNs3ObjectPtrContainerValue_Copy(PyNs3ObjectPtrContainerValue *self)
+_wrap_PyNs3ObjectPtrContainerValue_GetN(PyNs3ObjectPtrContainerValue *self)
 {
     PyObject *py_retval;
-    ns3::Ptr< ns3::AttributeValue > retval;
-    PyNs3AttributeValue *py_AttributeValue;
-    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
-    PyTypeObject *wrapper_type = 0;
+    uint32_t retval;
     
-    retval = self->obj->Copy();
-    if (!(const_cast<ns3::AttributeValue *> (ns3::PeekPointer (retval)))) {
-        Py_INCREF(Py_None);
-        return Py_None;
-    }
-    wrapper_lookup_iter = PyNs3Empty_wrapper_registry.find((void *) const_cast<ns3::AttributeValue *> (ns3::PeekPointer (retval)));
-    if (wrapper_lookup_iter == PyNs3Empty_wrapper_registry.end()) {
-        py_AttributeValue = NULL;
-    } else {
-        py_AttributeValue = (PyNs3AttributeValue *) wrapper_lookup_iter->second;
-        Py_INCREF(py_AttributeValue);
-    }
-    
-    if (py_AttributeValue == NULL) {
-        wrapper_type = PyNs3SimpleRefCount__Ns3AttributeValue_Ns3Empty_Ns3DefaultDeleter__lt__ns3AttributeValue__gt____typeid_map.lookup_wrapper(typeid((*const_cast<ns3::AttributeValue *> (ns3::PeekPointer (retval)))), &PyNs3AttributeValue_Type);
-        py_AttributeValue = PyObject_New(PyNs3AttributeValue, wrapper_type);
-    
-        py_AttributeValue->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-        const_cast<ns3::AttributeValue *> (ns3::PeekPointer (retval))->Ref();
-        py_AttributeValue->obj = const_cast<ns3::AttributeValue *> (ns3::PeekPointer (retval));
-        PyNs3Empty_wrapper_registry[(void *) py_AttributeValue->obj] = (PyObject *) py_AttributeValue;
-    }
-    py_retval = Py_BuildValue((char *) "N", py_AttributeValue);
+    retval = self->obj->GetN();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
 
@@ -49707,39 +49740,6 @@ _wrap_PyNs3ObjectPtrContainerValue_SerializeToString(PyNs3ObjectPtrContainerValu
 }
 
 
-PyObject *
-_wrap_PyNs3ObjectPtrContainerValue_GetN(PyNs3ObjectPtrContainerValue *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetN();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3ObjectPtrContainerValue_DeserializeFromString(PyNs3ObjectPtrContainerValue *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    const char *value;
-    Py_ssize_t value_len;
-    PyNs3AttributeChecker *checker;
-    ns3::AttributeChecker *checker_ptr;
-    const char *keywords[] = {"value", "checker", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &value, &value_len, &PyNs3AttributeChecker_Type, &checker)) {
-        return NULL;
-    }
-    checker_ptr = (checker ? checker->obj : NULL);
-    retval = self->obj->DeserializeFromString(std::string(value, value_len), ns3::Ptr< ns3::AttributeChecker  > (checker_ptr));
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3ObjectPtrContainerValue__copy__(PyNs3ObjectPtrContainerValue *self)
 {
@@ -49754,11 +49754,11 @@ _wrap_PyNs3ObjectPtrContainerValue__copy__(PyNs3ObjectPtrContainerValue *self)
 }
 
 static PyMethodDef PyNs3ObjectPtrContainerValue_methods[] = {
-    {(char *) "Get", (PyCFunction) _wrap_PyNs3ObjectPtrContainerValue_Get, METH_KEYWORDS|METH_VARARGS, "Get(i)\n\ntype: i: uint32_t" },
     {(char *) "Copy", (PyCFunction) _wrap_PyNs3ObjectPtrContainerValue_Copy, METH_NOARGS, "Copy()\n\n" },
-    {(char *) "SerializeToString", (PyCFunction) _wrap_PyNs3ObjectPtrContainerValue_SerializeToString, METH_KEYWORDS|METH_VARARGS, "SerializeToString(checker)\n\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
-    {(char *) "GetN", (PyCFunction) _wrap_PyNs3ObjectPtrContainerValue_GetN, METH_NOARGS, "GetN()\n\n" },
     {(char *) "DeserializeFromString", (PyCFunction) _wrap_PyNs3ObjectPtrContainerValue_DeserializeFromString, METH_KEYWORDS|METH_VARARGS, "DeserializeFromString(value, checker)\n\ntype: value: std::string\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
+    {(char *) "Get", (PyCFunction) _wrap_PyNs3ObjectPtrContainerValue_Get, METH_KEYWORDS|METH_VARARGS, "Get(i)\n\ntype: i: uint32_t" },
+    {(char *) "GetN", (PyCFunction) _wrap_PyNs3ObjectPtrContainerValue_GetN, METH_NOARGS, "GetN()\n\n" },
+    {(char *) "SerializeToString", (PyCFunction) _wrap_PyNs3ObjectPtrContainerValue_SerializeToString, METH_KEYWORDS|METH_VARARGS, "SerializeToString(checker)\n\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3ObjectPtrContainerValue__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -49871,16 +49871,16 @@ PyTypeObject PyNs3ObjectPtrContainerValue_Type = {
 
 
 PyObject *
-PyNs3ParetoRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3ParetoRandomVariable *self)
+PyNs3ParetoRandomVariable__PythonHelper::_wrap_DoDispose(PyNs3ParetoRandomVariable *self)
 {
     PyObject *py_retval;
     PyNs3ParetoRandomVariable__PythonHelper *helper = dynamic_cast< PyNs3ParetoRandomVariable__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -49919,16 +49919,16 @@ PyNs3ParetoRandomVariable__PythonHelper::_wrap_NotifyNewAggregate(PyNs3ParetoRan
 }
 
 PyObject *
-PyNs3ParetoRandomVariable__PythonHelper::_wrap_DoDispose(PyNs3ParetoRandomVariable *self)
+PyNs3ParetoRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3ParetoRandomVariable *self)
 {
     PyObject *py_retval;
     PyNs3ParetoRandomVariable__PythonHelper *helper = dynamic_cast< PyNs3ParetoRandomVariable__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -50279,78 +50279,6 @@ _wrap_PyNs3ParetoRandomVariable__tp_init(PyNs3ParetoRandomVariable *self, PyObje
 }
 
 
-
-PyObject *
-_wrap_PyNs3ParetoRandomVariable_GetInteger__0(PyNs3ParetoRandomVariable *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    unsigned int scale;
-    unsigned int shape;
-    unsigned int bound;
-    const char *keywords[] = {"scale", "shape", "bound", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "III", (char **) keywords, &scale, &shape, &bound)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    retval = self->obj->GetInteger(scale, shape, bound);
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-PyObject *
-_wrap_PyNs3ParetoRandomVariable_GetInteger__1(PyNs3ParetoRandomVariable *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    PyNs3ParetoRandomVariable__PythonHelper *helper_class = dynamic_cast<PyNs3ParetoRandomVariable__PythonHelper*> (self->obj);
-    const char *keywords[] = {NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "", (char **) keywords)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    retval = (helper_class == NULL)? (self->obj->GetInteger()) : (self->obj->ns3::ParetoRandomVariable::GetInteger());
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-PyObject * _wrap_PyNs3ParetoRandomVariable_GetInteger(PyNs3ParetoRandomVariable *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject * retval;
-    PyObject *error_list;
-    PyObject *exceptions[2] = {0,};
-    retval = _wrap_PyNs3ParetoRandomVariable_GetInteger__0(self, args, kwargs, &exceptions[0]);
-    if (!exceptions[0]) {
-        return retval;
-    }
-    retval = _wrap_PyNs3ParetoRandomVariable_GetInteger__1(self, args, kwargs, &exceptions[1]);
-    if (!exceptions[1]) {
-        Py_DECREF(exceptions[0]);
-        return retval;
-    }
-    error_list = PyList_New(2);
-    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
-    Py_DECREF(exceptions[0]);
-    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
-    Py_DECREF(exceptions[1]);
-    PyErr_SetObject(PyExc_TypeError, error_list);
-    Py_DECREF(error_list);
-    return NULL;
-}
-
-
 PyObject *
 _wrap_PyNs3ParetoRandomVariable_GetTypeId(void)
 {
@@ -50363,6 +50291,45 @@ _wrap_PyNs3ParetoRandomVariable_GetTypeId(void)
     py_TypeId->obj = new ns3::TypeId(retval);
     PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
     py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3ParetoRandomVariable_GetMean(PyNs3ParetoRandomVariable *self)
+{
+    PyObject *py_retval;
+    double retval;
+    
+    if (PyErr_Warn(PyExc_DeprecationWarning, (char *) "Deprecated")) {
+        return NULL;
+    }
+    retval = self->obj->GetMean();
+    py_retval = Py_BuildValue((char *) "d", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3ParetoRandomVariable_GetScale(PyNs3ParetoRandomVariable *self)
+{
+    PyObject *py_retval;
+    double retval;
+    
+    retval = self->obj->GetScale();
+    py_retval = Py_BuildValue((char *) "d", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3ParetoRandomVariable_GetShape(PyNs3ParetoRandomVariable *self)
+{
+    PyObject *py_retval;
+    double retval;
+    
+    retval = self->obj->GetShape();
+    py_retval = Py_BuildValue((char *) "d", retval);
     return py_retval;
 }
 
@@ -50451,56 +50418,89 @@ PyObject * _wrap_PyNs3ParetoRandomVariable_GetValue(PyNs3ParetoRandomVariable *s
 }
 
 
+
 PyObject *
-_wrap_PyNs3ParetoRandomVariable_GetMean(PyNs3ParetoRandomVariable *self)
+_wrap_PyNs3ParetoRandomVariable_GetInteger__0(PyNs3ParetoRandomVariable *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
 {
     PyObject *py_retval;
-    double retval;
+    uint32_t retval;
+    unsigned int scale;
+    unsigned int shape;
+    unsigned int bound;
+    const char *keywords[] = {"scale", "shape", "bound", NULL};
     
-    if (PyErr_Warn(PyExc_DeprecationWarning, (char *) "Deprecated")) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "III", (char **) keywords, &scale, &shape, &bound)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
         return NULL;
     }
-    retval = self->obj->GetMean();
-    py_retval = Py_BuildValue((char *) "d", retval);
+    retval = self->obj->GetInteger(scale, shape, bound);
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
 
-
 PyObject *
-_wrap_PyNs3ParetoRandomVariable_GetShape(PyNs3ParetoRandomVariable *self)
+_wrap_PyNs3ParetoRandomVariable_GetInteger__1(PyNs3ParetoRandomVariable *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
 {
     PyObject *py_retval;
-    double retval;
+    uint32_t retval;
+    PyNs3ParetoRandomVariable__PythonHelper *helper_class = dynamic_cast<PyNs3ParetoRandomVariable__PythonHelper*> (self->obj);
+    const char *keywords[] = {NULL};
     
-    retval = self->obj->GetShape();
-    py_retval = Py_BuildValue((char *) "d", retval);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "", (char **) keywords)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    retval = (helper_class == NULL)? (self->obj->GetInteger()) : (self->obj->ns3::ParetoRandomVariable::GetInteger());
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
 
-
-PyObject *
-_wrap_PyNs3ParetoRandomVariable_GetScale(PyNs3ParetoRandomVariable *self)
+PyObject * _wrap_PyNs3ParetoRandomVariable_GetInteger(PyNs3ParetoRandomVariable *self, PyObject *args, PyObject *kwargs)
 {
-    PyObject *py_retval;
-    double retval;
-    
-    retval = self->obj->GetScale();
-    py_retval = Py_BuildValue((char *) "d", retval);
-    return py_retval;
+    PyObject * retval;
+    PyObject *error_list;
+    PyObject *exceptions[2] = {0,};
+    retval = _wrap_PyNs3ParetoRandomVariable_GetInteger__0(self, args, kwargs, &exceptions[0]);
+    if (!exceptions[0]) {
+        return retval;
+    }
+    retval = _wrap_PyNs3ParetoRandomVariable_GetInteger__1(self, args, kwargs, &exceptions[1]);
+    if (!exceptions[1]) {
+        Py_DECREF(exceptions[0]);
+        return retval;
+    }
+    error_list = PyList_New(2);
+    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
+    Py_DECREF(exceptions[0]);
+    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
+    Py_DECREF(exceptions[1]);
+    PyErr_SetObject(PyExc_TypeError, error_list);
+    Py_DECREF(error_list);
+    return NULL;
 }
 
 static PyMethodDef PyNs3ParetoRandomVariable_methods[] = {
-    {(char *) "GetInteger", (PyCFunction) _wrap_PyNs3ParetoRandomVariable_GetInteger, METH_KEYWORDS|METH_VARARGS, NULL },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3ParetoRandomVariable_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "GetMean", (PyCFunction) _wrap_PyNs3ParetoRandomVariable_GetMean, METH_NOARGS, "GetMean()\n\n" },
+    {(char *) "GetScale", (PyCFunction) _wrap_PyNs3ParetoRandomVariable_GetScale, METH_NOARGS, "GetScale()\n\n" },
+    {(char *) "GetShape", (PyCFunction) _wrap_PyNs3ParetoRandomVariable_GetShape, METH_NOARGS, "GetShape()\n\n" },
     {(char *) "GetBound", (PyCFunction) _wrap_PyNs3ParetoRandomVariable_GetBound, METH_NOARGS, "GetBound()\n\n" },
     {(char *) "GetValue", (PyCFunction) _wrap_PyNs3ParetoRandomVariable_GetValue, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "GetMean", (PyCFunction) _wrap_PyNs3ParetoRandomVariable_GetMean, METH_NOARGS, "GetMean()\n\n" },
-    {(char *) "GetShape", (PyCFunction) _wrap_PyNs3ParetoRandomVariable_GetShape, METH_NOARGS, "GetShape()\n\n" },
-    {(char *) "GetScale", (PyCFunction) _wrap_PyNs3ParetoRandomVariable_GetScale, METH_NOARGS, "GetScale()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3ParetoRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "GetInteger", (PyCFunction) _wrap_PyNs3ParetoRandomVariable_GetInteger, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "DoDispose", (PyCFunction) PyNs3ParetoRandomVariable__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3ParetoRandomVariable__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3ParetoRandomVariable__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3ParetoRandomVariable__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3ParetoRandomVariable__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 
@@ -50599,7 +50599,7 @@ PyTypeObject PyNs3ParetoRandomVariable_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE,                      /* tp_flags */
     "ParetoRandomVariable()",                        /* Documentation string */
     (traverseproc)PyNs3ParetoRandomVariable__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3ParetoRandomVariable__tp_clear,             /* tp_clear */
@@ -50862,6 +50862,63 @@ int _wrap_PyNs3PointerValue__tp_init(PyNs3PointerValue *self, PyObject *args, Py
 
 
 PyObject *
+_wrap_PyNs3PointerValue_Copy(PyNs3PointerValue *self)
+{
+    PyObject *py_retval;
+    ns3::Ptr< ns3::AttributeValue > retval;
+    PyNs3AttributeValue *py_AttributeValue;
+    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
+    PyTypeObject *wrapper_type = 0;
+    
+    retval = self->obj->Copy();
+    if (!(const_cast<ns3::AttributeValue *> (ns3::PeekPointer (retval)))) {
+        Py_INCREF(Py_None);
+        return Py_None;
+    }
+    wrapper_lookup_iter = PyNs3Empty_wrapper_registry.find((void *) const_cast<ns3::AttributeValue *> (ns3::PeekPointer (retval)));
+    if (wrapper_lookup_iter == PyNs3Empty_wrapper_registry.end()) {
+        py_AttributeValue = NULL;
+    } else {
+        py_AttributeValue = (PyNs3AttributeValue *) wrapper_lookup_iter->second;
+        Py_INCREF(py_AttributeValue);
+    }
+    
+    if (py_AttributeValue == NULL) {
+        wrapper_type = PyNs3SimpleRefCount__Ns3AttributeValue_Ns3Empty_Ns3DefaultDeleter__lt__ns3AttributeValue__gt____typeid_map.lookup_wrapper(typeid((*const_cast<ns3::AttributeValue *> (ns3::PeekPointer (retval)))), &PyNs3AttributeValue_Type);
+        py_AttributeValue = PyObject_New(PyNs3AttributeValue, wrapper_type);
+    
+        py_AttributeValue->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+        const_cast<ns3::AttributeValue *> (ns3::PeekPointer (retval))->Ref();
+        py_AttributeValue->obj = const_cast<ns3::AttributeValue *> (ns3::PeekPointer (retval));
+        PyNs3Empty_wrapper_registry[(void *) py_AttributeValue->obj] = (PyObject *) py_AttributeValue;
+    }
+    py_retval = Py_BuildValue((char *) "N", py_AttributeValue);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3PointerValue_DeserializeFromString(PyNs3PointerValue *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    const char *value;
+    Py_ssize_t value_len;
+    PyNs3AttributeChecker *checker;
+    ns3::AttributeChecker *checker_ptr;
+    const char *keywords[] = {"value", "checker", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &value, &value_len, &PyNs3AttributeChecker_Type, &checker)) {
+        return NULL;
+    }
+    checker_ptr = (checker ? checker->obj : NULL);
+    retval = self->obj->DeserializeFromString(std::string(value, value_len), ns3::Ptr< ns3::AttributeChecker  > (checker_ptr));
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3PointerValue_GetObject(PyNs3PointerValue *self)
 {
     PyObject *py_retval;
@@ -50907,61 +50964,6 @@ _wrap_PyNs3PointerValue_GetObject(PyNs3PointerValue *self)
 
 
 PyObject *
-_wrap_PyNs3PointerValue_SetObject(PyNs3PointerValue *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Object *object;
-    ns3::Object *object_ptr;
-    const char *keywords[] = {"object", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Object_Type, &object)) {
-        return NULL;
-    }
-    object_ptr = (object ? object->obj : NULL);
-    self->obj->SetObject(ns3::Ptr< ns3::Object  > (object_ptr));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3PointerValue_Copy(PyNs3PointerValue *self)
-{
-    PyObject *py_retval;
-    ns3::Ptr< ns3::AttributeValue > retval;
-    PyNs3AttributeValue *py_AttributeValue;
-    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
-    PyTypeObject *wrapper_type = 0;
-    
-    retval = self->obj->Copy();
-    if (!(const_cast<ns3::AttributeValue *> (ns3::PeekPointer (retval)))) {
-        Py_INCREF(Py_None);
-        return Py_None;
-    }
-    wrapper_lookup_iter = PyNs3Empty_wrapper_registry.find((void *) const_cast<ns3::AttributeValue *> (ns3::PeekPointer (retval)));
-    if (wrapper_lookup_iter == PyNs3Empty_wrapper_registry.end()) {
-        py_AttributeValue = NULL;
-    } else {
-        py_AttributeValue = (PyNs3AttributeValue *) wrapper_lookup_iter->second;
-        Py_INCREF(py_AttributeValue);
-    }
-    
-    if (py_AttributeValue == NULL) {
-        wrapper_type = PyNs3SimpleRefCount__Ns3AttributeValue_Ns3Empty_Ns3DefaultDeleter__lt__ns3AttributeValue__gt____typeid_map.lookup_wrapper(typeid((*const_cast<ns3::AttributeValue *> (ns3::PeekPointer (retval)))), &PyNs3AttributeValue_Type);
-        py_AttributeValue = PyObject_New(PyNs3AttributeValue, wrapper_type);
-    
-        py_AttributeValue->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-        const_cast<ns3::AttributeValue *> (ns3::PeekPointer (retval))->Ref();
-        py_AttributeValue->obj = const_cast<ns3::AttributeValue *> (ns3::PeekPointer (retval));
-        PyNs3Empty_wrapper_registry[(void *) py_AttributeValue->obj] = (PyObject *) py_AttributeValue;
-    }
-    py_retval = Py_BuildValue((char *) "N", py_AttributeValue);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3PointerValue_SerializeToString(PyNs3PointerValue *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -50981,22 +50983,20 @@ _wrap_PyNs3PointerValue_SerializeToString(PyNs3PointerValue *self, PyObject *arg
 
 
 PyObject *
-_wrap_PyNs3PointerValue_DeserializeFromString(PyNs3PointerValue *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3PointerValue_SetObject(PyNs3PointerValue *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    bool retval;
-    const char *value;
-    Py_ssize_t value_len;
-    PyNs3AttributeChecker *checker;
-    ns3::AttributeChecker *checker_ptr;
-    const char *keywords[] = {"value", "checker", NULL};
+    PyNs3Object *object;
+    ns3::Object *object_ptr;
+    const char *keywords[] = {"object", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &value, &value_len, &PyNs3AttributeChecker_Type, &checker)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Object_Type, &object)) {
         return NULL;
     }
-    checker_ptr = (checker ? checker->obj : NULL);
-    retval = self->obj->DeserializeFromString(std::string(value, value_len), ns3::Ptr< ns3::AttributeChecker  > (checker_ptr));
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    object_ptr = (object ? object->obj : NULL);
+    self->obj->SetObject(ns3::Ptr< ns3::Object  > (object_ptr));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -51015,11 +51015,11 @@ _wrap_PyNs3PointerValue__copy__(PyNs3PointerValue *self)
 }
 
 static PyMethodDef PyNs3PointerValue_methods[] = {
-    {(char *) "GetObject", (PyCFunction) _wrap_PyNs3PointerValue_GetObject, METH_NOARGS, "GetObject()\n\n" },
-    {(char *) "SetObject", (PyCFunction) _wrap_PyNs3PointerValue_SetObject, METH_KEYWORDS|METH_VARARGS, "SetObject(object)\n\ntype: object: ns3::Ptr< ns3::Object >" },
     {(char *) "Copy", (PyCFunction) _wrap_PyNs3PointerValue_Copy, METH_NOARGS, "Copy()\n\n" },
-    {(char *) "SerializeToString", (PyCFunction) _wrap_PyNs3PointerValue_SerializeToString, METH_KEYWORDS|METH_VARARGS, "SerializeToString(checker)\n\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
     {(char *) "DeserializeFromString", (PyCFunction) _wrap_PyNs3PointerValue_DeserializeFromString, METH_KEYWORDS|METH_VARARGS, "DeserializeFromString(value, checker)\n\ntype: value: std::string\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
+    {(char *) "GetObject", (PyCFunction) _wrap_PyNs3PointerValue_GetObject, METH_NOARGS, "GetObject()\n\n" },
+    {(char *) "SerializeToString", (PyCFunction) _wrap_PyNs3PointerValue_SerializeToString, METH_KEYWORDS|METH_VARARGS, "SerializeToString(checker)\n\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
+    {(char *) "SetObject", (PyCFunction) _wrap_PyNs3PointerValue_SetObject, METH_KEYWORDS|METH_VARARGS, "SetObject(object)\n\ntype: object: ns3::Ptr< ns3::Object >" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3PointerValue__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -51201,11 +51201,16 @@ int _wrap_PyNs3RealtimeSimulatorImpl__tp_init(PyNs3RealtimeSimulatorImpl *self, 
 
 
 PyObject *
-_wrap_PyNs3RealtimeSimulatorImpl_Run(PyNs3RealtimeSimulatorImpl *self)
+_wrap_PyNs3RealtimeSimulatorImpl_Cancel(PyNs3RealtimeSimulatorImpl *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
+    PyNs3EventId *ev;
+    const char *keywords[] = {"ev", NULL};
     
-    self->obj->Run();
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3EventId_Type, &ev)) {
+        return NULL;
+    }
+    self->obj->Cancel(*((PyNs3EventId *) ev)->obj);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -51213,29 +51218,25 @@ _wrap_PyNs3RealtimeSimulatorImpl_Run(PyNs3RealtimeSimulatorImpl *self)
 
 
 PyObject *
-_wrap_PyNs3RealtimeSimulatorImpl_GetMaximumSimulationTime(PyNs3RealtimeSimulatorImpl *self)
+_wrap_PyNs3RealtimeSimulatorImpl_Destroy(PyNs3RealtimeSimulatorImpl *self)
 {
     PyObject *py_retval;
-    PyNs3Time *py_Time;
     
-    ns3::Time retval = self->obj->GetMaximumSimulationTime();
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
+    self->obj->Destroy();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3RealtimeSimulatorImpl_IsFinished(PyNs3RealtimeSimulatorImpl *self)
+_wrap_PyNs3RealtimeSimulatorImpl_GetContext(PyNs3RealtimeSimulatorImpl *self)
 {
     PyObject *py_retval;
-    bool retval;
+    uint32_t retval;
     
-    retval = self->obj->IsFinished();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    retval = self->obj->GetContext();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
 
@@ -51262,6 +51263,50 @@ _wrap_PyNs3RealtimeSimulatorImpl_GetDelayLeft(PyNs3RealtimeSimulatorImpl *self, 
 
 
 PyObject *
+_wrap_PyNs3RealtimeSimulatorImpl_GetHardLimit(PyNs3RealtimeSimulatorImpl *self)
+{
+    PyObject *py_retval;
+    PyNs3Time *py_Time;
+    
+    ns3::Time retval = self->obj->GetHardLimit();
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RealtimeSimulatorImpl_GetMaximumSimulationTime(PyNs3RealtimeSimulatorImpl *self)
+{
+    PyObject *py_retval;
+    PyNs3Time *py_Time;
+    
+    ns3::Time retval = self->obj->GetMaximumSimulationTime();
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RealtimeSimulatorImpl_GetSynchronizationMode(PyNs3RealtimeSimulatorImpl *self)
+{
+    PyObject *py_retval;
+    ns3::RealtimeSimulatorImpl::SynchronizationMode retval;
+    
+    retval = self->obj->GetSynchronizationMode();
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3RealtimeSimulatorImpl_GetSystemId(PyNs3RealtimeSimulatorImpl *self)
 {
     PyObject *py_retval;
@@ -51269,6 +51314,163 @@ _wrap_PyNs3RealtimeSimulatorImpl_GetSystemId(PyNs3RealtimeSimulatorImpl *self)
     
     retval = self->obj->GetSystemId();
     py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RealtimeSimulatorImpl_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::RealtimeSimulatorImpl::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RealtimeSimulatorImpl_IsExpired(PyNs3RealtimeSimulatorImpl *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3EventId *ev;
+    const char *keywords[] = {"ev", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3EventId_Type, &ev)) {
+        return NULL;
+    }
+    retval = self->obj->IsExpired(*((PyNs3EventId *) ev)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RealtimeSimulatorImpl_IsFinished(PyNs3RealtimeSimulatorImpl *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->IsFinished();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RealtimeSimulatorImpl_Now(PyNs3RealtimeSimulatorImpl *self)
+{
+    PyObject *py_retval;
+    PyNs3Time *py_Time;
+    
+    ns3::Time retval = self->obj->Now();
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RealtimeSimulatorImpl_RealtimeNow(PyNs3RealtimeSimulatorImpl *self)
+{
+    PyObject *py_retval;
+    PyNs3Time *py_Time;
+    
+    ns3::Time retval = self->obj->RealtimeNow();
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RealtimeSimulatorImpl_Remove(PyNs3RealtimeSimulatorImpl *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3EventId *ev;
+    const char *keywords[] = {"ev", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3EventId_Type, &ev)) {
+        return NULL;
+    }
+    self->obj->Remove(*((PyNs3EventId *) ev)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RealtimeSimulatorImpl_Run(PyNs3RealtimeSimulatorImpl *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->Run();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RealtimeSimulatorImpl_SetHardLimit(PyNs3RealtimeSimulatorImpl *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Time *limit;
+    const char *keywords[] = {"limit", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Time_Type, &limit)) {
+        return NULL;
+    }
+    self->obj->SetHardLimit(*((PyNs3Time *) limit)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RealtimeSimulatorImpl_SetScheduler(PyNs3RealtimeSimulatorImpl *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3ObjectFactory *schedulerFactory;
+    const char *keywords[] = {"schedulerFactory", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3ObjectFactory_Type, &schedulerFactory)) {
+        return NULL;
+    }
+    self->obj->SetScheduler(*((PyNs3ObjectFactory *) schedulerFactory)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RealtimeSimulatorImpl_SetSynchronizationMode(PyNs3RealtimeSimulatorImpl *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    ns3::RealtimeSimulatorImpl::SynchronizationMode mode;
+    const char *keywords[] = {"mode", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &mode)) {
+        return NULL;
+    }
+    self->obj->SetSynchronizationMode(mode);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -51342,208 +51544,6 @@ PyObject * _wrap_PyNs3RealtimeSimulatorImpl_Stop(PyNs3RealtimeSimulatorImpl *sel
 }
 
 
-PyObject *
-_wrap_PyNs3RealtimeSimulatorImpl_RealtimeNow(PyNs3RealtimeSimulatorImpl *self)
-{
-    PyObject *py_retval;
-    PyNs3Time *py_Time;
-    
-    ns3::Time retval = self->obj->RealtimeNow();
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RealtimeSimulatorImpl_GetContext(PyNs3RealtimeSimulatorImpl *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetContext();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RealtimeSimulatorImpl_SetHardLimit(PyNs3RealtimeSimulatorImpl *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Time *limit;
-    const char *keywords[] = {"limit", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Time_Type, &limit)) {
-        return NULL;
-    }
-    self->obj->SetHardLimit(*((PyNs3Time *) limit)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RealtimeSimulatorImpl_SetSynchronizationMode(PyNs3RealtimeSimulatorImpl *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    ns3::RealtimeSimulatorImpl::SynchronizationMode mode;
-    const char *keywords[] = {"mode", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &mode)) {
-        return NULL;
-    }
-    self->obj->SetSynchronizationMode(mode);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RealtimeSimulatorImpl_SetScheduler(PyNs3RealtimeSimulatorImpl *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3ObjectFactory *schedulerFactory;
-    const char *keywords[] = {"schedulerFactory", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3ObjectFactory_Type, &schedulerFactory)) {
-        return NULL;
-    }
-    self->obj->SetScheduler(*((PyNs3ObjectFactory *) schedulerFactory)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RealtimeSimulatorImpl_Remove(PyNs3RealtimeSimulatorImpl *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3EventId *ev;
-    const char *keywords[] = {"ev", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3EventId_Type, &ev)) {
-        return NULL;
-    }
-    self->obj->Remove(*((PyNs3EventId *) ev)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RealtimeSimulatorImpl_Cancel(PyNs3RealtimeSimulatorImpl *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3EventId *ev;
-    const char *keywords[] = {"ev", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3EventId_Type, &ev)) {
-        return NULL;
-    }
-    self->obj->Cancel(*((PyNs3EventId *) ev)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RealtimeSimulatorImpl_Destroy(PyNs3RealtimeSimulatorImpl *self)
-{
-    PyObject *py_retval;
-    
-    self->obj->Destroy();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RealtimeSimulatorImpl_IsExpired(PyNs3RealtimeSimulatorImpl *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3EventId *ev;
-    const char *keywords[] = {"ev", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3EventId_Type, &ev)) {
-        return NULL;
-    }
-    retval = self->obj->IsExpired(*((PyNs3EventId *) ev)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RealtimeSimulatorImpl_Now(PyNs3RealtimeSimulatorImpl *self)
-{
-    PyObject *py_retval;
-    PyNs3Time *py_Time;
-    
-    ns3::Time retval = self->obj->Now();
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RealtimeSimulatorImpl_GetHardLimit(PyNs3RealtimeSimulatorImpl *self)
-{
-    PyObject *py_retval;
-    PyNs3Time *py_Time;
-    
-    ns3::Time retval = self->obj->GetHardLimit();
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RealtimeSimulatorImpl_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::RealtimeSimulatorImpl::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RealtimeSimulatorImpl_GetSynchronizationMode(PyNs3RealtimeSimulatorImpl *self)
-{
-    PyObject *py_retval;
-    ns3::RealtimeSimulatorImpl::SynchronizationMode retval;
-    
-    retval = self->obj->GetSynchronizationMode();
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3RealtimeSimulatorImpl__copy__(PyNs3RealtimeSimulatorImpl *self)
 {
@@ -51560,25 +51560,25 @@ _wrap_PyNs3RealtimeSimulatorImpl__copy__(PyNs3RealtimeSimulatorImpl *self)
 }
 
 static PyMethodDef PyNs3RealtimeSimulatorImpl_methods[] = {
-    {(char *) "Run", (PyCFunction) _wrap_PyNs3RealtimeSimulatorImpl_Run, METH_NOARGS, "Run()\n\n" },
-    {(char *) "GetMaximumSimulationTime", (PyCFunction) _wrap_PyNs3RealtimeSimulatorImpl_GetMaximumSimulationTime, METH_NOARGS, "GetMaximumSimulationTime()\n\n" },
-    {(char *) "IsFinished", (PyCFunction) _wrap_PyNs3RealtimeSimulatorImpl_IsFinished, METH_NOARGS, "IsFinished()\n\n" },
-    {(char *) "GetDelayLeft", (PyCFunction) _wrap_PyNs3RealtimeSimulatorImpl_GetDelayLeft, METH_KEYWORDS|METH_VARARGS, "GetDelayLeft(id)\n\ntype: id: ns3::EventId const &" },
-    {(char *) "GetSystemId", (PyCFunction) _wrap_PyNs3RealtimeSimulatorImpl_GetSystemId, METH_NOARGS, "GetSystemId()\n\n" },
-    {(char *) "Stop", (PyCFunction) _wrap_PyNs3RealtimeSimulatorImpl_Stop, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "RealtimeNow", (PyCFunction) _wrap_PyNs3RealtimeSimulatorImpl_RealtimeNow, METH_NOARGS, "RealtimeNow()\n\n" },
-    {(char *) "GetContext", (PyCFunction) _wrap_PyNs3RealtimeSimulatorImpl_GetContext, METH_NOARGS, "GetContext()\n\n" },
-    {(char *) "SetHardLimit", (PyCFunction) _wrap_PyNs3RealtimeSimulatorImpl_SetHardLimit, METH_KEYWORDS|METH_VARARGS, "SetHardLimit(limit)\n\ntype: limit: ns3::Time" },
-    {(char *) "SetSynchronizationMode", (PyCFunction) _wrap_PyNs3RealtimeSimulatorImpl_SetSynchronizationMode, METH_KEYWORDS|METH_VARARGS, "SetSynchronizationMode(mode)\n\ntype: mode: ns3::RealtimeSimulatorImpl::SynchronizationMode" },
-    {(char *) "SetScheduler", (PyCFunction) _wrap_PyNs3RealtimeSimulatorImpl_SetScheduler, METH_KEYWORDS|METH_VARARGS, "SetScheduler(schedulerFactory)\n\ntype: schedulerFactory: ns3::ObjectFactory" },
-    {(char *) "Remove", (PyCFunction) _wrap_PyNs3RealtimeSimulatorImpl_Remove, METH_KEYWORDS|METH_VARARGS, "Remove(ev)\n\ntype: ev: ns3::EventId const &" },
     {(char *) "Cancel", (PyCFunction) _wrap_PyNs3RealtimeSimulatorImpl_Cancel, METH_KEYWORDS|METH_VARARGS, "Cancel(ev)\n\ntype: ev: ns3::EventId const &" },
     {(char *) "Destroy", (PyCFunction) _wrap_PyNs3RealtimeSimulatorImpl_Destroy, METH_NOARGS, "Destroy()\n\n" },
-    {(char *) "IsExpired", (PyCFunction) _wrap_PyNs3RealtimeSimulatorImpl_IsExpired, METH_KEYWORDS|METH_VARARGS, "IsExpired(ev)\n\ntype: ev: ns3::EventId const &" },
-    {(char *) "Now", (PyCFunction) _wrap_PyNs3RealtimeSimulatorImpl_Now, METH_NOARGS, "Now()\n\n" },
+    {(char *) "GetContext", (PyCFunction) _wrap_PyNs3RealtimeSimulatorImpl_GetContext, METH_NOARGS, "GetContext()\n\n" },
+    {(char *) "GetDelayLeft", (PyCFunction) _wrap_PyNs3RealtimeSimulatorImpl_GetDelayLeft, METH_KEYWORDS|METH_VARARGS, "GetDelayLeft(id)\n\ntype: id: ns3::EventId const &" },
     {(char *) "GetHardLimit", (PyCFunction) _wrap_PyNs3RealtimeSimulatorImpl_GetHardLimit, METH_NOARGS, "GetHardLimit()\n\n" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3RealtimeSimulatorImpl_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "GetMaximumSimulationTime", (PyCFunction) _wrap_PyNs3RealtimeSimulatorImpl_GetMaximumSimulationTime, METH_NOARGS, "GetMaximumSimulationTime()\n\n" },
     {(char *) "GetSynchronizationMode", (PyCFunction) _wrap_PyNs3RealtimeSimulatorImpl_GetSynchronizationMode, METH_NOARGS, "GetSynchronizationMode()\n\n" },
+    {(char *) "GetSystemId", (PyCFunction) _wrap_PyNs3RealtimeSimulatorImpl_GetSystemId, METH_NOARGS, "GetSystemId()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3RealtimeSimulatorImpl_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "IsExpired", (PyCFunction) _wrap_PyNs3RealtimeSimulatorImpl_IsExpired, METH_KEYWORDS|METH_VARARGS, "IsExpired(ev)\n\ntype: ev: ns3::EventId const &" },
+    {(char *) "IsFinished", (PyCFunction) _wrap_PyNs3RealtimeSimulatorImpl_IsFinished, METH_NOARGS, "IsFinished()\n\n" },
+    {(char *) "Now", (PyCFunction) _wrap_PyNs3RealtimeSimulatorImpl_Now, METH_NOARGS, "Now()\n\n" },
+    {(char *) "RealtimeNow", (PyCFunction) _wrap_PyNs3RealtimeSimulatorImpl_RealtimeNow, METH_NOARGS, "RealtimeNow()\n\n" },
+    {(char *) "Remove", (PyCFunction) _wrap_PyNs3RealtimeSimulatorImpl_Remove, METH_KEYWORDS|METH_VARARGS, "Remove(ev)\n\ntype: ev: ns3::EventId const &" },
+    {(char *) "Run", (PyCFunction) _wrap_PyNs3RealtimeSimulatorImpl_Run, METH_NOARGS, "Run()\n\n" },
+    {(char *) "SetHardLimit", (PyCFunction) _wrap_PyNs3RealtimeSimulatorImpl_SetHardLimit, METH_KEYWORDS|METH_VARARGS, "SetHardLimit(limit)\n\ntype: limit: ns3::Time" },
+    {(char *) "SetScheduler", (PyCFunction) _wrap_PyNs3RealtimeSimulatorImpl_SetScheduler, METH_KEYWORDS|METH_VARARGS, "SetScheduler(schedulerFactory)\n\ntype: schedulerFactory: ns3::ObjectFactory" },
+    {(char *) "SetSynchronizationMode", (PyCFunction) _wrap_PyNs3RealtimeSimulatorImpl_SetSynchronizationMode, METH_KEYWORDS|METH_VARARGS, "SetSynchronizationMode(mode)\n\ntype: mode: ns3::RealtimeSimulatorImpl::SynchronizationMode" },
+    {(char *) "Stop", (PyCFunction) _wrap_PyNs3RealtimeSimulatorImpl_Stop, METH_KEYWORDS|METH_VARARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3RealtimeSimulatorImpl__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -51675,7 +51675,7 @@ PyTypeObject PyNs3RealtimeSimulatorImpl_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE,                      /* tp_flags */
     "RealtimeSimulatorImpl(arg0)\nRealtimeSimulatorImpl()",                        /* Documentation string */
     (traverseproc)PyNs3RealtimeSimulatorImpl__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3RealtimeSimulatorImpl__tp_clear,             /* tp_clear */
@@ -52112,38 +52112,6 @@ int _wrap_PyNs3StringValue__tp_init(PyNs3StringValue *self, PyObject *args, PyOb
 
 
 PyObject *
-_wrap_PyNs3StringValue_Set(PyNs3StringValue *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    const char *value = NULL;
-    Py_ssize_t value_len;
-    std::string value_std;
-    const char *keywords[] = {"value", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#", (char **) keywords, &value, &value_len)) {
-        return NULL;
-    }
-    value_std = std::string(value, value_len);
-    self->obj->Set(value_std);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3StringValue_Get(PyNs3StringValue *self)
-{
-    PyObject *py_retval;
-    std::string retval;
-    
-    retval = self->obj->Get();
-    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3StringValue_Copy(PyNs3StringValue *self)
 {
     PyObject *py_retval;
@@ -52180,25 +52148,6 @@ _wrap_PyNs3StringValue_Copy(PyNs3StringValue *self)
 
 
 PyObject *
-_wrap_PyNs3StringValue_SerializeToString(PyNs3StringValue *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    std::string retval;
-    PyNs3AttributeChecker *checker;
-    ns3::AttributeChecker *checker_ptr;
-    const char *keywords[] = {"checker", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3AttributeChecker_Type, &checker)) {
-        return NULL;
-    }
-    checker_ptr = (checker ? checker->obj : NULL);
-    retval = self->obj->SerializeToString(ns3::Ptr< ns3::AttributeChecker  > (checker_ptr));
-    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3StringValue_DeserializeFromString(PyNs3StringValue *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -52219,6 +52168,57 @@ _wrap_PyNs3StringValue_DeserializeFromString(PyNs3StringValue *self, PyObject *a
 }
 
 
+PyObject *
+_wrap_PyNs3StringValue_Get(PyNs3StringValue *self)
+{
+    PyObject *py_retval;
+    std::string retval;
+    
+    retval = self->obj->Get();
+    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3StringValue_SerializeToString(PyNs3StringValue *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    std::string retval;
+    PyNs3AttributeChecker *checker;
+    ns3::AttributeChecker *checker_ptr;
+    const char *keywords[] = {"checker", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3AttributeChecker_Type, &checker)) {
+        return NULL;
+    }
+    checker_ptr = (checker ? checker->obj : NULL);
+    retval = self->obj->SerializeToString(ns3::Ptr< ns3::AttributeChecker  > (checker_ptr));
+    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3StringValue_Set(PyNs3StringValue *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    const char *value = NULL;
+    Py_ssize_t value_len;
+    std::string value_std;
+    const char *keywords[] = {"value", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#", (char **) keywords, &value, &value_len)) {
+        return NULL;
+    }
+    value_std = std::string(value, value_len);
+    self->obj->Set(value_std);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
 static PyObject*
 _wrap_PyNs3StringValue__copy__(PyNs3StringValue *self)
 {
@@ -52233,11 +52233,11 @@ _wrap_PyNs3StringValue__copy__(PyNs3StringValue *self)
 }
 
 static PyMethodDef PyNs3StringValue_methods[] = {
-    {(char *) "Set", (PyCFunction) _wrap_PyNs3StringValue_Set, METH_KEYWORDS|METH_VARARGS, "Set(value)\n\ntype: value: std::string const &" },
-    {(char *) "Get", (PyCFunction) _wrap_PyNs3StringValue_Get, METH_NOARGS, "Get()\n\n" },
     {(char *) "Copy", (PyCFunction) _wrap_PyNs3StringValue_Copy, METH_NOARGS, "Copy()\n\n" },
-    {(char *) "SerializeToString", (PyCFunction) _wrap_PyNs3StringValue_SerializeToString, METH_KEYWORDS|METH_VARARGS, "SerializeToString(checker)\n\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
     {(char *) "DeserializeFromString", (PyCFunction) _wrap_PyNs3StringValue_DeserializeFromString, METH_KEYWORDS|METH_VARARGS, "DeserializeFromString(value, checker)\n\ntype: value: std::string\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
+    {(char *) "Get", (PyCFunction) _wrap_PyNs3StringValue_Get, METH_NOARGS, "Get()\n\n" },
+    {(char *) "SerializeToString", (PyCFunction) _wrap_PyNs3StringValue_SerializeToString, METH_KEYWORDS|METH_VARARGS, "SerializeToString(checker)\n\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
+    {(char *) "Set", (PyCFunction) _wrap_PyNs3StringValue_Set, METH_KEYWORDS|METH_VARARGS, "Set(value)\n\ntype: value: std::string const &" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3StringValue__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -52443,39 +52443,6 @@ int _wrap_PyNs3TimeValue__tp_init(PyNs3TimeValue *self, PyObject *args, PyObject
 
 
 PyObject *
-_wrap_PyNs3TimeValue_Set(PyNs3TimeValue *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Time *value;
-    const char *keywords[] = {"value", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Time_Type, &value)) {
-        return NULL;
-    }
-    self->obj->Set(*((PyNs3Time *) value)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3TimeValue_Get(PyNs3TimeValue *self)
-{
-    PyObject *py_retval;
-    PyNs3Time *py_Time;
-    
-    ns3::Time retval = self->obj->Get();
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3TimeValue_Copy(PyNs3TimeValue *self)
 {
     PyObject *py_retval;
@@ -52512,25 +52479,6 @@ _wrap_PyNs3TimeValue_Copy(PyNs3TimeValue *self)
 
 
 PyObject *
-_wrap_PyNs3TimeValue_SerializeToString(PyNs3TimeValue *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    std::string retval;
-    PyNs3AttributeChecker *checker;
-    ns3::AttributeChecker *checker_ptr;
-    const char *keywords[] = {"checker", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3AttributeChecker_Type, &checker)) {
-        return NULL;
-    }
-    checker_ptr = (checker ? checker->obj : NULL);
-    retval = self->obj->SerializeToString(ns3::Ptr< ns3::AttributeChecker  > (checker_ptr));
-    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3TimeValue_DeserializeFromString(PyNs3TimeValue *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -52551,6 +52499,58 @@ _wrap_PyNs3TimeValue_DeserializeFromString(PyNs3TimeValue *self, PyObject *args,
 }
 
 
+PyObject *
+_wrap_PyNs3TimeValue_Get(PyNs3TimeValue *self)
+{
+    PyObject *py_retval;
+    PyNs3Time *py_Time;
+    
+    ns3::Time retval = self->obj->Get();
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3TimeValue_SerializeToString(PyNs3TimeValue *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    std::string retval;
+    PyNs3AttributeChecker *checker;
+    ns3::AttributeChecker *checker_ptr;
+    const char *keywords[] = {"checker", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3AttributeChecker_Type, &checker)) {
+        return NULL;
+    }
+    checker_ptr = (checker ? checker->obj : NULL);
+    retval = self->obj->SerializeToString(ns3::Ptr< ns3::AttributeChecker  > (checker_ptr));
+    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3TimeValue_Set(PyNs3TimeValue *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Time *value;
+    const char *keywords[] = {"value", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Time_Type, &value)) {
+        return NULL;
+    }
+    self->obj->Set(*((PyNs3Time *) value)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
 static PyObject*
 _wrap_PyNs3TimeValue__copy__(PyNs3TimeValue *self)
 {
@@ -52565,11 +52565,11 @@ _wrap_PyNs3TimeValue__copy__(PyNs3TimeValue *self)
 }
 
 static PyMethodDef PyNs3TimeValue_methods[] = {
-    {(char *) "Set", (PyCFunction) _wrap_PyNs3TimeValue_Set, METH_KEYWORDS|METH_VARARGS, "Set(value)\n\ntype: value: ns3::Time const &" },
-    {(char *) "Get", (PyCFunction) _wrap_PyNs3TimeValue_Get, METH_NOARGS, "Get()\n\n" },
     {(char *) "Copy", (PyCFunction) _wrap_PyNs3TimeValue_Copy, METH_NOARGS, "Copy()\n\n" },
-    {(char *) "SerializeToString", (PyCFunction) _wrap_PyNs3TimeValue_SerializeToString, METH_KEYWORDS|METH_VARARGS, "SerializeToString(checker)\n\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
     {(char *) "DeserializeFromString", (PyCFunction) _wrap_PyNs3TimeValue_DeserializeFromString, METH_KEYWORDS|METH_VARARGS, "DeserializeFromString(value, checker)\n\ntype: value: std::string\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
+    {(char *) "Get", (PyCFunction) _wrap_PyNs3TimeValue_Get, METH_NOARGS, "Get()\n\n" },
+    {(char *) "SerializeToString", (PyCFunction) _wrap_PyNs3TimeValue_SerializeToString, METH_KEYWORDS|METH_VARARGS, "SerializeToString(checker)\n\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
+    {(char *) "Set", (PyCFunction) _wrap_PyNs3TimeValue_Set, METH_KEYWORDS|METH_VARARGS, "Set(value)\n\ntype: value: ns3::Time const &" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3TimeValue__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -52893,39 +52893,6 @@ int _wrap_PyNs3TypeIdValue__tp_init(PyNs3TypeIdValue *self, PyObject *args, PyOb
 
 
 PyObject *
-_wrap_PyNs3TypeIdValue_Set(PyNs3TypeIdValue *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *value;
-    const char *keywords[] = {"value", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3TypeId_Type, &value)) {
-        return NULL;
-    }
-    self->obj->Set(*((PyNs3TypeId *) value)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3TypeIdValue_Get(PyNs3TypeIdValue *self)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = self->obj->Get();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3TypeIdValue_Copy(PyNs3TypeIdValue *self)
 {
     PyObject *py_retval;
@@ -52962,25 +52929,6 @@ _wrap_PyNs3TypeIdValue_Copy(PyNs3TypeIdValue *self)
 
 
 PyObject *
-_wrap_PyNs3TypeIdValue_SerializeToString(PyNs3TypeIdValue *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    std::string retval;
-    PyNs3AttributeChecker *checker;
-    ns3::AttributeChecker *checker_ptr;
-    const char *keywords[] = {"checker", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3AttributeChecker_Type, &checker)) {
-        return NULL;
-    }
-    checker_ptr = (checker ? checker->obj : NULL);
-    retval = self->obj->SerializeToString(ns3::Ptr< ns3::AttributeChecker  > (checker_ptr));
-    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3TypeIdValue_DeserializeFromString(PyNs3TypeIdValue *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -53001,6 +52949,58 @@ _wrap_PyNs3TypeIdValue_DeserializeFromString(PyNs3TypeIdValue *self, PyObject *a
 }
 
 
+PyObject *
+_wrap_PyNs3TypeIdValue_Get(PyNs3TypeIdValue *self)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = self->obj->Get();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3TypeIdValue_SerializeToString(PyNs3TypeIdValue *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    std::string retval;
+    PyNs3AttributeChecker *checker;
+    ns3::AttributeChecker *checker_ptr;
+    const char *keywords[] = {"checker", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3AttributeChecker_Type, &checker)) {
+        return NULL;
+    }
+    checker_ptr = (checker ? checker->obj : NULL);
+    retval = self->obj->SerializeToString(ns3::Ptr< ns3::AttributeChecker  > (checker_ptr));
+    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3TypeIdValue_Set(PyNs3TypeIdValue *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *value;
+    const char *keywords[] = {"value", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3TypeId_Type, &value)) {
+        return NULL;
+    }
+    self->obj->Set(*((PyNs3TypeId *) value)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
 static PyObject*
 _wrap_PyNs3TypeIdValue__copy__(PyNs3TypeIdValue *self)
 {
@@ -53015,11 +53015,11 @@ _wrap_PyNs3TypeIdValue__copy__(PyNs3TypeIdValue *self)
 }
 
 static PyMethodDef PyNs3TypeIdValue_methods[] = {
-    {(char *) "Set", (PyCFunction) _wrap_PyNs3TypeIdValue_Set, METH_KEYWORDS|METH_VARARGS, "Set(value)\n\ntype: value: ns3::TypeId const &" },
-    {(char *) "Get", (PyCFunction) _wrap_PyNs3TypeIdValue_Get, METH_NOARGS, "Get()\n\n" },
     {(char *) "Copy", (PyCFunction) _wrap_PyNs3TypeIdValue_Copy, METH_NOARGS, "Copy()\n\n" },
-    {(char *) "SerializeToString", (PyCFunction) _wrap_PyNs3TypeIdValue_SerializeToString, METH_KEYWORDS|METH_VARARGS, "SerializeToString(checker)\n\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
     {(char *) "DeserializeFromString", (PyCFunction) _wrap_PyNs3TypeIdValue_DeserializeFromString, METH_KEYWORDS|METH_VARARGS, "DeserializeFromString(value, checker)\n\ntype: value: std::string\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
+    {(char *) "Get", (PyCFunction) _wrap_PyNs3TypeIdValue_Get, METH_NOARGS, "Get()\n\n" },
+    {(char *) "SerializeToString", (PyCFunction) _wrap_PyNs3TypeIdValue_SerializeToString, METH_KEYWORDS|METH_VARARGS, "SerializeToString(checker)\n\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
+    {(char *) "Set", (PyCFunction) _wrap_PyNs3TypeIdValue_Set, METH_KEYWORDS|METH_VARARGS, "Set(value)\n\ntype: value: ns3::TypeId const &" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3TypeIdValue__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -53225,35 +53225,6 @@ int _wrap_PyNs3UintegerValue__tp_init(PyNs3UintegerValue *self, PyObject *args, 
 
 
 PyObject *
-_wrap_PyNs3UintegerValue_Set(PyNs3UintegerValue *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    uint64_t value;
-    const char *keywords[] = {"value", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "K", (char **) keywords, &value)) {
-        return NULL;
-    }
-    self->obj->Set(value);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3UintegerValue_Get(PyNs3UintegerValue *self)
-{
-    PyObject *py_retval;
-    uint64_t retval;
-    
-    retval = self->obj->Get();
-    py_retval = Py_BuildValue((char *) "K", retval);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3UintegerValue_Copy(PyNs3UintegerValue *self)
 {
     PyObject *py_retval;
@@ -53290,25 +53261,6 @@ _wrap_PyNs3UintegerValue_Copy(PyNs3UintegerValue *self)
 
 
 PyObject *
-_wrap_PyNs3UintegerValue_SerializeToString(PyNs3UintegerValue *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    std::string retval;
-    PyNs3AttributeChecker *checker;
-    ns3::AttributeChecker *checker_ptr;
-    const char *keywords[] = {"checker", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3AttributeChecker_Type, &checker)) {
-        return NULL;
-    }
-    checker_ptr = (checker ? checker->obj : NULL);
-    retval = self->obj->SerializeToString(ns3::Ptr< ns3::AttributeChecker  > (checker_ptr));
-    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3UintegerValue_DeserializeFromString(PyNs3UintegerValue *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -53329,6 +53281,54 @@ _wrap_PyNs3UintegerValue_DeserializeFromString(PyNs3UintegerValue *self, PyObjec
 }
 
 
+PyObject *
+_wrap_PyNs3UintegerValue_Get(PyNs3UintegerValue *self)
+{
+    PyObject *py_retval;
+    uint64_t retval;
+    
+    retval = self->obj->Get();
+    py_retval = Py_BuildValue((char *) "K", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3UintegerValue_SerializeToString(PyNs3UintegerValue *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    std::string retval;
+    PyNs3AttributeChecker *checker;
+    ns3::AttributeChecker *checker_ptr;
+    const char *keywords[] = {"checker", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3AttributeChecker_Type, &checker)) {
+        return NULL;
+    }
+    checker_ptr = (checker ? checker->obj : NULL);
+    retval = self->obj->SerializeToString(ns3::Ptr< ns3::AttributeChecker  > (checker_ptr));
+    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3UintegerValue_Set(PyNs3UintegerValue *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    uint64_t value;
+    const char *keywords[] = {"value", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "K", (char **) keywords, &value)) {
+        return NULL;
+    }
+    self->obj->Set(value);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
 static PyObject*
 _wrap_PyNs3UintegerValue__copy__(PyNs3UintegerValue *self)
 {
@@ -53343,11 +53343,11 @@ _wrap_PyNs3UintegerValue__copy__(PyNs3UintegerValue *self)
 }
 
 static PyMethodDef PyNs3UintegerValue_methods[] = {
-    {(char *) "Set", (PyCFunction) _wrap_PyNs3UintegerValue_Set, METH_KEYWORDS|METH_VARARGS, "Set(value)\n\ntype: value: uint64_t const &" },
-    {(char *) "Get", (PyCFunction) _wrap_PyNs3UintegerValue_Get, METH_NOARGS, "Get()\n\n" },
     {(char *) "Copy", (PyCFunction) _wrap_PyNs3UintegerValue_Copy, METH_NOARGS, "Copy()\n\n" },
-    {(char *) "SerializeToString", (PyCFunction) _wrap_PyNs3UintegerValue_SerializeToString, METH_KEYWORDS|METH_VARARGS, "SerializeToString(checker)\n\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
     {(char *) "DeserializeFromString", (PyCFunction) _wrap_PyNs3UintegerValue_DeserializeFromString, METH_KEYWORDS|METH_VARARGS, "DeserializeFromString(value, checker)\n\ntype: value: std::string\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
+    {(char *) "Get", (PyCFunction) _wrap_PyNs3UintegerValue_Get, METH_NOARGS, "Get()\n\n" },
+    {(char *) "SerializeToString", (PyCFunction) _wrap_PyNs3UintegerValue_SerializeToString, METH_KEYWORDS|METH_VARARGS, "SerializeToString(checker)\n\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
+    {(char *) "Set", (PyCFunction) _wrap_PyNs3UintegerValue_Set, METH_KEYWORDS|METH_VARARGS, "Set(value)\n\ntype: value: uint64_t const &" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3UintegerValue__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -53671,39 +53671,6 @@ int _wrap_PyNs3Vector2DValue__tp_init(PyNs3Vector2DValue *self, PyObject *args, 
 
 
 PyObject *
-_wrap_PyNs3Vector2DValue_Set(PyNs3Vector2DValue *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Vector2D *value;
-    const char *keywords[] = {"value", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Vector2D_Type, &value)) {
-        return NULL;
-    }
-    self->obj->Set(*((PyNs3Vector2D *) value)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Vector2DValue_Get(PyNs3Vector2DValue *self)
-{
-    PyObject *py_retval;
-    PyNs3Vector2D *py_Vector2D;
-    
-    ns3::Vector2D retval = self->obj->Get();
-    py_Vector2D = PyObject_New(PyNs3Vector2D, &PyNs3Vector2D_Type);
-    py_Vector2D->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Vector2D->obj = new ns3::Vector2D(retval);
-    PyNs3Vector2D_wrapper_registry[(void *) py_Vector2D->obj] = (PyObject *) py_Vector2D;
-    py_retval = Py_BuildValue((char *) "N", py_Vector2D);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3Vector2DValue_Copy(PyNs3Vector2DValue *self)
 {
     PyObject *py_retval;
@@ -53740,25 +53707,6 @@ _wrap_PyNs3Vector2DValue_Copy(PyNs3Vector2DValue *self)
 
 
 PyObject *
-_wrap_PyNs3Vector2DValue_SerializeToString(PyNs3Vector2DValue *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    std::string retval;
-    PyNs3AttributeChecker *checker;
-    ns3::AttributeChecker *checker_ptr;
-    const char *keywords[] = {"checker", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3AttributeChecker_Type, &checker)) {
-        return NULL;
-    }
-    checker_ptr = (checker ? checker->obj : NULL);
-    retval = self->obj->SerializeToString(ns3::Ptr< ns3::AttributeChecker  > (checker_ptr));
-    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3Vector2DValue_DeserializeFromString(PyNs3Vector2DValue *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -53779,6 +53727,58 @@ _wrap_PyNs3Vector2DValue_DeserializeFromString(PyNs3Vector2DValue *self, PyObjec
 }
 
 
+PyObject *
+_wrap_PyNs3Vector2DValue_Get(PyNs3Vector2DValue *self)
+{
+    PyObject *py_retval;
+    PyNs3Vector2D *py_Vector2D;
+    
+    ns3::Vector2D retval = self->obj->Get();
+    py_Vector2D = PyObject_New(PyNs3Vector2D, &PyNs3Vector2D_Type);
+    py_Vector2D->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Vector2D->obj = new ns3::Vector2D(retval);
+    PyNs3Vector2D_wrapper_registry[(void *) py_Vector2D->obj] = (PyObject *) py_Vector2D;
+    py_retval = Py_BuildValue((char *) "N", py_Vector2D);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Vector2DValue_SerializeToString(PyNs3Vector2DValue *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    std::string retval;
+    PyNs3AttributeChecker *checker;
+    ns3::AttributeChecker *checker_ptr;
+    const char *keywords[] = {"checker", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3AttributeChecker_Type, &checker)) {
+        return NULL;
+    }
+    checker_ptr = (checker ? checker->obj : NULL);
+    retval = self->obj->SerializeToString(ns3::Ptr< ns3::AttributeChecker  > (checker_ptr));
+    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Vector2DValue_Set(PyNs3Vector2DValue *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Vector2D *value;
+    const char *keywords[] = {"value", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Vector2D_Type, &value)) {
+        return NULL;
+    }
+    self->obj->Set(*((PyNs3Vector2D *) value)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
 static PyObject*
 _wrap_PyNs3Vector2DValue__copy__(PyNs3Vector2DValue *self)
 {
@@ -53793,11 +53793,11 @@ _wrap_PyNs3Vector2DValue__copy__(PyNs3Vector2DValue *self)
 }
 
 static PyMethodDef PyNs3Vector2DValue_methods[] = {
-    {(char *) "Set", (PyCFunction) _wrap_PyNs3Vector2DValue_Set, METH_KEYWORDS|METH_VARARGS, "Set(value)\n\ntype: value: ns3::Vector2D const &" },
-    {(char *) "Get", (PyCFunction) _wrap_PyNs3Vector2DValue_Get, METH_NOARGS, "Get()\n\n" },
     {(char *) "Copy", (PyCFunction) _wrap_PyNs3Vector2DValue_Copy, METH_NOARGS, "Copy()\n\n" },
-    {(char *) "SerializeToString", (PyCFunction) _wrap_PyNs3Vector2DValue_SerializeToString, METH_KEYWORDS|METH_VARARGS, "SerializeToString(checker)\n\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
     {(char *) "DeserializeFromString", (PyCFunction) _wrap_PyNs3Vector2DValue_DeserializeFromString, METH_KEYWORDS|METH_VARARGS, "DeserializeFromString(value, checker)\n\ntype: value: std::string\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
+    {(char *) "Get", (PyCFunction) _wrap_PyNs3Vector2DValue_Get, METH_NOARGS, "Get()\n\n" },
+    {(char *) "SerializeToString", (PyCFunction) _wrap_PyNs3Vector2DValue_SerializeToString, METH_KEYWORDS|METH_VARARGS, "SerializeToString(checker)\n\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
+    {(char *) "Set", (PyCFunction) _wrap_PyNs3Vector2DValue_Set, METH_KEYWORDS|METH_VARARGS, "Set(value)\n\ntype: value: ns3::Vector2D const &" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3Vector2DValue__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -54121,39 +54121,6 @@ int _wrap_PyNs3Vector3DValue__tp_init(PyNs3Vector3DValue *self, PyObject *args, 
 
 
 PyObject *
-_wrap_PyNs3Vector3DValue_Set(PyNs3Vector3DValue *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Vector3D *value;
-    const char *keywords[] = {"value", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Vector3D_Type, &value)) {
-        return NULL;
-    }
-    self->obj->Set(*((PyNs3Vector3D *) value)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Vector3DValue_Get(PyNs3Vector3DValue *self)
-{
-    PyObject *py_retval;
-    PyNs3Vector3D *py_Vector3D;
-    
-    ns3::Vector3D retval = self->obj->Get();
-    py_Vector3D = PyObject_New(PyNs3Vector3D, &PyNs3Vector3D_Type);
-    py_Vector3D->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Vector3D->obj = new ns3::Vector3D(retval);
-    PyNs3Vector3D_wrapper_registry[(void *) py_Vector3D->obj] = (PyObject *) py_Vector3D;
-    py_retval = Py_BuildValue((char *) "N", py_Vector3D);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3Vector3DValue_Copy(PyNs3Vector3DValue *self)
 {
     PyObject *py_retval;
@@ -54190,25 +54157,6 @@ _wrap_PyNs3Vector3DValue_Copy(PyNs3Vector3DValue *self)
 
 
 PyObject *
-_wrap_PyNs3Vector3DValue_SerializeToString(PyNs3Vector3DValue *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    std::string retval;
-    PyNs3AttributeChecker *checker;
-    ns3::AttributeChecker *checker_ptr;
-    const char *keywords[] = {"checker", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3AttributeChecker_Type, &checker)) {
-        return NULL;
-    }
-    checker_ptr = (checker ? checker->obj : NULL);
-    retval = self->obj->SerializeToString(ns3::Ptr< ns3::AttributeChecker  > (checker_ptr));
-    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3Vector3DValue_DeserializeFromString(PyNs3Vector3DValue *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -54229,6 +54177,58 @@ _wrap_PyNs3Vector3DValue_DeserializeFromString(PyNs3Vector3DValue *self, PyObjec
 }
 
 
+PyObject *
+_wrap_PyNs3Vector3DValue_Get(PyNs3Vector3DValue *self)
+{
+    PyObject *py_retval;
+    PyNs3Vector3D *py_Vector3D;
+    
+    ns3::Vector3D retval = self->obj->Get();
+    py_Vector3D = PyObject_New(PyNs3Vector3D, &PyNs3Vector3D_Type);
+    py_Vector3D->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Vector3D->obj = new ns3::Vector3D(retval);
+    PyNs3Vector3D_wrapper_registry[(void *) py_Vector3D->obj] = (PyObject *) py_Vector3D;
+    py_retval = Py_BuildValue((char *) "N", py_Vector3D);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Vector3DValue_SerializeToString(PyNs3Vector3DValue *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    std::string retval;
+    PyNs3AttributeChecker *checker;
+    ns3::AttributeChecker *checker_ptr;
+    const char *keywords[] = {"checker", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3AttributeChecker_Type, &checker)) {
+        return NULL;
+    }
+    checker_ptr = (checker ? checker->obj : NULL);
+    retval = self->obj->SerializeToString(ns3::Ptr< ns3::AttributeChecker  > (checker_ptr));
+    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Vector3DValue_Set(PyNs3Vector3DValue *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Vector3D *value;
+    const char *keywords[] = {"value", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Vector3D_Type, &value)) {
+        return NULL;
+    }
+    self->obj->Set(*((PyNs3Vector3D *) value)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
 static PyObject*
 _wrap_PyNs3Vector3DValue__copy__(PyNs3Vector3DValue *self)
 {
@@ -54243,11 +54243,11 @@ _wrap_PyNs3Vector3DValue__copy__(PyNs3Vector3DValue *self)
 }
 
 static PyMethodDef PyNs3Vector3DValue_methods[] = {
-    {(char *) "Set", (PyCFunction) _wrap_PyNs3Vector3DValue_Set, METH_KEYWORDS|METH_VARARGS, "Set(value)\n\ntype: value: ns3::Vector3D const &" },
-    {(char *) "Get", (PyCFunction) _wrap_PyNs3Vector3DValue_Get, METH_NOARGS, "Get()\n\n" },
     {(char *) "Copy", (PyCFunction) _wrap_PyNs3Vector3DValue_Copy, METH_NOARGS, "Copy()\n\n" },
-    {(char *) "SerializeToString", (PyCFunction) _wrap_PyNs3Vector3DValue_SerializeToString, METH_KEYWORDS|METH_VARARGS, "SerializeToString(checker)\n\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
     {(char *) "DeserializeFromString", (PyCFunction) _wrap_PyNs3Vector3DValue_DeserializeFromString, METH_KEYWORDS|METH_VARARGS, "DeserializeFromString(value, checker)\n\ntype: value: std::string\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
+    {(char *) "Get", (PyCFunction) _wrap_PyNs3Vector3DValue_Get, METH_NOARGS, "Get()\n\n" },
+    {(char *) "SerializeToString", (PyCFunction) _wrap_PyNs3Vector3DValue_SerializeToString, METH_KEYWORDS|METH_VARARGS, "SerializeToString(checker)\n\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
+    {(char *) "Set", (PyCFunction) _wrap_PyNs3Vector3DValue_Set, METH_KEYWORDS|METH_VARARGS, "Set(value)\n\ntype: value: ns3::Vector3D const &" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3Vector3DValue__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -54368,24 +54368,6 @@ _wrap_PyNs3CallbackImpl__Bool_StdBasic_string__lt__char__gt___Ns3Empty_Ns3Empty_
 
 
 PyObject *
-_wrap_PyNs3CallbackImpl__Bool_StdBasic_string__lt__char__gt___Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty___call__(PyNs3CallbackImpl__Bool_StdBasic_string__lt__char__gt___Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    const char *arg0;
-    Py_ssize_t arg0_len;
-    const char *keywords[] = {"arg0", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#", (char **) keywords, &arg0, &arg0_len)) {
-        return NULL;
-    }
-    retval = self->obj->operator()(std::string(arg0, arg0_len));
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3CallbackImpl__Bool_StdBasic_string__lt__char__gt___Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_DoGetTypeid(void)
 {
     PyObject *py_retval;
@@ -54405,6 +54387,24 @@ _wrap_PyNs3CallbackImpl__Bool_StdBasic_string__lt__char__gt___Ns3Empty_Ns3Empty_
     
     retval = self->obj->GetTypeid();
     py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3CallbackImpl__Bool_StdBasic_string__lt__char__gt___Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty___call__(PyNs3CallbackImpl__Bool_StdBasic_string__lt__char__gt___Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    const char *arg0;
+    Py_ssize_t arg0_len;
+    const char *keywords[] = {"arg0", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#", (char **) keywords, &arg0, &arg0_len)) {
+        return NULL;
+    }
+    retval = self->obj->operator()(std::string(arg0, arg0_len));
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
@@ -54674,22 +54674,6 @@ _wrap_PyNs3CallbackImpl__Void_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Em
 
 
 PyObject *
-_wrap_PyNs3CallbackImpl__Void_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty___call__(PyNs3CallbackImpl__Void_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    const char *keywords[] = {NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "", (char **) keywords)) {
-        return NULL;
-    }
-    self->obj->operator()();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3CallbackImpl__Void_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_DoGetTypeid(void)
 {
     PyObject *py_retval;
@@ -54709,6 +54693,22 @@ _wrap_PyNs3CallbackImpl__Void_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Em
     
     retval = self->obj->GetTypeid();
     py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3CallbackImpl__Void_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty___call__(PyNs3CallbackImpl__Void_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty_Ns3Empty *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    const char *keywords[] = {NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "", (char **) keywords)) {
+        return NULL;
+    }
+    self->obj->operator()();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 

@@ -799,39 +799,6 @@ int _wrap_PyNs3PointToPointDumbbellHelper__tp_init(PyNs3PointToPointDumbbellHelp
 
 
 PyObject *
-_wrap_PyNs3PointToPointDumbbellHelper_LeftCount(PyNs3PointToPointDumbbellHelper *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->LeftCount();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3PointToPointDumbbellHelper_GetRightIpv4Address(PyNs3PointToPointDumbbellHelper *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int i;
-    const char *keywords[] = {"i", NULL};
-    PyNs3Ipv4Address *py_Ipv4Address;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &i)) {
-        return NULL;
-    }
-    ns3::Ipv4Address retval = self->obj->GetRightIpv4Address(i);
-    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
-    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
-    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
-    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3PointToPointDumbbellHelper_AssignIpv4Addresses(PyNs3PointToPointDumbbellHelper *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -844,6 +811,44 @@ _wrap_PyNs3PointToPointDumbbellHelper_AssignIpv4Addresses(PyNs3PointToPointDumbb
         return NULL;
     }
     self->obj->AssignIpv4Addresses(*((PyNs3Ipv4AddressHelper *) leftIp)->obj, *((PyNs3Ipv4AddressHelper *) rightIp)->obj, *((PyNs3Ipv4AddressHelper *) routerIp)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3PointToPointDumbbellHelper_AssignIpv6Addresses(PyNs3PointToPointDumbbellHelper *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Ipv6Address *network;
+    PyNs3Ipv6Prefix *prefix;
+    const char *keywords[] = {"network", "prefix", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3Ipv6Address_Type, &network, &PyNs3Ipv6Prefix_Type, &prefix)) {
+        return NULL;
+    }
+    self->obj->AssignIpv6Addresses(*((PyNs3Ipv6Address *) network)->obj, *((PyNs3Ipv6Prefix *) prefix)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3PointToPointDumbbellHelper_BoundingBox(PyNs3PointToPointDumbbellHelper *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    double ulx;
+    double uly;
+    double lrx;
+    double lry;
+    const char *keywords[] = {"ulx", "uly", "lrx", "lry", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "dddd", (char **) keywords, &ulx, &uly, &lrx, &lry)) {
+        return NULL;
+    }
+    self->obj->BoundingBox(ulx, uly, lrx, lry);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -985,6 +990,48 @@ PyObject * _wrap_PyNs3PointToPointDumbbellHelper_GetLeft(PyNs3PointToPointDumbbe
 }
 
 
+PyObject *
+_wrap_PyNs3PointToPointDumbbellHelper_GetLeftIpv4Address(PyNs3PointToPointDumbbellHelper *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int i;
+    const char *keywords[] = {"i", NULL};
+    PyNs3Ipv4Address *py_Ipv4Address;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &i)) {
+        return NULL;
+    }
+    ns3::Ipv4Address retval = self->obj->GetLeftIpv4Address(i);
+    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
+    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
+    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
+    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3PointToPointDumbbellHelper_GetLeftIpv6Address(PyNs3PointToPointDumbbellHelper *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int i;
+    const char *keywords[] = {"i", NULL};
+    PyNs3Ipv6Address *py_Ipv6Address;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &i)) {
+        return NULL;
+    }
+    ns3::Ipv6Address retval = self->obj->GetLeftIpv6Address(i);
+    py_Ipv6Address = PyObject_New(PyNs3Ipv6Address, &PyNs3Ipv6Address_Type);
+    py_Ipv6Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Ipv6Address->obj = new ns3::Ipv6Address(retval);
+    PyNs3Ipv6Address_wrapper_registry[(void *) py_Ipv6Address->obj] = (PyObject *) py_Ipv6Address;
+    py_retval = Py_BuildValue((char *) "N", py_Ipv6Address);
+    return py_retval;
+}
+
+
 
 PyObject *
 _wrap_PyNs3PointToPointDumbbellHelper_GetRight__0(PyNs3PointToPointDumbbellHelper *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
@@ -1121,6 +1168,27 @@ PyObject * _wrap_PyNs3PointToPointDumbbellHelper_GetRight(PyNs3PointToPointDumbb
 
 
 PyObject *
+_wrap_PyNs3PointToPointDumbbellHelper_GetRightIpv4Address(PyNs3PointToPointDumbbellHelper *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int i;
+    const char *keywords[] = {"i", NULL};
+    PyNs3Ipv4Address *py_Ipv4Address;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &i)) {
+        return NULL;
+    }
+    ns3::Ipv4Address retval = self->obj->GetRightIpv4Address(i);
+    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
+    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
+    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
+    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3PointToPointDumbbellHelper_GetRightIpv6Address(PyNs3PointToPointDumbbellHelper *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -1142,98 +1210,6 @@ _wrap_PyNs3PointToPointDumbbellHelper_GetRightIpv6Address(PyNs3PointToPointDumbb
 
 
 PyObject *
-_wrap_PyNs3PointToPointDumbbellHelper_GetLeftIpv4Address(PyNs3PointToPointDumbbellHelper *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int i;
-    const char *keywords[] = {"i", NULL};
-    PyNs3Ipv4Address *py_Ipv4Address;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &i)) {
-        return NULL;
-    }
-    ns3::Ipv4Address retval = self->obj->GetLeftIpv4Address(i);
-    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
-    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
-    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
-    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3PointToPointDumbbellHelper_GetLeftIpv6Address(PyNs3PointToPointDumbbellHelper *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int i;
-    const char *keywords[] = {"i", NULL};
-    PyNs3Ipv6Address *py_Ipv6Address;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &i)) {
-        return NULL;
-    }
-    ns3::Ipv6Address retval = self->obj->GetLeftIpv6Address(i);
-    py_Ipv6Address = PyObject_New(PyNs3Ipv6Address, &PyNs3Ipv6Address_Type);
-    py_Ipv6Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Ipv6Address->obj = new ns3::Ipv6Address(retval);
-    PyNs3Ipv6Address_wrapper_registry[(void *) py_Ipv6Address->obj] = (PyObject *) py_Ipv6Address;
-    py_retval = Py_BuildValue((char *) "N", py_Ipv6Address);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3PointToPointDumbbellHelper_AssignIpv6Addresses(PyNs3PointToPointDumbbellHelper *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Ipv6Address *network;
-    PyNs3Ipv6Prefix *prefix;
-    const char *keywords[] = {"network", "prefix", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3Ipv6Address_Type, &network, &PyNs3Ipv6Prefix_Type, &prefix)) {
-        return NULL;
-    }
-    self->obj->AssignIpv6Addresses(*((PyNs3Ipv6Address *) network)->obj, *((PyNs3Ipv6Prefix *) prefix)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3PointToPointDumbbellHelper_BoundingBox(PyNs3PointToPointDumbbellHelper *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    double ulx;
-    double uly;
-    double lrx;
-    double lry;
-    const char *keywords[] = {"ulx", "uly", "lrx", "lry", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "dddd", (char **) keywords, &ulx, &uly, &lrx, &lry)) {
-        return NULL;
-    }
-    self->obj->BoundingBox(ulx, uly, lrx, lry);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3PointToPointDumbbellHelper_RightCount(PyNs3PointToPointDumbbellHelper *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->RightCount();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3PointToPointDumbbellHelper_InstallStack(PyNs3PointToPointDumbbellHelper *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -1246,6 +1222,30 @@ _wrap_PyNs3PointToPointDumbbellHelper_InstallStack(PyNs3PointToPointDumbbellHelp
     self->obj->InstallStack(*((PyNs3InternetStackHelper *) stack)->obj);
     Py_INCREF(Py_None);
     py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3PointToPointDumbbellHelper_LeftCount(PyNs3PointToPointDumbbellHelper *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->LeftCount();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3PointToPointDumbbellHelper_RightCount(PyNs3PointToPointDumbbellHelper *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->RightCount();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
 
@@ -1263,18 +1263,18 @@ _wrap_PyNs3PointToPointDumbbellHelper__copy__(PyNs3PointToPointDumbbellHelper *s
 }
 
 static PyMethodDef PyNs3PointToPointDumbbellHelper_methods[] = {
-    {(char *) "LeftCount", (PyCFunction) _wrap_PyNs3PointToPointDumbbellHelper_LeftCount, METH_NOARGS, "LeftCount()\n\n" },
-    {(char *) "GetRightIpv4Address", (PyCFunction) _wrap_PyNs3PointToPointDumbbellHelper_GetRightIpv4Address, METH_KEYWORDS|METH_VARARGS, "GetRightIpv4Address(i)\n\ntype: i: uint32_t" },
     {(char *) "AssignIpv4Addresses", (PyCFunction) _wrap_PyNs3PointToPointDumbbellHelper_AssignIpv4Addresses, METH_KEYWORDS|METH_VARARGS, "AssignIpv4Addresses(leftIp, rightIp, routerIp)\n\ntype: leftIp: ns3::Ipv4AddressHelper\ntype: rightIp: ns3::Ipv4AddressHelper\ntype: routerIp: ns3::Ipv4AddressHelper" },
-    {(char *) "GetLeft", (PyCFunction) _wrap_PyNs3PointToPointDumbbellHelper_GetLeft, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "GetRight", (PyCFunction) _wrap_PyNs3PointToPointDumbbellHelper_GetRight, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "GetRightIpv6Address", (PyCFunction) _wrap_PyNs3PointToPointDumbbellHelper_GetRightIpv6Address, METH_KEYWORDS|METH_VARARGS, "GetRightIpv6Address(i)\n\ntype: i: uint32_t" },
-    {(char *) "GetLeftIpv4Address", (PyCFunction) _wrap_PyNs3PointToPointDumbbellHelper_GetLeftIpv4Address, METH_KEYWORDS|METH_VARARGS, "GetLeftIpv4Address(i)\n\ntype: i: uint32_t" },
-    {(char *) "GetLeftIpv6Address", (PyCFunction) _wrap_PyNs3PointToPointDumbbellHelper_GetLeftIpv6Address, METH_KEYWORDS|METH_VARARGS, "GetLeftIpv6Address(i)\n\ntype: i: uint32_t" },
     {(char *) "AssignIpv6Addresses", (PyCFunction) _wrap_PyNs3PointToPointDumbbellHelper_AssignIpv6Addresses, METH_KEYWORDS|METH_VARARGS, "AssignIpv6Addresses(network, prefix)\n\ntype: network: ns3::Ipv6Address\ntype: prefix: ns3::Ipv6Prefix" },
     {(char *) "BoundingBox", (PyCFunction) _wrap_PyNs3PointToPointDumbbellHelper_BoundingBox, METH_KEYWORDS|METH_VARARGS, "BoundingBox(ulx, uly, lrx, lry)\n\ntype: ulx: double\ntype: uly: double\ntype: lrx: double\ntype: lry: double" },
-    {(char *) "RightCount", (PyCFunction) _wrap_PyNs3PointToPointDumbbellHelper_RightCount, METH_NOARGS, "RightCount()\n\n" },
+    {(char *) "GetLeft", (PyCFunction) _wrap_PyNs3PointToPointDumbbellHelper_GetLeft, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "GetLeftIpv4Address", (PyCFunction) _wrap_PyNs3PointToPointDumbbellHelper_GetLeftIpv4Address, METH_KEYWORDS|METH_VARARGS, "GetLeftIpv4Address(i)\n\ntype: i: uint32_t" },
+    {(char *) "GetLeftIpv6Address", (PyCFunction) _wrap_PyNs3PointToPointDumbbellHelper_GetLeftIpv6Address, METH_KEYWORDS|METH_VARARGS, "GetLeftIpv6Address(i)\n\ntype: i: uint32_t" },
+    {(char *) "GetRight", (PyCFunction) _wrap_PyNs3PointToPointDumbbellHelper_GetRight, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "GetRightIpv4Address", (PyCFunction) _wrap_PyNs3PointToPointDumbbellHelper_GetRightIpv4Address, METH_KEYWORDS|METH_VARARGS, "GetRightIpv4Address(i)\n\ntype: i: uint32_t" },
+    {(char *) "GetRightIpv6Address", (PyCFunction) _wrap_PyNs3PointToPointDumbbellHelper_GetRightIpv6Address, METH_KEYWORDS|METH_VARARGS, "GetRightIpv6Address(i)\n\ntype: i: uint32_t" },
     {(char *) "InstallStack", (PyCFunction) _wrap_PyNs3PointToPointDumbbellHelper_InstallStack, METH_KEYWORDS|METH_VARARGS, "InstallStack(stack)\n\ntype: stack: ns3::InternetStackHelper" },
+    {(char *) "LeftCount", (PyCFunction) _wrap_PyNs3PointToPointDumbbellHelper_LeftCount, METH_NOARGS, "LeftCount()\n\n" },
+    {(char *) "RightCount", (PyCFunction) _wrap_PyNs3PointToPointDumbbellHelper_RightCount, METH_NOARGS, "RightCount()\n\n" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3PointToPointDumbbellHelper__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -1456,23 +1456,6 @@ int _wrap_PyNs3PointToPointGridHelper__tp_init(PyNs3PointToPointGridHelper *self
 
 
 PyObject *
-_wrap_PyNs3PointToPointGridHelper_InstallStack(PyNs3PointToPointGridHelper *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3InternetStackHelper *stack;
-    const char *keywords[] = {"stack", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3InternetStackHelper_Type, &stack)) {
-        return NULL;
-    }
-    self->obj->InstallStack(*((PyNs3InternetStackHelper *) stack)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3PointToPointGridHelper_AssignIpv4Addresses(PyNs3PointToPointGridHelper *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -1486,28 +1469,6 @@ _wrap_PyNs3PointToPointGridHelper_AssignIpv4Addresses(PyNs3PointToPointGridHelpe
     self->obj->AssignIpv4Addresses(*((PyNs3Ipv4AddressHelper *) rowIp)->obj, *((PyNs3Ipv4AddressHelper *) colIp)->obj);
     Py_INCREF(Py_None);
     py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3PointToPointGridHelper_GetIpv4Address(PyNs3PointToPointGridHelper *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int row;
-    unsigned int col;
-    const char *keywords[] = {"row", "col", NULL};
-    PyNs3Ipv4Address *py_Ipv4Address;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "II", (char **) keywords, &row, &col)) {
-        return NULL;
-    }
-    ns3::Ipv4Address retval = self->obj->GetIpv4Address(row, col);
-    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
-    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
-    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
-    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
     return py_retval;
 }
 
@@ -1546,6 +1507,28 @@ _wrap_PyNs3PointToPointGridHelper_BoundingBox(PyNs3PointToPointGridHelper *self,
     self->obj->BoundingBox(ulx, uly, lrx, lry);
     Py_INCREF(Py_None);
     py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3PointToPointGridHelper_GetIpv4Address(PyNs3PointToPointGridHelper *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int row;
+    unsigned int col;
+    const char *keywords[] = {"row", "col", NULL};
+    PyNs3Ipv4Address *py_Ipv4Address;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "II", (char **) keywords, &row, &col)) {
+        return NULL;
+    }
+    ns3::Ipv4Address retval = self->obj->GetIpv4Address(row, col);
+    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
+    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
+    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
+    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
     return py_retval;
 }
 
@@ -1623,6 +1606,23 @@ _wrap_PyNs3PointToPointGridHelper_GetNode(PyNs3PointToPointGridHelper *self, PyO
 }
 
 
+PyObject *
+_wrap_PyNs3PointToPointGridHelper_InstallStack(PyNs3PointToPointGridHelper *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3InternetStackHelper *stack;
+    const char *keywords[] = {"stack", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3InternetStackHelper_Type, &stack)) {
+        return NULL;
+    }
+    self->obj->InstallStack(*((PyNs3InternetStackHelper *) stack)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
 static PyObject*
 _wrap_PyNs3PointToPointGridHelper__copy__(PyNs3PointToPointGridHelper *self)
 {
@@ -1636,13 +1636,13 @@ _wrap_PyNs3PointToPointGridHelper__copy__(PyNs3PointToPointGridHelper *self)
 }
 
 static PyMethodDef PyNs3PointToPointGridHelper_methods[] = {
-    {(char *) "InstallStack", (PyCFunction) _wrap_PyNs3PointToPointGridHelper_InstallStack, METH_KEYWORDS|METH_VARARGS, "InstallStack(stack)\n\ntype: stack: ns3::InternetStackHelper" },
     {(char *) "AssignIpv4Addresses", (PyCFunction) _wrap_PyNs3PointToPointGridHelper_AssignIpv4Addresses, METH_KEYWORDS|METH_VARARGS, "AssignIpv4Addresses(rowIp, colIp)\n\ntype: rowIp: ns3::Ipv4AddressHelper\ntype: colIp: ns3::Ipv4AddressHelper" },
-    {(char *) "GetIpv4Address", (PyCFunction) _wrap_PyNs3PointToPointGridHelper_GetIpv4Address, METH_KEYWORDS|METH_VARARGS, "GetIpv4Address(row, col)\n\ntype: row: uint32_t\ntype: col: uint32_t" },
     {(char *) "AssignIpv6Addresses", (PyCFunction) _wrap_PyNs3PointToPointGridHelper_AssignIpv6Addresses, METH_KEYWORDS|METH_VARARGS, "AssignIpv6Addresses(network, prefix)\n\ntype: network: ns3::Ipv6Address\ntype: prefix: ns3::Ipv6Prefix" },
     {(char *) "BoundingBox", (PyCFunction) _wrap_PyNs3PointToPointGridHelper_BoundingBox, METH_KEYWORDS|METH_VARARGS, "BoundingBox(ulx, uly, lrx, lry)\n\ntype: ulx: double\ntype: uly: double\ntype: lrx: double\ntype: lry: double" },
+    {(char *) "GetIpv4Address", (PyCFunction) _wrap_PyNs3PointToPointGridHelper_GetIpv4Address, METH_KEYWORDS|METH_VARARGS, "GetIpv4Address(row, col)\n\ntype: row: uint32_t\ntype: col: uint32_t" },
     {(char *) "GetIpv6Address", (PyCFunction) _wrap_PyNs3PointToPointGridHelper_GetIpv6Address, METH_KEYWORDS|METH_VARARGS, "GetIpv6Address(row, col)\n\ntype: row: uint32_t\ntype: col: uint32_t" },
     {(char *) "GetNode", (PyCFunction) _wrap_PyNs3PointToPointGridHelper_GetNode, METH_KEYWORDS|METH_VARARGS, "GetNode(row, col)\n\ntype: row: uint32_t\ntype: col: uint32_t" },
+    {(char *) "InstallStack", (PyCFunction) _wrap_PyNs3PointToPointGridHelper_InstallStack, METH_KEYWORDS|METH_VARARGS, "InstallStack(stack)\n\ntype: stack: ns3::InternetStackHelper" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3PointToPointGridHelper__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -1823,48 +1823,6 @@ int _wrap_PyNs3PointToPointStarHelper__tp_init(PyNs3PointToPointStarHelper *self
 
 
 PyObject *
-_wrap_PyNs3PointToPointStarHelper_GetHubIpv6Address(PyNs3PointToPointStarHelper *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int i;
-    const char *keywords[] = {"i", NULL};
-    PyNs3Ipv6Address *py_Ipv6Address;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &i)) {
-        return NULL;
-    }
-    ns3::Ipv6Address retval = self->obj->GetHubIpv6Address(i);
-    py_Ipv6Address = PyObject_New(PyNs3Ipv6Address, &PyNs3Ipv6Address_Type);
-    py_Ipv6Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Ipv6Address->obj = new ns3::Ipv6Address(retval);
-    PyNs3Ipv6Address_wrapper_registry[(void *) py_Ipv6Address->obj] = (PyObject *) py_Ipv6Address;
-    py_retval = Py_BuildValue((char *) "N", py_Ipv6Address);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3PointToPointStarHelper_GetSpokeIpv4Address(PyNs3PointToPointStarHelper *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int i;
-    const char *keywords[] = {"i", NULL};
-    PyNs3Ipv4Address *py_Ipv4Address;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &i)) {
-        return NULL;
-    }
-    ns3::Ipv4Address retval = self->obj->GetSpokeIpv4Address(i);
-    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
-    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
-    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
-    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3PointToPointStarHelper_AssignIpv4Addresses(PyNs3PointToPointStarHelper *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -1882,22 +1840,39 @@ _wrap_PyNs3PointToPointStarHelper_AssignIpv4Addresses(PyNs3PointToPointStarHelpe
 
 
 PyObject *
-_wrap_PyNs3PointToPointStarHelper_GetHubIpv4Address(PyNs3PointToPointStarHelper *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3PointToPointStarHelper_AssignIpv6Addresses(PyNs3PointToPointStarHelper *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    unsigned int i;
-    const char *keywords[] = {"i", NULL};
-    PyNs3Ipv4Address *py_Ipv4Address;
+    PyNs3Ipv6Address *network;
+    PyNs3Ipv6Prefix *prefix;
+    const char *keywords[] = {"network", "prefix", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &i)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3Ipv6Address_Type, &network, &PyNs3Ipv6Prefix_Type, &prefix)) {
         return NULL;
     }
-    ns3::Ipv4Address retval = self->obj->GetHubIpv4Address(i);
-    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
-    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
-    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
-    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
+    self->obj->AssignIpv6Addresses(*((PyNs3Ipv6Address *) network)->obj, *((PyNs3Ipv6Prefix *) prefix)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3PointToPointStarHelper_BoundingBox(PyNs3PointToPointStarHelper *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    double ulx;
+    double uly;
+    double lrx;
+    double lry;
+    const char *keywords[] = {"ulx", "uly", "lrx", "lry", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "dddd", (char **) keywords, &ulx, &uly, &lrx, &lry)) {
+        return NULL;
+    }
+    self->obj->BoundingBox(ulx, uly, lrx, lry);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -1948,39 +1923,64 @@ _wrap_PyNs3PointToPointStarHelper_GetHub(PyNs3PointToPointStarHelper *self)
 
 
 PyObject *
-_wrap_PyNs3PointToPointStarHelper_AssignIpv6Addresses(PyNs3PointToPointStarHelper *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3PointToPointStarHelper_GetHubIpv4Address(PyNs3PointToPointStarHelper *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3Ipv6Address *network;
-    PyNs3Ipv6Prefix *prefix;
-    const char *keywords[] = {"network", "prefix", NULL};
+    unsigned int i;
+    const char *keywords[] = {"i", NULL};
+    PyNs3Ipv4Address *py_Ipv4Address;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3Ipv6Address_Type, &network, &PyNs3Ipv6Prefix_Type, &prefix)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &i)) {
         return NULL;
     }
-    self->obj->AssignIpv6Addresses(*((PyNs3Ipv6Address *) network)->obj, *((PyNs3Ipv6Prefix *) prefix)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    ns3::Ipv4Address retval = self->obj->GetHubIpv4Address(i);
+    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
+    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
+    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
+    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3PointToPointStarHelper_BoundingBox(PyNs3PointToPointStarHelper *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3PointToPointStarHelper_GetHubIpv6Address(PyNs3PointToPointStarHelper *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    double ulx;
-    double uly;
-    double lrx;
-    double lry;
-    const char *keywords[] = {"ulx", "uly", "lrx", "lry", NULL};
+    unsigned int i;
+    const char *keywords[] = {"i", NULL};
+    PyNs3Ipv6Address *py_Ipv6Address;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "dddd", (char **) keywords, &ulx, &uly, &lrx, &lry)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &i)) {
         return NULL;
     }
-    self->obj->BoundingBox(ulx, uly, lrx, lry);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    ns3::Ipv6Address retval = self->obj->GetHubIpv6Address(i);
+    py_Ipv6Address = PyObject_New(PyNs3Ipv6Address, &PyNs3Ipv6Address_Type);
+    py_Ipv6Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Ipv6Address->obj = new ns3::Ipv6Address(retval);
+    PyNs3Ipv6Address_wrapper_registry[(void *) py_Ipv6Address->obj] = (PyObject *) py_Ipv6Address;
+    py_retval = Py_BuildValue((char *) "N", py_Ipv6Address);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3PointToPointStarHelper_GetSpokeIpv4Address(PyNs3PointToPointStarHelper *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int i;
+    const char *keywords[] = {"i", NULL};
+    PyNs3Ipv4Address *py_Ipv4Address;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &i)) {
+        return NULL;
+    }
+    ns3::Ipv4Address retval = self->obj->GetSpokeIpv4Address(i);
+    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
+    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
+    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
+    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
     return py_retval;
 }
 
@@ -2002,23 +2002,6 @@ _wrap_PyNs3PointToPointStarHelper_GetSpokeIpv6Address(PyNs3PointToPointStarHelpe
     py_Ipv6Address->obj = new ns3::Ipv6Address(retval);
     PyNs3Ipv6Address_wrapper_registry[(void *) py_Ipv6Address->obj] = (PyObject *) py_Ipv6Address;
     py_retval = Py_BuildValue((char *) "N", py_Ipv6Address);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3PointToPointStarHelper_InstallStack(PyNs3PointToPointStarHelper *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3InternetStackHelper *stack;
-    const char *keywords[] = {"stack", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3InternetStackHelper_Type, &stack)) {
-        return NULL;
-    }
-    self->obj->InstallStack(*((PyNs3InternetStackHelper *) stack)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
     return py_retval;
 }
 
@@ -2074,6 +2057,23 @@ _wrap_PyNs3PointToPointStarHelper_GetSpokeNode(PyNs3PointToPointStarHelper *self
 
 
 PyObject *
+_wrap_PyNs3PointToPointStarHelper_InstallStack(PyNs3PointToPointStarHelper *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3InternetStackHelper *stack;
+    const char *keywords[] = {"stack", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3InternetStackHelper_Type, &stack)) {
+        return NULL;
+    }
+    self->obj->InstallStack(*((PyNs3InternetStackHelper *) stack)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3PointToPointStarHelper_SpokeCount(PyNs3PointToPointStarHelper *self)
 {
     PyObject *py_retval;
@@ -2098,16 +2098,16 @@ _wrap_PyNs3PointToPointStarHelper__copy__(PyNs3PointToPointStarHelper *self)
 }
 
 static PyMethodDef PyNs3PointToPointStarHelper_methods[] = {
-    {(char *) "GetHubIpv6Address", (PyCFunction) _wrap_PyNs3PointToPointStarHelper_GetHubIpv6Address, METH_KEYWORDS|METH_VARARGS, "GetHubIpv6Address(i)\n\ntype: i: uint32_t" },
-    {(char *) "GetSpokeIpv4Address", (PyCFunction) _wrap_PyNs3PointToPointStarHelper_GetSpokeIpv4Address, METH_KEYWORDS|METH_VARARGS, "GetSpokeIpv4Address(i)\n\ntype: i: uint32_t" },
     {(char *) "AssignIpv4Addresses", (PyCFunction) _wrap_PyNs3PointToPointStarHelper_AssignIpv4Addresses, METH_KEYWORDS|METH_VARARGS, "AssignIpv4Addresses(address)\n\ntype: address: ns3::Ipv4AddressHelper" },
-    {(char *) "GetHubIpv4Address", (PyCFunction) _wrap_PyNs3PointToPointStarHelper_GetHubIpv4Address, METH_KEYWORDS|METH_VARARGS, "GetHubIpv4Address(i)\n\ntype: i: uint32_t" },
-    {(char *) "GetHub", (PyCFunction) _wrap_PyNs3PointToPointStarHelper_GetHub, METH_NOARGS, "GetHub()\n\n" },
     {(char *) "AssignIpv6Addresses", (PyCFunction) _wrap_PyNs3PointToPointStarHelper_AssignIpv6Addresses, METH_KEYWORDS|METH_VARARGS, "AssignIpv6Addresses(network, prefix)\n\ntype: network: ns3::Ipv6Address\ntype: prefix: ns3::Ipv6Prefix" },
     {(char *) "BoundingBox", (PyCFunction) _wrap_PyNs3PointToPointStarHelper_BoundingBox, METH_KEYWORDS|METH_VARARGS, "BoundingBox(ulx, uly, lrx, lry)\n\ntype: ulx: double\ntype: uly: double\ntype: lrx: double\ntype: lry: double" },
+    {(char *) "GetHub", (PyCFunction) _wrap_PyNs3PointToPointStarHelper_GetHub, METH_NOARGS, "GetHub()\n\n" },
+    {(char *) "GetHubIpv4Address", (PyCFunction) _wrap_PyNs3PointToPointStarHelper_GetHubIpv4Address, METH_KEYWORDS|METH_VARARGS, "GetHubIpv4Address(i)\n\ntype: i: uint32_t" },
+    {(char *) "GetHubIpv6Address", (PyCFunction) _wrap_PyNs3PointToPointStarHelper_GetHubIpv6Address, METH_KEYWORDS|METH_VARARGS, "GetHubIpv6Address(i)\n\ntype: i: uint32_t" },
+    {(char *) "GetSpokeIpv4Address", (PyCFunction) _wrap_PyNs3PointToPointStarHelper_GetSpokeIpv4Address, METH_KEYWORDS|METH_VARARGS, "GetSpokeIpv4Address(i)\n\ntype: i: uint32_t" },
     {(char *) "GetSpokeIpv6Address", (PyCFunction) _wrap_PyNs3PointToPointStarHelper_GetSpokeIpv6Address, METH_KEYWORDS|METH_VARARGS, "GetSpokeIpv6Address(i)\n\ntype: i: uint32_t" },
-    {(char *) "InstallStack", (PyCFunction) _wrap_PyNs3PointToPointStarHelper_InstallStack, METH_KEYWORDS|METH_VARARGS, "InstallStack(stack)\n\ntype: stack: ns3::InternetStackHelper" },
     {(char *) "GetSpokeNode", (PyCFunction) _wrap_PyNs3PointToPointStarHelper_GetSpokeNode, METH_KEYWORDS|METH_VARARGS, "GetSpokeNode(i)\n\ntype: i: uint32_t" },
+    {(char *) "InstallStack", (PyCFunction) _wrap_PyNs3PointToPointStarHelper_InstallStack, METH_KEYWORDS|METH_VARARGS, "InstallStack(stack)\n\ntype: stack: ns3::InternetStackHelper" },
     {(char *) "SpokeCount", (PyCFunction) _wrap_PyNs3PointToPointStarHelper_SpokeCount, METH_NOARGS, "SpokeCount()\n\n" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3PointToPointStarHelper__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}

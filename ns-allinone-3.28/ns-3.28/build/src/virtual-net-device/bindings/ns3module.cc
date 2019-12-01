@@ -552,6 +552,62 @@ int _wrap_PyNs3VirtualNetDevice__tp_init(PyNs3VirtualNetDevice *self, PyObject *
 }
 
 
+PyObject *
+_wrap_PyNs3VirtualNetDevice_GetAddress(PyNs3VirtualNetDevice *self)
+{
+    PyObject *py_retval;
+    PyNs3Address *py_Address;
+    
+    ns3::Address retval = self->obj->GetAddress();
+    py_Address = PyObject_New(PyNs3Address, &PyNs3Address_Type);
+    py_Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Address->obj = new ns3::Address(retval);
+    PyNs3Address_wrapper_registry[(void *) py_Address->obj] = (PyObject *) py_Address;
+    py_retval = Py_BuildValue((char *) "N", py_Address);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3VirtualNetDevice_GetBroadcast(PyNs3VirtualNetDevice *self)
+{
+    PyObject *py_retval;
+    PyNs3Address *py_Address;
+    
+    ns3::Address retval = self->obj->GetBroadcast();
+    py_Address = PyObject_New(PyNs3Address, &PyNs3Address_Type);
+    py_Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Address->obj = new ns3::Address(retval);
+    PyNs3Address_wrapper_registry[(void *) py_Address->obj] = (PyObject *) py_Address;
+    py_retval = Py_BuildValue((char *) "N", py_Address);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3VirtualNetDevice_GetIfIndex(PyNs3VirtualNetDevice *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetIfIndex();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3VirtualNetDevice_GetMtu(PyNs3VirtualNetDevice *self)
+{
+    PyObject *py_retval;
+    uint16_t retval;
+    
+    retval = self->obj->GetMtu();
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
 
 PyObject *
 _wrap_PyNs3VirtualNetDevice_GetMulticast__0(PyNs3VirtualNetDevice *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
@@ -631,122 +687,6 @@ PyObject * _wrap_PyNs3VirtualNetDevice_GetMulticast(PyNs3VirtualNetDevice *self,
 
 
 PyObject *
-_wrap_PyNs3VirtualNetDevice_IsPointToPoint(PyNs3VirtualNetDevice *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->IsPointToPoint();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3VirtualNetDevice_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::VirtualNetDevice::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3VirtualNetDevice_Send(PyNs3VirtualNetDevice *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3Packet *packet;
-    ns3::Packet *packet_ptr;
-    PyObject *dest;
-    ns3::Address dest2;
-    int protocolNumber;
-    const char *keywords[] = {"packet", "dest", "protocolNumber", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!Oi", (char **) keywords, &PyNs3Packet_Type, &packet, &dest, &protocolNumber)) {
-        return NULL;
-    }
-    packet_ptr = (packet ? packet->obj : NULL);
-    if (PyObject_IsInstance(dest, (PyObject*) &PyNs3Address_Type)) {
-        dest2 = *((PyNs3Address *) dest)->obj;
-    } else if (PyObject_IsInstance(dest, (PyObject*) &PyNs3Ipv4Address_Type)) {
-        dest2 = *((PyNs3Ipv4Address *) dest)->obj;
-    } else if (PyObject_IsInstance(dest, (PyObject*) &PyNs3Ipv6Address_Type)) {
-        dest2 = *((PyNs3Ipv6Address *) dest)->obj;
-    } else if (PyObject_IsInstance(dest, (PyObject*) &PyNs3Mac48Address_Type)) {
-        dest2 = *((PyNs3Mac48Address *) dest)->obj;
-    } else if (PyObject_IsInstance(dest, (PyObject*) &PyNs3Mac8Address_Type)) {
-        dest2 = *((PyNs3Mac8Address *) dest)->obj;
-    } else {
-    
-        PyErr_Format(PyExc_TypeError, "parameter must an instance of one of the types (Address, Ipv4Address, Ipv6Address, Mac48Address, Mac8Address), not %s", Py_TYPE(dest)->tp_name);
-        return NULL;
-    }
-    if (protocolNumber > 0xffff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    retval = self->obj->Send(ns3::Ptr< ns3::Packet  > (packet_ptr), dest2, protocolNumber);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3VirtualNetDevice_GetIfIndex(PyNs3VirtualNetDevice *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetIfIndex();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3VirtualNetDevice_NeedsArp(PyNs3VirtualNetDevice *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->NeedsArp();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3VirtualNetDevice_SetPromiscReceiveCallback(PyNs3VirtualNetDevice *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyObject *cb;
-    ns3::Ptr<PythonCallbackImpl2> cb_cb_impl;
-    const char *keywords[] = {"cb", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &cb)) {
-        return NULL;
-    }
-    if (!PyCallable_Check(cb)) {
-        PyErr_SetString(PyExc_TypeError, "parameter 'cb' must be callbale");
-        return NULL;
-    }
-    cb_cb_impl = ns3::Create<PythonCallbackImpl2> (cb);
-    self->obj->SetPromiscReceiveCallback(ns3::Callback<bool, ns3::Ptr<ns3::NetDevice>, ns3::Ptr<const ns3::Packet>, unsigned short, const ns3::Address &, const ns3::Address &, ns3::NetDevice::PacketType, ns3::empty, ns3::empty, ns3::empty> (cb_cb_impl));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3VirtualNetDevice_GetNode(PyNs3VirtualNetDevice *self)
 {
     PyObject *py_retval;
@@ -792,58 +732,28 @@ _wrap_PyNs3VirtualNetDevice_GetNode(PyNs3VirtualNetDevice *self)
 
 
 PyObject *
-_wrap_PyNs3VirtualNetDevice_SendFrom(PyNs3VirtualNetDevice *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3VirtualNetDevice_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::VirtualNetDevice::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3VirtualNetDevice_IsBridge(PyNs3VirtualNetDevice *self)
 {
     PyObject *py_retval;
     bool retval;
-    PyNs3Packet *packet;
-    ns3::Packet *packet_ptr;
-    PyObject *source;
-    ns3::Address source2;
-    PyObject *dest;
-    ns3::Address dest2;
-    int protocolNumber;
-    const char *keywords[] = {"packet", "source", "dest", "protocolNumber", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!OOi", (char **) keywords, &PyNs3Packet_Type, &packet, &source, &dest, &protocolNumber)) {
-        return NULL;
-    }
-    packet_ptr = (packet ? packet->obj : NULL);
-    if (PyObject_IsInstance(source, (PyObject*) &PyNs3Address_Type)) {
-        source2 = *((PyNs3Address *) source)->obj;
-    } else if (PyObject_IsInstance(source, (PyObject*) &PyNs3Ipv4Address_Type)) {
-        source2 = *((PyNs3Ipv4Address *) source)->obj;
-    } else if (PyObject_IsInstance(source, (PyObject*) &PyNs3Ipv6Address_Type)) {
-        source2 = *((PyNs3Ipv6Address *) source)->obj;
-    } else if (PyObject_IsInstance(source, (PyObject*) &PyNs3Mac48Address_Type)) {
-        source2 = *((PyNs3Mac48Address *) source)->obj;
-    } else if (PyObject_IsInstance(source, (PyObject*) &PyNs3Mac8Address_Type)) {
-        source2 = *((PyNs3Mac8Address *) source)->obj;
-    } else {
-    
-        PyErr_Format(PyExc_TypeError, "parameter must an instance of one of the types (Address, Ipv4Address, Ipv6Address, Mac48Address, Mac8Address), not %s", Py_TYPE(source)->tp_name);
-        return NULL;
-    }
-    if (PyObject_IsInstance(dest, (PyObject*) &PyNs3Address_Type)) {
-        dest2 = *((PyNs3Address *) dest)->obj;
-    } else if (PyObject_IsInstance(dest, (PyObject*) &PyNs3Ipv4Address_Type)) {
-        dest2 = *((PyNs3Ipv4Address *) dest)->obj;
-    } else if (PyObject_IsInstance(dest, (PyObject*) &PyNs3Ipv6Address_Type)) {
-        dest2 = *((PyNs3Ipv6Address *) dest)->obj;
-    } else if (PyObject_IsInstance(dest, (PyObject*) &PyNs3Mac48Address_Type)) {
-        dest2 = *((PyNs3Mac48Address *) dest)->obj;
-    } else if (PyObject_IsInstance(dest, (PyObject*) &PyNs3Mac8Address_Type)) {
-        dest2 = *((PyNs3Mac8Address *) dest)->obj;
-    } else {
-    
-        PyErr_Format(PyExc_TypeError, "parameter must an instance of one of the types (Address, Ipv4Address, Ipv6Address, Mac48Address, Mac8Address), not %s", Py_TYPE(dest)->tp_name);
-        return NULL;
-    }
-    if (protocolNumber > 0xffff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    retval = self->obj->SendFrom(ns3::Ptr< ns3::Packet  > (packet_ptr), source2, dest2, protocolNumber);
+    retval = self->obj->IsBridge();
     py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
@@ -862,63 +772,49 @@ _wrap_PyNs3VirtualNetDevice_IsBroadcast(PyNs3VirtualNetDevice *self)
 
 
 PyObject *
-_wrap_PyNs3VirtualNetDevice_SetSupportsSendFrom(PyNs3VirtualNetDevice *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool supportsSendFrom;
-    PyObject *py_supportsSendFrom;
-    const char *keywords[] = {"supportsSendFrom", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &py_supportsSendFrom)) {
-        return NULL;
-    }
-    supportsSendFrom = (bool) PyObject_IsTrue(py_supportsSendFrom);
-    self->obj->SetSupportsSendFrom(supportsSendFrom);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3VirtualNetDevice_GetMtu(PyNs3VirtualNetDevice *self)
-{
-    PyObject *py_retval;
-    uint16_t retval;
-    
-    retval = self->obj->GetMtu();
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3VirtualNetDevice_IsBridge(PyNs3VirtualNetDevice *self)
+_wrap_PyNs3VirtualNetDevice_IsLinkUp(PyNs3VirtualNetDevice *self)
 {
     PyObject *py_retval;
     bool retval;
     
-    retval = self->obj->IsBridge();
+    retval = self->obj->IsLinkUp();
     py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3VirtualNetDevice_SetNode(PyNs3VirtualNetDevice *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3VirtualNetDevice_IsMulticast(PyNs3VirtualNetDevice *self)
 {
     PyObject *py_retval;
-    PyNs3Node *node;
-    ns3::Node *node_ptr;
-    const char *keywords[] = {"node", NULL};
+    bool retval;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Node_Type, &node)) {
-        return NULL;
-    }
-    node_ptr = (node ? node->obj : NULL);
-    self->obj->SetNode(ns3::Ptr< ns3::Node  > (node_ptr));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    retval = self->obj->IsMulticast();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3VirtualNetDevice_IsPointToPoint(PyNs3VirtualNetDevice *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->IsPointToPoint();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3VirtualNetDevice_NeedsArp(PyNs3VirtualNetDevice *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->NeedsArp();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
@@ -983,69 +879,100 @@ _wrap_PyNs3VirtualNetDevice_Receive(PyNs3VirtualNetDevice *self, PyObject *args,
 
 
 PyObject *
-_wrap_PyNs3VirtualNetDevice_GetAddress(PyNs3VirtualNetDevice *self)
-{
-    PyObject *py_retval;
-    PyNs3Address *py_Address;
-    
-    ns3::Address retval = self->obj->GetAddress();
-    py_Address = PyObject_New(PyNs3Address, &PyNs3Address_Type);
-    py_Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Address->obj = new ns3::Address(retval);
-    PyNs3Address_wrapper_registry[(void *) py_Address->obj] = (PyObject *) py_Address;
-    py_retval = Py_BuildValue((char *) "N", py_Address);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3VirtualNetDevice_IsLinkUp(PyNs3VirtualNetDevice *self)
+_wrap_PyNs3VirtualNetDevice_Send(PyNs3VirtualNetDevice *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
     bool retval;
+    PyNs3Packet *packet;
+    ns3::Packet *packet_ptr;
+    PyObject *dest;
+    ns3::Address dest2;
+    int protocolNumber;
+    const char *keywords[] = {"packet", "dest", "protocolNumber", NULL};
     
-    retval = self->obj->IsLinkUp();
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!Oi", (char **) keywords, &PyNs3Packet_Type, &packet, &dest, &protocolNumber)) {
+        return NULL;
+    }
+    packet_ptr = (packet ? packet->obj : NULL);
+    if (PyObject_IsInstance(dest, (PyObject*) &PyNs3Address_Type)) {
+        dest2 = *((PyNs3Address *) dest)->obj;
+    } else if (PyObject_IsInstance(dest, (PyObject*) &PyNs3Ipv4Address_Type)) {
+        dest2 = *((PyNs3Ipv4Address *) dest)->obj;
+    } else if (PyObject_IsInstance(dest, (PyObject*) &PyNs3Ipv6Address_Type)) {
+        dest2 = *((PyNs3Ipv6Address *) dest)->obj;
+    } else if (PyObject_IsInstance(dest, (PyObject*) &PyNs3Mac48Address_Type)) {
+        dest2 = *((PyNs3Mac48Address *) dest)->obj;
+    } else if (PyObject_IsInstance(dest, (PyObject*) &PyNs3Mac8Address_Type)) {
+        dest2 = *((PyNs3Mac8Address *) dest)->obj;
+    } else {
+    
+        PyErr_Format(PyExc_TypeError, "parameter must an instance of one of the types (Address, Ipv4Address, Ipv6Address, Mac48Address, Mac8Address), not %s", Py_TYPE(dest)->tp_name);
+        return NULL;
+    }
+    if (protocolNumber > 0xffff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    retval = self->obj->Send(ns3::Ptr< ns3::Packet  > (packet_ptr), dest2, protocolNumber);
     py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3VirtualNetDevice_SetSendCallback(PyNs3VirtualNetDevice *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3VirtualNetDevice_SendFrom(PyNs3VirtualNetDevice *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyObject *transmitCb;
-    ns3::Ptr<PythonCallbackImpl5> transmitCb_cb_impl;
-    const char *keywords[] = {"transmitCb", NULL};
+    bool retval;
+    PyNs3Packet *packet;
+    ns3::Packet *packet_ptr;
+    PyObject *source;
+    ns3::Address source2;
+    PyObject *dest;
+    ns3::Address dest2;
+    int protocolNumber;
+    const char *keywords[] = {"packet", "source", "dest", "protocolNumber", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &transmitCb)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!OOi", (char **) keywords, &PyNs3Packet_Type, &packet, &source, &dest, &protocolNumber)) {
         return NULL;
     }
-    if (!PyCallable_Check(transmitCb)) {
-        PyErr_SetString(PyExc_TypeError, "parameter 'transmitCb' must be callbale");
-        return NULL;
-    }
-    transmitCb_cb_impl = ns3::Create<PythonCallbackImpl5> (transmitCb);
-    self->obj->SetSendCallback(ns3::Callback<bool, ns3::Ptr<ns3::Packet>, const ns3::Address &, const ns3::Address &, unsigned short, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty> (transmitCb_cb_impl));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3VirtualNetDevice_SetIfIndex(PyNs3VirtualNetDevice *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int index;
-    const char *keywords[] = {"index", NULL};
+    packet_ptr = (packet ? packet->obj : NULL);
+    if (PyObject_IsInstance(source, (PyObject*) &PyNs3Address_Type)) {
+        source2 = *((PyNs3Address *) source)->obj;
+    } else if (PyObject_IsInstance(source, (PyObject*) &PyNs3Ipv4Address_Type)) {
+        source2 = *((PyNs3Ipv4Address *) source)->obj;
+    } else if (PyObject_IsInstance(source, (PyObject*) &PyNs3Ipv6Address_Type)) {
+        source2 = *((PyNs3Ipv6Address *) source)->obj;
+    } else if (PyObject_IsInstance(source, (PyObject*) &PyNs3Mac48Address_Type)) {
+        source2 = *((PyNs3Mac48Address *) source)->obj;
+    } else if (PyObject_IsInstance(source, (PyObject*) &PyNs3Mac8Address_Type)) {
+        source2 = *((PyNs3Mac8Address *) source)->obj;
+    } else {
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &index)) {
+        PyErr_Format(PyExc_TypeError, "parameter must an instance of one of the types (Address, Ipv4Address, Ipv6Address, Mac48Address, Mac8Address), not %s", Py_TYPE(source)->tp_name);
         return NULL;
     }
-    self->obj->SetIfIndex(index);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    if (PyObject_IsInstance(dest, (PyObject*) &PyNs3Address_Type)) {
+        dest2 = *((PyNs3Address *) dest)->obj;
+    } else if (PyObject_IsInstance(dest, (PyObject*) &PyNs3Ipv4Address_Type)) {
+        dest2 = *((PyNs3Ipv4Address *) dest)->obj;
+    } else if (PyObject_IsInstance(dest, (PyObject*) &PyNs3Ipv6Address_Type)) {
+        dest2 = *((PyNs3Ipv6Address *) dest)->obj;
+    } else if (PyObject_IsInstance(dest, (PyObject*) &PyNs3Mac48Address_Type)) {
+        dest2 = *((PyNs3Mac48Address *) dest)->obj;
+    } else if (PyObject_IsInstance(dest, (PyObject*) &PyNs3Mac8Address_Type)) {
+        dest2 = *((PyNs3Mac8Address *) dest)->obj;
+    } else {
+    
+        PyErr_Format(PyExc_TypeError, "parameter must an instance of one of the types (Address, Ipv4Address, Ipv6Address, Mac48Address, Mac8Address), not %s", Py_TYPE(dest)->tp_name);
+        return NULL;
+    }
+    if (protocolNumber > 0xffff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    retval = self->obj->SendFrom(ns3::Ptr< ns3::Packet  > (packet_ptr), source2, dest2, protocolNumber);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
@@ -1084,17 +1011,119 @@ _wrap_PyNs3VirtualNetDevice_SetAddress(PyNs3VirtualNetDevice *self, PyObject *ar
 
 
 PyObject *
-_wrap_PyNs3VirtualNetDevice_GetBroadcast(PyNs3VirtualNetDevice *self)
+_wrap_PyNs3VirtualNetDevice_SetIfIndex(PyNs3VirtualNetDevice *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3Address *py_Address;
+    unsigned int index;
+    const char *keywords[] = {"index", NULL};
     
-    ns3::Address retval = self->obj->GetBroadcast();
-    py_Address = PyObject_New(PyNs3Address, &PyNs3Address_Type);
-    py_Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Address->obj = new ns3::Address(retval);
-    PyNs3Address_wrapper_registry[(void *) py_Address->obj] = (PyObject *) py_Address;
-    py_retval = Py_BuildValue((char *) "N", py_Address);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &index)) {
+        return NULL;
+    }
+    self->obj->SetIfIndex(index);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3VirtualNetDevice_SetIsPointToPoint(PyNs3VirtualNetDevice *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool isPointToPoint;
+    PyObject *py_isPointToPoint;
+    const char *keywords[] = {"isPointToPoint", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &py_isPointToPoint)) {
+        return NULL;
+    }
+    isPointToPoint = (bool) PyObject_IsTrue(py_isPointToPoint);
+    self->obj->SetIsPointToPoint(isPointToPoint);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3VirtualNetDevice_SetMtu(PyNs3VirtualNetDevice *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    int mtu;
+    const char *keywords[] = {"mtu", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &mtu)) {
+        return NULL;
+    }
+    if (mtu > 0xffff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    retval = self->obj->SetMtu(mtu);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3VirtualNetDevice_SetNeedsArp(PyNs3VirtualNetDevice *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool needsArp;
+    PyObject *py_needsArp;
+    const char *keywords[] = {"needsArp", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &py_needsArp)) {
+        return NULL;
+    }
+    needsArp = (bool) PyObject_IsTrue(py_needsArp);
+    self->obj->SetNeedsArp(needsArp);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3VirtualNetDevice_SetNode(PyNs3VirtualNetDevice *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Node *node;
+    ns3::Node *node_ptr;
+    const char *keywords[] = {"node", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Node_Type, &node)) {
+        return NULL;
+    }
+    node_ptr = (node ? node->obj : NULL);
+    self->obj->SetNode(ns3::Ptr< ns3::Node  > (node_ptr));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3VirtualNetDevice_SetPromiscReceiveCallback(PyNs3VirtualNetDevice *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyObject *cb;
+    ns3::Ptr<PythonCallbackImpl2> cb_cb_impl;
+    const char *keywords[] = {"cb", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &cb)) {
+        return NULL;
+    }
+    if (!PyCallable_Check(cb)) {
+        PyErr_SetString(PyExc_TypeError, "parameter 'cb' must be callbale");
+        return NULL;
+    }
+    cb_cb_impl = ns3::Create<PythonCallbackImpl2> (cb);
+    self->obj->SetPromiscReceiveCallback(ns3::Callback<bool, ns3::Ptr<ns3::NetDevice>, ns3::Ptr<const ns3::Packet>, unsigned short, const ns3::Address &, const ns3::Address &, ns3::NetDevice::PacketType, ns3::empty, ns3::empty, ns3::empty> (cb_cb_impl));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -1123,34 +1152,43 @@ _wrap_PyNs3VirtualNetDevice_SetReceiveCallback(PyNs3VirtualNetDevice *self, PyOb
 
 
 PyObject *
-_wrap_PyNs3VirtualNetDevice_IsMulticast(PyNs3VirtualNetDevice *self)
+_wrap_PyNs3VirtualNetDevice_SetSendCallback(PyNs3VirtualNetDevice *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    bool retval;
+    PyObject *transmitCb;
+    ns3::Ptr<PythonCallbackImpl5> transmitCb_cb_impl;
+    const char *keywords[] = {"transmitCb", NULL};
     
-    retval = self->obj->IsMulticast();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &transmitCb)) {
+        return NULL;
+    }
+    if (!PyCallable_Check(transmitCb)) {
+        PyErr_SetString(PyExc_TypeError, "parameter 'transmitCb' must be callbale");
+        return NULL;
+    }
+    transmitCb_cb_impl = ns3::Create<PythonCallbackImpl5> (transmitCb);
+    self->obj->SetSendCallback(ns3::Callback<bool, ns3::Ptr<ns3::Packet>, const ns3::Address &, const ns3::Address &, unsigned short, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty> (transmitCb_cb_impl));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3VirtualNetDevice_SetMtu(PyNs3VirtualNetDevice *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3VirtualNetDevice_SetSupportsSendFrom(PyNs3VirtualNetDevice *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    bool retval;
-    int mtu;
-    const char *keywords[] = {"mtu", NULL};
+    bool supportsSendFrom;
+    PyObject *py_supportsSendFrom;
+    const char *keywords[] = {"supportsSendFrom", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &mtu)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &py_supportsSendFrom)) {
         return NULL;
     }
-    if (mtu > 0xffff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    retval = self->obj->SetMtu(mtu);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    supportsSendFrom = (bool) PyObject_IsTrue(py_supportsSendFrom);
+    self->obj->SetSupportsSendFrom(supportsSendFrom);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -1163,44 +1201,6 @@ _wrap_PyNs3VirtualNetDevice_SupportsSendFrom(PyNs3VirtualNetDevice *self)
     
     retval = self->obj->SupportsSendFrom();
     py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3VirtualNetDevice_SetNeedsArp(PyNs3VirtualNetDevice *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool needsArp;
-    PyObject *py_needsArp;
-    const char *keywords[] = {"needsArp", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &py_needsArp)) {
-        return NULL;
-    }
-    needsArp = (bool) PyObject_IsTrue(py_needsArp);
-    self->obj->SetNeedsArp(needsArp);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3VirtualNetDevice_SetIsPointToPoint(PyNs3VirtualNetDevice *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool isPointToPoint;
-    PyObject *py_isPointToPoint;
-    const char *keywords[] = {"isPointToPoint", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &py_isPointToPoint)) {
-        return NULL;
-    }
-    isPointToPoint = (bool) PyObject_IsTrue(py_isPointToPoint);
-    self->obj->SetIsPointToPoint(isPointToPoint);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
     return py_retval;
 }
 
@@ -1221,33 +1221,33 @@ _wrap_PyNs3VirtualNetDevice__copy__(PyNs3VirtualNetDevice *self)
 }
 
 static PyMethodDef PyNs3VirtualNetDevice_methods[] = {
-    {(char *) "GetMulticast", (PyCFunction) _wrap_PyNs3VirtualNetDevice_GetMulticast, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "IsPointToPoint", (PyCFunction) _wrap_PyNs3VirtualNetDevice_IsPointToPoint, METH_NOARGS, "IsPointToPoint()\n\n" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3VirtualNetDevice_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "Send", (PyCFunction) _wrap_PyNs3VirtualNetDevice_Send, METH_KEYWORDS|METH_VARARGS, "Send(packet, dest, protocolNumber)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: dest: ns3::Address const &\ntype: protocolNumber: uint16_t" },
-    {(char *) "GetIfIndex", (PyCFunction) _wrap_PyNs3VirtualNetDevice_GetIfIndex, METH_NOARGS, "GetIfIndex()\n\n" },
-    {(char *) "NeedsArp", (PyCFunction) _wrap_PyNs3VirtualNetDevice_NeedsArp, METH_NOARGS, "NeedsArp()\n\n" },
-    {(char *) "SetPromiscReceiveCallback", (PyCFunction) _wrap_PyNs3VirtualNetDevice_SetPromiscReceiveCallback, METH_KEYWORDS|METH_VARARGS, "SetPromiscReceiveCallback(cb)\n\ntype: cb: ns3::Callback< bool, ns3::Ptr< ns3::NetDevice >, ns3::Ptr< ns3::Packet const >, unsigned short, ns3::Address const &, ns3::Address const &, ns3::NetDevice::PacketType, ns3::empty, ns3::empty, ns3::empty >" },
-    {(char *) "GetNode", (PyCFunction) _wrap_PyNs3VirtualNetDevice_GetNode, METH_NOARGS, "GetNode()\n\n" },
-    {(char *) "SendFrom", (PyCFunction) _wrap_PyNs3VirtualNetDevice_SendFrom, METH_KEYWORDS|METH_VARARGS, "SendFrom(packet, source, dest, protocolNumber)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: source: ns3::Address const &\ntype: dest: ns3::Address const &\ntype: protocolNumber: uint16_t" },
-    {(char *) "IsBroadcast", (PyCFunction) _wrap_PyNs3VirtualNetDevice_IsBroadcast, METH_NOARGS, "IsBroadcast()\n\n" },
-    {(char *) "SetSupportsSendFrom", (PyCFunction) _wrap_PyNs3VirtualNetDevice_SetSupportsSendFrom, METH_KEYWORDS|METH_VARARGS, "SetSupportsSendFrom(supportsSendFrom)\n\ntype: supportsSendFrom: bool" },
-    {(char *) "GetMtu", (PyCFunction) _wrap_PyNs3VirtualNetDevice_GetMtu, METH_NOARGS, "GetMtu()\n\n" },
-    {(char *) "IsBridge", (PyCFunction) _wrap_PyNs3VirtualNetDevice_IsBridge, METH_NOARGS, "IsBridge()\n\n" },
-    {(char *) "SetNode", (PyCFunction) _wrap_PyNs3VirtualNetDevice_SetNode, METH_KEYWORDS|METH_VARARGS, "SetNode(node)\n\ntype: node: ns3::Ptr< ns3::Node >" },
-    {(char *) "Receive", (PyCFunction) _wrap_PyNs3VirtualNetDevice_Receive, METH_KEYWORDS|METH_VARARGS, "Receive(packet, protocol, source, destination, packetType)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: protocol: uint16_t\ntype: source: ns3::Address const &\ntype: destination: ns3::Address const &\ntype: packetType: ns3::NetDevice::PacketType" },
     {(char *) "GetAddress", (PyCFunction) _wrap_PyNs3VirtualNetDevice_GetAddress, METH_NOARGS, "GetAddress()\n\n" },
-    {(char *) "IsLinkUp", (PyCFunction) _wrap_PyNs3VirtualNetDevice_IsLinkUp, METH_NOARGS, "IsLinkUp()\n\n" },
-    {(char *) "SetSendCallback", (PyCFunction) _wrap_PyNs3VirtualNetDevice_SetSendCallback, METH_KEYWORDS|METH_VARARGS, "SetSendCallback(transmitCb)\n\ntype: transmitCb: ns3::Callback< bool, ns3::Ptr< ns3::Packet >, ns3::Address const &, ns3::Address const &, unsigned short, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty >" },
-    {(char *) "SetIfIndex", (PyCFunction) _wrap_PyNs3VirtualNetDevice_SetIfIndex, METH_KEYWORDS|METH_VARARGS, "SetIfIndex(index)\n\ntype: index: uint32_t const" },
-    {(char *) "SetAddress", (PyCFunction) _wrap_PyNs3VirtualNetDevice_SetAddress, METH_KEYWORDS|METH_VARARGS, "SetAddress(address)\n\ntype: address: ns3::Address" },
     {(char *) "GetBroadcast", (PyCFunction) _wrap_PyNs3VirtualNetDevice_GetBroadcast, METH_NOARGS, "GetBroadcast()\n\n" },
-    {(char *) "SetReceiveCallback", (PyCFunction) _wrap_PyNs3VirtualNetDevice_SetReceiveCallback, METH_KEYWORDS|METH_VARARGS, "SetReceiveCallback(cb)\n\ntype: cb: ns3::Callback< bool, ns3::Ptr< ns3::NetDevice >, ns3::Ptr< ns3::Packet const >, unsigned short, ns3::Address const &, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty >" },
+    {(char *) "GetIfIndex", (PyCFunction) _wrap_PyNs3VirtualNetDevice_GetIfIndex, METH_NOARGS, "GetIfIndex()\n\n" },
+    {(char *) "GetMtu", (PyCFunction) _wrap_PyNs3VirtualNetDevice_GetMtu, METH_NOARGS, "GetMtu()\n\n" },
+    {(char *) "GetMulticast", (PyCFunction) _wrap_PyNs3VirtualNetDevice_GetMulticast, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "GetNode", (PyCFunction) _wrap_PyNs3VirtualNetDevice_GetNode, METH_NOARGS, "GetNode()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3VirtualNetDevice_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "IsBridge", (PyCFunction) _wrap_PyNs3VirtualNetDevice_IsBridge, METH_NOARGS, "IsBridge()\n\n" },
+    {(char *) "IsBroadcast", (PyCFunction) _wrap_PyNs3VirtualNetDevice_IsBroadcast, METH_NOARGS, "IsBroadcast()\n\n" },
+    {(char *) "IsLinkUp", (PyCFunction) _wrap_PyNs3VirtualNetDevice_IsLinkUp, METH_NOARGS, "IsLinkUp()\n\n" },
     {(char *) "IsMulticast", (PyCFunction) _wrap_PyNs3VirtualNetDevice_IsMulticast, METH_NOARGS, "IsMulticast()\n\n" },
-    {(char *) "SetMtu", (PyCFunction) _wrap_PyNs3VirtualNetDevice_SetMtu, METH_KEYWORDS|METH_VARARGS, "SetMtu(mtu)\n\ntype: mtu: uint16_t const" },
-    {(char *) "SupportsSendFrom", (PyCFunction) _wrap_PyNs3VirtualNetDevice_SupportsSendFrom, METH_NOARGS, "SupportsSendFrom()\n\n" },
-    {(char *) "SetNeedsArp", (PyCFunction) _wrap_PyNs3VirtualNetDevice_SetNeedsArp, METH_KEYWORDS|METH_VARARGS, "SetNeedsArp(needsArp)\n\ntype: needsArp: bool" },
+    {(char *) "IsPointToPoint", (PyCFunction) _wrap_PyNs3VirtualNetDevice_IsPointToPoint, METH_NOARGS, "IsPointToPoint()\n\n" },
+    {(char *) "NeedsArp", (PyCFunction) _wrap_PyNs3VirtualNetDevice_NeedsArp, METH_NOARGS, "NeedsArp()\n\n" },
+    {(char *) "Receive", (PyCFunction) _wrap_PyNs3VirtualNetDevice_Receive, METH_KEYWORDS|METH_VARARGS, "Receive(packet, protocol, source, destination, packetType)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: protocol: uint16_t\ntype: source: ns3::Address const &\ntype: destination: ns3::Address const &\ntype: packetType: ns3::NetDevice::PacketType" },
+    {(char *) "Send", (PyCFunction) _wrap_PyNs3VirtualNetDevice_Send, METH_KEYWORDS|METH_VARARGS, "Send(packet, dest, protocolNumber)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: dest: ns3::Address const &\ntype: protocolNumber: uint16_t" },
+    {(char *) "SendFrom", (PyCFunction) _wrap_PyNs3VirtualNetDevice_SendFrom, METH_KEYWORDS|METH_VARARGS, "SendFrom(packet, source, dest, protocolNumber)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: source: ns3::Address const &\ntype: dest: ns3::Address const &\ntype: protocolNumber: uint16_t" },
+    {(char *) "SetAddress", (PyCFunction) _wrap_PyNs3VirtualNetDevice_SetAddress, METH_KEYWORDS|METH_VARARGS, "SetAddress(address)\n\ntype: address: ns3::Address" },
+    {(char *) "SetIfIndex", (PyCFunction) _wrap_PyNs3VirtualNetDevice_SetIfIndex, METH_KEYWORDS|METH_VARARGS, "SetIfIndex(index)\n\ntype: index: uint32_t const" },
     {(char *) "SetIsPointToPoint", (PyCFunction) _wrap_PyNs3VirtualNetDevice_SetIsPointToPoint, METH_KEYWORDS|METH_VARARGS, "SetIsPointToPoint(isPointToPoint)\n\ntype: isPointToPoint: bool" },
+    {(char *) "SetMtu", (PyCFunction) _wrap_PyNs3VirtualNetDevice_SetMtu, METH_KEYWORDS|METH_VARARGS, "SetMtu(mtu)\n\ntype: mtu: uint16_t const" },
+    {(char *) "SetNeedsArp", (PyCFunction) _wrap_PyNs3VirtualNetDevice_SetNeedsArp, METH_KEYWORDS|METH_VARARGS, "SetNeedsArp(needsArp)\n\ntype: needsArp: bool" },
+    {(char *) "SetNode", (PyCFunction) _wrap_PyNs3VirtualNetDevice_SetNode, METH_KEYWORDS|METH_VARARGS, "SetNode(node)\n\ntype: node: ns3::Ptr< ns3::Node >" },
+    {(char *) "SetPromiscReceiveCallback", (PyCFunction) _wrap_PyNs3VirtualNetDevice_SetPromiscReceiveCallback, METH_KEYWORDS|METH_VARARGS, "SetPromiscReceiveCallback(cb)\n\ntype: cb: ns3::Callback< bool, ns3::Ptr< ns3::NetDevice >, ns3::Ptr< ns3::Packet const >, unsigned short, ns3::Address const &, ns3::Address const &, ns3::NetDevice::PacketType, ns3::empty, ns3::empty, ns3::empty >" },
+    {(char *) "SetReceiveCallback", (PyCFunction) _wrap_PyNs3VirtualNetDevice_SetReceiveCallback, METH_KEYWORDS|METH_VARARGS, "SetReceiveCallback(cb)\n\ntype: cb: ns3::Callback< bool, ns3::Ptr< ns3::NetDevice >, ns3::Ptr< ns3::Packet const >, unsigned short, ns3::Address const &, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty >" },
+    {(char *) "SetSendCallback", (PyCFunction) _wrap_PyNs3VirtualNetDevice_SetSendCallback, METH_KEYWORDS|METH_VARARGS, "SetSendCallback(transmitCb)\n\ntype: transmitCb: ns3::Callback< bool, ns3::Ptr< ns3::Packet >, ns3::Address const &, ns3::Address const &, unsigned short, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty >" },
+    {(char *) "SetSupportsSendFrom", (PyCFunction) _wrap_PyNs3VirtualNetDevice_SetSupportsSendFrom, METH_KEYWORDS|METH_VARARGS, "SetSupportsSendFrom(supportsSendFrom)\n\ntype: supportsSendFrom: bool" },
+    {(char *) "SupportsSendFrom", (PyCFunction) _wrap_PyNs3VirtualNetDevice_SupportsSendFrom, METH_NOARGS, "SupportsSendFrom()\n\n" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3VirtualNetDevice__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -1344,7 +1344,7 @@ PyTypeObject PyNs3VirtualNetDevice_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_BASETYPE,                      /* tp_flags */
     "VirtualNetDevice(arg0)\nVirtualNetDevice()",                        /* Documentation string */
     (traverseproc)PyNs3VirtualNetDevice__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3VirtualNetDevice__tp_clear,             /* tp_clear */

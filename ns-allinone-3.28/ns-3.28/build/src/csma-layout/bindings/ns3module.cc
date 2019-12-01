@@ -820,48 +820,6 @@ int _wrap_PyNs3CsmaStarHelper__tp_init(PyNs3CsmaStarHelper *self, PyObject *args
 
 
 PyObject *
-_wrap_PyNs3CsmaStarHelper_GetHubIpv6Address(PyNs3CsmaStarHelper *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int i;
-    const char *keywords[] = {"i", NULL};
-    PyNs3Ipv6Address *py_Ipv6Address;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &i)) {
-        return NULL;
-    }
-    ns3::Ipv6Address retval = self->obj->GetHubIpv6Address(i);
-    py_Ipv6Address = PyObject_New(PyNs3Ipv6Address, &PyNs3Ipv6Address_Type);
-    py_Ipv6Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Ipv6Address->obj = new ns3::Ipv6Address(retval);
-    PyNs3Ipv6Address_wrapper_registry[(void *) py_Ipv6Address->obj] = (PyObject *) py_Ipv6Address;
-    py_retval = Py_BuildValue((char *) "N", py_Ipv6Address);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3CsmaStarHelper_GetSpokeIpv4Address(PyNs3CsmaStarHelper *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int i;
-    const char *keywords[] = {"i", NULL};
-    PyNs3Ipv4Address *py_Ipv4Address;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &i)) {
-        return NULL;
-    }
-    ns3::Ipv4Address retval = self->obj->GetSpokeIpv4Address(i);
-    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
-    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
-    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
-    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3CsmaStarHelper_AssignIpv4Addresses(PyNs3CsmaStarHelper *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -879,22 +837,19 @@ _wrap_PyNs3CsmaStarHelper_AssignIpv4Addresses(PyNs3CsmaStarHelper *self, PyObjec
 
 
 PyObject *
-_wrap_PyNs3CsmaStarHelper_GetHubIpv4Address(PyNs3CsmaStarHelper *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3CsmaStarHelper_AssignIpv6Addresses(PyNs3CsmaStarHelper *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    unsigned int i;
-    const char *keywords[] = {"i", NULL};
-    PyNs3Ipv4Address *py_Ipv4Address;
+    PyNs3Ipv6Address *network;
+    PyNs3Ipv6Prefix *prefix;
+    const char *keywords[] = {"network", "prefix", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &i)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3Ipv6Address_Type, &network, &PyNs3Ipv6Prefix_Type, &prefix)) {
         return NULL;
     }
-    ns3::Ipv4Address retval = self->obj->GetHubIpv4Address(i);
-    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
-    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
-    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
-    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
+    self->obj->AssignIpv6Addresses(*((PyNs3Ipv6Address *) network)->obj, *((PyNs3Ipv6Prefix *) prefix)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -945,6 +900,64 @@ _wrap_PyNs3CsmaStarHelper_GetHub(PyNs3CsmaStarHelper *self)
 
 
 PyObject *
+_wrap_PyNs3CsmaStarHelper_GetHubDevices(PyNs3CsmaStarHelper *self)
+{
+    PyObject *py_retval;
+    PyNs3NetDeviceContainer *py_NetDeviceContainer;
+    
+    ns3::NetDeviceContainer retval = self->obj->GetHubDevices();
+    py_NetDeviceContainer = PyObject_New(PyNs3NetDeviceContainer, &PyNs3NetDeviceContainer_Type);
+    py_NetDeviceContainer->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_NetDeviceContainer->obj = new ns3::NetDeviceContainer(retval);
+    PyNs3NetDeviceContainer_wrapper_registry[(void *) py_NetDeviceContainer->obj] = (PyObject *) py_NetDeviceContainer;
+    py_retval = Py_BuildValue((char *) "N", py_NetDeviceContainer);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3CsmaStarHelper_GetHubIpv4Address(PyNs3CsmaStarHelper *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int i;
+    const char *keywords[] = {"i", NULL};
+    PyNs3Ipv4Address *py_Ipv4Address;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &i)) {
+        return NULL;
+    }
+    ns3::Ipv4Address retval = self->obj->GetHubIpv4Address(i);
+    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
+    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
+    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
+    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3CsmaStarHelper_GetHubIpv6Address(PyNs3CsmaStarHelper *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int i;
+    const char *keywords[] = {"i", NULL};
+    PyNs3Ipv6Address *py_Ipv6Address;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &i)) {
+        return NULL;
+    }
+    ns3::Ipv6Address retval = self->obj->GetHubIpv6Address(i);
+    py_Ipv6Address = PyObject_New(PyNs3Ipv6Address, &PyNs3Ipv6Address_Type);
+    py_Ipv6Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Ipv6Address->obj = new ns3::Ipv6Address(retval);
+    PyNs3Ipv6Address_wrapper_registry[(void *) py_Ipv6Address->obj] = (PyObject *) py_Ipv6Address;
+    py_retval = Py_BuildValue((char *) "N", py_Ipv6Address);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3CsmaStarHelper_GetSpokeDevices(PyNs3CsmaStarHelper *self)
 {
     PyObject *py_retval;
@@ -961,19 +974,22 @@ _wrap_PyNs3CsmaStarHelper_GetSpokeDevices(PyNs3CsmaStarHelper *self)
 
 
 PyObject *
-_wrap_PyNs3CsmaStarHelper_AssignIpv6Addresses(PyNs3CsmaStarHelper *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3CsmaStarHelper_GetSpokeIpv4Address(PyNs3CsmaStarHelper *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3Ipv6Address *network;
-    PyNs3Ipv6Prefix *prefix;
-    const char *keywords[] = {"network", "prefix", NULL};
+    unsigned int i;
+    const char *keywords[] = {"i", NULL};
+    PyNs3Ipv4Address *py_Ipv4Address;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3Ipv6Address_Type, &network, &PyNs3Ipv6Prefix_Type, &prefix)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &i)) {
         return NULL;
     }
-    self->obj->AssignIpv6Addresses(*((PyNs3Ipv6Address *) network)->obj, *((PyNs3Ipv6Prefix *) prefix)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    ns3::Ipv4Address retval = self->obj->GetSpokeIpv4Address(i);
+    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
+    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
+    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
+    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
     return py_retval;
 }
 
@@ -995,23 +1011,6 @@ _wrap_PyNs3CsmaStarHelper_GetSpokeIpv6Address(PyNs3CsmaStarHelper *self, PyObjec
     py_Ipv6Address->obj = new ns3::Ipv6Address(retval);
     PyNs3Ipv6Address_wrapper_registry[(void *) py_Ipv6Address->obj] = (PyObject *) py_Ipv6Address;
     py_retval = Py_BuildValue((char *) "N", py_Ipv6Address);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3CsmaStarHelper_InstallStack(PyNs3CsmaStarHelper *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3InternetStackHelper *stack;
-    const char *keywords[] = {"stack", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3InternetStackHelper_Type, &stack)) {
-        return NULL;
-    }
-    self->obj->InstallStack(*((PyNs3InternetStackHelper *) stack)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
     return py_retval;
 }
 
@@ -1067,6 +1066,23 @@ _wrap_PyNs3CsmaStarHelper_GetSpokeNode(PyNs3CsmaStarHelper *self, PyObject *args
 
 
 PyObject *
+_wrap_PyNs3CsmaStarHelper_InstallStack(PyNs3CsmaStarHelper *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3InternetStackHelper *stack;
+    const char *keywords[] = {"stack", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3InternetStackHelper_Type, &stack)) {
+        return NULL;
+    }
+    self->obj->InstallStack(*((PyNs3InternetStackHelper *) stack)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3CsmaStarHelper_SpokeCount(PyNs3CsmaStarHelper *self)
 {
     PyObject *py_retval;
@@ -1074,22 +1090,6 @@ _wrap_PyNs3CsmaStarHelper_SpokeCount(PyNs3CsmaStarHelper *self)
     
     retval = self->obj->SpokeCount();
     py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3CsmaStarHelper_GetHubDevices(PyNs3CsmaStarHelper *self)
-{
-    PyObject *py_retval;
-    PyNs3NetDeviceContainer *py_NetDeviceContainer;
-    
-    ns3::NetDeviceContainer retval = self->obj->GetHubDevices();
-    py_NetDeviceContainer = PyObject_New(PyNs3NetDeviceContainer, &PyNs3NetDeviceContainer_Type);
-    py_NetDeviceContainer->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_NetDeviceContainer->obj = new ns3::NetDeviceContainer(retval);
-    PyNs3NetDeviceContainer_wrapper_registry[(void *) py_NetDeviceContainer->obj] = (PyObject *) py_NetDeviceContainer;
-    py_retval = Py_BuildValue((char *) "N", py_NetDeviceContainer);
     return py_retval;
 }
 
@@ -1107,18 +1107,18 @@ _wrap_PyNs3CsmaStarHelper__copy__(PyNs3CsmaStarHelper *self)
 }
 
 static PyMethodDef PyNs3CsmaStarHelper_methods[] = {
-    {(char *) "GetHubIpv6Address", (PyCFunction) _wrap_PyNs3CsmaStarHelper_GetHubIpv6Address, METH_KEYWORDS|METH_VARARGS, "GetHubIpv6Address(i)\n\ntype: i: uint32_t" },
-    {(char *) "GetSpokeIpv4Address", (PyCFunction) _wrap_PyNs3CsmaStarHelper_GetSpokeIpv4Address, METH_KEYWORDS|METH_VARARGS, "GetSpokeIpv4Address(i)\n\ntype: i: uint32_t" },
-    {(char *) "AssignIpv4Addresses", (PyCFunction) _wrap_PyNs3CsmaStarHelper_AssignIpv4Addresses, METH_KEYWORDS|METH_VARARGS, "AssignIpv4Addresses(address)\n\ntype: address: ns3::Ipv4AddressHelper" },
-    {(char *) "GetHubIpv4Address", (PyCFunction) _wrap_PyNs3CsmaStarHelper_GetHubIpv4Address, METH_KEYWORDS|METH_VARARGS, "GetHubIpv4Address(i)\n\ntype: i: uint32_t" },
+    {(char *) "AssignIpv4Addresses", (PyCFunction) _wrap_PyNs3CsmaStarHelper_AssignIpv4Addresses, METH_VARARGS|METH_KEYWORDS, "AssignIpv4Addresses(address)\n\ntype: address: ns3::Ipv4AddressHelper" },
+    {(char *) "AssignIpv6Addresses", (PyCFunction) _wrap_PyNs3CsmaStarHelper_AssignIpv6Addresses, METH_VARARGS|METH_KEYWORDS, "AssignIpv6Addresses(network, prefix)\n\ntype: network: ns3::Ipv6Address\ntype: prefix: ns3::Ipv6Prefix" },
     {(char *) "GetHub", (PyCFunction) _wrap_PyNs3CsmaStarHelper_GetHub, METH_NOARGS, "GetHub()\n\n" },
-    {(char *) "GetSpokeDevices", (PyCFunction) _wrap_PyNs3CsmaStarHelper_GetSpokeDevices, METH_NOARGS, "GetSpokeDevices()\n\n" },
-    {(char *) "AssignIpv6Addresses", (PyCFunction) _wrap_PyNs3CsmaStarHelper_AssignIpv6Addresses, METH_KEYWORDS|METH_VARARGS, "AssignIpv6Addresses(network, prefix)\n\ntype: network: ns3::Ipv6Address\ntype: prefix: ns3::Ipv6Prefix" },
-    {(char *) "GetSpokeIpv6Address", (PyCFunction) _wrap_PyNs3CsmaStarHelper_GetSpokeIpv6Address, METH_KEYWORDS|METH_VARARGS, "GetSpokeIpv6Address(i)\n\ntype: i: uint32_t" },
-    {(char *) "InstallStack", (PyCFunction) _wrap_PyNs3CsmaStarHelper_InstallStack, METH_KEYWORDS|METH_VARARGS, "InstallStack(stack)\n\ntype: stack: ns3::InternetStackHelper" },
-    {(char *) "GetSpokeNode", (PyCFunction) _wrap_PyNs3CsmaStarHelper_GetSpokeNode, METH_KEYWORDS|METH_VARARGS, "GetSpokeNode(i)\n\ntype: i: uint32_t" },
-    {(char *) "SpokeCount", (PyCFunction) _wrap_PyNs3CsmaStarHelper_SpokeCount, METH_NOARGS, "SpokeCount()\n\n" },
     {(char *) "GetHubDevices", (PyCFunction) _wrap_PyNs3CsmaStarHelper_GetHubDevices, METH_NOARGS, "GetHubDevices()\n\n" },
+    {(char *) "GetHubIpv4Address", (PyCFunction) _wrap_PyNs3CsmaStarHelper_GetHubIpv4Address, METH_VARARGS|METH_KEYWORDS, "GetHubIpv4Address(i)\n\ntype: i: uint32_t" },
+    {(char *) "GetHubIpv6Address", (PyCFunction) _wrap_PyNs3CsmaStarHelper_GetHubIpv6Address, METH_VARARGS|METH_KEYWORDS, "GetHubIpv6Address(i)\n\ntype: i: uint32_t" },
+    {(char *) "GetSpokeDevices", (PyCFunction) _wrap_PyNs3CsmaStarHelper_GetSpokeDevices, METH_NOARGS, "GetSpokeDevices()\n\n" },
+    {(char *) "GetSpokeIpv4Address", (PyCFunction) _wrap_PyNs3CsmaStarHelper_GetSpokeIpv4Address, METH_VARARGS|METH_KEYWORDS, "GetSpokeIpv4Address(i)\n\ntype: i: uint32_t" },
+    {(char *) "GetSpokeIpv6Address", (PyCFunction) _wrap_PyNs3CsmaStarHelper_GetSpokeIpv6Address, METH_VARARGS|METH_KEYWORDS, "GetSpokeIpv6Address(i)\n\ntype: i: uint32_t" },
+    {(char *) "GetSpokeNode", (PyCFunction) _wrap_PyNs3CsmaStarHelper_GetSpokeNode, METH_VARARGS|METH_KEYWORDS, "GetSpokeNode(i)\n\ntype: i: uint32_t" },
+    {(char *) "InstallStack", (PyCFunction) _wrap_PyNs3CsmaStarHelper_InstallStack, METH_VARARGS|METH_KEYWORDS, "InstallStack(stack)\n\ntype: stack: ns3::InternetStackHelper" },
+    {(char *) "SpokeCount", (PyCFunction) _wrap_PyNs3CsmaStarHelper_SpokeCount, METH_NOARGS, "SpokeCount()\n\n" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3CsmaStarHelper__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };

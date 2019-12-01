@@ -852,27 +852,6 @@ static int _wrap_PyNs3Box__set_zMin(PyNs3Box *self, PyObject *value, void * PYBI
 }
 static PyGetSetDef PyNs3Box__getsets[] = {
     {
-        (char*) "zMax", /* attribute name */
-        (getter) _wrap_PyNs3Box__get_zMax, /* C function to get the attribute */
-        (setter) _wrap_PyNs3Box__set_zMax, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
-        (char*) "yMax", /* attribute name */
-        (getter) _wrap_PyNs3Box__get_yMax, /* C function to get the attribute */
-        (setter) _wrap_PyNs3Box__set_yMax, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
-        (char*) "zMin", /* attribute name */
-        (getter) _wrap_PyNs3Box__get_zMin, /* C function to get the attribute */
-        (setter) _wrap_PyNs3Box__set_zMin, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
         (char*) "xMax", /* attribute name */
         (getter) _wrap_PyNs3Box__get_xMax, /* C function to get the attribute */
         (setter) _wrap_PyNs3Box__set_xMax, /* C function to set the attribute */
@@ -887,9 +866,30 @@ static PyGetSetDef PyNs3Box__getsets[] = {
         NULL /* optional additional data for getter and setter */
     },
     {
+        (char*) "yMax", /* attribute name */
+        (getter) _wrap_PyNs3Box__get_yMax, /* C function to get the attribute */
+        (setter) _wrap_PyNs3Box__set_yMax, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
         (char*) "yMin", /* attribute name */
         (getter) _wrap_PyNs3Box__get_yMin, /* C function to get the attribute */
         (setter) _wrap_PyNs3Box__set_yMin, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "zMax", /* attribute name */
+        (getter) _wrap_PyNs3Box__get_zMax, /* C function to get the attribute */
+        (setter) _wrap_PyNs3Box__set_zMax, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "zMin", /* attribute name */
+        (getter) _wrap_PyNs3Box__get_zMin, /* C function to get the attribute */
+        (setter) _wrap_PyNs3Box__set_zMin, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -995,6 +995,28 @@ int _wrap_PyNs3Box__tp_init(PyNs3Box *self, PyObject *args, PyObject *kwargs)
 
 
 PyObject *
+_wrap_PyNs3Box_CalculateIntersection(PyNs3Box *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Vector3D *current;
+    PyNs3Vector3D *speed;
+    const char *keywords[] = {"current", "speed", NULL};
+    PyNs3Vector3D *py_Vector3D;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3Vector3D_Type, &current, &PyNs3Vector3D_Type, &speed)) {
+        return NULL;
+    }
+    ns3::Vector retval = self->obj->CalculateIntersection(*((PyNs3Vector3D *) current)->obj, *((PyNs3Vector3D *) speed)->obj);
+    py_Vector3D = PyObject_New(PyNs3Vector3D, &PyNs3Vector3D_Type);
+    py_Vector3D->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Vector3D->obj = new ns3::Vector3D(retval);
+    PyNs3Vector3D_wrapper_registry[(void *) py_Vector3D->obj] = (PyObject *) py_Vector3D;
+    py_retval = Py_BuildValue((char *) "N", py_Vector3D);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3Box_GetClosestSide(PyNs3Box *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -1028,28 +1050,6 @@ _wrap_PyNs3Box_IsInside(PyNs3Box *self, PyObject *args, PyObject *kwargs)
 }
 
 
-PyObject *
-_wrap_PyNs3Box_CalculateIntersection(PyNs3Box *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Vector3D *current;
-    PyNs3Vector3D *speed;
-    const char *keywords[] = {"current", "speed", NULL};
-    PyNs3Vector3D *py_Vector3D;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3Vector3D_Type, &current, &PyNs3Vector3D_Type, &speed)) {
-        return NULL;
-    }
-    ns3::Vector retval = self->obj->CalculateIntersection(*((PyNs3Vector3D *) current)->obj, *((PyNs3Vector3D *) speed)->obj);
-    py_Vector3D = PyObject_New(PyNs3Vector3D, &PyNs3Vector3D_Type);
-    py_Vector3D->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Vector3D->obj = new ns3::Vector3D(retval);
-    PyNs3Vector3D_wrapper_registry[(void *) py_Vector3D->obj] = (PyObject *) py_Vector3D;
-    py_retval = Py_BuildValue((char *) "N", py_Vector3D);
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3Box__copy__(PyNs3Box *self)
 {
@@ -1063,9 +1063,9 @@ _wrap_PyNs3Box__copy__(PyNs3Box *self)
 }
 
 static PyMethodDef PyNs3Box_methods[] = {
-    {(char *) "GetClosestSide", (PyCFunction) _wrap_PyNs3Box_GetClosestSide, METH_KEYWORDS|METH_VARARGS, "GetClosestSide(position)\n\ntype: position: ns3::Vector const &" },
-    {(char *) "IsInside", (PyCFunction) _wrap_PyNs3Box_IsInside, METH_KEYWORDS|METH_VARARGS, "IsInside(position)\n\ntype: position: ns3::Vector const &" },
-    {(char *) "CalculateIntersection", (PyCFunction) _wrap_PyNs3Box_CalculateIntersection, METH_KEYWORDS|METH_VARARGS, "CalculateIntersection(current, speed)\n\ntype: current: ns3::Vector const &\ntype: speed: ns3::Vector const &" },
+    {(char *) "CalculateIntersection", (PyCFunction) _wrap_PyNs3Box_CalculateIntersection, METH_VARARGS|METH_KEYWORDS, "CalculateIntersection(current, speed)\n\ntype: current: ns3::Vector const &\ntype: speed: ns3::Vector const &" },
+    {(char *) "GetClosestSide", (PyCFunction) _wrap_PyNs3Box_GetClosestSide, METH_VARARGS|METH_KEYWORDS, "GetClosestSide(position)\n\ntype: position: ns3::Vector const &" },
+    {(char *) "IsInside", (PyCFunction) _wrap_PyNs3Box_IsInside, METH_VARARGS|METH_KEYWORDS, "IsInside(position)\n\ntype: position: ns3::Vector const &" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3Box__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -1313,13 +1313,17 @@ int _wrap_PyNs3ConstantVelocityHelper__tp_init(PyNs3ConstantVelocityHelper *self
 
 
 PyObject *
-_wrap_PyNs3ConstantVelocityHelper_Pause(PyNs3ConstantVelocityHelper *self)
+_wrap_PyNs3ConstantVelocityHelper_GetCurrentPosition(PyNs3ConstantVelocityHelper *self)
 {
     PyObject *py_retval;
+    PyNs3Vector3D *py_Vector3D;
     
-    self->obj->Pause();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    ns3::Vector retval = self->obj->GetCurrentPosition();
+    py_Vector3D = PyObject_New(PyNs3Vector3D, &PyNs3Vector3D_Type);
+    py_Vector3D->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Vector3D->obj = new ns3::Vector3D(retval);
+    PyNs3Vector3D_wrapper_registry[(void *) py_Vector3D->obj] = (PyObject *) py_Vector3D;
+    py_retval = Py_BuildValue((char *) "N", py_Vector3D);
     return py_retval;
 }
 
@@ -1341,17 +1345,59 @@ _wrap_PyNs3ConstantVelocityHelper_GetVelocity(PyNs3ConstantVelocityHelper *self)
 
 
 PyObject *
-_wrap_PyNs3ConstantVelocityHelper_GetCurrentPosition(PyNs3ConstantVelocityHelper *self)
+_wrap_PyNs3ConstantVelocityHelper_Pause(PyNs3ConstantVelocityHelper *self)
 {
     PyObject *py_retval;
-    PyNs3Vector3D *py_Vector3D;
     
-    ns3::Vector retval = self->obj->GetCurrentPosition();
-    py_Vector3D = PyObject_New(PyNs3Vector3D, &PyNs3Vector3D_Type);
-    py_Vector3D->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Vector3D->obj = new ns3::Vector3D(retval);
-    PyNs3Vector3D_wrapper_registry[(void *) py_Vector3D->obj] = (PyObject *) py_Vector3D;
-    py_retval = Py_BuildValue((char *) "N", py_Vector3D);
+    self->obj->Pause();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3ConstantVelocityHelper_SetPosition(PyNs3ConstantVelocityHelper *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Vector3D *position;
+    const char *keywords[] = {"position", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Vector3D_Type, &position)) {
+        return NULL;
+    }
+    self->obj->SetPosition(*((PyNs3Vector3D *) position)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3ConstantVelocityHelper_SetVelocity(PyNs3ConstantVelocityHelper *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Vector3D *vel;
+    const char *keywords[] = {"vel", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Vector3D_Type, &vel)) {
+        return NULL;
+    }
+    self->obj->SetVelocity(*((PyNs3Vector3D *) vel)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3ConstantVelocityHelper_Unpause(PyNs3ConstantVelocityHelper *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->Unpause();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -1438,52 +1484,6 @@ PyObject * _wrap_PyNs3ConstantVelocityHelper_UpdateWithBounds(PyNs3ConstantVeloc
 }
 
 
-PyObject *
-_wrap_PyNs3ConstantVelocityHelper_SetPosition(PyNs3ConstantVelocityHelper *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Vector3D *position;
-    const char *keywords[] = {"position", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Vector3D_Type, &position)) {
-        return NULL;
-    }
-    self->obj->SetPosition(*((PyNs3Vector3D *) position)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3ConstantVelocityHelper_SetVelocity(PyNs3ConstantVelocityHelper *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Vector3D *vel;
-    const char *keywords[] = {"vel", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Vector3D_Type, &vel)) {
-        return NULL;
-    }
-    self->obj->SetVelocity(*((PyNs3Vector3D *) vel)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3ConstantVelocityHelper_Unpause(PyNs3ConstantVelocityHelper *self)
-{
-    PyObject *py_retval;
-    
-    self->obj->Unpause();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3ConstantVelocityHelper__copy__(PyNs3ConstantVelocityHelper *self)
 {
@@ -1497,14 +1497,14 @@ _wrap_PyNs3ConstantVelocityHelper__copy__(PyNs3ConstantVelocityHelper *self)
 }
 
 static PyMethodDef PyNs3ConstantVelocityHelper_methods[] = {
-    {(char *) "Pause", (PyCFunction) _wrap_PyNs3ConstantVelocityHelper_Pause, METH_NOARGS, "Pause()\n\n" },
-    {(char *) "GetVelocity", (PyCFunction) _wrap_PyNs3ConstantVelocityHelper_GetVelocity, METH_NOARGS, "GetVelocity()\n\n" },
     {(char *) "GetCurrentPosition", (PyCFunction) _wrap_PyNs3ConstantVelocityHelper_GetCurrentPosition, METH_NOARGS, "GetCurrentPosition()\n\n" },
-    {(char *) "Update", (PyCFunction) _wrap_PyNs3ConstantVelocityHelper_Update, METH_NOARGS, "Update()\n\n" },
-    {(char *) "UpdateWithBounds", (PyCFunction) _wrap_PyNs3ConstantVelocityHelper_UpdateWithBounds, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "SetPosition", (PyCFunction) _wrap_PyNs3ConstantVelocityHelper_SetPosition, METH_KEYWORDS|METH_VARARGS, "SetPosition(position)\n\ntype: position: ns3::Vector const &" },
-    {(char *) "SetVelocity", (PyCFunction) _wrap_PyNs3ConstantVelocityHelper_SetVelocity, METH_KEYWORDS|METH_VARARGS, "SetVelocity(vel)\n\ntype: vel: ns3::Vector const &" },
+    {(char *) "GetVelocity", (PyCFunction) _wrap_PyNs3ConstantVelocityHelper_GetVelocity, METH_NOARGS, "GetVelocity()\n\n" },
+    {(char *) "Pause", (PyCFunction) _wrap_PyNs3ConstantVelocityHelper_Pause, METH_NOARGS, "Pause()\n\n" },
+    {(char *) "SetPosition", (PyCFunction) _wrap_PyNs3ConstantVelocityHelper_SetPosition, METH_VARARGS|METH_KEYWORDS, "SetPosition(position)\n\ntype: position: ns3::Vector const &" },
+    {(char *) "SetVelocity", (PyCFunction) _wrap_PyNs3ConstantVelocityHelper_SetVelocity, METH_VARARGS|METH_KEYWORDS, "SetVelocity(vel)\n\ntype: vel: ns3::Vector const &" },
     {(char *) "Unpause", (PyCFunction) _wrap_PyNs3ConstantVelocityHelper_Unpause, METH_NOARGS, "Unpause()\n\n" },
+    {(char *) "Update", (PyCFunction) _wrap_PyNs3ConstantVelocityHelper_Update, METH_NOARGS, "Update()\n\n" },
+    {(char *) "UpdateWithBounds", (PyCFunction) _wrap_PyNs3ConstantVelocityHelper_UpdateWithBounds, METH_VARARGS|METH_KEYWORDS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3ConstantVelocityHelper__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -1683,6 +1683,30 @@ int _wrap_PyNs3GeographicPositions__tp_init(PyNs3GeographicPositions *self, PyOb
 
 
 PyObject *
+_wrap_PyNs3GeographicPositions_GeographicToCartesianCoordinates(PyNs3GeographicPositions *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    double latitude;
+    double longitude;
+    double altitude;
+    ns3::GeographicPositions::EarthSpheroidType sphType;
+    const char *keywords[] = {"latitude", "longitude", "altitude", "sphType", NULL};
+    PyNs3Vector3D *py_Vector3D;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "dddi", (char **) keywords, &latitude, &longitude, &altitude, &sphType)) {
+        return NULL;
+    }
+    ns3::Vector retval = ns3::GeographicPositions::GeographicToCartesianCoordinates(latitude, longitude, altitude, sphType);
+    py_Vector3D = PyObject_New(PyNs3Vector3D, &PyNs3Vector3D_Type);
+    py_Vector3D->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Vector3D->obj = new ns3::Vector3D(retval);
+    PyNs3Vector3D_wrapper_registry[(void *) py_Vector3D->obj] = (PyObject *) py_Vector3D;
+    py_retval = Py_BuildValue((char *) "N", py_Vector3D);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3GeographicPositions_RandCartesianPointsAroundGeographicPoint(PyNs3GeographicPositions *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -1709,30 +1733,6 @@ _wrap_PyNs3GeographicPositions_RandCartesianPointsAroundGeographicPoint(PyNs3Geo
 }
 
 
-PyObject *
-_wrap_PyNs3GeographicPositions_GeographicToCartesianCoordinates(PyNs3GeographicPositions *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    double latitude;
-    double longitude;
-    double altitude;
-    ns3::GeographicPositions::EarthSpheroidType sphType;
-    const char *keywords[] = {"latitude", "longitude", "altitude", "sphType", NULL};
-    PyNs3Vector3D *py_Vector3D;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "dddi", (char **) keywords, &latitude, &longitude, &altitude, &sphType)) {
-        return NULL;
-    }
-    ns3::Vector retval = ns3::GeographicPositions::GeographicToCartesianCoordinates(latitude, longitude, altitude, sphType);
-    py_Vector3D = PyObject_New(PyNs3Vector3D, &PyNs3Vector3D_Type);
-    py_Vector3D->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Vector3D->obj = new ns3::Vector3D(retval);
-    PyNs3Vector3D_wrapper_registry[(void *) py_Vector3D->obj] = (PyObject *) py_Vector3D;
-    py_retval = Py_BuildValue((char *) "N", py_Vector3D);
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3GeographicPositions__copy__(PyNs3GeographicPositions *self)
 {
@@ -1746,8 +1746,8 @@ _wrap_PyNs3GeographicPositions__copy__(PyNs3GeographicPositions *self)
 }
 
 static PyMethodDef PyNs3GeographicPositions_methods[] = {
-    {(char *) "RandCartesianPointsAroundGeographicPoint", (PyCFunction) _wrap_PyNs3GeographicPositions_RandCartesianPointsAroundGeographicPoint, METH_KEYWORDS|METH_VARARGS|METH_STATIC, "RandCartesianPointsAroundGeographicPoint(originLatitude, originLongitude, maxAltitude, numPoints, maxDistFromOrigin, uniRand)\n\ntype: originLatitude: double\ntype: originLongitude: double\ntype: maxAltitude: double\ntype: numPoints: int\ntype: maxDistFromOrigin: double\ntype: uniRand: ns3::Ptr< ns3::UniformRandomVariable >" },
-    {(char *) "GeographicToCartesianCoordinates", (PyCFunction) _wrap_PyNs3GeographicPositions_GeographicToCartesianCoordinates, METH_KEYWORDS|METH_VARARGS|METH_STATIC, "GeographicToCartesianCoordinates(latitude, longitude, altitude, sphType)\n\ntype: latitude: double\ntype: longitude: double\ntype: altitude: double\ntype: sphType: ns3::GeographicPositions::EarthSpheroidType" },
+    {(char *) "GeographicToCartesianCoordinates", (PyCFunction) _wrap_PyNs3GeographicPositions_GeographicToCartesianCoordinates, METH_VARARGS|METH_KEYWORDS|METH_STATIC, "GeographicToCartesianCoordinates(latitude, longitude, altitude, sphType)\n\ntype: latitude: double\ntype: longitude: double\ntype: altitude: double\ntype: sphType: ns3::GeographicPositions::EarthSpheroidType" },
+    {(char *) "RandCartesianPointsAroundGeographicPoint", (PyCFunction) _wrap_PyNs3GeographicPositions_RandCartesianPointsAroundGeographicPoint, METH_VARARGS|METH_KEYWORDS|METH_STATIC, "RandCartesianPointsAroundGeographicPoint(originLatitude, originLongitude, maxAltitude, numPoints, maxDistFromOrigin, uniRand)\n\ntype: originLatitude: double\ntype: originLongitude: double\ntype: maxAltitude: double\ntype: numPoints: int\ntype: maxDistFromOrigin: double\ntype: uniRand: ns3::Ptr< ns3::UniformRandomVariable >" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3GeographicPositions__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -1925,6 +1925,407 @@ int _wrap_PyNs3MobilityHelper__tp_init(PyNs3MobilityHelper *self, PyObject *args
 }
 
 
+PyObject *
+_wrap_PyNs3MobilityHelper_AssignStreams(PyNs3MobilityHelper *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int64_t retval;
+    PyNs3NodeContainer *c;
+    int64_t stream;
+    const char *keywords[] = {"c", "stream", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!L", (char **) keywords, &PyNs3NodeContainer_Type, &c, &stream)) {
+        return NULL;
+    }
+    retval = self->obj->AssignStreams(*((PyNs3NodeContainer *) c)->obj, stream);
+    py_retval = Py_BuildValue((char *) "L", retval);
+    return py_retval;
+}
+
+
+
+PyObject *
+_wrap_PyNs3MobilityHelper_EnableAscii__0(PyNs3MobilityHelper *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    PyNs3OutputStreamWrapper *stream;
+    ns3::OutputStreamWrapper *stream_ptr;
+    unsigned int nodeid;
+    const char *keywords[] = {"stream", "nodeid", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!I", (char **) keywords, &PyNs3OutputStreamWrapper_Type, &stream, &nodeid)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    stream_ptr = (stream ? stream->obj : NULL);
+    ns3::MobilityHelper::EnableAscii(ns3::Ptr< ns3::OutputStreamWrapper  > (stream_ptr), nodeid);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject *
+_wrap_PyNs3MobilityHelper_EnableAscii__1(PyNs3MobilityHelper *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    PyNs3OutputStreamWrapper *stream;
+    ns3::OutputStreamWrapper *stream_ptr;
+    PyNs3NodeContainer *n;
+    const char *keywords[] = {"stream", "n", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3OutputStreamWrapper_Type, &stream, &PyNs3NodeContainer_Type, &n)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    stream_ptr = (stream ? stream->obj : NULL);
+    ns3::MobilityHelper::EnableAscii(ns3::Ptr< ns3::OutputStreamWrapper  > (stream_ptr), *((PyNs3NodeContainer *) n)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject * _wrap_PyNs3MobilityHelper_EnableAscii(PyNs3MobilityHelper *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject * retval;
+    PyObject *error_list;
+    PyObject *exceptions[2] = {0,};
+    retval = _wrap_PyNs3MobilityHelper_EnableAscii__0(self, args, kwargs, &exceptions[0]);
+    if (!exceptions[0]) {
+        return retval;
+    }
+    retval = _wrap_PyNs3MobilityHelper_EnableAscii__1(self, args, kwargs, &exceptions[1]);
+    if (!exceptions[1]) {
+        Py_DECREF(exceptions[0]);
+        return retval;
+    }
+    error_list = PyList_New(2);
+    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
+    Py_DECREF(exceptions[0]);
+    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
+    Py_DECREF(exceptions[1]);
+    PyErr_SetObject(PyExc_TypeError, error_list);
+    Py_DECREF(error_list);
+    return NULL;
+}
+
+
+PyObject *
+_wrap_PyNs3MobilityHelper_EnableAsciiAll(PyNs3MobilityHelper *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3OutputStreamWrapper *stream;
+    ns3::OutputStreamWrapper *stream_ptr;
+    const char *keywords[] = {"stream", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3OutputStreamWrapper_Type, &stream)) {
+        return NULL;
+    }
+    stream_ptr = (stream ? stream->obj : NULL);
+    ns3::MobilityHelper::EnableAsciiAll(ns3::Ptr< ns3::OutputStreamWrapper  > (stream_ptr));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3MobilityHelper_GetDistanceSquaredBetween(PyNs3MobilityHelper *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    double retval;
+    PyNs3Node *n1;
+    ns3::Node *n1_ptr;
+    PyNs3Node *n2;
+    ns3::Node *n2_ptr;
+    const char *keywords[] = {"n1", "n2", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3Node_Type, &n1, &PyNs3Node_Type, &n2)) {
+        return NULL;
+    }
+    n1_ptr = (n1 ? n1->obj : NULL);
+    n2_ptr = (n2 ? n2->obj : NULL);
+    retval = ns3::MobilityHelper::GetDistanceSquaredBetween(ns3::Ptr< ns3::Node  > (n1_ptr), ns3::Ptr< ns3::Node  > (n2_ptr));
+    py_retval = Py_BuildValue((char *) "d", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3MobilityHelper_GetMobilityModelType(PyNs3MobilityHelper *self)
+{
+    PyObject *py_retval;
+    std::string retval;
+    
+    retval = self->obj->GetMobilityModelType();
+    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    return py_retval;
+}
+
+
+
+PyObject *
+_wrap_PyNs3MobilityHelper_Install__0(PyNs3MobilityHelper *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    PyNs3Node *node;
+    ns3::Node *node_ptr;
+    const char *keywords[] = {"node", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Node_Type, &node)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    node_ptr = (node ? node->obj : NULL);
+    self->obj->Install(ns3::Ptr< ns3::Node  > (node_ptr));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject *
+_wrap_PyNs3MobilityHelper_Install__1(PyNs3MobilityHelper *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    const char *nodeName;
+    Py_ssize_t nodeName_len;
+    const char *keywords[] = {"nodeName", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#", (char **) keywords, &nodeName, &nodeName_len)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    self->obj->Install(std::string(nodeName, nodeName_len));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject *
+_wrap_PyNs3MobilityHelper_Install__2(PyNs3MobilityHelper *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    PyNs3NodeContainer *container;
+    const char *keywords[] = {"container", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3NodeContainer_Type, &container)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    self->obj->Install(*((PyNs3NodeContainer *) container)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject * _wrap_PyNs3MobilityHelper_Install(PyNs3MobilityHelper *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject * retval;
+    PyObject *error_list;
+    PyObject *exceptions[3] = {0,};
+    retval = _wrap_PyNs3MobilityHelper_Install__0(self, args, kwargs, &exceptions[0]);
+    if (!exceptions[0]) {
+        return retval;
+    }
+    retval = _wrap_PyNs3MobilityHelper_Install__1(self, args, kwargs, &exceptions[1]);
+    if (!exceptions[1]) {
+        Py_DECREF(exceptions[0]);
+        return retval;
+    }
+    retval = _wrap_PyNs3MobilityHelper_Install__2(self, args, kwargs, &exceptions[2]);
+    if (!exceptions[2]) {
+        Py_DECREF(exceptions[0]);
+        Py_DECREF(exceptions[1]);
+        return retval;
+    }
+    error_list = PyList_New(3);
+    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
+    Py_DECREF(exceptions[0]);
+    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
+    Py_DECREF(exceptions[1]);
+    PyList_SET_ITEM(error_list, 2, PyObject_Str(exceptions[2]));
+    Py_DECREF(exceptions[2]);
+    PyErr_SetObject(PyExc_TypeError, error_list);
+    Py_DECREF(error_list);
+    return NULL;
+}
+
+
+PyObject *
+_wrap_PyNs3MobilityHelper_InstallAll(PyNs3MobilityHelper *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->InstallAll();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3MobilityHelper_PopReferenceMobilityModel(PyNs3MobilityHelper *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->PopReferenceMobilityModel();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+
+PyObject *
+_wrap_PyNs3MobilityHelper_PushReferenceMobilityModel__0(PyNs3MobilityHelper *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    PyNs3Object *reference;
+    ns3::Object *reference_ptr;
+    const char *keywords[] = {"reference", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Object_Type, &reference)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    reference_ptr = (reference ? reference->obj : NULL);
+    self->obj->PushReferenceMobilityModel(ns3::Ptr< ns3::Object  > (reference_ptr));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject *
+_wrap_PyNs3MobilityHelper_PushReferenceMobilityModel__1(PyNs3MobilityHelper *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    const char *referenceName;
+    Py_ssize_t referenceName_len;
+    const char *keywords[] = {"referenceName", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#", (char **) keywords, &referenceName, &referenceName_len)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    self->obj->PushReferenceMobilityModel(std::string(referenceName, referenceName_len));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject * _wrap_PyNs3MobilityHelper_PushReferenceMobilityModel(PyNs3MobilityHelper *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject * retval;
+    PyObject *error_list;
+    PyObject *exceptions[2] = {0,};
+    retval = _wrap_PyNs3MobilityHelper_PushReferenceMobilityModel__0(self, args, kwargs, &exceptions[0]);
+    if (!exceptions[0]) {
+        return retval;
+    }
+    retval = _wrap_PyNs3MobilityHelper_PushReferenceMobilityModel__1(self, args, kwargs, &exceptions[1]);
+    if (!exceptions[1]) {
+        Py_DECREF(exceptions[0]);
+        return retval;
+    }
+    error_list = PyList_New(2);
+    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
+    Py_DECREF(exceptions[0]);
+    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
+    Py_DECREF(exceptions[1]);
+    PyErr_SetObject(PyExc_TypeError, error_list);
+    Py_DECREF(error_list);
+    return NULL;
+}
+
+
+PyObject *
+_wrap_PyNs3MobilityHelper_SetMobilityModel(PyNs3MobilityHelper *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    const char *type;
+    Py_ssize_t type_len;
+    const char *n1 = NULL;
+    Py_ssize_t n1_len;
+    PyNs3AttributeValue *v1 = NULL;
+    ns3::EmptyAttributeValue v1_default = ns3::EmptyAttributeValue();
+    const char *n2 = NULL;
+    Py_ssize_t n2_len;
+    PyNs3AttributeValue *v2 = NULL;
+    ns3::EmptyAttributeValue v2_default = ns3::EmptyAttributeValue();
+    const char *n3 = NULL;
+    Py_ssize_t n3_len;
+    PyNs3AttributeValue *v3 = NULL;
+    ns3::EmptyAttributeValue v3_default = ns3::EmptyAttributeValue();
+    const char *n4 = NULL;
+    Py_ssize_t n4_len;
+    PyNs3AttributeValue *v4 = NULL;
+    ns3::EmptyAttributeValue v4_default = ns3::EmptyAttributeValue();
+    const char *n5 = NULL;
+    Py_ssize_t n5_len;
+    PyNs3AttributeValue *v5 = NULL;
+    ns3::EmptyAttributeValue v5_default = ns3::EmptyAttributeValue();
+    const char *n6 = NULL;
+    Py_ssize_t n6_len;
+    PyNs3AttributeValue *v6 = NULL;
+    ns3::EmptyAttributeValue v6_default = ns3::EmptyAttributeValue();
+    const char *n7 = NULL;
+    Py_ssize_t n7_len;
+    PyNs3AttributeValue *v7 = NULL;
+    ns3::EmptyAttributeValue v7_default = ns3::EmptyAttributeValue();
+    const char *n8 = NULL;
+    Py_ssize_t n8_len;
+    PyNs3AttributeValue *v8 = NULL;
+    ns3::EmptyAttributeValue v8_default = ns3::EmptyAttributeValue();
+    const char *n9 = NULL;
+    Py_ssize_t n9_len;
+    PyNs3AttributeValue *v9 = NULL;
+    ns3::EmptyAttributeValue v9_default = ns3::EmptyAttributeValue();
+    const char *keywords[] = {"type", "n1", "v1", "n2", "v2", "n3", "v3", "n4", "v4", "n5", "v5", "n6", "v6", "n7", "v7", "n8", "v8", "n9", "v9", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#|s#O!s#O!s#O!s#O!s#O!s#O!s#O!s#O!s#O!", (char **) keywords, &type, &type_len, &n1, &n1_len, &PyNs3AttributeValue_Type, &v1, &n2, &n2_len, &PyNs3AttributeValue_Type, &v2, &n3, &n3_len, &PyNs3AttributeValue_Type, &v3, &n4, &n4_len, &PyNs3AttributeValue_Type, &v4, &n5, &n5_len, &PyNs3AttributeValue_Type, &v5, &n6, &n6_len, &PyNs3AttributeValue_Type, &v6, &n7, &n7_len, &PyNs3AttributeValue_Type, &v7, &n8, &n8_len, &PyNs3AttributeValue_Type, &v8, &n9, &n9_len, &PyNs3AttributeValue_Type, &v9)) {
+        return NULL;
+    }
+    self->obj->SetMobilityModel(std::string(type, type_len), (n1 ? std::string(n1, n1_len) : ""), (v1 ? (*((PyNs3AttributeValue *) v1)->obj) : v1_default), (n2 ? std::string(n2, n2_len) : ""), (v2 ? (*((PyNs3AttributeValue *) v2)->obj) : v2_default), (n3 ? std::string(n3, n3_len) : ""), (v3 ? (*((PyNs3AttributeValue *) v3)->obj) : v3_default), (n4 ? std::string(n4, n4_len) : ""), (v4 ? (*((PyNs3AttributeValue *) v4)->obj) : v4_default), (n5 ? std::string(n5, n5_len) : ""), (v5 ? (*((PyNs3AttributeValue *) v5)->obj) : v5_default), (n6 ? std::string(n6, n6_len) : ""), (v6 ? (*((PyNs3AttributeValue *) v6)->obj) : v6_default), (n7 ? std::string(n7, n7_len) : ""), (v7 ? (*((PyNs3AttributeValue *) v7)->obj) : v7_default), (n8 ? std::string(n8, n8_len) : ""), (v8 ? (*((PyNs3AttributeValue *) v8)->obj) : v8_default), (n9 ? std::string(n9, n9_len) : ""), (v9 ? (*((PyNs3AttributeValue *) v9)->obj) : v9_default));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
 
 PyObject *
 _wrap_PyNs3MobilityHelper_SetPositionAllocator__0(PyNs3MobilityHelper *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
@@ -2034,407 +2435,6 @@ PyObject * _wrap_PyNs3MobilityHelper_SetPositionAllocator(PyNs3MobilityHelper *s
 }
 
 
-PyObject *
-_wrap_PyNs3MobilityHelper_EnableAsciiAll(PyNs3MobilityHelper *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3OutputStreamWrapper *stream;
-    ns3::OutputStreamWrapper *stream_ptr;
-    const char *keywords[] = {"stream", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3OutputStreamWrapper_Type, &stream)) {
-        return NULL;
-    }
-    stream_ptr = (stream ? stream->obj : NULL);
-    ns3::MobilityHelper::EnableAsciiAll(ns3::Ptr< ns3::OutputStreamWrapper  > (stream_ptr));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MobilityHelper_GetDistanceSquaredBetween(PyNs3MobilityHelper *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    double retval;
-    PyNs3Node *n1;
-    ns3::Node *n1_ptr;
-    PyNs3Node *n2;
-    ns3::Node *n2_ptr;
-    const char *keywords[] = {"n1", "n2", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3Node_Type, &n1, &PyNs3Node_Type, &n2)) {
-        return NULL;
-    }
-    n1_ptr = (n1 ? n1->obj : NULL);
-    n2_ptr = (n2 ? n2->obj : NULL);
-    retval = ns3::MobilityHelper::GetDistanceSquaredBetween(ns3::Ptr< ns3::Node  > (n1_ptr), ns3::Ptr< ns3::Node  > (n2_ptr));
-    py_retval = Py_BuildValue((char *) "d", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MobilityHelper_SetMobilityModel(PyNs3MobilityHelper *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    const char *type;
-    Py_ssize_t type_len;
-    const char *n1 = NULL;
-    Py_ssize_t n1_len;
-    PyNs3AttributeValue *v1 = NULL;
-    ns3::EmptyAttributeValue v1_default = ns3::EmptyAttributeValue();
-    const char *n2 = NULL;
-    Py_ssize_t n2_len;
-    PyNs3AttributeValue *v2 = NULL;
-    ns3::EmptyAttributeValue v2_default = ns3::EmptyAttributeValue();
-    const char *n3 = NULL;
-    Py_ssize_t n3_len;
-    PyNs3AttributeValue *v3 = NULL;
-    ns3::EmptyAttributeValue v3_default = ns3::EmptyAttributeValue();
-    const char *n4 = NULL;
-    Py_ssize_t n4_len;
-    PyNs3AttributeValue *v4 = NULL;
-    ns3::EmptyAttributeValue v4_default = ns3::EmptyAttributeValue();
-    const char *n5 = NULL;
-    Py_ssize_t n5_len;
-    PyNs3AttributeValue *v5 = NULL;
-    ns3::EmptyAttributeValue v5_default = ns3::EmptyAttributeValue();
-    const char *n6 = NULL;
-    Py_ssize_t n6_len;
-    PyNs3AttributeValue *v6 = NULL;
-    ns3::EmptyAttributeValue v6_default = ns3::EmptyAttributeValue();
-    const char *n7 = NULL;
-    Py_ssize_t n7_len;
-    PyNs3AttributeValue *v7 = NULL;
-    ns3::EmptyAttributeValue v7_default = ns3::EmptyAttributeValue();
-    const char *n8 = NULL;
-    Py_ssize_t n8_len;
-    PyNs3AttributeValue *v8 = NULL;
-    ns3::EmptyAttributeValue v8_default = ns3::EmptyAttributeValue();
-    const char *n9 = NULL;
-    Py_ssize_t n9_len;
-    PyNs3AttributeValue *v9 = NULL;
-    ns3::EmptyAttributeValue v9_default = ns3::EmptyAttributeValue();
-    const char *keywords[] = {"type", "n1", "v1", "n2", "v2", "n3", "v3", "n4", "v4", "n5", "v5", "n6", "v6", "n7", "v7", "n8", "v8", "n9", "v9", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#|s#O!s#O!s#O!s#O!s#O!s#O!s#O!s#O!s#O!", (char **) keywords, &type, &type_len, &n1, &n1_len, &PyNs3AttributeValue_Type, &v1, &n2, &n2_len, &PyNs3AttributeValue_Type, &v2, &n3, &n3_len, &PyNs3AttributeValue_Type, &v3, &n4, &n4_len, &PyNs3AttributeValue_Type, &v4, &n5, &n5_len, &PyNs3AttributeValue_Type, &v5, &n6, &n6_len, &PyNs3AttributeValue_Type, &v6, &n7, &n7_len, &PyNs3AttributeValue_Type, &v7, &n8, &n8_len, &PyNs3AttributeValue_Type, &v8, &n9, &n9_len, &PyNs3AttributeValue_Type, &v9)) {
-        return NULL;
-    }
-    self->obj->SetMobilityModel(std::string(type, type_len), (n1 ? std::string(n1, n1_len) : ""), (v1 ? (*((PyNs3AttributeValue *) v1)->obj) : v1_default), (n2 ? std::string(n2, n2_len) : ""), (v2 ? (*((PyNs3AttributeValue *) v2)->obj) : v2_default), (n3 ? std::string(n3, n3_len) : ""), (v3 ? (*((PyNs3AttributeValue *) v3)->obj) : v3_default), (n4 ? std::string(n4, n4_len) : ""), (v4 ? (*((PyNs3AttributeValue *) v4)->obj) : v4_default), (n5 ? std::string(n5, n5_len) : ""), (v5 ? (*((PyNs3AttributeValue *) v5)->obj) : v5_default), (n6 ? std::string(n6, n6_len) : ""), (v6 ? (*((PyNs3AttributeValue *) v6)->obj) : v6_default), (n7 ? std::string(n7, n7_len) : ""), (v7 ? (*((PyNs3AttributeValue *) v7)->obj) : v7_default), (n8 ? std::string(n8, n8_len) : ""), (v8 ? (*((PyNs3AttributeValue *) v8)->obj) : v8_default), (n9 ? std::string(n9, n9_len) : ""), (v9 ? (*((PyNs3AttributeValue *) v9)->obj) : v9_default));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MobilityHelper_InstallAll(PyNs3MobilityHelper *self)
-{
-    PyObject *py_retval;
-    
-    self->obj->InstallAll();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MobilityHelper_PopReferenceMobilityModel(PyNs3MobilityHelper *self)
-{
-    PyObject *py_retval;
-    
-    self->obj->PopReferenceMobilityModel();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MobilityHelper_GetMobilityModelType(PyNs3MobilityHelper *self)
-{
-    PyObject *py_retval;
-    std::string retval;
-    
-    retval = self->obj->GetMobilityModelType();
-    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
-    return py_retval;
-}
-
-
-
-PyObject *
-_wrap_PyNs3MobilityHelper_EnableAscii__0(PyNs3MobilityHelper *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    PyNs3OutputStreamWrapper *stream;
-    ns3::OutputStreamWrapper *stream_ptr;
-    unsigned int nodeid;
-    const char *keywords[] = {"stream", "nodeid", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!I", (char **) keywords, &PyNs3OutputStreamWrapper_Type, &stream, &nodeid)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    stream_ptr = (stream ? stream->obj : NULL);
-    ns3::MobilityHelper::EnableAscii(ns3::Ptr< ns3::OutputStreamWrapper  > (stream_ptr), nodeid);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject *
-_wrap_PyNs3MobilityHelper_EnableAscii__1(PyNs3MobilityHelper *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    PyNs3OutputStreamWrapper *stream;
-    ns3::OutputStreamWrapper *stream_ptr;
-    PyNs3NodeContainer *n;
-    const char *keywords[] = {"stream", "n", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3OutputStreamWrapper_Type, &stream, &PyNs3NodeContainer_Type, &n)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    stream_ptr = (stream ? stream->obj : NULL);
-    ns3::MobilityHelper::EnableAscii(ns3::Ptr< ns3::OutputStreamWrapper  > (stream_ptr), *((PyNs3NodeContainer *) n)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject * _wrap_PyNs3MobilityHelper_EnableAscii(PyNs3MobilityHelper *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject * retval;
-    PyObject *error_list;
-    PyObject *exceptions[2] = {0,};
-    retval = _wrap_PyNs3MobilityHelper_EnableAscii__0(self, args, kwargs, &exceptions[0]);
-    if (!exceptions[0]) {
-        return retval;
-    }
-    retval = _wrap_PyNs3MobilityHelper_EnableAscii__1(self, args, kwargs, &exceptions[1]);
-    if (!exceptions[1]) {
-        Py_DECREF(exceptions[0]);
-        return retval;
-    }
-    error_list = PyList_New(2);
-    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
-    Py_DECREF(exceptions[0]);
-    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
-    Py_DECREF(exceptions[1]);
-    PyErr_SetObject(PyExc_TypeError, error_list);
-    Py_DECREF(error_list);
-    return NULL;
-}
-
-
-
-PyObject *
-_wrap_PyNs3MobilityHelper_Install__0(PyNs3MobilityHelper *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    PyNs3Node *node;
-    ns3::Node *node_ptr;
-    const char *keywords[] = {"node", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Node_Type, &node)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    node_ptr = (node ? node->obj : NULL);
-    self->obj->Install(ns3::Ptr< ns3::Node  > (node_ptr));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject *
-_wrap_PyNs3MobilityHelper_Install__1(PyNs3MobilityHelper *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    const char *nodeName;
-    Py_ssize_t nodeName_len;
-    const char *keywords[] = {"nodeName", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#", (char **) keywords, &nodeName, &nodeName_len)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    self->obj->Install(std::string(nodeName, nodeName_len));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject *
-_wrap_PyNs3MobilityHelper_Install__2(PyNs3MobilityHelper *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    PyNs3NodeContainer *container;
-    const char *keywords[] = {"container", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3NodeContainer_Type, &container)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    self->obj->Install(*((PyNs3NodeContainer *) container)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject * _wrap_PyNs3MobilityHelper_Install(PyNs3MobilityHelper *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject * retval;
-    PyObject *error_list;
-    PyObject *exceptions[3] = {0,};
-    retval = _wrap_PyNs3MobilityHelper_Install__0(self, args, kwargs, &exceptions[0]);
-    if (!exceptions[0]) {
-        return retval;
-    }
-    retval = _wrap_PyNs3MobilityHelper_Install__1(self, args, kwargs, &exceptions[1]);
-    if (!exceptions[1]) {
-        Py_DECREF(exceptions[0]);
-        return retval;
-    }
-    retval = _wrap_PyNs3MobilityHelper_Install__2(self, args, kwargs, &exceptions[2]);
-    if (!exceptions[2]) {
-        Py_DECREF(exceptions[0]);
-        Py_DECREF(exceptions[1]);
-        return retval;
-    }
-    error_list = PyList_New(3);
-    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
-    Py_DECREF(exceptions[0]);
-    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
-    Py_DECREF(exceptions[1]);
-    PyList_SET_ITEM(error_list, 2, PyObject_Str(exceptions[2]));
-    Py_DECREF(exceptions[2]);
-    PyErr_SetObject(PyExc_TypeError, error_list);
-    Py_DECREF(error_list);
-    return NULL;
-}
-
-
-PyObject *
-_wrap_PyNs3MobilityHelper_AssignStreams(PyNs3MobilityHelper *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int64_t retval;
-    PyNs3NodeContainer *c;
-    int64_t stream;
-    const char *keywords[] = {"c", "stream", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!L", (char **) keywords, &PyNs3NodeContainer_Type, &c, &stream)) {
-        return NULL;
-    }
-    retval = self->obj->AssignStreams(*((PyNs3NodeContainer *) c)->obj, stream);
-    py_retval = Py_BuildValue((char *) "L", retval);
-    return py_retval;
-}
-
-
-
-PyObject *
-_wrap_PyNs3MobilityHelper_PushReferenceMobilityModel__0(PyNs3MobilityHelper *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    PyNs3Object *reference;
-    ns3::Object *reference_ptr;
-    const char *keywords[] = {"reference", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Object_Type, &reference)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    reference_ptr = (reference ? reference->obj : NULL);
-    self->obj->PushReferenceMobilityModel(ns3::Ptr< ns3::Object  > (reference_ptr));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject *
-_wrap_PyNs3MobilityHelper_PushReferenceMobilityModel__1(PyNs3MobilityHelper *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    const char *referenceName;
-    Py_ssize_t referenceName_len;
-    const char *keywords[] = {"referenceName", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#", (char **) keywords, &referenceName, &referenceName_len)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    self->obj->PushReferenceMobilityModel(std::string(referenceName, referenceName_len));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject * _wrap_PyNs3MobilityHelper_PushReferenceMobilityModel(PyNs3MobilityHelper *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject * retval;
-    PyObject *error_list;
-    PyObject *exceptions[2] = {0,};
-    retval = _wrap_PyNs3MobilityHelper_PushReferenceMobilityModel__0(self, args, kwargs, &exceptions[0]);
-    if (!exceptions[0]) {
-        return retval;
-    }
-    retval = _wrap_PyNs3MobilityHelper_PushReferenceMobilityModel__1(self, args, kwargs, &exceptions[1]);
-    if (!exceptions[1]) {
-        Py_DECREF(exceptions[0]);
-        return retval;
-    }
-    error_list = PyList_New(2);
-    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
-    Py_DECREF(exceptions[0]);
-    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
-    Py_DECREF(exceptions[1]);
-    PyErr_SetObject(PyExc_TypeError, error_list);
-    Py_DECREF(error_list);
-    return NULL;
-}
-
-
 static PyObject*
 _wrap_PyNs3MobilityHelper__copy__(PyNs3MobilityHelper *self)
 {
@@ -2448,17 +2448,17 @@ _wrap_PyNs3MobilityHelper__copy__(PyNs3MobilityHelper *self)
 }
 
 static PyMethodDef PyNs3MobilityHelper_methods[] = {
-    {(char *) "SetPositionAllocator", (PyCFunction) _wrap_PyNs3MobilityHelper_SetPositionAllocator, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "EnableAsciiAll", (PyCFunction) _wrap_PyNs3MobilityHelper_EnableAsciiAll, METH_KEYWORDS|METH_VARARGS|METH_STATIC, "EnableAsciiAll(stream)\n\ntype: stream: ns3::Ptr< ns3::OutputStreamWrapper >" },
-    {(char *) "GetDistanceSquaredBetween", (PyCFunction) _wrap_PyNs3MobilityHelper_GetDistanceSquaredBetween, METH_KEYWORDS|METH_VARARGS|METH_STATIC, "GetDistanceSquaredBetween(n1, n2)\n\ntype: n1: ns3::Ptr< ns3::Node >\ntype: n2: ns3::Ptr< ns3::Node >" },
-    {(char *) "SetMobilityModel", (PyCFunction) _wrap_PyNs3MobilityHelper_SetMobilityModel, METH_KEYWORDS|METH_VARARGS, "SetMobilityModel(type, n1, v1, n2, v2, n3, v3, n4, v4, n5, v5, n6, v6, n7, v7, n8, v8, n9, v9)\n\ntype: type: std::string\ntype: n1: std::string\ntype: v1: ns3::AttributeValue const &\ntype: n2: std::string\ntype: v2: ns3::AttributeValue const &\ntype: n3: std::string\ntype: v3: ns3::AttributeValue const &\ntype: n4: std::string\ntype: v4: ns3::AttributeValue const &\ntype: n5: std::string\ntype: v5: ns3::AttributeValue const &\ntype: n6: std::string\ntype: v6: ns3::AttributeValue const &\ntype: n7: std::string\ntype: v7: ns3::AttributeValue const &\ntype: n8: std::string\ntype: v8: ns3::AttributeValue const &\ntype: n9: std::string\ntype: v9: ns3::AttributeValue const &" },
+    {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3MobilityHelper_AssignStreams, METH_VARARGS|METH_KEYWORDS, "AssignStreams(c, stream)\n\ntype: c: ns3::NodeContainer\ntype: stream: int64_t" },
+    {(char *) "EnableAscii", (PyCFunction) _wrap_PyNs3MobilityHelper_EnableAscii, METH_VARARGS|METH_KEYWORDS|METH_STATIC, NULL },
+    {(char *) "EnableAsciiAll", (PyCFunction) _wrap_PyNs3MobilityHelper_EnableAsciiAll, METH_VARARGS|METH_KEYWORDS|METH_STATIC, "EnableAsciiAll(stream)\n\ntype: stream: ns3::Ptr< ns3::OutputStreamWrapper >" },
+    {(char *) "GetDistanceSquaredBetween", (PyCFunction) _wrap_PyNs3MobilityHelper_GetDistanceSquaredBetween, METH_VARARGS|METH_KEYWORDS|METH_STATIC, "GetDistanceSquaredBetween(n1, n2)\n\ntype: n1: ns3::Ptr< ns3::Node >\ntype: n2: ns3::Ptr< ns3::Node >" },
+    {(char *) "GetMobilityModelType", (PyCFunction) _wrap_PyNs3MobilityHelper_GetMobilityModelType, METH_NOARGS, "GetMobilityModelType()\n\n" },
+    {(char *) "Install", (PyCFunction) _wrap_PyNs3MobilityHelper_Install, METH_VARARGS|METH_KEYWORDS, NULL },
     {(char *) "InstallAll", (PyCFunction) _wrap_PyNs3MobilityHelper_InstallAll, METH_NOARGS, "InstallAll()\n\n" },
     {(char *) "PopReferenceMobilityModel", (PyCFunction) _wrap_PyNs3MobilityHelper_PopReferenceMobilityModel, METH_NOARGS, "PopReferenceMobilityModel()\n\n" },
-    {(char *) "GetMobilityModelType", (PyCFunction) _wrap_PyNs3MobilityHelper_GetMobilityModelType, METH_NOARGS, "GetMobilityModelType()\n\n" },
-    {(char *) "EnableAscii", (PyCFunction) _wrap_PyNs3MobilityHelper_EnableAscii, METH_KEYWORDS|METH_VARARGS|METH_STATIC, NULL },
-    {(char *) "Install", (PyCFunction) _wrap_PyNs3MobilityHelper_Install, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3MobilityHelper_AssignStreams, METH_KEYWORDS|METH_VARARGS, "AssignStreams(c, stream)\n\ntype: c: ns3::NodeContainer\ntype: stream: int64_t" },
-    {(char *) "PushReferenceMobilityModel", (PyCFunction) _wrap_PyNs3MobilityHelper_PushReferenceMobilityModel, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "PushReferenceMobilityModel", (PyCFunction) _wrap_PyNs3MobilityHelper_PushReferenceMobilityModel, METH_VARARGS|METH_KEYWORDS, NULL },
+    {(char *) "SetMobilityModel", (PyCFunction) _wrap_PyNs3MobilityHelper_SetMobilityModel, METH_VARARGS|METH_KEYWORDS, "SetMobilityModel(type, n1, v1, n2, v2, n3, v3, n4, v4, n5, v5, n6, v6, n7, v7, n8, v8, n9, v9)\n\ntype: type: std::string\ntype: n1: std::string\ntype: v1: ns3::AttributeValue const &\ntype: n2: std::string\ntype: v2: ns3::AttributeValue const &\ntype: n3: std::string\ntype: v3: ns3::AttributeValue const &\ntype: n4: std::string\ntype: v4: ns3::AttributeValue const &\ntype: n5: std::string\ntype: v5: ns3::AttributeValue const &\ntype: n6: std::string\ntype: v6: ns3::AttributeValue const &\ntype: n7: std::string\ntype: v7: ns3::AttributeValue const &\ntype: n8: std::string\ntype: v8: ns3::AttributeValue const &\ntype: n9: std::string\ntype: v9: ns3::AttributeValue const &" },
+    {(char *) "SetPositionAllocator", (PyCFunction) _wrap_PyNs3MobilityHelper_SetPositionAllocator, METH_VARARGS|METH_KEYWORDS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3MobilityHelper__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -2853,16 +2853,16 @@ static int _wrap_PyNs3Rectangle__set_yMin(PyNs3Rectangle *self, PyObject *value,
 }
 static PyGetSetDef PyNs3Rectangle__getsets[] = {
     {
-        (char*) "xMin", /* attribute name */
-        (getter) _wrap_PyNs3Rectangle__get_xMin, /* C function to get the attribute */
-        (setter) _wrap_PyNs3Rectangle__set_xMin, /* C function to set the attribute */
+        (char*) "xMax", /* attribute name */
+        (getter) _wrap_PyNs3Rectangle__get_xMax, /* C function to get the attribute */
+        (setter) _wrap_PyNs3Rectangle__set_xMax, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
     {
-        (char*) "yMin", /* attribute name */
-        (getter) _wrap_PyNs3Rectangle__get_yMin, /* C function to get the attribute */
-        (setter) _wrap_PyNs3Rectangle__set_yMin, /* C function to set the attribute */
+        (char*) "xMin", /* attribute name */
+        (getter) _wrap_PyNs3Rectangle__get_xMin, /* C function to get the attribute */
+        (setter) _wrap_PyNs3Rectangle__set_xMin, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -2874,9 +2874,9 @@ static PyGetSetDef PyNs3Rectangle__getsets[] = {
         NULL /* optional additional data for getter and setter */
     },
     {
-        (char*) "xMax", /* attribute name */
-        (getter) _wrap_PyNs3Rectangle__get_xMax, /* C function to get the attribute */
-        (setter) _wrap_PyNs3Rectangle__set_xMax, /* C function to set the attribute */
+        (char*) "yMin", /* attribute name */
+        (getter) _wrap_PyNs3Rectangle__get_yMin, /* C function to get the attribute */
+        (setter) _wrap_PyNs3Rectangle__set_yMin, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -2980,6 +2980,28 @@ int _wrap_PyNs3Rectangle__tp_init(PyNs3Rectangle *self, PyObject *args, PyObject
 
 
 PyObject *
+_wrap_PyNs3Rectangle_CalculateIntersection(PyNs3Rectangle *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Vector3D *current;
+    PyNs3Vector3D *speed;
+    const char *keywords[] = {"current", "speed", NULL};
+    PyNs3Vector3D *py_Vector3D;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3Vector3D_Type, &current, &PyNs3Vector3D_Type, &speed)) {
+        return NULL;
+    }
+    ns3::Vector retval = self->obj->CalculateIntersection(*((PyNs3Vector3D *) current)->obj, *((PyNs3Vector3D *) speed)->obj);
+    py_Vector3D = PyObject_New(PyNs3Vector3D, &PyNs3Vector3D_Type);
+    py_Vector3D->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Vector3D->obj = new ns3::Vector3D(retval);
+    PyNs3Vector3D_wrapper_registry[(void *) py_Vector3D->obj] = (PyObject *) py_Vector3D;
+    py_retval = Py_BuildValue((char *) "N", py_Vector3D);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3Rectangle_GetClosestSide(PyNs3Rectangle *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -3013,28 +3035,6 @@ _wrap_PyNs3Rectangle_IsInside(PyNs3Rectangle *self, PyObject *args, PyObject *kw
 }
 
 
-PyObject *
-_wrap_PyNs3Rectangle_CalculateIntersection(PyNs3Rectangle *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Vector3D *current;
-    PyNs3Vector3D *speed;
-    const char *keywords[] = {"current", "speed", NULL};
-    PyNs3Vector3D *py_Vector3D;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3Vector3D_Type, &current, &PyNs3Vector3D_Type, &speed)) {
-        return NULL;
-    }
-    ns3::Vector retval = self->obj->CalculateIntersection(*((PyNs3Vector3D *) current)->obj, *((PyNs3Vector3D *) speed)->obj);
-    py_Vector3D = PyObject_New(PyNs3Vector3D, &PyNs3Vector3D_Type);
-    py_Vector3D->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Vector3D->obj = new ns3::Vector3D(retval);
-    PyNs3Vector3D_wrapper_registry[(void *) py_Vector3D->obj] = (PyObject *) py_Vector3D;
-    py_retval = Py_BuildValue((char *) "N", py_Vector3D);
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3Rectangle__copy__(PyNs3Rectangle *self)
 {
@@ -3048,9 +3048,9 @@ _wrap_PyNs3Rectangle__copy__(PyNs3Rectangle *self)
 }
 
 static PyMethodDef PyNs3Rectangle_methods[] = {
-    {(char *) "GetClosestSide", (PyCFunction) _wrap_PyNs3Rectangle_GetClosestSide, METH_KEYWORDS|METH_VARARGS, "GetClosestSide(position)\n\ntype: position: ns3::Vector const &" },
-    {(char *) "IsInside", (PyCFunction) _wrap_PyNs3Rectangle_IsInside, METH_KEYWORDS|METH_VARARGS, "IsInside(position)\n\ntype: position: ns3::Vector const &" },
-    {(char *) "CalculateIntersection", (PyCFunction) _wrap_PyNs3Rectangle_CalculateIntersection, METH_KEYWORDS|METH_VARARGS, "CalculateIntersection(current, speed)\n\ntype: current: ns3::Vector const &\ntype: speed: ns3::Vector const &" },
+    {(char *) "CalculateIntersection", (PyCFunction) _wrap_PyNs3Rectangle_CalculateIntersection, METH_VARARGS|METH_KEYWORDS, "CalculateIntersection(current, speed)\n\ntype: current: ns3::Vector const &\ntype: speed: ns3::Vector const &" },
+    {(char *) "GetClosestSide", (PyCFunction) _wrap_PyNs3Rectangle_GetClosestSide, METH_VARARGS|METH_KEYWORDS, "GetClosestSide(position)\n\ntype: position: ns3::Vector const &" },
+    {(char *) "IsInside", (PyCFunction) _wrap_PyNs3Rectangle_IsInside, METH_VARARGS|METH_KEYWORDS, "IsInside(position)\n\ntype: position: ns3::Vector const &" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3Rectangle__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -3473,16 +3473,16 @@ PyTypeObject PyNs3Waypoint_Type = {
 
 
 PyObject *
-PyNs3PositionAllocator__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3PositionAllocator *self)
+PyNs3PositionAllocator__PythonHelper::_wrap_DoDispose(PyNs3PositionAllocator *self)
 {
     PyObject *py_retval;
     PyNs3PositionAllocator__PythonHelper *helper = dynamic_cast< PyNs3PositionAllocator__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -3521,16 +3521,16 @@ PyNs3PositionAllocator__PythonHelper::_wrap_NotifyNewAggregate(PyNs3PositionAllo
 }
 
 PyObject *
-PyNs3PositionAllocator__PythonHelper::_wrap_DoDispose(PyNs3PositionAllocator *self)
+PyNs3PositionAllocator__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3PositionAllocator *self)
 {
     PyObject *py_retval;
     PyNs3PositionAllocator__PythonHelper *helper = dynamic_cast< PyNs3PositionAllocator__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -3951,6 +3951,23 @@ int _wrap_PyNs3PositionAllocator__tp_init(PyNs3PositionAllocator *self, PyObject
 
 
 PyObject *
+_wrap_PyNs3PositionAllocator_AssignStreams(PyNs3PositionAllocator *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int64_t retval;
+    int64_t stream;
+    const char *keywords[] = {"stream", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "L", (char **) keywords, &stream)) {
+        return NULL;
+    }
+    retval = self->obj->AssignStreams(stream);
+    py_retval = Py_BuildValue((char *) "L", retval);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3PositionAllocator_GetNext(PyNs3PositionAllocator *self)
 {
     PyObject *py_retval;
@@ -3981,31 +3998,14 @@ _wrap_PyNs3PositionAllocator_GetTypeId(void)
     return py_retval;
 }
 
-
-PyObject *
-_wrap_PyNs3PositionAllocator_AssignStreams(PyNs3PositionAllocator *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int64_t retval;
-    int64_t stream;
-    const char *keywords[] = {"stream", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "L", (char **) keywords, &stream)) {
-        return NULL;
-    }
-    retval = self->obj->AssignStreams(stream);
-    py_retval = Py_BuildValue((char *) "L", retval);
-    return py_retval;
-}
-
 static PyMethodDef PyNs3PositionAllocator_methods[] = {
+    {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3PositionAllocator_AssignStreams, METH_VARARGS|METH_KEYWORDS, "AssignStreams(stream)\n\ntype: stream: int64_t" },
     {(char *) "GetNext", (PyCFunction) _wrap_PyNs3PositionAllocator_GetNext, METH_NOARGS, "GetNext()\n\n" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3PositionAllocator_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3PositionAllocator_AssignStreams, METH_KEYWORDS|METH_VARARGS, "AssignStreams(stream)\n\ntype: stream: int64_t" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3PositionAllocator__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "DoDispose", (PyCFunction) PyNs3PositionAllocator__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3PositionAllocator__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3PositionAllocator__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3PositionAllocator__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3PositionAllocator__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 
@@ -4104,7 +4104,7 @@ PyTypeObject PyNs3PositionAllocator_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "PositionAllocator(arg0)\nPositionAllocator()",                        /* Documentation string */
     (traverseproc)PyNs3PositionAllocator__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3PositionAllocator__tp_clear,             /* tp_clear */
@@ -4137,16 +4137,16 @@ PyTypeObject PyNs3PositionAllocator_Type = {
 
 
 PyObject *
-PyNs3RandomBoxPositionAllocator__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3RandomBoxPositionAllocator *self)
+PyNs3RandomBoxPositionAllocator__PythonHelper::_wrap_DoDispose(PyNs3RandomBoxPositionAllocator *self)
 {
     PyObject *py_retval;
     PyNs3RandomBoxPositionAllocator__PythonHelper *helper = dynamic_cast< PyNs3RandomBoxPositionAllocator__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -4185,16 +4185,16 @@ PyNs3RandomBoxPositionAllocator__PythonHelper::_wrap_NotifyNewAggregate(PyNs3Ran
 }
 
 PyObject *
-PyNs3RandomBoxPositionAllocator__PythonHelper::_wrap_DoDispose(PyNs3RandomBoxPositionAllocator *self)
+PyNs3RandomBoxPositionAllocator__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3RandomBoxPositionAllocator *self)
 {
     PyObject *py_retval;
     PyNs3RandomBoxPositionAllocator__PythonHelper *helper = dynamic_cast< PyNs3RandomBoxPositionAllocator__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -4610,6 +4610,24 @@ int _wrap_PyNs3RandomBoxPositionAllocator__tp_init(PyNs3RandomBoxPositionAllocat
 
 
 PyObject *
+_wrap_PyNs3RandomBoxPositionAllocator_AssignStreams(PyNs3RandomBoxPositionAllocator *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int64_t retval;
+    int64_t stream;
+    PyNs3RandomBoxPositionAllocator__PythonHelper *helper_class = dynamic_cast<PyNs3RandomBoxPositionAllocator__PythonHelper*> (self->obj);
+    const char *keywords[] = {"stream", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "L", (char **) keywords, &stream)) {
+        return NULL;
+    }
+    retval = (helper_class == NULL)? (self->obj->AssignStreams(stream)) : (self->obj->ns3::RandomBoxPositionAllocator::AssignStreams(stream));
+    py_retval = Py_BuildValue((char *) "L", retval);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3RandomBoxPositionAllocator_GetNext(PyNs3RandomBoxPositionAllocator *self)
 {
     PyObject *py_retval;
@@ -4638,24 +4656,6 @@ _wrap_PyNs3RandomBoxPositionAllocator_GetTypeId(void)
     py_TypeId->obj = new ns3::TypeId(retval);
     PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
     py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RandomBoxPositionAllocator_AssignStreams(PyNs3RandomBoxPositionAllocator *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int64_t retval;
-    int64_t stream;
-    PyNs3RandomBoxPositionAllocator__PythonHelper *helper_class = dynamic_cast<PyNs3RandomBoxPositionAllocator__PythonHelper*> (self->obj);
-    const char *keywords[] = {"stream", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "L", (char **) keywords, &stream)) {
-        return NULL;
-    }
-    retval = (helper_class == NULL)? (self->obj->AssignStreams(stream)) : (self->obj->ns3::RandomBoxPositionAllocator::AssignStreams(stream));
-    py_retval = Py_BuildValue((char *) "L", retval);
     return py_retval;
 }
 
@@ -4733,16 +4733,16 @@ _wrap_PyNs3RandomBoxPositionAllocator__copy__(PyNs3RandomBoxPositionAllocator *s
 }
 
 static PyMethodDef PyNs3RandomBoxPositionAllocator_methods[] = {
+    {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3RandomBoxPositionAllocator_AssignStreams, METH_VARARGS|METH_KEYWORDS, "AssignStreams(stream)\n\ntype: stream: int64_t" },
     {(char *) "GetNext", (PyCFunction) _wrap_PyNs3RandomBoxPositionAllocator_GetNext, METH_NOARGS, "GetNext()\n\n" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3RandomBoxPositionAllocator_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3RandomBoxPositionAllocator_AssignStreams, METH_KEYWORDS|METH_VARARGS, "AssignStreams(stream)\n\ntype: stream: int64_t" },
-    {(char *) "SetX", (PyCFunction) _wrap_PyNs3RandomBoxPositionAllocator_SetX, METH_KEYWORDS|METH_VARARGS, "SetX(x)\n\ntype: x: ns3::Ptr< ns3::RandomVariableStream >" },
-    {(char *) "SetY", (PyCFunction) _wrap_PyNs3RandomBoxPositionAllocator_SetY, METH_KEYWORDS|METH_VARARGS, "SetY(y)\n\ntype: y: ns3::Ptr< ns3::RandomVariableStream >" },
-    {(char *) "SetZ", (PyCFunction) _wrap_PyNs3RandomBoxPositionAllocator_SetZ, METH_KEYWORDS|METH_VARARGS, "SetZ(z)\n\ntype: z: ns3::Ptr< ns3::RandomVariableStream >" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3RandomBoxPositionAllocator__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "SetX", (PyCFunction) _wrap_PyNs3RandomBoxPositionAllocator_SetX, METH_VARARGS|METH_KEYWORDS, "SetX(x)\n\ntype: x: ns3::Ptr< ns3::RandomVariableStream >" },
+    {(char *) "SetY", (PyCFunction) _wrap_PyNs3RandomBoxPositionAllocator_SetY, METH_VARARGS|METH_KEYWORDS, "SetY(y)\n\ntype: y: ns3::Ptr< ns3::RandomVariableStream >" },
+    {(char *) "SetZ", (PyCFunction) _wrap_PyNs3RandomBoxPositionAllocator_SetZ, METH_VARARGS|METH_KEYWORDS, "SetZ(z)\n\ntype: z: ns3::Ptr< ns3::RandomVariableStream >" },
+    {(char *) "DoDispose", (PyCFunction) PyNs3RandomBoxPositionAllocator__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3RandomBoxPositionAllocator__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3RandomBoxPositionAllocator__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3RandomBoxPositionAllocator__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3RandomBoxPositionAllocator__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3RandomBoxPositionAllocator__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -4842,7 +4842,7 @@ PyTypeObject PyNs3RandomBoxPositionAllocator_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "RandomBoxPositionAllocator(arg0)\nRandomBoxPositionAllocator()",                        /* Documentation string */
     (traverseproc)PyNs3RandomBoxPositionAllocator__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3RandomBoxPositionAllocator__tp_clear,             /* tp_clear */
@@ -4875,16 +4875,16 @@ PyTypeObject PyNs3RandomBoxPositionAllocator_Type = {
 
 
 PyObject *
-PyNs3RandomDiscPositionAllocator__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3RandomDiscPositionAllocator *self)
+PyNs3RandomDiscPositionAllocator__PythonHelper::_wrap_DoDispose(PyNs3RandomDiscPositionAllocator *self)
 {
     PyObject *py_retval;
     PyNs3RandomDiscPositionAllocator__PythonHelper *helper = dynamic_cast< PyNs3RandomDiscPositionAllocator__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -4923,16 +4923,16 @@ PyNs3RandomDiscPositionAllocator__PythonHelper::_wrap_NotifyNewAggregate(PyNs3Ra
 }
 
 PyObject *
-PyNs3RandomDiscPositionAllocator__PythonHelper::_wrap_DoDispose(PyNs3RandomDiscPositionAllocator *self)
+PyNs3RandomDiscPositionAllocator__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3RandomDiscPositionAllocator *self)
 {
     PyObject *py_retval;
     PyNs3RandomDiscPositionAllocator__PythonHelper *helper = dynamic_cast< PyNs3RandomDiscPositionAllocator__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -5348,6 +5348,24 @@ int _wrap_PyNs3RandomDiscPositionAllocator__tp_init(PyNs3RandomDiscPositionAlloc
 
 
 PyObject *
+_wrap_PyNs3RandomDiscPositionAllocator_AssignStreams(PyNs3RandomDiscPositionAllocator *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int64_t retval;
+    int64_t stream;
+    PyNs3RandomDiscPositionAllocator__PythonHelper *helper_class = dynamic_cast<PyNs3RandomDiscPositionAllocator__PythonHelper*> (self->obj);
+    const char *keywords[] = {"stream", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "L", (char **) keywords, &stream)) {
+        return NULL;
+    }
+    retval = (helper_class == NULL)? (self->obj->AssignStreams(stream)) : (self->obj->ns3::RandomDiscPositionAllocator::AssignStreams(stream));
+    py_retval = Py_BuildValue((char *) "L", retval);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3RandomDiscPositionAllocator_GetNext(PyNs3RandomDiscPositionAllocator *self)
 {
     PyObject *py_retval;
@@ -5419,24 +5437,6 @@ _wrap_PyNs3RandomDiscPositionAllocator_SetTheta(PyNs3RandomDiscPositionAllocator
 
 
 PyObject *
-_wrap_PyNs3RandomDiscPositionAllocator_AssignStreams(PyNs3RandomDiscPositionAllocator *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int64_t retval;
-    int64_t stream;
-    PyNs3RandomDiscPositionAllocator__PythonHelper *helper_class = dynamic_cast<PyNs3RandomDiscPositionAllocator__PythonHelper*> (self->obj);
-    const char *keywords[] = {"stream", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "L", (char **) keywords, &stream)) {
-        return NULL;
-    }
-    retval = (helper_class == NULL)? (self->obj->AssignStreams(stream)) : (self->obj->ns3::RandomDiscPositionAllocator::AssignStreams(stream));
-    py_retval = Py_BuildValue((char *) "L", retval);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3RandomDiscPositionAllocator_SetX(PyNs3RandomDiscPositionAllocator *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -5486,17 +5486,17 @@ _wrap_PyNs3RandomDiscPositionAllocator__copy__(PyNs3RandomDiscPositionAllocator 
 }
 
 static PyMethodDef PyNs3RandomDiscPositionAllocator_methods[] = {
+    {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3RandomDiscPositionAllocator_AssignStreams, METH_VARARGS|METH_KEYWORDS, "AssignStreams(stream)\n\ntype: stream: int64_t" },
     {(char *) "GetNext", (PyCFunction) _wrap_PyNs3RandomDiscPositionAllocator_GetNext, METH_NOARGS, "GetNext()\n\n" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3RandomDiscPositionAllocator_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "SetRho", (PyCFunction) _wrap_PyNs3RandomDiscPositionAllocator_SetRho, METH_KEYWORDS|METH_VARARGS, "SetRho(rho)\n\ntype: rho: ns3::Ptr< ns3::RandomVariableStream >" },
-    {(char *) "SetTheta", (PyCFunction) _wrap_PyNs3RandomDiscPositionAllocator_SetTheta, METH_KEYWORDS|METH_VARARGS, "SetTheta(theta)\n\ntype: theta: ns3::Ptr< ns3::RandomVariableStream >" },
-    {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3RandomDiscPositionAllocator_AssignStreams, METH_KEYWORDS|METH_VARARGS, "AssignStreams(stream)\n\ntype: stream: int64_t" },
-    {(char *) "SetX", (PyCFunction) _wrap_PyNs3RandomDiscPositionAllocator_SetX, METH_KEYWORDS|METH_VARARGS, "SetX(x)\n\ntype: x: double" },
-    {(char *) "SetY", (PyCFunction) _wrap_PyNs3RandomDiscPositionAllocator_SetY, METH_KEYWORDS|METH_VARARGS, "SetY(y)\n\ntype: y: double" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3RandomDiscPositionAllocator__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "SetRho", (PyCFunction) _wrap_PyNs3RandomDiscPositionAllocator_SetRho, METH_VARARGS|METH_KEYWORDS, "SetRho(rho)\n\ntype: rho: ns3::Ptr< ns3::RandomVariableStream >" },
+    {(char *) "SetTheta", (PyCFunction) _wrap_PyNs3RandomDiscPositionAllocator_SetTheta, METH_VARARGS|METH_KEYWORDS, "SetTheta(theta)\n\ntype: theta: ns3::Ptr< ns3::RandomVariableStream >" },
+    {(char *) "SetX", (PyCFunction) _wrap_PyNs3RandomDiscPositionAllocator_SetX, METH_VARARGS|METH_KEYWORDS, "SetX(x)\n\ntype: x: double" },
+    {(char *) "SetY", (PyCFunction) _wrap_PyNs3RandomDiscPositionAllocator_SetY, METH_VARARGS|METH_KEYWORDS, "SetY(y)\n\ntype: y: double" },
+    {(char *) "DoDispose", (PyCFunction) PyNs3RandomDiscPositionAllocator__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3RandomDiscPositionAllocator__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3RandomDiscPositionAllocator__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3RandomDiscPositionAllocator__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3RandomDiscPositionAllocator__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3RandomDiscPositionAllocator__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -5596,7 +5596,7 @@ PyTypeObject PyNs3RandomDiscPositionAllocator_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "RandomDiscPositionAllocator(arg0)\nRandomDiscPositionAllocator()",                        /* Documentation string */
     (traverseproc)PyNs3RandomDiscPositionAllocator__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3RandomDiscPositionAllocator__tp_clear,             /* tp_clear */
@@ -5629,16 +5629,16 @@ PyTypeObject PyNs3RandomDiscPositionAllocator_Type = {
 
 
 PyObject *
-PyNs3RandomRectanglePositionAllocator__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3RandomRectanglePositionAllocator *self)
+PyNs3RandomRectanglePositionAllocator__PythonHelper::_wrap_DoDispose(PyNs3RandomRectanglePositionAllocator *self)
 {
     PyObject *py_retval;
     PyNs3RandomRectanglePositionAllocator__PythonHelper *helper = dynamic_cast< PyNs3RandomRectanglePositionAllocator__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -5677,16 +5677,16 @@ PyNs3RandomRectanglePositionAllocator__PythonHelper::_wrap_NotifyNewAggregate(Py
 }
 
 PyObject *
-PyNs3RandomRectanglePositionAllocator__PythonHelper::_wrap_DoDispose(PyNs3RandomRectanglePositionAllocator *self)
+PyNs3RandomRectanglePositionAllocator__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3RandomRectanglePositionAllocator *self)
 {
     PyObject *py_retval;
     PyNs3RandomRectanglePositionAllocator__PythonHelper *helper = dynamic_cast< PyNs3RandomRectanglePositionAllocator__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -6102,6 +6102,24 @@ int _wrap_PyNs3RandomRectanglePositionAllocator__tp_init(PyNs3RandomRectanglePos
 
 
 PyObject *
+_wrap_PyNs3RandomRectanglePositionAllocator_AssignStreams(PyNs3RandomRectanglePositionAllocator *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int64_t retval;
+    int64_t stream;
+    PyNs3RandomRectanglePositionAllocator__PythonHelper *helper_class = dynamic_cast<PyNs3RandomRectanglePositionAllocator__PythonHelper*> (self->obj);
+    const char *keywords[] = {"stream", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "L", (char **) keywords, &stream)) {
+        return NULL;
+    }
+    retval = (helper_class == NULL)? (self->obj->AssignStreams(stream)) : (self->obj->ns3::RandomRectanglePositionAllocator::AssignStreams(stream));
+    py_retval = Py_BuildValue((char *) "L", retval);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3RandomRectanglePositionAllocator_GetNext(PyNs3RandomRectanglePositionAllocator *self)
 {
     PyObject *py_retval;
@@ -6172,24 +6190,6 @@ _wrap_PyNs3RandomRectanglePositionAllocator_SetY(PyNs3RandomRectanglePositionAll
 }
 
 
-PyObject *
-_wrap_PyNs3RandomRectanglePositionAllocator_AssignStreams(PyNs3RandomRectanglePositionAllocator *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int64_t retval;
-    int64_t stream;
-    PyNs3RandomRectanglePositionAllocator__PythonHelper *helper_class = dynamic_cast<PyNs3RandomRectanglePositionAllocator__PythonHelper*> (self->obj);
-    const char *keywords[] = {"stream", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "L", (char **) keywords, &stream)) {
-        return NULL;
-    }
-    retval = (helper_class == NULL)? (self->obj->AssignStreams(stream)) : (self->obj->ns3::RandomRectanglePositionAllocator::AssignStreams(stream));
-    py_retval = Py_BuildValue((char *) "L", retval);
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3RandomRectanglePositionAllocator__copy__(PyNs3RandomRectanglePositionAllocator *self)
 {
@@ -6206,15 +6206,15 @@ _wrap_PyNs3RandomRectanglePositionAllocator__copy__(PyNs3RandomRectanglePosition
 }
 
 static PyMethodDef PyNs3RandomRectanglePositionAllocator_methods[] = {
+    {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3RandomRectanglePositionAllocator_AssignStreams, METH_VARARGS|METH_KEYWORDS, "AssignStreams(stream)\n\ntype: stream: int64_t" },
     {(char *) "GetNext", (PyCFunction) _wrap_PyNs3RandomRectanglePositionAllocator_GetNext, METH_NOARGS, "GetNext()\n\n" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3RandomRectanglePositionAllocator_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "SetX", (PyCFunction) _wrap_PyNs3RandomRectanglePositionAllocator_SetX, METH_KEYWORDS|METH_VARARGS, "SetX(x)\n\ntype: x: ns3::Ptr< ns3::RandomVariableStream >" },
-    {(char *) "SetY", (PyCFunction) _wrap_PyNs3RandomRectanglePositionAllocator_SetY, METH_KEYWORDS|METH_VARARGS, "SetY(y)\n\ntype: y: ns3::Ptr< ns3::RandomVariableStream >" },
-    {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3RandomRectanglePositionAllocator_AssignStreams, METH_KEYWORDS|METH_VARARGS, "AssignStreams(stream)\n\ntype: stream: int64_t" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3RandomRectanglePositionAllocator__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "SetX", (PyCFunction) _wrap_PyNs3RandomRectanglePositionAllocator_SetX, METH_VARARGS|METH_KEYWORDS, "SetX(x)\n\ntype: x: ns3::Ptr< ns3::RandomVariableStream >" },
+    {(char *) "SetY", (PyCFunction) _wrap_PyNs3RandomRectanglePositionAllocator_SetY, METH_VARARGS|METH_KEYWORDS, "SetY(y)\n\ntype: y: ns3::Ptr< ns3::RandomVariableStream >" },
+    {(char *) "DoDispose", (PyCFunction) PyNs3RandomRectanglePositionAllocator__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3RandomRectanglePositionAllocator__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3RandomRectanglePositionAllocator__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3RandomRectanglePositionAllocator__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3RandomRectanglePositionAllocator__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3RandomRectanglePositionAllocator__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -6314,7 +6314,7 @@ PyTypeObject PyNs3RandomRectanglePositionAllocator_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "RandomRectanglePositionAllocator(arg0)\nRandomRectanglePositionAllocator()",                        /* Documentation string */
     (traverseproc)PyNs3RandomRectanglePositionAllocator__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3RandomRectanglePositionAllocator__tp_clear,             /* tp_clear */
@@ -6347,16 +6347,16 @@ PyTypeObject PyNs3RandomRectanglePositionAllocator_Type = {
 
 
 PyObject *
-PyNs3UniformDiscPositionAllocator__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3UniformDiscPositionAllocator *self)
+PyNs3UniformDiscPositionAllocator__PythonHelper::_wrap_DoDispose(PyNs3UniformDiscPositionAllocator *self)
 {
     PyObject *py_retval;
     PyNs3UniformDiscPositionAllocator__PythonHelper *helper = dynamic_cast< PyNs3UniformDiscPositionAllocator__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -6395,16 +6395,16 @@ PyNs3UniformDiscPositionAllocator__PythonHelper::_wrap_NotifyNewAggregate(PyNs3U
 }
 
 PyObject *
-PyNs3UniformDiscPositionAllocator__PythonHelper::_wrap_DoDispose(PyNs3UniformDiscPositionAllocator *self)
+PyNs3UniformDiscPositionAllocator__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3UniformDiscPositionAllocator *self)
 {
     PyObject *py_retval;
     PyNs3UniformDiscPositionAllocator__PythonHelper *helper = dynamic_cast< PyNs3UniformDiscPositionAllocator__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -6820,6 +6820,24 @@ int _wrap_PyNs3UniformDiscPositionAllocator__tp_init(PyNs3UniformDiscPositionAll
 
 
 PyObject *
+_wrap_PyNs3UniformDiscPositionAllocator_AssignStreams(PyNs3UniformDiscPositionAllocator *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int64_t retval;
+    int64_t stream;
+    PyNs3UniformDiscPositionAllocator__PythonHelper *helper_class = dynamic_cast<PyNs3UniformDiscPositionAllocator__PythonHelper*> (self->obj);
+    const char *keywords[] = {"stream", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "L", (char **) keywords, &stream)) {
+        return NULL;
+    }
+    retval = (helper_class == NULL)? (self->obj->AssignStreams(stream)) : (self->obj->ns3::UniformDiscPositionAllocator::AssignStreams(stream));
+    py_retval = Py_BuildValue((char *) "L", retval);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3UniformDiscPositionAllocator_GetNext(PyNs3UniformDiscPositionAllocator *self)
 {
     PyObject *py_retval;
@@ -6865,24 +6883,6 @@ _wrap_PyNs3UniformDiscPositionAllocator_SetRho(PyNs3UniformDiscPositionAllocator
     self->obj->SetRho(rho);
     Py_INCREF(Py_None);
     py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3UniformDiscPositionAllocator_AssignStreams(PyNs3UniformDiscPositionAllocator *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int64_t retval;
-    int64_t stream;
-    PyNs3UniformDiscPositionAllocator__PythonHelper *helper_class = dynamic_cast<PyNs3UniformDiscPositionAllocator__PythonHelper*> (self->obj);
-    const char *keywords[] = {"stream", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "L", (char **) keywords, &stream)) {
-        return NULL;
-    }
-    retval = (helper_class == NULL)? (self->obj->AssignStreams(stream)) : (self->obj->ns3::UniformDiscPositionAllocator::AssignStreams(stream));
-    py_retval = Py_BuildValue((char *) "L", retval);
     return py_retval;
 }
 
@@ -6937,16 +6937,16 @@ _wrap_PyNs3UniformDiscPositionAllocator__copy__(PyNs3UniformDiscPositionAllocato
 }
 
 static PyMethodDef PyNs3UniformDiscPositionAllocator_methods[] = {
+    {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3UniformDiscPositionAllocator_AssignStreams, METH_VARARGS|METH_KEYWORDS, "AssignStreams(stream)\n\ntype: stream: int64_t" },
     {(char *) "GetNext", (PyCFunction) _wrap_PyNs3UniformDiscPositionAllocator_GetNext, METH_NOARGS, "GetNext()\n\n" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3UniformDiscPositionAllocator_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "SetRho", (PyCFunction) _wrap_PyNs3UniformDiscPositionAllocator_SetRho, METH_KEYWORDS|METH_VARARGS, "SetRho(rho)\n\ntype: rho: double" },
-    {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3UniformDiscPositionAllocator_AssignStreams, METH_KEYWORDS|METH_VARARGS, "AssignStreams(stream)\n\ntype: stream: int64_t" },
-    {(char *) "SetX", (PyCFunction) _wrap_PyNs3UniformDiscPositionAllocator_SetX, METH_KEYWORDS|METH_VARARGS, "SetX(x)\n\ntype: x: double" },
-    {(char *) "SetY", (PyCFunction) _wrap_PyNs3UniformDiscPositionAllocator_SetY, METH_KEYWORDS|METH_VARARGS, "SetY(y)\n\ntype: y: double" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3UniformDiscPositionAllocator__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "SetRho", (PyCFunction) _wrap_PyNs3UniformDiscPositionAllocator_SetRho, METH_VARARGS|METH_KEYWORDS, "SetRho(rho)\n\ntype: rho: double" },
+    {(char *) "SetX", (PyCFunction) _wrap_PyNs3UniformDiscPositionAllocator_SetX, METH_VARARGS|METH_KEYWORDS, "SetX(x)\n\ntype: x: double" },
+    {(char *) "SetY", (PyCFunction) _wrap_PyNs3UniformDiscPositionAllocator_SetY, METH_VARARGS|METH_KEYWORDS, "SetY(y)\n\ntype: y: double" },
+    {(char *) "DoDispose", (PyCFunction) PyNs3UniformDiscPositionAllocator__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3UniformDiscPositionAllocator__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3UniformDiscPositionAllocator__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3UniformDiscPositionAllocator__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3UniformDiscPositionAllocator__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3UniformDiscPositionAllocator__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -7046,7 +7046,7 @@ PyTypeObject PyNs3UniformDiscPositionAllocator_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "UniformDiscPositionAllocator(arg0)\nUniformDiscPositionAllocator()",                        /* Documentation string */
     (traverseproc)PyNs3UniformDiscPositionAllocator__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3UniformDiscPositionAllocator__tp_clear,             /* tp_clear */
@@ -7290,39 +7290,6 @@ int _wrap_PyNs3BoxValue__tp_init(PyNs3BoxValue *self, PyObject *args, PyObject *
 
 
 PyObject *
-_wrap_PyNs3BoxValue_Set(PyNs3BoxValue *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Box *value;
-    const char *keywords[] = {"value", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Box_Type, &value)) {
-        return NULL;
-    }
-    self->obj->Set(*((PyNs3Box *) value)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3BoxValue_Get(PyNs3BoxValue *self)
-{
-    PyObject *py_retval;
-    PyNs3Box *py_Box;
-    
-    ns3::Box retval = self->obj->Get();
-    py_Box = PyObject_New(PyNs3Box, &PyNs3Box_Type);
-    py_Box->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Box->obj = new ns3::Box(retval);
-    PyNs3Box_wrapper_registry[(void *) py_Box->obj] = (PyObject *) py_Box;
-    py_retval = Py_BuildValue((char *) "N", py_Box);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3BoxValue_Copy(PyNs3BoxValue *self)
 {
     PyObject *py_retval;
@@ -7359,25 +7326,6 @@ _wrap_PyNs3BoxValue_Copy(PyNs3BoxValue *self)
 
 
 PyObject *
-_wrap_PyNs3BoxValue_SerializeToString(PyNs3BoxValue *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    std::string retval;
-    PyNs3AttributeChecker *checker;
-    ns3::AttributeChecker *checker_ptr;
-    const char *keywords[] = {"checker", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3AttributeChecker_Type, &checker)) {
-        return NULL;
-    }
-    checker_ptr = (checker ? checker->obj : NULL);
-    retval = self->obj->SerializeToString(ns3::Ptr< ns3::AttributeChecker  > (checker_ptr));
-    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3BoxValue_DeserializeFromString(PyNs3BoxValue *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -7398,6 +7346,58 @@ _wrap_PyNs3BoxValue_DeserializeFromString(PyNs3BoxValue *self, PyObject *args, P
 }
 
 
+PyObject *
+_wrap_PyNs3BoxValue_Get(PyNs3BoxValue *self)
+{
+    PyObject *py_retval;
+    PyNs3Box *py_Box;
+    
+    ns3::Box retval = self->obj->Get();
+    py_Box = PyObject_New(PyNs3Box, &PyNs3Box_Type);
+    py_Box->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Box->obj = new ns3::Box(retval);
+    PyNs3Box_wrapper_registry[(void *) py_Box->obj] = (PyObject *) py_Box;
+    py_retval = Py_BuildValue((char *) "N", py_Box);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3BoxValue_SerializeToString(PyNs3BoxValue *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    std::string retval;
+    PyNs3AttributeChecker *checker;
+    ns3::AttributeChecker *checker_ptr;
+    const char *keywords[] = {"checker", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3AttributeChecker_Type, &checker)) {
+        return NULL;
+    }
+    checker_ptr = (checker ? checker->obj : NULL);
+    retval = self->obj->SerializeToString(ns3::Ptr< ns3::AttributeChecker  > (checker_ptr));
+    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3BoxValue_Set(PyNs3BoxValue *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Box *value;
+    const char *keywords[] = {"value", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Box_Type, &value)) {
+        return NULL;
+    }
+    self->obj->Set(*((PyNs3Box *) value)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
 static PyObject*
 _wrap_PyNs3BoxValue__copy__(PyNs3BoxValue *self)
 {
@@ -7412,11 +7412,11 @@ _wrap_PyNs3BoxValue__copy__(PyNs3BoxValue *self)
 }
 
 static PyMethodDef PyNs3BoxValue_methods[] = {
-    {(char *) "Set", (PyCFunction) _wrap_PyNs3BoxValue_Set, METH_KEYWORDS|METH_VARARGS, "Set(value)\n\ntype: value: ns3::Box const &" },
-    {(char *) "Get", (PyCFunction) _wrap_PyNs3BoxValue_Get, METH_NOARGS, "Get()\n\n" },
     {(char *) "Copy", (PyCFunction) _wrap_PyNs3BoxValue_Copy, METH_NOARGS, "Copy()\n\n" },
-    {(char *) "SerializeToString", (PyCFunction) _wrap_PyNs3BoxValue_SerializeToString, METH_KEYWORDS|METH_VARARGS, "SerializeToString(checker)\n\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
-    {(char *) "DeserializeFromString", (PyCFunction) _wrap_PyNs3BoxValue_DeserializeFromString, METH_KEYWORDS|METH_VARARGS, "DeserializeFromString(value, checker)\n\ntype: value: std::string\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
+    {(char *) "DeserializeFromString", (PyCFunction) _wrap_PyNs3BoxValue_DeserializeFromString, METH_VARARGS|METH_KEYWORDS, "DeserializeFromString(value, checker)\n\ntype: value: std::string\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
+    {(char *) "Get", (PyCFunction) _wrap_PyNs3BoxValue_Get, METH_NOARGS, "Get()\n\n" },
+    {(char *) "SerializeToString", (PyCFunction) _wrap_PyNs3BoxValue_SerializeToString, METH_VARARGS|METH_KEYWORDS, "SerializeToString(checker)\n\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
+    {(char *) "Set", (PyCFunction) _wrap_PyNs3BoxValue_Set, METH_VARARGS|METH_KEYWORDS, "Set(value)\n\ntype: value: ns3::Box const &" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3BoxValue__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -7529,16 +7529,16 @@ PyTypeObject PyNs3BoxValue_Type = {
 
 
 PyObject *
-PyNs3GridPositionAllocator__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3GridPositionAllocator *self)
+PyNs3GridPositionAllocator__PythonHelper::_wrap_DoDispose(PyNs3GridPositionAllocator *self)
 {
     PyObject *py_retval;
     PyNs3GridPositionAllocator__PythonHelper *helper = dynamic_cast< PyNs3GridPositionAllocator__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -7577,16 +7577,16 @@ PyNs3GridPositionAllocator__PythonHelper::_wrap_NotifyNewAggregate(PyNs3GridPosi
 }
 
 PyObject *
-PyNs3GridPositionAllocator__PythonHelper::_wrap_DoDispose(PyNs3GridPositionAllocator *self)
+PyNs3GridPositionAllocator__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3GridPositionAllocator *self)
 {
     PyObject *py_retval;
     PyNs3GridPositionAllocator__PythonHelper *helper = dynamic_cast< PyNs3GridPositionAllocator__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -8002,6 +8002,96 @@ int _wrap_PyNs3GridPositionAllocator__tp_init(PyNs3GridPositionAllocator *self, 
 
 
 PyObject *
+_wrap_PyNs3GridPositionAllocator_AssignStreams(PyNs3GridPositionAllocator *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int64_t retval;
+    int64_t stream;
+    PyNs3GridPositionAllocator__PythonHelper *helper_class = dynamic_cast<PyNs3GridPositionAllocator__PythonHelper*> (self->obj);
+    const char *keywords[] = {"stream", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "L", (char **) keywords, &stream)) {
+        return NULL;
+    }
+    retval = (helper_class == NULL)? (self->obj->AssignStreams(stream)) : (self->obj->ns3::GridPositionAllocator::AssignStreams(stream));
+    py_retval = Py_BuildValue((char *) "L", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3GridPositionAllocator_GetDeltaX(PyNs3GridPositionAllocator *self)
+{
+    PyObject *py_retval;
+    double retval;
+    
+    retval = self->obj->GetDeltaX();
+    py_retval = Py_BuildValue((char *) "d", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3GridPositionAllocator_GetDeltaY(PyNs3GridPositionAllocator *self)
+{
+    PyObject *py_retval;
+    double retval;
+    
+    retval = self->obj->GetDeltaY();
+    py_retval = Py_BuildValue((char *) "d", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3GridPositionAllocator_GetLayoutType(PyNs3GridPositionAllocator *self)
+{
+    PyObject *py_retval;
+    ns3::GridPositionAllocator::LayoutType retval;
+    
+    retval = self->obj->GetLayoutType();
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3GridPositionAllocator_GetMinX(PyNs3GridPositionAllocator *self)
+{
+    PyObject *py_retval;
+    double retval;
+    
+    retval = self->obj->GetMinX();
+    py_retval = Py_BuildValue((char *) "d", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3GridPositionAllocator_GetMinY(PyNs3GridPositionAllocator *self)
+{
+    PyObject *py_retval;
+    double retval;
+    
+    retval = self->obj->GetMinY();
+    py_retval = Py_BuildValue((char *) "d", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3GridPositionAllocator_GetN(PyNs3GridPositionAllocator *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetN();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3GridPositionAllocator_GetNext(PyNs3GridPositionAllocator *self)
 {
     PyObject *py_retval;
@@ -8019,30 +8109,17 @@ _wrap_PyNs3GridPositionAllocator_GetNext(PyNs3GridPositionAllocator *self)
 
 
 PyObject *
-_wrap_PyNs3GridPositionAllocator_SetDeltaY(PyNs3GridPositionAllocator *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3GridPositionAllocator_GetTypeId(void)
 {
     PyObject *py_retval;
-    double deltaY;
-    const char *keywords[] = {"deltaY", NULL};
+    PyNs3TypeId *py_TypeId;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "d", (char **) keywords, &deltaY)) {
-        return NULL;
-    }
-    self->obj->SetDeltaY(deltaY);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3GridPositionAllocator_GetN(PyNs3GridPositionAllocator *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetN();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    ns3::TypeId retval = ns3::GridPositionAllocator::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
     return py_retval;
 }
 
@@ -8065,68 +8142,33 @@ _wrap_PyNs3GridPositionAllocator_SetDeltaX(PyNs3GridPositionAllocator *self, PyO
 
 
 PyObject *
-_wrap_PyNs3GridPositionAllocator_GetTypeId(void)
+_wrap_PyNs3GridPositionAllocator_SetDeltaY(PyNs3GridPositionAllocator *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
+    double deltaY;
+    const char *keywords[] = {"deltaY", NULL};
     
-    ns3::TypeId retval = ns3::GridPositionAllocator::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3GridPositionAllocator_GetLayoutType(PyNs3GridPositionAllocator *self)
-{
-    PyObject *py_retval;
-    ns3::GridPositionAllocator::LayoutType retval;
-    
-    retval = self->obj->GetLayoutType();
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3GridPositionAllocator_GetMinY(PyNs3GridPositionAllocator *self)
-{
-    PyObject *py_retval;
-    double retval;
-    
-    retval = self->obj->GetMinY();
-    py_retval = Py_BuildValue((char *) "d", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3GridPositionAllocator_GetMinX(PyNs3GridPositionAllocator *self)
-{
-    PyObject *py_retval;
-    double retval;
-    
-    retval = self->obj->GetMinX();
-    py_retval = Py_BuildValue((char *) "d", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3GridPositionAllocator_SetMinY(PyNs3GridPositionAllocator *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    double yMin;
-    const char *keywords[] = {"yMin", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "d", (char **) keywords, &yMin)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "d", (char **) keywords, &deltaY)) {
         return NULL;
     }
-    self->obj->SetMinY(yMin);
+    self->obj->SetDeltaY(deltaY);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3GridPositionAllocator_SetLayoutType(PyNs3GridPositionAllocator *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    ns3::GridPositionAllocator::LayoutType layoutType;
+    const char *keywords[] = {"layoutType", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &layoutType)) {
+        return NULL;
+    }
+    self->obj->SetLayoutType(layoutType);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -8151,43 +8193,18 @@ _wrap_PyNs3GridPositionAllocator_SetMinX(PyNs3GridPositionAllocator *self, PyObj
 
 
 PyObject *
-_wrap_PyNs3GridPositionAllocator_AssignStreams(PyNs3GridPositionAllocator *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3GridPositionAllocator_SetMinY(PyNs3GridPositionAllocator *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    int64_t retval;
-    int64_t stream;
-    PyNs3GridPositionAllocator__PythonHelper *helper_class = dynamic_cast<PyNs3GridPositionAllocator__PythonHelper*> (self->obj);
-    const char *keywords[] = {"stream", NULL};
+    double yMin;
+    const char *keywords[] = {"yMin", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "L", (char **) keywords, &stream)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "d", (char **) keywords, &yMin)) {
         return NULL;
     }
-    retval = (helper_class == NULL)? (self->obj->AssignStreams(stream)) : (self->obj->ns3::GridPositionAllocator::AssignStreams(stream));
-    py_retval = Py_BuildValue((char *) "L", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3GridPositionAllocator_GetDeltaY(PyNs3GridPositionAllocator *self)
-{
-    PyObject *py_retval;
-    double retval;
-    
-    retval = self->obj->GetDeltaY();
-    py_retval = Py_BuildValue((char *) "d", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3GridPositionAllocator_GetDeltaX(PyNs3GridPositionAllocator *self)
-{
-    PyObject *py_retval;
-    double retval;
-    
-    retval = self->obj->GetDeltaX();
-    py_retval = Py_BuildValue((char *) "d", retval);
+    self->obj->SetMinY(yMin);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -8203,23 +8220,6 @@ _wrap_PyNs3GridPositionAllocator_SetN(PyNs3GridPositionAllocator *self, PyObject
         return NULL;
     }
     self->obj->SetN(n);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3GridPositionAllocator_SetLayoutType(PyNs3GridPositionAllocator *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    ns3::GridPositionAllocator::LayoutType layoutType;
-    const char *keywords[] = {"layoutType", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &layoutType)) {
-        return NULL;
-    }
-    self->obj->SetLayoutType(layoutType);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -8242,25 +8242,25 @@ _wrap_PyNs3GridPositionAllocator__copy__(PyNs3GridPositionAllocator *self)
 }
 
 static PyMethodDef PyNs3GridPositionAllocator_methods[] = {
-    {(char *) "GetNext", (PyCFunction) _wrap_PyNs3GridPositionAllocator_GetNext, METH_NOARGS, "GetNext()\n\n" },
-    {(char *) "SetDeltaY", (PyCFunction) _wrap_PyNs3GridPositionAllocator_SetDeltaY, METH_KEYWORDS|METH_VARARGS, "SetDeltaY(deltaY)\n\ntype: deltaY: double" },
-    {(char *) "GetN", (PyCFunction) _wrap_PyNs3GridPositionAllocator_GetN, METH_NOARGS, "GetN()\n\n" },
-    {(char *) "SetDeltaX", (PyCFunction) _wrap_PyNs3GridPositionAllocator_SetDeltaX, METH_KEYWORDS|METH_VARARGS, "SetDeltaX(deltaX)\n\ntype: deltaX: double" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3GridPositionAllocator_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "GetLayoutType", (PyCFunction) _wrap_PyNs3GridPositionAllocator_GetLayoutType, METH_NOARGS, "GetLayoutType()\n\n" },
-    {(char *) "GetMinY", (PyCFunction) _wrap_PyNs3GridPositionAllocator_GetMinY, METH_NOARGS, "GetMinY()\n\n" },
-    {(char *) "GetMinX", (PyCFunction) _wrap_PyNs3GridPositionAllocator_GetMinX, METH_NOARGS, "GetMinX()\n\n" },
-    {(char *) "SetMinY", (PyCFunction) _wrap_PyNs3GridPositionAllocator_SetMinY, METH_KEYWORDS|METH_VARARGS, "SetMinY(yMin)\n\ntype: yMin: double" },
-    {(char *) "SetMinX", (PyCFunction) _wrap_PyNs3GridPositionAllocator_SetMinX, METH_KEYWORDS|METH_VARARGS, "SetMinX(xMin)\n\ntype: xMin: double" },
-    {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3GridPositionAllocator_AssignStreams, METH_KEYWORDS|METH_VARARGS, "AssignStreams(stream)\n\ntype: stream: int64_t" },
-    {(char *) "GetDeltaY", (PyCFunction) _wrap_PyNs3GridPositionAllocator_GetDeltaY, METH_NOARGS, "GetDeltaY()\n\n" },
+    {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3GridPositionAllocator_AssignStreams, METH_VARARGS|METH_KEYWORDS, "AssignStreams(stream)\n\ntype: stream: int64_t" },
     {(char *) "GetDeltaX", (PyCFunction) _wrap_PyNs3GridPositionAllocator_GetDeltaX, METH_NOARGS, "GetDeltaX()\n\n" },
-    {(char *) "SetN", (PyCFunction) _wrap_PyNs3GridPositionAllocator_SetN, METH_KEYWORDS|METH_VARARGS, "SetN(n)\n\ntype: n: uint32_t" },
-    {(char *) "SetLayoutType", (PyCFunction) _wrap_PyNs3GridPositionAllocator_SetLayoutType, METH_KEYWORDS|METH_VARARGS, "SetLayoutType(layoutType)\n\ntype: layoutType: ns3::GridPositionAllocator::LayoutType" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3GridPositionAllocator__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "GetDeltaY", (PyCFunction) _wrap_PyNs3GridPositionAllocator_GetDeltaY, METH_NOARGS, "GetDeltaY()\n\n" },
+    {(char *) "GetLayoutType", (PyCFunction) _wrap_PyNs3GridPositionAllocator_GetLayoutType, METH_NOARGS, "GetLayoutType()\n\n" },
+    {(char *) "GetMinX", (PyCFunction) _wrap_PyNs3GridPositionAllocator_GetMinX, METH_NOARGS, "GetMinX()\n\n" },
+    {(char *) "GetMinY", (PyCFunction) _wrap_PyNs3GridPositionAllocator_GetMinY, METH_NOARGS, "GetMinY()\n\n" },
+    {(char *) "GetN", (PyCFunction) _wrap_PyNs3GridPositionAllocator_GetN, METH_NOARGS, "GetN()\n\n" },
+    {(char *) "GetNext", (PyCFunction) _wrap_PyNs3GridPositionAllocator_GetNext, METH_NOARGS, "GetNext()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3GridPositionAllocator_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "SetDeltaX", (PyCFunction) _wrap_PyNs3GridPositionAllocator_SetDeltaX, METH_VARARGS|METH_KEYWORDS, "SetDeltaX(deltaX)\n\ntype: deltaX: double" },
+    {(char *) "SetDeltaY", (PyCFunction) _wrap_PyNs3GridPositionAllocator_SetDeltaY, METH_VARARGS|METH_KEYWORDS, "SetDeltaY(deltaY)\n\ntype: deltaY: double" },
+    {(char *) "SetLayoutType", (PyCFunction) _wrap_PyNs3GridPositionAllocator_SetLayoutType, METH_VARARGS|METH_KEYWORDS, "SetLayoutType(layoutType)\n\ntype: layoutType: ns3::GridPositionAllocator::LayoutType" },
+    {(char *) "SetMinX", (PyCFunction) _wrap_PyNs3GridPositionAllocator_SetMinX, METH_VARARGS|METH_KEYWORDS, "SetMinX(xMin)\n\ntype: xMin: double" },
+    {(char *) "SetMinY", (PyCFunction) _wrap_PyNs3GridPositionAllocator_SetMinY, METH_VARARGS|METH_KEYWORDS, "SetMinY(yMin)\n\ntype: yMin: double" },
+    {(char *) "SetN", (PyCFunction) _wrap_PyNs3GridPositionAllocator_SetN, METH_VARARGS|METH_KEYWORDS, "SetN(n)\n\ntype: n: uint32_t" },
+    {(char *) "DoDispose", (PyCFunction) PyNs3GridPositionAllocator__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3GridPositionAllocator__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3GridPositionAllocator__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3GridPositionAllocator__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3GridPositionAllocator__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3GridPositionAllocator__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -8360,7 +8360,7 @@ PyTypeObject PyNs3GridPositionAllocator_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "GridPositionAllocator(arg0)\nGridPositionAllocator()",                        /* Documentation string */
     (traverseproc)PyNs3GridPositionAllocator__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3GridPositionAllocator__tp_clear,             /* tp_clear */
@@ -8393,16 +8393,16 @@ PyTypeObject PyNs3GridPositionAllocator_Type = {
 
 
 PyObject *
-PyNs3ListPositionAllocator__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3ListPositionAllocator *self)
+PyNs3ListPositionAllocator__PythonHelper::_wrap_DoDispose(PyNs3ListPositionAllocator *self)
 {
     PyObject *py_retval;
     PyNs3ListPositionAllocator__PythonHelper *helper = dynamic_cast< PyNs3ListPositionAllocator__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -8441,16 +8441,16 @@ PyNs3ListPositionAllocator__PythonHelper::_wrap_NotifyNewAggregate(PyNs3ListPosi
 }
 
 PyObject *
-PyNs3ListPositionAllocator__PythonHelper::_wrap_DoDispose(PyNs3ListPositionAllocator *self)
+PyNs3ListPositionAllocator__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3ListPositionAllocator *self)
 {
     PyObject *py_retval;
     PyNs3ListPositionAllocator__PythonHelper *helper = dynamic_cast< PyNs3ListPositionAllocator__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -8866,6 +8866,41 @@ int _wrap_PyNs3ListPositionAllocator__tp_init(PyNs3ListPositionAllocator *self, 
 
 
 PyObject *
+_wrap_PyNs3ListPositionAllocator_Add(PyNs3ListPositionAllocator *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Vector3D *v;
+    const char *keywords[] = {"v", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Vector3D_Type, &v)) {
+        return NULL;
+    }
+    self->obj->Add(*((PyNs3Vector3D *) v)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3ListPositionAllocator_AssignStreams(PyNs3ListPositionAllocator *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int64_t retval;
+    int64_t stream;
+    PyNs3ListPositionAllocator__PythonHelper *helper_class = dynamic_cast<PyNs3ListPositionAllocator__PythonHelper*> (self->obj);
+    const char *keywords[] = {"stream", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "L", (char **) keywords, &stream)) {
+        return NULL;
+    }
+    retval = (helper_class == NULL)? (self->obj->AssignStreams(stream)) : (self->obj->ns3::ListPositionAllocator::AssignStreams(stream));
+    py_retval = Py_BuildValue((char *) "L", retval);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3ListPositionAllocator_GetNext(PyNs3ListPositionAllocator *self)
 {
     PyObject *py_retval;
@@ -8895,23 +8930,6 @@ _wrap_PyNs3ListPositionAllocator_GetSize(PyNs3ListPositionAllocator *self)
 
 
 PyObject *
-_wrap_PyNs3ListPositionAllocator_Add(PyNs3ListPositionAllocator *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Vector3D *v;
-    const char *keywords[] = {"v", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Vector3D_Type, &v)) {
-        return NULL;
-    }
-    self->obj->Add(*((PyNs3Vector3D *) v)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3ListPositionAllocator_GetTypeId(void)
 {
     PyObject *py_retval;
@@ -8923,24 +8941,6 @@ _wrap_PyNs3ListPositionAllocator_GetTypeId(void)
     py_TypeId->obj = new ns3::TypeId(retval);
     PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
     py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3ListPositionAllocator_AssignStreams(PyNs3ListPositionAllocator *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int64_t retval;
-    int64_t stream;
-    PyNs3ListPositionAllocator__PythonHelper *helper_class = dynamic_cast<PyNs3ListPositionAllocator__PythonHelper*> (self->obj);
-    const char *keywords[] = {"stream", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "L", (char **) keywords, &stream)) {
-        return NULL;
-    }
-    retval = (helper_class == NULL)? (self->obj->AssignStreams(stream)) : (self->obj->ns3::ListPositionAllocator::AssignStreams(stream));
-    py_retval = Py_BuildValue((char *) "L", retval);
     return py_retval;
 }
 
@@ -8961,15 +8961,15 @@ _wrap_PyNs3ListPositionAllocator__copy__(PyNs3ListPositionAllocator *self)
 }
 
 static PyMethodDef PyNs3ListPositionAllocator_methods[] = {
+    {(char *) "Add", (PyCFunction) _wrap_PyNs3ListPositionAllocator_Add, METH_VARARGS|METH_KEYWORDS, "Add(v)\n\ntype: v: ns3::Vector3D" },
+    {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3ListPositionAllocator_AssignStreams, METH_VARARGS|METH_KEYWORDS, "AssignStreams(stream)\n\ntype: stream: int64_t" },
     {(char *) "GetNext", (PyCFunction) _wrap_PyNs3ListPositionAllocator_GetNext, METH_NOARGS, "GetNext()\n\n" },
     {(char *) "GetSize", (PyCFunction) _wrap_PyNs3ListPositionAllocator_GetSize, METH_NOARGS, "GetSize()\n\n" },
-    {(char *) "Add", (PyCFunction) _wrap_PyNs3ListPositionAllocator_Add, METH_KEYWORDS|METH_VARARGS, "Add(v)\n\ntype: v: ns3::Vector3D" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3ListPositionAllocator_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3ListPositionAllocator_AssignStreams, METH_KEYWORDS|METH_VARARGS, "AssignStreams(stream)\n\ntype: stream: int64_t" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3ListPositionAllocator__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "DoDispose", (PyCFunction) PyNs3ListPositionAllocator__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3ListPositionAllocator__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3ListPositionAllocator__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3ListPositionAllocator__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3ListPositionAllocator__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3ListPositionAllocator__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -9069,7 +9069,7 @@ PyTypeObject PyNs3ListPositionAllocator_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "ListPositionAllocator(arg0)\nListPositionAllocator()",                        /* Documentation string */
     (traverseproc)PyNs3ListPositionAllocator__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3ListPositionAllocator__tp_clear,             /* tp_clear */
@@ -9102,16 +9102,32 @@ PyTypeObject PyNs3ListPositionAllocator_Type = {
 
 
 PyObject *
-PyNs3MobilityModel__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3MobilityModel *self)
+PyNs3MobilityModel__PythonHelper::_wrap_NotifyCourseChange(PyNs3MobilityModel *self)
 {
     PyObject *py_retval;
     PyNs3MobilityModel__PythonHelper *helper = dynamic_cast< PyNs3MobilityModel__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyCourseChange of class MobilityModel is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->NotifyCourseChange__parent_caller();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject *
+PyNs3MobilityModel__PythonHelper::_wrap_DoDispose(PyNs3MobilityModel *self)
+{
+    PyObject *py_retval;
+    PyNs3MobilityModel__PythonHelper *helper = dynamic_cast< PyNs3MobilityModel__PythonHelper* >(self->obj);
+    
+    if (helper == NULL) {
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        return NULL;
+    }
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -9150,32 +9166,16 @@ PyNs3MobilityModel__PythonHelper::_wrap_NotifyNewAggregate(PyNs3MobilityModel *s
 }
 
 PyObject *
-PyNs3MobilityModel__PythonHelper::_wrap_NotifyCourseChange(PyNs3MobilityModel *self)
+PyNs3MobilityModel__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3MobilityModel *self)
 {
     PyObject *py_retval;
     PyNs3MobilityModel__PythonHelper *helper = dynamic_cast< PyNs3MobilityModel__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyCourseChange of class MobilityModel is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyCourseChange__parent_caller();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject *
-PyNs3MobilityModel__PythonHelper::_wrap_DoDispose(PyNs3MobilityModel *self)
-{
-    PyObject *py_retval;
-    PyNs3MobilityModel__PythonHelper *helper = dynamic_cast< PyNs3MobilityModel__PythonHelper* >(self->obj);
-    
-    if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
-        return NULL;
-    }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -9692,6 +9692,23 @@ int _wrap_PyNs3MobilityModel__tp_init(PyNs3MobilityModel *self, PyObject *args, 
 
 
 PyObject *
+_wrap_PyNs3MobilityModel_AssignStreams(PyNs3MobilityModel *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int64_t retval;
+    int64_t stream;
+    const char *keywords[] = {"stream", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "L", (char **) keywords, &stream)) {
+        return NULL;
+    }
+    retval = self->obj->AssignStreams(stream);
+    py_retval = Py_BuildValue((char *) "L", retval);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3MobilityModel_GetDistanceFrom(PyNs3MobilityModel *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -9711,33 +9728,17 @@ _wrap_PyNs3MobilityModel_GetDistanceFrom(PyNs3MobilityModel *self, PyObject *arg
 
 
 PyObject *
-_wrap_PyNs3MobilityModel_GetVelocity(PyNs3MobilityModel *self)
+_wrap_PyNs3MobilityModel_GetPosition(PyNs3MobilityModel *self)
 {
     PyObject *py_retval;
     PyNs3Vector3D *py_Vector3D;
     
-    ns3::Vector retval = self->obj->GetVelocity();
+    ns3::Vector retval = self->obj->GetPosition();
     py_Vector3D = PyObject_New(PyNs3Vector3D, &PyNs3Vector3D_Type);
     py_Vector3D->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
     py_Vector3D->obj = new ns3::Vector3D(retval);
     PyNs3Vector3D_wrapper_registry[(void *) py_Vector3D->obj] = (PyObject *) py_Vector3D;
     py_retval = Py_BuildValue((char *) "N", py_Vector3D);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MobilityModel_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::MobilityModel::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
     return py_retval;
 }
 
@@ -9762,18 +9763,33 @@ _wrap_PyNs3MobilityModel_GetRelativeSpeed(PyNs3MobilityModel *self, PyObject *ar
 
 
 PyObject *
-_wrap_PyNs3MobilityModel_AssignStreams(PyNs3MobilityModel *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3MobilityModel_GetTypeId(void)
 {
     PyObject *py_retval;
-    int64_t retval;
-    int64_t stream;
-    const char *keywords[] = {"stream", NULL};
+    PyNs3TypeId *py_TypeId;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "L", (char **) keywords, &stream)) {
-        return NULL;
-    }
-    retval = self->obj->AssignStreams(stream);
-    py_retval = Py_BuildValue((char *) "L", retval);
+    ns3::TypeId retval = ns3::MobilityModel::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3MobilityModel_GetVelocity(PyNs3MobilityModel *self)
+{
+    PyObject *py_retval;
+    PyNs3Vector3D *py_Vector3D;
+    
+    ns3::Vector retval = self->obj->GetVelocity();
+    py_Vector3D = PyObject_New(PyNs3Vector3D, &PyNs3Vector3D_Type);
+    py_Vector3D->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Vector3D->obj = new ns3::Vector3D(retval);
+    PyNs3Vector3D_wrapper_registry[(void *) py_Vector3D->obj] = (PyObject *) py_Vector3D;
+    py_retval = Py_BuildValue((char *) "N", py_Vector3D);
     return py_retval;
 }
 
@@ -9794,35 +9810,19 @@ _wrap_PyNs3MobilityModel_SetPosition(PyNs3MobilityModel *self, PyObject *args, P
     return py_retval;
 }
 
-
-PyObject *
-_wrap_PyNs3MobilityModel_GetPosition(PyNs3MobilityModel *self)
-{
-    PyObject *py_retval;
-    PyNs3Vector3D *py_Vector3D;
-    
-    ns3::Vector retval = self->obj->GetPosition();
-    py_Vector3D = PyObject_New(PyNs3Vector3D, &PyNs3Vector3D_Type);
-    py_Vector3D->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Vector3D->obj = new ns3::Vector3D(retval);
-    PyNs3Vector3D_wrapper_registry[(void *) py_Vector3D->obj] = (PyObject *) py_Vector3D;
-    py_retval = Py_BuildValue((char *) "N", py_Vector3D);
-    return py_retval;
-}
-
 static PyMethodDef PyNs3MobilityModel_methods[] = {
-    {(char *) "GetDistanceFrom", (PyCFunction) _wrap_PyNs3MobilityModel_GetDistanceFrom, METH_KEYWORDS|METH_VARARGS, "GetDistanceFrom(position)\n\ntype: position: ns3::Ptr< ns3::MobilityModel const >" },
-    {(char *) "GetVelocity", (PyCFunction) _wrap_PyNs3MobilityModel_GetVelocity, METH_NOARGS, "GetVelocity()\n\n" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3MobilityModel_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "GetRelativeSpeed", (PyCFunction) _wrap_PyNs3MobilityModel_GetRelativeSpeed, METH_KEYWORDS|METH_VARARGS, "GetRelativeSpeed(other)\n\ntype: other: ns3::Ptr< ns3::MobilityModel const >" },
-    {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3MobilityModel_AssignStreams, METH_KEYWORDS|METH_VARARGS, "AssignStreams(stream)\n\ntype: stream: int64_t" },
-    {(char *) "SetPosition", (PyCFunction) _wrap_PyNs3MobilityModel_SetPosition, METH_KEYWORDS|METH_VARARGS, "SetPosition(position)\n\ntype: position: ns3::Vector const &" },
+    {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3MobilityModel_AssignStreams, METH_VARARGS|METH_KEYWORDS, "AssignStreams(stream)\n\ntype: stream: int64_t" },
+    {(char *) "GetDistanceFrom", (PyCFunction) _wrap_PyNs3MobilityModel_GetDistanceFrom, METH_VARARGS|METH_KEYWORDS, "GetDistanceFrom(position)\n\ntype: position: ns3::Ptr< ns3::MobilityModel const >" },
     {(char *) "GetPosition", (PyCFunction) _wrap_PyNs3MobilityModel_GetPosition, METH_NOARGS, "GetPosition()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3MobilityModel__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
-    {(char *) "DoInitialize", (PyCFunction) PyNs3MobilityModel__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
-    {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3MobilityModel__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
+    {(char *) "GetRelativeSpeed", (PyCFunction) _wrap_PyNs3MobilityModel_GetRelativeSpeed, METH_VARARGS|METH_KEYWORDS, "GetRelativeSpeed(other)\n\ntype: other: ns3::Ptr< ns3::MobilityModel const >" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3MobilityModel_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "GetVelocity", (PyCFunction) _wrap_PyNs3MobilityModel_GetVelocity, METH_NOARGS, "GetVelocity()\n\n" },
+    {(char *) "SetPosition", (PyCFunction) _wrap_PyNs3MobilityModel_SetPosition, METH_VARARGS|METH_KEYWORDS, "SetPosition(position)\n\ntype: position: ns3::Vector const &" },
     {(char *) "NotifyCourseChange", (PyCFunction) PyNs3MobilityModel__PythonHelper::_wrap_NotifyCourseChange, METH_NOARGS, NULL },
     {(char *) "DoDispose", (PyCFunction) PyNs3MobilityModel__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "DoInitialize", (PyCFunction) PyNs3MobilityModel__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
+    {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3MobilityModel__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3MobilityModel__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 
@@ -9921,7 +9921,7 @@ PyTypeObject PyNs3MobilityModel_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "MobilityModel(arg0)\nMobilityModel()",                        /* Documentation string */
     (traverseproc)PyNs3MobilityModel__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3MobilityModel__tp_clear,             /* tp_clear */
@@ -9954,22 +9954,6 @@ PyTypeObject PyNs3MobilityModel_Type = {
 
 
 PyObject *
-PyNs3RandomDirection2dMobilityModel__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3RandomDirection2dMobilityModel *self)
-{
-    PyObject *py_retval;
-    PyNs3RandomDirection2dMobilityModel__PythonHelper *helper = dynamic_cast< PyNs3RandomDirection2dMobilityModel__PythonHelper* >(self->obj);
-    
-    if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
-        return NULL;
-    }
-    helper->NotifyConstructionCompleted__parent_caller();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject *
 PyNs3RandomDirection2dMobilityModel__PythonHelper::_wrap_NotifyNewAggregate(PyNs3RandomDirection2dMobilityModel *self)
 {
     PyObject *py_retval;
@@ -9980,6 +9964,22 @@ PyNs3RandomDirection2dMobilityModel__PythonHelper::_wrap_NotifyNewAggregate(PyNs
         return NULL;
     }
     helper->NotifyNewAggregate__parent_caller();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject *
+PyNs3RandomDirection2dMobilityModel__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3RandomDirection2dMobilityModel *self)
+{
+    PyObject *py_retval;
+    PyNs3RandomDirection2dMobilityModel__PythonHelper *helper = dynamic_cast< PyNs3RandomDirection2dMobilityModel__PythonHelper* >(self->obj);
+    
+    if (helper == NULL) {
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        return NULL;
+    }
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -10530,8 +10530,8 @@ _wrap_PyNs3RandomDirection2dMobilityModel__copy__(PyNs3RandomDirection2dMobility
 
 static PyMethodDef PyNs3RandomDirection2dMobilityModel_methods[] = {
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3RandomDirection2dMobilityModel_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3RandomDirection2dMobilityModel__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3RandomDirection2dMobilityModel__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3RandomDirection2dMobilityModel__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3RandomDirection2dMobilityModel__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -10631,7 +10631,7 @@ PyTypeObject PyNs3RandomDirection2dMobilityModel_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "RandomDirection2dMobilityModel(arg0)\nRandomDirection2dMobilityModel()",                        /* Documentation string */
     (traverseproc)PyNs3RandomDirection2dMobilityModel__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3RandomDirection2dMobilityModel__tp_clear,             /* tp_clear */
@@ -10664,22 +10664,6 @@ PyTypeObject PyNs3RandomDirection2dMobilityModel_Type = {
 
 
 PyObject *
-PyNs3RandomWalk2dMobilityModel__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3RandomWalk2dMobilityModel *self)
-{
-    PyObject *py_retval;
-    PyNs3RandomWalk2dMobilityModel__PythonHelper *helper = dynamic_cast< PyNs3RandomWalk2dMobilityModel__PythonHelper* >(self->obj);
-    
-    if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
-        return NULL;
-    }
-    helper->NotifyConstructionCompleted__parent_caller();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject *
 PyNs3RandomWalk2dMobilityModel__PythonHelper::_wrap_NotifyNewAggregate(PyNs3RandomWalk2dMobilityModel *self)
 {
     PyObject *py_retval;
@@ -10690,6 +10674,22 @@ PyNs3RandomWalk2dMobilityModel__PythonHelper::_wrap_NotifyNewAggregate(PyNs3Rand
         return NULL;
     }
     helper->NotifyNewAggregate__parent_caller();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject *
+PyNs3RandomWalk2dMobilityModel__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3RandomWalk2dMobilityModel *self)
+{
+    PyObject *py_retval;
+    PyNs3RandomWalk2dMobilityModel__PythonHelper *helper = dynamic_cast< PyNs3RandomWalk2dMobilityModel__PythonHelper* >(self->obj);
+    
+    if (helper == NULL) {
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        return NULL;
+    }
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -11240,8 +11240,8 @@ _wrap_PyNs3RandomWalk2dMobilityModel__copy__(PyNs3RandomWalk2dMobilityModel *sel
 
 static PyMethodDef PyNs3RandomWalk2dMobilityModel_methods[] = {
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3RandomWalk2dMobilityModel_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3RandomWalk2dMobilityModel__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3RandomWalk2dMobilityModel__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3RandomWalk2dMobilityModel__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3RandomWalk2dMobilityModel__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -11341,7 +11341,7 @@ PyTypeObject PyNs3RandomWalk2dMobilityModel_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "RandomWalk2dMobilityModel(arg0)\nRandomWalk2dMobilityModel()",                        /* Documentation string */
     (traverseproc)PyNs3RandomWalk2dMobilityModel__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3RandomWalk2dMobilityModel__tp_clear,             /* tp_clear */
@@ -11374,22 +11374,6 @@ PyTypeObject PyNs3RandomWalk2dMobilityModel_Type = {
 
 
 PyObject *
-PyNs3RandomWaypointMobilityModel__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3RandomWaypointMobilityModel *self)
-{
-    PyObject *py_retval;
-    PyNs3RandomWaypointMobilityModel__PythonHelper *helper = dynamic_cast< PyNs3RandomWaypointMobilityModel__PythonHelper* >(self->obj);
-    
-    if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
-        return NULL;
-    }
-    helper->NotifyConstructionCompleted__parent_caller();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject *
 PyNs3RandomWaypointMobilityModel__PythonHelper::_wrap_DoInitialize(PyNs3RandomWaypointMobilityModel *self)
 {
     PyObject *py_retval;
@@ -11400,6 +11384,22 @@ PyNs3RandomWaypointMobilityModel__PythonHelper::_wrap_DoInitialize(PyNs3RandomWa
         return NULL;
     }
     helper->DoInitialize__parent_caller();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject *
+PyNs3RandomWaypointMobilityModel__PythonHelper::_wrap_DoDispose(PyNs3RandomWaypointMobilityModel *self)
+{
+    PyObject *py_retval;
+    PyNs3RandomWaypointMobilityModel__PythonHelper *helper = dynamic_cast< PyNs3RandomWaypointMobilityModel__PythonHelper* >(self->obj);
+    
+    if (helper == NULL) {
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        return NULL;
+    }
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -11422,16 +11422,16 @@ PyNs3RandomWaypointMobilityModel__PythonHelper::_wrap_NotifyNewAggregate(PyNs3Ra
 }
 
 PyObject *
-PyNs3RandomWaypointMobilityModel__PythonHelper::_wrap_DoDispose(PyNs3RandomWaypointMobilityModel *self)
+PyNs3RandomWaypointMobilityModel__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3RandomWaypointMobilityModel *self)
 {
     PyObject *py_retval;
     PyNs3RandomWaypointMobilityModel__PythonHelper *helper = dynamic_cast< PyNs3RandomWaypointMobilityModel__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -11984,10 +11984,10 @@ _wrap_PyNs3RandomWaypointMobilityModel__copy__(PyNs3RandomWaypointMobilityModel 
 
 static PyMethodDef PyNs3RandomWaypointMobilityModel_methods[] = {
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3RandomWaypointMobilityModel_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3RandomWaypointMobilityModel__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3RandomWaypointMobilityModel__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
-    {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3RandomWaypointMobilityModel__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
     {(char *) "DoDispose", (PyCFunction) PyNs3RandomWaypointMobilityModel__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3RandomWaypointMobilityModel__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3RandomWaypointMobilityModel__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3RandomWaypointMobilityModel__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -12087,7 +12087,7 @@ PyTypeObject PyNs3RandomWaypointMobilityModel_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "RandomWaypointMobilityModel(arg0)\nRandomWaypointMobilityModel()",                        /* Documentation string */
     (traverseproc)PyNs3RandomWaypointMobilityModel__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3RandomWaypointMobilityModel__tp_clear,             /* tp_clear */
@@ -12331,39 +12331,6 @@ int _wrap_PyNs3RectangleValue__tp_init(PyNs3RectangleValue *self, PyObject *args
 
 
 PyObject *
-_wrap_PyNs3RectangleValue_Set(PyNs3RectangleValue *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Rectangle *value;
-    const char *keywords[] = {"value", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Rectangle_Type, &value)) {
-        return NULL;
-    }
-    self->obj->Set(*((PyNs3Rectangle *) value)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RectangleValue_Get(PyNs3RectangleValue *self)
-{
-    PyObject *py_retval;
-    PyNs3Rectangle *py_Rectangle;
-    
-    ns3::Rectangle retval = self->obj->Get();
-    py_Rectangle = PyObject_New(PyNs3Rectangle, &PyNs3Rectangle_Type);
-    py_Rectangle->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Rectangle->obj = new ns3::Rectangle(retval);
-    PyNs3Rectangle_wrapper_registry[(void *) py_Rectangle->obj] = (PyObject *) py_Rectangle;
-    py_retval = Py_BuildValue((char *) "N", py_Rectangle);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3RectangleValue_Copy(PyNs3RectangleValue *self)
 {
     PyObject *py_retval;
@@ -12400,25 +12367,6 @@ _wrap_PyNs3RectangleValue_Copy(PyNs3RectangleValue *self)
 
 
 PyObject *
-_wrap_PyNs3RectangleValue_SerializeToString(PyNs3RectangleValue *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    std::string retval;
-    PyNs3AttributeChecker *checker;
-    ns3::AttributeChecker *checker_ptr;
-    const char *keywords[] = {"checker", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3AttributeChecker_Type, &checker)) {
-        return NULL;
-    }
-    checker_ptr = (checker ? checker->obj : NULL);
-    retval = self->obj->SerializeToString(ns3::Ptr< ns3::AttributeChecker  > (checker_ptr));
-    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3RectangleValue_DeserializeFromString(PyNs3RectangleValue *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -12439,6 +12387,58 @@ _wrap_PyNs3RectangleValue_DeserializeFromString(PyNs3RectangleValue *self, PyObj
 }
 
 
+PyObject *
+_wrap_PyNs3RectangleValue_Get(PyNs3RectangleValue *self)
+{
+    PyObject *py_retval;
+    PyNs3Rectangle *py_Rectangle;
+    
+    ns3::Rectangle retval = self->obj->Get();
+    py_Rectangle = PyObject_New(PyNs3Rectangle, &PyNs3Rectangle_Type);
+    py_Rectangle->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Rectangle->obj = new ns3::Rectangle(retval);
+    PyNs3Rectangle_wrapper_registry[(void *) py_Rectangle->obj] = (PyObject *) py_Rectangle;
+    py_retval = Py_BuildValue((char *) "N", py_Rectangle);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RectangleValue_SerializeToString(PyNs3RectangleValue *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    std::string retval;
+    PyNs3AttributeChecker *checker;
+    ns3::AttributeChecker *checker_ptr;
+    const char *keywords[] = {"checker", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3AttributeChecker_Type, &checker)) {
+        return NULL;
+    }
+    checker_ptr = (checker ? checker->obj : NULL);
+    retval = self->obj->SerializeToString(ns3::Ptr< ns3::AttributeChecker  > (checker_ptr));
+    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RectangleValue_Set(PyNs3RectangleValue *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Rectangle *value;
+    const char *keywords[] = {"value", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Rectangle_Type, &value)) {
+        return NULL;
+    }
+    self->obj->Set(*((PyNs3Rectangle *) value)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
 static PyObject*
 _wrap_PyNs3RectangleValue__copy__(PyNs3RectangleValue *self)
 {
@@ -12453,11 +12453,11 @@ _wrap_PyNs3RectangleValue__copy__(PyNs3RectangleValue *self)
 }
 
 static PyMethodDef PyNs3RectangleValue_methods[] = {
-    {(char *) "Set", (PyCFunction) _wrap_PyNs3RectangleValue_Set, METH_KEYWORDS|METH_VARARGS, "Set(value)\n\ntype: value: ns3::Rectangle const &" },
-    {(char *) "Get", (PyCFunction) _wrap_PyNs3RectangleValue_Get, METH_NOARGS, "Get()\n\n" },
     {(char *) "Copy", (PyCFunction) _wrap_PyNs3RectangleValue_Copy, METH_NOARGS, "Copy()\n\n" },
-    {(char *) "SerializeToString", (PyCFunction) _wrap_PyNs3RectangleValue_SerializeToString, METH_KEYWORDS|METH_VARARGS, "SerializeToString(checker)\n\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
-    {(char *) "DeserializeFromString", (PyCFunction) _wrap_PyNs3RectangleValue_DeserializeFromString, METH_KEYWORDS|METH_VARARGS, "DeserializeFromString(value, checker)\n\ntype: value: std::string\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
+    {(char *) "DeserializeFromString", (PyCFunction) _wrap_PyNs3RectangleValue_DeserializeFromString, METH_VARARGS|METH_KEYWORDS, "DeserializeFromString(value, checker)\n\ntype: value: std::string\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
+    {(char *) "Get", (PyCFunction) _wrap_PyNs3RectangleValue_Get, METH_NOARGS, "Get()\n\n" },
+    {(char *) "SerializeToString", (PyCFunction) _wrap_PyNs3RectangleValue_SerializeToString, METH_VARARGS|METH_KEYWORDS, "SerializeToString(checker)\n\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
+    {(char *) "Set", (PyCFunction) _wrap_PyNs3RectangleValue_Set, METH_VARARGS|METH_KEYWORDS, "Set(value)\n\ntype: value: ns3::Rectangle const &" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3RectangleValue__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -12570,22 +12570,6 @@ PyTypeObject PyNs3RectangleValue_Type = {
 
 
 PyObject *
-PyNs3SteadyStateRandomWaypointMobilityModel__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3SteadyStateRandomWaypointMobilityModel *self)
-{
-    PyObject *py_retval;
-    PyNs3SteadyStateRandomWaypointMobilityModel__PythonHelper *helper = dynamic_cast< PyNs3SteadyStateRandomWaypointMobilityModel__PythonHelper* >(self->obj);
-    
-    if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
-        return NULL;
-    }
-    helper->NotifyConstructionCompleted__parent_caller();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject *
 PyNs3SteadyStateRandomWaypointMobilityModel__PythonHelper::_wrap_DoInitialize(PyNs3SteadyStateRandomWaypointMobilityModel *self)
 {
     PyObject *py_retval;
@@ -12596,6 +12580,22 @@ PyNs3SteadyStateRandomWaypointMobilityModel__PythonHelper::_wrap_DoInitialize(Py
         return NULL;
     }
     helper->DoInitialize__parent_caller();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject *
+PyNs3SteadyStateRandomWaypointMobilityModel__PythonHelper::_wrap_DoDispose(PyNs3SteadyStateRandomWaypointMobilityModel *self)
+{
+    PyObject *py_retval;
+    PyNs3SteadyStateRandomWaypointMobilityModel__PythonHelper *helper = dynamic_cast< PyNs3SteadyStateRandomWaypointMobilityModel__PythonHelper* >(self->obj);
+    
+    if (helper == NULL) {
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        return NULL;
+    }
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -12618,16 +12618,16 @@ PyNs3SteadyStateRandomWaypointMobilityModel__PythonHelper::_wrap_NotifyNewAggreg
 }
 
 PyObject *
-PyNs3SteadyStateRandomWaypointMobilityModel__PythonHelper::_wrap_DoDispose(PyNs3SteadyStateRandomWaypointMobilityModel *self)
+PyNs3SteadyStateRandomWaypointMobilityModel__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3SteadyStateRandomWaypointMobilityModel *self)
 {
     PyObject *py_retval;
     PyNs3SteadyStateRandomWaypointMobilityModel__PythonHelper *helper = dynamic_cast< PyNs3SteadyStateRandomWaypointMobilityModel__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -13180,10 +13180,10 @@ _wrap_PyNs3SteadyStateRandomWaypointMobilityModel__copy__(PyNs3SteadyStateRandom
 
 static PyMethodDef PyNs3SteadyStateRandomWaypointMobilityModel_methods[] = {
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3SteadyStateRandomWaypointMobilityModel_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3SteadyStateRandomWaypointMobilityModel__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3SteadyStateRandomWaypointMobilityModel__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
-    {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3SteadyStateRandomWaypointMobilityModel__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
     {(char *) "DoDispose", (PyCFunction) PyNs3SteadyStateRandomWaypointMobilityModel__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3SteadyStateRandomWaypointMobilityModel__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3SteadyStateRandomWaypointMobilityModel__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3SteadyStateRandomWaypointMobilityModel__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -13283,7 +13283,7 @@ PyTypeObject PyNs3SteadyStateRandomWaypointMobilityModel_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "SteadyStateRandomWaypointMobilityModel(arg0)\nSteadyStateRandomWaypointMobilityModel()",                        /* Documentation string */
     (traverseproc)PyNs3SteadyStateRandomWaypointMobilityModel__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3SteadyStateRandomWaypointMobilityModel__tp_clear,             /* tp_clear */
@@ -13434,22 +13434,6 @@ PyTypeObject PyNs3WaypointChecker_Type = {
 
 
 PyObject *
-PyNs3WaypointMobilityModel__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3WaypointMobilityModel *self)
-{
-    PyObject *py_retval;
-    PyNs3WaypointMobilityModel__PythonHelper *helper = dynamic_cast< PyNs3WaypointMobilityModel__PythonHelper* >(self->obj);
-    
-    if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
-        return NULL;
-    }
-    helper->NotifyConstructionCompleted__parent_caller();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject *
 PyNs3WaypointMobilityModel__PythonHelper::_wrap_DoInitialize(PyNs3WaypointMobilityModel *self)
 {
     PyObject *py_retval;
@@ -13476,6 +13460,22 @@ PyNs3WaypointMobilityModel__PythonHelper::_wrap_NotifyNewAggregate(PyNs3Waypoint
         return NULL;
     }
     helper->NotifyNewAggregate__parent_caller();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject *
+PyNs3WaypointMobilityModel__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3WaypointMobilityModel *self)
+{
+    PyObject *py_retval;
+    PyNs3WaypointMobilityModel__PythonHelper *helper = dynamic_cast< PyNs3WaypointMobilityModel__PythonHelper* >(self->obj);
+    
+    if (helper == NULL) {
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        return NULL;
+    }
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -14039,6 +14039,35 @@ int _wrap_PyNs3WaypointMobilityModel__tp_init(PyNs3WaypointMobilityModel *self, 
 
 
 PyObject *
+_wrap_PyNs3WaypointMobilityModel_AddWaypoint(PyNs3WaypointMobilityModel *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Waypoint *waypoint;
+    const char *keywords[] = {"waypoint", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Waypoint_Type, &waypoint)) {
+        return NULL;
+    }
+    self->obj->AddWaypoint(*((PyNs3Waypoint *) waypoint)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3WaypointMobilityModel_EndMobility(PyNs3WaypointMobilityModel *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->EndMobility();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3WaypointMobilityModel_GetNextWaypoint(PyNs3WaypointMobilityModel *self)
 {
     PyObject *py_retval;
@@ -14071,18 +14100,6 @@ _wrap_PyNs3WaypointMobilityModel_GetTypeId(void)
 
 
 PyObject *
-_wrap_PyNs3WaypointMobilityModel_EndMobility(PyNs3WaypointMobilityModel *self)
-{
-    PyObject *py_retval;
-    
-    self->obj->EndMobility();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3WaypointMobilityModel_WaypointsLeft(PyNs3WaypointMobilityModel *self)
 {
     PyObject *py_retval;
@@ -14090,23 +14107,6 @@ _wrap_PyNs3WaypointMobilityModel_WaypointsLeft(PyNs3WaypointMobilityModel *self)
     
     retval = self->obj->WaypointsLeft();
     py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3WaypointMobilityModel_AddWaypoint(PyNs3WaypointMobilityModel *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Waypoint *waypoint;
-    const char *keywords[] = {"waypoint", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Waypoint_Type, &waypoint)) {
-        return NULL;
-    }
-    self->obj->AddWaypoint(*((PyNs3Waypoint *) waypoint)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
     return py_retval;
 }
 
@@ -14127,14 +14127,14 @@ _wrap_PyNs3WaypointMobilityModel__copy__(PyNs3WaypointMobilityModel *self)
 }
 
 static PyMethodDef PyNs3WaypointMobilityModel_methods[] = {
+    {(char *) "AddWaypoint", (PyCFunction) _wrap_PyNs3WaypointMobilityModel_AddWaypoint, METH_VARARGS|METH_KEYWORDS, "AddWaypoint(waypoint)\n\ntype: waypoint: ns3::Waypoint const &" },
+    {(char *) "EndMobility", (PyCFunction) _wrap_PyNs3WaypointMobilityModel_EndMobility, METH_NOARGS, "EndMobility()\n\n" },
     {(char *) "GetNextWaypoint", (PyCFunction) _wrap_PyNs3WaypointMobilityModel_GetNextWaypoint, METH_NOARGS, "GetNextWaypoint()\n\n" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3WaypointMobilityModel_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "EndMobility", (PyCFunction) _wrap_PyNs3WaypointMobilityModel_EndMobility, METH_NOARGS, "EndMobility()\n\n" },
     {(char *) "WaypointsLeft", (PyCFunction) _wrap_PyNs3WaypointMobilityModel_WaypointsLeft, METH_NOARGS, "WaypointsLeft()\n\n" },
-    {(char *) "AddWaypoint", (PyCFunction) _wrap_PyNs3WaypointMobilityModel_AddWaypoint, METH_KEYWORDS|METH_VARARGS, "AddWaypoint(waypoint)\n\ntype: waypoint: ns3::Waypoint const &" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3WaypointMobilityModel__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3WaypointMobilityModel__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3WaypointMobilityModel__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3WaypointMobilityModel__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3WaypointMobilityModel__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -14234,7 +14234,7 @@ PyTypeObject PyNs3WaypointMobilityModel_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "WaypointMobilityModel(arg0)\nWaypointMobilityModel()",                        /* Documentation string */
     (traverseproc)PyNs3WaypointMobilityModel__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3WaypointMobilityModel__tp_clear,             /* tp_clear */
@@ -14360,39 +14360,6 @@ int _wrap_PyNs3WaypointValue__tp_init(PyNs3WaypointValue *self, PyObject *args, 
 
 
 PyObject *
-_wrap_PyNs3WaypointValue_Set(PyNs3WaypointValue *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Waypoint *value;
-    const char *keywords[] = {"value", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Waypoint_Type, &value)) {
-        return NULL;
-    }
-    self->obj->Set(*((PyNs3Waypoint *) value)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3WaypointValue_Get(PyNs3WaypointValue *self)
-{
-    PyObject *py_retval;
-    PyNs3Waypoint *py_Waypoint;
-    
-    ns3::Waypoint retval = self->obj->Get();
-    py_Waypoint = PyObject_New(PyNs3Waypoint, &PyNs3Waypoint_Type);
-    py_Waypoint->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Waypoint->obj = new ns3::Waypoint(retval);
-    PyNs3Waypoint_wrapper_registry[(void *) py_Waypoint->obj] = (PyObject *) py_Waypoint;
-    py_retval = Py_BuildValue((char *) "N", py_Waypoint);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3WaypointValue_Copy(PyNs3WaypointValue *self)
 {
     PyObject *py_retval;
@@ -14429,25 +14396,6 @@ _wrap_PyNs3WaypointValue_Copy(PyNs3WaypointValue *self)
 
 
 PyObject *
-_wrap_PyNs3WaypointValue_SerializeToString(PyNs3WaypointValue *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    std::string retval;
-    PyNs3AttributeChecker *checker;
-    ns3::AttributeChecker *checker_ptr;
-    const char *keywords[] = {"checker", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3AttributeChecker_Type, &checker)) {
-        return NULL;
-    }
-    checker_ptr = (checker ? checker->obj : NULL);
-    retval = self->obj->SerializeToString(ns3::Ptr< ns3::AttributeChecker  > (checker_ptr));
-    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3WaypointValue_DeserializeFromString(PyNs3WaypointValue *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -14468,6 +14416,58 @@ _wrap_PyNs3WaypointValue_DeserializeFromString(PyNs3WaypointValue *self, PyObjec
 }
 
 
+PyObject *
+_wrap_PyNs3WaypointValue_Get(PyNs3WaypointValue *self)
+{
+    PyObject *py_retval;
+    PyNs3Waypoint *py_Waypoint;
+    
+    ns3::Waypoint retval = self->obj->Get();
+    py_Waypoint = PyObject_New(PyNs3Waypoint, &PyNs3Waypoint_Type);
+    py_Waypoint->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Waypoint->obj = new ns3::Waypoint(retval);
+    PyNs3Waypoint_wrapper_registry[(void *) py_Waypoint->obj] = (PyObject *) py_Waypoint;
+    py_retval = Py_BuildValue((char *) "N", py_Waypoint);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3WaypointValue_SerializeToString(PyNs3WaypointValue *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    std::string retval;
+    PyNs3AttributeChecker *checker;
+    ns3::AttributeChecker *checker_ptr;
+    const char *keywords[] = {"checker", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3AttributeChecker_Type, &checker)) {
+        return NULL;
+    }
+    checker_ptr = (checker ? checker->obj : NULL);
+    retval = self->obj->SerializeToString(ns3::Ptr< ns3::AttributeChecker  > (checker_ptr));
+    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3WaypointValue_Set(PyNs3WaypointValue *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Waypoint *value;
+    const char *keywords[] = {"value", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Waypoint_Type, &value)) {
+        return NULL;
+    }
+    self->obj->Set(*((PyNs3Waypoint *) value)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
 static PyObject*
 _wrap_PyNs3WaypointValue__copy__(PyNs3WaypointValue *self)
 {
@@ -14482,11 +14482,11 @@ _wrap_PyNs3WaypointValue__copy__(PyNs3WaypointValue *self)
 }
 
 static PyMethodDef PyNs3WaypointValue_methods[] = {
-    {(char *) "Set", (PyCFunction) _wrap_PyNs3WaypointValue_Set, METH_KEYWORDS|METH_VARARGS, "Set(value)\n\ntype: value: ns3::Waypoint const &" },
-    {(char *) "Get", (PyCFunction) _wrap_PyNs3WaypointValue_Get, METH_NOARGS, "Get()\n\n" },
     {(char *) "Copy", (PyCFunction) _wrap_PyNs3WaypointValue_Copy, METH_NOARGS, "Copy()\n\n" },
-    {(char *) "SerializeToString", (PyCFunction) _wrap_PyNs3WaypointValue_SerializeToString, METH_KEYWORDS|METH_VARARGS, "SerializeToString(checker)\n\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
-    {(char *) "DeserializeFromString", (PyCFunction) _wrap_PyNs3WaypointValue_DeserializeFromString, METH_KEYWORDS|METH_VARARGS, "DeserializeFromString(value, checker)\n\ntype: value: std::string\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
+    {(char *) "DeserializeFromString", (PyCFunction) _wrap_PyNs3WaypointValue_DeserializeFromString, METH_VARARGS|METH_KEYWORDS, "DeserializeFromString(value, checker)\n\ntype: value: std::string\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
+    {(char *) "Get", (PyCFunction) _wrap_PyNs3WaypointValue_Get, METH_NOARGS, "Get()\n\n" },
+    {(char *) "SerializeToString", (PyCFunction) _wrap_PyNs3WaypointValue_SerializeToString, METH_VARARGS|METH_KEYWORDS, "SerializeToString(checker)\n\ntype: checker: ns3::Ptr< ns3::AttributeChecker const >" },
+    {(char *) "Set", (PyCFunction) _wrap_PyNs3WaypointValue_Set, METH_VARARGS|METH_KEYWORDS, "Set(value)\n\ntype: value: ns3::Waypoint const &" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3WaypointValue__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -14599,16 +14599,16 @@ PyTypeObject PyNs3WaypointValue_Type = {
 
 
 PyObject *
-PyNs3ConstantAccelerationMobilityModel__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3ConstantAccelerationMobilityModel *self)
+PyNs3ConstantAccelerationMobilityModel__PythonHelper::_wrap_DoDispose(PyNs3ConstantAccelerationMobilityModel *self)
 {
     PyObject *py_retval;
     PyNs3ConstantAccelerationMobilityModel__PythonHelper *helper = dynamic_cast< PyNs3ConstantAccelerationMobilityModel__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -14647,16 +14647,16 @@ PyNs3ConstantAccelerationMobilityModel__PythonHelper::_wrap_NotifyNewAggregate(P
 }
 
 PyObject *
-PyNs3ConstantAccelerationMobilityModel__PythonHelper::_wrap_DoDispose(PyNs3ConstantAccelerationMobilityModel *self)
+PyNs3ConstantAccelerationMobilityModel__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3ConstantAccelerationMobilityModel *self)
 {
     PyObject *py_retval;
     PyNs3ConstantAccelerationMobilityModel__PythonHelper *helper = dynamic_cast< PyNs3ConstantAccelerationMobilityModel__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -15227,11 +15227,11 @@ _wrap_PyNs3ConstantAccelerationMobilityModel__copy__(PyNs3ConstantAccelerationMo
 
 static PyMethodDef PyNs3ConstantAccelerationMobilityModel_methods[] = {
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3ConstantAccelerationMobilityModel_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "SetVelocityAndAcceleration", (PyCFunction) _wrap_PyNs3ConstantAccelerationMobilityModel_SetVelocityAndAcceleration, METH_KEYWORDS|METH_VARARGS, "SetVelocityAndAcceleration(velocity, acceleration)\n\ntype: velocity: ns3::Vector const &\ntype: acceleration: ns3::Vector const &" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3ConstantAccelerationMobilityModel__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "SetVelocityAndAcceleration", (PyCFunction) _wrap_PyNs3ConstantAccelerationMobilityModel_SetVelocityAndAcceleration, METH_VARARGS|METH_KEYWORDS, "SetVelocityAndAcceleration(velocity, acceleration)\n\ntype: velocity: ns3::Vector const &\ntype: acceleration: ns3::Vector const &" },
+    {(char *) "DoDispose", (PyCFunction) PyNs3ConstantAccelerationMobilityModel__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3ConstantAccelerationMobilityModel__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3ConstantAccelerationMobilityModel__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3ConstantAccelerationMobilityModel__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3ConstantAccelerationMobilityModel__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3ConstantAccelerationMobilityModel__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -15331,7 +15331,7 @@ PyTypeObject PyNs3ConstantAccelerationMobilityModel_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "ConstantAccelerationMobilityModel(arg0)\nConstantAccelerationMobilityModel()",                        /* Documentation string */
     (traverseproc)PyNs3ConstantAccelerationMobilityModel__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3ConstantAccelerationMobilityModel__tp_clear,             /* tp_clear */
@@ -15364,16 +15364,16 @@ PyTypeObject PyNs3ConstantAccelerationMobilityModel_Type = {
 
 
 PyObject *
-PyNs3ConstantPositionMobilityModel__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3ConstantPositionMobilityModel *self)
+PyNs3ConstantPositionMobilityModel__PythonHelper::_wrap_DoDispose(PyNs3ConstantPositionMobilityModel *self)
 {
     PyObject *py_retval;
     PyNs3ConstantPositionMobilityModel__PythonHelper *helper = dynamic_cast< PyNs3ConstantPositionMobilityModel__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -15412,16 +15412,16 @@ PyNs3ConstantPositionMobilityModel__PythonHelper::_wrap_NotifyNewAggregate(PyNs3
 }
 
 PyObject *
-PyNs3ConstantPositionMobilityModel__PythonHelper::_wrap_DoDispose(PyNs3ConstantPositionMobilityModel *self)
+PyNs3ConstantPositionMobilityModel__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3ConstantPositionMobilityModel *self)
 {
     PyObject *py_retval;
     PyNs3ConstantPositionMobilityModel__PythonHelper *helper = dynamic_cast< PyNs3ConstantPositionMobilityModel__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -15974,10 +15974,10 @@ _wrap_PyNs3ConstantPositionMobilityModel__copy__(PyNs3ConstantPositionMobilityMo
 
 static PyMethodDef PyNs3ConstantPositionMobilityModel_methods[] = {
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3ConstantPositionMobilityModel_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3ConstantPositionMobilityModel__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "DoDispose", (PyCFunction) PyNs3ConstantPositionMobilityModel__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3ConstantPositionMobilityModel__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3ConstantPositionMobilityModel__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3ConstantPositionMobilityModel__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3ConstantPositionMobilityModel__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3ConstantPositionMobilityModel__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -16077,7 +16077,7 @@ PyTypeObject PyNs3ConstantPositionMobilityModel_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "ConstantPositionMobilityModel(arg0)\nConstantPositionMobilityModel()",                        /* Documentation string */
     (traverseproc)PyNs3ConstantPositionMobilityModel__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3ConstantPositionMobilityModel__tp_clear,             /* tp_clear */
@@ -16110,16 +16110,16 @@ PyTypeObject PyNs3ConstantPositionMobilityModel_Type = {
 
 
 PyObject *
-PyNs3ConstantVelocityMobilityModel__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3ConstantVelocityMobilityModel *self)
+PyNs3ConstantVelocityMobilityModel__PythonHelper::_wrap_DoDispose(PyNs3ConstantVelocityMobilityModel *self)
 {
     PyObject *py_retval;
     PyNs3ConstantVelocityMobilityModel__PythonHelper *helper = dynamic_cast< PyNs3ConstantVelocityMobilityModel__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -16158,16 +16158,16 @@ PyNs3ConstantVelocityMobilityModel__PythonHelper::_wrap_NotifyNewAggregate(PyNs3
 }
 
 PyObject *
-PyNs3ConstantVelocityMobilityModel__PythonHelper::_wrap_DoDispose(PyNs3ConstantVelocityMobilityModel *self)
+PyNs3ConstantVelocityMobilityModel__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3ConstantVelocityMobilityModel *self)
 {
     PyObject *py_retval;
     PyNs3ConstantVelocityMobilityModel__PythonHelper *helper = dynamic_cast< PyNs3ConstantVelocityMobilityModel__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -16737,11 +16737,11 @@ _wrap_PyNs3ConstantVelocityMobilityModel__copy__(PyNs3ConstantVelocityMobilityMo
 
 static PyMethodDef PyNs3ConstantVelocityMobilityModel_methods[] = {
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3ConstantVelocityMobilityModel_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "SetVelocity", (PyCFunction) _wrap_PyNs3ConstantVelocityMobilityModel_SetVelocity, METH_KEYWORDS|METH_VARARGS, "SetVelocity(speed)\n\ntype: speed: ns3::Vector const &" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3ConstantVelocityMobilityModel__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "SetVelocity", (PyCFunction) _wrap_PyNs3ConstantVelocityMobilityModel_SetVelocity, METH_VARARGS|METH_KEYWORDS, "SetVelocity(speed)\n\ntype: speed: ns3::Vector const &" },
+    {(char *) "DoDispose", (PyCFunction) PyNs3ConstantVelocityMobilityModel__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3ConstantVelocityMobilityModel__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3ConstantVelocityMobilityModel__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3ConstantVelocityMobilityModel__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3ConstantVelocityMobilityModel__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3ConstantVelocityMobilityModel__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -16841,7 +16841,7 @@ PyTypeObject PyNs3ConstantVelocityMobilityModel_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "ConstantVelocityMobilityModel(arg0)\nConstantVelocityMobilityModel()",                        /* Documentation string */
     (traverseproc)PyNs3ConstantVelocityMobilityModel__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3ConstantVelocityMobilityModel__tp_clear,             /* tp_clear */
@@ -16874,22 +16874,6 @@ PyTypeObject PyNs3ConstantVelocityMobilityModel_Type = {
 
 
 PyObject *
-PyNs3GaussMarkovMobilityModel__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3GaussMarkovMobilityModel *self)
-{
-    PyObject *py_retval;
-    PyNs3GaussMarkovMobilityModel__PythonHelper *helper = dynamic_cast< PyNs3GaussMarkovMobilityModel__PythonHelper* >(self->obj);
-    
-    if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
-        return NULL;
-    }
-    helper->NotifyConstructionCompleted__parent_caller();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject *
 PyNs3GaussMarkovMobilityModel__PythonHelper::_wrap_DoInitialize(PyNs3GaussMarkovMobilityModel *self)
 {
     PyObject *py_retval;
@@ -16916,6 +16900,22 @@ PyNs3GaussMarkovMobilityModel__PythonHelper::_wrap_NotifyNewAggregate(PyNs3Gauss
         return NULL;
     }
     helper->NotifyNewAggregate__parent_caller();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject *
+PyNs3GaussMarkovMobilityModel__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3GaussMarkovMobilityModel *self)
+{
+    PyObject *py_retval;
+    PyNs3GaussMarkovMobilityModel__PythonHelper *helper = dynamic_cast< PyNs3GaussMarkovMobilityModel__PythonHelper* >(self->obj);
+    
+    if (helper == NULL) {
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        return NULL;
+    }
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -17467,9 +17467,9 @@ _wrap_PyNs3GaussMarkovMobilityModel__copy__(PyNs3GaussMarkovMobilityModel *self)
 
 static PyMethodDef PyNs3GaussMarkovMobilityModel_methods[] = {
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3GaussMarkovMobilityModel_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3GaussMarkovMobilityModel__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3GaussMarkovMobilityModel__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3GaussMarkovMobilityModel__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3GaussMarkovMobilityModel__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3GaussMarkovMobilityModel__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -17569,7 +17569,7 @@ PyTypeObject PyNs3GaussMarkovMobilityModel_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "GaussMarkovMobilityModel(arg0)\nGaussMarkovMobilityModel()",                        /* Documentation string */
     (traverseproc)PyNs3GaussMarkovMobilityModel__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3GaussMarkovMobilityModel__tp_clear,             /* tp_clear */
@@ -17602,16 +17602,16 @@ PyTypeObject PyNs3GaussMarkovMobilityModel_Type = {
 
 
 PyObject *
-PyNs3HierarchicalMobilityModel__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3HierarchicalMobilityModel *self)
+PyNs3HierarchicalMobilityModel__PythonHelper::_wrap_DoDispose(PyNs3HierarchicalMobilityModel *self)
 {
     PyObject *py_retval;
     PyNs3HierarchicalMobilityModel__PythonHelper *helper = dynamic_cast< PyNs3HierarchicalMobilityModel__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -17650,16 +17650,16 @@ PyNs3HierarchicalMobilityModel__PythonHelper::_wrap_NotifyNewAggregate(PyNs3Hier
 }
 
 PyObject *
-PyNs3HierarchicalMobilityModel__PythonHelper::_wrap_DoDispose(PyNs3HierarchicalMobilityModel *self)
+PyNs3HierarchicalMobilityModel__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3HierarchicalMobilityModel *self)
 {
     PyObject *py_retval;
     PyNs3HierarchicalMobilityModel__PythonHelper *helper = dynamic_cast< PyNs3HierarchicalMobilityModel__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -18180,55 +18180,46 @@ int _wrap_PyNs3HierarchicalMobilityModel__tp_init(PyNs3HierarchicalMobilityModel
 
 
 PyObject *
-_wrap_PyNs3HierarchicalMobilityModel_SetChild(PyNs3HierarchicalMobilityModel *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3HierarchicalMobilityModel_GetChild(PyNs3HierarchicalMobilityModel *self)
 {
     PyObject *py_retval;
-    PyNs3MobilityModel *model;
-    ns3::MobilityModel *model_ptr;
-    const char *keywords[] = {"model", NULL};
+    ns3::Ptr< ns3::MobilityModel > retval;
+    PyNs3MobilityModel *py_MobilityModel;
+    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
+    PyTypeObject *wrapper_type = 0;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3MobilityModel_Type, &model)) {
-        return NULL;
+    retval = self->obj->GetChild();
+    if (!(const_cast<ns3::MobilityModel *> (ns3::PeekPointer (retval)))) {
+        Py_INCREF(Py_None);
+        return Py_None;
     }
-    model_ptr = (model ? model->obj : NULL);
-    self->obj->SetChild(ns3::Ptr< ns3::MobilityModel  > (model_ptr));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3HierarchicalMobilityModel_SetParent(PyNs3HierarchicalMobilityModel *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3MobilityModel *model;
-    ns3::MobilityModel *model_ptr;
-    const char *keywords[] = {"model", NULL};
+    if (typeid((*const_cast<ns3::MobilityModel *> (ns3::PeekPointer (retval)))).name() == typeid(PyNs3MobilityModel__PythonHelper).name())
+    {
+        py_MobilityModel = reinterpret_cast< PyNs3MobilityModel* >(reinterpret_cast< PyNs3MobilityModel__PythonHelper* >(const_cast<ns3::MobilityModel *> (ns3::PeekPointer (retval)))->m_pyself);
+        py_MobilityModel->obj = const_cast<ns3::MobilityModel *> (ns3::PeekPointer (retval));
+        Py_INCREF(py_MobilityModel);
+    } else {
+        wrapper_lookup_iter = PyNs3ObjectBase_wrapper_registry.find((void *) const_cast<ns3::MobilityModel *> (ns3::PeekPointer (retval)));
+        if (wrapper_lookup_iter == PyNs3ObjectBase_wrapper_registry.end()) {
+            py_MobilityModel = NULL;
+        } else {
+            py_MobilityModel = (PyNs3MobilityModel *) wrapper_lookup_iter->second;
+            Py_INCREF(py_MobilityModel);
+        }
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3MobilityModel_Type, &model)) {
-        return NULL;
+        if (py_MobilityModel == NULL) {
+            wrapper_type = PyNs3SimpleRefCount__Ns3Object_Ns3ObjectBase_Ns3ObjectDeleter__typeid_map.lookup_wrapper(typeid((*const_cast<ns3::MobilityModel *> (ns3::PeekPointer (retval)))), &PyNs3MobilityModel_Type);
+            py_MobilityModel = PyObject_GC_New(PyNs3MobilityModel, wrapper_type);
+            py_MobilityModel->inst_dict = NULL;
+    
+            py_MobilityModel->inst_dict = NULL;
+            py_MobilityModel->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+            const_cast<ns3::MobilityModel *> (ns3::PeekPointer (retval))->Ref();
+            py_MobilityModel->obj = const_cast<ns3::MobilityModel *> (ns3::PeekPointer (retval));
+            PyNs3ObjectBase_wrapper_registry[(void *) py_MobilityModel->obj] = (PyObject *) py_MobilityModel;
+        }
     }
-    model_ptr = (model ? model->obj : NULL);
-    self->obj->SetParent(ns3::Ptr< ns3::MobilityModel  > (model_ptr));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3HierarchicalMobilityModel_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::HierarchicalMobilityModel::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    py_retval = Py_BuildValue((char *) "N", py_MobilityModel);
     return py_retval;
 }
 
@@ -18279,46 +18270,55 @@ _wrap_PyNs3HierarchicalMobilityModel_GetParent(PyNs3HierarchicalMobilityModel *s
 
 
 PyObject *
-_wrap_PyNs3HierarchicalMobilityModel_GetChild(PyNs3HierarchicalMobilityModel *self)
+_wrap_PyNs3HierarchicalMobilityModel_GetTypeId(void)
 {
     PyObject *py_retval;
-    ns3::Ptr< ns3::MobilityModel > retval;
-    PyNs3MobilityModel *py_MobilityModel;
-    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
-    PyTypeObject *wrapper_type = 0;
+    PyNs3TypeId *py_TypeId;
     
-    retval = self->obj->GetChild();
-    if (!(const_cast<ns3::MobilityModel *> (ns3::PeekPointer (retval)))) {
-        Py_INCREF(Py_None);
-        return Py_None;
+    ns3::TypeId retval = ns3::HierarchicalMobilityModel::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3HierarchicalMobilityModel_SetChild(PyNs3HierarchicalMobilityModel *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3MobilityModel *model;
+    ns3::MobilityModel *model_ptr;
+    const char *keywords[] = {"model", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3MobilityModel_Type, &model)) {
+        return NULL;
     }
-    if (typeid((*const_cast<ns3::MobilityModel *> (ns3::PeekPointer (retval)))).name() == typeid(PyNs3MobilityModel__PythonHelper).name())
-    {
-        py_MobilityModel = reinterpret_cast< PyNs3MobilityModel* >(reinterpret_cast< PyNs3MobilityModel__PythonHelper* >(const_cast<ns3::MobilityModel *> (ns3::PeekPointer (retval)))->m_pyself);
-        py_MobilityModel->obj = const_cast<ns3::MobilityModel *> (ns3::PeekPointer (retval));
-        Py_INCREF(py_MobilityModel);
-    } else {
-        wrapper_lookup_iter = PyNs3ObjectBase_wrapper_registry.find((void *) const_cast<ns3::MobilityModel *> (ns3::PeekPointer (retval)));
-        if (wrapper_lookup_iter == PyNs3ObjectBase_wrapper_registry.end()) {
-            py_MobilityModel = NULL;
-        } else {
-            py_MobilityModel = (PyNs3MobilityModel *) wrapper_lookup_iter->second;
-            Py_INCREF(py_MobilityModel);
-        }
+    model_ptr = (model ? model->obj : NULL);
+    self->obj->SetChild(ns3::Ptr< ns3::MobilityModel  > (model_ptr));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3HierarchicalMobilityModel_SetParent(PyNs3HierarchicalMobilityModel *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3MobilityModel *model;
+    ns3::MobilityModel *model_ptr;
+    const char *keywords[] = {"model", NULL};
     
-        if (py_MobilityModel == NULL) {
-            wrapper_type = PyNs3SimpleRefCount__Ns3Object_Ns3ObjectBase_Ns3ObjectDeleter__typeid_map.lookup_wrapper(typeid((*const_cast<ns3::MobilityModel *> (ns3::PeekPointer (retval)))), &PyNs3MobilityModel_Type);
-            py_MobilityModel = PyObject_GC_New(PyNs3MobilityModel, wrapper_type);
-            py_MobilityModel->inst_dict = NULL;
-    
-            py_MobilityModel->inst_dict = NULL;
-            py_MobilityModel->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-            const_cast<ns3::MobilityModel *> (ns3::PeekPointer (retval))->Ref();
-            py_MobilityModel->obj = const_cast<ns3::MobilityModel *> (ns3::PeekPointer (retval));
-            PyNs3ObjectBase_wrapper_registry[(void *) py_MobilityModel->obj] = (PyObject *) py_MobilityModel;
-        }
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3MobilityModel_Type, &model)) {
+        return NULL;
     }
-    py_retval = Py_BuildValue((char *) "N", py_MobilityModel);
+    model_ptr = (model ? model->obj : NULL);
+    self->obj->SetParent(ns3::Ptr< ns3::MobilityModel  > (model_ptr));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -18339,15 +18339,15 @@ _wrap_PyNs3HierarchicalMobilityModel__copy__(PyNs3HierarchicalMobilityModel *sel
 }
 
 static PyMethodDef PyNs3HierarchicalMobilityModel_methods[] = {
-    {(char *) "SetChild", (PyCFunction) _wrap_PyNs3HierarchicalMobilityModel_SetChild, METH_KEYWORDS|METH_VARARGS, "SetChild(model)\n\ntype: model: ns3::Ptr< ns3::MobilityModel >" },
-    {(char *) "SetParent", (PyCFunction) _wrap_PyNs3HierarchicalMobilityModel_SetParent, METH_KEYWORDS|METH_VARARGS, "SetParent(model)\n\ntype: model: ns3::Ptr< ns3::MobilityModel >" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3HierarchicalMobilityModel_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "GetParent", (PyCFunction) _wrap_PyNs3HierarchicalMobilityModel_GetParent, METH_NOARGS, "GetParent()\n\n" },
     {(char *) "GetChild", (PyCFunction) _wrap_PyNs3HierarchicalMobilityModel_GetChild, METH_NOARGS, "GetChild()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3HierarchicalMobilityModel__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "GetParent", (PyCFunction) _wrap_PyNs3HierarchicalMobilityModel_GetParent, METH_NOARGS, "GetParent()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3HierarchicalMobilityModel_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "SetChild", (PyCFunction) _wrap_PyNs3HierarchicalMobilityModel_SetChild, METH_VARARGS|METH_KEYWORDS, "SetChild(model)\n\ntype: model: ns3::Ptr< ns3::MobilityModel >" },
+    {(char *) "SetParent", (PyCFunction) _wrap_PyNs3HierarchicalMobilityModel_SetParent, METH_VARARGS|METH_KEYWORDS, "SetParent(model)\n\ntype: model: ns3::Ptr< ns3::MobilityModel >" },
+    {(char *) "DoDispose", (PyCFunction) PyNs3HierarchicalMobilityModel__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3HierarchicalMobilityModel__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3HierarchicalMobilityModel__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3HierarchicalMobilityModel__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3HierarchicalMobilityModel__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3HierarchicalMobilityModel__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -18447,7 +18447,7 @@ PyTypeObject PyNs3HierarchicalMobilityModel_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "HierarchicalMobilityModel(arg0)\nHierarchicalMobilityModel()",                        /* Documentation string */
     (traverseproc)PyNs3HierarchicalMobilityModel__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3HierarchicalMobilityModel__tp_clear,             /* tp_clear */

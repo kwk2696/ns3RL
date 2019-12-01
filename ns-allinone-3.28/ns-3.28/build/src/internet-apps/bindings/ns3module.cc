@@ -1283,31 +1283,6 @@ PyObject * _wrap_PyNs3DhcpHelper_InstallDhcpClient(PyNs3DhcpHelper *self, PyObje
 
 
 PyObject *
-_wrap_PyNs3DhcpHelper_InstallFixedAddress(PyNs3DhcpHelper *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3NetDevice *netDevice;
-    ns3::NetDevice *netDevice_ptr;
-    PyNs3Ipv4Address *addr;
-    PyNs3Ipv4Mask *mask;
-    const char *keywords[] = {"netDevice", "addr", "mask", NULL};
-    PyNs3Ipv4InterfaceContainer *py_Ipv4InterfaceContainer;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!O!", (char **) keywords, &PyNs3NetDevice_Type, &netDevice, &PyNs3Ipv4Address_Type, &addr, &PyNs3Ipv4Mask_Type, &mask)) {
-        return NULL;
-    }
-    netDevice_ptr = (netDevice ? netDevice->obj : NULL);
-    ns3::Ipv4InterfaceContainer retval = self->obj->InstallFixedAddress(ns3::Ptr< ns3::NetDevice  > (netDevice_ptr), *((PyNs3Ipv4Address *) addr)->obj, *((PyNs3Ipv4Mask *) mask)->obj);
-    py_Ipv4InterfaceContainer = PyObject_New(PyNs3Ipv4InterfaceContainer, &PyNs3Ipv4InterfaceContainer_Type);
-    py_Ipv4InterfaceContainer->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Ipv4InterfaceContainer->obj = new ns3::Ipv4InterfaceContainer(retval);
-    PyNs3Ipv4InterfaceContainer_wrapper_registry[(void *) py_Ipv4InterfaceContainer->obj] = (PyObject *) py_Ipv4InterfaceContainer;
-    py_retval = Py_BuildValue((char *) "N", py_Ipv4InterfaceContainer);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3DhcpHelper_InstallDhcpServer(PyNs3DhcpHelper *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -1332,6 +1307,31 @@ _wrap_PyNs3DhcpHelper_InstallDhcpServer(PyNs3DhcpHelper *self, PyObject *args, P
     py_ApplicationContainer->obj = new ns3::ApplicationContainer(retval);
     PyNs3ApplicationContainer_wrapper_registry[(void *) py_ApplicationContainer->obj] = (PyObject *) py_ApplicationContainer;
     py_retval = Py_BuildValue((char *) "N", py_ApplicationContainer);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DhcpHelper_InstallFixedAddress(PyNs3DhcpHelper *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3NetDevice *netDevice;
+    ns3::NetDevice *netDevice_ptr;
+    PyNs3Ipv4Address *addr;
+    PyNs3Ipv4Mask *mask;
+    const char *keywords[] = {"netDevice", "addr", "mask", NULL};
+    PyNs3Ipv4InterfaceContainer *py_Ipv4InterfaceContainer;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!O!", (char **) keywords, &PyNs3NetDevice_Type, &netDevice, &PyNs3Ipv4Address_Type, &addr, &PyNs3Ipv4Mask_Type, &mask)) {
+        return NULL;
+    }
+    netDevice_ptr = (netDevice ? netDevice->obj : NULL);
+    ns3::Ipv4InterfaceContainer retval = self->obj->InstallFixedAddress(ns3::Ptr< ns3::NetDevice  > (netDevice_ptr), *((PyNs3Ipv4Address *) addr)->obj, *((PyNs3Ipv4Mask *) mask)->obj);
+    py_Ipv4InterfaceContainer = PyObject_New(PyNs3Ipv4InterfaceContainer, &PyNs3Ipv4InterfaceContainer_Type);
+    py_Ipv4InterfaceContainer->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Ipv4InterfaceContainer->obj = new ns3::Ipv4InterfaceContainer(retval);
+    PyNs3Ipv4InterfaceContainer_wrapper_registry[(void *) py_Ipv4InterfaceContainer->obj] = (PyObject *) py_Ipv4InterfaceContainer;
+    py_retval = Py_BuildValue((char *) "N", py_Ipv4InterfaceContainer);
     return py_retval;
 }
 
@@ -1388,8 +1388,8 @@ _wrap_PyNs3DhcpHelper__copy__(PyNs3DhcpHelper *self)
 
 static PyMethodDef PyNs3DhcpHelper_methods[] = {
     {(char *) "InstallDhcpClient", (PyCFunction) _wrap_PyNs3DhcpHelper_InstallDhcpClient, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "InstallFixedAddress", (PyCFunction) _wrap_PyNs3DhcpHelper_InstallFixedAddress, METH_KEYWORDS|METH_VARARGS, "InstallFixedAddress(netDevice, addr, mask)\n\ntype: netDevice: ns3::Ptr< ns3::NetDevice >\ntype: addr: ns3::Ipv4Address\ntype: mask: ns3::Ipv4Mask" },
     {(char *) "InstallDhcpServer", (PyCFunction) _wrap_PyNs3DhcpHelper_InstallDhcpServer, METH_KEYWORDS|METH_VARARGS, "InstallDhcpServer(netDevice, serverAddr, poolAddr, poolMask, minAddr, maxAddr, gateway)\n\ntype: netDevice: ns3::Ptr< ns3::NetDevice >\ntype: serverAddr: ns3::Ipv4Address\ntype: poolAddr: ns3::Ipv4Address\ntype: poolMask: ns3::Ipv4Mask\ntype: minAddr: ns3::Ipv4Address\ntype: maxAddr: ns3::Ipv4Address\ntype: gateway: ns3::Ipv4Address" },
+    {(char *) "InstallFixedAddress", (PyCFunction) _wrap_PyNs3DhcpHelper_InstallFixedAddress, METH_KEYWORDS|METH_VARARGS, "InstallFixedAddress(netDevice, addr, mask)\n\ntype: netDevice: ns3::Ptr< ns3::NetDevice >\ntype: addr: ns3::Ipv4Address\ntype: mask: ns3::Ipv4Mask" },
     {(char *) "SetClientAttribute", (PyCFunction) _wrap_PyNs3DhcpHelper_SetClientAttribute, METH_KEYWORDS|METH_VARARGS, "SetClientAttribute(name, value)\n\ntype: name: std::string\ntype: value: ns3::AttributeValue const &" },
     {(char *) "SetServerAttribute", (PyCFunction) _wrap_PyNs3DhcpHelper_SetServerAttribute, METH_KEYWORDS|METH_VARARGS, "SetServerAttribute(name, value)\n\ntype: name: std::string\ntype: value: ns3::AttributeValue const &" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3DhcpHelper__copy__, METH_NOARGS, NULL},
@@ -1570,18 +1570,22 @@ int _wrap_PyNs3Ping6Helper__tp_init(PyNs3Ping6Helper *self, PyObject *args, PyOb
 
 
 PyObject *
-_wrap_PyNs3Ping6Helper_SetRemote(PyNs3Ping6Helper *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3Ping6Helper_Install(PyNs3Ping6Helper *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3Ipv6Address *ip;
-    const char *keywords[] = {"ip", NULL};
+    PyNs3NodeContainer *c;
+    const char *keywords[] = {"c", NULL};
+    PyNs3ApplicationContainer *py_ApplicationContainer;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv6Address_Type, &ip)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3NodeContainer_Type, &c)) {
         return NULL;
     }
-    self->obj->SetRemote(*((PyNs3Ipv6Address *) ip)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    ns3::ApplicationContainer retval = self->obj->Install(*((PyNs3NodeContainer *) c)->obj);
+    py_ApplicationContainer = PyObject_New(PyNs3ApplicationContainer, &PyNs3ApplicationContainer_Type);
+    py_ApplicationContainer->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_ApplicationContainer->obj = new ns3::ApplicationContainer(retval);
+    PyNs3ApplicationContainer_wrapper_registry[(void *) py_ApplicationContainer->obj] = (PyObject *) py_ApplicationContainer;
+    py_retval = Py_BuildValue((char *) "N", py_ApplicationContainer);
     return py_retval;
 }
 
@@ -1606,23 +1610,6 @@ _wrap_PyNs3Ping6Helper_SetAttribute(PyNs3Ping6Helper *self, PyObject *args, PyOb
 
 
 PyObject *
-_wrap_PyNs3Ping6Helper_SetLocal(PyNs3Ping6Helper *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Ipv6Address *ip;
-    const char *keywords[] = {"ip", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv6Address_Type, &ip)) {
-        return NULL;
-    }
-    self->obj->SetLocal(*((PyNs3Ipv6Address *) ip)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3Ping6Helper_SetIfIndex(PyNs3Ping6Helper *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -1640,22 +1627,35 @@ _wrap_PyNs3Ping6Helper_SetIfIndex(PyNs3Ping6Helper *self, PyObject *args, PyObje
 
 
 PyObject *
-_wrap_PyNs3Ping6Helper_Install(PyNs3Ping6Helper *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3Ping6Helper_SetLocal(PyNs3Ping6Helper *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3NodeContainer *c;
-    const char *keywords[] = {"c", NULL};
-    PyNs3ApplicationContainer *py_ApplicationContainer;
+    PyNs3Ipv6Address *ip;
+    const char *keywords[] = {"ip", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3NodeContainer_Type, &c)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv6Address_Type, &ip)) {
         return NULL;
     }
-    ns3::ApplicationContainer retval = self->obj->Install(*((PyNs3NodeContainer *) c)->obj);
-    py_ApplicationContainer = PyObject_New(PyNs3ApplicationContainer, &PyNs3ApplicationContainer_Type);
-    py_ApplicationContainer->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_ApplicationContainer->obj = new ns3::ApplicationContainer(retval);
-    PyNs3ApplicationContainer_wrapper_registry[(void *) py_ApplicationContainer->obj] = (PyObject *) py_ApplicationContainer;
-    py_retval = Py_BuildValue((char *) "N", py_ApplicationContainer);
+    self->obj->SetLocal(*((PyNs3Ipv6Address *) ip)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Ping6Helper_SetRemote(PyNs3Ping6Helper *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Ipv6Address *ip;
+    const char *keywords[] = {"ip", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv6Address_Type, &ip)) {
+        return NULL;
+    }
+    self->obj->SetRemote(*((PyNs3Ipv6Address *) ip)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -1690,11 +1690,11 @@ _wrap_PyNs3Ping6Helper__copy__(PyNs3Ping6Helper *self)
 }
 
 static PyMethodDef PyNs3Ping6Helper_methods[] = {
-    {(char *) "SetRemote", (PyCFunction) _wrap_PyNs3Ping6Helper_SetRemote, METH_KEYWORDS|METH_VARARGS, "SetRemote(ip)\n\ntype: ip: ns3::Ipv6Address" },
-    {(char *) "SetAttribute", (PyCFunction) _wrap_PyNs3Ping6Helper_SetAttribute, METH_KEYWORDS|METH_VARARGS, "SetAttribute(name, value)\n\ntype: name: std::string\ntype: value: ns3::AttributeValue const &" },
-    {(char *) "SetLocal", (PyCFunction) _wrap_PyNs3Ping6Helper_SetLocal, METH_KEYWORDS|METH_VARARGS, "SetLocal(ip)\n\ntype: ip: ns3::Ipv6Address" },
-    {(char *) "SetIfIndex", (PyCFunction) _wrap_PyNs3Ping6Helper_SetIfIndex, METH_KEYWORDS|METH_VARARGS, "SetIfIndex(ifIndex)\n\ntype: ifIndex: uint32_t" },
     {(char *) "Install", (PyCFunction) _wrap_PyNs3Ping6Helper_Install, METH_KEYWORDS|METH_VARARGS, "Install(c)\n\ntype: c: ns3::NodeContainer" },
+    {(char *) "SetAttribute", (PyCFunction) _wrap_PyNs3Ping6Helper_SetAttribute, METH_KEYWORDS|METH_VARARGS, "SetAttribute(name, value)\n\ntype: name: std::string\ntype: value: ns3::AttributeValue const &" },
+    {(char *) "SetIfIndex", (PyCFunction) _wrap_PyNs3Ping6Helper_SetIfIndex, METH_KEYWORDS|METH_VARARGS, "SetIfIndex(ifIndex)\n\ntype: ifIndex: uint32_t" },
+    {(char *) "SetLocal", (PyCFunction) _wrap_PyNs3Ping6Helper_SetLocal, METH_KEYWORDS|METH_VARARGS, "SetLocal(ip)\n\ntype: ip: ns3::Ipv6Address" },
+    {(char *) "SetRemote", (PyCFunction) _wrap_PyNs3Ping6Helper_SetRemote, METH_KEYWORDS|METH_VARARGS, "SetRemote(ip)\n\ntype: ip: ns3::Ipv6Address" },
     {(char *) "SetRoutersAddress", (PyCFunction) _wrap_PyNs3Ping6Helper_SetRoutersAddress, METH_KEYWORDS|METH_VARARGS, "SetRoutersAddress(routers)\n\ntype: routers: std::vector< ns3::Ipv6Address >" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3Ping6Helper__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
@@ -1874,6 +1874,25 @@ int _wrap_PyNs3RadvdHelper__tp_init(PyNs3RadvdHelper *self, PyObject *args, PyOb
 
 
 PyObject *
+_wrap_PyNs3RadvdHelper_AddAnnouncedPrefix(PyNs3RadvdHelper *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int interface;
+    PyNs3Ipv6Address *prefix;
+    unsigned int prefixLength;
+    const char *keywords[] = {"interface", "prefix", "prefixLength", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "IO!I", (char **) keywords, &interface, &PyNs3Ipv6Address_Type, &prefix, &prefixLength)) {
+        return NULL;
+    }
+    self->obj->AddAnnouncedPrefix(interface, *((PyNs3Ipv6Address *) prefix)->obj, prefixLength);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3RadvdHelper_ClearPrefixes(PyNs3RadvdHelper *self)
 {
     PyObject *py_retval;
@@ -1903,25 +1922,6 @@ _wrap_PyNs3RadvdHelper_DisableDefaultRouterForInterface(PyNs3RadvdHelper *self, 
 
 
 PyObject *
-_wrap_PyNs3RadvdHelper_SetAttribute(PyNs3RadvdHelper *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    const char *name;
-    Py_ssize_t name_len;
-    PyNs3AttributeValue *value;
-    const char *keywords[] = {"name", "value", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3AttributeValue_Type, &value)) {
-        return NULL;
-    }
-    self->obj->SetAttribute(std::string(name, name_len), *((PyNs3AttributeValue *) value)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3RadvdHelper_EnableDefaultRouterForInterface(PyNs3RadvdHelper *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -1934,29 +1934,6 @@ _wrap_PyNs3RadvdHelper_EnableDefaultRouterForInterface(PyNs3RadvdHelper *self, P
     self->obj->EnableDefaultRouterForInterface(interface);
     Py_INCREF(Py_None);
     py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RadvdHelper_Install(PyNs3RadvdHelper *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Node *node;
-    ns3::Node *node_ptr;
-    const char *keywords[] = {"node", NULL};
-    PyNs3ApplicationContainer *py_ApplicationContainer;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Node_Type, &node)) {
-        return NULL;
-    }
-    node_ptr = (node ? node->obj : NULL);
-    ns3::ApplicationContainer retval = self->obj->Install(ns3::Ptr< ns3::Node  > (node_ptr));
-    py_ApplicationContainer = PyObject_New(PyNs3ApplicationContainer, &PyNs3ApplicationContainer_Type);
-    py_ApplicationContainer->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_ApplicationContainer->obj = new ns3::ApplicationContainer(retval);
-    PyNs3ApplicationContainer_wrapper_registry[(void *) py_ApplicationContainer->obj] = (PyObject *) py_ApplicationContainer;
-    py_retval = Py_BuildValue((char *) "N", py_ApplicationContainer);
     return py_retval;
 }
 
@@ -2003,18 +1980,41 @@ _wrap_PyNs3RadvdHelper_GetRadvdInterface(PyNs3RadvdHelper *self, PyObject *args,
 
 
 PyObject *
-_wrap_PyNs3RadvdHelper_AddAnnouncedPrefix(PyNs3RadvdHelper *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3RadvdHelper_Install(PyNs3RadvdHelper *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    unsigned int interface;
-    PyNs3Ipv6Address *prefix;
-    unsigned int prefixLength;
-    const char *keywords[] = {"interface", "prefix", "prefixLength", NULL};
+    PyNs3Node *node;
+    ns3::Node *node_ptr;
+    const char *keywords[] = {"node", NULL};
+    PyNs3ApplicationContainer *py_ApplicationContainer;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "IO!I", (char **) keywords, &interface, &PyNs3Ipv6Address_Type, &prefix, &prefixLength)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Node_Type, &node)) {
         return NULL;
     }
-    self->obj->AddAnnouncedPrefix(interface, *((PyNs3Ipv6Address *) prefix)->obj, prefixLength);
+    node_ptr = (node ? node->obj : NULL);
+    ns3::ApplicationContainer retval = self->obj->Install(ns3::Ptr< ns3::Node  > (node_ptr));
+    py_ApplicationContainer = PyObject_New(PyNs3ApplicationContainer, &PyNs3ApplicationContainer_Type);
+    py_ApplicationContainer->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_ApplicationContainer->obj = new ns3::ApplicationContainer(retval);
+    PyNs3ApplicationContainer_wrapper_registry[(void *) py_ApplicationContainer->obj] = (PyObject *) py_ApplicationContainer;
+    py_retval = Py_BuildValue((char *) "N", py_ApplicationContainer);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RadvdHelper_SetAttribute(PyNs3RadvdHelper *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    const char *name;
+    Py_ssize_t name_len;
+    PyNs3AttributeValue *value;
+    const char *keywords[] = {"name", "value", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3AttributeValue_Type, &value)) {
+        return NULL;
+    }
+    self->obj->SetAttribute(std::string(name, name_len), *((PyNs3AttributeValue *) value)->obj);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -2034,13 +2034,13 @@ _wrap_PyNs3RadvdHelper__copy__(PyNs3RadvdHelper *self)
 }
 
 static PyMethodDef PyNs3RadvdHelper_methods[] = {
+    {(char *) "AddAnnouncedPrefix", (PyCFunction) _wrap_PyNs3RadvdHelper_AddAnnouncedPrefix, METH_KEYWORDS|METH_VARARGS, "AddAnnouncedPrefix(interface, prefix, prefixLength)\n\ntype: interface: uint32_t\ntype: prefix: ns3::Ipv6Address\ntype: prefixLength: uint32_t" },
     {(char *) "ClearPrefixes", (PyCFunction) _wrap_PyNs3RadvdHelper_ClearPrefixes, METH_NOARGS, "ClearPrefixes()\n\n" },
     {(char *) "DisableDefaultRouterForInterface", (PyCFunction) _wrap_PyNs3RadvdHelper_DisableDefaultRouterForInterface, METH_KEYWORDS|METH_VARARGS, "DisableDefaultRouterForInterface(interface)\n\ntype: interface: uint32_t" },
-    {(char *) "SetAttribute", (PyCFunction) _wrap_PyNs3RadvdHelper_SetAttribute, METH_KEYWORDS|METH_VARARGS, "SetAttribute(name, value)\n\ntype: name: std::string\ntype: value: ns3::AttributeValue const &" },
     {(char *) "EnableDefaultRouterForInterface", (PyCFunction) _wrap_PyNs3RadvdHelper_EnableDefaultRouterForInterface, METH_KEYWORDS|METH_VARARGS, "EnableDefaultRouterForInterface(interface)\n\ntype: interface: uint32_t" },
-    {(char *) "Install", (PyCFunction) _wrap_PyNs3RadvdHelper_Install, METH_KEYWORDS|METH_VARARGS, "Install(node)\n\ntype: node: ns3::Ptr< ns3::Node >" },
     {(char *) "GetRadvdInterface", (PyCFunction) _wrap_PyNs3RadvdHelper_GetRadvdInterface, METH_KEYWORDS|METH_VARARGS, "GetRadvdInterface(interface)\n\ntype: interface: uint32_t" },
-    {(char *) "AddAnnouncedPrefix", (PyCFunction) _wrap_PyNs3RadvdHelper_AddAnnouncedPrefix, METH_KEYWORDS|METH_VARARGS, "AddAnnouncedPrefix(interface, prefix, prefixLength)\n\ntype: interface: uint32_t\ntype: prefix: ns3::Ipv6Address\ntype: prefixLength: uint32_t" },
+    {(char *) "Install", (PyCFunction) _wrap_PyNs3RadvdHelper_Install, METH_KEYWORDS|METH_VARARGS, "Install(node)\n\ntype: node: ns3::Ptr< ns3::Node >" },
+    {(char *) "SetAttribute", (PyCFunction) _wrap_PyNs3RadvdHelper_SetAttribute, METH_KEYWORDS|METH_VARARGS, "SetAttribute(name, value)\n\ntype: name: std::string\ntype: value: ns3::AttributeValue const &" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3RadvdHelper__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -2219,25 +2219,6 @@ int _wrap_PyNs3V4PingHelper__tp_init(PyNs3V4PingHelper *self, PyObject *args, Py
 }
 
 
-PyObject *
-_wrap_PyNs3V4PingHelper_SetAttribute(PyNs3V4PingHelper *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    const char *name;
-    Py_ssize_t name_len;
-    PyNs3AttributeValue *value;
-    const char *keywords[] = {"name", "value", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3AttributeValue_Type, &value)) {
-        return NULL;
-    }
-    self->obj->SetAttribute(std::string(name, name_len), *((PyNs3AttributeValue *) value)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
 
 PyObject *
 _wrap_PyNs3V4PingHelper_Install__0(PyNs3V4PingHelper *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
@@ -2353,6 +2334,25 @@ PyObject * _wrap_PyNs3V4PingHelper_Install(PyNs3V4PingHelper *self, PyObject *ar
 }
 
 
+PyObject *
+_wrap_PyNs3V4PingHelper_SetAttribute(PyNs3V4PingHelper *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    const char *name;
+    Py_ssize_t name_len;
+    PyNs3AttributeValue *value;
+    const char *keywords[] = {"name", "value", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3AttributeValue_Type, &value)) {
+        return NULL;
+    }
+    self->obj->SetAttribute(std::string(name, name_len), *((PyNs3AttributeValue *) value)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
 static PyObject*
 _wrap_PyNs3V4PingHelper__copy__(PyNs3V4PingHelper *self)
 {
@@ -2366,8 +2366,8 @@ _wrap_PyNs3V4PingHelper__copy__(PyNs3V4PingHelper *self)
 }
 
 static PyMethodDef PyNs3V4PingHelper_methods[] = {
-    {(char *) "SetAttribute", (PyCFunction) _wrap_PyNs3V4PingHelper_SetAttribute, METH_KEYWORDS|METH_VARARGS, "SetAttribute(name, value)\n\ntype: name: std::string\ntype: value: ns3::AttributeValue const &" },
     {(char *) "Install", (PyCFunction) _wrap_PyNs3V4PingHelper_Install, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "SetAttribute", (PyCFunction) _wrap_PyNs3V4PingHelper_SetAttribute, METH_KEYWORDS|METH_VARARGS, "SetAttribute(name, value)\n\ntype: name: std::string\ntype: value: ns3::AttributeValue const &" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3V4PingHelper__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -2866,16 +2866,16 @@ PyTypeObject PyNs3SimpleRefCount__Ns3RadvdPrefix_Ns3Empty_Ns3DefaultDeleter__lt_
 
 
 PyObject *
-PyNs3DhcpClient__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3DhcpClient *self)
+PyNs3DhcpClient__PythonHelper::_wrap_DoDispose(PyNs3DhcpClient *self)
 {
     PyObject *py_retval;
     PyNs3DhcpClient__PythonHelper *helper = dynamic_cast< PyNs3DhcpClient__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class DhcpClient is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -2914,16 +2914,16 @@ PyNs3DhcpClient__PythonHelper::_wrap_NotifyNewAggregate(PyNs3DhcpClient *self)
 }
 
 PyObject *
-PyNs3DhcpClient__PythonHelper::_wrap_DoDispose(PyNs3DhcpClient *self)
+PyNs3DhcpClient__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3DhcpClient *self)
 {
     PyObject *py_retval;
     PyNs3DhcpClient__PythonHelper *helper = dynamic_cast< PyNs3DhcpClient__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class DhcpClient is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -3376,6 +3376,23 @@ int _wrap_PyNs3DhcpClient__tp_init(PyNs3DhcpClient *self, PyObject *args, PyObje
 
 
 PyObject *
+_wrap_PyNs3DhcpClient_AssignStreams(PyNs3DhcpClient *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int64_t retval;
+    int64_t stream;
+    const char *keywords[] = {"stream", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "L", (char **) keywords, &stream)) {
+        return NULL;
+    }
+    retval = self->obj->AssignStreams(stream);
+    py_retval = Py_BuildValue((char *) "L", retval);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3DhcpClient_GetDhcpClientNetDevice(PyNs3DhcpClient *self)
 {
     PyObject *py_retval;
@@ -3414,22 +3431,6 @@ _wrap_PyNs3DhcpClient_GetDhcpClientNetDevice(PyNs3DhcpClient *self)
 
 
 PyObject *
-_wrap_PyNs3DhcpClient_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::DhcpClient::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3DhcpClient_GetDhcpServer(PyNs3DhcpClient *self)
 {
     PyObject *py_retval;
@@ -3441,6 +3442,22 @@ _wrap_PyNs3DhcpClient_GetDhcpServer(PyNs3DhcpClient *self)
     py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
     PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
     py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DhcpClient_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::DhcpClient::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
     return py_retval;
 }
 
@@ -3464,23 +3481,6 @@ _wrap_PyNs3DhcpClient_SetDhcpClientNetDevice(PyNs3DhcpClient *self, PyObject *ar
 }
 
 
-PyObject *
-_wrap_PyNs3DhcpClient_AssignStreams(PyNs3DhcpClient *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int64_t retval;
-    int64_t stream;
-    const char *keywords[] = {"stream", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "L", (char **) keywords, &stream)) {
-        return NULL;
-    }
-    retval = self->obj->AssignStreams(stream);
-    py_retval = Py_BuildValue((char *) "L", retval);
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3DhcpClient__copy__(PyNs3DhcpClient *self)
 {
@@ -3497,15 +3497,15 @@ _wrap_PyNs3DhcpClient__copy__(PyNs3DhcpClient *self)
 }
 
 static PyMethodDef PyNs3DhcpClient_methods[] = {
-    {(char *) "GetDhcpClientNetDevice", (PyCFunction) _wrap_PyNs3DhcpClient_GetDhcpClientNetDevice, METH_NOARGS, "GetDhcpClientNetDevice()\n\n" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DhcpClient_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "GetDhcpServer", (PyCFunction) _wrap_PyNs3DhcpClient_GetDhcpServer, METH_NOARGS, "GetDhcpServer()\n\n" },
-    {(char *) "SetDhcpClientNetDevice", (PyCFunction) _wrap_PyNs3DhcpClient_SetDhcpClientNetDevice, METH_KEYWORDS|METH_VARARGS, "SetDhcpClientNetDevice(netDevice)\n\ntype: netDevice: ns3::Ptr< ns3::NetDevice >" },
     {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3DhcpClient_AssignStreams, METH_KEYWORDS|METH_VARARGS, "AssignStreams(stream)\n\ntype: stream: int64_t" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3DhcpClient__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "GetDhcpClientNetDevice", (PyCFunction) _wrap_PyNs3DhcpClient_GetDhcpClientNetDevice, METH_NOARGS, "GetDhcpClientNetDevice()\n\n" },
+    {(char *) "GetDhcpServer", (PyCFunction) _wrap_PyNs3DhcpClient_GetDhcpServer, METH_NOARGS, "GetDhcpServer()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DhcpClient_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "SetDhcpClientNetDevice", (PyCFunction) _wrap_PyNs3DhcpClient_SetDhcpClientNetDevice, METH_KEYWORDS|METH_VARARGS, "SetDhcpClientNetDevice(netDevice)\n\ntype: netDevice: ns3::Ptr< ns3::NetDevice >" },
+    {(char *) "DoDispose", (PyCFunction) PyNs3DhcpClient__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3DhcpClient__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3DhcpClient__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3DhcpClient__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3DhcpClient__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3DhcpClient__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -3605,7 +3605,7 @@ PyTypeObject PyNs3DhcpClient_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
     "DhcpClient(netDevice)\nDhcpClient(arg0)\nDhcpClient()",                        /* Documentation string */
     (traverseproc)PyNs3DhcpClient__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3DhcpClient__tp_clear,             /* tp_clear */
@@ -3703,39 +3703,6 @@ int _wrap_PyNs3DhcpHeader__tp_init(PyNs3DhcpHeader *self, PyObject *args, PyObje
 
 
 PyObject *
-_wrap_PyNs3DhcpHeader_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::DhcpHeader::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DhcpHeader_SetDhcps(PyNs3DhcpHeader *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Ipv4Address *addr;
-    const char *keywords[] = {"addr", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &addr)) {
-        return NULL;
-    }
-    self->obj->SetDhcps(*((PyNs3Ipv4Address *) addr)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3DhcpHeader_GetChaddr(PyNs3DhcpHeader *self)
 {
     PyObject *py_retval;
@@ -3752,17 +3719,41 @@ _wrap_PyNs3DhcpHeader_GetChaddr(PyNs3DhcpHeader *self)
 
 
 PyObject *
-_wrap_PyNs3DhcpHeader_GetYiaddr(PyNs3DhcpHeader *self)
+_wrap_PyNs3DhcpHeader_GetDhcps(PyNs3DhcpHeader *self)
 {
     PyObject *py_retval;
     PyNs3Ipv4Address *py_Ipv4Address;
     
-    ns3::Ipv4Address retval = self->obj->GetYiaddr();
+    ns3::Ipv4Address retval = self->obj->GetDhcps();
     py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
     py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
     py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
     PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
     py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DhcpHeader_GetLease(PyNs3DhcpHeader *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetLease();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DhcpHeader_GetMask(PyNs3DhcpHeader *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetMask();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
 
@@ -3780,18 +3771,13 @@ _wrap_PyNs3DhcpHeader_GetRebind(PyNs3DhcpHeader *self)
 
 
 PyObject *
-_wrap_PyNs3DhcpHeader_SetRebind(PyNs3DhcpHeader *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3DhcpHeader_GetRenew(PyNs3DhcpHeader *self)
 {
     PyObject *py_retval;
-    unsigned int time;
-    const char *keywords[] = {"time", NULL};
+    uint32_t retval;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &time)) {
-        return NULL;
-    }
-    self->obj->SetRebind(time);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    retval = self->obj->GetRenew();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
 
@@ -3813,109 +3799,85 @@ _wrap_PyNs3DhcpHeader_GetReq(PyNs3DhcpHeader *self)
 
 
 PyObject *
-_wrap_PyNs3DhcpHeader_SetReq(PyNs3DhcpHeader *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3DhcpHeader_GetRouter(PyNs3DhcpHeader *self)
 {
     PyObject *py_retval;
-    PyNs3Ipv4Address *addr;
-    const char *keywords[] = {"addr", NULL};
+    PyNs3Ipv4Address *py_Ipv4Address;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &addr)) {
-        return NULL;
-    }
-    self->obj->SetReq(*((PyNs3Ipv4Address *) addr)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    ns3::Ipv4Address retval = self->obj->GetRouter();
+    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
+    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
+    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
+    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3DhcpHeader_SetLease(PyNs3DhcpHeader *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int time;
-    const char *keywords[] = {"time", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &time)) {
-        return NULL;
-    }
-    self->obj->SetLease(time);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DhcpHeader_GetMask(PyNs3DhcpHeader *self)
+_wrap_PyNs3DhcpHeader_GetTran(PyNs3DhcpHeader *self)
 {
     PyObject *py_retval;
     uint32_t retval;
     
-    retval = self->obj->GetMask();
+    retval = self->obj->GetTran();
     py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3DhcpHeader_SetYiaddr(PyNs3DhcpHeader *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3DhcpHeader_GetType(PyNs3DhcpHeader *self)
 {
     PyObject *py_retval;
-    PyNs3Ipv4Address *addr;
-    const char *keywords[] = {"addr", NULL};
+    uint8_t retval;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &addr)) {
-        return NULL;
-    }
-    self->obj->SetYiaddr(*((PyNs3Ipv4Address *) addr)->obj);
+    retval = self->obj->GetType();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DhcpHeader_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::DhcpHeader::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DhcpHeader_GetYiaddr(PyNs3DhcpHeader *self)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4Address *py_Ipv4Address;
+    
+    ns3::Ipv4Address retval = self->obj->GetYiaddr();
+    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
+    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
+    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
+    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DhcpHeader_ResetOpt(PyNs3DhcpHeader *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->ResetOpt();
     Py_INCREF(Py_None);
     py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DhcpHeader_SetType(PyNs3DhcpHeader *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int type;
-    const char *keywords[] = {"type", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &type)) {
-        return NULL;
-    }
-    if (type > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SetType(type);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DhcpHeader_GetLease(PyNs3DhcpHeader *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetLease();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DhcpHeader_GetRenew(PyNs3DhcpHeader *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetRenew();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
 
@@ -3960,6 +3922,23 @@ _wrap_PyNs3DhcpHeader_SetChaddr(PyNs3DhcpHeader *self, PyObject *args, PyObject 
 
 
 PyObject *
+_wrap_PyNs3DhcpHeader_SetDhcps(PyNs3DhcpHeader *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4Address *addr;
+    const char *keywords[] = {"addr", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &addr)) {
+        return NULL;
+    }
+    self->obj->SetDhcps(*((PyNs3Ipv4Address *) addr)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3DhcpHeader_SetHWType(PyNs3DhcpHeader *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -3986,84 +3965,16 @@ _wrap_PyNs3DhcpHeader_SetHWType(PyNs3DhcpHeader *self, PyObject *args, PyObject 
 
 
 PyObject *
-_wrap_PyNs3DhcpHeader_GetDhcps(PyNs3DhcpHeader *self)
+_wrap_PyNs3DhcpHeader_SetLease(PyNs3DhcpHeader *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3Ipv4Address *py_Ipv4Address;
+    unsigned int time;
+    const char *keywords[] = {"time", NULL};
     
-    ns3::Ipv4Address retval = self->obj->GetDhcps();
-    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
-    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
-    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
-    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DhcpHeader_GetTran(PyNs3DhcpHeader *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetTran();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DhcpHeader_SetTran(PyNs3DhcpHeader *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int tran;
-    const char *keywords[] = {"tran", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &tran)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &time)) {
         return NULL;
     }
-    self->obj->SetTran(tran);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DhcpHeader_GetRouter(PyNs3DhcpHeader *self)
-{
-    PyObject *py_retval;
-    PyNs3Ipv4Address *py_Ipv4Address;
-    
-    ns3::Ipv4Address retval = self->obj->GetRouter();
-    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
-    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
-    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
-    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DhcpHeader_GetType(PyNs3DhcpHeader *self)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    
-    retval = self->obj->GetType();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DhcpHeader_ResetOpt(PyNs3DhcpHeader *self)
-{
-    PyObject *py_retval;
-    
-    self->obj->ResetOpt();
+    self->obj->SetLease(time);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -4088,11 +3999,50 @@ _wrap_PyNs3DhcpHeader_SetMask(PyNs3DhcpHeader *self, PyObject *args, PyObject *k
 
 
 PyObject *
-_wrap_PyNs3DhcpHeader_SetTime(PyNs3DhcpHeader *self)
+_wrap_PyNs3DhcpHeader_SetRebind(PyNs3DhcpHeader *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
+    unsigned int time;
+    const char *keywords[] = {"time", NULL};
     
-    self->obj->SetTime();
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &time)) {
+        return NULL;
+    }
+    self->obj->SetRebind(time);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DhcpHeader_SetRenew(PyNs3DhcpHeader *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int time;
+    const char *keywords[] = {"time", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &time)) {
+        return NULL;
+    }
+    self->obj->SetRenew(time);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DhcpHeader_SetReq(PyNs3DhcpHeader *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4Address *addr;
+    const char *keywords[] = {"addr", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &addr)) {
+        return NULL;
+    }
+    self->obj->SetReq(*((PyNs3Ipv4Address *) addr)->obj);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -4117,16 +4067,66 @@ _wrap_PyNs3DhcpHeader_SetRouter(PyNs3DhcpHeader *self, PyObject *args, PyObject 
 
 
 PyObject *
-_wrap_PyNs3DhcpHeader_SetRenew(PyNs3DhcpHeader *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3DhcpHeader_SetTime(PyNs3DhcpHeader *self)
 {
     PyObject *py_retval;
-    unsigned int time;
-    const char *keywords[] = {"time", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &time)) {
+    self->obj->SetTime();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DhcpHeader_SetTran(PyNs3DhcpHeader *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int tran;
+    const char *keywords[] = {"tran", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &tran)) {
         return NULL;
     }
-    self->obj->SetRenew(time);
+    self->obj->SetTran(tran);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DhcpHeader_SetType(PyNs3DhcpHeader *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int type;
+    const char *keywords[] = {"type", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &type)) {
+        return NULL;
+    }
+    if (type > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SetType(type);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DhcpHeader_SetYiaddr(PyNs3DhcpHeader *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4Address *addr;
+    const char *keywords[] = {"addr", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &addr)) {
+        return NULL;
+    }
+    self->obj->SetYiaddr(*((PyNs3Ipv4Address *) addr)->obj);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -4148,32 +4148,32 @@ _wrap_PyNs3DhcpHeader__copy__(PyNs3DhcpHeader *self)
 }
 
 static PyMethodDef PyNs3DhcpHeader_methods[] = {
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DhcpHeader_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "SetDhcps", (PyCFunction) _wrap_PyNs3DhcpHeader_SetDhcps, METH_KEYWORDS|METH_VARARGS, "SetDhcps(addr)\n\ntype: addr: ns3::Ipv4Address" },
     {(char *) "GetChaddr", (PyCFunction) _wrap_PyNs3DhcpHeader_GetChaddr, METH_NOARGS, "GetChaddr()\n\n" },
-    {(char *) "GetYiaddr", (PyCFunction) _wrap_PyNs3DhcpHeader_GetYiaddr, METH_NOARGS, "GetYiaddr()\n\n" },
-    {(char *) "GetRebind", (PyCFunction) _wrap_PyNs3DhcpHeader_GetRebind, METH_NOARGS, "GetRebind()\n\n" },
-    {(char *) "SetRebind", (PyCFunction) _wrap_PyNs3DhcpHeader_SetRebind, METH_KEYWORDS|METH_VARARGS, "SetRebind(time)\n\ntype: time: uint32_t" },
-    {(char *) "GetReq", (PyCFunction) _wrap_PyNs3DhcpHeader_GetReq, METH_NOARGS, "GetReq()\n\n" },
-    {(char *) "SetReq", (PyCFunction) _wrap_PyNs3DhcpHeader_SetReq, METH_KEYWORDS|METH_VARARGS, "SetReq(addr)\n\ntype: addr: ns3::Ipv4Address" },
-    {(char *) "SetLease", (PyCFunction) _wrap_PyNs3DhcpHeader_SetLease, METH_KEYWORDS|METH_VARARGS, "SetLease(time)\n\ntype: time: uint32_t" },
-    {(char *) "GetMask", (PyCFunction) _wrap_PyNs3DhcpHeader_GetMask, METH_NOARGS, "GetMask()\n\n" },
-    {(char *) "SetYiaddr", (PyCFunction) _wrap_PyNs3DhcpHeader_SetYiaddr, METH_KEYWORDS|METH_VARARGS, "SetYiaddr(addr)\n\ntype: addr: ns3::Ipv4Address" },
-    {(char *) "SetType", (PyCFunction) _wrap_PyNs3DhcpHeader_SetType, METH_KEYWORDS|METH_VARARGS, "SetType(type)\n\ntype: type: uint8_t" },
-    {(char *) "GetLease", (PyCFunction) _wrap_PyNs3DhcpHeader_GetLease, METH_NOARGS, "GetLease()\n\n" },
-    {(char *) "GetRenew", (PyCFunction) _wrap_PyNs3DhcpHeader_GetRenew, METH_NOARGS, "GetRenew()\n\n" },
-    {(char *) "SetChaddr", (PyCFunction) _wrap_PyNs3DhcpHeader_SetChaddr, METH_KEYWORDS|METH_VARARGS, "SetChaddr(addr)\n\ntype: addr: ns3::Address" },
-    {(char *) "SetHWType", (PyCFunction) _wrap_PyNs3DhcpHeader_SetHWType, METH_KEYWORDS|METH_VARARGS, "SetHWType(htype, hlen)\n\ntype: htype: uint8_t\ntype: hlen: uint8_t" },
     {(char *) "GetDhcps", (PyCFunction) _wrap_PyNs3DhcpHeader_GetDhcps, METH_NOARGS, "GetDhcps()\n\n" },
-    {(char *) "GetTran", (PyCFunction) _wrap_PyNs3DhcpHeader_GetTran, METH_NOARGS, "GetTran()\n\n" },
-    {(char *) "SetTran", (PyCFunction) _wrap_PyNs3DhcpHeader_SetTran, METH_KEYWORDS|METH_VARARGS, "SetTran(tran)\n\ntype: tran: uint32_t" },
+    {(char *) "GetLease", (PyCFunction) _wrap_PyNs3DhcpHeader_GetLease, METH_NOARGS, "GetLease()\n\n" },
+    {(char *) "GetMask", (PyCFunction) _wrap_PyNs3DhcpHeader_GetMask, METH_NOARGS, "GetMask()\n\n" },
+    {(char *) "GetRebind", (PyCFunction) _wrap_PyNs3DhcpHeader_GetRebind, METH_NOARGS, "GetRebind()\n\n" },
+    {(char *) "GetRenew", (PyCFunction) _wrap_PyNs3DhcpHeader_GetRenew, METH_NOARGS, "GetRenew()\n\n" },
+    {(char *) "GetReq", (PyCFunction) _wrap_PyNs3DhcpHeader_GetReq, METH_NOARGS, "GetReq()\n\n" },
     {(char *) "GetRouter", (PyCFunction) _wrap_PyNs3DhcpHeader_GetRouter, METH_NOARGS, "GetRouter()\n\n" },
+    {(char *) "GetTran", (PyCFunction) _wrap_PyNs3DhcpHeader_GetTran, METH_NOARGS, "GetTran()\n\n" },
     {(char *) "GetType", (PyCFunction) _wrap_PyNs3DhcpHeader_GetType, METH_NOARGS, "GetType()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DhcpHeader_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "GetYiaddr", (PyCFunction) _wrap_PyNs3DhcpHeader_GetYiaddr, METH_NOARGS, "GetYiaddr()\n\n" },
     {(char *) "ResetOpt", (PyCFunction) _wrap_PyNs3DhcpHeader_ResetOpt, METH_NOARGS, "ResetOpt()\n\n" },
+    {(char *) "SetChaddr", (PyCFunction) _wrap_PyNs3DhcpHeader_SetChaddr, METH_KEYWORDS|METH_VARARGS, "SetChaddr(addr)\n\ntype: addr: ns3::Address" },
+    {(char *) "SetDhcps", (PyCFunction) _wrap_PyNs3DhcpHeader_SetDhcps, METH_KEYWORDS|METH_VARARGS, "SetDhcps(addr)\n\ntype: addr: ns3::Ipv4Address" },
+    {(char *) "SetHWType", (PyCFunction) _wrap_PyNs3DhcpHeader_SetHWType, METH_KEYWORDS|METH_VARARGS, "SetHWType(htype, hlen)\n\ntype: htype: uint8_t\ntype: hlen: uint8_t" },
+    {(char *) "SetLease", (PyCFunction) _wrap_PyNs3DhcpHeader_SetLease, METH_KEYWORDS|METH_VARARGS, "SetLease(time)\n\ntype: time: uint32_t" },
     {(char *) "SetMask", (PyCFunction) _wrap_PyNs3DhcpHeader_SetMask, METH_KEYWORDS|METH_VARARGS, "SetMask(addr)\n\ntype: addr: uint32_t" },
-    {(char *) "SetTime", (PyCFunction) _wrap_PyNs3DhcpHeader_SetTime, METH_NOARGS, "SetTime()\n\n" },
-    {(char *) "SetRouter", (PyCFunction) _wrap_PyNs3DhcpHeader_SetRouter, METH_KEYWORDS|METH_VARARGS, "SetRouter(addr)\n\ntype: addr: ns3::Ipv4Address" },
+    {(char *) "SetRebind", (PyCFunction) _wrap_PyNs3DhcpHeader_SetRebind, METH_KEYWORDS|METH_VARARGS, "SetRebind(time)\n\ntype: time: uint32_t" },
     {(char *) "SetRenew", (PyCFunction) _wrap_PyNs3DhcpHeader_SetRenew, METH_KEYWORDS|METH_VARARGS, "SetRenew(time)\n\ntype: time: uint32_t" },
+    {(char *) "SetReq", (PyCFunction) _wrap_PyNs3DhcpHeader_SetReq, METH_KEYWORDS|METH_VARARGS, "SetReq(addr)\n\ntype: addr: ns3::Ipv4Address" },
+    {(char *) "SetRouter", (PyCFunction) _wrap_PyNs3DhcpHeader_SetRouter, METH_KEYWORDS|METH_VARARGS, "SetRouter(addr)\n\ntype: addr: ns3::Ipv4Address" },
+    {(char *) "SetTime", (PyCFunction) _wrap_PyNs3DhcpHeader_SetTime, METH_NOARGS, "SetTime()\n\n" },
+    {(char *) "SetTran", (PyCFunction) _wrap_PyNs3DhcpHeader_SetTran, METH_KEYWORDS|METH_VARARGS, "SetTran(tran)\n\ntype: tran: uint32_t" },
+    {(char *) "SetType", (PyCFunction) _wrap_PyNs3DhcpHeader_SetType, METH_KEYWORDS|METH_VARARGS, "SetType(type)\n\ntype: type: uint8_t" },
+    {(char *) "SetYiaddr", (PyCFunction) _wrap_PyNs3DhcpHeader_SetYiaddr, METH_KEYWORDS|METH_VARARGS, "SetYiaddr(addr)\n\ntype: addr: ns3::Ipv4Address" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3DhcpHeader__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -4270,7 +4270,7 @@ PyTypeObject PyNs3DhcpHeader_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
     "DhcpHeader(arg0)\nDhcpHeader()",                        /* Documentation string */
     (traverseproc)PyNs3DhcpHeader__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3DhcpHeader__tp_clear,             /* tp_clear */
@@ -4303,16 +4303,16 @@ PyTypeObject PyNs3DhcpHeader_Type = {
 
 
 PyObject *
-PyNs3DhcpServer__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3DhcpServer *self)
+PyNs3DhcpServer__PythonHelper::_wrap_DoDispose(PyNs3DhcpServer *self)
 {
     PyObject *py_retval;
     PyNs3DhcpServer__PythonHelper *helper = dynamic_cast< PyNs3DhcpServer__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class DhcpServer is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -4351,16 +4351,16 @@ PyNs3DhcpServer__PythonHelper::_wrap_NotifyNewAggregate(PyNs3DhcpServer *self)
 }
 
 PyObject *
-PyNs3DhcpServer__PythonHelper::_wrap_DoDispose(PyNs3DhcpServer *self)
+PyNs3DhcpServer__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3DhcpServer *self)
 {
     PyObject *py_retval;
     PyNs3DhcpServer__PythonHelper *helper = dynamic_cast< PyNs3DhcpServer__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class DhcpServer is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -4844,10 +4844,10 @@ _wrap_PyNs3DhcpServer__copy__(PyNs3DhcpServer *self)
 static PyMethodDef PyNs3DhcpServer_methods[] = {
     {(char *) "AddStaticDhcpEntry", (PyCFunction) _wrap_PyNs3DhcpServer_AddStaticDhcpEntry, METH_KEYWORDS|METH_VARARGS, "AddStaticDhcpEntry(chaddr, addr)\n\ntype: chaddr: ns3::Address\ntype: addr: ns3::Ipv4Address" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DhcpServer_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3DhcpServer__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "DoDispose", (PyCFunction) PyNs3DhcpServer__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3DhcpServer__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3DhcpServer__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3DhcpServer__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3DhcpServer__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3DhcpServer__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -4947,7 +4947,7 @@ PyTypeObject PyNs3DhcpServer_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
     "DhcpServer(arg0)\nDhcpServer()",                        /* Documentation string */
     (traverseproc)PyNs3DhcpServer__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3DhcpServer__tp_clear,             /* tp_clear */
@@ -4980,16 +4980,16 @@ PyTypeObject PyNs3DhcpServer_Type = {
 
 
 PyObject *
-PyNs3Ping6__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3Ping6 *self)
+PyNs3Ping6__PythonHelper::_wrap_DoDispose(PyNs3Ping6 *self)
 {
     PyObject *py_retval;
     PyNs3Ping6__PythonHelper *helper = dynamic_cast< PyNs3Ping6__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Ping6 is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -5028,16 +5028,16 @@ PyNs3Ping6__PythonHelper::_wrap_NotifyNewAggregate(PyNs3Ping6 *self)
 }
 
 PyObject *
-PyNs3Ping6__PythonHelper::_wrap_DoDispose(PyNs3Ping6 *self)
+PyNs3Ping6__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3Ping6 *self)
 {
     PyObject *py_retval;
     PyNs3Ping6__PythonHelper *helper = dynamic_cast< PyNs3Ping6__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Ping6 is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -5448,6 +5448,39 @@ int _wrap_PyNs3Ping6__tp_init(PyNs3Ping6 *self, PyObject *args, PyObject *kwargs
 
 
 PyObject *
+_wrap_PyNs3Ping6_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::Ping6::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Ping6_SetIfIndex(PyNs3Ping6 *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int ifIndex;
+    const char *keywords[] = {"ifIndex", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &ifIndex)) {
+        return NULL;
+    }
+    self->obj->SetIfIndex(ifIndex);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3Ping6_SetLocal(PyNs3Ping6 *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -5460,22 +5493,6 @@ _wrap_PyNs3Ping6_SetLocal(PyNs3Ping6 *self, PyObject *args, PyObject *kwargs)
     self->obj->SetLocal(*((PyNs3Ipv6Address *) ipv6)->obj);
     Py_INCREF(Py_None);
     py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Ping6_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::Ping6::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
     return py_retval;
 }
 
@@ -5514,23 +5531,6 @@ _wrap_PyNs3Ping6_SetRouters(PyNs3Ping6 *self, PyObject *args, PyObject *kwargs)
 }
 
 
-PyObject *
-_wrap_PyNs3Ping6_SetIfIndex(PyNs3Ping6 *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int ifIndex;
-    const char *keywords[] = {"ifIndex", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &ifIndex)) {
-        return NULL;
-    }
-    self->obj->SetIfIndex(ifIndex);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3Ping6__copy__(PyNs3Ping6 *self)
 {
@@ -5547,15 +5547,15 @@ _wrap_PyNs3Ping6__copy__(PyNs3Ping6 *self)
 }
 
 static PyMethodDef PyNs3Ping6_methods[] = {
-    {(char *) "SetLocal", (PyCFunction) _wrap_PyNs3Ping6_SetLocal, METH_KEYWORDS|METH_VARARGS, "SetLocal(ipv6)\n\ntype: ipv6: ns3::Ipv6Address" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3Ping6_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "SetIfIndex", (PyCFunction) _wrap_PyNs3Ping6_SetIfIndex, METH_KEYWORDS|METH_VARARGS, "SetIfIndex(ifIndex)\n\ntype: ifIndex: uint32_t" },
+    {(char *) "SetLocal", (PyCFunction) _wrap_PyNs3Ping6_SetLocal, METH_KEYWORDS|METH_VARARGS, "SetLocal(ipv6)\n\ntype: ipv6: ns3::Ipv6Address" },
     {(char *) "SetRemote", (PyCFunction) _wrap_PyNs3Ping6_SetRemote, METH_KEYWORDS|METH_VARARGS, "SetRemote(ipv6)\n\ntype: ipv6: ns3::Ipv6Address" },
     {(char *) "SetRouters", (PyCFunction) _wrap_PyNs3Ping6_SetRouters, METH_KEYWORDS|METH_VARARGS, "SetRouters(routers)\n\ntype: routers: std::vector< ns3::Ipv6Address >" },
-    {(char *) "SetIfIndex", (PyCFunction) _wrap_PyNs3Ping6_SetIfIndex, METH_KEYWORDS|METH_VARARGS, "SetIfIndex(ifIndex)\n\ntype: ifIndex: uint32_t" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3Ping6__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "DoDispose", (PyCFunction) PyNs3Ping6__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3Ping6__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3Ping6__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3Ping6__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3Ping6__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3Ping6__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -5655,7 +5655,7 @@ PyTypeObject PyNs3Ping6_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
     "Ping6(arg0)\nPing6()",                        /* Documentation string */
     (traverseproc)PyNs3Ping6__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3Ping6__tp_clear,             /* tp_clear */
@@ -5688,16 +5688,16 @@ PyTypeObject PyNs3Ping6_Type = {
 
 
 PyObject *
-PyNs3Radvd__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3Radvd *self)
+PyNs3Radvd__PythonHelper::_wrap_DoDispose(PyNs3Radvd *self)
 {
     PyObject *py_retval;
     PyNs3Radvd__PythonHelper *helper = dynamic_cast< PyNs3Radvd__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Radvd is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -5736,16 +5736,16 @@ PyNs3Radvd__PythonHelper::_wrap_NotifyNewAggregate(PyNs3Radvd *self)
 }
 
 PyObject *
-PyNs3Radvd__PythonHelper::_wrap_DoDispose(PyNs3Radvd *self)
+PyNs3Radvd__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3Radvd *self)
 {
     PyObject *py_retval;
     PyNs3Radvd__PythonHelper *helper = dynamic_cast< PyNs3Radvd__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Radvd is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -6102,15 +6102,15 @@ static PyGetSetDef Ns3RadvdMeta__getsets[] = {
         NULL /* optional additional data for getter and setter */
     },
     {
-        (char*) "MAX_RA_DELAY_TIME", /* attribute name */
-        (getter) _wrap_PyNs3Radvd__get_MAX_RA_DELAY_TIME, /* C function to get the attribute */
+        (char*) "MAX_INITIAL_RTR_ADVERT_INTERVAL", /* attribute name */
+        (getter) _wrap_PyNs3Radvd__get_MAX_INITIAL_RTR_ADVERT_INTERVAL, /* C function to get the attribute */
         (setter) NULL, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
     {
-        (char*) "MAX_INITIAL_RTR_ADVERT_INTERVAL", /* attribute name */
-        (getter) _wrap_PyNs3Radvd__get_MAX_INITIAL_RTR_ADVERT_INTERVAL, /* C function to get the attribute */
+        (char*) "MAX_RA_DELAY_TIME", /* attribute name */
+        (getter) _wrap_PyNs3Radvd__get_MAX_RA_DELAY_TIME, /* C function to get the attribute */
         (setter) NULL, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
@@ -6284,22 +6284,6 @@ _wrap_PyNs3Radvd_AddConfiguration(PyNs3Radvd *self, PyObject *args, PyObject *kw
 
 
 PyObject *
-_wrap_PyNs3Radvd_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::Radvd::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3Radvd_AssignStreams(PyNs3Radvd *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -6312,6 +6296,22 @@ _wrap_PyNs3Radvd_AssignStreams(PyNs3Radvd *self, PyObject *args, PyObject *kwarg
     }
     retval = self->obj->AssignStreams(stream);
     py_retval = Py_BuildValue((char *) "L", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Radvd_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::Radvd::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
     return py_retval;
 }
 
@@ -6333,12 +6333,12 @@ _wrap_PyNs3Radvd__copy__(PyNs3Radvd *self)
 
 static PyMethodDef PyNs3Radvd_methods[] = {
     {(char *) "AddConfiguration", (PyCFunction) _wrap_PyNs3Radvd_AddConfiguration, METH_KEYWORDS|METH_VARARGS, "AddConfiguration(routerInterface)\n\ntype: routerInterface: ns3::Ptr< ns3::RadvdInterface >" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3Radvd_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
     {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3Radvd_AssignStreams, METH_KEYWORDS|METH_VARARGS, "AssignStreams(stream)\n\ntype: stream: int64_t" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3Radvd__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3Radvd_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "DoDispose", (PyCFunction) PyNs3Radvd__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3Radvd__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3Radvd__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3Radvd__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3Radvd__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3Radvd__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -6438,7 +6438,7 @@ PyTypeObject PyNs3Radvd_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
     "Radvd(arg0)\nRadvd()",                        /* Documentation string */
     (traverseproc)PyNs3Radvd__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3Radvd__tp_clear,             /* tp_clear */
@@ -6567,16 +6567,18 @@ int _wrap_PyNs3RadvdInterface__tp_init(PyNs3RadvdInterface *self, PyObject *args
 
 
 PyObject *
-_wrap_PyNs3RadvdInterface_SetMinRtrAdvInterval(PyNs3RadvdInterface *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3RadvdInterface_AddPrefix(PyNs3RadvdInterface *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    unsigned int minRtrAdvInterval;
-    const char *keywords[] = {"minRtrAdvInterval", NULL};
+    PyNs3RadvdPrefix *routerPrefix;
+    ns3::RadvdPrefix *routerPrefix_ptr;
+    const char *keywords[] = {"routerPrefix", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &minRtrAdvInterval)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3RadvdPrefix_Type, &routerPrefix)) {
         return NULL;
     }
-    self->obj->SetMinRtrAdvInterval(minRtrAdvInterval);
+    routerPrefix_ptr = (routerPrefix ? routerPrefix->obj : NULL);
+    self->obj->AddPrefix(ns3::Ptr< ns3::RadvdPrefix  > (routerPrefix_ptr));
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -6584,37 +6586,25 @@ _wrap_PyNs3RadvdInterface_SetMinRtrAdvInterval(PyNs3RadvdInterface *self, PyObje
 
 
 PyObject *
-_wrap_PyNs3RadvdInterface_GetHomeAgentPreference(PyNs3RadvdInterface *self)
+_wrap_PyNs3RadvdInterface_GetCurHopLimit(PyNs3RadvdInterface *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    
+    retval = self->obj->GetCurHopLimit();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RadvdInterface_GetDefaultLifeTime(PyNs3RadvdInterface *self)
 {
     PyObject *py_retval;
     uint32_t retval;
     
-    retval = self->obj->GetHomeAgentPreference();
+    retval = self->obj->GetDefaultLifeTime();
     py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RadvdInterface_IsManagedFlag(PyNs3RadvdInterface *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->IsManagedFlag();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RadvdInterface_IsHomeAgentInfo(PyNs3RadvdInterface *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->IsHomeAgentInfo();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
@@ -6644,145 +6634,25 @@ _wrap_PyNs3RadvdInterface_GetHomeAgentLifeTime(PyNs3RadvdInterface *self)
 
 
 PyObject *
-_wrap_PyNs3RadvdInterface_SetManagedFlag(PyNs3RadvdInterface *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool managedFlag;
-    PyObject *py_managedFlag;
-    const char *keywords[] = {"managedFlag", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &py_managedFlag)) {
-        return NULL;
-    }
-    managedFlag = (bool) PyObject_IsTrue(py_managedFlag);
-    self->obj->SetManagedFlag(managedFlag);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RadvdInterface_SetHomeAgentInfo(PyNs3RadvdInterface *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool homeAgentFlag;
-    PyObject *py_homeAgentFlag;
-    const char *keywords[] = {"homeAgentFlag", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &py_homeAgentFlag)) {
-        return NULL;
-    }
-    homeAgentFlag = (bool) PyObject_IsTrue(py_homeAgentFlag);
-    self->obj->SetHomeAgentInfo(homeAgentFlag);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RadvdInterface_IsInitialRtrAdv(PyNs3RadvdInterface *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->IsInitialRtrAdv();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RadvdInterface_IsMobRtrSupportFlag(PyNs3RadvdInterface *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->IsMobRtrSupportFlag();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RadvdInterface_GetMinRtrAdvInterval(PyNs3RadvdInterface *self)
+_wrap_PyNs3RadvdInterface_GetHomeAgentPreference(PyNs3RadvdInterface *self)
 {
     PyObject *py_retval;
     uint32_t retval;
     
-    retval = self->obj->GetMinRtrAdvInterval();
+    retval = self->obj->GetHomeAgentPreference();
     py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3RadvdInterface_GetMaxRtrAdvInterval(PyNs3RadvdInterface *self)
+_wrap_PyNs3RadvdInterface_GetInterface(PyNs3RadvdInterface *self)
 {
     PyObject *py_retval;
     uint32_t retval;
     
-    retval = self->obj->GetMaxRtrAdvInterval();
+    retval = self->obj->GetInterface();
     py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RadvdInterface_IsSendAdvert(PyNs3RadvdInterface *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->IsSendAdvert();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RadvdInterface_SetMinDelayBetweenRAs(PyNs3RadvdInterface *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int minDelayBetweenRAs;
-    const char *keywords[] = {"minDelayBetweenRAs", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &minDelayBetweenRAs)) {
-        return NULL;
-    }
-    self->obj->SetMinDelayBetweenRAs(minDelayBetweenRAs);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RadvdInterface_SetMaxRtrAdvInterval(PyNs3RadvdInterface *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int maxRtrAdvInterval;
-    const char *keywords[] = {"maxRtrAdvInterval", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &maxRtrAdvInterval)) {
-        return NULL;
-    }
-    self->obj->SetMaxRtrAdvInterval(maxRtrAdvInterval);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RadvdInterface_GetCurHopLimit(PyNs3RadvdInterface *self)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    
-    retval = self->obj->GetCurHopLimit();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
     return py_retval;
 }
 
@@ -6804,119 +6674,49 @@ _wrap_PyNs3RadvdInterface_GetLastRaTxTime(PyNs3RadvdInterface *self)
 
 
 PyObject *
-_wrap_PyNs3RadvdInterface_AddPrefix(PyNs3RadvdInterface *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3RadvdInterface_GetLinkMtu(PyNs3RadvdInterface *self)
 {
     PyObject *py_retval;
-    PyNs3RadvdPrefix *routerPrefix;
-    ns3::RadvdPrefix *routerPrefix_ptr;
-    const char *keywords[] = {"routerPrefix", NULL};
+    uint32_t retval;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3RadvdPrefix_Type, &routerPrefix)) {
-        return NULL;
-    }
-    routerPrefix_ptr = (routerPrefix ? routerPrefix->obj : NULL);
-    self->obj->AddPrefix(ns3::Ptr< ns3::RadvdPrefix  > (routerPrefix_ptr));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    retval = self->obj->GetLinkMtu();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3RadvdInterface_IsHomeAgentFlag(PyNs3RadvdInterface *self)
+_wrap_PyNs3RadvdInterface_GetMaxRtrAdvInterval(PyNs3RadvdInterface *self)
 {
     PyObject *py_retval;
-    bool retval;
+    uint32_t retval;
     
-    retval = self->obj->IsHomeAgentFlag();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    retval = self->obj->GetMaxRtrAdvInterval();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3RadvdInterface_SetLastRaTxTime(PyNs3RadvdInterface *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3RadvdInterface_GetMinDelayBetweenRAs(PyNs3RadvdInterface *self)
 {
     PyObject *py_retval;
-    PyNs3Time *now;
-    const char *keywords[] = {"now", NULL};
+    uint32_t retval;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Time_Type, &now)) {
-        return NULL;
-    }
-    self->obj->SetLastRaTxTime(*((PyNs3Time *) now)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    retval = self->obj->GetMinDelayBetweenRAs();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3RadvdInterface_SetReachableTime(PyNs3RadvdInterface *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3RadvdInterface_GetMinRtrAdvInterval(PyNs3RadvdInterface *self)
 {
     PyObject *py_retval;
-    unsigned int reachableTime;
-    const char *keywords[] = {"reachableTime", NULL};
+    uint32_t retval;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &reachableTime)) {
-        return NULL;
-    }
-    self->obj->SetReachableTime(reachableTime);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RadvdInterface_SetHomeAgentLifeTime(PyNs3RadvdInterface *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int homeAgentLifeTime;
-    const char *keywords[] = {"homeAgentLifeTime", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &homeAgentLifeTime)) {
-        return NULL;
-    }
-    self->obj->SetHomeAgentLifeTime(homeAgentLifeTime);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RadvdInterface_SetHomeAgentFlag(PyNs3RadvdInterface *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool homeAgentFlag;
-    PyObject *py_homeAgentFlag;
-    const char *keywords[] = {"homeAgentFlag", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &py_homeAgentFlag)) {
-        return NULL;
-    }
-    homeAgentFlag = (bool) PyObject_IsTrue(py_homeAgentFlag);
-    self->obj->SetHomeAgentFlag(homeAgentFlag);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RadvdInterface_SetLinkMtu(PyNs3RadvdInterface *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int linkMtu;
-    const char *keywords[] = {"linkMtu", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &linkMtu)) {
-        return NULL;
-    }
-    self->obj->SetLinkMtu(linkMtu);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    retval = self->obj->GetMinRtrAdvInterval();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
 
@@ -6937,29 +6737,96 @@ _wrap_PyNs3RadvdInterface_GetPrefixes(PyNs3RadvdInterface *self)
 
 
 PyObject *
-_wrap_PyNs3RadvdInterface_SetHomeAgentPreference(PyNs3RadvdInterface *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3RadvdInterface_GetReachableTime(PyNs3RadvdInterface *self)
 {
     PyObject *py_retval;
-    unsigned int homeAgentPreference;
-    const char *keywords[] = {"homeAgentPreference", NULL};
+    uint32_t retval;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &homeAgentPreference)) {
-        return NULL;
-    }
-    self->obj->SetHomeAgentPreference(homeAgentPreference);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    retval = self->obj->GetReachableTime();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3RadvdInterface_IsSourceLLAddress(PyNs3RadvdInterface *self)
+_wrap_PyNs3RadvdInterface_GetRetransTimer(PyNs3RadvdInterface *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetRetransTimer();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RadvdInterface_IsHomeAgentFlag(PyNs3RadvdInterface *self)
 {
     PyObject *py_retval;
     bool retval;
     
-    retval = self->obj->IsSourceLLAddress();
+    retval = self->obj->IsHomeAgentFlag();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RadvdInterface_IsHomeAgentInfo(PyNs3RadvdInterface *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->IsHomeAgentInfo();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RadvdInterface_IsInitialRtrAdv(PyNs3RadvdInterface *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->IsInitialRtrAdv();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RadvdInterface_IsIntervalOpt(PyNs3RadvdInterface *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->IsIntervalOpt();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RadvdInterface_IsManagedFlag(PyNs3RadvdInterface *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->IsManagedFlag();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RadvdInterface_IsMobRtrSupportFlag(PyNs3RadvdInterface *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->IsMobRtrSupportFlag();
     py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
@@ -6978,37 +6845,25 @@ _wrap_PyNs3RadvdInterface_IsOtherConfigFlag(PyNs3RadvdInterface *self)
 
 
 PyObject *
-_wrap_PyNs3RadvdInterface_SetRetransTimer(PyNs3RadvdInterface *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3RadvdInterface_IsSendAdvert(PyNs3RadvdInterface *self)
 {
     PyObject *py_retval;
-    unsigned int retransTimer;
-    const char *keywords[] = {"retransTimer", NULL};
+    bool retval;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &retransTimer)) {
-        return NULL;
-    }
-    self->obj->SetRetransTimer(retransTimer);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    retval = self->obj->IsSendAdvert();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3RadvdInterface_SetSourceLLAddress(PyNs3RadvdInterface *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3RadvdInterface_IsSourceLLAddress(PyNs3RadvdInterface *self)
 {
     PyObject *py_retval;
-    bool sourceLLAddress;
-    PyObject *py_sourceLLAddress;
-    const char *keywords[] = {"sourceLLAddress", NULL};
+    bool retval;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &py_sourceLLAddress)) {
-        return NULL;
-    }
-    sourceLLAddress = (bool) PyObject_IsTrue(py_sourceLLAddress);
-    self->obj->SetSourceLLAddress(sourceLLAddress);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    retval = self->obj->IsSourceLLAddress();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
@@ -7035,37 +6890,6 @@ _wrap_PyNs3RadvdInterface_SetCurHopLimit(PyNs3RadvdInterface *self, PyObject *ar
 
 
 PyObject *
-_wrap_PyNs3RadvdInterface_SetMobRtrSupportFlag(PyNs3RadvdInterface *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool mobRtrSupportFlag;
-    PyObject *py_mobRtrSupportFlag;
-    const char *keywords[] = {"mobRtrSupportFlag", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &py_mobRtrSupportFlag)) {
-        return NULL;
-    }
-    mobRtrSupportFlag = (bool) PyObject_IsTrue(py_mobRtrSupportFlag);
-    self->obj->SetMobRtrSupportFlag(mobRtrSupportFlag);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RadvdInterface_GetDefaultLifeTime(PyNs3RadvdInterface *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetDefaultLifeTime();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3RadvdInterface_SetDefaultLifeTime(PyNs3RadvdInterface *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -7076,92 +6900,6 @@ _wrap_PyNs3RadvdInterface_SetDefaultLifeTime(PyNs3RadvdInterface *self, PyObject
         return NULL;
     }
     self->obj->SetDefaultLifeTime(defaultLifeTime);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RadvdInterface_IsIntervalOpt(PyNs3RadvdInterface *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->IsIntervalOpt();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RadvdInterface_GetLinkMtu(PyNs3RadvdInterface *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetLinkMtu();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RadvdInterface_GetRetransTimer(PyNs3RadvdInterface *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetRetransTimer();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RadvdInterface_GetMinDelayBetweenRAs(PyNs3RadvdInterface *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetMinDelayBetweenRAs();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RadvdInterface_SetOtherConfigFlag(PyNs3RadvdInterface *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool otherConfigFlag;
-    PyObject *py_otherConfigFlag;
-    const char *keywords[] = {"otherConfigFlag", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &py_otherConfigFlag)) {
-        return NULL;
-    }
-    otherConfigFlag = (bool) PyObject_IsTrue(py_otherConfigFlag);
-    self->obj->SetOtherConfigFlag(otherConfigFlag);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RadvdInterface_SetSendAdvert(PyNs3RadvdInterface *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool sendAdvert;
-    PyObject *py_sendAdvert;
-    const char *keywords[] = {"sendAdvert", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &py_sendAdvert)) {
-        return NULL;
-    }
-    sendAdvert = (bool) PyObject_IsTrue(py_sendAdvert);
-    self->obj->SetSendAdvert(sendAdvert);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -7190,13 +6928,73 @@ _wrap_PyNs3RadvdInterface_SetDefaultPreference(PyNs3RadvdInterface *self, PyObje
 
 
 PyObject *
-_wrap_PyNs3RadvdInterface_GetInterface(PyNs3RadvdInterface *self)
+_wrap_PyNs3RadvdInterface_SetHomeAgentFlag(PyNs3RadvdInterface *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    uint32_t retval;
+    bool homeAgentFlag;
+    PyObject *py_homeAgentFlag;
+    const char *keywords[] = {"homeAgentFlag", NULL};
     
-    retval = self->obj->GetInterface();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &py_homeAgentFlag)) {
+        return NULL;
+    }
+    homeAgentFlag = (bool) PyObject_IsTrue(py_homeAgentFlag);
+    self->obj->SetHomeAgentFlag(homeAgentFlag);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RadvdInterface_SetHomeAgentInfo(PyNs3RadvdInterface *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool homeAgentFlag;
+    PyObject *py_homeAgentFlag;
+    const char *keywords[] = {"homeAgentFlag", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &py_homeAgentFlag)) {
+        return NULL;
+    }
+    homeAgentFlag = (bool) PyObject_IsTrue(py_homeAgentFlag);
+    self->obj->SetHomeAgentInfo(homeAgentFlag);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RadvdInterface_SetHomeAgentLifeTime(PyNs3RadvdInterface *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int homeAgentLifeTime;
+    const char *keywords[] = {"homeAgentLifeTime", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &homeAgentLifeTime)) {
+        return NULL;
+    }
+    self->obj->SetHomeAgentLifeTime(homeAgentLifeTime);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RadvdInterface_SetHomeAgentPreference(PyNs3RadvdInterface *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int homeAgentPreference;
+    const char *keywords[] = {"homeAgentPreference", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &homeAgentPreference)) {
+        return NULL;
+    }
+    self->obj->SetHomeAgentPreference(homeAgentPreference);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -7221,13 +7019,215 @@ _wrap_PyNs3RadvdInterface_SetIntervalOpt(PyNs3RadvdInterface *self, PyObject *ar
 
 
 PyObject *
-_wrap_PyNs3RadvdInterface_GetReachableTime(PyNs3RadvdInterface *self)
+_wrap_PyNs3RadvdInterface_SetLastRaTxTime(PyNs3RadvdInterface *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    uint32_t retval;
+    PyNs3Time *now;
+    const char *keywords[] = {"now", NULL};
     
-    retval = self->obj->GetReachableTime();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Time_Type, &now)) {
+        return NULL;
+    }
+    self->obj->SetLastRaTxTime(*((PyNs3Time *) now)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RadvdInterface_SetLinkMtu(PyNs3RadvdInterface *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int linkMtu;
+    const char *keywords[] = {"linkMtu", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &linkMtu)) {
+        return NULL;
+    }
+    self->obj->SetLinkMtu(linkMtu);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RadvdInterface_SetManagedFlag(PyNs3RadvdInterface *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool managedFlag;
+    PyObject *py_managedFlag;
+    const char *keywords[] = {"managedFlag", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &py_managedFlag)) {
+        return NULL;
+    }
+    managedFlag = (bool) PyObject_IsTrue(py_managedFlag);
+    self->obj->SetManagedFlag(managedFlag);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RadvdInterface_SetMaxRtrAdvInterval(PyNs3RadvdInterface *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int maxRtrAdvInterval;
+    const char *keywords[] = {"maxRtrAdvInterval", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &maxRtrAdvInterval)) {
+        return NULL;
+    }
+    self->obj->SetMaxRtrAdvInterval(maxRtrAdvInterval);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RadvdInterface_SetMinDelayBetweenRAs(PyNs3RadvdInterface *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int minDelayBetweenRAs;
+    const char *keywords[] = {"minDelayBetweenRAs", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &minDelayBetweenRAs)) {
+        return NULL;
+    }
+    self->obj->SetMinDelayBetweenRAs(minDelayBetweenRAs);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RadvdInterface_SetMinRtrAdvInterval(PyNs3RadvdInterface *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int minRtrAdvInterval;
+    const char *keywords[] = {"minRtrAdvInterval", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &minRtrAdvInterval)) {
+        return NULL;
+    }
+    self->obj->SetMinRtrAdvInterval(minRtrAdvInterval);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RadvdInterface_SetMobRtrSupportFlag(PyNs3RadvdInterface *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool mobRtrSupportFlag;
+    PyObject *py_mobRtrSupportFlag;
+    const char *keywords[] = {"mobRtrSupportFlag", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &py_mobRtrSupportFlag)) {
+        return NULL;
+    }
+    mobRtrSupportFlag = (bool) PyObject_IsTrue(py_mobRtrSupportFlag);
+    self->obj->SetMobRtrSupportFlag(mobRtrSupportFlag);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RadvdInterface_SetOtherConfigFlag(PyNs3RadvdInterface *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool otherConfigFlag;
+    PyObject *py_otherConfigFlag;
+    const char *keywords[] = {"otherConfigFlag", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &py_otherConfigFlag)) {
+        return NULL;
+    }
+    otherConfigFlag = (bool) PyObject_IsTrue(py_otherConfigFlag);
+    self->obj->SetOtherConfigFlag(otherConfigFlag);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RadvdInterface_SetReachableTime(PyNs3RadvdInterface *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int reachableTime;
+    const char *keywords[] = {"reachableTime", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &reachableTime)) {
+        return NULL;
+    }
+    self->obj->SetReachableTime(reachableTime);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RadvdInterface_SetRetransTimer(PyNs3RadvdInterface *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int retransTimer;
+    const char *keywords[] = {"retransTimer", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &retransTimer)) {
+        return NULL;
+    }
+    self->obj->SetRetransTimer(retransTimer);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RadvdInterface_SetSendAdvert(PyNs3RadvdInterface *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool sendAdvert;
+    PyObject *py_sendAdvert;
+    const char *keywords[] = {"sendAdvert", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &py_sendAdvert)) {
+        return NULL;
+    }
+    sendAdvert = (bool) PyObject_IsTrue(py_sendAdvert);
+    self->obj->SetSendAdvert(sendAdvert);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RadvdInterface_SetSourceLLAddress(PyNs3RadvdInterface *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool sourceLLAddress;
+    PyObject *py_sourceLLAddress;
+    const char *keywords[] = {"sourceLLAddress", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &py_sourceLLAddress)) {
+        return NULL;
+    }
+    sourceLLAddress = (bool) PyObject_IsTrue(py_sourceLLAddress);
+    self->obj->SetSourceLLAddress(sourceLLAddress);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -7246,50 +7246,50 @@ _wrap_PyNs3RadvdInterface__copy__(PyNs3RadvdInterface *self)
 }
 
 static PyMethodDef PyNs3RadvdInterface_methods[] = {
-    {(char *) "SetMinRtrAdvInterval", (PyCFunction) _wrap_PyNs3RadvdInterface_SetMinRtrAdvInterval, METH_KEYWORDS|METH_VARARGS, "SetMinRtrAdvInterval(minRtrAdvInterval)\n\ntype: minRtrAdvInterval: uint32_t" },
-    {(char *) "GetHomeAgentPreference", (PyCFunction) _wrap_PyNs3RadvdInterface_GetHomeAgentPreference, METH_NOARGS, "GetHomeAgentPreference()\n\n" },
-    {(char *) "IsManagedFlag", (PyCFunction) _wrap_PyNs3RadvdInterface_IsManagedFlag, METH_NOARGS, "IsManagedFlag()\n\n" },
-    {(char *) "IsHomeAgentInfo", (PyCFunction) _wrap_PyNs3RadvdInterface_IsHomeAgentInfo, METH_NOARGS, "IsHomeAgentInfo()\n\n" },
+    {(char *) "AddPrefix", (PyCFunction) _wrap_PyNs3RadvdInterface_AddPrefix, METH_KEYWORDS|METH_VARARGS, "AddPrefix(routerPrefix)\n\ntype: routerPrefix: ns3::Ptr< ns3::RadvdPrefix >" },
+    {(char *) "GetCurHopLimit", (PyCFunction) _wrap_PyNs3RadvdInterface_GetCurHopLimit, METH_NOARGS, "GetCurHopLimit()\n\n" },
+    {(char *) "GetDefaultLifeTime", (PyCFunction) _wrap_PyNs3RadvdInterface_GetDefaultLifeTime, METH_NOARGS, "GetDefaultLifeTime()\n\n" },
     {(char *) "GetDefaultPreference", (PyCFunction) _wrap_PyNs3RadvdInterface_GetDefaultPreference, METH_NOARGS, "GetDefaultPreference()\n\n" },
     {(char *) "GetHomeAgentLifeTime", (PyCFunction) _wrap_PyNs3RadvdInterface_GetHomeAgentLifeTime, METH_NOARGS, "GetHomeAgentLifeTime()\n\n" },
-    {(char *) "SetManagedFlag", (PyCFunction) _wrap_PyNs3RadvdInterface_SetManagedFlag, METH_KEYWORDS|METH_VARARGS, "SetManagedFlag(managedFlag)\n\ntype: managedFlag: bool" },
-    {(char *) "SetHomeAgentInfo", (PyCFunction) _wrap_PyNs3RadvdInterface_SetHomeAgentInfo, METH_KEYWORDS|METH_VARARGS, "SetHomeAgentInfo(homeAgentFlag)\n\ntype: homeAgentFlag: bool" },
-    {(char *) "IsInitialRtrAdv", (PyCFunction) _wrap_PyNs3RadvdInterface_IsInitialRtrAdv, METH_NOARGS, "IsInitialRtrAdv()\n\n" },
-    {(char *) "IsMobRtrSupportFlag", (PyCFunction) _wrap_PyNs3RadvdInterface_IsMobRtrSupportFlag, METH_NOARGS, "IsMobRtrSupportFlag()\n\n" },
-    {(char *) "GetMinRtrAdvInterval", (PyCFunction) _wrap_PyNs3RadvdInterface_GetMinRtrAdvInterval, METH_NOARGS, "GetMinRtrAdvInterval()\n\n" },
-    {(char *) "GetMaxRtrAdvInterval", (PyCFunction) _wrap_PyNs3RadvdInterface_GetMaxRtrAdvInterval, METH_NOARGS, "GetMaxRtrAdvInterval()\n\n" },
-    {(char *) "IsSendAdvert", (PyCFunction) _wrap_PyNs3RadvdInterface_IsSendAdvert, METH_NOARGS, "IsSendAdvert()\n\n" },
-    {(char *) "SetMinDelayBetweenRAs", (PyCFunction) _wrap_PyNs3RadvdInterface_SetMinDelayBetweenRAs, METH_KEYWORDS|METH_VARARGS, "SetMinDelayBetweenRAs(minDelayBetweenRAs)\n\ntype: minDelayBetweenRAs: uint32_t" },
-    {(char *) "SetMaxRtrAdvInterval", (PyCFunction) _wrap_PyNs3RadvdInterface_SetMaxRtrAdvInterval, METH_KEYWORDS|METH_VARARGS, "SetMaxRtrAdvInterval(maxRtrAdvInterval)\n\ntype: maxRtrAdvInterval: uint32_t" },
-    {(char *) "GetCurHopLimit", (PyCFunction) _wrap_PyNs3RadvdInterface_GetCurHopLimit, METH_NOARGS, "GetCurHopLimit()\n\n" },
-    {(char *) "GetLastRaTxTime", (PyCFunction) _wrap_PyNs3RadvdInterface_GetLastRaTxTime, METH_NOARGS, "GetLastRaTxTime()\n\n" },
-    {(char *) "AddPrefix", (PyCFunction) _wrap_PyNs3RadvdInterface_AddPrefix, METH_KEYWORDS|METH_VARARGS, "AddPrefix(routerPrefix)\n\ntype: routerPrefix: ns3::Ptr< ns3::RadvdPrefix >" },
-    {(char *) "IsHomeAgentFlag", (PyCFunction) _wrap_PyNs3RadvdInterface_IsHomeAgentFlag, METH_NOARGS, "IsHomeAgentFlag()\n\n" },
-    {(char *) "SetLastRaTxTime", (PyCFunction) _wrap_PyNs3RadvdInterface_SetLastRaTxTime, METH_KEYWORDS|METH_VARARGS, "SetLastRaTxTime(now)\n\ntype: now: ns3::Time" },
-    {(char *) "SetReachableTime", (PyCFunction) _wrap_PyNs3RadvdInterface_SetReachableTime, METH_KEYWORDS|METH_VARARGS, "SetReachableTime(reachableTime)\n\ntype: reachableTime: uint32_t" },
-    {(char *) "SetHomeAgentLifeTime", (PyCFunction) _wrap_PyNs3RadvdInterface_SetHomeAgentLifeTime, METH_KEYWORDS|METH_VARARGS, "SetHomeAgentLifeTime(homeAgentLifeTime)\n\ntype: homeAgentLifeTime: uint32_t" },
-    {(char *) "SetHomeAgentFlag", (PyCFunction) _wrap_PyNs3RadvdInterface_SetHomeAgentFlag, METH_KEYWORDS|METH_VARARGS, "SetHomeAgentFlag(homeAgentFlag)\n\ntype: homeAgentFlag: bool" },
-    {(char *) "SetLinkMtu", (PyCFunction) _wrap_PyNs3RadvdInterface_SetLinkMtu, METH_KEYWORDS|METH_VARARGS, "SetLinkMtu(linkMtu)\n\ntype: linkMtu: uint32_t" },
-    {(char *) "GetPrefixes", (PyCFunction) _wrap_PyNs3RadvdInterface_GetPrefixes, METH_NOARGS, "GetPrefixes()\n\n" },
-    {(char *) "SetHomeAgentPreference", (PyCFunction) _wrap_PyNs3RadvdInterface_SetHomeAgentPreference, METH_KEYWORDS|METH_VARARGS, "SetHomeAgentPreference(homeAgentPreference)\n\ntype: homeAgentPreference: uint32_t" },
-    {(char *) "IsSourceLLAddress", (PyCFunction) _wrap_PyNs3RadvdInterface_IsSourceLLAddress, METH_NOARGS, "IsSourceLLAddress()\n\n" },
-    {(char *) "IsOtherConfigFlag", (PyCFunction) _wrap_PyNs3RadvdInterface_IsOtherConfigFlag, METH_NOARGS, "IsOtherConfigFlag()\n\n" },
-    {(char *) "SetRetransTimer", (PyCFunction) _wrap_PyNs3RadvdInterface_SetRetransTimer, METH_KEYWORDS|METH_VARARGS, "SetRetransTimer(retransTimer)\n\ntype: retransTimer: uint32_t" },
-    {(char *) "SetSourceLLAddress", (PyCFunction) _wrap_PyNs3RadvdInterface_SetSourceLLAddress, METH_KEYWORDS|METH_VARARGS, "SetSourceLLAddress(sourceLLAddress)\n\ntype: sourceLLAddress: bool" },
-    {(char *) "SetCurHopLimit", (PyCFunction) _wrap_PyNs3RadvdInterface_SetCurHopLimit, METH_KEYWORDS|METH_VARARGS, "SetCurHopLimit(curHopLimit)\n\ntype: curHopLimit: uint8_t" },
-    {(char *) "SetMobRtrSupportFlag", (PyCFunction) _wrap_PyNs3RadvdInterface_SetMobRtrSupportFlag, METH_KEYWORDS|METH_VARARGS, "SetMobRtrSupportFlag(mobRtrSupportFlag)\n\ntype: mobRtrSupportFlag: bool" },
-    {(char *) "GetDefaultLifeTime", (PyCFunction) _wrap_PyNs3RadvdInterface_GetDefaultLifeTime, METH_NOARGS, "GetDefaultLifeTime()\n\n" },
-    {(char *) "SetDefaultLifeTime", (PyCFunction) _wrap_PyNs3RadvdInterface_SetDefaultLifeTime, METH_KEYWORDS|METH_VARARGS, "SetDefaultLifeTime(defaultLifeTime)\n\ntype: defaultLifeTime: uint32_t" },
-    {(char *) "IsIntervalOpt", (PyCFunction) _wrap_PyNs3RadvdInterface_IsIntervalOpt, METH_NOARGS, "IsIntervalOpt()\n\n" },
-    {(char *) "GetLinkMtu", (PyCFunction) _wrap_PyNs3RadvdInterface_GetLinkMtu, METH_NOARGS, "GetLinkMtu()\n\n" },
-    {(char *) "GetRetransTimer", (PyCFunction) _wrap_PyNs3RadvdInterface_GetRetransTimer, METH_NOARGS, "GetRetransTimer()\n\n" },
-    {(char *) "GetMinDelayBetweenRAs", (PyCFunction) _wrap_PyNs3RadvdInterface_GetMinDelayBetweenRAs, METH_NOARGS, "GetMinDelayBetweenRAs()\n\n" },
-    {(char *) "SetOtherConfigFlag", (PyCFunction) _wrap_PyNs3RadvdInterface_SetOtherConfigFlag, METH_KEYWORDS|METH_VARARGS, "SetOtherConfigFlag(otherConfigFlag)\n\ntype: otherConfigFlag: bool" },
-    {(char *) "SetSendAdvert", (PyCFunction) _wrap_PyNs3RadvdInterface_SetSendAdvert, METH_KEYWORDS|METH_VARARGS, "SetSendAdvert(sendAdvert)\n\ntype: sendAdvert: bool" },
-    {(char *) "SetDefaultPreference", (PyCFunction) _wrap_PyNs3RadvdInterface_SetDefaultPreference, METH_KEYWORDS|METH_VARARGS, "SetDefaultPreference(defaultPreference)\n\ntype: defaultPreference: uint8_t" },
+    {(char *) "GetHomeAgentPreference", (PyCFunction) _wrap_PyNs3RadvdInterface_GetHomeAgentPreference, METH_NOARGS, "GetHomeAgentPreference()\n\n" },
     {(char *) "GetInterface", (PyCFunction) _wrap_PyNs3RadvdInterface_GetInterface, METH_NOARGS, "GetInterface()\n\n" },
-    {(char *) "SetIntervalOpt", (PyCFunction) _wrap_PyNs3RadvdInterface_SetIntervalOpt, METH_KEYWORDS|METH_VARARGS, "SetIntervalOpt(intervalOpt)\n\ntype: intervalOpt: bool" },
+    {(char *) "GetLastRaTxTime", (PyCFunction) _wrap_PyNs3RadvdInterface_GetLastRaTxTime, METH_NOARGS, "GetLastRaTxTime()\n\n" },
+    {(char *) "GetLinkMtu", (PyCFunction) _wrap_PyNs3RadvdInterface_GetLinkMtu, METH_NOARGS, "GetLinkMtu()\n\n" },
+    {(char *) "GetMaxRtrAdvInterval", (PyCFunction) _wrap_PyNs3RadvdInterface_GetMaxRtrAdvInterval, METH_NOARGS, "GetMaxRtrAdvInterval()\n\n" },
+    {(char *) "GetMinDelayBetweenRAs", (PyCFunction) _wrap_PyNs3RadvdInterface_GetMinDelayBetweenRAs, METH_NOARGS, "GetMinDelayBetweenRAs()\n\n" },
+    {(char *) "GetMinRtrAdvInterval", (PyCFunction) _wrap_PyNs3RadvdInterface_GetMinRtrAdvInterval, METH_NOARGS, "GetMinRtrAdvInterval()\n\n" },
+    {(char *) "GetPrefixes", (PyCFunction) _wrap_PyNs3RadvdInterface_GetPrefixes, METH_NOARGS, "GetPrefixes()\n\n" },
     {(char *) "GetReachableTime", (PyCFunction) _wrap_PyNs3RadvdInterface_GetReachableTime, METH_NOARGS, "GetReachableTime()\n\n" },
+    {(char *) "GetRetransTimer", (PyCFunction) _wrap_PyNs3RadvdInterface_GetRetransTimer, METH_NOARGS, "GetRetransTimer()\n\n" },
+    {(char *) "IsHomeAgentFlag", (PyCFunction) _wrap_PyNs3RadvdInterface_IsHomeAgentFlag, METH_NOARGS, "IsHomeAgentFlag()\n\n" },
+    {(char *) "IsHomeAgentInfo", (PyCFunction) _wrap_PyNs3RadvdInterface_IsHomeAgentInfo, METH_NOARGS, "IsHomeAgentInfo()\n\n" },
+    {(char *) "IsInitialRtrAdv", (PyCFunction) _wrap_PyNs3RadvdInterface_IsInitialRtrAdv, METH_NOARGS, "IsInitialRtrAdv()\n\n" },
+    {(char *) "IsIntervalOpt", (PyCFunction) _wrap_PyNs3RadvdInterface_IsIntervalOpt, METH_NOARGS, "IsIntervalOpt()\n\n" },
+    {(char *) "IsManagedFlag", (PyCFunction) _wrap_PyNs3RadvdInterface_IsManagedFlag, METH_NOARGS, "IsManagedFlag()\n\n" },
+    {(char *) "IsMobRtrSupportFlag", (PyCFunction) _wrap_PyNs3RadvdInterface_IsMobRtrSupportFlag, METH_NOARGS, "IsMobRtrSupportFlag()\n\n" },
+    {(char *) "IsOtherConfigFlag", (PyCFunction) _wrap_PyNs3RadvdInterface_IsOtherConfigFlag, METH_NOARGS, "IsOtherConfigFlag()\n\n" },
+    {(char *) "IsSendAdvert", (PyCFunction) _wrap_PyNs3RadvdInterface_IsSendAdvert, METH_NOARGS, "IsSendAdvert()\n\n" },
+    {(char *) "IsSourceLLAddress", (PyCFunction) _wrap_PyNs3RadvdInterface_IsSourceLLAddress, METH_NOARGS, "IsSourceLLAddress()\n\n" },
+    {(char *) "SetCurHopLimit", (PyCFunction) _wrap_PyNs3RadvdInterface_SetCurHopLimit, METH_KEYWORDS|METH_VARARGS, "SetCurHopLimit(curHopLimit)\n\ntype: curHopLimit: uint8_t" },
+    {(char *) "SetDefaultLifeTime", (PyCFunction) _wrap_PyNs3RadvdInterface_SetDefaultLifeTime, METH_KEYWORDS|METH_VARARGS, "SetDefaultLifeTime(defaultLifeTime)\n\ntype: defaultLifeTime: uint32_t" },
+    {(char *) "SetDefaultPreference", (PyCFunction) _wrap_PyNs3RadvdInterface_SetDefaultPreference, METH_KEYWORDS|METH_VARARGS, "SetDefaultPreference(defaultPreference)\n\ntype: defaultPreference: uint8_t" },
+    {(char *) "SetHomeAgentFlag", (PyCFunction) _wrap_PyNs3RadvdInterface_SetHomeAgentFlag, METH_KEYWORDS|METH_VARARGS, "SetHomeAgentFlag(homeAgentFlag)\n\ntype: homeAgentFlag: bool" },
+    {(char *) "SetHomeAgentInfo", (PyCFunction) _wrap_PyNs3RadvdInterface_SetHomeAgentInfo, METH_KEYWORDS|METH_VARARGS, "SetHomeAgentInfo(homeAgentFlag)\n\ntype: homeAgentFlag: bool" },
+    {(char *) "SetHomeAgentLifeTime", (PyCFunction) _wrap_PyNs3RadvdInterface_SetHomeAgentLifeTime, METH_KEYWORDS|METH_VARARGS, "SetHomeAgentLifeTime(homeAgentLifeTime)\n\ntype: homeAgentLifeTime: uint32_t" },
+    {(char *) "SetHomeAgentPreference", (PyCFunction) _wrap_PyNs3RadvdInterface_SetHomeAgentPreference, METH_KEYWORDS|METH_VARARGS, "SetHomeAgentPreference(homeAgentPreference)\n\ntype: homeAgentPreference: uint32_t" },
+    {(char *) "SetIntervalOpt", (PyCFunction) _wrap_PyNs3RadvdInterface_SetIntervalOpt, METH_KEYWORDS|METH_VARARGS, "SetIntervalOpt(intervalOpt)\n\ntype: intervalOpt: bool" },
+    {(char *) "SetLastRaTxTime", (PyCFunction) _wrap_PyNs3RadvdInterface_SetLastRaTxTime, METH_KEYWORDS|METH_VARARGS, "SetLastRaTxTime(now)\n\ntype: now: ns3::Time" },
+    {(char *) "SetLinkMtu", (PyCFunction) _wrap_PyNs3RadvdInterface_SetLinkMtu, METH_KEYWORDS|METH_VARARGS, "SetLinkMtu(linkMtu)\n\ntype: linkMtu: uint32_t" },
+    {(char *) "SetManagedFlag", (PyCFunction) _wrap_PyNs3RadvdInterface_SetManagedFlag, METH_KEYWORDS|METH_VARARGS, "SetManagedFlag(managedFlag)\n\ntype: managedFlag: bool" },
+    {(char *) "SetMaxRtrAdvInterval", (PyCFunction) _wrap_PyNs3RadvdInterface_SetMaxRtrAdvInterval, METH_KEYWORDS|METH_VARARGS, "SetMaxRtrAdvInterval(maxRtrAdvInterval)\n\ntype: maxRtrAdvInterval: uint32_t" },
+    {(char *) "SetMinDelayBetweenRAs", (PyCFunction) _wrap_PyNs3RadvdInterface_SetMinDelayBetweenRAs, METH_KEYWORDS|METH_VARARGS, "SetMinDelayBetweenRAs(minDelayBetweenRAs)\n\ntype: minDelayBetweenRAs: uint32_t" },
+    {(char *) "SetMinRtrAdvInterval", (PyCFunction) _wrap_PyNs3RadvdInterface_SetMinRtrAdvInterval, METH_KEYWORDS|METH_VARARGS, "SetMinRtrAdvInterval(minRtrAdvInterval)\n\ntype: minRtrAdvInterval: uint32_t" },
+    {(char *) "SetMobRtrSupportFlag", (PyCFunction) _wrap_PyNs3RadvdInterface_SetMobRtrSupportFlag, METH_KEYWORDS|METH_VARARGS, "SetMobRtrSupportFlag(mobRtrSupportFlag)\n\ntype: mobRtrSupportFlag: bool" },
+    {(char *) "SetOtherConfigFlag", (PyCFunction) _wrap_PyNs3RadvdInterface_SetOtherConfigFlag, METH_KEYWORDS|METH_VARARGS, "SetOtherConfigFlag(otherConfigFlag)\n\ntype: otherConfigFlag: bool" },
+    {(char *) "SetReachableTime", (PyCFunction) _wrap_PyNs3RadvdInterface_SetReachableTime, METH_KEYWORDS|METH_VARARGS, "SetReachableTime(reachableTime)\n\ntype: reachableTime: uint32_t" },
+    {(char *) "SetRetransTimer", (PyCFunction) _wrap_PyNs3RadvdInterface_SetRetransTimer, METH_KEYWORDS|METH_VARARGS, "SetRetransTimer(retransTimer)\n\ntype: retransTimer: uint32_t" },
+    {(char *) "SetSendAdvert", (PyCFunction) _wrap_PyNs3RadvdInterface_SetSendAdvert, METH_KEYWORDS|METH_VARARGS, "SetSendAdvert(sendAdvert)\n\ntype: sendAdvert: bool" },
+    {(char *) "SetSourceLLAddress", (PyCFunction) _wrap_PyNs3RadvdInterface_SetSourceLLAddress, METH_KEYWORDS|METH_VARARGS, "SetSourceLLAddress(sourceLLAddress)\n\ntype: sourceLLAddress: bool" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3RadvdInterface__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -7490,6 +7490,82 @@ int _wrap_PyNs3RadvdPrefix__tp_init(PyNs3RadvdPrefix *self, PyObject *args, PyOb
 
 
 PyObject *
+_wrap_PyNs3RadvdPrefix_GetNetwork(PyNs3RadvdPrefix *self)
+{
+    PyObject *py_retval;
+    PyNs3Ipv6Address *py_Ipv6Address;
+    
+    ns3::Ipv6Address retval = self->obj->GetNetwork();
+    py_Ipv6Address = PyObject_New(PyNs3Ipv6Address, &PyNs3Ipv6Address_Type);
+    py_Ipv6Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Ipv6Address->obj = new ns3::Ipv6Address(retval);
+    PyNs3Ipv6Address_wrapper_registry[(void *) py_Ipv6Address->obj] = (PyObject *) py_Ipv6Address;
+    py_retval = Py_BuildValue((char *) "N", py_Ipv6Address);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RadvdPrefix_GetPreferredLifeTime(PyNs3RadvdPrefix *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetPreferredLifeTime();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RadvdPrefix_GetPrefixLength(PyNs3RadvdPrefix *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    
+    retval = self->obj->GetPrefixLength();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RadvdPrefix_GetValidLifeTime(PyNs3RadvdPrefix *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetValidLifeTime();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RadvdPrefix_IsAutonomousFlag(PyNs3RadvdPrefix *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->IsAutonomousFlag();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RadvdPrefix_IsOnLinkFlag(PyNs3RadvdPrefix *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->IsOnLinkFlag();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3RadvdPrefix_IsRouterAddrFlag(PyNs3RadvdPrefix *self)
 {
     PyObject *py_retval;
@@ -7497,6 +7573,25 @@ _wrap_PyNs3RadvdPrefix_IsRouterAddrFlag(PyNs3RadvdPrefix *self)
     
     retval = self->obj->IsRouterAddrFlag();
     py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RadvdPrefix_SetAutonomousFlag(PyNs3RadvdPrefix *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool autonomousFlag;
+    PyObject *py_autonomousFlag;
+    const char *keywords[] = {"autonomousFlag", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &py_autonomousFlag)) {
+        return NULL;
+    }
+    autonomousFlag = (bool) PyObject_IsTrue(py_autonomousFlag);
+    self->obj->SetAutonomousFlag(autonomousFlag);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -7538,47 +7633,6 @@ _wrap_PyNs3RadvdPrefix_SetOnLinkFlag(PyNs3RadvdPrefix *self, PyObject *args, PyO
 
 
 PyObject *
-_wrap_PyNs3RadvdPrefix_SetValidLifeTime(PyNs3RadvdPrefix *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int validLifeTime;
-    const char *keywords[] = {"validLifeTime", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &validLifeTime)) {
-        return NULL;
-    }
-    self->obj->SetValidLifeTime(validLifeTime);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RadvdPrefix_IsOnLinkFlag(PyNs3RadvdPrefix *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->IsOnLinkFlag();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RadvdPrefix_GetPrefixLength(PyNs3RadvdPrefix *self)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    
-    retval = self->obj->GetPrefixLength();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3RadvdPrefix_SetPreferredLifeTime(PyNs3RadvdPrefix *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -7591,37 +7645,6 @@ _wrap_PyNs3RadvdPrefix_SetPreferredLifeTime(PyNs3RadvdPrefix *self, PyObject *ar
     self->obj->SetPreferredLifeTime(preferredLifeTime);
     Py_INCREF(Py_None);
     py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RadvdPrefix_SetAutonomousFlag(PyNs3RadvdPrefix *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool autonomousFlag;
-    PyObject *py_autonomousFlag;
-    const char *keywords[] = {"autonomousFlag", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &py_autonomousFlag)) {
-        return NULL;
-    }
-    autonomousFlag = (bool) PyObject_IsTrue(py_autonomousFlag);
-    self->obj->SetAutonomousFlag(autonomousFlag);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RadvdPrefix_GetPreferredLifeTime(PyNs3RadvdPrefix *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetPreferredLifeTime();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
 
@@ -7648,22 +7671,6 @@ _wrap_PyNs3RadvdPrefix_SetPrefixLength(PyNs3RadvdPrefix *self, PyObject *args, P
 
 
 PyObject *
-_wrap_PyNs3RadvdPrefix_GetNetwork(PyNs3RadvdPrefix *self)
-{
-    PyObject *py_retval;
-    PyNs3Ipv6Address *py_Ipv6Address;
-    
-    ns3::Ipv6Address retval = self->obj->GetNetwork();
-    py_Ipv6Address = PyObject_New(PyNs3Ipv6Address, &PyNs3Ipv6Address_Type);
-    py_Ipv6Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Ipv6Address->obj = new ns3::Ipv6Address(retval);
-    PyNs3Ipv6Address_wrapper_registry[(void *) py_Ipv6Address->obj] = (PyObject *) py_Ipv6Address;
-    py_retval = Py_BuildValue((char *) "N", py_Ipv6Address);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3RadvdPrefix_SetRouterAddrFlag(PyNs3RadvdPrefix *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -7683,25 +7690,18 @@ _wrap_PyNs3RadvdPrefix_SetRouterAddrFlag(PyNs3RadvdPrefix *self, PyObject *args,
 
 
 PyObject *
-_wrap_PyNs3RadvdPrefix_IsAutonomousFlag(PyNs3RadvdPrefix *self)
+_wrap_PyNs3RadvdPrefix_SetValidLifeTime(PyNs3RadvdPrefix *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    bool retval;
+    unsigned int validLifeTime;
+    const char *keywords[] = {"validLifeTime", NULL};
     
-    retval = self->obj->IsAutonomousFlag();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RadvdPrefix_GetValidLifeTime(PyNs3RadvdPrefix *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetValidLifeTime();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &validLifeTime)) {
+        return NULL;
+    }
+    self->obj->SetValidLifeTime(validLifeTime);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -7720,20 +7720,20 @@ _wrap_PyNs3RadvdPrefix__copy__(PyNs3RadvdPrefix *self)
 }
 
 static PyMethodDef PyNs3RadvdPrefix_methods[] = {
+    {(char *) "GetNetwork", (PyCFunction) _wrap_PyNs3RadvdPrefix_GetNetwork, METH_NOARGS, "GetNetwork()\n\n" },
+    {(char *) "GetPreferredLifeTime", (PyCFunction) _wrap_PyNs3RadvdPrefix_GetPreferredLifeTime, METH_NOARGS, "GetPreferredLifeTime()\n\n" },
+    {(char *) "GetPrefixLength", (PyCFunction) _wrap_PyNs3RadvdPrefix_GetPrefixLength, METH_NOARGS, "GetPrefixLength()\n\n" },
+    {(char *) "GetValidLifeTime", (PyCFunction) _wrap_PyNs3RadvdPrefix_GetValidLifeTime, METH_NOARGS, "GetValidLifeTime()\n\n" },
+    {(char *) "IsAutonomousFlag", (PyCFunction) _wrap_PyNs3RadvdPrefix_IsAutonomousFlag, METH_NOARGS, "IsAutonomousFlag()\n\n" },
+    {(char *) "IsOnLinkFlag", (PyCFunction) _wrap_PyNs3RadvdPrefix_IsOnLinkFlag, METH_NOARGS, "IsOnLinkFlag()\n\n" },
     {(char *) "IsRouterAddrFlag", (PyCFunction) _wrap_PyNs3RadvdPrefix_IsRouterAddrFlag, METH_NOARGS, "IsRouterAddrFlag()\n\n" },
+    {(char *) "SetAutonomousFlag", (PyCFunction) _wrap_PyNs3RadvdPrefix_SetAutonomousFlag, METH_KEYWORDS|METH_VARARGS, "SetAutonomousFlag(autonomousFlag)\n\ntype: autonomousFlag: bool" },
     {(char *) "SetNetwork", (PyCFunction) _wrap_PyNs3RadvdPrefix_SetNetwork, METH_KEYWORDS|METH_VARARGS, "SetNetwork(network)\n\ntype: network: ns3::Ipv6Address" },
     {(char *) "SetOnLinkFlag", (PyCFunction) _wrap_PyNs3RadvdPrefix_SetOnLinkFlag, METH_KEYWORDS|METH_VARARGS, "SetOnLinkFlag(onLinkFlag)\n\ntype: onLinkFlag: bool" },
-    {(char *) "SetValidLifeTime", (PyCFunction) _wrap_PyNs3RadvdPrefix_SetValidLifeTime, METH_KEYWORDS|METH_VARARGS, "SetValidLifeTime(validLifeTime)\n\ntype: validLifeTime: uint32_t" },
-    {(char *) "IsOnLinkFlag", (PyCFunction) _wrap_PyNs3RadvdPrefix_IsOnLinkFlag, METH_NOARGS, "IsOnLinkFlag()\n\n" },
-    {(char *) "GetPrefixLength", (PyCFunction) _wrap_PyNs3RadvdPrefix_GetPrefixLength, METH_NOARGS, "GetPrefixLength()\n\n" },
     {(char *) "SetPreferredLifeTime", (PyCFunction) _wrap_PyNs3RadvdPrefix_SetPreferredLifeTime, METH_KEYWORDS|METH_VARARGS, "SetPreferredLifeTime(preferredLifeTime)\n\ntype: preferredLifeTime: uint32_t" },
-    {(char *) "SetAutonomousFlag", (PyCFunction) _wrap_PyNs3RadvdPrefix_SetAutonomousFlag, METH_KEYWORDS|METH_VARARGS, "SetAutonomousFlag(autonomousFlag)\n\ntype: autonomousFlag: bool" },
-    {(char *) "GetPreferredLifeTime", (PyCFunction) _wrap_PyNs3RadvdPrefix_GetPreferredLifeTime, METH_NOARGS, "GetPreferredLifeTime()\n\n" },
     {(char *) "SetPrefixLength", (PyCFunction) _wrap_PyNs3RadvdPrefix_SetPrefixLength, METH_KEYWORDS|METH_VARARGS, "SetPrefixLength(prefixLength)\n\ntype: prefixLength: uint8_t" },
-    {(char *) "GetNetwork", (PyCFunction) _wrap_PyNs3RadvdPrefix_GetNetwork, METH_NOARGS, "GetNetwork()\n\n" },
     {(char *) "SetRouterAddrFlag", (PyCFunction) _wrap_PyNs3RadvdPrefix_SetRouterAddrFlag, METH_KEYWORDS|METH_VARARGS, "SetRouterAddrFlag(routerAddrFlag)\n\ntype: routerAddrFlag: bool" },
-    {(char *) "IsAutonomousFlag", (PyCFunction) _wrap_PyNs3RadvdPrefix_IsAutonomousFlag, METH_NOARGS, "IsAutonomousFlag()\n\n" },
-    {(char *) "GetValidLifeTime", (PyCFunction) _wrap_PyNs3RadvdPrefix_GetValidLifeTime, METH_NOARGS, "GetValidLifeTime()\n\n" },
+    {(char *) "SetValidLifeTime", (PyCFunction) _wrap_PyNs3RadvdPrefix_SetValidLifeTime, METH_KEYWORDS|METH_VARARGS, "SetValidLifeTime(validLifeTime)\n\ntype: validLifeTime: uint32_t" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3RadvdPrefix__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -7846,22 +7846,6 @@ PyTypeObject PyNs3RadvdPrefix_Type = {
 
 
 PyObject *
-PyNs3V4Ping__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3V4Ping *self)
-{
-    PyObject *py_retval;
-    PyNs3V4Ping__PythonHelper *helper = dynamic_cast< PyNs3V4Ping__PythonHelper* >(self->obj);
-    
-    if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
-        return NULL;
-    }
-    helper->NotifyConstructionCompleted__parent_caller();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject *
 PyNs3V4Ping__PythonHelper::_wrap_DoInitialize(PyNs3V4Ping *self)
 {
     PyObject *py_retval;
@@ -7888,6 +7872,22 @@ PyNs3V4Ping__PythonHelper::_wrap_NotifyNewAggregate(PyNs3V4Ping *self)
         return NULL;
     }
     helper->NotifyNewAggregate__parent_caller();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject *
+PyNs3V4Ping__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3V4Ping *self)
+{
+    PyObject *py_retval;
+    PyNs3V4Ping__PythonHelper *helper = dynamic_cast< PyNs3V4Ping__PythonHelper* >(self->obj);
+    
+    if (helper == NULL) {
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        return NULL;
+    }
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -8329,9 +8329,9 @@ _wrap_PyNs3V4Ping__copy__(PyNs3V4Ping *self)
 
 static PyMethodDef PyNs3V4Ping_methods[] = {
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3V4Ping_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3V4Ping__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3V4Ping__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3V4Ping__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3V4Ping__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3V4Ping__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -8431,7 +8431,7 @@ PyTypeObject PyNs3V4Ping_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
     "V4Ping(arg0)\nV4Ping()",                        /* Documentation string */
     (traverseproc)PyNs3V4Ping__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3V4Ping__tp_clear,             /* tp_clear */

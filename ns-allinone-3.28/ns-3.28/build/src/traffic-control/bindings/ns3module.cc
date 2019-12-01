@@ -914,18 +914,6 @@ PyObject * _wrap_PyNs3QueueDiscContainer_Add(PyNs3QueueDiscContainer *self, PyOb
 
 
 PyObject *
-_wrap_PyNs3QueueDiscContainer_GetN(PyNs3QueueDiscContainer *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetN();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3QueueDiscContainer_Get(PyNs3QueueDiscContainer *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -975,6 +963,18 @@ _wrap_PyNs3QueueDiscContainer_Get(PyNs3QueueDiscContainer *self, PyObject *args,
 }
 
 
+PyObject *
+_wrap_PyNs3QueueDiscContainer_GetN(PyNs3QueueDiscContainer *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetN();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
 static PyObject*
 _wrap_PyNs3QueueDiscContainer__copy__(PyNs3QueueDiscContainer *self)
 {
@@ -989,8 +989,8 @@ _wrap_PyNs3QueueDiscContainer__copy__(PyNs3QueueDiscContainer *self)
 
 static PyMethodDef PyNs3QueueDiscContainer_methods[] = {
     {(char *) "Add", (PyCFunction) _wrap_PyNs3QueueDiscContainer_Add, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "GetN", (PyCFunction) _wrap_PyNs3QueueDiscContainer_GetN, METH_NOARGS, "GetN()\n\n" },
     {(char *) "Get", (PyCFunction) _wrap_PyNs3QueueDiscContainer_Get, METH_KEYWORDS|METH_VARARGS, "Get(i)\n\ntype: i: uint32_t" },
+    {(char *) "GetN", (PyCFunction) _wrap_PyNs3QueueDiscContainer_GetN, METH_NOARGS, "GetN()\n\n" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3QueueDiscContainer__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -1170,6 +1170,57 @@ int _wrap_PyNs3QueueDiscFactory__tp_init(PyNs3QueueDiscFactory *self, PyObject *
 
 
 PyObject *
+_wrap_PyNs3QueueDiscFactory_AddInternalQueue(PyNs3QueueDiscFactory *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3ObjectFactory *factory;
+    const char *keywords[] = {"factory", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3ObjectFactory_Type, &factory)) {
+        return NULL;
+    }
+    self->obj->AddInternalQueue(*((PyNs3ObjectFactory *) factory)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3QueueDiscFactory_AddPacketFilter(PyNs3QueueDiscFactory *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3ObjectFactory *factory;
+    const char *keywords[] = {"factory", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3ObjectFactory_Type, &factory)) {
+        return NULL;
+    }
+    self->obj->AddPacketFilter(*((PyNs3ObjectFactory *) factory)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3QueueDiscFactory_AddQueueDiscClass(PyNs3QueueDiscFactory *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    uint16_t retval;
+    PyNs3ObjectFactory *factory;
+    const char *keywords[] = {"factory", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3ObjectFactory_Type, &factory)) {
+        return NULL;
+    }
+    retval = self->obj->AddQueueDiscClass(*((PyNs3ObjectFactory *) factory)->obj);
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3QueueDiscFactory_CreateQueueDisc(PyNs3QueueDiscFactory *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -1220,23 +1271,6 @@ _wrap_PyNs3QueueDiscFactory_CreateQueueDisc(PyNs3QueueDiscFactory *self, PyObjec
 
 
 PyObject *
-_wrap_PyNs3QueueDiscFactory_AddQueueDiscClass(PyNs3QueueDiscFactory *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    uint16_t retval;
-    PyNs3ObjectFactory *factory;
-    const char *keywords[] = {"factory", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3ObjectFactory_Type, &factory)) {
-        return NULL;
-    }
-    retval = self->obj->AddQueueDiscClass(*((PyNs3ObjectFactory *) factory)->obj);
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3QueueDiscFactory_SetChildQueueDisc(PyNs3QueueDiscFactory *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -1262,40 +1296,6 @@ _wrap_PyNs3QueueDiscFactory_SetChildQueueDisc(PyNs3QueueDiscFactory *self, PyObj
 }
 
 
-PyObject *
-_wrap_PyNs3QueueDiscFactory_AddPacketFilter(PyNs3QueueDiscFactory *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3ObjectFactory *factory;
-    const char *keywords[] = {"factory", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3ObjectFactory_Type, &factory)) {
-        return NULL;
-    }
-    self->obj->AddPacketFilter(*((PyNs3ObjectFactory *) factory)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3QueueDiscFactory_AddInternalQueue(PyNs3QueueDiscFactory *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3ObjectFactory *factory;
-    const char *keywords[] = {"factory", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3ObjectFactory_Type, &factory)) {
-        return NULL;
-    }
-    self->obj->AddInternalQueue(*((PyNs3ObjectFactory *) factory)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3QueueDiscFactory__copy__(PyNs3QueueDiscFactory *self)
 {
@@ -1309,11 +1309,11 @@ _wrap_PyNs3QueueDiscFactory__copy__(PyNs3QueueDiscFactory *self)
 }
 
 static PyMethodDef PyNs3QueueDiscFactory_methods[] = {
-    {(char *) "CreateQueueDisc", (PyCFunction) _wrap_PyNs3QueueDiscFactory_CreateQueueDisc, METH_KEYWORDS|METH_VARARGS, "CreateQueueDisc(queueDiscs)\n\ntype: queueDiscs: std::vector< ns3::Ptr< ns3::QueueDisc > > const &" },
-    {(char *) "AddQueueDiscClass", (PyCFunction) _wrap_PyNs3QueueDiscFactory_AddQueueDiscClass, METH_KEYWORDS|METH_VARARGS, "AddQueueDiscClass(factory)\n\ntype: factory: ns3::ObjectFactory" },
-    {(char *) "SetChildQueueDisc", (PyCFunction) _wrap_PyNs3QueueDiscFactory_SetChildQueueDisc, METH_KEYWORDS|METH_VARARGS, "SetChildQueueDisc(classId, handle)\n\ntype: classId: uint16_t\ntype: handle: uint16_t" },
-    {(char *) "AddPacketFilter", (PyCFunction) _wrap_PyNs3QueueDiscFactory_AddPacketFilter, METH_KEYWORDS|METH_VARARGS, "AddPacketFilter(factory)\n\ntype: factory: ns3::ObjectFactory" },
     {(char *) "AddInternalQueue", (PyCFunction) _wrap_PyNs3QueueDiscFactory_AddInternalQueue, METH_KEYWORDS|METH_VARARGS, "AddInternalQueue(factory)\n\ntype: factory: ns3::ObjectFactory" },
+    {(char *) "AddPacketFilter", (PyCFunction) _wrap_PyNs3QueueDiscFactory_AddPacketFilter, METH_KEYWORDS|METH_VARARGS, "AddPacketFilter(factory)\n\ntype: factory: ns3::ObjectFactory" },
+    {(char *) "AddQueueDiscClass", (PyCFunction) _wrap_PyNs3QueueDiscFactory_AddQueueDiscClass, METH_KEYWORDS|METH_VARARGS, "AddQueueDiscClass(factory)\n\ntype: factory: ns3::ObjectFactory" },
+    {(char *) "CreateQueueDisc", (PyCFunction) _wrap_PyNs3QueueDiscFactory_CreateQueueDisc, METH_KEYWORDS|METH_VARARGS, "CreateQueueDisc(queueDiscs)\n\ntype: queueDiscs: std::vector< ns3::Ptr< ns3::QueueDisc > > const &" },
+    {(char *) "SetChildQueueDisc", (PyCFunction) _wrap_PyNs3QueueDiscFactory_SetChildQueueDisc, METH_KEYWORDS|METH_VARARGS, "SetChildQueueDisc(classId, handle)\n\ntype: classId: uint16_t\ntype: handle: uint16_t" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3QueueDiscFactory__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -1492,6 +1492,94 @@ int _wrap_PyNs3TrafficControlHelper__tp_init(PyNs3TrafficControlHelper *self, Py
 
 
 PyObject *
+_wrap_PyNs3TrafficControlHelper_AddChildQueueDisc(PyNs3TrafficControlHelper *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    uint16_t retval;
+    int handle;
+    int classId;
+    const char *type;
+    Py_ssize_t type_len;
+    const char *n01 = NULL;
+    Py_ssize_t n01_len;
+    PyNs3AttributeValue *v01 = NULL;
+    ns3::EmptyAttributeValue v01_default = ns3::EmptyAttributeValue();
+    const char *n02 = NULL;
+    Py_ssize_t n02_len;
+    PyNs3AttributeValue *v02 = NULL;
+    ns3::EmptyAttributeValue v02_default = ns3::EmptyAttributeValue();
+    const char *n03 = NULL;
+    Py_ssize_t n03_len;
+    PyNs3AttributeValue *v03 = NULL;
+    ns3::EmptyAttributeValue v03_default = ns3::EmptyAttributeValue();
+    const char *n04 = NULL;
+    Py_ssize_t n04_len;
+    PyNs3AttributeValue *v04 = NULL;
+    ns3::EmptyAttributeValue v04_default = ns3::EmptyAttributeValue();
+    const char *n05 = NULL;
+    Py_ssize_t n05_len;
+    PyNs3AttributeValue *v05 = NULL;
+    ns3::EmptyAttributeValue v05_default = ns3::EmptyAttributeValue();
+    const char *n06 = NULL;
+    Py_ssize_t n06_len;
+    PyNs3AttributeValue *v06 = NULL;
+    ns3::EmptyAttributeValue v06_default = ns3::EmptyAttributeValue();
+    const char *n07 = NULL;
+    Py_ssize_t n07_len;
+    PyNs3AttributeValue *v07 = NULL;
+    ns3::EmptyAttributeValue v07_default = ns3::EmptyAttributeValue();
+    const char *n08 = NULL;
+    Py_ssize_t n08_len;
+    PyNs3AttributeValue *v08 = NULL;
+    ns3::EmptyAttributeValue v08_default = ns3::EmptyAttributeValue();
+    const char *n09 = NULL;
+    Py_ssize_t n09_len;
+    PyNs3AttributeValue *v09 = NULL;
+    ns3::EmptyAttributeValue v09_default = ns3::EmptyAttributeValue();
+    const char *n10 = NULL;
+    Py_ssize_t n10_len;
+    PyNs3AttributeValue *v10 = NULL;
+    ns3::EmptyAttributeValue v10_default = ns3::EmptyAttributeValue();
+    const char *n11 = NULL;
+    Py_ssize_t n11_len;
+    PyNs3AttributeValue *v11 = NULL;
+    ns3::EmptyAttributeValue v11_default = ns3::EmptyAttributeValue();
+    const char *n12 = NULL;
+    Py_ssize_t n12_len;
+    PyNs3AttributeValue *v12 = NULL;
+    ns3::EmptyAttributeValue v12_default = ns3::EmptyAttributeValue();
+    const char *n13 = NULL;
+    Py_ssize_t n13_len;
+    PyNs3AttributeValue *v13 = NULL;
+    ns3::EmptyAttributeValue v13_default = ns3::EmptyAttributeValue();
+    const char *n14 = NULL;
+    Py_ssize_t n14_len;
+    PyNs3AttributeValue *v14 = NULL;
+    ns3::EmptyAttributeValue v14_default = ns3::EmptyAttributeValue();
+    const char *n15 = NULL;
+    Py_ssize_t n15_len;
+    PyNs3AttributeValue *v15 = NULL;
+    ns3::EmptyAttributeValue v15_default = ns3::EmptyAttributeValue();
+    const char *keywords[] = {"handle", "classId", "type", "n01", "v01", "n02", "v02", "n03", "v03", "n04", "v04", "n05", "v05", "n06", "v06", "n07", "v07", "n08", "v08", "n09", "v09", "n10", "v10", "n11", "v11", "n12", "v12", "n13", "v13", "n14", "v14", "n15", "v15", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "iis#|s#O!s#O!s#O!s#O!s#O!s#O!s#O!s#O!s#O!s#O!s#O!s#O!s#O!s#O!s#O!", (char **) keywords, &handle, &classId, &type, &type_len, &n01, &n01_len, &PyNs3AttributeValue_Type, &v01, &n02, &n02_len, &PyNs3AttributeValue_Type, &v02, &n03, &n03_len, &PyNs3AttributeValue_Type, &v03, &n04, &n04_len, &PyNs3AttributeValue_Type, &v04, &n05, &n05_len, &PyNs3AttributeValue_Type, &v05, &n06, &n06_len, &PyNs3AttributeValue_Type, &v06, &n07, &n07_len, &PyNs3AttributeValue_Type, &v07, &n08, &n08_len, &PyNs3AttributeValue_Type, &v08, &n09, &n09_len, &PyNs3AttributeValue_Type, &v09, &n10, &n10_len, &PyNs3AttributeValue_Type, &v10, &n11, &n11_len, &PyNs3AttributeValue_Type, &v11, &n12, &n12_len, &PyNs3AttributeValue_Type, &v12, &n13, &n13_len, &PyNs3AttributeValue_Type, &v13, &n14, &n14_len, &PyNs3AttributeValue_Type, &v14, &n15, &n15_len, &PyNs3AttributeValue_Type, &v15)) {
+        return NULL;
+    }
+    if (handle > 0xffff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    if (classId > 0xffff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    retval = self->obj->AddChildQueueDisc(handle, classId, std::string(type, type_len), (n01 ? std::string(n01, n01_len) : ""), (v01 ? (*((PyNs3AttributeValue *) v01)->obj) : v01_default), (n02 ? std::string(n02, n02_len) : ""), (v02 ? (*((PyNs3AttributeValue *) v02)->obj) : v02_default), (n03 ? std::string(n03, n03_len) : ""), (v03 ? (*((PyNs3AttributeValue *) v03)->obj) : v03_default), (n04 ? std::string(n04, n04_len) : ""), (v04 ? (*((PyNs3AttributeValue *) v04)->obj) : v04_default), (n05 ? std::string(n05, n05_len) : ""), (v05 ? (*((PyNs3AttributeValue *) v05)->obj) : v05_default), (n06 ? std::string(n06, n06_len) : ""), (v06 ? (*((PyNs3AttributeValue *) v06)->obj) : v06_default), (n07 ? std::string(n07, n07_len) : ""), (v07 ? (*((PyNs3AttributeValue *) v07)->obj) : v07_default), (n08 ? std::string(n08, n08_len) : ""), (v08 ? (*((PyNs3AttributeValue *) v08)->obj) : v08_default), (n09 ? std::string(n09, n09_len) : ""), (v09 ? (*((PyNs3AttributeValue *) v09)->obj) : v09_default), (n10 ? std::string(n10, n10_len) : ""), (v10 ? (*((PyNs3AttributeValue *) v10)->obj) : v10_default), (n11 ? std::string(n11, n11_len) : ""), (v11 ? (*((PyNs3AttributeValue *) v11)->obj) : v11_default), (n12 ? std::string(n12, n12_len) : ""), (v12 ? (*((PyNs3AttributeValue *) v12)->obj) : v12_default), (n13 ? std::string(n13, n13_len) : ""), (v13 ? (*((PyNs3AttributeValue *) v13)->obj) : v13_default), (n14 ? std::string(n14, n14_len) : ""), (v14 ? (*((PyNs3AttributeValue *) v14)->obj) : v14_default), (n15 ? std::string(n15, n15_len) : ""), (v15 ? (*((PyNs3AttributeValue *) v15)->obj) : v15_default));
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3TrafficControlHelper_AddChildQueueDiscs(PyNs3TrafficControlHelper *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -1639,17 +1727,56 @@ _wrap_PyNs3TrafficControlHelper_AddInternalQueues(PyNs3TrafficControlHelper *sel
 
 
 PyObject *
-_wrap_PyNs3TrafficControlHelper_Default(void)
+_wrap_PyNs3TrafficControlHelper_AddPacketFilter(PyNs3TrafficControlHelper *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3TrafficControlHelper *py_TrafficControlHelper;
+    int handle;
+    const char *type;
+    Py_ssize_t type_len;
+    const char *n01 = NULL;
+    Py_ssize_t n01_len;
+    PyNs3AttributeValue *v01 = NULL;
+    ns3::EmptyAttributeValue v01_default = ns3::EmptyAttributeValue();
+    const char *n02 = NULL;
+    Py_ssize_t n02_len;
+    PyNs3AttributeValue *v02 = NULL;
+    ns3::EmptyAttributeValue v02_default = ns3::EmptyAttributeValue();
+    const char *n03 = NULL;
+    Py_ssize_t n03_len;
+    PyNs3AttributeValue *v03 = NULL;
+    ns3::EmptyAttributeValue v03_default = ns3::EmptyAttributeValue();
+    const char *n04 = NULL;
+    Py_ssize_t n04_len;
+    PyNs3AttributeValue *v04 = NULL;
+    ns3::EmptyAttributeValue v04_default = ns3::EmptyAttributeValue();
+    const char *n05 = NULL;
+    Py_ssize_t n05_len;
+    PyNs3AttributeValue *v05 = NULL;
+    ns3::EmptyAttributeValue v05_default = ns3::EmptyAttributeValue();
+    const char *n06 = NULL;
+    Py_ssize_t n06_len;
+    PyNs3AttributeValue *v06 = NULL;
+    ns3::EmptyAttributeValue v06_default = ns3::EmptyAttributeValue();
+    const char *n07 = NULL;
+    Py_ssize_t n07_len;
+    PyNs3AttributeValue *v07 = NULL;
+    ns3::EmptyAttributeValue v07_default = ns3::EmptyAttributeValue();
+    const char *n08 = NULL;
+    Py_ssize_t n08_len;
+    PyNs3AttributeValue *v08 = NULL;
+    ns3::EmptyAttributeValue v08_default = ns3::EmptyAttributeValue();
+    const char *keywords[] = {"handle", "type", "n01", "v01", "n02", "v02", "n03", "v03", "n04", "v04", "n05", "v05", "n06", "v06", "n07", "v07", "n08", "v08", NULL};
     
-    ns3::TrafficControlHelper retval = ns3::TrafficControlHelper::Default();
-    py_TrafficControlHelper = PyObject_New(PyNs3TrafficControlHelper, &PyNs3TrafficControlHelper_Type);
-    py_TrafficControlHelper->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TrafficControlHelper->obj = new ns3::TrafficControlHelper(retval);
-    PyNs3TrafficControlHelper_wrapper_registry[(void *) py_TrafficControlHelper->obj] = (PyObject *) py_TrafficControlHelper;
-    py_retval = Py_BuildValue((char *) "N", py_TrafficControlHelper);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "is#|s#O!s#O!s#O!s#O!s#O!s#O!s#O!s#O!", (char **) keywords, &handle, &type, &type_len, &n01, &n01_len, &PyNs3AttributeValue_Type, &v01, &n02, &n02_len, &PyNs3AttributeValue_Type, &v02, &n03, &n03_len, &PyNs3AttributeValue_Type, &v03, &n04, &n04_len, &PyNs3AttributeValue_Type, &v04, &n05, &n05_len, &PyNs3AttributeValue_Type, &v05, &n06, &n06_len, &PyNs3AttributeValue_Type, &v06, &n07, &n07_len, &PyNs3AttributeValue_Type, &v07, &n08, &n08_len, &PyNs3AttributeValue_Type, &v08)) {
+        return NULL;
+    }
+    if (handle > 0xffff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->AddPacketFilter(handle, std::string(type, type_len), (n01 ? std::string(n01, n01_len) : ""), (v01 ? (*((PyNs3AttributeValue *) v01)->obj) : v01_default), (n02 ? std::string(n02, n02_len) : ""), (v02 ? (*((PyNs3AttributeValue *) v02)->obj) : v02_default), (n03 ? std::string(n03, n03_len) : ""), (v03 ? (*((PyNs3AttributeValue *) v03)->obj) : v03_default), (n04 ? std::string(n04, n04_len) : ""), (v04 ? (*((PyNs3AttributeValue *) v04)->obj) : v04_default), (n05 ? std::string(n05, n05_len) : ""), (v05 ? (*((PyNs3AttributeValue *) v05)->obj) : v05_default), (n06 ? std::string(n06, n06_len) : ""), (v06 ? (*((PyNs3AttributeValue *) v06)->obj) : v06_default), (n07 ? std::string(n07, n07_len) : ""), (v07 ? (*((PyNs3AttributeValue *) v07)->obj) : v07_default), (n08 ? std::string(n08, n08_len) : ""), (v08 ? (*((PyNs3AttributeValue *) v08)->obj) : v08_default));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -1718,56 +1845,17 @@ _wrap_PyNs3TrafficControlHelper_AddQueueDiscClasses(PyNs3TrafficControlHelper *s
 
 
 PyObject *
-_wrap_PyNs3TrafficControlHelper_AddPacketFilter(PyNs3TrafficControlHelper *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3TrafficControlHelper_Default(void)
 {
     PyObject *py_retval;
-    int handle;
-    const char *type;
-    Py_ssize_t type_len;
-    const char *n01 = NULL;
-    Py_ssize_t n01_len;
-    PyNs3AttributeValue *v01 = NULL;
-    ns3::EmptyAttributeValue v01_default = ns3::EmptyAttributeValue();
-    const char *n02 = NULL;
-    Py_ssize_t n02_len;
-    PyNs3AttributeValue *v02 = NULL;
-    ns3::EmptyAttributeValue v02_default = ns3::EmptyAttributeValue();
-    const char *n03 = NULL;
-    Py_ssize_t n03_len;
-    PyNs3AttributeValue *v03 = NULL;
-    ns3::EmptyAttributeValue v03_default = ns3::EmptyAttributeValue();
-    const char *n04 = NULL;
-    Py_ssize_t n04_len;
-    PyNs3AttributeValue *v04 = NULL;
-    ns3::EmptyAttributeValue v04_default = ns3::EmptyAttributeValue();
-    const char *n05 = NULL;
-    Py_ssize_t n05_len;
-    PyNs3AttributeValue *v05 = NULL;
-    ns3::EmptyAttributeValue v05_default = ns3::EmptyAttributeValue();
-    const char *n06 = NULL;
-    Py_ssize_t n06_len;
-    PyNs3AttributeValue *v06 = NULL;
-    ns3::EmptyAttributeValue v06_default = ns3::EmptyAttributeValue();
-    const char *n07 = NULL;
-    Py_ssize_t n07_len;
-    PyNs3AttributeValue *v07 = NULL;
-    ns3::EmptyAttributeValue v07_default = ns3::EmptyAttributeValue();
-    const char *n08 = NULL;
-    Py_ssize_t n08_len;
-    PyNs3AttributeValue *v08 = NULL;
-    ns3::EmptyAttributeValue v08_default = ns3::EmptyAttributeValue();
-    const char *keywords[] = {"handle", "type", "n01", "v01", "n02", "v02", "n03", "v03", "n04", "v04", "n05", "v05", "n06", "v06", "n07", "v07", "n08", "v08", NULL};
+    PyNs3TrafficControlHelper *py_TrafficControlHelper;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "is#|s#O!s#O!s#O!s#O!s#O!s#O!s#O!s#O!", (char **) keywords, &handle, &type, &type_len, &n01, &n01_len, &PyNs3AttributeValue_Type, &v01, &n02, &n02_len, &PyNs3AttributeValue_Type, &v02, &n03, &n03_len, &PyNs3AttributeValue_Type, &v03, &n04, &n04_len, &PyNs3AttributeValue_Type, &v04, &n05, &n05_len, &PyNs3AttributeValue_Type, &v05, &n06, &n06_len, &PyNs3AttributeValue_Type, &v06, &n07, &n07_len, &PyNs3AttributeValue_Type, &v07, &n08, &n08_len, &PyNs3AttributeValue_Type, &v08)) {
-        return NULL;
-    }
-    if (handle > 0xffff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->AddPacketFilter(handle, std::string(type, type_len), (n01 ? std::string(n01, n01_len) : ""), (v01 ? (*((PyNs3AttributeValue *) v01)->obj) : v01_default), (n02 ? std::string(n02, n02_len) : ""), (v02 ? (*((PyNs3AttributeValue *) v02)->obj) : v02_default), (n03 ? std::string(n03, n03_len) : ""), (v03 ? (*((PyNs3AttributeValue *) v03)->obj) : v03_default), (n04 ? std::string(n04, n04_len) : ""), (v04 ? (*((PyNs3AttributeValue *) v04)->obj) : v04_default), (n05 ? std::string(n05, n05_len) : ""), (v05 ? (*((PyNs3AttributeValue *) v05)->obj) : v05_default), (n06 ? std::string(n06, n06_len) : ""), (v06 ? (*((PyNs3AttributeValue *) v06)->obj) : v06_default), (n07 ? std::string(n07, n07_len) : ""), (v07 ? (*((PyNs3AttributeValue *) v07)->obj) : v07_default), (n08 ? std::string(n08, n08_len) : ""), (v08 ? (*((PyNs3AttributeValue *) v08)->obj) : v08_default));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    ns3::TrafficControlHelper retval = ns3::TrafficControlHelper::Default();
+    py_TrafficControlHelper = PyObject_New(PyNs3TrafficControlHelper, &PyNs3TrafficControlHelper_Type);
+    py_TrafficControlHelper->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TrafficControlHelper->obj = new ns3::TrafficControlHelper(retval);
+    PyNs3TrafficControlHelper_wrapper_registry[(void *) py_TrafficControlHelper->obj] = (PyObject *) py_TrafficControlHelper;
+    py_retval = Py_BuildValue((char *) "N", py_TrafficControlHelper);
     return py_retval;
 }
 
@@ -1980,94 +2068,6 @@ _wrap_PyNs3TrafficControlHelper_SetRootQueueDisc(PyNs3TrafficControlHelper *self
 }
 
 
-PyObject *
-_wrap_PyNs3TrafficControlHelper_AddChildQueueDisc(PyNs3TrafficControlHelper *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    uint16_t retval;
-    int handle;
-    int classId;
-    const char *type;
-    Py_ssize_t type_len;
-    const char *n01 = NULL;
-    Py_ssize_t n01_len;
-    PyNs3AttributeValue *v01 = NULL;
-    ns3::EmptyAttributeValue v01_default = ns3::EmptyAttributeValue();
-    const char *n02 = NULL;
-    Py_ssize_t n02_len;
-    PyNs3AttributeValue *v02 = NULL;
-    ns3::EmptyAttributeValue v02_default = ns3::EmptyAttributeValue();
-    const char *n03 = NULL;
-    Py_ssize_t n03_len;
-    PyNs3AttributeValue *v03 = NULL;
-    ns3::EmptyAttributeValue v03_default = ns3::EmptyAttributeValue();
-    const char *n04 = NULL;
-    Py_ssize_t n04_len;
-    PyNs3AttributeValue *v04 = NULL;
-    ns3::EmptyAttributeValue v04_default = ns3::EmptyAttributeValue();
-    const char *n05 = NULL;
-    Py_ssize_t n05_len;
-    PyNs3AttributeValue *v05 = NULL;
-    ns3::EmptyAttributeValue v05_default = ns3::EmptyAttributeValue();
-    const char *n06 = NULL;
-    Py_ssize_t n06_len;
-    PyNs3AttributeValue *v06 = NULL;
-    ns3::EmptyAttributeValue v06_default = ns3::EmptyAttributeValue();
-    const char *n07 = NULL;
-    Py_ssize_t n07_len;
-    PyNs3AttributeValue *v07 = NULL;
-    ns3::EmptyAttributeValue v07_default = ns3::EmptyAttributeValue();
-    const char *n08 = NULL;
-    Py_ssize_t n08_len;
-    PyNs3AttributeValue *v08 = NULL;
-    ns3::EmptyAttributeValue v08_default = ns3::EmptyAttributeValue();
-    const char *n09 = NULL;
-    Py_ssize_t n09_len;
-    PyNs3AttributeValue *v09 = NULL;
-    ns3::EmptyAttributeValue v09_default = ns3::EmptyAttributeValue();
-    const char *n10 = NULL;
-    Py_ssize_t n10_len;
-    PyNs3AttributeValue *v10 = NULL;
-    ns3::EmptyAttributeValue v10_default = ns3::EmptyAttributeValue();
-    const char *n11 = NULL;
-    Py_ssize_t n11_len;
-    PyNs3AttributeValue *v11 = NULL;
-    ns3::EmptyAttributeValue v11_default = ns3::EmptyAttributeValue();
-    const char *n12 = NULL;
-    Py_ssize_t n12_len;
-    PyNs3AttributeValue *v12 = NULL;
-    ns3::EmptyAttributeValue v12_default = ns3::EmptyAttributeValue();
-    const char *n13 = NULL;
-    Py_ssize_t n13_len;
-    PyNs3AttributeValue *v13 = NULL;
-    ns3::EmptyAttributeValue v13_default = ns3::EmptyAttributeValue();
-    const char *n14 = NULL;
-    Py_ssize_t n14_len;
-    PyNs3AttributeValue *v14 = NULL;
-    ns3::EmptyAttributeValue v14_default = ns3::EmptyAttributeValue();
-    const char *n15 = NULL;
-    Py_ssize_t n15_len;
-    PyNs3AttributeValue *v15 = NULL;
-    ns3::EmptyAttributeValue v15_default = ns3::EmptyAttributeValue();
-    const char *keywords[] = {"handle", "classId", "type", "n01", "v01", "n02", "v02", "n03", "v03", "n04", "v04", "n05", "v05", "n06", "v06", "n07", "v07", "n08", "v08", "n09", "v09", "n10", "v10", "n11", "v11", "n12", "v12", "n13", "v13", "n14", "v14", "n15", "v15", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "iis#|s#O!s#O!s#O!s#O!s#O!s#O!s#O!s#O!s#O!s#O!s#O!s#O!s#O!s#O!s#O!", (char **) keywords, &handle, &classId, &type, &type_len, &n01, &n01_len, &PyNs3AttributeValue_Type, &v01, &n02, &n02_len, &PyNs3AttributeValue_Type, &v02, &n03, &n03_len, &PyNs3AttributeValue_Type, &v03, &n04, &n04_len, &PyNs3AttributeValue_Type, &v04, &n05, &n05_len, &PyNs3AttributeValue_Type, &v05, &n06, &n06_len, &PyNs3AttributeValue_Type, &v06, &n07, &n07_len, &PyNs3AttributeValue_Type, &v07, &n08, &n08_len, &PyNs3AttributeValue_Type, &v08, &n09, &n09_len, &PyNs3AttributeValue_Type, &v09, &n10, &n10_len, &PyNs3AttributeValue_Type, &v10, &n11, &n11_len, &PyNs3AttributeValue_Type, &v11, &n12, &n12_len, &PyNs3AttributeValue_Type, &v12, &n13, &n13_len, &PyNs3AttributeValue_Type, &v13, &n14, &n14_len, &PyNs3AttributeValue_Type, &v14, &n15, &n15_len, &PyNs3AttributeValue_Type, &v15)) {
-        return NULL;
-    }
-    if (handle > 0xffff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    if (classId > 0xffff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    retval = self->obj->AddChildQueueDisc(handle, classId, std::string(type, type_len), (n01 ? std::string(n01, n01_len) : ""), (v01 ? (*((PyNs3AttributeValue *) v01)->obj) : v01_default), (n02 ? std::string(n02, n02_len) : ""), (v02 ? (*((PyNs3AttributeValue *) v02)->obj) : v02_default), (n03 ? std::string(n03, n03_len) : ""), (v03 ? (*((PyNs3AttributeValue *) v03)->obj) : v03_default), (n04 ? std::string(n04, n04_len) : ""), (v04 ? (*((PyNs3AttributeValue *) v04)->obj) : v04_default), (n05 ? std::string(n05, n05_len) : ""), (v05 ? (*((PyNs3AttributeValue *) v05)->obj) : v05_default), (n06 ? std::string(n06, n06_len) : ""), (v06 ? (*((PyNs3AttributeValue *) v06)->obj) : v06_default), (n07 ? std::string(n07, n07_len) : ""), (v07 ? (*((PyNs3AttributeValue *) v07)->obj) : v07_default), (n08 ? std::string(n08, n08_len) : ""), (v08 ? (*((PyNs3AttributeValue *) v08)->obj) : v08_default), (n09 ? std::string(n09, n09_len) : ""), (v09 ? (*((PyNs3AttributeValue *) v09)->obj) : v09_default), (n10 ? std::string(n10, n10_len) : ""), (v10 ? (*((PyNs3AttributeValue *) v10)->obj) : v10_default), (n11 ? std::string(n11, n11_len) : ""), (v11 ? (*((PyNs3AttributeValue *) v11)->obj) : v11_default), (n12 ? std::string(n12, n12_len) : ""), (v12 ? (*((PyNs3AttributeValue *) v12)->obj) : v12_default), (n13 ? std::string(n13, n13_len) : ""), (v13 ? (*((PyNs3AttributeValue *) v13)->obj) : v13_default), (n14 ? std::string(n14, n14_len) : ""), (v14 ? (*((PyNs3AttributeValue *) v14)->obj) : v14_default), (n15 ? std::string(n15, n15_len) : ""), (v15 ? (*((PyNs3AttributeValue *) v15)->obj) : v15_default));
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
 
 PyObject *
 _wrap_PyNs3TrafficControlHelper_Uninstall__0(PyNs3TrafficControlHelper *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
@@ -2153,15 +2153,15 @@ _wrap_PyNs3TrafficControlHelper__copy__(PyNs3TrafficControlHelper *self)
 }
 
 static PyMethodDef PyNs3TrafficControlHelper_methods[] = {
+    {(char *) "AddChildQueueDisc", (PyCFunction) _wrap_PyNs3TrafficControlHelper_AddChildQueueDisc, METH_KEYWORDS|METH_VARARGS, "AddChildQueueDisc(handle, classId, type, n01, v01, n02, v02, n03, v03, n04, v04, n05, v05, n06, v06, n07, v07, n08, v08, n09, v09, n10, v10, n11, v11, n12, v12, n13, v13, n14, v14, n15, v15)\n\ntype: handle: uint16_t\ntype: classId: uint16_t\ntype: type: std::string\ntype: n01: std::string\ntype: v01: ns3::AttributeValue const &\ntype: n02: std::string\ntype: v02: ns3::AttributeValue const &\ntype: n03: std::string\ntype: v03: ns3::AttributeValue const &\ntype: n04: std::string\ntype: v04: ns3::AttributeValue const &\ntype: n05: std::string\ntype: v05: ns3::AttributeValue const &\ntype: n06: std::string\ntype: v06: ns3::AttributeValue const &\ntype: n07: std::string\ntype: v07: ns3::AttributeValue const &\ntype: n08: std::string\ntype: v08: ns3::AttributeValue const &\ntype: n09: std::string\ntype: v09: ns3::AttributeValue const &\ntype: n10: std::string\ntype: v10: ns3::AttributeValue const &\ntype: n11: std::string\ntype: v11: ns3::AttributeValue const &\ntype: n12: std::string\ntype: v12: ns3::AttributeValue const &\ntype: n13: std::string\ntype: v13: ns3::AttributeValue const &\ntype: n14: std::string\ntype: v14: ns3::AttributeValue const &\ntype: n15: std::string\ntype: v15: ns3::AttributeValue const &" },
     {(char *) "AddChildQueueDiscs", (PyCFunction) _wrap_PyNs3TrafficControlHelper_AddChildQueueDiscs, METH_KEYWORDS|METH_VARARGS, "AddChildQueueDiscs(handle, classes, type, n01, v01, n02, v02, n03, v03, n04, v04, n05, v05, n06, v06, n07, v07, n08, v08, n09, v09, n10, v10, n11, v11, n12, v12, n13, v13, n14, v14, n15, v15)\n\ntype: handle: uint16_t\ntype: classes: ns3::TrafficControlHelper::ClassIdList const &\ntype: type: std::string\ntype: n01: std::string\ntype: v01: ns3::AttributeValue const &\ntype: n02: std::string\ntype: v02: ns3::AttributeValue const &\ntype: n03: std::string\ntype: v03: ns3::AttributeValue const &\ntype: n04: std::string\ntype: v04: ns3::AttributeValue const &\ntype: n05: std::string\ntype: v05: ns3::AttributeValue const &\ntype: n06: std::string\ntype: v06: ns3::AttributeValue const &\ntype: n07: std::string\ntype: v07: ns3::AttributeValue const &\ntype: n08: std::string\ntype: v08: ns3::AttributeValue const &\ntype: n09: std::string\ntype: v09: ns3::AttributeValue const &\ntype: n10: std::string\ntype: v10: ns3::AttributeValue const &\ntype: n11: std::string\ntype: v11: ns3::AttributeValue const &\ntype: n12: std::string\ntype: v12: ns3::AttributeValue const &\ntype: n13: std::string\ntype: v13: ns3::AttributeValue const &\ntype: n14: std::string\ntype: v14: ns3::AttributeValue const &\ntype: n15: std::string\ntype: v15: ns3::AttributeValue const &" },
     {(char *) "AddInternalQueues", (PyCFunction) _wrap_PyNs3TrafficControlHelper_AddInternalQueues, METH_KEYWORDS|METH_VARARGS, "AddInternalQueues(handle, count, type, n01, v01, n02, v02, n03, v03, n04, v04, n05, v05, n06, v06, n07, v07, n08, v08)\n\ntype: handle: uint16_t\ntype: count: uint16_t\ntype: type: std::string\ntype: n01: std::string\ntype: v01: ns3::AttributeValue const &\ntype: n02: std::string\ntype: v02: ns3::AttributeValue const &\ntype: n03: std::string\ntype: v03: ns3::AttributeValue const &\ntype: n04: std::string\ntype: v04: ns3::AttributeValue const &\ntype: n05: std::string\ntype: v05: ns3::AttributeValue const &\ntype: n06: std::string\ntype: v06: ns3::AttributeValue const &\ntype: n07: std::string\ntype: v07: ns3::AttributeValue const &\ntype: n08: std::string\ntype: v08: ns3::AttributeValue const &" },
-    {(char *) "Default", (PyCFunction) _wrap_PyNs3TrafficControlHelper_Default, METH_NOARGS|METH_STATIC, "Default()\n\n" },
-    {(char *) "AddQueueDiscClasses", (PyCFunction) _wrap_PyNs3TrafficControlHelper_AddQueueDiscClasses, METH_KEYWORDS|METH_VARARGS, "AddQueueDiscClasses(handle, count, type, n01, v01, n02, v02, n03, v03, n04, v04, n05, v05, n06, v06, n07, v07, n08, v08)\n\ntype: handle: uint16_t\ntype: count: uint16_t\ntype: type: std::string\ntype: n01: std::string\ntype: v01: ns3::AttributeValue const &\ntype: n02: std::string\ntype: v02: ns3::AttributeValue const &\ntype: n03: std::string\ntype: v03: ns3::AttributeValue const &\ntype: n04: std::string\ntype: v04: ns3::AttributeValue const &\ntype: n05: std::string\ntype: v05: ns3::AttributeValue const &\ntype: n06: std::string\ntype: v06: ns3::AttributeValue const &\ntype: n07: std::string\ntype: v07: ns3::AttributeValue const &\ntype: n08: std::string\ntype: v08: ns3::AttributeValue const &" },
     {(char *) "AddPacketFilter", (PyCFunction) _wrap_PyNs3TrafficControlHelper_AddPacketFilter, METH_KEYWORDS|METH_VARARGS, "AddPacketFilter(handle, type, n01, v01, n02, v02, n03, v03, n04, v04, n05, v05, n06, v06, n07, v07, n08, v08)\n\ntype: handle: uint16_t\ntype: type: std::string\ntype: n01: std::string\ntype: v01: ns3::AttributeValue const &\ntype: n02: std::string\ntype: v02: ns3::AttributeValue const &\ntype: n03: std::string\ntype: v03: ns3::AttributeValue const &\ntype: n04: std::string\ntype: v04: ns3::AttributeValue const &\ntype: n05: std::string\ntype: v05: ns3::AttributeValue const &\ntype: n06: std::string\ntype: v06: ns3::AttributeValue const &\ntype: n07: std::string\ntype: v07: ns3::AttributeValue const &\ntype: n08: std::string\ntype: v08: ns3::AttributeValue const &" },
+    {(char *) "AddQueueDiscClasses", (PyCFunction) _wrap_PyNs3TrafficControlHelper_AddQueueDiscClasses, METH_KEYWORDS|METH_VARARGS, "AddQueueDiscClasses(handle, count, type, n01, v01, n02, v02, n03, v03, n04, v04, n05, v05, n06, v06, n07, v07, n08, v08)\n\ntype: handle: uint16_t\ntype: count: uint16_t\ntype: type: std::string\ntype: n01: std::string\ntype: v01: ns3::AttributeValue const &\ntype: n02: std::string\ntype: v02: ns3::AttributeValue const &\ntype: n03: std::string\ntype: v03: ns3::AttributeValue const &\ntype: n04: std::string\ntype: v04: ns3::AttributeValue const &\ntype: n05: std::string\ntype: v05: ns3::AttributeValue const &\ntype: n06: std::string\ntype: v06: ns3::AttributeValue const &\ntype: n07: std::string\ntype: v07: ns3::AttributeValue const &\ntype: n08: std::string\ntype: v08: ns3::AttributeValue const &" },
+    {(char *) "Default", (PyCFunction) _wrap_PyNs3TrafficControlHelper_Default, METH_NOARGS|METH_STATIC, "Default()\n\n" },
     {(char *) "Install", (PyCFunction) _wrap_PyNs3TrafficControlHelper_Install, METH_KEYWORDS|METH_VARARGS, NULL },
     {(char *) "SetQueueLimits", (PyCFunction) _wrap_PyNs3TrafficControlHelper_SetQueueLimits, METH_KEYWORDS|METH_VARARGS, "SetQueueLimits(type, n01, v01, n02, v02, n03, v03, n04, v04, n05, v05, n06, v06, n07, v07, n08, v08)\n\ntype: type: std::string\ntype: n01: std::string\ntype: v01: ns3::AttributeValue const &\ntype: n02: std::string\ntype: v02: ns3::AttributeValue const &\ntype: n03: std::string\ntype: v03: ns3::AttributeValue const &\ntype: n04: std::string\ntype: v04: ns3::AttributeValue const &\ntype: n05: std::string\ntype: v05: ns3::AttributeValue const &\ntype: n06: std::string\ntype: v06: ns3::AttributeValue const &\ntype: n07: std::string\ntype: v07: ns3::AttributeValue const &\ntype: n08: std::string\ntype: v08: ns3::AttributeValue const &" },
     {(char *) "SetRootQueueDisc", (PyCFunction) _wrap_PyNs3TrafficControlHelper_SetRootQueueDisc, METH_KEYWORDS|METH_VARARGS, "SetRootQueueDisc(type, n01, v01, n02, v02, n03, v03, n04, v04, n05, v05, n06, v06, n07, v07, n08, v08, n09, v09, n10, v10, n11, v11, n12, v12, n13, v13, n14, v14, n15, v15)\n\ntype: type: std::string\ntype: n01: std::string\ntype: v01: ns3::AttributeValue const &\ntype: n02: std::string\ntype: v02: ns3::AttributeValue const &\ntype: n03: std::string\ntype: v03: ns3::AttributeValue const &\ntype: n04: std::string\ntype: v04: ns3::AttributeValue const &\ntype: n05: std::string\ntype: v05: ns3::AttributeValue const &\ntype: n06: std::string\ntype: v06: ns3::AttributeValue const &\ntype: n07: std::string\ntype: v07: ns3::AttributeValue const &\ntype: n08: std::string\ntype: v08: ns3::AttributeValue const &\ntype: n09: std::string\ntype: v09: ns3::AttributeValue const &\ntype: n10: std::string\ntype: v10: ns3::AttributeValue const &\ntype: n11: std::string\ntype: v11: ns3::AttributeValue const &\ntype: n12: std::string\ntype: v12: ns3::AttributeValue const &\ntype: n13: std::string\ntype: v13: ns3::AttributeValue const &\ntype: n14: std::string\ntype: v14: ns3::AttributeValue const &\ntype: n15: std::string\ntype: v15: ns3::AttributeValue const &" },
-    {(char *) "AddChildQueueDisc", (PyCFunction) _wrap_PyNs3TrafficControlHelper_AddChildQueueDisc, METH_KEYWORDS|METH_VARARGS, "AddChildQueueDisc(handle, classId, type, n01, v01, n02, v02, n03, v03, n04, v04, n05, v05, n06, v06, n07, v07, n08, v08, n09, v09, n10, v10, n11, v11, n12, v12, n13, v13, n14, v14, n15, v15)\n\ntype: handle: uint16_t\ntype: classId: uint16_t\ntype: type: std::string\ntype: n01: std::string\ntype: v01: ns3::AttributeValue const &\ntype: n02: std::string\ntype: v02: ns3::AttributeValue const &\ntype: n03: std::string\ntype: v03: ns3::AttributeValue const &\ntype: n04: std::string\ntype: v04: ns3::AttributeValue const &\ntype: n05: std::string\ntype: v05: ns3::AttributeValue const &\ntype: n06: std::string\ntype: v06: ns3::AttributeValue const &\ntype: n07: std::string\ntype: v07: ns3::AttributeValue const &\ntype: n08: std::string\ntype: v08: ns3::AttributeValue const &\ntype: n09: std::string\ntype: v09: ns3::AttributeValue const &\ntype: n10: std::string\ntype: v10: ns3::AttributeValue const &\ntype: n11: std::string\ntype: v11: ns3::AttributeValue const &\ntype: n12: std::string\ntype: v12: ns3::AttributeValue const &\ntype: n13: std::string\ntype: v13: ns3::AttributeValue const &\ntype: n14: std::string\ntype: v14: ns3::AttributeValue const &\ntype: n15: std::string\ntype: v15: ns3::AttributeValue const &" },
     {(char *) "Uninstall", (PyCFunction) _wrap_PyNs3TrafficControlHelper_Uninstall, METH_KEYWORDS|METH_VARARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3TrafficControlHelper__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
@@ -2275,16 +2275,16 @@ PyTypeObject PyNs3TrafficControlHelper_Type = {
 
 
 PyObject *
-PyNs3PacketFilter__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3PacketFilter *self)
+PyNs3PacketFilter__PythonHelper::_wrap_DoDispose(PyNs3PacketFilter *self)
 {
     PyObject *py_retval;
     PyNs3PacketFilter__PythonHelper *helper = dynamic_cast< PyNs3PacketFilter__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -2323,16 +2323,16 @@ PyNs3PacketFilter__PythonHelper::_wrap_NotifyNewAggregate(PyNs3PacketFilter *sel
 }
 
 PyObject *
-PyNs3PacketFilter__PythonHelper::_wrap_DoDispose(PyNs3PacketFilter *self)
+PyNs3PacketFilter__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3PacketFilter *self)
 {
     PyObject *py_retval;
     PyNs3PacketFilter__PythonHelper *helper = dynamic_cast< PyNs3PacketFilter__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -2872,22 +2872,6 @@ int _wrap_PyNs3PacketFilter__tp_init(PyNs3PacketFilter *self, PyObject *args, Py
 
 
 PyObject *
-_wrap_PyNs3PacketFilter_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::PacketFilter::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3PacketFilter_Classify(PyNs3PacketFilter *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -2905,13 +2889,29 @@ _wrap_PyNs3PacketFilter_Classify(PyNs3PacketFilter *self, PyObject *args, PyObje
     return py_retval;
 }
 
+
+PyObject *
+_wrap_PyNs3PacketFilter_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::PacketFilter::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
 static PyMethodDef PyNs3PacketFilter_methods[] = {
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3PacketFilter_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
     {(char *) "Classify", (PyCFunction) _wrap_PyNs3PacketFilter_Classify, METH_KEYWORDS|METH_VARARGS, "Classify(item)\n\ntype: item: ns3::Ptr< ns3::QueueDiscItem >" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3PacketFilter__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3PacketFilter_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "DoDispose", (PyCFunction) PyNs3PacketFilter__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3PacketFilter__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3PacketFilter__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3PacketFilter__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3PacketFilter__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 
@@ -3043,16 +3043,32 @@ PyTypeObject PyNs3PacketFilter_Type = {
 
 
 PyObject *
-PyNs3QueueDisc__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3QueueDisc *self)
+PyNs3QueueDisc__PythonHelper::_wrap_DoDispose(PyNs3QueueDisc *self)
 {
     PyObject *py_retval;
     PyNs3QueueDisc__PythonHelper *helper = dynamic_cast< PyNs3QueueDisc__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class QueueDisc is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject *
+PyNs3QueueDisc__PythonHelper::_wrap_DoInitialize(PyNs3QueueDisc *self)
+{
+    PyObject *py_retval;
+    PyNs3QueueDisc__PythonHelper *helper = dynamic_cast< PyNs3QueueDisc__PythonHelper* >(self->obj);
+    
+    if (helper == NULL) {
+        PyErr_SetString(PyExc_TypeError, "Method DoInitialize of class QueueDisc is protected and can only be called by a subclass");
+        return NULL;
+    }
+    helper->DoInitialize__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -3083,48 +3099,24 @@ PyNs3QueueDisc__PythonHelper::_wrap_DropAfterDequeue(PyNs3QueueDisc *self, PyObj
 }
 
 PyObject *
-PyNs3QueueDisc__PythonHelper::_wrap_DoInitialize(PyNs3QueueDisc *self)
+PyNs3QueueDisc__PythonHelper::_wrap_DropBeforeEnqueue(PyNs3QueueDisc *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
+    PyNs3QueueDiscItem *item;
+    ns3::QueueDiscItem *item_ptr;
+    char const *reason;
     PyNs3QueueDisc__PythonHelper *helper = dynamic_cast< PyNs3QueueDisc__PythonHelper* >(self->obj);
+    const char *keywords[] = {"item", "reason", NULL};
     
-    if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoInitialize of class QueueDisc is protected and can only be called by a subclass");
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!s", (char **) keywords, &PyNs3QueueDiscItem_Type, &item, &reason)) {
         return NULL;
     }
-    helper->DoInitialize__parent_caller();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject *
-PyNs3QueueDisc__PythonHelper::_wrap_NotifyNewAggregate(PyNs3QueueDisc *self)
-{
-    PyObject *py_retval;
-    PyNs3QueueDisc__PythonHelper *helper = dynamic_cast< PyNs3QueueDisc__PythonHelper* >(self->obj);
-    
+    item_ptr = (item ? item->obj : NULL);
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyNewAggregate of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DropBeforeEnqueue of class QueueDisc is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyNewAggregate__parent_caller();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject *
-PyNs3QueueDisc__PythonHelper::_wrap_DoDispose(PyNs3QueueDisc *self)
-{
-    PyObject *py_retval;
-    PyNs3QueueDisc__PythonHelper *helper = dynamic_cast< PyNs3QueueDisc__PythonHelper* >(self->obj);
-    
-    if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class QueueDisc is protected and can only be called by a subclass");
-        return NULL;
-    }
-    helper->DoDispose__parent_caller();
+    helper->DropBeforeEnqueue__parent_caller(ns3::Ptr< ns3::QueueDiscItem  > (item_ptr), reason);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -3151,30 +3143,6 @@ PyNs3QueueDisc__PythonHelper::_wrap_Mark(PyNs3QueueDisc *self, PyObject *args, P
     }
     retval = helper->Mark__parent_caller(ns3::Ptr< ns3::QueueDiscItem  > (item_ptr), reason);
     py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-PyObject *
-PyNs3QueueDisc__PythonHelper::_wrap_DropBeforeEnqueue(PyNs3QueueDisc *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3QueueDiscItem *item;
-    ns3::QueueDiscItem *item_ptr;
-    char const *reason;
-    PyNs3QueueDisc__PythonHelper *helper = dynamic_cast< PyNs3QueueDisc__PythonHelper* >(self->obj);
-    const char *keywords[] = {"item", "reason", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!s", (char **) keywords, &PyNs3QueueDiscItem_Type, &item, &reason)) {
-        return NULL;
-    }
-    item_ptr = (item ? item->obj : NULL);
-    if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DropBeforeEnqueue of class QueueDisc is protected and can only be called by a subclass");
-        return NULL;
-    }
-    helper->DropBeforeEnqueue__parent_caller(ns3::Ptr< ns3::QueueDiscItem  > (item_ptr), reason);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
     return py_retval;
 }
 
@@ -3215,6 +3183,38 @@ PyNs3QueueDisc__PythonHelper::_wrap_PeekDequeued(PyNs3QueueDisc *self)
         PyNs3Empty_wrapper_registry[(void *) py_QueueDiscItem->obj] = (PyObject *) py_QueueDiscItem;
     }
     py_retval = Py_BuildValue((char *) "N", py_QueueDiscItem);
+    return py_retval;
+}
+
+PyObject *
+PyNs3QueueDisc__PythonHelper::_wrap_NotifyNewAggregate(PyNs3QueueDisc *self)
+{
+    PyObject *py_retval;
+    PyNs3QueueDisc__PythonHelper *helper = dynamic_cast< PyNs3QueueDisc__PythonHelper* >(self->obj);
+    
+    if (helper == NULL) {
+        PyErr_SetString(PyExc_TypeError, "Method NotifyNewAggregate of class Object is protected and can only be called by a subclass");
+        return NULL;
+    }
+    helper->NotifyNewAggregate__parent_caller();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject *
+PyNs3QueueDisc__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3QueueDisc *self)
+{
+    PyObject *py_retval;
+    PyNs3QueueDisc__PythonHelper *helper = dynamic_cast< PyNs3QueueDisc__PythonHelper* >(self->obj);
+    
+    if (helper == NULL) {
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        return NULL;
+    }
+    helper->NotifyConstructionCompleted__parent_caller();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -3892,15 +3892,15 @@ static PyObject* _wrap_PyNs3QueueDisc__get_INTERNAL_QUEUE_DROP(PyObject * PYBIND
 }
 static PyGetSetDef Ns3QueueDiscMeta__getsets[] = {
     {
-        (char*) "INTERNAL_QUEUE_DROP", /* attribute name */
-        (getter) _wrap_PyNs3QueueDisc__get_INTERNAL_QUEUE_DROP, /* C function to get the attribute */
+        (char*) "CHILD_QUEUE_DISC_DROP", /* attribute name */
+        (getter) _wrap_PyNs3QueueDisc__get_CHILD_QUEUE_DISC_DROP, /* C function to get the attribute */
         (setter) NULL, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
     {
-        (char*) "CHILD_QUEUE_DISC_DROP", /* attribute name */
-        (getter) _wrap_PyNs3QueueDisc__get_CHILD_QUEUE_DISC_DROP, /* C function to get the attribute */
+        (char*) "INTERNAL_QUEUE_DROP", /* attribute name */
+        (getter) _wrap_PyNs3QueueDisc__get_INTERNAL_QUEUE_DROP, /* C function to get the attribute */
         (setter) NULL, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
@@ -4046,30 +4046,165 @@ int _wrap_PyNs3QueueDisc__tp_init(PyNs3QueueDisc *self, PyObject *args, PyObject
 
 
 PyObject *
-_wrap_PyNs3QueueDisc_GetQuota(PyNs3QueueDisc *self)
+_wrap_PyNs3QueueDisc_AddPacketFilter(PyNs3QueueDisc *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    uint32_t retval;
-    PyNs3QueueDisc__PythonHelper *helper_class = dynamic_cast<PyNs3QueueDisc__PythonHelper*> (self->obj);
+    PyNs3PacketFilter *filter;
+    ns3::PacketFilter *filter_ptr;
+    const char *keywords[] = {"filter", NULL};
     
-    retval = (helper_class == NULL)? (self->obj->GetQuota()) : (self->obj->ns3::QueueDisc::GetQuota());
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3PacketFilter_Type, &filter)) {
+        return NULL;
+    }
+    filter_ptr = (filter ? filter->obj : NULL);
+    self->obj->AddPacketFilter(ns3::Ptr< ns3::PacketFilter  > (filter_ptr));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3QueueDisc_GetTypeId(void)
+_wrap_PyNs3QueueDisc_AddQueueDiscClass(PyNs3QueueDisc *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
+    PyNs3QueueDiscClass *qdClass;
+    ns3::QueueDiscClass *qdClass_ptr;
+    const char *keywords[] = {"qdClass", NULL};
     
-    ns3::TypeId retval = ns3::QueueDisc::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3QueueDiscClass_Type, &qdClass)) {
+        return NULL;
+    }
+    qdClass_ptr = (qdClass ? qdClass->obj : NULL);
+    self->obj->AddQueueDiscClass(ns3::Ptr< ns3::QueueDiscClass  > (qdClass_ptr));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3QueueDisc_Classify(PyNs3QueueDisc *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int32_t retval;
+    PyNs3QueueDiscItem *item;
+    ns3::QueueDiscItem *item_ptr;
+    const char *keywords[] = {"item", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3QueueDiscItem_Type, &item)) {
+        return NULL;
+    }
+    item_ptr = (item ? item->obj : NULL);
+    retval = self->obj->Classify(ns3::Ptr< ns3::QueueDiscItem  > (item_ptr));
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3QueueDisc_Dequeue(PyNs3QueueDisc *self)
+{
+    PyObject *py_retval;
+    ns3::Ptr< ns3::QueueDiscItem > retval;
+    PyNs3QueueDiscItem *py_QueueDiscItem;
+    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
+    PyTypeObject *wrapper_type = 0;
+    
+    retval = self->obj->Dequeue();
+    if (!(const_cast<ns3::QueueDiscItem *> (ns3::PeekPointer (retval)))) {
+        Py_INCREF(Py_None);
+        return Py_None;
+    }
+    wrapper_lookup_iter = PyNs3Empty_wrapper_registry.find((void *) const_cast<ns3::QueueDiscItem *> (ns3::PeekPointer (retval)));
+    if (wrapper_lookup_iter == PyNs3Empty_wrapper_registry.end()) {
+        py_QueueDiscItem = NULL;
+    } else {
+        py_QueueDiscItem = (PyNs3QueueDiscItem *) wrapper_lookup_iter->second;
+        Py_INCREF(py_QueueDiscItem);
+    }
+    
+    if (py_QueueDiscItem == NULL) {
+        wrapper_type = PyNs3SimpleRefCount__Ns3QueueItem_Ns3Empty_Ns3DefaultDeleter__lt__ns3QueueItem__gt____typeid_map.lookup_wrapper(typeid((*const_cast<ns3::QueueDiscItem *> (ns3::PeekPointer (retval)))), &PyNs3QueueDiscItem_Type);
+        py_QueueDiscItem = PyObject_New(PyNs3QueueDiscItem, wrapper_type);
+    
+        py_QueueDiscItem->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+        const_cast<ns3::QueueDiscItem *> (ns3::PeekPointer (retval))->Ref();
+        py_QueueDiscItem->obj = const_cast<ns3::QueueDiscItem *> (ns3::PeekPointer (retval));
+        PyNs3Empty_wrapper_registry[(void *) py_QueueDiscItem->obj] = (PyObject *) py_QueueDiscItem;
+    }
+    py_retval = Py_BuildValue((char *) "N", py_QueueDiscItem);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3QueueDisc_DequeuePeeked(PyNs3QueueDisc *self)
+{
+    PyObject *py_retval;
+    ns3::Ptr< ns3::QueueDiscItem > retval;
+    PyNs3QueueDiscItem *py_QueueDiscItem;
+    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
+    PyTypeObject *wrapper_type = 0;
+    
+    retval = self->obj->DequeuePeeked();
+    if (!(const_cast<ns3::QueueDiscItem *> (ns3::PeekPointer (retval)))) {
+        Py_INCREF(Py_None);
+        return Py_None;
+    }
+    wrapper_lookup_iter = PyNs3Empty_wrapper_registry.find((void *) const_cast<ns3::QueueDiscItem *> (ns3::PeekPointer (retval)));
+    if (wrapper_lookup_iter == PyNs3Empty_wrapper_registry.end()) {
+        py_QueueDiscItem = NULL;
+    } else {
+        py_QueueDiscItem = (PyNs3QueueDiscItem *) wrapper_lookup_iter->second;
+        Py_INCREF(py_QueueDiscItem);
+    }
+    
+    if (py_QueueDiscItem == NULL) {
+        wrapper_type = PyNs3SimpleRefCount__Ns3QueueItem_Ns3Empty_Ns3DefaultDeleter__lt__ns3QueueItem__gt____typeid_map.lookup_wrapper(typeid((*const_cast<ns3::QueueDiscItem *> (ns3::PeekPointer (retval)))), &PyNs3QueueDiscItem_Type);
+        py_QueueDiscItem = PyObject_New(PyNs3QueueDiscItem, wrapper_type);
+    
+        py_QueueDiscItem->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+        const_cast<ns3::QueueDiscItem *> (ns3::PeekPointer (retval))->Ref();
+        py_QueueDiscItem->obj = const_cast<ns3::QueueDiscItem *> (ns3::PeekPointer (retval));
+        PyNs3Empty_wrapper_registry[(void *) py_QueueDiscItem->obj] = (PyObject *) py_QueueDiscItem;
+    }
+    py_retval = Py_BuildValue((char *) "N", py_QueueDiscItem);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3QueueDisc_Enqueue(PyNs3QueueDisc *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3QueueDiscItem *item;
+    ns3::QueueDiscItem *item_ptr;
+    const char *keywords[] = {"item", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3QueueDiscItem_Type, &item)) {
+        return NULL;
+    }
+    item_ptr = (item ? item->obj : NULL);
+    retval = self->obj->Enqueue(ns3::Ptr< ns3::QueueDiscItem  > (item_ptr));
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3QueueDisc_GetCurrentSize(PyNs3QueueDisc *self)
+{
+    PyObject *py_retval;
+    PyNs3QueueSize *py_QueueSize;
+    
+    ns3::QueueSize retval = self->obj->GetCurrentSize();
+    py_QueueSize = PyObject_New(PyNs3QueueSize, &PyNs3QueueSize_Type);
+    py_QueueSize->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_QueueSize->obj = new ns3::QueueSize(retval);
+    PyNs3QueueSize_wrapper_registry[(void *) py_QueueSize->obj] = (PyObject *) py_QueueSize;
+    py_retval = Py_BuildValue((char *) "N", py_QueueSize);
     return py_retval;
 }
 
@@ -4091,32 +4226,13 @@ _wrap_PyNs3QueueDisc_GetMaxSize(PyNs3QueueDisc *self)
 
 
 PyObject *
-_wrap_PyNs3QueueDisc_GetNPackets(PyNs3QueueDisc *self)
+_wrap_PyNs3QueueDisc_GetNBytes(PyNs3QueueDisc *self)
 {
     PyObject *py_retval;
     uint32_t retval;
     
-    retval = self->obj->GetNPackets();
+    retval = self->obj->GetNBytes();
     py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3QueueDisc_AddQueueDiscClass(PyNs3QueueDisc *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3QueueDiscClass *qdClass;
-    ns3::QueueDiscClass *qdClass_ptr;
-    const char *keywords[] = {"qdClass", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3QueueDiscClass_Type, &qdClass)) {
-        return NULL;
-    }
-    qdClass_ptr = (qdClass ? qdClass->obj : NULL);
-    self->obj->AddQueueDiscClass(ns3::Ptr< ns3::QueueDiscClass  > (qdClass_ptr));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
     return py_retval;
 }
 
@@ -4146,85 +4262,63 @@ _wrap_PyNs3QueueDisc_GetNPacketFilters(PyNs3QueueDisc *self)
 
 
 PyObject *
-_wrap_PyNs3QueueDisc_Classify(PyNs3QueueDisc *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3QueueDisc_GetNPackets(PyNs3QueueDisc *self)
 {
     PyObject *py_retval;
-    int32_t retval;
-    PyNs3QueueDiscItem *item;
-    ns3::QueueDiscItem *item_ptr;
-    const char *keywords[] = {"item", NULL};
+    uint32_t retval;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3QueueDiscItem_Type, &item)) {
-        return NULL;
-    }
-    item_ptr = (item ? item->obj : NULL);
-    retval = self->obj->Classify(ns3::Ptr< ns3::QueueDiscItem  > (item_ptr));
-    py_retval = Py_BuildValue((char *) "i", retval);
+    retval = self->obj->GetNPackets();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3QueueDisc_SetMaxSize(PyNs3QueueDisc *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3QueueDisc_GetNQueueDiscClasses(PyNs3QueueDisc *self)
 {
     PyObject *py_retval;
-    bool retval;
-    PyNs3QueueSize *size;
-    const char *keywords[] = {"size", NULL};
+    uint32_t retval;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3QueueSize_Type, &size)) {
-        return NULL;
-    }
-    retval = self->obj->SetMaxSize(*((PyNs3QueueSize *) size)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    retval = self->obj->GetNQueueDiscClasses();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3QueueDisc_Peek(PyNs3QueueDisc *self)
+_wrap_PyNs3QueueDisc_GetNetDevice(PyNs3QueueDisc *self)
 {
     PyObject *py_retval;
-    ns3::Ptr< ns3::QueueDiscItem const > retval;
-    PyNs3QueueDiscItem *py_QueueDiscItem;
+    ns3::Ptr< ns3::NetDevice > retval;
+    PyNs3NetDevice *py_NetDevice;
     std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
     PyTypeObject *wrapper_type = 0;
     
-    retval = self->obj->Peek();
-    if (!(const_cast<ns3::QueueDiscItem *> (ns3::PeekPointer (retval)))) {
+    retval = self->obj->GetNetDevice();
+    if (!(const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval)))) {
         Py_INCREF(Py_None);
         return Py_None;
     }
-    wrapper_lookup_iter = PyNs3Empty_wrapper_registry.find((void *) const_cast<ns3::QueueDiscItem *> (ns3::PeekPointer (retval)));
-    if (wrapper_lookup_iter == PyNs3Empty_wrapper_registry.end()) {
-        py_QueueDiscItem = NULL;
+    wrapper_lookup_iter = PyNs3ObjectBase_wrapper_registry.find((void *) const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval)));
+    if (wrapper_lookup_iter == PyNs3ObjectBase_wrapper_registry.end()) {
+        py_NetDevice = NULL;
     } else {
-        py_QueueDiscItem = (PyNs3QueueDiscItem *) wrapper_lookup_iter->second;
-        Py_INCREF(py_QueueDiscItem);
+        py_NetDevice = (PyNs3NetDevice *) wrapper_lookup_iter->second;
+        Py_INCREF(py_NetDevice);
     }
     
-    if (py_QueueDiscItem == NULL) {
-        wrapper_type = PyNs3SimpleRefCount__Ns3QueueItem_Ns3Empty_Ns3DefaultDeleter__lt__ns3QueueItem__gt____typeid_map.lookup_wrapper(typeid((*const_cast<ns3::QueueDiscItem *> (ns3::PeekPointer (retval)))), &PyNs3QueueDiscItem_Type);
-        py_QueueDiscItem = PyObject_New(PyNs3QueueDiscItem, wrapper_type);
+    if (py_NetDevice == NULL) {
+        wrapper_type = PyNs3SimpleRefCount__Ns3Object_Ns3ObjectBase_Ns3ObjectDeleter__typeid_map.lookup_wrapper(typeid((*const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval)))), &PyNs3NetDevice_Type);
+        py_NetDevice = PyObject_GC_New(PyNs3NetDevice, wrapper_type);
+        py_NetDevice->inst_dict = NULL;
     
-        py_QueueDiscItem->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-        const_cast<ns3::QueueDiscItem *> (ns3::PeekPointer (retval))->Ref();
-        py_QueueDiscItem->obj = const_cast<ns3::QueueDiscItem *> (ns3::PeekPointer (retval));
-        PyNs3Empty_wrapper_registry[(void *) py_QueueDiscItem->obj] = (PyObject *) py_QueueDiscItem;
+        py_NetDevice->inst_dict = NULL;
+        py_NetDevice->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+        const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval))->Ref();
+        py_NetDevice->obj = const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval));
+        PyNs3ObjectBase_wrapper_registry[(void *) py_NetDevice->obj] = (PyObject *) py_NetDevice;
     }
-    py_retval = Py_BuildValue((char *) "N", py_QueueDiscItem);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3QueueDisc_Run(PyNs3QueueDisc *self)
-{
-    PyObject *py_retval;
-    
-    self->obj->Run();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    py_retval = Py_BuildValue((char *) "N", py_NetDevice);
     return py_retval;
 }
 
@@ -4280,224 +4374,6 @@ _wrap_PyNs3QueueDisc_GetPacketFilter(PyNs3QueueDisc *self, PyObject *args, PyObj
 
 
 PyObject *
-_wrap_PyNs3QueueDisc_GetNQueueDiscClasses(PyNs3QueueDisc *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetNQueueDiscClasses();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3QueueDisc_Enqueue(PyNs3QueueDisc *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3QueueDiscItem *item;
-    ns3::QueueDiscItem *item_ptr;
-    const char *keywords[] = {"item", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3QueueDiscItem_Type, &item)) {
-        return NULL;
-    }
-    item_ptr = (item ? item->obj : NULL);
-    retval = self->obj->Enqueue(ns3::Ptr< ns3::QueueDiscItem  > (item_ptr));
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3QueueDisc_GetWakeMode(PyNs3QueueDisc *self)
-{
-    PyObject *py_retval;
-    ns3::QueueDisc::WakeMode retval;
-    PyNs3QueueDisc__PythonHelper *helper_class = dynamic_cast<PyNs3QueueDisc__PythonHelper*> (self->obj);
-    
-    retval = (helper_class == NULL)? (self->obj->GetWakeMode()) : (self->obj->ns3::QueueDisc::GetWakeMode());
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3QueueDisc_SetQuota(PyNs3QueueDisc *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int quota;
-    PyNs3QueueDisc__PythonHelper *helper_class = dynamic_cast<PyNs3QueueDisc__PythonHelper*> (self->obj);
-    const char *keywords[] = {"quota", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &quota)) {
-        return NULL;
-    }
-    (helper_class == NULL)? (self->obj->SetQuota(quota)) : (self->obj->ns3::QueueDisc::SetQuota(quota));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3QueueDisc_SetNetDevice(PyNs3QueueDisc *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3NetDevice *device;
-    ns3::NetDevice *device_ptr;
-    const char *keywords[] = {"device", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3NetDevice_Type, &device)) {
-        return NULL;
-    }
-    device_ptr = (device ? device->obj : NULL);
-    self->obj->SetNetDevice(ns3::Ptr< ns3::NetDevice  > (device_ptr));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3QueueDisc_GetNetDevice(PyNs3QueueDisc *self)
-{
-    PyObject *py_retval;
-    ns3::Ptr< ns3::NetDevice > retval;
-    PyNs3NetDevice *py_NetDevice;
-    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
-    PyTypeObject *wrapper_type = 0;
-    
-    retval = self->obj->GetNetDevice();
-    if (!(const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval)))) {
-        Py_INCREF(Py_None);
-        return Py_None;
-    }
-    wrapper_lookup_iter = PyNs3ObjectBase_wrapper_registry.find((void *) const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval)));
-    if (wrapper_lookup_iter == PyNs3ObjectBase_wrapper_registry.end()) {
-        py_NetDevice = NULL;
-    } else {
-        py_NetDevice = (PyNs3NetDevice *) wrapper_lookup_iter->second;
-        Py_INCREF(py_NetDevice);
-    }
-    
-    if (py_NetDevice == NULL) {
-        wrapper_type = PyNs3SimpleRefCount__Ns3Object_Ns3ObjectBase_Ns3ObjectDeleter__typeid_map.lookup_wrapper(typeid((*const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval)))), &PyNs3NetDevice_Type);
-        py_NetDevice = PyObject_GC_New(PyNs3NetDevice, wrapper_type);
-        py_NetDevice->inst_dict = NULL;
-    
-        py_NetDevice->inst_dict = NULL;
-        py_NetDevice->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-        const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval))->Ref();
-        py_NetDevice->obj = const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval));
-        PyNs3ObjectBase_wrapper_registry[(void *) py_NetDevice->obj] = (PyObject *) py_NetDevice;
-    }
-    py_retval = Py_BuildValue((char *) "N", py_NetDevice);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3QueueDisc_GetCurrentSize(PyNs3QueueDisc *self)
-{
-    PyObject *py_retval;
-    PyNs3QueueSize *py_QueueSize;
-    
-    ns3::QueueSize retval = self->obj->GetCurrentSize();
-    py_QueueSize = PyObject_New(PyNs3QueueSize, &PyNs3QueueSize_Type);
-    py_QueueSize->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_QueueSize->obj = new ns3::QueueSize(retval);
-    PyNs3QueueSize_wrapper_registry[(void *) py_QueueSize->obj] = (PyObject *) py_QueueSize;
-    py_retval = Py_BuildValue((char *) "N", py_QueueSize);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3QueueDisc_Dequeue(PyNs3QueueDisc *self)
-{
-    PyObject *py_retval;
-    ns3::Ptr< ns3::QueueDiscItem > retval;
-    PyNs3QueueDiscItem *py_QueueDiscItem;
-    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
-    PyTypeObject *wrapper_type = 0;
-    
-    retval = self->obj->Dequeue();
-    if (!(const_cast<ns3::QueueDiscItem *> (ns3::PeekPointer (retval)))) {
-        Py_INCREF(Py_None);
-        return Py_None;
-    }
-    wrapper_lookup_iter = PyNs3Empty_wrapper_registry.find((void *) const_cast<ns3::QueueDiscItem *> (ns3::PeekPointer (retval)));
-    if (wrapper_lookup_iter == PyNs3Empty_wrapper_registry.end()) {
-        py_QueueDiscItem = NULL;
-    } else {
-        py_QueueDiscItem = (PyNs3QueueDiscItem *) wrapper_lookup_iter->second;
-        Py_INCREF(py_QueueDiscItem);
-    }
-    
-    if (py_QueueDiscItem == NULL) {
-        wrapper_type = PyNs3SimpleRefCount__Ns3QueueItem_Ns3Empty_Ns3DefaultDeleter__lt__ns3QueueItem__gt____typeid_map.lookup_wrapper(typeid((*const_cast<ns3::QueueDiscItem *> (ns3::PeekPointer (retval)))), &PyNs3QueueDiscItem_Type);
-        py_QueueDiscItem = PyObject_New(PyNs3QueueDiscItem, wrapper_type);
-    
-        py_QueueDiscItem->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-        const_cast<ns3::QueueDiscItem *> (ns3::PeekPointer (retval))->Ref();
-        py_QueueDiscItem->obj = const_cast<ns3::QueueDiscItem *> (ns3::PeekPointer (retval));
-        PyNs3Empty_wrapper_registry[(void *) py_QueueDiscItem->obj] = (PyObject *) py_QueueDiscItem;
-    }
-    py_retval = Py_BuildValue((char *) "N", py_QueueDiscItem);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3QueueDisc_AddPacketFilter(PyNs3QueueDisc *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3PacketFilter *filter;
-    ns3::PacketFilter *filter_ptr;
-    const char *keywords[] = {"filter", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3PacketFilter_Type, &filter)) {
-        return NULL;
-    }
-    filter_ptr = (filter ? filter->obj : NULL);
-    self->obj->AddPacketFilter(ns3::Ptr< ns3::PacketFilter  > (filter_ptr));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3QueueDisc_GetStats(PyNs3QueueDisc *self)
-{
-    PyObject *py_retval;
-    PyNs3QueueDiscStats *py_Stats;
-    
-    ns3::QueueDisc::Stats const & retval = self->obj->GetStats();
-    py_Stats = PyObject_New(PyNs3QueueDiscStats, &PyNs3QueueDiscStats_Type);
-    py_Stats->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Stats->obj = new ns3::QueueDisc::Stats(retval);
-    PyNs3QueueDiscStats_wrapper_registry[(void *) py_Stats->obj] = (PyObject *) py_Stats;
-    py_retval = Py_BuildValue((char *) "N", py_Stats);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3QueueDisc_GetNBytes(PyNs3QueueDisc *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetNBytes();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3QueueDisc_GetQueueDiscClass(PyNs3QueueDisc *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -4548,15 +4424,73 @@ _wrap_PyNs3QueueDisc_GetQueueDiscClass(PyNs3QueueDisc *self, PyObject *args, PyO
 
 
 PyObject *
-_wrap_PyNs3QueueDisc_DequeuePeeked(PyNs3QueueDisc *self)
+_wrap_PyNs3QueueDisc_GetQuota(PyNs3QueueDisc *self)
 {
     PyObject *py_retval;
-    ns3::Ptr< ns3::QueueDiscItem > retval;
+    uint32_t retval;
+    PyNs3QueueDisc__PythonHelper *helper_class = dynamic_cast<PyNs3QueueDisc__PythonHelper*> (self->obj);
+    
+    retval = (helper_class == NULL)? (self->obj->GetQuota()) : (self->obj->ns3::QueueDisc::GetQuota());
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3QueueDisc_GetStats(PyNs3QueueDisc *self)
+{
+    PyObject *py_retval;
+    PyNs3QueueDiscStats *py_Stats;
+    
+    ns3::QueueDisc::Stats const & retval = self->obj->GetStats();
+    py_Stats = PyObject_New(PyNs3QueueDiscStats, &PyNs3QueueDiscStats_Type);
+    py_Stats->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Stats->obj = new ns3::QueueDisc::Stats(retval);
+    PyNs3QueueDiscStats_wrapper_registry[(void *) py_Stats->obj] = (PyObject *) py_Stats;
+    py_retval = Py_BuildValue((char *) "N", py_Stats);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3QueueDisc_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::QueueDisc::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3QueueDisc_GetWakeMode(PyNs3QueueDisc *self)
+{
+    PyObject *py_retval;
+    ns3::QueueDisc::WakeMode retval;
+    PyNs3QueueDisc__PythonHelper *helper_class = dynamic_cast<PyNs3QueueDisc__PythonHelper*> (self->obj);
+    
+    retval = (helper_class == NULL)? (self->obj->GetWakeMode()) : (self->obj->ns3::QueueDisc::GetWakeMode());
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3QueueDisc_Peek(PyNs3QueueDisc *self)
+{
+    PyObject *py_retval;
+    ns3::Ptr< ns3::QueueDiscItem const > retval;
     PyNs3QueueDiscItem *py_QueueDiscItem;
     std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
     PyTypeObject *wrapper_type = 0;
     
-    retval = self->obj->DequeuePeeked();
+    retval = self->obj->Peek();
     if (!(const_cast<ns3::QueueDiscItem *> (ns3::PeekPointer (retval)))) {
         Py_INCREF(Py_None);
         return Py_None;
@@ -4582,40 +4516,106 @@ _wrap_PyNs3QueueDisc_DequeuePeeked(PyNs3QueueDisc *self)
     return py_retval;
 }
 
+
+PyObject *
+_wrap_PyNs3QueueDisc_Run(PyNs3QueueDisc *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->Run();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3QueueDisc_SetMaxSize(PyNs3QueueDisc *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3QueueSize *size;
+    const char *keywords[] = {"size", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3QueueSize_Type, &size)) {
+        return NULL;
+    }
+    retval = self->obj->SetMaxSize(*((PyNs3QueueSize *) size)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3QueueDisc_SetNetDevice(PyNs3QueueDisc *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3NetDevice *device;
+    ns3::NetDevice *device_ptr;
+    const char *keywords[] = {"device", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3NetDevice_Type, &device)) {
+        return NULL;
+    }
+    device_ptr = (device ? device->obj : NULL);
+    self->obj->SetNetDevice(ns3::Ptr< ns3::NetDevice  > (device_ptr));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3QueueDisc_SetQuota(PyNs3QueueDisc *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int quota;
+    PyNs3QueueDisc__PythonHelper *helper_class = dynamic_cast<PyNs3QueueDisc__PythonHelper*> (self->obj);
+    const char *keywords[] = {"quota", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &quota)) {
+        return NULL;
+    }
+    (helper_class == NULL)? (self->obj->SetQuota(quota)) : (self->obj->ns3::QueueDisc::SetQuota(quota));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
 static PyMethodDef PyNs3QueueDisc_methods[] = {
-    {(char *) "GetQuota", (PyCFunction) _wrap_PyNs3QueueDisc_GetQuota, METH_NOARGS, "GetQuota()\n\n" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3QueueDisc_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "GetMaxSize", (PyCFunction) _wrap_PyNs3QueueDisc_GetMaxSize, METH_NOARGS, "GetMaxSize()\n\n" },
-    {(char *) "GetNPackets", (PyCFunction) _wrap_PyNs3QueueDisc_GetNPackets, METH_NOARGS, "GetNPackets()\n\n" },
+    {(char *) "AddPacketFilter", (PyCFunction) _wrap_PyNs3QueueDisc_AddPacketFilter, METH_KEYWORDS|METH_VARARGS, "AddPacketFilter(filter)\n\ntype: filter: ns3::Ptr< ns3::PacketFilter >" },
     {(char *) "AddQueueDiscClass", (PyCFunction) _wrap_PyNs3QueueDisc_AddQueueDiscClass, METH_KEYWORDS|METH_VARARGS, "AddQueueDiscClass(qdClass)\n\ntype: qdClass: ns3::Ptr< ns3::QueueDiscClass >" },
+    {(char *) "Classify", (PyCFunction) _wrap_PyNs3QueueDisc_Classify, METH_KEYWORDS|METH_VARARGS, "Classify(item)\n\ntype: item: ns3::Ptr< ns3::QueueDiscItem >" },
+    {(char *) "Dequeue", (PyCFunction) _wrap_PyNs3QueueDisc_Dequeue, METH_NOARGS, "Dequeue()\n\n" },
+    {(char *) "DequeuePeeked", (PyCFunction) _wrap_PyNs3QueueDisc_DequeuePeeked, METH_NOARGS, "DequeuePeeked()\n\n" },
+    {(char *) "Enqueue", (PyCFunction) _wrap_PyNs3QueueDisc_Enqueue, METH_KEYWORDS|METH_VARARGS, "Enqueue(item)\n\ntype: item: ns3::Ptr< ns3::QueueDiscItem >" },
+    {(char *) "GetCurrentSize", (PyCFunction) _wrap_PyNs3QueueDisc_GetCurrentSize, METH_NOARGS, "GetCurrentSize()\n\n" },
+    {(char *) "GetMaxSize", (PyCFunction) _wrap_PyNs3QueueDisc_GetMaxSize, METH_NOARGS, "GetMaxSize()\n\n" },
+    {(char *) "GetNBytes", (PyCFunction) _wrap_PyNs3QueueDisc_GetNBytes, METH_NOARGS, "GetNBytes()\n\n" },
     {(char *) "GetNInternalQueues", (PyCFunction) _wrap_PyNs3QueueDisc_GetNInternalQueues, METH_NOARGS, "GetNInternalQueues()\n\n" },
     {(char *) "GetNPacketFilters", (PyCFunction) _wrap_PyNs3QueueDisc_GetNPacketFilters, METH_NOARGS, "GetNPacketFilters()\n\n" },
-    {(char *) "Classify", (PyCFunction) _wrap_PyNs3QueueDisc_Classify, METH_KEYWORDS|METH_VARARGS, "Classify(item)\n\ntype: item: ns3::Ptr< ns3::QueueDiscItem >" },
-    {(char *) "SetMaxSize", (PyCFunction) _wrap_PyNs3QueueDisc_SetMaxSize, METH_KEYWORDS|METH_VARARGS, "SetMaxSize(size)\n\ntype: size: ns3::QueueSize" },
+    {(char *) "GetNPackets", (PyCFunction) _wrap_PyNs3QueueDisc_GetNPackets, METH_NOARGS, "GetNPackets()\n\n" },
+    {(char *) "GetNQueueDiscClasses", (PyCFunction) _wrap_PyNs3QueueDisc_GetNQueueDiscClasses, METH_NOARGS, "GetNQueueDiscClasses()\n\n" },
+    {(char *) "GetNetDevice", (PyCFunction) _wrap_PyNs3QueueDisc_GetNetDevice, METH_NOARGS, "GetNetDevice()\n\n" },
+    {(char *) "GetPacketFilter", (PyCFunction) _wrap_PyNs3QueueDisc_GetPacketFilter, METH_KEYWORDS|METH_VARARGS, "GetPacketFilter(i)\n\ntype: i: uint32_t" },
+    {(char *) "GetQueueDiscClass", (PyCFunction) _wrap_PyNs3QueueDisc_GetQueueDiscClass, METH_KEYWORDS|METH_VARARGS, "GetQueueDiscClass(i)\n\ntype: i: uint32_t" },
+    {(char *) "GetQuota", (PyCFunction) _wrap_PyNs3QueueDisc_GetQuota, METH_NOARGS, "GetQuota()\n\n" },
+    {(char *) "GetStats", (PyCFunction) _wrap_PyNs3QueueDisc_GetStats, METH_NOARGS, "GetStats()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3QueueDisc_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "GetWakeMode", (PyCFunction) _wrap_PyNs3QueueDisc_GetWakeMode, METH_NOARGS, "GetWakeMode()\n\n" },
     {(char *) "Peek", (PyCFunction) _wrap_PyNs3QueueDisc_Peek, METH_NOARGS, "Peek()\n\n" },
     {(char *) "Run", (PyCFunction) _wrap_PyNs3QueueDisc_Run, METH_NOARGS, "Run()\n\n" },
-    {(char *) "GetPacketFilter", (PyCFunction) _wrap_PyNs3QueueDisc_GetPacketFilter, METH_KEYWORDS|METH_VARARGS, "GetPacketFilter(i)\n\ntype: i: uint32_t" },
-    {(char *) "GetNQueueDiscClasses", (PyCFunction) _wrap_PyNs3QueueDisc_GetNQueueDiscClasses, METH_NOARGS, "GetNQueueDiscClasses()\n\n" },
-    {(char *) "Enqueue", (PyCFunction) _wrap_PyNs3QueueDisc_Enqueue, METH_KEYWORDS|METH_VARARGS, "Enqueue(item)\n\ntype: item: ns3::Ptr< ns3::QueueDiscItem >" },
-    {(char *) "GetWakeMode", (PyCFunction) _wrap_PyNs3QueueDisc_GetWakeMode, METH_NOARGS, "GetWakeMode()\n\n" },
-    {(char *) "SetQuota", (PyCFunction) _wrap_PyNs3QueueDisc_SetQuota, METH_KEYWORDS|METH_VARARGS, "SetQuota(quota)\n\ntype: quota: uint32_t const" },
+    {(char *) "SetMaxSize", (PyCFunction) _wrap_PyNs3QueueDisc_SetMaxSize, METH_KEYWORDS|METH_VARARGS, "SetMaxSize(size)\n\ntype: size: ns3::QueueSize" },
     {(char *) "SetNetDevice", (PyCFunction) _wrap_PyNs3QueueDisc_SetNetDevice, METH_KEYWORDS|METH_VARARGS, "SetNetDevice(device)\n\ntype: device: ns3::Ptr< ns3::NetDevice >" },
-    {(char *) "GetNetDevice", (PyCFunction) _wrap_PyNs3QueueDisc_GetNetDevice, METH_NOARGS, "GetNetDevice()\n\n" },
-    {(char *) "GetCurrentSize", (PyCFunction) _wrap_PyNs3QueueDisc_GetCurrentSize, METH_NOARGS, "GetCurrentSize()\n\n" },
-    {(char *) "Dequeue", (PyCFunction) _wrap_PyNs3QueueDisc_Dequeue, METH_NOARGS, "Dequeue()\n\n" },
-    {(char *) "AddPacketFilter", (PyCFunction) _wrap_PyNs3QueueDisc_AddPacketFilter, METH_KEYWORDS|METH_VARARGS, "AddPacketFilter(filter)\n\ntype: filter: ns3::Ptr< ns3::PacketFilter >" },
-    {(char *) "GetStats", (PyCFunction) _wrap_PyNs3QueueDisc_GetStats, METH_NOARGS, "GetStats()\n\n" },
-    {(char *) "GetNBytes", (PyCFunction) _wrap_PyNs3QueueDisc_GetNBytes, METH_NOARGS, "GetNBytes()\n\n" },
-    {(char *) "GetQueueDiscClass", (PyCFunction) _wrap_PyNs3QueueDisc_GetQueueDiscClass, METH_KEYWORDS|METH_VARARGS, "GetQueueDiscClass(i)\n\ntype: i: uint32_t" },
-    {(char *) "DequeuePeeked", (PyCFunction) _wrap_PyNs3QueueDisc_DequeuePeeked, METH_NOARGS, "DequeuePeeked()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3QueueDisc__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
-    {(char *) "DropAfterDequeue", (PyCFunction) PyNs3QueueDisc__PythonHelper::_wrap_DropAfterDequeue, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "DoInitialize", (PyCFunction) PyNs3QueueDisc__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
-    {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3QueueDisc__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
+    {(char *) "SetQuota", (PyCFunction) _wrap_PyNs3QueueDisc_SetQuota, METH_KEYWORDS|METH_VARARGS, "SetQuota(quota)\n\ntype: quota: uint32_t const" },
     {(char *) "DoDispose", (PyCFunction) PyNs3QueueDisc__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
-    {(char *) "Mark", (PyCFunction) PyNs3QueueDisc__PythonHelper::_wrap_Mark, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "DoInitialize", (PyCFunction) PyNs3QueueDisc__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
+    {(char *) "DropAfterDequeue", (PyCFunction) PyNs3QueueDisc__PythonHelper::_wrap_DropAfterDequeue, METH_KEYWORDS|METH_VARARGS, NULL },
     {(char *) "DropBeforeEnqueue", (PyCFunction) PyNs3QueueDisc__PythonHelper::_wrap_DropBeforeEnqueue, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "Mark", (PyCFunction) PyNs3QueueDisc__PythonHelper::_wrap_Mark, METH_KEYWORDS|METH_VARARGS, NULL },
     {(char *) "PeekDequeued", (PyCFunction) PyNs3QueueDisc__PythonHelper::_wrap_PeekDequeued, METH_NOARGS, NULL },
+    {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3QueueDisc__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3QueueDisc__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 
@@ -5234,58 +5234,16 @@ static int _wrap_PyNs3QueueDiscStats__set_nTotalSentPackets(PyNs3QueueDiscStats 
 }
 static PyGetSetDef PyNs3QueueDiscStats__getsets[] = {
     {
-        (char*) "nTotalDroppedBytes", /* attribute name */
-        (getter) _wrap_PyNs3QueueDiscStats__get_nTotalDroppedBytes, /* C function to get the attribute */
-        (setter) _wrap_PyNs3QueueDiscStats__set_nTotalDroppedBytes, /* C function to set the attribute */
+        (char*) "nDroppedBytesAfterDequeue", /* attribute name */
+        (getter) _wrap_PyNs3QueueDiscStats__get_nDroppedBytesAfterDequeue, /* C function to get the attribute */
+        (setter) _wrap_PyNs3QueueDiscStats__set_nDroppedBytesAfterDequeue, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
     {
-        (char*) "nTotalEnqueuedPackets", /* attribute name */
-        (getter) _wrap_PyNs3QueueDiscStats__get_nTotalEnqueuedPackets, /* C function to get the attribute */
-        (setter) _wrap_PyNs3QueueDiscStats__set_nTotalEnqueuedPackets, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
-        (char*) "nTotalDroppedBytesBeforeEnqueue", /* attribute name */
-        (getter) _wrap_PyNs3QueueDiscStats__get_nTotalDroppedBytesBeforeEnqueue, /* C function to get the attribute */
-        (setter) _wrap_PyNs3QueueDiscStats__set_nTotalDroppedBytesBeforeEnqueue, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
-        (char*) "nTotalEnqueuedBytes", /* attribute name */
-        (getter) _wrap_PyNs3QueueDiscStats__get_nTotalEnqueuedBytes, /* C function to get the attribute */
-        (setter) _wrap_PyNs3QueueDiscStats__set_nTotalEnqueuedBytes, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
-        (char*) "nTotalSentBytes", /* attribute name */
-        (getter) _wrap_PyNs3QueueDiscStats__get_nTotalSentBytes, /* C function to get the attribute */
-        (setter) _wrap_PyNs3QueueDiscStats__set_nTotalSentBytes, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
-        (char*) "nTotalMarkedPackets", /* attribute name */
-        (getter) _wrap_PyNs3QueueDiscStats__get_nTotalMarkedPackets, /* C function to get the attribute */
-        (setter) _wrap_PyNs3QueueDiscStats__set_nTotalMarkedPackets, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
-        (char*) "nTotalDroppedPackets", /* attribute name */
-        (getter) _wrap_PyNs3QueueDiscStats__get_nTotalDroppedPackets, /* C function to get the attribute */
-        (setter) _wrap_PyNs3QueueDiscStats__set_nTotalDroppedPackets, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
-        (char*) "nMarkedPackets", /* attribute name */
-        (getter) _wrap_PyNs3QueueDiscStats__get_nMarkedPackets, /* C function to get the attribute */
-        (setter) _wrap_PyNs3QueueDiscStats__set_nMarkedPackets, /* C function to set the attribute */
+        (char*) "nDroppedBytesBeforeEnqueue", /* attribute name */
+        (getter) _wrap_PyNs3QueueDiscStats__get_nDroppedBytesBeforeEnqueue, /* C function to get the attribute */
+        (setter) _wrap_PyNs3QueueDiscStats__set_nDroppedBytesBeforeEnqueue, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -5297,9 +5255,107 @@ static PyGetSetDef PyNs3QueueDiscStats__getsets[] = {
         NULL /* optional additional data for getter and setter */
     },
     {
+        (char*) "nDroppedPacketsBeforeEnqueue", /* attribute name */
+        (getter) _wrap_PyNs3QueueDiscStats__get_nDroppedPacketsBeforeEnqueue, /* C function to get the attribute */
+        (setter) _wrap_PyNs3QueueDiscStats__set_nDroppedPacketsBeforeEnqueue, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "nMarkedBytes", /* attribute name */
+        (getter) _wrap_PyNs3QueueDiscStats__get_nMarkedBytes, /* C function to get the attribute */
+        (setter) _wrap_PyNs3QueueDiscStats__set_nMarkedBytes, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "nMarkedPackets", /* attribute name */
+        (getter) _wrap_PyNs3QueueDiscStats__get_nMarkedPackets, /* C function to get the attribute */
+        (setter) _wrap_PyNs3QueueDiscStats__set_nMarkedPackets, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "nTotalDequeuedBytes", /* attribute name */
+        (getter) _wrap_PyNs3QueueDiscStats__get_nTotalDequeuedBytes, /* C function to get the attribute */
+        (setter) _wrap_PyNs3QueueDiscStats__set_nTotalDequeuedBytes, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "nTotalDequeuedPackets", /* attribute name */
+        (getter) _wrap_PyNs3QueueDiscStats__get_nTotalDequeuedPackets, /* C function to get the attribute */
+        (setter) _wrap_PyNs3QueueDiscStats__set_nTotalDequeuedPackets, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "nTotalDroppedBytes", /* attribute name */
+        (getter) _wrap_PyNs3QueueDiscStats__get_nTotalDroppedBytes, /* C function to get the attribute */
+        (setter) _wrap_PyNs3QueueDiscStats__set_nTotalDroppedBytes, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "nTotalDroppedBytesAfterDequeue", /* attribute name */
+        (getter) _wrap_PyNs3QueueDiscStats__get_nTotalDroppedBytesAfterDequeue, /* C function to get the attribute */
+        (setter) _wrap_PyNs3QueueDiscStats__set_nTotalDroppedBytesAfterDequeue, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "nTotalDroppedBytesBeforeEnqueue", /* attribute name */
+        (getter) _wrap_PyNs3QueueDiscStats__get_nTotalDroppedBytesBeforeEnqueue, /* C function to get the attribute */
+        (setter) _wrap_PyNs3QueueDiscStats__set_nTotalDroppedBytesBeforeEnqueue, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "nTotalDroppedPackets", /* attribute name */
+        (getter) _wrap_PyNs3QueueDiscStats__get_nTotalDroppedPackets, /* C function to get the attribute */
+        (setter) _wrap_PyNs3QueueDiscStats__set_nTotalDroppedPackets, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "nTotalDroppedPacketsAfterDequeue", /* attribute name */
+        (getter) _wrap_PyNs3QueueDiscStats__get_nTotalDroppedPacketsAfterDequeue, /* C function to get the attribute */
+        (setter) _wrap_PyNs3QueueDiscStats__set_nTotalDroppedPacketsAfterDequeue, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "nTotalDroppedPacketsBeforeEnqueue", /* attribute name */
+        (getter) _wrap_PyNs3QueueDiscStats__get_nTotalDroppedPacketsBeforeEnqueue, /* C function to get the attribute */
+        (setter) _wrap_PyNs3QueueDiscStats__set_nTotalDroppedPacketsBeforeEnqueue, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "nTotalEnqueuedBytes", /* attribute name */
+        (getter) _wrap_PyNs3QueueDiscStats__get_nTotalEnqueuedBytes, /* C function to get the attribute */
+        (setter) _wrap_PyNs3QueueDiscStats__set_nTotalEnqueuedBytes, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "nTotalEnqueuedPackets", /* attribute name */
+        (getter) _wrap_PyNs3QueueDiscStats__get_nTotalEnqueuedPackets, /* C function to get the attribute */
+        (setter) _wrap_PyNs3QueueDiscStats__set_nTotalEnqueuedPackets, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
         (char*) "nTotalMarkedBytes", /* attribute name */
         (getter) _wrap_PyNs3QueueDiscStats__get_nTotalMarkedBytes, /* C function to get the attribute */
         (setter) _wrap_PyNs3QueueDiscStats__set_nTotalMarkedBytes, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "nTotalMarkedPackets", /* attribute name */
+        (getter) _wrap_PyNs3QueueDiscStats__get_nTotalMarkedPackets, /* C function to get the attribute */
+        (setter) _wrap_PyNs3QueueDiscStats__set_nTotalMarkedPackets, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -5318,16 +5374,9 @@ static PyGetSetDef PyNs3QueueDiscStats__getsets[] = {
         NULL /* optional additional data for getter and setter */
     },
     {
-        (char*) "nMarkedBytes", /* attribute name */
-        (getter) _wrap_PyNs3QueueDiscStats__get_nMarkedBytes, /* C function to get the attribute */
-        (setter) _wrap_PyNs3QueueDiscStats__set_nMarkedBytes, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
-        (char*) "nDroppedBytesAfterDequeue", /* attribute name */
-        (getter) _wrap_PyNs3QueueDiscStats__get_nDroppedBytesAfterDequeue, /* C function to get the attribute */
-        (setter) _wrap_PyNs3QueueDiscStats__set_nDroppedBytesAfterDequeue, /* C function to set the attribute */
+        (char*) "nTotalRequeuedBytes", /* attribute name */
+        (getter) _wrap_PyNs3QueueDiscStats__get_nTotalRequeuedBytes, /* C function to get the attribute */
+        (setter) _wrap_PyNs3QueueDiscStats__set_nTotalRequeuedBytes, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -5339,9 +5388,9 @@ static PyGetSetDef PyNs3QueueDiscStats__getsets[] = {
         NULL /* optional additional data for getter and setter */
     },
     {
-        (char*) "nTotalDroppedPacketsAfterDequeue", /* attribute name */
-        (getter) _wrap_PyNs3QueueDiscStats__get_nTotalDroppedPacketsAfterDequeue, /* C function to get the attribute */
-        (setter) _wrap_PyNs3QueueDiscStats__set_nTotalDroppedPacketsAfterDequeue, /* C function to set the attribute */
+        (char*) "nTotalSentBytes", /* attribute name */
+        (getter) _wrap_PyNs3QueueDiscStats__get_nTotalSentBytes, /* C function to get the attribute */
+        (setter) _wrap_PyNs3QueueDiscStats__set_nTotalSentBytes, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -5349,55 +5398,6 @@ static PyGetSetDef PyNs3QueueDiscStats__getsets[] = {
         (char*) "nTotalSentPackets", /* attribute name */
         (getter) _wrap_PyNs3QueueDiscStats__get_nTotalSentPackets, /* C function to get the attribute */
         (setter) _wrap_PyNs3QueueDiscStats__set_nTotalSentPackets, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
-        (char*) "nTotalDroppedPacketsBeforeEnqueue", /* attribute name */
-        (getter) _wrap_PyNs3QueueDiscStats__get_nTotalDroppedPacketsBeforeEnqueue, /* C function to get the attribute */
-        (setter) _wrap_PyNs3QueueDiscStats__set_nTotalDroppedPacketsBeforeEnqueue, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
-        (char*) "nTotalDequeuedBytes", /* attribute name */
-        (getter) _wrap_PyNs3QueueDiscStats__get_nTotalDequeuedBytes, /* C function to get the attribute */
-        (setter) _wrap_PyNs3QueueDiscStats__set_nTotalDequeuedBytes, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
-        (char*) "nTotalRequeuedBytes", /* attribute name */
-        (getter) _wrap_PyNs3QueueDiscStats__get_nTotalRequeuedBytes, /* C function to get the attribute */
-        (setter) _wrap_PyNs3QueueDiscStats__set_nTotalRequeuedBytes, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
-        (char*) "nTotalDroppedBytesAfterDequeue", /* attribute name */
-        (getter) _wrap_PyNs3QueueDiscStats__get_nTotalDroppedBytesAfterDequeue, /* C function to get the attribute */
-        (setter) _wrap_PyNs3QueueDiscStats__set_nTotalDroppedBytesAfterDequeue, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
-        (char*) "nDroppedPacketsBeforeEnqueue", /* attribute name */
-        (getter) _wrap_PyNs3QueueDiscStats__get_nDroppedPacketsBeforeEnqueue, /* C function to get the attribute */
-        (setter) _wrap_PyNs3QueueDiscStats__set_nDroppedPacketsBeforeEnqueue, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
-        (char*) "nTotalDequeuedPackets", /* attribute name */
-        (getter) _wrap_PyNs3QueueDiscStats__get_nTotalDequeuedPackets, /* C function to get the attribute */
-        (setter) _wrap_PyNs3QueueDiscStats__set_nTotalDequeuedPackets, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
-        (char*) "nDroppedBytesBeforeEnqueue", /* attribute name */
-        (getter) _wrap_PyNs3QueueDiscStats__get_nDroppedBytesBeforeEnqueue, /* C function to get the attribute */
-        (setter) _wrap_PyNs3QueueDiscStats__set_nDroppedBytesBeforeEnqueue, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -5470,24 +5470,6 @@ int _wrap_PyNs3QueueDiscStats__tp_init(PyNs3QueueDiscStats *self, PyObject *args
 
 
 PyObject *
-_wrap_PyNs3QueueDiscStats_GetNMarkedBytes(PyNs3QueueDiscStats *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    uint64_t retval;
-    const char *reason;
-    Py_ssize_t reason_len;
-    const char *keywords[] = {"reason", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#", (char **) keywords, &reason, &reason_len)) {
-        return NULL;
-    }
-    retval = self->obj->GetNMarkedBytes(std::string(reason, reason_len));
-    py_retval = Py_BuildValue((char *) "K", retval);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3QueueDiscStats_GetNDroppedBytes(PyNs3QueueDiscStats *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -5500,6 +5482,42 @@ _wrap_PyNs3QueueDiscStats_GetNDroppedBytes(PyNs3QueueDiscStats *self, PyObject *
         return NULL;
     }
     retval = self->obj->GetNDroppedBytes(std::string(reason, reason_len));
+    py_retval = Py_BuildValue((char *) "K", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3QueueDiscStats_GetNDroppedPackets(PyNs3QueueDiscStats *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    const char *reason;
+    Py_ssize_t reason_len;
+    const char *keywords[] = {"reason", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#", (char **) keywords, &reason, &reason_len)) {
+        return NULL;
+    }
+    retval = self->obj->GetNDroppedPackets(std::string(reason, reason_len));
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3QueueDiscStats_GetNMarkedBytes(PyNs3QueueDiscStats *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    uint64_t retval;
+    const char *reason;
+    Py_ssize_t reason_len;
+    const char *keywords[] = {"reason", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#", (char **) keywords, &reason, &reason_len)) {
+        return NULL;
+    }
+    retval = self->obj->GetNMarkedBytes(std::string(reason, reason_len));
     py_retval = Py_BuildValue((char *) "K", retval);
     return py_retval;
 }
@@ -5523,24 +5541,6 @@ _wrap_PyNs3QueueDiscStats_GetNMarkedPackets(PyNs3QueueDiscStats *self, PyObject 
 }
 
 
-PyObject *
-_wrap_PyNs3QueueDiscStats_GetNDroppedPackets(PyNs3QueueDiscStats *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    const char *reason;
-    Py_ssize_t reason_len;
-    const char *keywords[] = {"reason", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#", (char **) keywords, &reason, &reason_len)) {
-        return NULL;
-    }
-    retval = self->obj->GetNDroppedPackets(std::string(reason, reason_len));
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3QueueDiscStats__copy__(PyNs3QueueDiscStats *self)
 {
@@ -5554,10 +5554,10 @@ _wrap_PyNs3QueueDiscStats__copy__(PyNs3QueueDiscStats *self)
 }
 
 static PyMethodDef PyNs3QueueDiscStats_methods[] = {
-    {(char *) "GetNMarkedBytes", (PyCFunction) _wrap_PyNs3QueueDiscStats_GetNMarkedBytes, METH_KEYWORDS|METH_VARARGS, "GetNMarkedBytes(reason)\n\ntype: reason: std::string" },
     {(char *) "GetNDroppedBytes", (PyCFunction) _wrap_PyNs3QueueDiscStats_GetNDroppedBytes, METH_KEYWORDS|METH_VARARGS, "GetNDroppedBytes(reason)\n\ntype: reason: std::string" },
-    {(char *) "GetNMarkedPackets", (PyCFunction) _wrap_PyNs3QueueDiscStats_GetNMarkedPackets, METH_KEYWORDS|METH_VARARGS, "GetNMarkedPackets(reason)\n\ntype: reason: std::string" },
     {(char *) "GetNDroppedPackets", (PyCFunction) _wrap_PyNs3QueueDiscStats_GetNDroppedPackets, METH_KEYWORDS|METH_VARARGS, "GetNDroppedPackets(reason)\n\ntype: reason: std::string" },
+    {(char *) "GetNMarkedBytes", (PyCFunction) _wrap_PyNs3QueueDiscStats_GetNMarkedBytes, METH_KEYWORDS|METH_VARARGS, "GetNMarkedBytes(reason)\n\ntype: reason: std::string" },
+    {(char *) "GetNMarkedPackets", (PyCFunction) _wrap_PyNs3QueueDiscStats_GetNMarkedPackets, METH_KEYWORDS|METH_VARARGS, "GetNMarkedPackets(reason)\n\ntype: reason: std::string" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3QueueDiscStats__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -5681,16 +5681,16 @@ PyTypeObject PyNs3QueueDiscStats_Type = {
 
 
 PyObject *
-PyNs3QueueDiscClass__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3QueueDiscClass *self)
+PyNs3QueueDiscClass__PythonHelper::_wrap_DoDispose(PyNs3QueueDiscClass *self)
 {
     PyObject *py_retval;
     PyNs3QueueDiscClass__PythonHelper *helper = dynamic_cast< PyNs3QueueDiscClass__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class QueueDiscClass is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -5729,16 +5729,16 @@ PyNs3QueueDiscClass__PythonHelper::_wrap_NotifyNewAggregate(PyNs3QueueDiscClass 
 }
 
 PyObject *
-PyNs3QueueDiscClass__PythonHelper::_wrap_DoDispose(PyNs3QueueDiscClass *self)
+PyNs3QueueDiscClass__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3QueueDiscClass *self)
 {
     PyObject *py_retval;
     PyNs3QueueDiscClass__PythonHelper *helper = dynamic_cast< PyNs3QueueDiscClass__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class QueueDiscClass is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -6159,10 +6159,10 @@ static PyMethodDef PyNs3QueueDiscClass_methods[] = {
     {(char *) "GetQueueDisc", (PyCFunction) _wrap_PyNs3QueueDiscClass_GetQueueDisc, METH_NOARGS, "GetQueueDisc()\n\n" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3QueueDiscClass_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
     {(char *) "SetQueueDisc", (PyCFunction) _wrap_PyNs3QueueDiscClass_SetQueueDisc, METH_KEYWORDS|METH_VARARGS, "SetQueueDisc(qd)\n\ntype: qd: ns3::Ptr< ns3::QueueDisc >" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3QueueDiscClass__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "DoDispose", (PyCFunction) PyNs3QueueDiscClass__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3QueueDiscClass__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3QueueDiscClass__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3QueueDiscClass__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3QueueDiscClass__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3QueueDiscClass__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -6295,16 +6295,16 @@ PyTypeObject PyNs3QueueDiscClass_Type = {
 
 
 PyObject *
-PyNs3RedQueueDisc__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3RedQueueDisc *self)
+PyNs3RedQueueDisc__PythonHelper::_wrap_DoDispose(PyNs3RedQueueDisc *self)
 {
     PyObject *py_retval;
     PyNs3RedQueueDisc__PythonHelper *helper = dynamic_cast< PyNs3RedQueueDisc__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class RedQueueDisc is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -6343,16 +6343,16 @@ PyNs3RedQueueDisc__PythonHelper::_wrap_NotifyNewAggregate(PyNs3RedQueueDisc *sel
 }
 
 PyObject *
-PyNs3RedQueueDisc__PythonHelper::_wrap_DoDispose(PyNs3RedQueueDisc *self)
+PyNs3RedQueueDisc__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3RedQueueDisc *self)
 {
     PyObject *py_retval;
     PyNs3RedQueueDisc__PythonHelper *helper = dynamic_cast< PyNs3RedQueueDisc__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class RedQueueDisc is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -7046,13 +7046,6 @@ static PyObject* _wrap_PyNs3RedQueueDisc__get_FORCED_MARK(PyObject * PYBINDGEN_U
 }
 static PyGetSetDef Ns3RedQueueDiscMeta__getsets[] = {
     {
-        (char*) "FORCED_DROP", /* attribute name */
-        (getter) _wrap_PyNs3RedQueueDisc__get_FORCED_DROP, /* C function to get the attribute */
-        (setter) NULL, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
         (char*) "UNFORCED_DROP", /* attribute name */
         (getter) _wrap_PyNs3RedQueueDisc__get_UNFORCED_DROP, /* C function to get the attribute */
         (setter) NULL, /* C function to set the attribute */
@@ -7060,8 +7053,8 @@ static PyGetSetDef Ns3RedQueueDiscMeta__getsets[] = {
         NULL /* optional additional data for getter and setter */
     },
     {
-        (char*) "FORCED_MARK", /* attribute name */
-        (getter) _wrap_PyNs3RedQueueDisc__get_FORCED_MARK, /* C function to get the attribute */
+        (char*) "FORCED_DROP", /* attribute name */
+        (getter) _wrap_PyNs3RedQueueDisc__get_FORCED_DROP, /* C function to get the attribute */
         (setter) NULL, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
@@ -7069,6 +7062,13 @@ static PyGetSetDef Ns3RedQueueDiscMeta__getsets[] = {
     {
         (char*) "UNFORCED_MARK", /* attribute name */
         (getter) _wrap_PyNs3RedQueueDisc__get_UNFORCED_MARK, /* C function to get the attribute */
+        (setter) NULL, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "FORCED_MARK", /* attribute name */
+        (getter) _wrap_PyNs3RedQueueDisc__get_FORCED_MARK, /* C function to get the attribute */
         (setter) NULL, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
@@ -7153,6 +7153,51 @@ _wrap_PyNs3RedQueueDisc__tp_init(PyNs3RedQueueDisc *self, PyObject *args, PyObje
 
 
 PyObject *
+_wrap_PyNs3RedQueueDisc_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::RedQueueDisc::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RedQueueDisc_SetMode(PyNs3RedQueueDisc *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    ns3::RedQueueDisc::QueueDiscMode mode;
+    const char *keywords[] = {"mode", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &mode)) {
+        return NULL;
+    }
+    self->obj->SetMode(mode);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RedQueueDisc_GetMode(PyNs3RedQueueDisc *self)
+{
+    PyObject *py_retval;
+    ns3::RedQueueDisc::QueueDiscMode retval;
+    
+    retval = self->obj->GetMode();
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3RedQueueDisc_SetAredAlpha(PyNs3RedQueueDisc *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -7170,34 +7215,13 @@ _wrap_PyNs3RedQueueDisc_SetAredAlpha(PyNs3RedQueueDisc *self, PyObject *args, Py
 
 
 PyObject *
-_wrap_PyNs3RedQueueDisc_SetQueueLimit(PyNs3RedQueueDisc *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3RedQueueDisc_GetAredAlpha(PyNs3RedQueueDisc *self)
 {
     PyObject *py_retval;
-    unsigned int lim;
-    const char *keywords[] = {"lim", NULL};
+    double retval;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &lim)) {
-        return NULL;
-    }
-    self->obj->SetQueueLimit(lim);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RedQueueDisc_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::RedQueueDisc::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    retval = self->obj->GetAredAlpha();
+    py_retval = Py_BuildValue((char *) "d", retval);
     return py_retval;
 }
 
@@ -7220,24 +7244,12 @@ _wrap_PyNs3RedQueueDisc_SetAredBeta(PyNs3RedQueueDisc *self, PyObject *args, PyO
 
 
 PyObject *
-_wrap_PyNs3RedQueueDisc_GetMode(PyNs3RedQueueDisc *self)
-{
-    PyObject *py_retval;
-    ns3::RedQueueDisc::QueueDiscMode retval;
-    
-    retval = self->obj->GetMode();
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RedQueueDisc_GetAredAlpha(PyNs3RedQueueDisc *self)
+_wrap_PyNs3RedQueueDisc_GetAredBeta(PyNs3RedQueueDisc *self)
 {
     PyObject *py_retval;
     double retval;
     
-    retval = self->obj->GetAredAlpha();
+    retval = self->obj->GetAredBeta();
     py_retval = Py_BuildValue((char *) "d", retval);
     return py_retval;
 }
@@ -7254,6 +7266,64 @@ _wrap_PyNs3RedQueueDisc_SetFengAdaptiveA(PyNs3RedQueueDisc *self, PyObject *args
         return NULL;
     }
     self->obj->SetFengAdaptiveA(a);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RedQueueDisc_GetFengAdaptiveA(PyNs3RedQueueDisc *self)
+{
+    PyObject *py_retval;
+    double retval;
+    
+    retval = self->obj->GetFengAdaptiveA();
+    py_retval = Py_BuildValue((char *) "d", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RedQueueDisc_SetFengAdaptiveB(PyNs3RedQueueDisc *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    double b;
+    const char *keywords[] = {"b", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "d", (char **) keywords, &b)) {
+        return NULL;
+    }
+    self->obj->SetFengAdaptiveB(b);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RedQueueDisc_GetFengAdaptiveB(PyNs3RedQueueDisc *self)
+{
+    PyObject *py_retval;
+    double retval;
+    
+    retval = self->obj->GetFengAdaptiveB();
+    py_retval = Py_BuildValue((char *) "d", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RedQueueDisc_SetQueueLimit(PyNs3RedQueueDisc *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int lim;
+    const char *keywords[] = {"lim", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &lim)) {
+        return NULL;
+    }
+    self->obj->SetQueueLimit(lim);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -7279,40 +7349,6 @@ _wrap_PyNs3RedQueueDisc_SetTh(PyNs3RedQueueDisc *self, PyObject *args, PyObject 
 
 
 PyObject *
-_wrap_PyNs3RedQueueDisc_SetFengAdaptiveB(PyNs3RedQueueDisc *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    double b;
-    const char *keywords[] = {"b", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "d", (char **) keywords, &b)) {
-        return NULL;
-    }
-    self->obj->SetFengAdaptiveB(b);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RedQueueDisc_SetMode(PyNs3RedQueueDisc *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    ns3::RedQueueDisc::QueueDiscMode mode;
-    const char *keywords[] = {"mode", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &mode)) {
-        return NULL;
-    }
-    self->obj->SetMode(mode);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3RedQueueDisc_AssignStreams(PyNs3RedQueueDisc *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -7328,61 +7364,25 @@ _wrap_PyNs3RedQueueDisc_AssignStreams(PyNs3RedQueueDisc *self, PyObject *args, P
     return py_retval;
 }
 
-
-PyObject *
-_wrap_PyNs3RedQueueDisc_GetFengAdaptiveA(PyNs3RedQueueDisc *self)
-{
-    PyObject *py_retval;
-    double retval;
-    
-    retval = self->obj->GetFengAdaptiveA();
-    py_retval = Py_BuildValue((char *) "d", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RedQueueDisc_GetFengAdaptiveB(PyNs3RedQueueDisc *self)
-{
-    PyObject *py_retval;
-    double retval;
-    
-    retval = self->obj->GetFengAdaptiveB();
-    py_retval = Py_BuildValue((char *) "d", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RedQueueDisc_GetAredBeta(PyNs3RedQueueDisc *self)
-{
-    PyObject *py_retval;
-    double retval;
-    
-    retval = self->obj->GetAredBeta();
-    py_retval = Py_BuildValue((char *) "d", retval);
-    return py_retval;
-}
-
 static PyMethodDef PyNs3RedQueueDisc_methods[] = {
-    {(char *) "SetAredAlpha", (PyCFunction) _wrap_PyNs3RedQueueDisc_SetAredAlpha, METH_KEYWORDS|METH_VARARGS, "SetAredAlpha(alpha)\n\ntype: alpha: double" },
-    {(char *) "SetQueueLimit", (PyCFunction) _wrap_PyNs3RedQueueDisc_SetQueueLimit, METH_KEYWORDS|METH_VARARGS, "SetQueueLimit(lim)\n\ntype: lim: uint32_t" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3RedQueueDisc_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "SetAredBeta", (PyCFunction) _wrap_PyNs3RedQueueDisc_SetAredBeta, METH_KEYWORDS|METH_VARARGS, "SetAredBeta(beta)\n\ntype: beta: double" },
-    {(char *) "GetMode", (PyCFunction) _wrap_PyNs3RedQueueDisc_GetMode, METH_NOARGS, "GetMode()\n\n" },
-    {(char *) "GetAredAlpha", (PyCFunction) _wrap_PyNs3RedQueueDisc_GetAredAlpha, METH_NOARGS, "GetAredAlpha()\n\n" },
-    {(char *) "SetFengAdaptiveA", (PyCFunction) _wrap_PyNs3RedQueueDisc_SetFengAdaptiveA, METH_KEYWORDS|METH_VARARGS, "SetFengAdaptiveA(a)\n\ntype: a: double" },
-    {(char *) "SetTh", (PyCFunction) _wrap_PyNs3RedQueueDisc_SetTh, METH_KEYWORDS|METH_VARARGS, "SetTh(minTh, maxTh)\n\ntype: minTh: double\ntype: maxTh: double" },
-    {(char *) "SetFengAdaptiveB", (PyCFunction) _wrap_PyNs3RedQueueDisc_SetFengAdaptiveB, METH_KEYWORDS|METH_VARARGS, "SetFengAdaptiveB(b)\n\ntype: b: double" },
     {(char *) "SetMode", (PyCFunction) _wrap_PyNs3RedQueueDisc_SetMode, METH_KEYWORDS|METH_VARARGS, "SetMode(mode)\n\ntype: mode: ns3::RedQueueDisc::QueueDiscMode" },
-    {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3RedQueueDisc_AssignStreams, METH_KEYWORDS|METH_VARARGS, "AssignStreams(stream)\n\ntype: stream: int64_t" },
-    {(char *) "GetFengAdaptiveA", (PyCFunction) _wrap_PyNs3RedQueueDisc_GetFengAdaptiveA, METH_NOARGS, "GetFengAdaptiveA()\n\n" },
-    {(char *) "GetFengAdaptiveB", (PyCFunction) _wrap_PyNs3RedQueueDisc_GetFengAdaptiveB, METH_NOARGS, "GetFengAdaptiveB()\n\n" },
+    {(char *) "GetMode", (PyCFunction) _wrap_PyNs3RedQueueDisc_GetMode, METH_NOARGS, "GetMode()\n\n" },
+    {(char *) "SetAredAlpha", (PyCFunction) _wrap_PyNs3RedQueueDisc_SetAredAlpha, METH_KEYWORDS|METH_VARARGS, "SetAredAlpha(alpha)\n\ntype: alpha: double" },
+    {(char *) "GetAredAlpha", (PyCFunction) _wrap_PyNs3RedQueueDisc_GetAredAlpha, METH_NOARGS, "GetAredAlpha()\n\n" },
+    {(char *) "SetAredBeta", (PyCFunction) _wrap_PyNs3RedQueueDisc_SetAredBeta, METH_KEYWORDS|METH_VARARGS, "SetAredBeta(beta)\n\ntype: beta: double" },
     {(char *) "GetAredBeta", (PyCFunction) _wrap_PyNs3RedQueueDisc_GetAredBeta, METH_NOARGS, "GetAredBeta()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3RedQueueDisc__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "SetFengAdaptiveA", (PyCFunction) _wrap_PyNs3RedQueueDisc_SetFengAdaptiveA, METH_KEYWORDS|METH_VARARGS, "SetFengAdaptiveA(a)\n\ntype: a: double" },
+    {(char *) "GetFengAdaptiveA", (PyCFunction) _wrap_PyNs3RedQueueDisc_GetFengAdaptiveA, METH_NOARGS, "GetFengAdaptiveA()\n\n" },
+    {(char *) "SetFengAdaptiveB", (PyCFunction) _wrap_PyNs3RedQueueDisc_SetFengAdaptiveB, METH_KEYWORDS|METH_VARARGS, "SetFengAdaptiveB(b)\n\ntype: b: double" },
+    {(char *) "GetFengAdaptiveB", (PyCFunction) _wrap_PyNs3RedQueueDisc_GetFengAdaptiveB, METH_NOARGS, "GetFengAdaptiveB()\n\n" },
+    {(char *) "SetQueueLimit", (PyCFunction) _wrap_PyNs3RedQueueDisc_SetQueueLimit, METH_KEYWORDS|METH_VARARGS, "SetQueueLimit(lim)\n\ntype: lim: uint32_t" },
+    {(char *) "SetTh", (PyCFunction) _wrap_PyNs3RedQueueDisc_SetTh, METH_KEYWORDS|METH_VARARGS, "SetTh(minTh, maxTh)\n\ntype: minTh: double\ntype: maxTh: double" },
+    {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3RedQueueDisc_AssignStreams, METH_KEYWORDS|METH_VARARGS, "AssignStreams(stream)\n\ntype: stream: int64_t" },
+    {(char *) "DoDispose", (PyCFunction) PyNs3RedQueueDisc__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3RedQueueDisc__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3RedQueueDisc__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3RedQueueDisc__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3RedQueueDisc__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 
@@ -7514,16 +7514,16 @@ PyTypeObject PyNs3RedQueueDisc_Type = {
 
 
 PyObject *
-PyNs3TbfQueueDisc__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3TbfQueueDisc *self)
+PyNs3TbfQueueDisc__PythonHelper::_wrap_DoDispose(PyNs3TbfQueueDisc *self)
 {
     PyObject *py_retval;
     PyNs3TbfQueueDisc__PythonHelper *helper = dynamic_cast< PyNs3TbfQueueDisc__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class TbfQueueDisc is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -7562,16 +7562,16 @@ PyNs3TbfQueueDisc__PythonHelper::_wrap_NotifyNewAggregate(PyNs3TbfQueueDisc *sel
 }
 
 PyObject *
-PyNs3TbfQueueDisc__PythonHelper::_wrap_DoDispose(PyNs3TbfQueueDisc *self)
+PyNs3TbfQueueDisc__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3TbfQueueDisc *self)
 {
     PyObject *py_retval;
     PyNs3TbfQueueDisc__PythonHelper *helper = dynamic_cast< PyNs3TbfQueueDisc__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class TbfQueueDisc is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -8263,13 +8263,34 @@ _wrap_PyNs3TbfQueueDisc__tp_init(PyNs3TbfQueueDisc *self, PyObject *args, PyObje
 
 
 PyObject *
-_wrap_PyNs3TbfQueueDisc_GetFirstBucketTokens(PyNs3TbfQueueDisc *self)
+_wrap_PyNs3TbfQueueDisc_GetTypeId(void)
 {
     PyObject *py_retval;
-    uint32_t retval;
+    PyNs3TypeId *py_TypeId;
     
-    retval = self->obj->GetFirstBucketTokens();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    ns3::TypeId retval = ns3::TbfQueueDisc::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3TbfQueueDisc_SetBurst(PyNs3TbfQueueDisc *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int burst;
+    const char *keywords[] = {"burst", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &burst)) {
+        return NULL;
+    }
+    self->obj->SetBurst(burst);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -8304,6 +8325,35 @@ _wrap_PyNs3TbfQueueDisc_SetMtu(PyNs3TbfQueueDisc *self, PyObject *args, PyObject
 
 
 PyObject *
+_wrap_PyNs3TbfQueueDisc_GetMtu(PyNs3TbfQueueDisc *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetMtu();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3TbfQueueDisc_SetRate(PyNs3TbfQueueDisc *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3DataRate *rate;
+    const char *keywords[] = {"rate", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3DataRate_Type, &rate)) {
+        return NULL;
+    }
+    self->obj->SetRate(*((PyNs3DataRate *) rate)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3TbfQueueDisc_GetRate(PyNs3TbfQueueDisc *self)
 {
     PyObject *py_retval;
@@ -8320,33 +8370,16 @@ _wrap_PyNs3TbfQueueDisc_GetRate(PyNs3TbfQueueDisc *self)
 
 
 PyObject *
-_wrap_PyNs3TbfQueueDisc_SetBurst(PyNs3TbfQueueDisc *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3TbfQueueDisc_SetPeakRate(PyNs3TbfQueueDisc *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    unsigned int burst;
-    const char *keywords[] = {"burst", NULL};
+    PyNs3DataRate *peakRate;
+    const char *keywords[] = {"peakRate", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &burst)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3DataRate_Type, &peakRate)) {
         return NULL;
     }
-    self->obj->SetBurst(burst);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3TbfQueueDisc_SetRate(PyNs3TbfQueueDisc *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3DataRate *rate;
-    const char *keywords[] = {"rate", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3DataRate_Type, &rate)) {
-        return NULL;
-    }
-    self->obj->SetRate(*((PyNs3DataRate *) rate)->obj);
+    self->obj->SetPeakRate(*((PyNs3DataRate *) peakRate)->obj);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -8370,46 +8403,13 @@ _wrap_PyNs3TbfQueueDisc_GetPeakRate(PyNs3TbfQueueDisc *self)
 
 
 PyObject *
-_wrap_PyNs3TbfQueueDisc_GetMtu(PyNs3TbfQueueDisc *self)
+_wrap_PyNs3TbfQueueDisc_GetFirstBucketTokens(PyNs3TbfQueueDisc *self)
 {
     PyObject *py_retval;
     uint32_t retval;
     
-    retval = self->obj->GetMtu();
+    retval = self->obj->GetFirstBucketTokens();
     py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3TbfQueueDisc_SetPeakRate(PyNs3TbfQueueDisc *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3DataRate *peakRate;
-    const char *keywords[] = {"peakRate", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3DataRate_Type, &peakRate)) {
-        return NULL;
-    }
-    self->obj->SetPeakRate(*((PyNs3DataRate *) peakRate)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3TbfQueueDisc_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::TbfQueueDisc::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
     return py_retval;
 }
 
@@ -8426,21 +8426,21 @@ _wrap_PyNs3TbfQueueDisc_GetSecondBucketTokens(PyNs3TbfQueueDisc *self)
 }
 
 static PyMethodDef PyNs3TbfQueueDisc_methods[] = {
-    {(char *) "GetFirstBucketTokens", (PyCFunction) _wrap_PyNs3TbfQueueDisc_GetFirstBucketTokens, METH_NOARGS, "GetFirstBucketTokens()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3TbfQueueDisc_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "SetBurst", (PyCFunction) _wrap_PyNs3TbfQueueDisc_SetBurst, METH_KEYWORDS|METH_VARARGS, "SetBurst(burst)\n\ntype: burst: uint32_t" },
     {(char *) "GetBurst", (PyCFunction) _wrap_PyNs3TbfQueueDisc_GetBurst, METH_NOARGS, "GetBurst()\n\n" },
     {(char *) "SetMtu", (PyCFunction) _wrap_PyNs3TbfQueueDisc_SetMtu, METH_KEYWORDS|METH_VARARGS, "SetMtu(mtu)\n\ntype: mtu: uint32_t" },
-    {(char *) "GetRate", (PyCFunction) _wrap_PyNs3TbfQueueDisc_GetRate, METH_NOARGS, "GetRate()\n\n" },
-    {(char *) "SetBurst", (PyCFunction) _wrap_PyNs3TbfQueueDisc_SetBurst, METH_KEYWORDS|METH_VARARGS, "SetBurst(burst)\n\ntype: burst: uint32_t" },
-    {(char *) "SetRate", (PyCFunction) _wrap_PyNs3TbfQueueDisc_SetRate, METH_KEYWORDS|METH_VARARGS, "SetRate(rate)\n\ntype: rate: ns3::DataRate" },
-    {(char *) "GetPeakRate", (PyCFunction) _wrap_PyNs3TbfQueueDisc_GetPeakRate, METH_NOARGS, "GetPeakRate()\n\n" },
     {(char *) "GetMtu", (PyCFunction) _wrap_PyNs3TbfQueueDisc_GetMtu, METH_NOARGS, "GetMtu()\n\n" },
+    {(char *) "SetRate", (PyCFunction) _wrap_PyNs3TbfQueueDisc_SetRate, METH_KEYWORDS|METH_VARARGS, "SetRate(rate)\n\ntype: rate: ns3::DataRate" },
+    {(char *) "GetRate", (PyCFunction) _wrap_PyNs3TbfQueueDisc_GetRate, METH_NOARGS, "GetRate()\n\n" },
     {(char *) "SetPeakRate", (PyCFunction) _wrap_PyNs3TbfQueueDisc_SetPeakRate, METH_KEYWORDS|METH_VARARGS, "SetPeakRate(peakRate)\n\ntype: peakRate: ns3::DataRate" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3TbfQueueDisc_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "GetPeakRate", (PyCFunction) _wrap_PyNs3TbfQueueDisc_GetPeakRate, METH_NOARGS, "GetPeakRate()\n\n" },
+    {(char *) "GetFirstBucketTokens", (PyCFunction) _wrap_PyNs3TbfQueueDisc_GetFirstBucketTokens, METH_NOARGS, "GetFirstBucketTokens()\n\n" },
     {(char *) "GetSecondBucketTokens", (PyCFunction) _wrap_PyNs3TbfQueueDisc_GetSecondBucketTokens, METH_NOARGS, "GetSecondBucketTokens()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3TbfQueueDisc__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "DoDispose", (PyCFunction) PyNs3TbfQueueDisc__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3TbfQueueDisc__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3TbfQueueDisc__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3TbfQueueDisc__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3TbfQueueDisc__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 
@@ -8572,16 +8572,16 @@ PyTypeObject PyNs3TbfQueueDisc_Type = {
 
 
 PyObject *
-PyNs3TrafficControlLayer__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3TrafficControlLayer *self)
+PyNs3TrafficControlLayer__PythonHelper::_wrap_DoDispose(PyNs3TrafficControlLayer *self)
 {
     PyObject *py_retval;
     PyNs3TrafficControlLayer__PythonHelper *helper = dynamic_cast< PyNs3TrafficControlLayer__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class TrafficControlLayer is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -8620,16 +8620,16 @@ PyNs3TrafficControlLayer__PythonHelper::_wrap_NotifyNewAggregate(PyNs3TrafficCon
 }
 
 PyObject *
-PyNs3TrafficControlLayer__PythonHelper::_wrap_DoDispose(PyNs3TrafficControlLayer *self)
+PyNs3TrafficControlLayer__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3TrafficControlLayer *self)
 {
     PyObject *py_retval;
     PyNs3TrafficControlLayer__PythonHelper *helper = dynamic_cast< PyNs3TrafficControlLayer__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class TrafficControlLayer is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -9376,7 +9376,7 @@ _wrap_PyNs3TrafficControlLayer__tp_init(PyNs3TrafficControlLayer *self, PyObject
 
 
 PyObject *
-_wrap_PyNs3TrafficControlLayer_SetupDevice(PyNs3TrafficControlLayer *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3TrafficControlLayer_DeleteRootQueueDiscOnDevice(PyNs3TrafficControlLayer *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
     PyNs3NetDevice *device;
@@ -9388,9 +9388,26 @@ _wrap_PyNs3TrafficControlLayer_SetupDevice(PyNs3TrafficControlLayer *self, PyObj
         return NULL;
     }
     device_ptr = (device ? device->obj : NULL);
-    (helper_class == NULL)? (self->obj->SetupDevice(ns3::Ptr< ns3::NetDevice  > (device_ptr))) : (self->obj->ns3::TrafficControlLayer::SetupDevice(ns3::Ptr< ns3::NetDevice  > (device_ptr)));
+    (helper_class == NULL)? (self->obj->DeleteRootQueueDiscOnDevice(ns3::Ptr< ns3::NetDevice  > (device_ptr))) : (self->obj->ns3::TrafficControlLayer::DeleteRootQueueDiscOnDevice(ns3::Ptr< ns3::NetDevice  > (device_ptr)));
     Py_INCREF(Py_None);
     py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3TrafficControlLayer_GetInstanceTypeId(PyNs3TrafficControlLayer *self)
+{
+    PyObject *py_retval;
+    PyNs3TrafficControlLayer__PythonHelper *helper_class = dynamic_cast<PyNs3TrafficControlLayer__PythonHelper*> (self->obj);
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = (helper_class == NULL)? (self->obj->GetInstanceTypeId()) : (self->obj->ns3::TrafficControlLayer::GetInstanceTypeId());
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
     return py_retval;
 }
 
@@ -9444,6 +9461,22 @@ _wrap_PyNs3TrafficControlLayer_GetRootQueueDiscOnDevice(PyNs3TrafficControlLayer
         }
     }
     py_retval = Py_BuildValue((char *) "N", py_QueueDisc);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3TrafficControlLayer_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::TrafficControlLayer::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
     return py_retval;
 }
 
@@ -9543,29 +9576,6 @@ _wrap_PyNs3TrafficControlLayer_RegisterProtocolHandler(PyNs3TrafficControlLayer 
 
 
 PyObject *
-_wrap_PyNs3TrafficControlLayer_SetRootQueueDiscOnDevice(PyNs3TrafficControlLayer *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3NetDevice *device;
-    ns3::NetDevice *device_ptr;
-    PyNs3QueueDisc *qDisc;
-    ns3::QueueDisc *qDisc_ptr;
-    PyNs3TrafficControlLayer__PythonHelper *helper_class = dynamic_cast<PyNs3TrafficControlLayer__PythonHelper*> (self->obj);
-    const char *keywords[] = {"device", "qDisc", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3NetDevice_Type, &device, &PyNs3QueueDisc_Type, &qDisc)) {
-        return NULL;
-    }
-    device_ptr = (device ? device->obj : NULL);
-    qDisc_ptr = (qDisc ? qDisc->obj : NULL);
-    (helper_class == NULL)? (self->obj->SetRootQueueDiscOnDevice(ns3::Ptr< ns3::NetDevice  > (device_ptr), ns3::Ptr< ns3::QueueDisc  > (qDisc_ptr))) : (self->obj->ns3::TrafficControlLayer::SetRootQueueDiscOnDevice(ns3::Ptr< ns3::NetDevice  > (device_ptr), ns3::Ptr< ns3::QueueDisc  > (qDisc_ptr)));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3TrafficControlLayer_Send(PyNs3TrafficControlLayer *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -9608,24 +9618,30 @@ _wrap_PyNs3TrafficControlLayer_SetNode(PyNs3TrafficControlLayer *self, PyObject 
 
 
 PyObject *
-_wrap_PyNs3TrafficControlLayer_GetInstanceTypeId(PyNs3TrafficControlLayer *self)
+_wrap_PyNs3TrafficControlLayer_SetRootQueueDiscOnDevice(PyNs3TrafficControlLayer *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
+    PyNs3NetDevice *device;
+    ns3::NetDevice *device_ptr;
+    PyNs3QueueDisc *qDisc;
+    ns3::QueueDisc *qDisc_ptr;
     PyNs3TrafficControlLayer__PythonHelper *helper_class = dynamic_cast<PyNs3TrafficControlLayer__PythonHelper*> (self->obj);
-    PyNs3TypeId *py_TypeId;
+    const char *keywords[] = {"device", "qDisc", NULL};
     
-    ns3::TypeId retval = (helper_class == NULL)? (self->obj->GetInstanceTypeId()) : (self->obj->ns3::TrafficControlLayer::GetInstanceTypeId());
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3NetDevice_Type, &device, &PyNs3QueueDisc_Type, &qDisc)) {
+        return NULL;
+    }
+    device_ptr = (device ? device->obj : NULL);
+    qDisc_ptr = (qDisc ? qDisc->obj : NULL);
+    (helper_class == NULL)? (self->obj->SetRootQueueDiscOnDevice(ns3::Ptr< ns3::NetDevice  > (device_ptr), ns3::Ptr< ns3::QueueDisc  > (qDisc_ptr))) : (self->obj->ns3::TrafficControlLayer::SetRootQueueDiscOnDevice(ns3::Ptr< ns3::NetDevice  > (device_ptr), ns3::Ptr< ns3::QueueDisc  > (qDisc_ptr)));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3TrafficControlLayer_DeleteRootQueueDiscOnDevice(PyNs3TrafficControlLayer *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3TrafficControlLayer_SetupDevice(PyNs3TrafficControlLayer *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
     PyNs3NetDevice *device;
@@ -9637,43 +9653,27 @@ _wrap_PyNs3TrafficControlLayer_DeleteRootQueueDiscOnDevice(PyNs3TrafficControlLa
         return NULL;
     }
     device_ptr = (device ? device->obj : NULL);
-    (helper_class == NULL)? (self->obj->DeleteRootQueueDiscOnDevice(ns3::Ptr< ns3::NetDevice  > (device_ptr))) : (self->obj->ns3::TrafficControlLayer::DeleteRootQueueDiscOnDevice(ns3::Ptr< ns3::NetDevice  > (device_ptr)));
+    (helper_class == NULL)? (self->obj->SetupDevice(ns3::Ptr< ns3::NetDevice  > (device_ptr))) : (self->obj->ns3::TrafficControlLayer::SetupDevice(ns3::Ptr< ns3::NetDevice  > (device_ptr)));
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
 }
 
-
-PyObject *
-_wrap_PyNs3TrafficControlLayer_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::TrafficControlLayer::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
 static PyMethodDef PyNs3TrafficControlLayer_methods[] = {
-    {(char *) "SetupDevice", (PyCFunction) _wrap_PyNs3TrafficControlLayer_SetupDevice, METH_KEYWORDS|METH_VARARGS, "SetupDevice(device)\n\ntype: device: ns3::Ptr< ns3::NetDevice >" },
+    {(char *) "DeleteRootQueueDiscOnDevice", (PyCFunction) _wrap_PyNs3TrafficControlLayer_DeleteRootQueueDiscOnDevice, METH_KEYWORDS|METH_VARARGS, "DeleteRootQueueDiscOnDevice(device)\n\ntype: device: ns3::Ptr< ns3::NetDevice >" },
+    {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3TrafficControlLayer_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
     {(char *) "GetRootQueueDiscOnDevice", (PyCFunction) _wrap_PyNs3TrafficControlLayer_GetRootQueueDiscOnDevice, METH_KEYWORDS|METH_VARARGS, "GetRootQueueDiscOnDevice(device)\n\ntype: device: ns3::Ptr< ns3::NetDevice >" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3TrafficControlLayer_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
     {(char *) "Receive", (PyCFunction) _wrap_PyNs3TrafficControlLayer_Receive, METH_KEYWORDS|METH_VARARGS, "Receive(device, p, protocol, from, to, packetType)\n\ntype: device: ns3::Ptr< ns3::NetDevice >\ntype: p: ns3::Ptr< ns3::Packet const >\ntype: protocol: uint16_t\ntype: from: ns3::Address const &\ntype: to: ns3::Address const &\ntype: packetType: ns3::NetDevice::PacketType" },
     {(char *) "RegisterProtocolHandler", (PyCFunction) _wrap_PyNs3TrafficControlLayer_RegisterProtocolHandler, METH_KEYWORDS|METH_VARARGS, "RegisterProtocolHandler(handler, protocolType, device)\n\ntype: handler: ns3::Callback< void, ns3::Ptr< ns3::NetDevice >, ns3::Ptr< ns3::Packet const >, unsigned short, ns3::Address const &, ns3::Address const &, ns3::NetDevice::PacketType, ns3::empty, ns3::empty, ns3::empty >\ntype: protocolType: uint16_t\ntype: device: ns3::Ptr< ns3::NetDevice >" },
-    {(char *) "SetRootQueueDiscOnDevice", (PyCFunction) _wrap_PyNs3TrafficControlLayer_SetRootQueueDiscOnDevice, METH_KEYWORDS|METH_VARARGS, "SetRootQueueDiscOnDevice(device, qDisc)\n\ntype: device: ns3::Ptr< ns3::NetDevice >\ntype: qDisc: ns3::Ptr< ns3::QueueDisc >" },
     {(char *) "Send", (PyCFunction) _wrap_PyNs3TrafficControlLayer_Send, METH_KEYWORDS|METH_VARARGS, "Send(device, item)\n\ntype: device: ns3::Ptr< ns3::NetDevice >\ntype: item: ns3::Ptr< ns3::QueueDiscItem >" },
     {(char *) "SetNode", (PyCFunction) _wrap_PyNs3TrafficControlLayer_SetNode, METH_KEYWORDS|METH_VARARGS, "SetNode(node)\n\ntype: node: ns3::Ptr< ns3::Node >" },
-    {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3TrafficControlLayer_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
-    {(char *) "DeleteRootQueueDiscOnDevice", (PyCFunction) _wrap_PyNs3TrafficControlLayer_DeleteRootQueueDiscOnDevice, METH_KEYWORDS|METH_VARARGS, "DeleteRootQueueDiscOnDevice(device)\n\ntype: device: ns3::Ptr< ns3::NetDevice >" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3TrafficControlLayer_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3TrafficControlLayer__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "SetRootQueueDiscOnDevice", (PyCFunction) _wrap_PyNs3TrafficControlLayer_SetRootQueueDiscOnDevice, METH_KEYWORDS|METH_VARARGS, "SetRootQueueDiscOnDevice(device, qDisc)\n\ntype: device: ns3::Ptr< ns3::NetDevice >\ntype: qDisc: ns3::Ptr< ns3::QueueDisc >" },
+    {(char *) "SetupDevice", (PyCFunction) _wrap_PyNs3TrafficControlLayer_SetupDevice, METH_KEYWORDS|METH_VARARGS, "SetupDevice(device)\n\ntype: device: ns3::Ptr< ns3::NetDevice >" },
+    {(char *) "DoDispose", (PyCFunction) PyNs3TrafficControlLayer__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3TrafficControlLayer__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3TrafficControlLayer__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3TrafficControlLayer__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3TrafficControlLayer__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 
@@ -9805,16 +9805,16 @@ PyTypeObject PyNs3TrafficControlLayer_Type = {
 
 
 PyObject *
-PyNs3CoDelQueueDisc__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3CoDelQueueDisc *self)
+PyNs3CoDelQueueDisc__PythonHelper::_wrap_DoDispose(PyNs3CoDelQueueDisc *self)
 {
     PyObject *py_retval;
     PyNs3CoDelQueueDisc__PythonHelper *helper = dynamic_cast< PyNs3CoDelQueueDisc__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class QueueDisc is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -9853,16 +9853,16 @@ PyNs3CoDelQueueDisc__PythonHelper::_wrap_NotifyNewAggregate(PyNs3CoDelQueueDisc 
 }
 
 PyObject *
-PyNs3CoDelQueueDisc__PythonHelper::_wrap_DoDispose(PyNs3CoDelQueueDisc *self)
+PyNs3CoDelQueueDisc__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3CoDelQueueDisc *self)
 {
     PyObject *py_retval;
     PyNs3CoDelQueueDisc__PythonHelper *helper = dynamic_cast< PyNs3CoDelQueueDisc__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class QueueDisc is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -10542,15 +10542,15 @@ static PyObject* _wrap_PyNs3CoDelQueueDisc__get_OVERLIMIT_DROP(PyObject * PYBIND
 }
 static PyGetSetDef Ns3CoDelQueueDiscMeta__getsets[] = {
     {
-        (char*) "OVERLIMIT_DROP", /* attribute name */
-        (getter) _wrap_PyNs3CoDelQueueDisc__get_OVERLIMIT_DROP, /* C function to get the attribute */
+        (char*) "TARGET_EXCEEDED_DROP", /* attribute name */
+        (getter) _wrap_PyNs3CoDelQueueDisc__get_TARGET_EXCEEDED_DROP, /* C function to get the attribute */
         (setter) NULL, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
     {
-        (char*) "TARGET_EXCEEDED_DROP", /* attribute name */
-        (getter) _wrap_PyNs3CoDelQueueDisc__get_TARGET_EXCEEDED_DROP, /* C function to get the attribute */
+        (char*) "OVERLIMIT_DROP", /* attribute name */
+        (getter) _wrap_PyNs3CoDelQueueDisc__get_OVERLIMIT_DROP, /* C function to get the attribute */
         (setter) NULL, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
@@ -10635,6 +10635,39 @@ _wrap_PyNs3CoDelQueueDisc__tp_init(PyNs3CoDelQueueDisc *self, PyObject *args, Py
 
 
 PyObject *
+_wrap_PyNs3CoDelQueueDisc_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::CoDelQueueDisc::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3CoDelQueueDisc_SetMode(PyNs3CoDelQueueDisc *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    ns3::CoDelQueueDisc::QueueDiscMode mode;
+    const char *keywords[] = {"mode", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &mode)) {
+        return NULL;
+    }
+    self->obj->SetMode(mode);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3CoDelQueueDisc_GetMode(PyNs3CoDelQueueDisc *self)
 {
     PyObject *py_retval;
@@ -10642,6 +10675,34 @@ _wrap_PyNs3CoDelQueueDisc_GetMode(PyNs3CoDelQueueDisc *self)
     
     retval = self->obj->GetMode();
     py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3CoDelQueueDisc_GetQueueSize(PyNs3CoDelQueueDisc *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetQueueSize();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3CoDelQueueDisc_GetTarget(PyNs3CoDelQueueDisc *self)
+{
+    PyObject *py_retval;
+    PyNs3Time *py_Time;
+    
+    ns3::Time retval = self->obj->GetTarget();
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
     return py_retval;
 }
 
@@ -10673,79 +10734,18 @@ _wrap_PyNs3CoDelQueueDisc_GetDropNext(PyNs3CoDelQueueDisc *self)
     return py_retval;
 }
 
-
-PyObject *
-_wrap_PyNs3CoDelQueueDisc_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::CoDelQueueDisc::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3CoDelQueueDisc_GetTarget(PyNs3CoDelQueueDisc *self)
-{
-    PyObject *py_retval;
-    PyNs3Time *py_Time;
-    
-    ns3::Time retval = self->obj->GetTarget();
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3CoDelQueueDisc_SetMode(PyNs3CoDelQueueDisc *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    ns3::CoDelQueueDisc::QueueDiscMode mode;
-    const char *keywords[] = {"mode", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &mode)) {
-        return NULL;
-    }
-    self->obj->SetMode(mode);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3CoDelQueueDisc_GetQueueSize(PyNs3CoDelQueueDisc *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetQueueSize();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
 static PyMethodDef PyNs3CoDelQueueDisc_methods[] = {
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3CoDelQueueDisc_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "SetMode", (PyCFunction) _wrap_PyNs3CoDelQueueDisc_SetMode, METH_KEYWORDS|METH_VARARGS, "SetMode(mode)\n\ntype: mode: ns3::CoDelQueueDisc::QueueDiscMode" },
     {(char *) "GetMode", (PyCFunction) _wrap_PyNs3CoDelQueueDisc_GetMode, METH_NOARGS, "GetMode()\n\n" },
+    {(char *) "GetQueueSize", (PyCFunction) _wrap_PyNs3CoDelQueueDisc_GetQueueSize, METH_NOARGS, "GetQueueSize()\n\n" },
+    {(char *) "GetTarget", (PyCFunction) _wrap_PyNs3CoDelQueueDisc_GetTarget, METH_NOARGS, "GetTarget()\n\n" },
     {(char *) "GetInterval", (PyCFunction) _wrap_PyNs3CoDelQueueDisc_GetInterval, METH_NOARGS, "GetInterval()\n\n" },
     {(char *) "GetDropNext", (PyCFunction) _wrap_PyNs3CoDelQueueDisc_GetDropNext, METH_NOARGS, "GetDropNext()\n\n" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3CoDelQueueDisc_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "GetTarget", (PyCFunction) _wrap_PyNs3CoDelQueueDisc_GetTarget, METH_NOARGS, "GetTarget()\n\n" },
-    {(char *) "SetMode", (PyCFunction) _wrap_PyNs3CoDelQueueDisc_SetMode, METH_KEYWORDS|METH_VARARGS, "SetMode(mode)\n\ntype: mode: ns3::CoDelQueueDisc::QueueDiscMode" },
-    {(char *) "GetQueueSize", (PyCFunction) _wrap_PyNs3CoDelQueueDisc_GetQueueSize, METH_NOARGS, "GetQueueSize()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3CoDelQueueDisc__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "DoDispose", (PyCFunction) PyNs3CoDelQueueDisc__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3CoDelQueueDisc__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3CoDelQueueDisc__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3CoDelQueueDisc__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3CoDelQueueDisc__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 
@@ -10877,16 +10877,16 @@ PyTypeObject PyNs3CoDelQueueDisc_Type = {
 
 
 PyObject *
-PyNs3FifoQueueDisc__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3FifoQueueDisc *self)
+PyNs3FifoQueueDisc__PythonHelper::_wrap_DoDispose(PyNs3FifoQueueDisc *self)
 {
     PyObject *py_retval;
     PyNs3FifoQueueDisc__PythonHelper *helper = dynamic_cast< PyNs3FifoQueueDisc__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class QueueDisc is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -10925,16 +10925,16 @@ PyNs3FifoQueueDisc__PythonHelper::_wrap_NotifyNewAggregate(PyNs3FifoQueueDisc *s
 }
 
 PyObject *
-PyNs3FifoQueueDisc__PythonHelper::_wrap_DoDispose(PyNs3FifoQueueDisc *self)
+PyNs3FifoQueueDisc__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3FifoQueueDisc *self)
 {
     PyObject *py_retval;
     PyNs3FifoQueueDisc__PythonHelper *helper = dynamic_cast< PyNs3FifoQueueDisc__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class QueueDisc is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -11709,10 +11709,10 @@ _wrap_PyNs3FifoQueueDisc_GetTypeId(void)
 
 static PyMethodDef PyNs3FifoQueueDisc_methods[] = {
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3FifoQueueDisc_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3FifoQueueDisc__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "DoDispose", (PyCFunction) PyNs3FifoQueueDisc__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3FifoQueueDisc__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3FifoQueueDisc__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3FifoQueueDisc__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3FifoQueueDisc__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 
@@ -11913,17 +11913,13 @@ int _wrap_PyNs3FqCoDelFlow__tp_init(PyNs3FqCoDelFlow *self, PyObject *args, PyOb
 
 
 PyObject *
-_wrap_PyNs3FqCoDelFlow_GetTypeId(void)
+_wrap_PyNs3FqCoDelFlow_GetDeficit(PyNs3FqCoDelFlow *self)
 {
     PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
+    int32_t retval;
     
-    ns3::TypeId retval = ns3::FqCoDelFlow::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    retval = self->obj->GetDeficit();
+    py_retval = Py_BuildValue((char *) "i", retval);
     return py_retval;
 }
 
@@ -11941,30 +11937,17 @@ _wrap_PyNs3FqCoDelFlow_GetStatus(PyNs3FqCoDelFlow *self)
 
 
 PyObject *
-_wrap_PyNs3FqCoDelFlow_SetStatus(PyNs3FqCoDelFlow *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3FqCoDelFlow_GetTypeId(void)
 {
     PyObject *py_retval;
-    ns3::FqCoDelFlow::FlowStatus status;
-    const char *keywords[] = {"status", NULL};
+    PyNs3TypeId *py_TypeId;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &status)) {
-        return NULL;
-    }
-    self->obj->SetStatus(status);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3FqCoDelFlow_GetDeficit(PyNs3FqCoDelFlow *self)
-{
-    PyObject *py_retval;
-    int32_t retval;
-    
-    retval = self->obj->GetDeficit();
-    py_retval = Py_BuildValue((char *) "i", retval);
+    ns3::TypeId retval = ns3::FqCoDelFlow::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
     return py_retval;
 }
 
@@ -12003,6 +11986,23 @@ _wrap_PyNs3FqCoDelFlow_SetDeficit(PyNs3FqCoDelFlow *self, PyObject *args, PyObje
 }
 
 
+PyObject *
+_wrap_PyNs3FqCoDelFlow_SetStatus(PyNs3FqCoDelFlow *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    ns3::FqCoDelFlow::FlowStatus status;
+    const char *keywords[] = {"status", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &status)) {
+        return NULL;
+    }
+    self->obj->SetStatus(status);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
 static PyObject*
 _wrap_PyNs3FqCoDelFlow__copy__(PyNs3FqCoDelFlow *self)
 {
@@ -12019,12 +12019,12 @@ _wrap_PyNs3FqCoDelFlow__copy__(PyNs3FqCoDelFlow *self)
 }
 
 static PyMethodDef PyNs3FqCoDelFlow_methods[] = {
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3FqCoDelFlow_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "GetStatus", (PyCFunction) _wrap_PyNs3FqCoDelFlow_GetStatus, METH_NOARGS, "GetStatus()\n\n" },
-    {(char *) "SetStatus", (PyCFunction) _wrap_PyNs3FqCoDelFlow_SetStatus, METH_KEYWORDS|METH_VARARGS, "SetStatus(status)\n\ntype: status: ns3::FqCoDelFlow::FlowStatus" },
     {(char *) "GetDeficit", (PyCFunction) _wrap_PyNs3FqCoDelFlow_GetDeficit, METH_NOARGS, "GetDeficit()\n\n" },
+    {(char *) "GetStatus", (PyCFunction) _wrap_PyNs3FqCoDelFlow_GetStatus, METH_NOARGS, "GetStatus()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3FqCoDelFlow_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
     {(char *) "IncreaseDeficit", (PyCFunction) _wrap_PyNs3FqCoDelFlow_IncreaseDeficit, METH_KEYWORDS|METH_VARARGS, "IncreaseDeficit(deficit)\n\ntype: deficit: int32_t" },
     {(char *) "SetDeficit", (PyCFunction) _wrap_PyNs3FqCoDelFlow_SetDeficit, METH_KEYWORDS|METH_VARARGS, "SetDeficit(deficit)\n\ntype: deficit: uint32_t" },
+    {(char *) "SetStatus", (PyCFunction) _wrap_PyNs3FqCoDelFlow_SetStatus, METH_KEYWORDS|METH_VARARGS, "SetStatus(status)\n\ntype: status: ns3::FqCoDelFlow::FlowStatus" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3FqCoDelFlow__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -12154,16 +12154,16 @@ PyTypeObject PyNs3FqCoDelFlow_Type = {
 
 
 PyObject *
-PyNs3FqCoDelQueueDisc__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3FqCoDelQueueDisc *self)
+PyNs3FqCoDelQueueDisc__PythonHelper::_wrap_DoDispose(PyNs3FqCoDelQueueDisc *self)
 {
     PyObject *py_retval;
     PyNs3FqCoDelQueueDisc__PythonHelper *helper = dynamic_cast< PyNs3FqCoDelQueueDisc__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class QueueDisc is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -12202,16 +12202,16 @@ PyNs3FqCoDelQueueDisc__PythonHelper::_wrap_NotifyNewAggregate(PyNs3FqCoDelQueueD
 }
 
 PyObject *
-PyNs3FqCoDelQueueDisc__PythonHelper::_wrap_DoDispose(PyNs3FqCoDelQueueDisc *self)
+PyNs3FqCoDelQueueDisc__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3FqCoDelQueueDisc *self)
 {
     PyObject *py_retval;
     PyNs3FqCoDelQueueDisc__PythonHelper *helper = dynamic_cast< PyNs3FqCoDelQueueDisc__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class QueueDisc is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -12984,18 +12984,6 @@ _wrap_PyNs3FqCoDelQueueDisc__tp_init(PyNs3FqCoDelQueueDisc *self, PyObject *args
 
 
 PyObject *
-_wrap_PyNs3FqCoDelQueueDisc_GetQuantum(PyNs3FqCoDelQueueDisc *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetQuantum();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3FqCoDelQueueDisc_GetTypeId(void)
 {
     PyObject *py_retval;
@@ -13027,14 +13015,26 @@ _wrap_PyNs3FqCoDelQueueDisc_SetQuantum(PyNs3FqCoDelQueueDisc *self, PyObject *ar
     return py_retval;
 }
 
+
+PyObject *
+_wrap_PyNs3FqCoDelQueueDisc_GetQuantum(PyNs3FqCoDelQueueDisc *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetQuantum();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
 static PyMethodDef PyNs3FqCoDelQueueDisc_methods[] = {
-    {(char *) "GetQuantum", (PyCFunction) _wrap_PyNs3FqCoDelQueueDisc_GetQuantum, METH_NOARGS, "GetQuantum()\n\n" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3FqCoDelQueueDisc_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
     {(char *) "SetQuantum", (PyCFunction) _wrap_PyNs3FqCoDelQueueDisc_SetQuantum, METH_KEYWORDS|METH_VARARGS, "SetQuantum(quantum)\n\ntype: quantum: uint32_t" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3FqCoDelQueueDisc__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "GetQuantum", (PyCFunction) _wrap_PyNs3FqCoDelQueueDisc_GetQuantum, METH_NOARGS, "GetQuantum()\n\n" },
+    {(char *) "DoDispose", (PyCFunction) PyNs3FqCoDelQueueDisc__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3FqCoDelQueueDisc__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3FqCoDelQueueDisc__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3FqCoDelQueueDisc__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3FqCoDelQueueDisc__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 
@@ -13166,16 +13166,16 @@ PyTypeObject PyNs3FqCoDelQueueDisc_Type = {
 
 
 PyObject *
-PyNs3MqQueueDisc__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3MqQueueDisc *self)
+PyNs3MqQueueDisc__PythonHelper::_wrap_DoDispose(PyNs3MqQueueDisc *self)
 {
     PyObject *py_retval;
     PyNs3MqQueueDisc__PythonHelper *helper = dynamic_cast< PyNs3MqQueueDisc__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class QueueDisc is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -13214,16 +13214,16 @@ PyNs3MqQueueDisc__PythonHelper::_wrap_NotifyNewAggregate(PyNs3MqQueueDisc *self)
 }
 
 PyObject *
-PyNs3MqQueueDisc__PythonHelper::_wrap_DoDispose(PyNs3MqQueueDisc *self)
+PyNs3MqQueueDisc__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3MqQueueDisc *self)
 {
     PyObject *py_retval;
     PyNs3MqQueueDisc__PythonHelper *helper = dynamic_cast< PyNs3MqQueueDisc__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class QueueDisc is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -13945,10 +13945,10 @@ _wrap_PyNs3MqQueueDisc_GetWakeMode(PyNs3MqQueueDisc *self)
 static PyMethodDef PyNs3MqQueueDisc_methods[] = {
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3MqQueueDisc_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
     {(char *) "GetWakeMode", (PyCFunction) _wrap_PyNs3MqQueueDisc_GetWakeMode, METH_NOARGS, "GetWakeMode()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3MqQueueDisc__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "DoDispose", (PyCFunction) PyNs3MqQueueDisc__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3MqQueueDisc__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3MqQueueDisc__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3MqQueueDisc__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3MqQueueDisc__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 
@@ -14080,16 +14080,16 @@ PyTypeObject PyNs3MqQueueDisc_Type = {
 
 
 PyObject *
-PyNs3PfifoFastQueueDisc__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3PfifoFastQueueDisc *self)
+PyNs3PfifoFastQueueDisc__PythonHelper::_wrap_DoDispose(PyNs3PfifoFastQueueDisc *self)
 {
     PyObject *py_retval;
     PyNs3PfifoFastQueueDisc__PythonHelper *helper = dynamic_cast< PyNs3PfifoFastQueueDisc__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class QueueDisc is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -14128,16 +14128,16 @@ PyNs3PfifoFastQueueDisc__PythonHelper::_wrap_NotifyNewAggregate(PyNs3PfifoFastQu
 }
 
 PyObject *
-PyNs3PfifoFastQueueDisc__PythonHelper::_wrap_DoDispose(PyNs3PfifoFastQueueDisc *self)
+PyNs3PfifoFastQueueDisc__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3PfifoFastQueueDisc *self)
 {
     PyObject *py_retval;
     PyNs3PfifoFastQueueDisc__PythonHelper *helper = dynamic_cast< PyNs3PfifoFastQueueDisc__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class QueueDisc is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -14912,10 +14912,10 @@ _wrap_PyNs3PfifoFastQueueDisc_GetTypeId(void)
 
 static PyMethodDef PyNs3PfifoFastQueueDisc_methods[] = {
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3PfifoFastQueueDisc_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3PfifoFastQueueDisc__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "DoDispose", (PyCFunction) PyNs3PfifoFastQueueDisc__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3PfifoFastQueueDisc__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3PfifoFastQueueDisc__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3PfifoFastQueueDisc__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3PfifoFastQueueDisc__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 
@@ -15047,16 +15047,16 @@ PyTypeObject PyNs3PfifoFastQueueDisc_Type = {
 
 
 PyObject *
-PyNs3PieQueueDisc__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3PieQueueDisc *self)
+PyNs3PieQueueDisc__PythonHelper::_wrap_DoDispose(PyNs3PieQueueDisc *self)
 {
     PyObject *py_retval;
     PyNs3PieQueueDisc__PythonHelper *helper = dynamic_cast< PyNs3PieQueueDisc__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class PieQueueDisc is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -15095,16 +15095,16 @@ PyNs3PieQueueDisc__PythonHelper::_wrap_NotifyNewAggregate(PyNs3PieQueueDisc *sel
 }
 
 PyObject *
-PyNs3PieQueueDisc__PythonHelper::_wrap_DoDispose(PyNs3PieQueueDisc *self)
+PyNs3PieQueueDisc__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3PieQueueDisc *self)
 {
     PyObject *py_retval;
     PyNs3PieQueueDisc__PythonHelper *helper = dynamic_cast< PyNs3PieQueueDisc__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class PieQueueDisc is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -15784,15 +15784,15 @@ static PyObject* _wrap_PyNs3PieQueueDisc__get_FORCED_DROP(PyObject * PYBINDGEN_U
 }
 static PyGetSetDef Ns3PieQueueDiscMeta__getsets[] = {
     {
-        (char*) "FORCED_DROP", /* attribute name */
-        (getter) _wrap_PyNs3PieQueueDisc__get_FORCED_DROP, /* C function to get the attribute */
+        (char*) "UNFORCED_DROP", /* attribute name */
+        (getter) _wrap_PyNs3PieQueueDisc__get_UNFORCED_DROP, /* C function to get the attribute */
         (setter) NULL, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
     {
-        (char*) "UNFORCED_DROP", /* attribute name */
-        (getter) _wrap_PyNs3PieQueueDisc__get_UNFORCED_DROP, /* C function to get the attribute */
+        (char*) "FORCED_DROP", /* attribute name */
+        (getter) _wrap_PyNs3PieQueueDisc__get_FORCED_DROP, /* C function to get the attribute */
         (setter) NULL, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
@@ -15877,35 +15877,6 @@ _wrap_PyNs3PieQueueDisc__tp_init(PyNs3PieQueueDisc *self, PyObject *args, PyObje
 
 
 PyObject *
-_wrap_PyNs3PieQueueDisc_GetMode(PyNs3PieQueueDisc *self)
-{
-    PyObject *py_retval;
-    ns3::PieQueueDisc::QueueDiscMode retval;
-    
-    retval = self->obj->GetMode();
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3PieQueueDisc_SetQueueLimit(PyNs3PieQueueDisc *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int lim;
-    const char *keywords[] = {"lim", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &lim)) {
-        return NULL;
-    }
-    self->obj->SetQueueLimit(lim);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3PieQueueDisc_GetTypeId(void)
 {
     PyObject *py_retval;
@@ -15939,18 +15910,42 @@ _wrap_PyNs3PieQueueDisc_SetMode(PyNs3PieQueueDisc *self, PyObject *args, PyObjec
 
 
 PyObject *
-_wrap_PyNs3PieQueueDisc_AssignStreams(PyNs3PieQueueDisc *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3PieQueueDisc_GetMode(PyNs3PieQueueDisc *self)
 {
     PyObject *py_retval;
-    int64_t retval;
-    int64_t stream;
-    const char *keywords[] = {"stream", NULL};
+    ns3::PieQueueDisc::QueueDiscMode retval;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "L", (char **) keywords, &stream)) {
+    retval = self->obj->GetMode();
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3PieQueueDisc_GetQueueSize(PyNs3PieQueueDisc *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetQueueSize();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3PieQueueDisc_SetQueueLimit(PyNs3PieQueueDisc *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int lim;
+    const char *keywords[] = {"lim", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &lim)) {
         return NULL;
     }
-    retval = self->obj->AssignStreams(stream);
-    py_retval = Py_BuildValue((char *) "L", retval);
+    self->obj->SetQueueLimit(lim);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -15972,28 +15967,33 @@ _wrap_PyNs3PieQueueDisc_GetQueueDelay(PyNs3PieQueueDisc *self)
 
 
 PyObject *
-_wrap_PyNs3PieQueueDisc_GetQueueSize(PyNs3PieQueueDisc *self)
+_wrap_PyNs3PieQueueDisc_AssignStreams(PyNs3PieQueueDisc *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    uint32_t retval;
+    int64_t retval;
+    int64_t stream;
+    const char *keywords[] = {"stream", NULL};
     
-    retval = self->obj->GetQueueSize();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "L", (char **) keywords, &stream)) {
+        return NULL;
+    }
+    retval = self->obj->AssignStreams(stream);
+    py_retval = Py_BuildValue((char *) "L", retval);
     return py_retval;
 }
 
 static PyMethodDef PyNs3PieQueueDisc_methods[] = {
-    {(char *) "GetMode", (PyCFunction) _wrap_PyNs3PieQueueDisc_GetMode, METH_NOARGS, "GetMode()\n\n" },
-    {(char *) "SetQueueLimit", (PyCFunction) _wrap_PyNs3PieQueueDisc_SetQueueLimit, METH_KEYWORDS|METH_VARARGS, "SetQueueLimit(lim)\n\ntype: lim: uint32_t" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3PieQueueDisc_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
     {(char *) "SetMode", (PyCFunction) _wrap_PyNs3PieQueueDisc_SetMode, METH_KEYWORDS|METH_VARARGS, "SetMode(mode)\n\ntype: mode: ns3::PieQueueDisc::QueueDiscMode" },
-    {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3PieQueueDisc_AssignStreams, METH_KEYWORDS|METH_VARARGS, "AssignStreams(stream)\n\ntype: stream: int64_t" },
-    {(char *) "GetQueueDelay", (PyCFunction) _wrap_PyNs3PieQueueDisc_GetQueueDelay, METH_NOARGS, "GetQueueDelay()\n\n" },
+    {(char *) "GetMode", (PyCFunction) _wrap_PyNs3PieQueueDisc_GetMode, METH_NOARGS, "GetMode()\n\n" },
     {(char *) "GetQueueSize", (PyCFunction) _wrap_PyNs3PieQueueDisc_GetQueueSize, METH_NOARGS, "GetQueueSize()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3PieQueueDisc__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "SetQueueLimit", (PyCFunction) _wrap_PyNs3PieQueueDisc_SetQueueLimit, METH_KEYWORDS|METH_VARARGS, "SetQueueLimit(lim)\n\ntype: lim: uint32_t" },
+    {(char *) "GetQueueDelay", (PyCFunction) _wrap_PyNs3PieQueueDisc_GetQueueDelay, METH_NOARGS, "GetQueueDelay()\n\n" },
+    {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3PieQueueDisc_AssignStreams, METH_KEYWORDS|METH_VARARGS, "AssignStreams(stream)\n\ntype: stream: int64_t" },
+    {(char *) "DoDispose", (PyCFunction) PyNs3PieQueueDisc__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3PieQueueDisc__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3PieQueueDisc__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3PieQueueDisc__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3PieQueueDisc__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 

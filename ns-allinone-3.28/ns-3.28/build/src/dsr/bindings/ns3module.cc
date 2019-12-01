@@ -290,16 +290,16 @@ static int _wrap_PyNs3DsrBlackList__set_m_neighborAddress(PyNs3DsrBlackList *sel
 }
 static PyGetSetDef PyNs3DsrBlackList__getsets[] = {
     {
-        (char*) "m_linkStates", /* attribute name */
-        (getter) _wrap_PyNs3DsrBlackList__get_m_linkStates, /* C function to get the attribute */
-        (setter) _wrap_PyNs3DsrBlackList__set_m_linkStates, /* C function to set the attribute */
+        (char*) "m_expireTime", /* attribute name */
+        (getter) _wrap_PyNs3DsrBlackList__get_m_expireTime, /* C function to get the attribute */
+        (setter) _wrap_PyNs3DsrBlackList__set_m_expireTime, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
     {
-        (char*) "m_expireTime", /* attribute name */
-        (getter) _wrap_PyNs3DsrBlackList__get_m_expireTime, /* C function to get the attribute */
-        (setter) _wrap_PyNs3DsrBlackList__set_m_expireTime, /* C function to set the attribute */
+        (char*) "m_linkStates", /* attribute name */
+        (getter) _wrap_PyNs3DsrBlackList__get_m_linkStates, /* C function to get the attribute */
+        (setter) _wrap_PyNs3DsrBlackList__set_m_linkStates, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -589,75 +589,33 @@ int _wrap_PyNs3DsrDsrErrorBuffEntry__tp_init(PyNs3DsrDsrErrorBuffEntry *self, Py
 
 
 PyObject *
-_wrap_PyNs3DsrDsrErrorBuffEntry_SetPacket(PyNs3DsrDsrErrorBuffEntry *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3DsrDsrErrorBuffEntry_GetDestination(PyNs3DsrDsrErrorBuffEntry *self)
 {
     PyObject *py_retval;
-    PyNs3Packet *p;
-    ns3::Packet *p_ptr;
-    const char *keywords[] = {"p", NULL};
+    PyNs3Ipv4Address *py_Ipv4Address;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Packet_Type, &p)) {
-        return NULL;
-    }
-    p_ptr = (p ? p->obj : NULL);
-    self->obj->SetPacket(ns3::Ptr< ns3::Packet  > (p_ptr));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    ns3::Ipv4Address retval = self->obj->GetDestination();
+    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
+    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
+    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
+    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3DsrDsrErrorBuffEntry_SetNextHop(PyNs3DsrDsrErrorBuffEntry *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3DsrDsrErrorBuffEntry_GetExpireTime(PyNs3DsrDsrErrorBuffEntry *self)
 {
     PyObject *py_retval;
-    PyNs3Ipv4Address *n;
-    const char *keywords[] = {"n", NULL};
+    PyNs3Time *py_Time;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &n)) {
-        return NULL;
-    }
-    self->obj->SetNextHop(*((PyNs3Ipv4Address *) n)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrErrorBuffEntry_SetProtocol(PyNs3DsrDsrErrorBuffEntry *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int p;
-    const char *keywords[] = {"p", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &p)) {
-        return NULL;
-    }
-    if (p > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SetProtocol(p);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrErrorBuffEntry_SetDestination(PyNs3DsrDsrErrorBuffEntry *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Ipv4Address *d;
-    const char *keywords[] = {"d", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &d)) {
-        return NULL;
-    }
-    self->obj->SetDestination(*((PyNs3Ipv4Address *) d)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    ns3::Time retval = self->obj->GetExpireTime();
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
     return py_retval;
 }
 
@@ -674,18 +632,6 @@ _wrap_PyNs3DsrDsrErrorBuffEntry_GetNextHop(PyNs3DsrDsrErrorBuffEntry *self)
     py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
     PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
     py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrErrorBuffEntry_GetProtocol(PyNs3DsrDsrErrorBuffEntry *self)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    
-    retval = self->obj->GetProtocol();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
     return py_retval;
 }
 
@@ -727,18 +673,13 @@ _wrap_PyNs3DsrDsrErrorBuffEntry_GetPacket(PyNs3DsrDsrErrorBuffEntry *self)
 
 
 PyObject *
-_wrap_PyNs3DsrDsrErrorBuffEntry_SetExpireTime(PyNs3DsrDsrErrorBuffEntry *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3DsrDsrErrorBuffEntry_GetProtocol(PyNs3DsrDsrErrorBuffEntry *self)
 {
     PyObject *py_retval;
-    PyNs3Time *exp;
-    const char *keywords[] = {"exp", NULL};
+    uint8_t retval;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Time_Type, &exp)) {
-        return NULL;
-    }
-    self->obj->SetExpireTime(*((PyNs3Time *) exp)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    retval = self->obj->GetProtocol();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
     return py_retval;
 }
 
@@ -760,33 +701,92 @@ _wrap_PyNs3DsrDsrErrorBuffEntry_GetSource(PyNs3DsrDsrErrorBuffEntry *self)
 
 
 PyObject *
-_wrap_PyNs3DsrDsrErrorBuffEntry_GetExpireTime(PyNs3DsrDsrErrorBuffEntry *self)
+_wrap_PyNs3DsrDsrErrorBuffEntry_SetDestination(PyNs3DsrDsrErrorBuffEntry *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3Time *py_Time;
+    PyNs3Ipv4Address *d;
+    const char *keywords[] = {"d", NULL};
     
-    ns3::Time retval = self->obj->GetExpireTime();
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &d)) {
+        return NULL;
+    }
+    self->obj->SetDestination(*((PyNs3Ipv4Address *) d)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3DsrDsrErrorBuffEntry_GetDestination(PyNs3DsrDsrErrorBuffEntry *self)
+_wrap_PyNs3DsrDsrErrorBuffEntry_SetExpireTime(PyNs3DsrDsrErrorBuffEntry *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3Ipv4Address *py_Ipv4Address;
+    PyNs3Time *exp;
+    const char *keywords[] = {"exp", NULL};
     
-    ns3::Ipv4Address retval = self->obj->GetDestination();
-    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
-    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
-    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
-    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Time_Type, &exp)) {
+        return NULL;
+    }
+    self->obj->SetExpireTime(*((PyNs3Time *) exp)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrErrorBuffEntry_SetNextHop(PyNs3DsrDsrErrorBuffEntry *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4Address *n;
+    const char *keywords[] = {"n", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &n)) {
+        return NULL;
+    }
+    self->obj->SetNextHop(*((PyNs3Ipv4Address *) n)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrErrorBuffEntry_SetPacket(PyNs3DsrDsrErrorBuffEntry *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Packet *p;
+    ns3::Packet *p_ptr;
+    const char *keywords[] = {"p", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Packet_Type, &p)) {
+        return NULL;
+    }
+    p_ptr = (p ? p->obj : NULL);
+    self->obj->SetPacket(ns3::Ptr< ns3::Packet  > (p_ptr));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrErrorBuffEntry_SetProtocol(PyNs3DsrDsrErrorBuffEntry *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int p;
+    const char *keywords[] = {"p", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &p)) {
+        return NULL;
+    }
+    if (p > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SetProtocol(p);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -821,18 +821,18 @@ _wrap_PyNs3DsrDsrErrorBuffEntry__copy__(PyNs3DsrDsrErrorBuffEntry *self)
 }
 
 static PyMethodDef PyNs3DsrDsrErrorBuffEntry_methods[] = {
-    {(char *) "SetPacket", (PyCFunction) _wrap_PyNs3DsrDsrErrorBuffEntry_SetPacket, METH_KEYWORDS|METH_VARARGS, "SetPacket(p)\n\ntype: p: ns3::Ptr< ns3::Packet const >" },
-    {(char *) "SetNextHop", (PyCFunction) _wrap_PyNs3DsrDsrErrorBuffEntry_SetNextHop, METH_KEYWORDS|METH_VARARGS, "SetNextHop(n)\n\ntype: n: ns3::Ipv4Address" },
-    {(char *) "SetProtocol", (PyCFunction) _wrap_PyNs3DsrDsrErrorBuffEntry_SetProtocol, METH_KEYWORDS|METH_VARARGS, "SetProtocol(p)\n\ntype: p: uint8_t" },
-    {(char *) "SetDestination", (PyCFunction) _wrap_PyNs3DsrDsrErrorBuffEntry_SetDestination, METH_KEYWORDS|METH_VARARGS, "SetDestination(d)\n\ntype: d: ns3::Ipv4Address" },
-    {(char *) "GetNextHop", (PyCFunction) _wrap_PyNs3DsrDsrErrorBuffEntry_GetNextHop, METH_NOARGS, "GetNextHop()\n\n" },
-    {(char *) "GetProtocol", (PyCFunction) _wrap_PyNs3DsrDsrErrorBuffEntry_GetProtocol, METH_NOARGS, "GetProtocol()\n\n" },
-    {(char *) "GetPacket", (PyCFunction) _wrap_PyNs3DsrDsrErrorBuffEntry_GetPacket, METH_NOARGS, "GetPacket()\n\n" },
-    {(char *) "SetExpireTime", (PyCFunction) _wrap_PyNs3DsrDsrErrorBuffEntry_SetExpireTime, METH_KEYWORDS|METH_VARARGS, "SetExpireTime(exp)\n\ntype: exp: ns3::Time" },
-    {(char *) "GetSource", (PyCFunction) _wrap_PyNs3DsrDsrErrorBuffEntry_GetSource, METH_NOARGS, "GetSource()\n\n" },
-    {(char *) "GetExpireTime", (PyCFunction) _wrap_PyNs3DsrDsrErrorBuffEntry_GetExpireTime, METH_NOARGS, "GetExpireTime()\n\n" },
     {(char *) "GetDestination", (PyCFunction) _wrap_PyNs3DsrDsrErrorBuffEntry_GetDestination, METH_NOARGS, "GetDestination()\n\n" },
-    {(char *) "SetSource", (PyCFunction) _wrap_PyNs3DsrDsrErrorBuffEntry_SetSource, METH_KEYWORDS|METH_VARARGS, "SetSource(s)\n\ntype: s: ns3::Ipv4Address" },
+    {(char *) "GetExpireTime", (PyCFunction) _wrap_PyNs3DsrDsrErrorBuffEntry_GetExpireTime, METH_NOARGS, "GetExpireTime()\n\n" },
+    {(char *) "GetNextHop", (PyCFunction) _wrap_PyNs3DsrDsrErrorBuffEntry_GetNextHop, METH_NOARGS, "GetNextHop()\n\n" },
+    {(char *) "GetPacket", (PyCFunction) _wrap_PyNs3DsrDsrErrorBuffEntry_GetPacket, METH_NOARGS, "GetPacket()\n\n" },
+    {(char *) "GetProtocol", (PyCFunction) _wrap_PyNs3DsrDsrErrorBuffEntry_GetProtocol, METH_NOARGS, "GetProtocol()\n\n" },
+    {(char *) "GetSource", (PyCFunction) _wrap_PyNs3DsrDsrErrorBuffEntry_GetSource, METH_NOARGS, "GetSource()\n\n" },
+    {(char *) "SetDestination", (PyCFunction) _wrap_PyNs3DsrDsrErrorBuffEntry_SetDestination, METH_VARARGS|METH_KEYWORDS, "SetDestination(d)\n\ntype: d: ns3::Ipv4Address" },
+    {(char *) "SetExpireTime", (PyCFunction) _wrap_PyNs3DsrDsrErrorBuffEntry_SetExpireTime, METH_VARARGS|METH_KEYWORDS, "SetExpireTime(exp)\n\ntype: exp: ns3::Time" },
+    {(char *) "SetNextHop", (PyCFunction) _wrap_PyNs3DsrDsrErrorBuffEntry_SetNextHop, METH_VARARGS|METH_KEYWORDS, "SetNextHop(n)\n\ntype: n: ns3::Ipv4Address" },
+    {(char *) "SetPacket", (PyCFunction) _wrap_PyNs3DsrDsrErrorBuffEntry_SetPacket, METH_VARARGS|METH_KEYWORDS, "SetPacket(p)\n\ntype: p: ns3::Ptr< ns3::Packet const >" },
+    {(char *) "SetProtocol", (PyCFunction) _wrap_PyNs3DsrDsrErrorBuffEntry_SetProtocol, METH_VARARGS|METH_KEYWORDS, "SetProtocol(p)\n\ntype: p: uint8_t" },
+    {(char *) "SetSource", (PyCFunction) _wrap_PyNs3DsrDsrErrorBuffEntry_SetSource, METH_VARARGS|METH_KEYWORDS, "SetSource(s)\n\ntype: s: ns3::Ipv4Address" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3DsrDsrErrorBuffEntry__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -1016,6 +1016,91 @@ int _wrap_PyNs3DsrDsrErrorBuffer__tp_init(PyNs3DsrDsrErrorBuffer *self, PyObject
 
 
 PyObject *
+_wrap_PyNs3DsrDsrErrorBuffer_Dequeue(PyNs3DsrDsrErrorBuffer *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3Ipv4Address *dst;
+    PyNs3DsrDsrErrorBuffEntry *entry;
+    const char *keywords[] = {"dst", "entry", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3Ipv4Address_Type, &dst, &PyNs3DsrDsrErrorBuffEntry_Type, &entry)) {
+        return NULL;
+    }
+    retval = self->obj->Dequeue(*((PyNs3Ipv4Address *) dst)->obj, *((PyNs3DsrDsrErrorBuffEntry *) entry)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrErrorBuffer_DropPacketForErrLink(PyNs3DsrDsrErrorBuffer *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4Address *source;
+    PyNs3Ipv4Address *nextHop;
+    const char *keywords[] = {"source", "nextHop", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3Ipv4Address_Type, &source, &PyNs3Ipv4Address_Type, &nextHop)) {
+        return NULL;
+    }
+    self->obj->DropPacketForErrLink(*((PyNs3Ipv4Address *) source)->obj, *((PyNs3Ipv4Address *) nextHop)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrErrorBuffer_Enqueue(PyNs3DsrDsrErrorBuffer *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3DsrDsrErrorBuffEntry *entry;
+    const char *keywords[] = {"entry", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3DsrDsrErrorBuffEntry_Type, &entry)) {
+        return NULL;
+    }
+    retval = self->obj->Enqueue(*((PyNs3DsrDsrErrorBuffEntry *) entry)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrErrorBuffer_Find(PyNs3DsrDsrErrorBuffer *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3Ipv4Address *dst;
+    const char *keywords[] = {"dst", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &dst)) {
+        return NULL;
+    }
+    retval = self->obj->Find(*((PyNs3Ipv4Address *) dst)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrErrorBuffer_GetBuffer(PyNs3DsrDsrErrorBuffer *self)
+{
+    PyObject *py_retval;
+    std::vector< ns3::dsr::DsrErrorBuffEntry > retval;
+    Pystd__vector__lt___ns3__dsr__DsrErrorBuffEntry___gt__ *py_std__vector__lt___ns3__dsr__DsrErrorBuffEntry___gt__;
+    
+    retval = self->obj->GetBuffer();
+    py_std__vector__lt___ns3__dsr__DsrErrorBuffEntry___gt__ = PyObject_New(Pystd__vector__lt___ns3__dsr__DsrErrorBuffEntry___gt__, &Pystd__vector__lt___ns3__dsr__DsrErrorBuffEntry___gt___Type);
+    py_std__vector__lt___ns3__dsr__DsrErrorBuffEntry___gt__->obj = new std::vector< ns3::dsr::DsrErrorBuffEntry >(retval);
+    py_retval = Py_BuildValue((char *) "N", py_std__vector__lt___ns3__dsr__DsrErrorBuffEntry___gt__);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3DsrDsrErrorBuffer_GetErrorBufferTimeout(PyNs3DsrDsrErrorBuffer *self)
 {
     PyObject *py_retval;
@@ -1044,59 +1129,6 @@ _wrap_PyNs3DsrDsrErrorBuffer_GetMaxQueueLen(PyNs3DsrDsrErrorBuffer *self)
 
 
 PyObject *
-_wrap_PyNs3DsrDsrErrorBuffer_DropPacketForErrLink(PyNs3DsrDsrErrorBuffer *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Ipv4Address *source;
-    PyNs3Ipv4Address *nextHop;
-    const char *keywords[] = {"source", "nextHop", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3Ipv4Address_Type, &source, &PyNs3Ipv4Address_Type, &nextHop)) {
-        return NULL;
-    }
-    self->obj->DropPacketForErrLink(*((PyNs3Ipv4Address *) source)->obj, *((PyNs3Ipv4Address *) nextHop)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrErrorBuffer_Dequeue(PyNs3DsrDsrErrorBuffer *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3Ipv4Address *dst;
-    PyNs3DsrDsrErrorBuffEntry *entry;
-    const char *keywords[] = {"dst", "entry", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3Ipv4Address_Type, &dst, &PyNs3DsrDsrErrorBuffEntry_Type, &entry)) {
-        return NULL;
-    }
-    retval = self->obj->Dequeue(*((PyNs3Ipv4Address *) dst)->obj, *((PyNs3DsrDsrErrorBuffEntry *) entry)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrErrorBuffer_SetMaxQueueLen(PyNs3DsrDsrErrorBuffer *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int len;
-    const char *keywords[] = {"len", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &len)) {
-        return NULL;
-    }
-    self->obj->SetMaxQueueLen(len);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3DsrDsrErrorBuffer_GetSize(PyNs3DsrDsrErrorBuffer *self)
 {
     PyObject *py_retval;
@@ -1104,23 +1136,6 @@ _wrap_PyNs3DsrDsrErrorBuffer_GetSize(PyNs3DsrDsrErrorBuffer *self)
     
     retval = self->obj->GetSize();
     py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrErrorBuffer_Enqueue(PyNs3DsrDsrErrorBuffer *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3DsrDsrErrorBuffEntry *entry;
-    const char *keywords[] = {"entry", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3DsrDsrErrorBuffEntry_Type, &entry)) {
-        return NULL;
-    }
-    retval = self->obj->Enqueue(*((PyNs3DsrDsrErrorBuffEntry *) entry)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
@@ -1143,33 +1158,18 @@ _wrap_PyNs3DsrDsrErrorBuffer_SetErrorBufferTimeout(PyNs3DsrDsrErrorBuffer *self,
 
 
 PyObject *
-_wrap_PyNs3DsrDsrErrorBuffer_GetBuffer(PyNs3DsrDsrErrorBuffer *self)
+_wrap_PyNs3DsrDsrErrorBuffer_SetMaxQueueLen(PyNs3DsrDsrErrorBuffer *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    std::vector< ns3::dsr::DsrErrorBuffEntry > retval;
-    Pystd__vector__lt___ns3__dsr__DsrErrorBuffEntry___gt__ *py_std__vector__lt___ns3__dsr__DsrErrorBuffEntry___gt__;
+    unsigned int len;
+    const char *keywords[] = {"len", NULL};
     
-    retval = self->obj->GetBuffer();
-    py_std__vector__lt___ns3__dsr__DsrErrorBuffEntry___gt__ = PyObject_New(Pystd__vector__lt___ns3__dsr__DsrErrorBuffEntry___gt__, &Pystd__vector__lt___ns3__dsr__DsrErrorBuffEntry___gt___Type);
-    py_std__vector__lt___ns3__dsr__DsrErrorBuffEntry___gt__->obj = new std::vector< ns3::dsr::DsrErrorBuffEntry >(retval);
-    py_retval = Py_BuildValue((char *) "N", py_std__vector__lt___ns3__dsr__DsrErrorBuffEntry___gt__);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrErrorBuffer_Find(PyNs3DsrDsrErrorBuffer *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3Ipv4Address *dst;
-    const char *keywords[] = {"dst", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &dst)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &len)) {
         return NULL;
     }
-    retval = self->obj->Find(*((PyNs3Ipv4Address *) dst)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    self->obj->SetMaxQueueLen(len);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -1187,16 +1187,16 @@ _wrap_PyNs3DsrDsrErrorBuffer__copy__(PyNs3DsrDsrErrorBuffer *self)
 }
 
 static PyMethodDef PyNs3DsrDsrErrorBuffer_methods[] = {
+    {(char *) "Dequeue", (PyCFunction) _wrap_PyNs3DsrDsrErrorBuffer_Dequeue, METH_VARARGS|METH_KEYWORDS, "Dequeue(dst, entry)\n\ntype: dst: ns3::Ipv4Address\ntype: entry: ns3::dsr::DsrErrorBuffEntry &" },
+    {(char *) "DropPacketForErrLink", (PyCFunction) _wrap_PyNs3DsrDsrErrorBuffer_DropPacketForErrLink, METH_VARARGS|METH_KEYWORDS, "DropPacketForErrLink(source, nextHop)\n\ntype: source: ns3::Ipv4Address\ntype: nextHop: ns3::Ipv4Address" },
+    {(char *) "Enqueue", (PyCFunction) _wrap_PyNs3DsrDsrErrorBuffer_Enqueue, METH_VARARGS|METH_KEYWORDS, "Enqueue(entry)\n\ntype: entry: ns3::dsr::DsrErrorBuffEntry &" },
+    {(char *) "Find", (PyCFunction) _wrap_PyNs3DsrDsrErrorBuffer_Find, METH_VARARGS|METH_KEYWORDS, "Find(dst)\n\ntype: dst: ns3::Ipv4Address" },
+    {(char *) "GetBuffer", (PyCFunction) _wrap_PyNs3DsrDsrErrorBuffer_GetBuffer, METH_NOARGS, "GetBuffer()\n\n" },
     {(char *) "GetErrorBufferTimeout", (PyCFunction) _wrap_PyNs3DsrDsrErrorBuffer_GetErrorBufferTimeout, METH_NOARGS, "GetErrorBufferTimeout()\n\n" },
     {(char *) "GetMaxQueueLen", (PyCFunction) _wrap_PyNs3DsrDsrErrorBuffer_GetMaxQueueLen, METH_NOARGS, "GetMaxQueueLen()\n\n" },
-    {(char *) "DropPacketForErrLink", (PyCFunction) _wrap_PyNs3DsrDsrErrorBuffer_DropPacketForErrLink, METH_KEYWORDS|METH_VARARGS, "DropPacketForErrLink(source, nextHop)\n\ntype: source: ns3::Ipv4Address\ntype: nextHop: ns3::Ipv4Address" },
-    {(char *) "Dequeue", (PyCFunction) _wrap_PyNs3DsrDsrErrorBuffer_Dequeue, METH_KEYWORDS|METH_VARARGS, "Dequeue(dst, entry)\n\ntype: dst: ns3::Ipv4Address\ntype: entry: ns3::dsr::DsrErrorBuffEntry &" },
-    {(char *) "SetMaxQueueLen", (PyCFunction) _wrap_PyNs3DsrDsrErrorBuffer_SetMaxQueueLen, METH_KEYWORDS|METH_VARARGS, "SetMaxQueueLen(len)\n\ntype: len: uint32_t" },
     {(char *) "GetSize", (PyCFunction) _wrap_PyNs3DsrDsrErrorBuffer_GetSize, METH_NOARGS, "GetSize()\n\n" },
-    {(char *) "Enqueue", (PyCFunction) _wrap_PyNs3DsrDsrErrorBuffer_Enqueue, METH_KEYWORDS|METH_VARARGS, "Enqueue(entry)\n\ntype: entry: ns3::dsr::DsrErrorBuffEntry &" },
-    {(char *) "SetErrorBufferTimeout", (PyCFunction) _wrap_PyNs3DsrDsrErrorBuffer_SetErrorBufferTimeout, METH_KEYWORDS|METH_VARARGS, "SetErrorBufferTimeout(t)\n\ntype: t: ns3::Time" },
-    {(char *) "GetBuffer", (PyCFunction) _wrap_PyNs3DsrDsrErrorBuffer_GetBuffer, METH_NOARGS, "GetBuffer()\n\n" },
-    {(char *) "Find", (PyCFunction) _wrap_PyNs3DsrDsrErrorBuffer_Find, METH_KEYWORDS|METH_VARARGS, "Find(dst)\n\ntype: dst: ns3::Ipv4Address" },
+    {(char *) "SetErrorBufferTimeout", (PyCFunction) _wrap_PyNs3DsrDsrErrorBuffer_SetErrorBufferTimeout, METH_VARARGS|METH_KEYWORDS, "SetErrorBufferTimeout(t)\n\ntype: t: ns3::Time" },
+    {(char *) "SetMaxQueueLen", (PyCFunction) _wrap_PyNs3DsrDsrErrorBuffer_SetMaxQueueLen, METH_VARARGS|METH_KEYWORDS, "SetMaxQueueLen(len)\n\ntype: len: uint32_t" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3DsrDsrErrorBuffer__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -1374,27 +1374,6 @@ int _wrap_PyNs3DsrDsrFsHeader__tp_init(PyNs3DsrDsrFsHeader *self, PyObject *args
 
 
 PyObject *
-_wrap_PyNs3DsrDsrFsHeader_SetMessageType(PyNs3DsrDsrFsHeader *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int messageType;
-    const char *keywords[] = {"messageType", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &messageType)) {
-        return NULL;
-    }
-    if (messageType > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SetMessageType(messageType);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3DsrDsrFsHeader_Deserialize(PyNs3DsrDsrFsHeader *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -1407,6 +1386,94 @@ _wrap_PyNs3DsrDsrFsHeader_Deserialize(PyNs3DsrDsrFsHeader *self, PyObject *args,
     }
     retval = self->obj->Deserialize(*((PyNs3BufferIterator *) start)->obj);
     py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrFsHeader_GetDestId(PyNs3DsrDsrFsHeader *self)
+{
+    PyObject *py_retval;
+    uint16_t retval;
+    
+    retval = self->obj->GetDestId();
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrFsHeader_GetInstanceTypeId(PyNs3DsrDsrFsHeader *self)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = self->obj->GetInstanceTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrFsHeader_GetMessageType(PyNs3DsrDsrFsHeader *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    
+    retval = self->obj->GetMessageType();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrFsHeader_GetNextHeader(PyNs3DsrDsrFsHeader *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    
+    retval = self->obj->GetNextHeader();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrFsHeader_GetPayloadLength(PyNs3DsrDsrFsHeader *self)
+{
+    PyObject *py_retval;
+    uint16_t retval;
+    
+    retval = self->obj->GetPayloadLength();
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrFsHeader_GetSerializedSize(PyNs3DsrDsrFsHeader *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetSerializedSize();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrFsHeader_GetSourceId(PyNs3DsrDsrFsHeader *self)
+{
+    PyObject *py_retval;
+    uint16_t retval;
+    
+    retval = self->obj->GetSourceId();
+    py_retval = Py_BuildValue((char *) "i", retval);
     return py_retval;
 }
 
@@ -1445,25 +1512,43 @@ _wrap_PyNs3DsrDsrFsHeader_Serialize(PyNs3DsrDsrFsHeader *self, PyObject *args, P
 
 
 PyObject *
-_wrap_PyNs3DsrDsrFsHeader_GetNextHeader(PyNs3DsrDsrFsHeader *self)
+_wrap_PyNs3DsrDsrFsHeader_SetDestId(PyNs3DsrDsrFsHeader *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    uint8_t retval;
+    int destId;
+    const char *keywords[] = {"destId", NULL};
     
-    retval = self->obj->GetNextHeader();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &destId)) {
+        return NULL;
+    }
+    if (destId > 0xffff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SetDestId(destId);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3DsrDsrFsHeader_GetDestId(PyNs3DsrDsrFsHeader *self)
+_wrap_PyNs3DsrDsrFsHeader_SetMessageType(PyNs3DsrDsrFsHeader *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    uint16_t retval;
+    int messageType;
+    const char *keywords[] = {"messageType", NULL};
     
-    retval = self->obj->GetDestId();
-    py_retval = Py_BuildValue((char *) "i", retval);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &messageType)) {
+        return NULL;
+    }
+    if (messageType > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SetMessageType(messageType);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -1483,100 +1568,6 @@ _wrap_PyNs3DsrDsrFsHeader_SetNextHeader(PyNs3DsrDsrFsHeader *self, PyObject *arg
         return NULL;
     }
     self->obj->SetNextHeader(protocol);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrFsHeader_SetSourceId(PyNs3DsrDsrFsHeader *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int sourceId;
-    const char *keywords[] = {"sourceId", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &sourceId)) {
-        return NULL;
-    }
-    if (sourceId > 0xffff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SetSourceId(sourceId);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrFsHeader_GetInstanceTypeId(PyNs3DsrDsrFsHeader *self)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = self->obj->GetInstanceTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrFsHeader_GetSerializedSize(PyNs3DsrDsrFsHeader *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetSerializedSize();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrFsHeader_GetPayloadLength(PyNs3DsrDsrFsHeader *self)
-{
-    PyObject *py_retval;
-    uint16_t retval;
-    
-    retval = self->obj->GetPayloadLength();
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrFsHeader_GetSourceId(PyNs3DsrDsrFsHeader *self)
-{
-    PyObject *py_retval;
-    uint16_t retval;
-    
-    retval = self->obj->GetSourceId();
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrFsHeader_SetDestId(PyNs3DsrDsrFsHeader *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int destId;
-    const char *keywords[] = {"destId", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &destId)) {
-        return NULL;
-    }
-    if (destId > 0xffff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SetDestId(destId);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -1605,13 +1596,22 @@ _wrap_PyNs3DsrDsrFsHeader_SetPayloadLength(PyNs3DsrDsrFsHeader *self, PyObject *
 
 
 PyObject *
-_wrap_PyNs3DsrDsrFsHeader_GetMessageType(PyNs3DsrDsrFsHeader *self)
+_wrap_PyNs3DsrDsrFsHeader_SetSourceId(PyNs3DsrDsrFsHeader *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    uint8_t retval;
+    int sourceId;
+    const char *keywords[] = {"sourceId", NULL};
     
-    retval = self->obj->GetMessageType();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &sourceId)) {
+        return NULL;
+    }
+    if (sourceId > 0xffff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SetSourceId(sourceId);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -1631,21 +1631,21 @@ _wrap_PyNs3DsrDsrFsHeader__copy__(PyNs3DsrDsrFsHeader *self)
 }
 
 static PyMethodDef PyNs3DsrDsrFsHeader_methods[] = {
-    {(char *) "SetMessageType", (PyCFunction) _wrap_PyNs3DsrDsrFsHeader_SetMessageType, METH_KEYWORDS|METH_VARARGS, "SetMessageType(messageType)\n\ntype: messageType: uint8_t" },
-    {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3DsrDsrFsHeader_Deserialize, METH_KEYWORDS|METH_VARARGS, "Deserialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DsrDsrFsHeader_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3DsrDsrFsHeader_Serialize, METH_KEYWORDS|METH_VARARGS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
-    {(char *) "GetNextHeader", (PyCFunction) _wrap_PyNs3DsrDsrFsHeader_GetNextHeader, METH_NOARGS, "GetNextHeader()\n\n" },
+    {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3DsrDsrFsHeader_Deserialize, METH_VARARGS|METH_KEYWORDS, "Deserialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
     {(char *) "GetDestId", (PyCFunction) _wrap_PyNs3DsrDsrFsHeader_GetDestId, METH_NOARGS, "GetDestId()\n\n" },
-    {(char *) "SetNextHeader", (PyCFunction) _wrap_PyNs3DsrDsrFsHeader_SetNextHeader, METH_KEYWORDS|METH_VARARGS, "SetNextHeader(protocol)\n\ntype: protocol: uint8_t" },
-    {(char *) "SetSourceId", (PyCFunction) _wrap_PyNs3DsrDsrFsHeader_SetSourceId, METH_KEYWORDS|METH_VARARGS, "SetSourceId(sourceId)\n\ntype: sourceId: uint16_t" },
     {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3DsrDsrFsHeader_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
-    {(char *) "GetSerializedSize", (PyCFunction) _wrap_PyNs3DsrDsrFsHeader_GetSerializedSize, METH_NOARGS, "GetSerializedSize()\n\n" },
-    {(char *) "GetPayloadLength", (PyCFunction) _wrap_PyNs3DsrDsrFsHeader_GetPayloadLength, METH_NOARGS, "GetPayloadLength()\n\n" },
-    {(char *) "GetSourceId", (PyCFunction) _wrap_PyNs3DsrDsrFsHeader_GetSourceId, METH_NOARGS, "GetSourceId()\n\n" },
-    {(char *) "SetDestId", (PyCFunction) _wrap_PyNs3DsrDsrFsHeader_SetDestId, METH_KEYWORDS|METH_VARARGS, "SetDestId(destId)\n\ntype: destId: uint16_t" },
-    {(char *) "SetPayloadLength", (PyCFunction) _wrap_PyNs3DsrDsrFsHeader_SetPayloadLength, METH_KEYWORDS|METH_VARARGS, "SetPayloadLength(length)\n\ntype: length: uint16_t" },
     {(char *) "GetMessageType", (PyCFunction) _wrap_PyNs3DsrDsrFsHeader_GetMessageType, METH_NOARGS, "GetMessageType()\n\n" },
+    {(char *) "GetNextHeader", (PyCFunction) _wrap_PyNs3DsrDsrFsHeader_GetNextHeader, METH_NOARGS, "GetNextHeader()\n\n" },
+    {(char *) "GetPayloadLength", (PyCFunction) _wrap_PyNs3DsrDsrFsHeader_GetPayloadLength, METH_NOARGS, "GetPayloadLength()\n\n" },
+    {(char *) "GetSerializedSize", (PyCFunction) _wrap_PyNs3DsrDsrFsHeader_GetSerializedSize, METH_NOARGS, "GetSerializedSize()\n\n" },
+    {(char *) "GetSourceId", (PyCFunction) _wrap_PyNs3DsrDsrFsHeader_GetSourceId, METH_NOARGS, "GetSourceId()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DsrDsrFsHeader_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3DsrDsrFsHeader_Serialize, METH_VARARGS|METH_KEYWORDS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
+    {(char *) "SetDestId", (PyCFunction) _wrap_PyNs3DsrDsrFsHeader_SetDestId, METH_VARARGS|METH_KEYWORDS, "SetDestId(destId)\n\ntype: destId: uint16_t" },
+    {(char *) "SetMessageType", (PyCFunction) _wrap_PyNs3DsrDsrFsHeader_SetMessageType, METH_VARARGS|METH_KEYWORDS, "SetMessageType(messageType)\n\ntype: messageType: uint8_t" },
+    {(char *) "SetNextHeader", (PyCFunction) _wrap_PyNs3DsrDsrFsHeader_SetNextHeader, METH_VARARGS|METH_KEYWORDS, "SetNextHeader(protocol)\n\ntype: protocol: uint8_t" },
+    {(char *) "SetPayloadLength", (PyCFunction) _wrap_PyNs3DsrDsrFsHeader_SetPayloadLength, METH_VARARGS|METH_KEYWORDS, "SetPayloadLength(length)\n\ntype: length: uint16_t" },
+    {(char *) "SetSourceId", (PyCFunction) _wrap_PyNs3DsrDsrFsHeader_SetSourceId, METH_VARARGS|METH_KEYWORDS, "SetSourceId(sourceId)\n\ntype: sourceId: uint16_t" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3DsrDsrFsHeader__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -1742,7 +1742,7 @@ PyTypeObject PyNs3DsrDsrFsHeader_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "DsrFsHeader(arg0)\nDsrFsHeader()",                        /* Documentation string */
     (traverseproc)PyNs3DsrDsrFsHeader__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3DsrDsrFsHeader__tp_clear,             /* tp_clear */
@@ -1844,6 +1844,54 @@ int _wrap_PyNs3DsrDsrGraReply__tp_init(PyNs3DsrDsrGraReply *self, PyObject *args
 
 
 PyObject *
+_wrap_PyNs3DsrDsrGraReply_AddEntry(PyNs3DsrDsrGraReply *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3DsrGraReplyEntry *graTableEntry;
+    const char *keywords[] = {"graTableEntry", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3DsrGraReplyEntry_Type, &graTableEntry)) {
+        return NULL;
+    }
+    retval = self->obj->AddEntry(*((PyNs3DsrGraReplyEntry *) graTableEntry)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrGraReply_Clear(PyNs3DsrDsrGraReply *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->Clear();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrGraReply_FindAndUpdate(PyNs3DsrDsrGraReply *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3Ipv4Address *replyTo;
+    PyNs3Ipv4Address *replyFrom;
+    PyNs3Time *gratReplyHoldoff;
+    const char *keywords[] = {"replyTo", "replyFrom", "gratReplyHoldoff", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!O!", (char **) keywords, &PyNs3Ipv4Address_Type, &replyTo, &PyNs3Ipv4Address_Type, &replyFrom, &PyNs3Time_Type, &gratReplyHoldoff)) {
+        return NULL;
+    }
+    retval = self->obj->FindAndUpdate(*((PyNs3Ipv4Address *) replyTo)->obj, *((PyNs3Ipv4Address *) replyFrom)->obj, *((PyNs3Time *) gratReplyHoldoff)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3DsrDsrGraReply_GetGraTableSize(PyNs3DsrDsrGraReply *self)
 {
     PyObject *py_retval;
@@ -1884,25 +1932,6 @@ _wrap_PyNs3DsrDsrGraReply_Purge(PyNs3DsrDsrGraReply *self)
 
 
 PyObject *
-_wrap_PyNs3DsrDsrGraReply_FindAndUpdate(PyNs3DsrDsrGraReply *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3Ipv4Address *replyTo;
-    PyNs3Ipv4Address *replyFrom;
-    PyNs3Time *gratReplyHoldoff;
-    const char *keywords[] = {"replyTo", "replyFrom", "gratReplyHoldoff", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!O!", (char **) keywords, &PyNs3Ipv4Address_Type, &replyTo, &PyNs3Ipv4Address_Type, &replyFrom, &PyNs3Time_Type, &gratReplyHoldoff)) {
-        return NULL;
-    }
-    retval = self->obj->FindAndUpdate(*((PyNs3Ipv4Address *) replyTo)->obj, *((PyNs3Ipv4Address *) replyFrom)->obj, *((PyNs3Time *) gratReplyHoldoff)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3DsrDsrGraReply_SetGraTableSize(PyNs3DsrDsrGraReply *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -1913,35 +1942,6 @@ _wrap_PyNs3DsrDsrGraReply_SetGraTableSize(PyNs3DsrDsrGraReply *self, PyObject *a
         return NULL;
     }
     self->obj->SetGraTableSize(g);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrGraReply_AddEntry(PyNs3DsrDsrGraReply *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3DsrGraReplyEntry *graTableEntry;
-    const char *keywords[] = {"graTableEntry", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3DsrGraReplyEntry_Type, &graTableEntry)) {
-        return NULL;
-    }
-    retval = self->obj->AddEntry(*((PyNs3DsrGraReplyEntry *) graTableEntry)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrGraReply_Clear(PyNs3DsrDsrGraReply *self)
-{
-    PyObject *py_retval;
-    
-    self->obj->Clear();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -1964,13 +1964,13 @@ _wrap_PyNs3DsrDsrGraReply__copy__(PyNs3DsrDsrGraReply *self)
 }
 
 static PyMethodDef PyNs3DsrDsrGraReply_methods[] = {
+    {(char *) "AddEntry", (PyCFunction) _wrap_PyNs3DsrDsrGraReply_AddEntry, METH_VARARGS|METH_KEYWORDS, "AddEntry(graTableEntry)\n\ntype: graTableEntry: ns3::dsr::GraReplyEntry &" },
+    {(char *) "Clear", (PyCFunction) _wrap_PyNs3DsrDsrGraReply_Clear, METH_NOARGS, "Clear()\n\n" },
+    {(char *) "FindAndUpdate", (PyCFunction) _wrap_PyNs3DsrDsrGraReply_FindAndUpdate, METH_VARARGS|METH_KEYWORDS, "FindAndUpdate(replyTo, replyFrom, gratReplyHoldoff)\n\ntype: replyTo: ns3::Ipv4Address\ntype: replyFrom: ns3::Ipv4Address\ntype: gratReplyHoldoff: ns3::Time" },
     {(char *) "GetGraTableSize", (PyCFunction) _wrap_PyNs3DsrDsrGraReply_GetGraTableSize, METH_NOARGS, "GetGraTableSize()\n\n" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DsrDsrGraReply_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
     {(char *) "Purge", (PyCFunction) _wrap_PyNs3DsrDsrGraReply_Purge, METH_NOARGS, "Purge()\n\n" },
-    {(char *) "FindAndUpdate", (PyCFunction) _wrap_PyNs3DsrDsrGraReply_FindAndUpdate, METH_KEYWORDS|METH_VARARGS, "FindAndUpdate(replyTo, replyFrom, gratReplyHoldoff)\n\ntype: replyTo: ns3::Ipv4Address\ntype: replyFrom: ns3::Ipv4Address\ntype: gratReplyHoldoff: ns3::Time" },
-    {(char *) "SetGraTableSize", (PyCFunction) _wrap_PyNs3DsrDsrGraReply_SetGraTableSize, METH_KEYWORDS|METH_VARARGS, "SetGraTableSize(g)\n\ntype: g: uint32_t" },
-    {(char *) "AddEntry", (PyCFunction) _wrap_PyNs3DsrDsrGraReply_AddEntry, METH_KEYWORDS|METH_VARARGS, "AddEntry(graTableEntry)\n\ntype: graTableEntry: ns3::dsr::GraReplyEntry &" },
-    {(char *) "Clear", (PyCFunction) _wrap_PyNs3DsrDsrGraReply_Clear, METH_NOARGS, "Clear()\n\n" },
+    {(char *) "SetGraTableSize", (PyCFunction) _wrap_PyNs3DsrDsrGraReply_SetGraTableSize, METH_VARARGS|METH_KEYWORDS, "SetGraTableSize(g)\n\ntype: g: uint32_t" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3DsrDsrGraReply__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -2067,7 +2067,7 @@ PyTypeObject PyNs3DsrDsrGraReply_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "DsrGraReply(arg0)\nDsrGraReply()",                        /* Documentation string */
     (traverseproc)PyNs3DsrDsrGraReply__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3DsrDsrGraReply__tp_clear,             /* tp_clear */
@@ -2167,6 +2167,22 @@ int _wrap_PyNs3DsrDsrLinkStab__tp_init(PyNs3DsrDsrLinkStab *self, PyObject *args
 
 
 PyObject *
+_wrap_PyNs3DsrDsrLinkStab_GetLinkStability(PyNs3DsrDsrLinkStab *self)
+{
+    PyObject *py_retval;
+    PyNs3Time *py_Time;
+    
+    ns3::Time retval = self->obj->GetLinkStability();
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3DsrDsrLinkStab_Print(PyNs3DsrDsrLinkStab *self)
 {
     PyObject *py_retval;
@@ -2195,22 +2211,6 @@ _wrap_PyNs3DsrDsrLinkStab_SetLinkStability(PyNs3DsrDsrLinkStab *self, PyObject *
 }
 
 
-PyObject *
-_wrap_PyNs3DsrDsrLinkStab_GetLinkStability(PyNs3DsrDsrLinkStab *self)
-{
-    PyObject *py_retval;
-    PyNs3Time *py_Time;
-    
-    ns3::Time retval = self->obj->GetLinkStability();
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3DsrDsrLinkStab__copy__(PyNs3DsrDsrLinkStab *self)
 {
@@ -2224,9 +2224,9 @@ _wrap_PyNs3DsrDsrLinkStab__copy__(PyNs3DsrDsrLinkStab *self)
 }
 
 static PyMethodDef PyNs3DsrDsrLinkStab_methods[] = {
-    {(char *) "Print", (PyCFunction) _wrap_PyNs3DsrDsrLinkStab_Print, METH_NOARGS, "Print()\n\n" },
-    {(char *) "SetLinkStability", (PyCFunction) _wrap_PyNs3DsrDsrLinkStab_SetLinkStability, METH_KEYWORDS|METH_VARARGS, "SetLinkStability(linkStab)\n\ntype: linkStab: ns3::Time" },
     {(char *) "GetLinkStability", (PyCFunction) _wrap_PyNs3DsrDsrLinkStab_GetLinkStability, METH_NOARGS, "GetLinkStability()\n\n" },
+    {(char *) "Print", (PyCFunction) _wrap_PyNs3DsrDsrLinkStab_Print, METH_NOARGS, "Print()\n\n" },
+    {(char *) "SetLinkStability", (PyCFunction) _wrap_PyNs3DsrDsrLinkStab_SetLinkStability, METH_VARARGS|METH_KEYWORDS, "SetLinkStability(linkStab)\n\ntype: linkStab: ns3::Time" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3DsrDsrLinkStab__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -2435,6 +2435,235 @@ int _wrap_PyNs3DsrDsrMaintainBuffEntry__tp_init(PyNs3DsrDsrMaintainBuffEntry *se
 
 
 PyObject *
+_wrap_PyNs3DsrDsrMaintainBuffEntry_GetAckId(PyNs3DsrDsrMaintainBuffEntry *self)
+{
+    PyObject *py_retval;
+    uint16_t retval;
+    
+    retval = self->obj->GetAckId();
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrMaintainBuffEntry_GetDst(PyNs3DsrDsrMaintainBuffEntry *self)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4Address *py_Ipv4Address;
+    
+    ns3::Ipv4Address retval = self->obj->GetDst();
+    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
+    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
+    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
+    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrMaintainBuffEntry_GetExpireTime(PyNs3DsrDsrMaintainBuffEntry *self)
+{
+    PyObject *py_retval;
+    PyNs3Time *py_Time;
+    
+    ns3::Time retval = self->obj->GetExpireTime();
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrMaintainBuffEntry_GetNextHop(PyNs3DsrDsrMaintainBuffEntry *self)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4Address *py_Ipv4Address;
+    
+    ns3::Ipv4Address retval = self->obj->GetNextHop();
+    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
+    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
+    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
+    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrMaintainBuffEntry_GetOurAdd(PyNs3DsrDsrMaintainBuffEntry *self)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4Address *py_Ipv4Address;
+    
+    ns3::Ipv4Address retval = self->obj->GetOurAdd();
+    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
+    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
+    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
+    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrMaintainBuffEntry_GetPacket(PyNs3DsrDsrMaintainBuffEntry *self)
+{
+    PyObject *py_retval;
+    ns3::Ptr< ns3::Packet const > retval;
+    PyNs3Packet *py_Packet;
+    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
+    PyTypeObject *wrapper_type = 0;
+    
+    retval = self->obj->GetPacket();
+    if (!(const_cast<ns3::Packet *> (ns3::PeekPointer (retval)))) {
+        Py_INCREF(Py_None);
+        return Py_None;
+    }
+    wrapper_lookup_iter = PyNs3Empty_wrapper_registry.find((void *) const_cast<ns3::Packet *> (ns3::PeekPointer (retval)));
+    if (wrapper_lookup_iter == PyNs3Empty_wrapper_registry.end()) {
+        py_Packet = NULL;
+    } else {
+        py_Packet = (PyNs3Packet *) wrapper_lookup_iter->second;
+        Py_INCREF(py_Packet);
+    }
+    
+    if (py_Packet == NULL) {
+        wrapper_type = PyNs3SimpleRefCount__Ns3Packet_Ns3Empty_Ns3DefaultDeleter__lt__ns3Packet__gt____typeid_map.lookup_wrapper(typeid((*const_cast<ns3::Packet *> (ns3::PeekPointer (retval)))), &PyNs3Packet_Type);
+        py_Packet = PyObject_New(PyNs3Packet, wrapper_type);
+    
+        py_Packet->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+        const_cast<ns3::Packet *> (ns3::PeekPointer (retval))->Ref();
+        py_Packet->obj = const_cast<ns3::Packet *> (ns3::PeekPointer (retval));
+        PyNs3Empty_wrapper_registry[(void *) py_Packet->obj] = (PyObject *) py_Packet;
+    }
+    py_retval = Py_BuildValue((char *) "N", py_Packet);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrMaintainBuffEntry_GetSegsLeft(PyNs3DsrDsrMaintainBuffEntry *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    
+    retval = self->obj->GetSegsLeft();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrMaintainBuffEntry_GetSrc(PyNs3DsrDsrMaintainBuffEntry *self)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4Address *py_Ipv4Address;
+    
+    ns3::Ipv4Address retval = self->obj->GetSrc();
+    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
+    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
+    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
+    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrMaintainBuffEntry_SetAckId(PyNs3DsrDsrMaintainBuffEntry *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int ackId;
+    const char *keywords[] = {"ackId", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &ackId)) {
+        return NULL;
+    }
+    if (ackId > 0xffff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SetAckId(ackId);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrMaintainBuffEntry_SetDst(PyNs3DsrDsrMaintainBuffEntry *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4Address *n;
+    const char *keywords[] = {"n", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &n)) {
+        return NULL;
+    }
+    self->obj->SetDst(*((PyNs3Ipv4Address *) n)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrMaintainBuffEntry_SetExpireTime(PyNs3DsrDsrMaintainBuffEntry *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Time *exp;
+    const char *keywords[] = {"exp", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Time_Type, &exp)) {
+        return NULL;
+    }
+    self->obj->SetExpireTime(*((PyNs3Time *) exp)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrMaintainBuffEntry_SetNextHop(PyNs3DsrDsrMaintainBuffEntry *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4Address *n;
+    const char *keywords[] = {"n", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &n)) {
+        return NULL;
+    }
+    self->obj->SetNextHop(*((PyNs3Ipv4Address *) n)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrMaintainBuffEntry_SetOurAdd(PyNs3DsrDsrMaintainBuffEntry *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4Address *us;
+    const char *keywords[] = {"us", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &us)) {
+        return NULL;
+    }
+    self->obj->SetOurAdd(*((PyNs3Ipv4Address *) us)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3DsrDsrMaintainBuffEntry_SetPacket(PyNs3DsrDsrMaintainBuffEntry *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -2491,235 +2720,6 @@ _wrap_PyNs3DsrDsrMaintainBuffEntry_SetSrc(PyNs3DsrDsrMaintainBuffEntry *self, Py
 }
 
 
-PyObject *
-_wrap_PyNs3DsrDsrMaintainBuffEntry_SetNextHop(PyNs3DsrDsrMaintainBuffEntry *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Ipv4Address *n;
-    const char *keywords[] = {"n", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &n)) {
-        return NULL;
-    }
-    self->obj->SetNextHop(*((PyNs3Ipv4Address *) n)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrMaintainBuffEntry_GetSegsLeft(PyNs3DsrDsrMaintainBuffEntry *self)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    
-    retval = self->obj->GetSegsLeft();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrMaintainBuffEntry_GetSrc(PyNs3DsrDsrMaintainBuffEntry *self)
-{
-    PyObject *py_retval;
-    PyNs3Ipv4Address *py_Ipv4Address;
-    
-    ns3::Ipv4Address retval = self->obj->GetSrc();
-    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
-    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
-    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
-    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrMaintainBuffEntry_SetDst(PyNs3DsrDsrMaintainBuffEntry *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Ipv4Address *n;
-    const char *keywords[] = {"n", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &n)) {
-        return NULL;
-    }
-    self->obj->SetDst(*((PyNs3Ipv4Address *) n)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrMaintainBuffEntry_GetNextHop(PyNs3DsrDsrMaintainBuffEntry *self)
-{
-    PyObject *py_retval;
-    PyNs3Ipv4Address *py_Ipv4Address;
-    
-    ns3::Ipv4Address retval = self->obj->GetNextHop();
-    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
-    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
-    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
-    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrMaintainBuffEntry_GetDst(PyNs3DsrDsrMaintainBuffEntry *self)
-{
-    PyObject *py_retval;
-    PyNs3Ipv4Address *py_Ipv4Address;
-    
-    ns3::Ipv4Address retval = self->obj->GetDst();
-    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
-    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
-    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
-    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrMaintainBuffEntry_SetAckId(PyNs3DsrDsrMaintainBuffEntry *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int ackId;
-    const char *keywords[] = {"ackId", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &ackId)) {
-        return NULL;
-    }
-    if (ackId > 0xffff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SetAckId(ackId);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrMaintainBuffEntry_GetPacket(PyNs3DsrDsrMaintainBuffEntry *self)
-{
-    PyObject *py_retval;
-    ns3::Ptr< ns3::Packet const > retval;
-    PyNs3Packet *py_Packet;
-    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
-    PyTypeObject *wrapper_type = 0;
-    
-    retval = self->obj->GetPacket();
-    if (!(const_cast<ns3::Packet *> (ns3::PeekPointer (retval)))) {
-        Py_INCREF(Py_None);
-        return Py_None;
-    }
-    wrapper_lookup_iter = PyNs3Empty_wrapper_registry.find((void *) const_cast<ns3::Packet *> (ns3::PeekPointer (retval)));
-    if (wrapper_lookup_iter == PyNs3Empty_wrapper_registry.end()) {
-        py_Packet = NULL;
-    } else {
-        py_Packet = (PyNs3Packet *) wrapper_lookup_iter->second;
-        Py_INCREF(py_Packet);
-    }
-    
-    if (py_Packet == NULL) {
-        wrapper_type = PyNs3SimpleRefCount__Ns3Packet_Ns3Empty_Ns3DefaultDeleter__lt__ns3Packet__gt____typeid_map.lookup_wrapper(typeid((*const_cast<ns3::Packet *> (ns3::PeekPointer (retval)))), &PyNs3Packet_Type);
-        py_Packet = PyObject_New(PyNs3Packet, wrapper_type);
-    
-        py_Packet->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-        const_cast<ns3::Packet *> (ns3::PeekPointer (retval))->Ref();
-        py_Packet->obj = const_cast<ns3::Packet *> (ns3::PeekPointer (retval));
-        PyNs3Empty_wrapper_registry[(void *) py_Packet->obj] = (PyObject *) py_Packet;
-    }
-    py_retval = Py_BuildValue((char *) "N", py_Packet);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrMaintainBuffEntry_SetOurAdd(PyNs3DsrDsrMaintainBuffEntry *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Ipv4Address *us;
-    const char *keywords[] = {"us", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &us)) {
-        return NULL;
-    }
-    self->obj->SetOurAdd(*((PyNs3Ipv4Address *) us)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrMaintainBuffEntry_SetExpireTime(PyNs3DsrDsrMaintainBuffEntry *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Time *exp;
-    const char *keywords[] = {"exp", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Time_Type, &exp)) {
-        return NULL;
-    }
-    self->obj->SetExpireTime(*((PyNs3Time *) exp)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrMaintainBuffEntry_GetAckId(PyNs3DsrDsrMaintainBuffEntry *self)
-{
-    PyObject *py_retval;
-    uint16_t retval;
-    
-    retval = self->obj->GetAckId();
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrMaintainBuffEntry_GetOurAdd(PyNs3DsrDsrMaintainBuffEntry *self)
-{
-    PyObject *py_retval;
-    PyNs3Ipv4Address *py_Ipv4Address;
-    
-    ns3::Ipv4Address retval = self->obj->GetOurAdd();
-    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
-    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
-    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
-    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrMaintainBuffEntry_GetExpireTime(PyNs3DsrDsrMaintainBuffEntry *self)
-{
-    PyObject *py_retval;
-    PyNs3Time *py_Time;
-    
-    ns3::Time retval = self->obj->GetExpireTime();
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3DsrDsrMaintainBuffEntry__copy__(PyNs3DsrDsrMaintainBuffEntry *self)
 {
@@ -2733,22 +2733,22 @@ _wrap_PyNs3DsrDsrMaintainBuffEntry__copy__(PyNs3DsrDsrMaintainBuffEntry *self)
 }
 
 static PyMethodDef PyNs3DsrDsrMaintainBuffEntry_methods[] = {
-    {(char *) "SetPacket", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffEntry_SetPacket, METH_KEYWORDS|METH_VARARGS, "SetPacket(p)\n\ntype: p: ns3::Ptr< ns3::Packet const >" },
-    {(char *) "SetSegsLeft", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffEntry_SetSegsLeft, METH_KEYWORDS|METH_VARARGS, "SetSegsLeft(segs)\n\ntype: segs: uint8_t" },
-    {(char *) "SetSrc", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffEntry_SetSrc, METH_KEYWORDS|METH_VARARGS, "SetSrc(s)\n\ntype: s: ns3::Ipv4Address" },
-    {(char *) "SetNextHop", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffEntry_SetNextHop, METH_KEYWORDS|METH_VARARGS, "SetNextHop(n)\n\ntype: n: ns3::Ipv4Address" },
+    {(char *) "GetAckId", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffEntry_GetAckId, METH_NOARGS, "GetAckId()\n\n" },
+    {(char *) "GetDst", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffEntry_GetDst, METH_NOARGS, "GetDst()\n\n" },
+    {(char *) "GetExpireTime", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffEntry_GetExpireTime, METH_NOARGS, "GetExpireTime()\n\n" },
+    {(char *) "GetNextHop", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffEntry_GetNextHop, METH_NOARGS, "GetNextHop()\n\n" },
+    {(char *) "GetOurAdd", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffEntry_GetOurAdd, METH_NOARGS, "GetOurAdd()\n\n" },
+    {(char *) "GetPacket", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffEntry_GetPacket, METH_NOARGS, "GetPacket()\n\n" },
     {(char *) "GetSegsLeft", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffEntry_GetSegsLeft, METH_NOARGS, "GetSegsLeft()\n\n" },
     {(char *) "GetSrc", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffEntry_GetSrc, METH_NOARGS, "GetSrc()\n\n" },
-    {(char *) "SetDst", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffEntry_SetDst, METH_KEYWORDS|METH_VARARGS, "SetDst(n)\n\ntype: n: ns3::Ipv4Address" },
-    {(char *) "GetNextHop", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffEntry_GetNextHop, METH_NOARGS, "GetNextHop()\n\n" },
-    {(char *) "GetDst", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffEntry_GetDst, METH_NOARGS, "GetDst()\n\n" },
-    {(char *) "SetAckId", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffEntry_SetAckId, METH_KEYWORDS|METH_VARARGS, "SetAckId(ackId)\n\ntype: ackId: uint16_t" },
-    {(char *) "GetPacket", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffEntry_GetPacket, METH_NOARGS, "GetPacket()\n\n" },
-    {(char *) "SetOurAdd", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffEntry_SetOurAdd, METH_KEYWORDS|METH_VARARGS, "SetOurAdd(us)\n\ntype: us: ns3::Ipv4Address" },
-    {(char *) "SetExpireTime", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffEntry_SetExpireTime, METH_KEYWORDS|METH_VARARGS, "SetExpireTime(exp)\n\ntype: exp: ns3::Time" },
-    {(char *) "GetAckId", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffEntry_GetAckId, METH_NOARGS, "GetAckId()\n\n" },
-    {(char *) "GetOurAdd", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffEntry_GetOurAdd, METH_NOARGS, "GetOurAdd()\n\n" },
-    {(char *) "GetExpireTime", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffEntry_GetExpireTime, METH_NOARGS, "GetExpireTime()\n\n" },
+    {(char *) "SetAckId", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffEntry_SetAckId, METH_VARARGS|METH_KEYWORDS, "SetAckId(ackId)\n\ntype: ackId: uint16_t" },
+    {(char *) "SetDst", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffEntry_SetDst, METH_VARARGS|METH_KEYWORDS, "SetDst(n)\n\ntype: n: ns3::Ipv4Address" },
+    {(char *) "SetExpireTime", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffEntry_SetExpireTime, METH_VARARGS|METH_KEYWORDS, "SetExpireTime(exp)\n\ntype: exp: ns3::Time" },
+    {(char *) "SetNextHop", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffEntry_SetNextHop, METH_VARARGS|METH_KEYWORDS, "SetNextHop(n)\n\ntype: n: ns3::Ipv4Address" },
+    {(char *) "SetOurAdd", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffEntry_SetOurAdd, METH_VARARGS|METH_KEYWORDS, "SetOurAdd(us)\n\ntype: us: ns3::Ipv4Address" },
+    {(char *) "SetPacket", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffEntry_SetPacket, METH_VARARGS|METH_KEYWORDS, "SetPacket(p)\n\ntype: p: ns3::Ptr< ns3::Packet const >" },
+    {(char *) "SetSegsLeft", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffEntry_SetSegsLeft, METH_VARARGS|METH_KEYWORDS, "SetSegsLeft(segs)\n\ntype: segs: uint8_t" },
+    {(char *) "SetSrc", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffEntry_SetSrc, METH_VARARGS|METH_KEYWORDS, "SetSrc(s)\n\ntype: s: ns3::Ipv4Address" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffEntry__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -2927,57 +2927,7 @@ int _wrap_PyNs3DsrDsrMaintainBuffer__tp_init(PyNs3DsrDsrMaintainBuffer *self, Py
 
 
 PyObject *
-_wrap_PyNs3DsrDsrMaintainBuffer_DropPacketWithNextHop(PyNs3DsrDsrMaintainBuffer *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Ipv4Address *nextHop;
-    const char *keywords[] = {"nextHop", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &nextHop)) {
-        return NULL;
-    }
-    self->obj->DropPacketWithNextHop(*((PyNs3Ipv4Address *) nextHop)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrMaintainBuffer_GetMaintainBufferTimeout(PyNs3DsrDsrMaintainBuffer *self)
-{
-    PyObject *py_retval;
-    PyNs3Time *py_Time;
-    
-    ns3::Time retval = self->obj->GetMaintainBufferTimeout();
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrMaintainBuffer_SetMaintainBufferTimeout(PyNs3DsrDsrMaintainBuffer *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Time *t;
-    const char *keywords[] = {"t", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Time_Type, &t)) {
-        return NULL;
-    }
-    self->obj->SetMaintainBufferTimeout(*((PyNs3Time *) t)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrMaintainBuffer_NetworkEqual(PyNs3DsrDsrMaintainBuffer *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3DsrDsrMaintainBuffer_AllEqual(PyNs3DsrDsrMaintainBuffer *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
     bool retval;
@@ -2987,24 +2937,7 @@ _wrap_PyNs3DsrDsrMaintainBuffer_NetworkEqual(PyNs3DsrDsrMaintainBuffer *self, Py
     if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3DsrDsrMaintainBuffEntry_Type, &entry)) {
         return NULL;
     }
-    retval = self->obj->NetworkEqual(*((PyNs3DsrDsrMaintainBuffEntry *) entry)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrMaintainBuffer_LinkEqual(PyNs3DsrDsrMaintainBuffer *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3DsrDsrMaintainBuffEntry *entry;
-    const char *keywords[] = {"entry", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3DsrDsrMaintainBuffEntry_Type, &entry)) {
-        return NULL;
-    }
-    retval = self->obj->LinkEqual(*((PyNs3DsrDsrMaintainBuffEntry *) entry)->obj);
+    retval = self->obj->AllEqual(*((PyNs3DsrDsrMaintainBuffEntry *) entry)->obj);
     py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
@@ -3029,59 +2962,18 @@ _wrap_PyNs3DsrDsrMaintainBuffer_Dequeue(PyNs3DsrDsrMaintainBuffer *self, PyObjec
 
 
 PyObject *
-_wrap_PyNs3DsrDsrMaintainBuffer_PromiscEqual(PyNs3DsrDsrMaintainBuffer *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3DsrDsrMaintainBuffer_DropPacketWithNextHop(PyNs3DsrDsrMaintainBuffer *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    bool retval;
-    PyNs3DsrDsrMaintainBuffEntry *entry;
-    const char *keywords[] = {"entry", NULL};
+    PyNs3Ipv4Address *nextHop;
+    const char *keywords[] = {"nextHop", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3DsrDsrMaintainBuffEntry_Type, &entry)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &nextHop)) {
         return NULL;
     }
-    retval = self->obj->PromiscEqual(*((PyNs3DsrDsrMaintainBuffEntry *) entry)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrMaintainBuffer_GetMaxQueueLen(PyNs3DsrDsrMaintainBuffer *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetMaxQueueLen();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrMaintainBuffer_SetMaxQueueLen(PyNs3DsrDsrMaintainBuffer *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int len;
-    const char *keywords[] = {"len", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &len)) {
-        return NULL;
-    }
-    self->obj->SetMaxQueueLen(len);
+    self->obj->DropPacketWithNextHop(*((PyNs3Ipv4Address *) nextHop)->obj);
     Py_INCREF(Py_None);
     py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrMaintainBuffer_GetSize(PyNs3DsrDsrMaintainBuffer *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetSize();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
 
@@ -3104,23 +2996,6 @@ _wrap_PyNs3DsrDsrMaintainBuffer_Enqueue(PyNs3DsrDsrMaintainBuffer *self, PyObjec
 
 
 PyObject *
-_wrap_PyNs3DsrDsrMaintainBuffer_AllEqual(PyNs3DsrDsrMaintainBuffer *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3DsrDsrMaintainBuffEntry *entry;
-    const char *keywords[] = {"entry", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3DsrDsrMaintainBuffEntry_Type, &entry)) {
-        return NULL;
-    }
-    retval = self->obj->AllEqual(*((PyNs3DsrDsrMaintainBuffEntry *) entry)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3DsrDsrMaintainBuffer_Find(PyNs3DsrDsrMaintainBuffer *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -3133,6 +3008,131 @@ _wrap_PyNs3DsrDsrMaintainBuffer_Find(PyNs3DsrDsrMaintainBuffer *self, PyObject *
     }
     retval = self->obj->Find(*((PyNs3Ipv4Address *) nextHop)->obj);
     py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrMaintainBuffer_GetMaintainBufferTimeout(PyNs3DsrDsrMaintainBuffer *self)
+{
+    PyObject *py_retval;
+    PyNs3Time *py_Time;
+    
+    ns3::Time retval = self->obj->GetMaintainBufferTimeout();
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrMaintainBuffer_GetMaxQueueLen(PyNs3DsrDsrMaintainBuffer *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetMaxQueueLen();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrMaintainBuffer_GetSize(PyNs3DsrDsrMaintainBuffer *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetSize();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrMaintainBuffer_LinkEqual(PyNs3DsrDsrMaintainBuffer *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3DsrDsrMaintainBuffEntry *entry;
+    const char *keywords[] = {"entry", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3DsrDsrMaintainBuffEntry_Type, &entry)) {
+        return NULL;
+    }
+    retval = self->obj->LinkEqual(*((PyNs3DsrDsrMaintainBuffEntry *) entry)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrMaintainBuffer_NetworkEqual(PyNs3DsrDsrMaintainBuffer *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3DsrDsrMaintainBuffEntry *entry;
+    const char *keywords[] = {"entry", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3DsrDsrMaintainBuffEntry_Type, &entry)) {
+        return NULL;
+    }
+    retval = self->obj->NetworkEqual(*((PyNs3DsrDsrMaintainBuffEntry *) entry)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrMaintainBuffer_PromiscEqual(PyNs3DsrDsrMaintainBuffer *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3DsrDsrMaintainBuffEntry *entry;
+    const char *keywords[] = {"entry", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3DsrDsrMaintainBuffEntry_Type, &entry)) {
+        return NULL;
+    }
+    retval = self->obj->PromiscEqual(*((PyNs3DsrDsrMaintainBuffEntry *) entry)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrMaintainBuffer_SetMaintainBufferTimeout(PyNs3DsrDsrMaintainBuffer *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Time *t;
+    const char *keywords[] = {"t", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Time_Type, &t)) {
+        return NULL;
+    }
+    self->obj->SetMaintainBufferTimeout(*((PyNs3Time *) t)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrMaintainBuffer_SetMaxQueueLen(PyNs3DsrDsrMaintainBuffer *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int len;
+    const char *keywords[] = {"len", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &len)) {
+        return NULL;
+    }
+    self->obj->SetMaxQueueLen(len);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -3150,19 +3150,19 @@ _wrap_PyNs3DsrDsrMaintainBuffer__copy__(PyNs3DsrDsrMaintainBuffer *self)
 }
 
 static PyMethodDef PyNs3DsrDsrMaintainBuffer_methods[] = {
-    {(char *) "DropPacketWithNextHop", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffer_DropPacketWithNextHop, METH_KEYWORDS|METH_VARARGS, "DropPacketWithNextHop(nextHop)\n\ntype: nextHop: ns3::Ipv4Address" },
+    {(char *) "AllEqual", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffer_AllEqual, METH_VARARGS|METH_KEYWORDS, "AllEqual(entry)\n\ntype: entry: ns3::dsr::DsrMaintainBuffEntry &" },
+    {(char *) "Dequeue", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffer_Dequeue, METH_VARARGS|METH_KEYWORDS, "Dequeue(dst, entry)\n\ntype: dst: ns3::Ipv4Address\ntype: entry: ns3::dsr::DsrMaintainBuffEntry &" },
+    {(char *) "DropPacketWithNextHop", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffer_DropPacketWithNextHop, METH_VARARGS|METH_KEYWORDS, "DropPacketWithNextHop(nextHop)\n\ntype: nextHop: ns3::Ipv4Address" },
+    {(char *) "Enqueue", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffer_Enqueue, METH_VARARGS|METH_KEYWORDS, "Enqueue(entry)\n\ntype: entry: ns3::dsr::DsrMaintainBuffEntry &" },
+    {(char *) "Find", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffer_Find, METH_VARARGS|METH_KEYWORDS, "Find(nextHop)\n\ntype: nextHop: ns3::Ipv4Address" },
     {(char *) "GetMaintainBufferTimeout", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffer_GetMaintainBufferTimeout, METH_NOARGS, "GetMaintainBufferTimeout()\n\n" },
-    {(char *) "SetMaintainBufferTimeout", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffer_SetMaintainBufferTimeout, METH_KEYWORDS|METH_VARARGS, "SetMaintainBufferTimeout(t)\n\ntype: t: ns3::Time" },
-    {(char *) "NetworkEqual", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffer_NetworkEqual, METH_KEYWORDS|METH_VARARGS, "NetworkEqual(entry)\n\ntype: entry: ns3::dsr::DsrMaintainBuffEntry &" },
-    {(char *) "LinkEqual", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffer_LinkEqual, METH_KEYWORDS|METH_VARARGS, "LinkEqual(entry)\n\ntype: entry: ns3::dsr::DsrMaintainBuffEntry &" },
-    {(char *) "Dequeue", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffer_Dequeue, METH_KEYWORDS|METH_VARARGS, "Dequeue(dst, entry)\n\ntype: dst: ns3::Ipv4Address\ntype: entry: ns3::dsr::DsrMaintainBuffEntry &" },
-    {(char *) "PromiscEqual", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffer_PromiscEqual, METH_KEYWORDS|METH_VARARGS, "PromiscEqual(entry)\n\ntype: entry: ns3::dsr::DsrMaintainBuffEntry &" },
     {(char *) "GetMaxQueueLen", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffer_GetMaxQueueLen, METH_NOARGS, "GetMaxQueueLen()\n\n" },
-    {(char *) "SetMaxQueueLen", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffer_SetMaxQueueLen, METH_KEYWORDS|METH_VARARGS, "SetMaxQueueLen(len)\n\ntype: len: uint32_t" },
     {(char *) "GetSize", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffer_GetSize, METH_NOARGS, "GetSize()\n\n" },
-    {(char *) "Enqueue", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffer_Enqueue, METH_KEYWORDS|METH_VARARGS, "Enqueue(entry)\n\ntype: entry: ns3::dsr::DsrMaintainBuffEntry &" },
-    {(char *) "AllEqual", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffer_AllEqual, METH_KEYWORDS|METH_VARARGS, "AllEqual(entry)\n\ntype: entry: ns3::dsr::DsrMaintainBuffEntry &" },
-    {(char *) "Find", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffer_Find, METH_KEYWORDS|METH_VARARGS, "Find(nextHop)\n\ntype: nextHop: ns3::Ipv4Address" },
+    {(char *) "LinkEqual", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffer_LinkEqual, METH_VARARGS|METH_KEYWORDS, "LinkEqual(entry)\n\ntype: entry: ns3::dsr::DsrMaintainBuffEntry &" },
+    {(char *) "NetworkEqual", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffer_NetworkEqual, METH_VARARGS|METH_KEYWORDS, "NetworkEqual(entry)\n\ntype: entry: ns3::dsr::DsrMaintainBuffEntry &" },
+    {(char *) "PromiscEqual", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffer_PromiscEqual, METH_VARARGS|METH_KEYWORDS, "PromiscEqual(entry)\n\ntype: entry: ns3::dsr::DsrMaintainBuffEntry &" },
+    {(char *) "SetMaintainBufferTimeout", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffer_SetMaintainBufferTimeout, METH_VARARGS|METH_KEYWORDS, "SetMaintainBufferTimeout(t)\n\ntype: t: ns3::Time" },
+    {(char *) "SetMaxQueueLen", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffer_SetMaxQueueLen, METH_VARARGS|METH_KEYWORDS, "SetMaxQueueLen(len)\n\ntype: len: uint32_t" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3DsrDsrMaintainBuffer__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -3392,6 +3392,125 @@ _wrap_PyNs3DsrDsrNetworkQueue_Dequeue(PyNs3DsrDsrNetworkQueue *self, PyObject *a
 
 
 PyObject *
+_wrap_PyNs3DsrDsrNetworkQueue_Enqueue(PyNs3DsrDsrNetworkQueue *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3DsrDsrNetworkQueueEntry *entry;
+    const char *keywords[] = {"entry", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3DsrDsrNetworkQueueEntry_Type, &entry)) {
+        return NULL;
+    }
+    retval = self->obj->Enqueue(*((PyNs3DsrDsrNetworkQueueEntry *) entry)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrNetworkQueue_Find(PyNs3DsrDsrNetworkQueue *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3Ipv4Address *nextHop;
+    const char *keywords[] = {"nextHop", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &nextHop)) {
+        return NULL;
+    }
+    retval = self->obj->Find(*((PyNs3Ipv4Address *) nextHop)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrNetworkQueue_FindPacketWithNexthop(PyNs3DsrDsrNetworkQueue *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3Ipv4Address *nextHop;
+    PyNs3DsrDsrNetworkQueueEntry *entry;
+    const char *keywords[] = {"nextHop", "entry", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3Ipv4Address_Type, &nextHop, &PyNs3DsrDsrNetworkQueueEntry_Type, &entry)) {
+        return NULL;
+    }
+    retval = self->obj->FindPacketWithNexthop(*((PyNs3Ipv4Address *) nextHop)->obj, *((PyNs3DsrDsrNetworkQueueEntry *) entry)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrNetworkQueue_Flush(PyNs3DsrDsrNetworkQueue *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->Flush();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrNetworkQueue_GetMaxNetworkDelay(PyNs3DsrDsrNetworkQueue *self)
+{
+    PyObject *py_retval;
+    PyNs3Time *py_Time;
+    
+    ns3::Time retval = self->obj->GetMaxNetworkDelay();
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrNetworkQueue_GetMaxNetworkSize(PyNs3DsrDsrNetworkQueue *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetMaxNetworkSize();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrNetworkQueue_GetQueue(PyNs3DsrDsrNetworkQueue *self)
+{
+    PyObject *py_retval;
+    std::vector< ns3::dsr::DsrNetworkQueueEntry > retval;
+    Pystd__vector__lt___ns3__dsr__DsrNetworkQueueEntry___gt__ *py_std__vector__lt___ns3__dsr__DsrNetworkQueueEntry___gt__;
+    
+    retval = self->obj->GetQueue();
+    py_std__vector__lt___ns3__dsr__DsrNetworkQueueEntry___gt__ = PyObject_New(Pystd__vector__lt___ns3__dsr__DsrNetworkQueueEntry___gt__, &Pystd__vector__lt___ns3__dsr__DsrNetworkQueueEntry___gt___Type);
+    py_std__vector__lt___ns3__dsr__DsrNetworkQueueEntry___gt__->obj = new std::vector< ns3::dsr::DsrNetworkQueueEntry >(retval);
+    py_retval = Py_BuildValue((char *) "N", py_std__vector__lt___ns3__dsr__DsrNetworkQueueEntry___gt__);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrNetworkQueue_GetSize(PyNs3DsrDsrNetworkQueue *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetSize();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3DsrDsrNetworkQueue_GetTypeId(void)
 {
     PyObject *py_retval;
@@ -3425,65 +3544,6 @@ _wrap_PyNs3DsrDsrNetworkQueue_SetMaxNetworkDelay(PyNs3DsrDsrNetworkQueue *self, 
 
 
 PyObject *
-_wrap_PyNs3DsrDsrNetworkQueue_GetMaxNetworkSize(PyNs3DsrDsrNetworkQueue *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetMaxNetworkSize();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrNetworkQueue_GetSize(PyNs3DsrDsrNetworkQueue *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetSize();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrNetworkQueue_Enqueue(PyNs3DsrDsrNetworkQueue *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3DsrDsrNetworkQueueEntry *entry;
-    const char *keywords[] = {"entry", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3DsrDsrNetworkQueueEntry_Type, &entry)) {
-        return NULL;
-    }
-    retval = self->obj->Enqueue(*((PyNs3DsrDsrNetworkQueueEntry *) entry)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrNetworkQueue_FindPacketWithNexthop(PyNs3DsrDsrNetworkQueue *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3Ipv4Address *nextHop;
-    PyNs3DsrDsrNetworkQueueEntry *entry;
-    const char *keywords[] = {"nextHop", "entry", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3Ipv4Address_Type, &nextHop, &PyNs3DsrDsrNetworkQueueEntry_Type, &entry)) {
-        return NULL;
-    }
-    retval = self->obj->FindPacketWithNexthop(*((PyNs3Ipv4Address *) nextHop)->obj, *((PyNs3DsrDsrNetworkQueueEntry *) entry)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3DsrDsrNetworkQueue_SetMaxNetworkSize(PyNs3DsrDsrNetworkQueue *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -3496,66 +3556,6 @@ _wrap_PyNs3DsrDsrNetworkQueue_SetMaxNetworkSize(PyNs3DsrDsrNetworkQueue *self, P
     self->obj->SetMaxNetworkSize(maxSize);
     Py_INCREF(Py_None);
     py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrNetworkQueue_Flush(PyNs3DsrDsrNetworkQueue *self)
-{
-    PyObject *py_retval;
-    
-    self->obj->Flush();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrNetworkQueue_GetQueue(PyNs3DsrDsrNetworkQueue *self)
-{
-    PyObject *py_retval;
-    std::vector< ns3::dsr::DsrNetworkQueueEntry > retval;
-    Pystd__vector__lt___ns3__dsr__DsrNetworkQueueEntry___gt__ *py_std__vector__lt___ns3__dsr__DsrNetworkQueueEntry___gt__;
-    
-    retval = self->obj->GetQueue();
-    py_std__vector__lt___ns3__dsr__DsrNetworkQueueEntry___gt__ = PyObject_New(Pystd__vector__lt___ns3__dsr__DsrNetworkQueueEntry___gt__, &Pystd__vector__lt___ns3__dsr__DsrNetworkQueueEntry___gt___Type);
-    py_std__vector__lt___ns3__dsr__DsrNetworkQueueEntry___gt__->obj = new std::vector< ns3::dsr::DsrNetworkQueueEntry >(retval);
-    py_retval = Py_BuildValue((char *) "N", py_std__vector__lt___ns3__dsr__DsrNetworkQueueEntry___gt__);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrNetworkQueue_Find(PyNs3DsrDsrNetworkQueue *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3Ipv4Address *nextHop;
-    const char *keywords[] = {"nextHop", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &nextHop)) {
-        return NULL;
-    }
-    retval = self->obj->Find(*((PyNs3Ipv4Address *) nextHop)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrNetworkQueue_GetMaxNetworkDelay(PyNs3DsrDsrNetworkQueue *self)
-{
-    PyObject *py_retval;
-    PyNs3Time *py_Time;
-    
-    ns3::Time retval = self->obj->GetMaxNetworkDelay();
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
     return py_retval;
 }
 
@@ -3576,18 +3576,18 @@ _wrap_PyNs3DsrDsrNetworkQueue__copy__(PyNs3DsrDsrNetworkQueue *self)
 }
 
 static PyMethodDef PyNs3DsrDsrNetworkQueue_methods[] = {
-    {(char *) "Dequeue", (PyCFunction) _wrap_PyNs3DsrDsrNetworkQueue_Dequeue, METH_KEYWORDS|METH_VARARGS, "Dequeue(entry)\n\ntype: entry: ns3::dsr::DsrNetworkQueueEntry &" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DsrDsrNetworkQueue_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "SetMaxNetworkDelay", (PyCFunction) _wrap_PyNs3DsrDsrNetworkQueue_SetMaxNetworkDelay, METH_KEYWORDS|METH_VARARGS, "SetMaxNetworkDelay(delay)\n\ntype: delay: ns3::Time" },
-    {(char *) "GetMaxNetworkSize", (PyCFunction) _wrap_PyNs3DsrDsrNetworkQueue_GetMaxNetworkSize, METH_NOARGS, "GetMaxNetworkSize()\n\n" },
-    {(char *) "GetSize", (PyCFunction) _wrap_PyNs3DsrDsrNetworkQueue_GetSize, METH_NOARGS, "GetSize()\n\n" },
-    {(char *) "Enqueue", (PyCFunction) _wrap_PyNs3DsrDsrNetworkQueue_Enqueue, METH_KEYWORDS|METH_VARARGS, "Enqueue(entry)\n\ntype: entry: ns3::dsr::DsrNetworkQueueEntry &" },
-    {(char *) "FindPacketWithNexthop", (PyCFunction) _wrap_PyNs3DsrDsrNetworkQueue_FindPacketWithNexthop, METH_KEYWORDS|METH_VARARGS, "FindPacketWithNexthop(nextHop, entry)\n\ntype: nextHop: ns3::Ipv4Address\ntype: entry: ns3::dsr::DsrNetworkQueueEntry &" },
-    {(char *) "SetMaxNetworkSize", (PyCFunction) _wrap_PyNs3DsrDsrNetworkQueue_SetMaxNetworkSize, METH_KEYWORDS|METH_VARARGS, "SetMaxNetworkSize(maxSize)\n\ntype: maxSize: uint32_t" },
+    {(char *) "Dequeue", (PyCFunction) _wrap_PyNs3DsrDsrNetworkQueue_Dequeue, METH_VARARGS|METH_KEYWORDS, "Dequeue(entry)\n\ntype: entry: ns3::dsr::DsrNetworkQueueEntry &" },
+    {(char *) "Enqueue", (PyCFunction) _wrap_PyNs3DsrDsrNetworkQueue_Enqueue, METH_VARARGS|METH_KEYWORDS, "Enqueue(entry)\n\ntype: entry: ns3::dsr::DsrNetworkQueueEntry &" },
+    {(char *) "Find", (PyCFunction) _wrap_PyNs3DsrDsrNetworkQueue_Find, METH_VARARGS|METH_KEYWORDS, "Find(nextHop)\n\ntype: nextHop: ns3::Ipv4Address" },
+    {(char *) "FindPacketWithNexthop", (PyCFunction) _wrap_PyNs3DsrDsrNetworkQueue_FindPacketWithNexthop, METH_VARARGS|METH_KEYWORDS, "FindPacketWithNexthop(nextHop, entry)\n\ntype: nextHop: ns3::Ipv4Address\ntype: entry: ns3::dsr::DsrNetworkQueueEntry &" },
     {(char *) "Flush", (PyCFunction) _wrap_PyNs3DsrDsrNetworkQueue_Flush, METH_NOARGS, "Flush()\n\n" },
-    {(char *) "GetQueue", (PyCFunction) _wrap_PyNs3DsrDsrNetworkQueue_GetQueue, METH_NOARGS, "GetQueue()\n\n" },
-    {(char *) "Find", (PyCFunction) _wrap_PyNs3DsrDsrNetworkQueue_Find, METH_KEYWORDS|METH_VARARGS, "Find(nextHop)\n\ntype: nextHop: ns3::Ipv4Address" },
     {(char *) "GetMaxNetworkDelay", (PyCFunction) _wrap_PyNs3DsrDsrNetworkQueue_GetMaxNetworkDelay, METH_NOARGS, "GetMaxNetworkDelay()\n\n" },
+    {(char *) "GetMaxNetworkSize", (PyCFunction) _wrap_PyNs3DsrDsrNetworkQueue_GetMaxNetworkSize, METH_NOARGS, "GetMaxNetworkSize()\n\n" },
+    {(char *) "GetQueue", (PyCFunction) _wrap_PyNs3DsrDsrNetworkQueue_GetQueue, METH_NOARGS, "GetQueue()\n\n" },
+    {(char *) "GetSize", (PyCFunction) _wrap_PyNs3DsrDsrNetworkQueue_GetSize, METH_NOARGS, "GetSize()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DsrDsrNetworkQueue_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "SetMaxNetworkDelay", (PyCFunction) _wrap_PyNs3DsrDsrNetworkQueue_SetMaxNetworkDelay, METH_VARARGS|METH_KEYWORDS, "SetMaxNetworkDelay(delay)\n\ntype: delay: ns3::Time" },
+    {(char *) "SetMaxNetworkSize", (PyCFunction) _wrap_PyNs3DsrDsrNetworkQueue_SetMaxNetworkSize, METH_VARARGS|METH_KEYWORDS, "SetMaxNetworkSize(maxSize)\n\ntype: maxSize: uint32_t" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3DsrDsrNetworkQueue__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -3684,7 +3684,7 @@ PyTypeObject PyNs3DsrDsrNetworkQueue_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "DsrNetworkQueue(maxLen, maxDelay)\nDsrNetworkQueue(arg0)\nDsrNetworkQueue()",                        /* Documentation string */
     (traverseproc)PyNs3DsrDsrNetworkQueue__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3DsrDsrNetworkQueue__tp_clear,             /* tp_clear */
@@ -3792,40 +3792,6 @@ int _wrap_PyNs3DsrDsrNetworkQueueEntry__tp_init(PyNs3DsrDsrNetworkQueueEntry *se
 
 
 PyObject *
-_wrap_PyNs3DsrDsrNetworkQueueEntry_SetInsertedTimeStamp(PyNs3DsrDsrNetworkQueueEntry *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Time *time;
-    const char *keywords[] = {"time", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Time_Type, &time)) {
-        return NULL;
-    }
-    self->obj->SetInsertedTimeStamp(*((PyNs3Time *) time)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrNetworkQueueEntry_SetSourceAddress(PyNs3DsrDsrNetworkQueueEntry *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Ipv4Address *addr;
-    const char *keywords[] = {"addr", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &addr)) {
-        return NULL;
-    }
-    self->obj->SetSourceAddress(*((PyNs3Ipv4Address *) addr)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3DsrDsrNetworkQueueEntry_GetInsertedTimeStamp(PyNs3DsrDsrNetworkQueueEntry *self)
 {
     PyObject *py_retval;
@@ -3837,58 +3803,6 @@ _wrap_PyNs3DsrDsrNetworkQueueEntry_GetInsertedTimeStamp(PyNs3DsrDsrNetworkQueueE
     py_Time->obj = new ns3::Time(retval);
     PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
     py_retval = Py_BuildValue((char *) "N", py_Time);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrNetworkQueueEntry_SetPacket(PyNs3DsrDsrNetworkQueueEntry *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Packet *p;
-    ns3::Packet *p_ptr;
-    const char *keywords[] = {"p", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Packet_Type, &p)) {
-        return NULL;
-    }
-    p_ptr = (p ? p->obj : NULL);
-    self->obj->SetPacket(ns3::Ptr< ns3::Packet  > (p_ptr));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrNetworkQueueEntry_GetNextHopAddress(PyNs3DsrDsrNetworkQueueEntry *self)
-{
-    PyObject *py_retval;
-    PyNs3Ipv4Address *py_Ipv4Address;
-    
-    ns3::Ipv4Address retval = self->obj->GetNextHopAddress();
-    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
-    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
-    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
-    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrNetworkQueueEntry_SetNextHopAddress(PyNs3DsrDsrNetworkQueueEntry *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Ipv4Address *addr;
-    const char *keywords[] = {"addr", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &addr)) {
-        return NULL;
-    }
-    self->obj->SetNextHopAddress(*((PyNs3Ipv4Address *) addr)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
     return py_retval;
 }
 
@@ -3930,6 +3844,22 @@ _wrap_PyNs3DsrDsrNetworkQueueEntry_GetIpv4Route(PyNs3DsrDsrNetworkQueueEntry *se
 
 
 PyObject *
+_wrap_PyNs3DsrDsrNetworkQueueEntry_GetNextHopAddress(PyNs3DsrDsrNetworkQueueEntry *self)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4Address *py_Ipv4Address;
+    
+    ns3::Ipv4Address retval = self->obj->GetNextHopAddress();
+    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
+    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
+    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
+    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3DsrDsrNetworkQueueEntry_GetPacket(PyNs3DsrDsrNetworkQueueEntry *self)
 {
     PyObject *py_retval;
@@ -3966,6 +3896,39 @@ _wrap_PyNs3DsrDsrNetworkQueueEntry_GetPacket(PyNs3DsrDsrNetworkQueueEntry *self)
 
 
 PyObject *
+_wrap_PyNs3DsrDsrNetworkQueueEntry_GetSourceAddress(PyNs3DsrDsrNetworkQueueEntry *self)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4Address *py_Ipv4Address;
+    
+    ns3::Ipv4Address retval = self->obj->GetSourceAddress();
+    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
+    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
+    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
+    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrNetworkQueueEntry_SetInsertedTimeStamp(PyNs3DsrDsrNetworkQueueEntry *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Time *time;
+    const char *keywords[] = {"time", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Time_Type, &time)) {
+        return NULL;
+    }
+    self->obj->SetInsertedTimeStamp(*((PyNs3Time *) time)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3DsrDsrNetworkQueueEntry_SetIpv4Route(PyNs3DsrDsrNetworkQueueEntry *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -3985,17 +3948,54 @@ _wrap_PyNs3DsrDsrNetworkQueueEntry_SetIpv4Route(PyNs3DsrDsrNetworkQueueEntry *se
 
 
 PyObject *
-_wrap_PyNs3DsrDsrNetworkQueueEntry_GetSourceAddress(PyNs3DsrDsrNetworkQueueEntry *self)
+_wrap_PyNs3DsrDsrNetworkQueueEntry_SetNextHopAddress(PyNs3DsrDsrNetworkQueueEntry *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3Ipv4Address *py_Ipv4Address;
+    PyNs3Ipv4Address *addr;
+    const char *keywords[] = {"addr", NULL};
     
-    ns3::Ipv4Address retval = self->obj->GetSourceAddress();
-    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
-    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
-    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
-    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &addr)) {
+        return NULL;
+    }
+    self->obj->SetNextHopAddress(*((PyNs3Ipv4Address *) addr)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrNetworkQueueEntry_SetPacket(PyNs3DsrDsrNetworkQueueEntry *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Packet *p;
+    ns3::Packet *p_ptr;
+    const char *keywords[] = {"p", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Packet_Type, &p)) {
+        return NULL;
+    }
+    p_ptr = (p ? p->obj : NULL);
+    self->obj->SetPacket(ns3::Ptr< ns3::Packet  > (p_ptr));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrNetworkQueueEntry_SetSourceAddress(PyNs3DsrDsrNetworkQueueEntry *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4Address *addr;
+    const char *keywords[] = {"addr", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &addr)) {
+        return NULL;
+    }
+    self->obj->SetSourceAddress(*((PyNs3Ipv4Address *) addr)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -4013,16 +4013,16 @@ _wrap_PyNs3DsrDsrNetworkQueueEntry__copy__(PyNs3DsrDsrNetworkQueueEntry *self)
 }
 
 static PyMethodDef PyNs3DsrDsrNetworkQueueEntry_methods[] = {
-    {(char *) "SetInsertedTimeStamp", (PyCFunction) _wrap_PyNs3DsrDsrNetworkQueueEntry_SetInsertedTimeStamp, METH_KEYWORDS|METH_VARARGS, "SetInsertedTimeStamp(time)\n\ntype: time: ns3::Time" },
-    {(char *) "SetSourceAddress", (PyCFunction) _wrap_PyNs3DsrDsrNetworkQueueEntry_SetSourceAddress, METH_KEYWORDS|METH_VARARGS, "SetSourceAddress(addr)\n\ntype: addr: ns3::Ipv4Address" },
     {(char *) "GetInsertedTimeStamp", (PyCFunction) _wrap_PyNs3DsrDsrNetworkQueueEntry_GetInsertedTimeStamp, METH_NOARGS, "GetInsertedTimeStamp()\n\n" },
-    {(char *) "SetPacket", (PyCFunction) _wrap_PyNs3DsrDsrNetworkQueueEntry_SetPacket, METH_KEYWORDS|METH_VARARGS, "SetPacket(p)\n\ntype: p: ns3::Ptr< ns3::Packet const >" },
-    {(char *) "GetNextHopAddress", (PyCFunction) _wrap_PyNs3DsrDsrNetworkQueueEntry_GetNextHopAddress, METH_NOARGS, "GetNextHopAddress()\n\n" },
-    {(char *) "SetNextHopAddress", (PyCFunction) _wrap_PyNs3DsrDsrNetworkQueueEntry_SetNextHopAddress, METH_KEYWORDS|METH_VARARGS, "SetNextHopAddress(addr)\n\ntype: addr: ns3::Ipv4Address" },
     {(char *) "GetIpv4Route", (PyCFunction) _wrap_PyNs3DsrDsrNetworkQueueEntry_GetIpv4Route, METH_NOARGS, "GetIpv4Route()\n\n" },
+    {(char *) "GetNextHopAddress", (PyCFunction) _wrap_PyNs3DsrDsrNetworkQueueEntry_GetNextHopAddress, METH_NOARGS, "GetNextHopAddress()\n\n" },
     {(char *) "GetPacket", (PyCFunction) _wrap_PyNs3DsrDsrNetworkQueueEntry_GetPacket, METH_NOARGS, "GetPacket()\n\n" },
-    {(char *) "SetIpv4Route", (PyCFunction) _wrap_PyNs3DsrDsrNetworkQueueEntry_SetIpv4Route, METH_KEYWORDS|METH_VARARGS, "SetIpv4Route(route)\n\ntype: route: ns3::Ptr< ns3::Ipv4Route >" },
     {(char *) "GetSourceAddress", (PyCFunction) _wrap_PyNs3DsrDsrNetworkQueueEntry_GetSourceAddress, METH_NOARGS, "GetSourceAddress()\n\n" },
+    {(char *) "SetInsertedTimeStamp", (PyCFunction) _wrap_PyNs3DsrDsrNetworkQueueEntry_SetInsertedTimeStamp, METH_VARARGS|METH_KEYWORDS, "SetInsertedTimeStamp(time)\n\ntype: time: ns3::Time" },
+    {(char *) "SetIpv4Route", (PyCFunction) _wrap_PyNs3DsrDsrNetworkQueueEntry_SetIpv4Route, METH_VARARGS|METH_KEYWORDS, "SetIpv4Route(route)\n\ntype: route: ns3::Ptr< ns3::Ipv4Route >" },
+    {(char *) "SetNextHopAddress", (PyCFunction) _wrap_PyNs3DsrDsrNetworkQueueEntry_SetNextHopAddress, METH_VARARGS|METH_KEYWORDS, "SetNextHopAddress(addr)\n\ntype: addr: ns3::Ipv4Address" },
+    {(char *) "SetPacket", (PyCFunction) _wrap_PyNs3DsrDsrNetworkQueueEntry_SetPacket, METH_VARARGS|METH_KEYWORDS, "SetPacket(p)\n\ntype: p: ns3::Ptr< ns3::Packet const >" },
+    {(char *) "SetSourceAddress", (PyCFunction) _wrap_PyNs3DsrDsrNetworkQueueEntry_SetSourceAddress, METH_VARARGS|METH_KEYWORDS, "SetSourceAddress(addr)\n\ntype: addr: ns3::Ipv4Address" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3DsrDsrNetworkQueueEntry__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -4253,7 +4253,7 @@ _wrap_PyNs3DsrDsrNodeStab__copy__(PyNs3DsrDsrNodeStab *self)
 
 static PyMethodDef PyNs3DsrDsrNodeStab_methods[] = {
     {(char *) "GetNodeStability", (PyCFunction) _wrap_PyNs3DsrDsrNodeStab_GetNodeStability, METH_NOARGS, "GetNodeStability()\n\n" },
-    {(char *) "SetNodeStability", (PyCFunction) _wrap_PyNs3DsrDsrNodeStab_SetNodeStability, METH_KEYWORDS|METH_VARARGS, "SetNodeStability(nodeStab)\n\ntype: nodeStab: ns3::Time" },
+    {(char *) "SetNodeStability", (PyCFunction) _wrap_PyNs3DsrDsrNodeStab_SetNodeStability, METH_VARARGS|METH_KEYWORDS, "SetNodeStability(nodeStab)\n\ntype: nodeStab: ns3::Time" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3DsrDsrNodeStab__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -4433,17 +4433,18 @@ int _wrap_PyNs3DsrDsrOptionField__tp_init(PyNs3DsrDsrOptionField *self, PyObject
 
 
 PyObject *
-_wrap_PyNs3DsrDsrOptionField_GetDsrOptionBuffer(PyNs3DsrDsrOptionField *self)
+_wrap_PyNs3DsrDsrOptionField_AddDsrOption(PyNs3DsrDsrOptionField *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3Buffer *py_Buffer;
+    PyNs3DsrDsrOptionHeader *option;
+    const char *keywords[] = {"option", NULL};
     
-    ns3::Buffer retval = self->obj->GetDsrOptionBuffer();
-    py_Buffer = PyObject_New(PyNs3Buffer, &PyNs3Buffer_Type);
-    py_Buffer->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Buffer->obj = new ns3::Buffer(retval);
-    PyNs3Buffer_wrapper_registry[(void *) py_Buffer->obj] = (PyObject *) py_Buffer;
-    py_retval = Py_BuildValue((char *) "N", py_Buffer);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3DsrDsrOptionHeader_Type, &option)) {
+        return NULL;
+    }
+    self->obj->AddDsrOption(*((PyNs3DsrDsrOptionHeader *) option)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -4467,12 +4468,40 @@ _wrap_PyNs3DsrDsrOptionField_Deserialize(PyNs3DsrDsrOptionField *self, PyObject 
 
 
 PyObject *
+_wrap_PyNs3DsrDsrOptionField_GetDsrOptionBuffer(PyNs3DsrDsrOptionField *self)
+{
+    PyObject *py_retval;
+    PyNs3Buffer *py_Buffer;
+    
+    ns3::Buffer retval = self->obj->GetDsrOptionBuffer();
+    py_Buffer = PyObject_New(PyNs3Buffer, &PyNs3Buffer_Type);
+    py_Buffer->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Buffer->obj = new ns3::Buffer(retval);
+    PyNs3Buffer_wrapper_registry[(void *) py_Buffer->obj] = (PyObject *) py_Buffer;
+    py_retval = Py_BuildValue((char *) "N", py_Buffer);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3DsrDsrOptionField_GetDsrOptionsOffset(PyNs3DsrDsrOptionField *self)
 {
     PyObject *py_retval;
     uint32_t retval;
     
     retval = self->obj->GetDsrOptionsOffset();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionField_GetSerializedSize(PyNs3DsrDsrOptionField *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetSerializedSize();
     py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
@@ -4495,35 +4524,6 @@ _wrap_PyNs3DsrDsrOptionField_Serialize(PyNs3DsrDsrOptionField *self, PyObject *a
 }
 
 
-PyObject *
-_wrap_PyNs3DsrDsrOptionField_GetSerializedSize(PyNs3DsrDsrOptionField *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetSerializedSize();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionField_AddDsrOption(PyNs3DsrDsrOptionField *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3DsrDsrOptionHeader *option;
-    const char *keywords[] = {"option", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3DsrDsrOptionHeader_Type, &option)) {
-        return NULL;
-    }
-    self->obj->AddDsrOption(*((PyNs3DsrDsrOptionHeader *) option)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3DsrDsrOptionField__copy__(PyNs3DsrDsrOptionField *self)
 {
@@ -4537,12 +4537,12 @@ _wrap_PyNs3DsrDsrOptionField__copy__(PyNs3DsrDsrOptionField *self)
 }
 
 static PyMethodDef PyNs3DsrDsrOptionField_methods[] = {
+    {(char *) "AddDsrOption", (PyCFunction) _wrap_PyNs3DsrDsrOptionField_AddDsrOption, METH_VARARGS|METH_KEYWORDS, "AddDsrOption(option)\n\ntype: option: ns3::dsr::DsrOptionHeader const &" },
+    {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3DsrDsrOptionField_Deserialize, METH_VARARGS|METH_KEYWORDS, "Deserialize(start, length)\n\ntype: start: ns3::Buffer::Iterator\ntype: length: uint32_t" },
     {(char *) "GetDsrOptionBuffer", (PyCFunction) _wrap_PyNs3DsrDsrOptionField_GetDsrOptionBuffer, METH_NOARGS, "GetDsrOptionBuffer()\n\n" },
-    {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3DsrDsrOptionField_Deserialize, METH_KEYWORDS|METH_VARARGS, "Deserialize(start, length)\n\ntype: start: ns3::Buffer::Iterator\ntype: length: uint32_t" },
     {(char *) "GetDsrOptionsOffset", (PyCFunction) _wrap_PyNs3DsrDsrOptionField_GetDsrOptionsOffset, METH_NOARGS, "GetDsrOptionsOffset()\n\n" },
-    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3DsrDsrOptionField_Serialize, METH_KEYWORDS|METH_VARARGS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
     {(char *) "GetSerializedSize", (PyCFunction) _wrap_PyNs3DsrDsrOptionField_GetSerializedSize, METH_NOARGS, "GetSerializedSize()\n\n" },
-    {(char *) "AddDsrOption", (PyCFunction) _wrap_PyNs3DsrDsrOptionField_AddDsrOption, METH_KEYWORDS|METH_VARARGS, "AddDsrOption(option)\n\ntype: option: ns3::dsr::DsrOptionHeader const &" },
+    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3DsrDsrOptionField_Serialize, METH_VARARGS|METH_KEYWORDS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3DsrDsrOptionField__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -4720,23 +4720,6 @@ int _wrap_PyNs3DsrDsrOptionHeader__tp_init(PyNs3DsrDsrOptionHeader *self, PyObje
 
 
 PyObject *
-_wrap_PyNs3DsrDsrOptionHeader_Serialize(PyNs3DsrDsrOptionHeader *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3BufferIterator *start;
-    const char *keywords[] = {"start", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
-        return NULL;
-    }
-    self->obj->Serialize(*((PyNs3BufferIterator *) start)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3DsrDsrOptionHeader_Deserialize(PyNs3DsrDsrOptionHeader *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -4754,12 +4737,68 @@ _wrap_PyNs3DsrDsrOptionHeader_Deserialize(PyNs3DsrDsrOptionHeader *self, PyObjec
 
 
 PyObject *
+_wrap_PyNs3DsrDsrOptionHeader_GetAlignment(PyNs3DsrDsrOptionHeader *self)
+{
+    PyObject *py_retval;
+    PyNs3DsrDsrOptionHeaderAlignment *py_Alignment;
+    
+    ns3::dsr::DsrOptionHeader::Alignment retval = self->obj->GetAlignment();
+    py_Alignment = PyObject_New(PyNs3DsrDsrOptionHeaderAlignment, &PyNs3DsrDsrOptionHeaderAlignment_Type);
+    py_Alignment->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Alignment->obj = new ns3::dsr::DsrOptionHeader::Alignment(retval);
+    PyNs3DsrDsrOptionHeaderAlignment_wrapper_registry[(void *) py_Alignment->obj] = (PyObject *) py_Alignment;
+    py_retval = Py_BuildValue((char *) "N", py_Alignment);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionHeader_GetInstanceTypeId(PyNs3DsrDsrOptionHeader *self)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = self->obj->GetInstanceTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3DsrDsrOptionHeader_GetLength(PyNs3DsrDsrOptionHeader *self)
 {
     PyObject *py_retval;
     uint8_t retval;
     
     retval = self->obj->GetLength();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionHeader_GetSerializedSize(PyNs3DsrDsrOptionHeader *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetSerializedSize();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionHeader_GetType(PyNs3DsrDsrOptionHeader *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    
+    retval = self->obj->GetType();
     py_retval = Py_BuildValue((char *) "i", (int)retval);
     return py_retval;
 }
@@ -4782,57 +4821,18 @@ _wrap_PyNs3DsrDsrOptionHeader_GetTypeId(void)
 
 
 PyObject *
-_wrap_PyNs3DsrDsrOptionHeader_GetType(PyNs3DsrDsrOptionHeader *self)
+_wrap_PyNs3DsrDsrOptionHeader_Serialize(PyNs3DsrDsrOptionHeader *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    uint8_t retval;
+    PyNs3BufferIterator *start;
+    const char *keywords[] = {"start", NULL};
     
-    retval = self->obj->GetType();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionHeader_GetInstanceTypeId(PyNs3DsrDsrOptionHeader *self)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = self->obj->GetInstanceTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionHeader_GetSerializedSize(PyNs3DsrDsrOptionHeader *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetSerializedSize();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionHeader_GetAlignment(PyNs3DsrDsrOptionHeader *self)
-{
-    PyObject *py_retval;
-    PyNs3DsrDsrOptionHeaderAlignment *py_Alignment;
-    
-    ns3::dsr::DsrOptionHeader::Alignment retval = self->obj->GetAlignment();
-    py_Alignment = PyObject_New(PyNs3DsrDsrOptionHeaderAlignment, &PyNs3DsrDsrOptionHeaderAlignment_Type);
-    py_Alignment->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Alignment->obj = new ns3::dsr::DsrOptionHeader::Alignment(retval);
-    PyNs3DsrDsrOptionHeaderAlignment_wrapper_registry[(void *) py_Alignment->obj] = (PyObject *) py_Alignment;
-    py_retval = Py_BuildValue((char *) "N", py_Alignment);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
+        return NULL;
+    }
+    self->obj->Serialize(*((PyNs3BufferIterator *) start)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -4894,16 +4894,16 @@ _wrap_PyNs3DsrDsrOptionHeader__copy__(PyNs3DsrDsrOptionHeader *self)
 }
 
 static PyMethodDef PyNs3DsrDsrOptionHeader_methods[] = {
-    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3DsrDsrOptionHeader_Serialize, METH_KEYWORDS|METH_VARARGS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
-    {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3DsrDsrOptionHeader_Deserialize, METH_KEYWORDS|METH_VARARGS, "Deserialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
-    {(char *) "GetLength", (PyCFunction) _wrap_PyNs3DsrDsrOptionHeader_GetLength, METH_NOARGS, "GetLength()\n\n" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionHeader_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "GetType", (PyCFunction) _wrap_PyNs3DsrDsrOptionHeader_GetType, METH_NOARGS, "GetType()\n\n" },
-    {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionHeader_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
-    {(char *) "GetSerializedSize", (PyCFunction) _wrap_PyNs3DsrDsrOptionHeader_GetSerializedSize, METH_NOARGS, "GetSerializedSize()\n\n" },
+    {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3DsrDsrOptionHeader_Deserialize, METH_VARARGS|METH_KEYWORDS, "Deserialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
     {(char *) "GetAlignment", (PyCFunction) _wrap_PyNs3DsrDsrOptionHeader_GetAlignment, METH_NOARGS, "GetAlignment()\n\n" },
-    {(char *) "SetLength", (PyCFunction) _wrap_PyNs3DsrDsrOptionHeader_SetLength, METH_KEYWORDS|METH_VARARGS, "SetLength(length)\n\ntype: length: uint8_t" },
-    {(char *) "SetType", (PyCFunction) _wrap_PyNs3DsrDsrOptionHeader_SetType, METH_KEYWORDS|METH_VARARGS, "SetType(type)\n\ntype: type: uint8_t" },
+    {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionHeader_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
+    {(char *) "GetLength", (PyCFunction) _wrap_PyNs3DsrDsrOptionHeader_GetLength, METH_NOARGS, "GetLength()\n\n" },
+    {(char *) "GetSerializedSize", (PyCFunction) _wrap_PyNs3DsrDsrOptionHeader_GetSerializedSize, METH_NOARGS, "GetSerializedSize()\n\n" },
+    {(char *) "GetType", (PyCFunction) _wrap_PyNs3DsrDsrOptionHeader_GetType, METH_NOARGS, "GetType()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionHeader_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3DsrDsrOptionHeader_Serialize, METH_VARARGS|METH_KEYWORDS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
+    {(char *) "SetLength", (PyCFunction) _wrap_PyNs3DsrDsrOptionHeader_SetLength, METH_VARARGS|METH_KEYWORDS, "SetLength(length)\n\ntype: length: uint8_t" },
+    {(char *) "SetType", (PyCFunction) _wrap_PyNs3DsrDsrOptionHeader_SetType, METH_VARARGS|METH_KEYWORDS, "SetType(type)\n\ntype: type: uint8_t" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3DsrDsrOptionHeader__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -5000,7 +5000,7 @@ PyTypeObject PyNs3DsrDsrOptionHeader_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "DsrOptionHeader(arg0)\nDsrOptionHeader()",                        /* Documentation string */
     (traverseproc)PyNs3DsrDsrOptionHeader__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3DsrDsrOptionHeader__tp_clear,             /* tp_clear */
@@ -5086,16 +5086,16 @@ static int _wrap_PyNs3DsrDsrOptionHeaderAlignment__set_offset(PyNs3DsrDsrOptionH
 }
 static PyGetSetDef PyNs3DsrDsrOptionHeaderAlignment__getsets[] = {
     {
-        (char*) "offset", /* attribute name */
-        (getter) _wrap_PyNs3DsrDsrOptionHeaderAlignment__get_offset, /* C function to get the attribute */
-        (setter) _wrap_PyNs3DsrDsrOptionHeaderAlignment__set_offset, /* C function to set the attribute */
+        (char*) "factor", /* attribute name */
+        (getter) _wrap_PyNs3DsrDsrOptionHeaderAlignment__get_factor, /* C function to get the attribute */
+        (setter) _wrap_PyNs3DsrDsrOptionHeaderAlignment__set_factor, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
     {
-        (char*) "factor", /* attribute name */
-        (getter) _wrap_PyNs3DsrDsrOptionHeaderAlignment__get_factor, /* C function to get the attribute */
-        (setter) _wrap_PyNs3DsrDsrOptionHeaderAlignment__set_factor, /* C function to set the attribute */
+        (char*) "offset", /* attribute name */
+        (getter) _wrap_PyNs3DsrDsrOptionHeaderAlignment__get_offset, /* C function to get the attribute */
+        (setter) _wrap_PyNs3DsrDsrOptionHeaderAlignment__set_offset, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -5357,6 +5357,39 @@ int _wrap_PyNs3DsrDsrOptionPad1Header__tp_init(PyNs3DsrDsrOptionPad1Header *self
 
 
 PyObject *
+_wrap_PyNs3DsrDsrOptionPad1Header_Deserialize(PyNs3DsrDsrOptionPad1Header *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    PyNs3BufferIterator *start;
+    const char *keywords[] = {"start", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
+        return NULL;
+    }
+    retval = self->obj->Deserialize(*((PyNs3BufferIterator *) start)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionPad1Header_GetInstanceTypeId(PyNs3DsrDsrOptionPad1Header *self)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = self->obj->GetInstanceTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3DsrDsrOptionPad1Header_GetSerializedSize(PyNs3DsrDsrOptionPad1Header *self)
 {
     PyObject *py_retval;
@@ -5401,39 +5434,6 @@ _wrap_PyNs3DsrDsrOptionPad1Header_Serialize(PyNs3DsrDsrOptionPad1Header *self, P
 }
 
 
-PyObject *
-_wrap_PyNs3DsrDsrOptionPad1Header_Deserialize(PyNs3DsrDsrOptionPad1Header *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    PyNs3BufferIterator *start;
-    const char *keywords[] = {"start", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
-        return NULL;
-    }
-    retval = self->obj->Deserialize(*((PyNs3BufferIterator *) start)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionPad1Header_GetInstanceTypeId(PyNs3DsrDsrOptionPad1Header *self)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = self->obj->GetInstanceTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3DsrDsrOptionPad1Header__copy__(PyNs3DsrDsrOptionPad1Header *self)
 {
@@ -5449,11 +5449,11 @@ _wrap_PyNs3DsrDsrOptionPad1Header__copy__(PyNs3DsrDsrOptionPad1Header *self)
 }
 
 static PyMethodDef PyNs3DsrDsrOptionPad1Header_methods[] = {
+    {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3DsrDsrOptionPad1Header_Deserialize, METH_VARARGS|METH_KEYWORDS, "Deserialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
+    {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionPad1Header_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
     {(char *) "GetSerializedSize", (PyCFunction) _wrap_PyNs3DsrDsrOptionPad1Header_GetSerializedSize, METH_NOARGS, "GetSerializedSize()\n\n" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionPad1Header_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3DsrDsrOptionPad1Header_Serialize, METH_KEYWORDS|METH_VARARGS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
-    {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3DsrDsrOptionPad1Header_Deserialize, METH_KEYWORDS|METH_VARARGS, "Deserialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
-    {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionPad1Header_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
+    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3DsrDsrOptionPad1Header_Serialize, METH_VARARGS|METH_KEYWORDS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3DsrDsrOptionPad1Header__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -5550,7 +5550,7 @@ PyTypeObject PyNs3DsrDsrOptionPad1Header_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "DsrOptionPad1Header(arg0)\nDsrOptionPad1Header()",                        /* Documentation string */
     (traverseproc)PyNs3DsrDsrOptionPad1Header__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3DsrDsrOptionPad1Header__tp_clear,             /* tp_clear */
@@ -5649,6 +5649,39 @@ int _wrap_PyNs3DsrDsrOptionPadnHeader__tp_init(PyNs3DsrDsrOptionPadnHeader *self
 
 
 PyObject *
+_wrap_PyNs3DsrDsrOptionPadnHeader_Deserialize(PyNs3DsrDsrOptionPadnHeader *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    PyNs3BufferIterator *start;
+    const char *keywords[] = {"start", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
+        return NULL;
+    }
+    retval = self->obj->Deserialize(*((PyNs3BufferIterator *) start)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionPadnHeader_GetInstanceTypeId(PyNs3DsrDsrOptionPadnHeader *self)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = self->obj->GetInstanceTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3DsrDsrOptionPadnHeader_GetSerializedSize(PyNs3DsrDsrOptionPadnHeader *self)
 {
     PyObject *py_retval;
@@ -5693,39 +5726,6 @@ _wrap_PyNs3DsrDsrOptionPadnHeader_Serialize(PyNs3DsrDsrOptionPadnHeader *self, P
 }
 
 
-PyObject *
-_wrap_PyNs3DsrDsrOptionPadnHeader_Deserialize(PyNs3DsrDsrOptionPadnHeader *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    PyNs3BufferIterator *start;
-    const char *keywords[] = {"start", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
-        return NULL;
-    }
-    retval = self->obj->Deserialize(*((PyNs3BufferIterator *) start)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionPadnHeader_GetInstanceTypeId(PyNs3DsrDsrOptionPadnHeader *self)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = self->obj->GetInstanceTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3DsrDsrOptionPadnHeader__copy__(PyNs3DsrDsrOptionPadnHeader *self)
 {
@@ -5741,11 +5741,11 @@ _wrap_PyNs3DsrDsrOptionPadnHeader__copy__(PyNs3DsrDsrOptionPadnHeader *self)
 }
 
 static PyMethodDef PyNs3DsrDsrOptionPadnHeader_methods[] = {
+    {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3DsrDsrOptionPadnHeader_Deserialize, METH_VARARGS|METH_KEYWORDS, "Deserialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
+    {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionPadnHeader_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
     {(char *) "GetSerializedSize", (PyCFunction) _wrap_PyNs3DsrDsrOptionPadnHeader_GetSerializedSize, METH_NOARGS, "GetSerializedSize()\n\n" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionPadnHeader_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3DsrDsrOptionPadnHeader_Serialize, METH_KEYWORDS|METH_VARARGS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
-    {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3DsrDsrOptionPadnHeader_Deserialize, METH_KEYWORDS|METH_VARARGS, "Deserialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
-    {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionPadnHeader_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
+    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3DsrDsrOptionPadnHeader_Serialize, METH_VARARGS|METH_KEYWORDS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3DsrDsrOptionPadnHeader__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -5842,7 +5842,7 @@ PyTypeObject PyNs3DsrDsrOptionPadnHeader_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "DsrOptionPadnHeader(arg0)\nDsrOptionPadnHeader(pad)",                        /* Documentation string */
     (traverseproc)PyNs3DsrDsrOptionPadnHeader__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3DsrDsrOptionPadnHeader__tp_clear,             /* tp_clear */
@@ -5940,13 +5940,50 @@ int _wrap_PyNs3DsrDsrOptionRerrHeader__tp_init(PyNs3DsrDsrOptionRerrHeader *self
 
 
 PyObject *
-_wrap_PyNs3DsrDsrOptionRerrHeader_GetErrorType(PyNs3DsrDsrOptionRerrHeader *self)
+_wrap_PyNs3DsrDsrOptionRerrHeader_Deserialize(PyNs3DsrDsrOptionRerrHeader *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    uint8_t retval;
+    uint32_t retval;
+    PyNs3BufferIterator *start;
+    const char *keywords[] = {"start", NULL};
     
-    retval = self->obj->GetErrorType();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
+        return NULL;
+    }
+    retval = self->obj->Deserialize(*((PyNs3BufferIterator *) start)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionRerrHeader_GetAlignment(PyNs3DsrDsrOptionRerrHeader *self)
+{
+    PyObject *py_retval;
+    PyNs3DsrDsrOptionHeaderAlignment *py_Alignment;
+    
+    ns3::dsr::DsrOptionHeader::Alignment retval = self->obj->GetAlignment();
+    py_Alignment = PyObject_New(PyNs3DsrDsrOptionHeaderAlignment, &PyNs3DsrDsrOptionHeaderAlignment_Type);
+    py_Alignment->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Alignment->obj = new ns3::dsr::DsrOptionHeader::Alignment(retval);
+    PyNs3DsrDsrOptionHeaderAlignment_wrapper_registry[(void *) py_Alignment->obj] = (PyObject *) py_Alignment;
+    py_retval = Py_BuildValue((char *) "N", py_Alignment);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionRerrHeader_GetErrorDst(PyNs3DsrDsrOptionRerrHeader *self)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4Address *py_Ipv4Address;
+    
+    ns3::Ipv4Address retval = self->obj->GetErrorDst();
+    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
+    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
+    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
+    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
     return py_retval;
 }
 
@@ -5968,17 +6005,52 @@ _wrap_PyNs3DsrDsrOptionRerrHeader_GetErrorSrc(PyNs3DsrDsrOptionRerrHeader *self)
 
 
 PyObject *
-_wrap_PyNs3DsrDsrOptionRerrHeader_Deserialize(PyNs3DsrDsrOptionRerrHeader *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3DsrDsrOptionRerrHeader_GetErrorType(PyNs3DsrDsrOptionRerrHeader *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    
+    retval = self->obj->GetErrorType();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionRerrHeader_GetInstanceTypeId(PyNs3DsrDsrOptionRerrHeader *self)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = self->obj->GetInstanceTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionRerrHeader_GetSalvage(PyNs3DsrDsrOptionRerrHeader *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    
+    retval = self->obj->GetSalvage();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionRerrHeader_GetSerializedSize(PyNs3DsrDsrOptionRerrHeader *self)
 {
     PyObject *py_retval;
     uint32_t retval;
-    PyNs3BufferIterator *start;
-    const char *keywords[] = {"start", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
-        return NULL;
-    }
-    retval = self->obj->Deserialize(*((PyNs3BufferIterator *) start)->obj);
+    retval = self->obj->GetSerializedSize();
     py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
@@ -6001,29 +6073,52 @@ _wrap_PyNs3DsrDsrOptionRerrHeader_GetTypeId(void)
 
 
 PyObject *
-_wrap_PyNs3DsrDsrOptionRerrHeader_GetAlignment(PyNs3DsrDsrOptionRerrHeader *self)
+_wrap_PyNs3DsrDsrOptionRerrHeader_Serialize(PyNs3DsrDsrOptionRerrHeader *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3DsrDsrOptionHeaderAlignment *py_Alignment;
+    PyNs3BufferIterator *start;
+    const char *keywords[] = {"start", NULL};
     
-    ns3::dsr::DsrOptionHeader::Alignment retval = self->obj->GetAlignment();
-    py_Alignment = PyObject_New(PyNs3DsrDsrOptionHeaderAlignment, &PyNs3DsrDsrOptionHeaderAlignment_Type);
-    py_Alignment->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Alignment->obj = new ns3::dsr::DsrOptionHeader::Alignment(retval);
-    PyNs3DsrDsrOptionHeaderAlignment_wrapper_registry[(void *) py_Alignment->obj] = (PyObject *) py_Alignment;
-    py_retval = Py_BuildValue((char *) "N", py_Alignment);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
+        return NULL;
+    }
+    self->obj->Serialize(*((PyNs3BufferIterator *) start)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3DsrDsrOptionRerrHeader_GetSalvage(PyNs3DsrDsrOptionRerrHeader *self)
+_wrap_PyNs3DsrDsrOptionRerrHeader_SetErrorDst(PyNs3DsrDsrOptionRerrHeader *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    uint8_t retval;
+    PyNs3Ipv4Address *errorDstAddress;
+    const char *keywords[] = {"errorDstAddress", NULL};
     
-    retval = self->obj->GetSalvage();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &errorDstAddress)) {
+        return NULL;
+    }
+    self->obj->SetErrorDst(*((PyNs3Ipv4Address *) errorDstAddress)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionRerrHeader_SetErrorSrc(PyNs3DsrDsrOptionRerrHeader *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4Address *errorSrcAddress;
+    const char *keywords[] = {"errorSrcAddress", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &errorSrcAddress)) {
+        return NULL;
+    }
+    self->obj->SetErrorSrc(*((PyNs3Ipv4Address *) errorSrcAddress)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -6043,23 +6138,6 @@ _wrap_PyNs3DsrDsrOptionRerrHeader_SetErrorType(PyNs3DsrDsrOptionRerrHeader *self
         return NULL;
     }
     self->obj->SetErrorType(errorType);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionRerrHeader_SetErrorDst(PyNs3DsrDsrOptionRerrHeader *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Ipv4Address *errorDstAddress;
-    const char *keywords[] = {"errorDstAddress", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &errorDstAddress)) {
-        return NULL;
-    }
-    self->obj->SetErrorDst(*((PyNs3Ipv4Address *) errorDstAddress)->obj);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -6087,84 +6165,6 @@ _wrap_PyNs3DsrDsrOptionRerrHeader_SetSalvage(PyNs3DsrDsrOptionRerrHeader *self, 
 }
 
 
-PyObject *
-_wrap_PyNs3DsrDsrOptionRerrHeader_GetErrorDst(PyNs3DsrDsrOptionRerrHeader *self)
-{
-    PyObject *py_retval;
-    PyNs3Ipv4Address *py_Ipv4Address;
-    
-    ns3::Ipv4Address retval = self->obj->GetErrorDst();
-    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
-    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
-    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
-    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionRerrHeader_GetInstanceTypeId(PyNs3DsrDsrOptionRerrHeader *self)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = self->obj->GetInstanceTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionRerrHeader_GetSerializedSize(PyNs3DsrDsrOptionRerrHeader *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetSerializedSize();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionRerrHeader_Serialize(PyNs3DsrDsrOptionRerrHeader *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3BufferIterator *start;
-    const char *keywords[] = {"start", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
-        return NULL;
-    }
-    self->obj->Serialize(*((PyNs3BufferIterator *) start)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionRerrHeader_SetErrorSrc(PyNs3DsrDsrOptionRerrHeader *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Ipv4Address *errorSrcAddress;
-    const char *keywords[] = {"errorSrcAddress", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &errorSrcAddress)) {
-        return NULL;
-    }
-    self->obj->SetErrorSrc(*((PyNs3Ipv4Address *) errorSrcAddress)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3DsrDsrOptionRerrHeader__copy__(PyNs3DsrDsrOptionRerrHeader *self)
 {
@@ -6180,20 +6180,20 @@ _wrap_PyNs3DsrDsrOptionRerrHeader__copy__(PyNs3DsrDsrOptionRerrHeader *self)
 }
 
 static PyMethodDef PyNs3DsrDsrOptionRerrHeader_methods[] = {
-    {(char *) "GetErrorType", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrHeader_GetErrorType, METH_NOARGS, "GetErrorType()\n\n" },
-    {(char *) "GetErrorSrc", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrHeader_GetErrorSrc, METH_NOARGS, "GetErrorSrc()\n\n" },
-    {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrHeader_Deserialize, METH_KEYWORDS|METH_VARARGS, "Deserialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrHeader_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrHeader_Deserialize, METH_VARARGS|METH_KEYWORDS, "Deserialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
     {(char *) "GetAlignment", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrHeader_GetAlignment, METH_NOARGS, "GetAlignment()\n\n" },
-    {(char *) "GetSalvage", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrHeader_GetSalvage, METH_NOARGS, "GetSalvage()\n\n" },
-    {(char *) "SetErrorType", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrHeader_SetErrorType, METH_KEYWORDS|METH_VARARGS, "SetErrorType(errorType)\n\ntype: errorType: uint8_t" },
-    {(char *) "SetErrorDst", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrHeader_SetErrorDst, METH_KEYWORDS|METH_VARARGS, "SetErrorDst(errorDstAddress)\n\ntype: errorDstAddress: ns3::Ipv4Address" },
-    {(char *) "SetSalvage", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrHeader_SetSalvage, METH_KEYWORDS|METH_VARARGS, "SetSalvage(salvage)\n\ntype: salvage: uint8_t" },
     {(char *) "GetErrorDst", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrHeader_GetErrorDst, METH_NOARGS, "GetErrorDst()\n\n" },
+    {(char *) "GetErrorSrc", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrHeader_GetErrorSrc, METH_NOARGS, "GetErrorSrc()\n\n" },
+    {(char *) "GetErrorType", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrHeader_GetErrorType, METH_NOARGS, "GetErrorType()\n\n" },
     {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrHeader_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
+    {(char *) "GetSalvage", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrHeader_GetSalvage, METH_NOARGS, "GetSalvage()\n\n" },
     {(char *) "GetSerializedSize", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrHeader_GetSerializedSize, METH_NOARGS, "GetSerializedSize()\n\n" },
-    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrHeader_Serialize, METH_KEYWORDS|METH_VARARGS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
-    {(char *) "SetErrorSrc", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrHeader_SetErrorSrc, METH_KEYWORDS|METH_VARARGS, "SetErrorSrc(errorSrcAddress)\n\ntype: errorSrcAddress: ns3::Ipv4Address" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrHeader_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrHeader_Serialize, METH_VARARGS|METH_KEYWORDS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
+    {(char *) "SetErrorDst", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrHeader_SetErrorDst, METH_VARARGS|METH_KEYWORDS, "SetErrorDst(errorDstAddress)\n\ntype: errorDstAddress: ns3::Ipv4Address" },
+    {(char *) "SetErrorSrc", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrHeader_SetErrorSrc, METH_VARARGS|METH_KEYWORDS, "SetErrorSrc(errorSrcAddress)\n\ntype: errorSrcAddress: ns3::Ipv4Address" },
+    {(char *) "SetErrorType", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrHeader_SetErrorType, METH_VARARGS|METH_KEYWORDS, "SetErrorType(errorType)\n\ntype: errorType: uint8_t" },
+    {(char *) "SetSalvage", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrHeader_SetSalvage, METH_VARARGS|METH_KEYWORDS, "SetSalvage(salvage)\n\ntype: salvage: uint8_t" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrHeader__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -6290,7 +6290,7 @@ PyTypeObject PyNs3DsrDsrOptionRerrHeader_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "DsrOptionRerrHeader(arg0)\nDsrOptionRerrHeader()",                        /* Documentation string */
     (traverseproc)PyNs3DsrDsrOptionRerrHeader__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3DsrDsrOptionRerrHeader__tp_clear,             /* tp_clear */
@@ -6388,55 +6388,6 @@ int _wrap_PyNs3DsrDsrOptionRerrUnreachHeader__tp_init(PyNs3DsrDsrOptionRerrUnrea
 
 
 PyObject *
-_wrap_PyNs3DsrDsrOptionRerrUnreachHeader_GetOriginalDst(PyNs3DsrDsrOptionRerrUnreachHeader *self)
-{
-    PyObject *py_retval;
-    PyNs3Ipv4Address *py_Ipv4Address;
-    
-    ns3::Ipv4Address retval = self->obj->GetOriginalDst();
-    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
-    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
-    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
-    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionRerrUnreachHeader_SetErrorDst(PyNs3DsrDsrOptionRerrUnreachHeader *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Ipv4Address *errorDstAddress;
-    const char *keywords[] = {"errorDstAddress", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &errorDstAddress)) {
-        return NULL;
-    }
-    self->obj->SetErrorDst(*((PyNs3Ipv4Address *) errorDstAddress)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionRerrUnreachHeader_GetErrorSrc(PyNs3DsrDsrOptionRerrUnreachHeader *self)
-{
-    PyObject *py_retval;
-    PyNs3Ipv4Address *py_Ipv4Address;
-    
-    ns3::Ipv4Address retval = self->obj->GetErrorSrc();
-    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
-    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
-    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
-    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3DsrDsrOptionRerrUnreachHeader_Deserialize(PyNs3DsrDsrOptionRerrUnreachHeader *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -6449,39 +6400,6 @@ _wrap_PyNs3DsrDsrOptionRerrUnreachHeader_Deserialize(PyNs3DsrDsrOptionRerrUnreac
     }
     retval = self->obj->Deserialize(*((PyNs3BufferIterator *) start)->obj);
     py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionRerrUnreachHeader_SetOriginalDst(PyNs3DsrDsrOptionRerrUnreachHeader *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Ipv4Address *originalDst;
-    const char *keywords[] = {"originalDst", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &originalDst)) {
-        return NULL;
-    }
-    self->obj->SetOriginalDst(*((PyNs3Ipv4Address *) originalDst)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionRerrUnreachHeader_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::dsr::DsrOptionRerrUnreachHeader::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
     return py_retval;
 }
 
@@ -6503,24 +6421,12 @@ _wrap_PyNs3DsrDsrOptionRerrUnreachHeader_GetAlignment(PyNs3DsrDsrOptionRerrUnrea
 
 
 PyObject *
-_wrap_PyNs3DsrDsrOptionRerrUnreachHeader_GetSalvage(PyNs3DsrDsrOptionRerrUnreachHeader *self)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    
-    retval = self->obj->GetSalvage();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionRerrUnreachHeader_GetUnreachNode(PyNs3DsrDsrOptionRerrUnreachHeader *self)
+_wrap_PyNs3DsrDsrOptionRerrUnreachHeader_GetErrorDst(PyNs3DsrDsrOptionRerrUnreachHeader *self)
 {
     PyObject *py_retval;
     PyNs3Ipv4Address *py_Ipv4Address;
     
-    ns3::Ipv4Address retval = self->obj->GetUnreachNode();
+    ns3::Ipv4Address retval = self->obj->GetErrorDst();
     py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
     py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
     py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
@@ -6531,33 +6437,12 @@ _wrap_PyNs3DsrDsrOptionRerrUnreachHeader_GetUnreachNode(PyNs3DsrDsrOptionRerrUnr
 
 
 PyObject *
-_wrap_PyNs3DsrDsrOptionRerrUnreachHeader_SetSalvage(PyNs3DsrDsrOptionRerrUnreachHeader *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int salvage;
-    const char *keywords[] = {"salvage", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &salvage)) {
-        return NULL;
-    }
-    if (salvage > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SetSalvage(salvage);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionRerrUnreachHeader_GetErrorDst(PyNs3DsrDsrOptionRerrUnreachHeader *self)
+_wrap_PyNs3DsrDsrOptionRerrUnreachHeader_GetErrorSrc(PyNs3DsrDsrOptionRerrUnreachHeader *self)
 {
     PyObject *py_retval;
     PyNs3Ipv4Address *py_Ipv4Address;
     
-    ns3::Ipv4Address retval = self->obj->GetErrorDst();
+    ns3::Ipv4Address retval = self->obj->GetErrorSrc();
     py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
     py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
     py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
@@ -6584,6 +6469,34 @@ _wrap_PyNs3DsrDsrOptionRerrUnreachHeader_GetInstanceTypeId(PyNs3DsrDsrOptionRerr
 
 
 PyObject *
+_wrap_PyNs3DsrDsrOptionRerrUnreachHeader_GetOriginalDst(PyNs3DsrDsrOptionRerrUnreachHeader *self)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4Address *py_Ipv4Address;
+    
+    ns3::Ipv4Address retval = self->obj->GetOriginalDst();
+    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
+    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
+    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
+    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionRerrUnreachHeader_GetSalvage(PyNs3DsrDsrOptionRerrUnreachHeader *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    
+    retval = self->obj->GetSalvage();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3DsrDsrOptionRerrUnreachHeader_GetSerializedSize(PyNs3DsrDsrOptionRerrUnreachHeader *self)
 {
     PyObject *py_retval;
@@ -6596,18 +6509,33 @@ _wrap_PyNs3DsrDsrOptionRerrUnreachHeader_GetSerializedSize(PyNs3DsrDsrOptionRerr
 
 
 PyObject *
-_wrap_PyNs3DsrDsrOptionRerrUnreachHeader_SetUnreachNode(PyNs3DsrDsrOptionRerrUnreachHeader *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3DsrDsrOptionRerrUnreachHeader_GetTypeId(void)
 {
     PyObject *py_retval;
-    PyNs3Ipv4Address *unreachNode;
-    const char *keywords[] = {"unreachNode", NULL};
+    PyNs3TypeId *py_TypeId;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &unreachNode)) {
-        return NULL;
-    }
-    self->obj->SetUnreachNode(*((PyNs3Ipv4Address *) unreachNode)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    ns3::TypeId retval = ns3::dsr::DsrOptionRerrUnreachHeader::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionRerrUnreachHeader_GetUnreachNode(PyNs3DsrDsrOptionRerrUnreachHeader *self)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4Address *py_Ipv4Address;
+    
+    ns3::Ipv4Address retval = self->obj->GetUnreachNode();
+    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
+    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
+    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
+    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
     return py_retval;
 }
 
@@ -6623,6 +6551,23 @@ _wrap_PyNs3DsrDsrOptionRerrUnreachHeader_Serialize(PyNs3DsrDsrOptionRerrUnreachH
         return NULL;
     }
     self->obj->Serialize(*((PyNs3BufferIterator *) start)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionRerrUnreachHeader_SetErrorDst(PyNs3DsrDsrOptionRerrUnreachHeader *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4Address *errorDstAddress;
+    const char *keywords[] = {"errorDstAddress", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &errorDstAddress)) {
+        return NULL;
+    }
+    self->obj->SetErrorDst(*((PyNs3Ipv4Address *) errorDstAddress)->obj);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -6646,6 +6591,61 @@ _wrap_PyNs3DsrDsrOptionRerrUnreachHeader_SetErrorSrc(PyNs3DsrDsrOptionRerrUnreac
 }
 
 
+PyObject *
+_wrap_PyNs3DsrDsrOptionRerrUnreachHeader_SetOriginalDst(PyNs3DsrDsrOptionRerrUnreachHeader *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4Address *originalDst;
+    const char *keywords[] = {"originalDst", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &originalDst)) {
+        return NULL;
+    }
+    self->obj->SetOriginalDst(*((PyNs3Ipv4Address *) originalDst)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionRerrUnreachHeader_SetSalvage(PyNs3DsrDsrOptionRerrUnreachHeader *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int salvage;
+    const char *keywords[] = {"salvage", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &salvage)) {
+        return NULL;
+    }
+    if (salvage > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SetSalvage(salvage);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionRerrUnreachHeader_SetUnreachNode(PyNs3DsrDsrOptionRerrUnreachHeader *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4Address *unreachNode;
+    const char *keywords[] = {"unreachNode", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &unreachNode)) {
+        return NULL;
+    }
+    self->obj->SetUnreachNode(*((PyNs3Ipv4Address *) unreachNode)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
 static PyObject*
 _wrap_PyNs3DsrDsrOptionRerrUnreachHeader__copy__(PyNs3DsrDsrOptionRerrUnreachHeader *self)
 {
@@ -6661,22 +6661,22 @@ _wrap_PyNs3DsrDsrOptionRerrUnreachHeader__copy__(PyNs3DsrDsrOptionRerrUnreachHea
 }
 
 static PyMethodDef PyNs3DsrDsrOptionRerrUnreachHeader_methods[] = {
-    {(char *) "GetOriginalDst", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnreachHeader_GetOriginalDst, METH_NOARGS, "GetOriginalDst()\n\n" },
-    {(char *) "SetErrorDst", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnreachHeader_SetErrorDst, METH_KEYWORDS|METH_VARARGS, "SetErrorDst(errorDstAddress)\n\ntype: errorDstAddress: ns3::Ipv4Address" },
-    {(char *) "GetErrorSrc", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnreachHeader_GetErrorSrc, METH_NOARGS, "GetErrorSrc()\n\n" },
-    {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnreachHeader_Deserialize, METH_KEYWORDS|METH_VARARGS, "Deserialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
-    {(char *) "SetOriginalDst", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnreachHeader_SetOriginalDst, METH_KEYWORDS|METH_VARARGS, "SetOriginalDst(originalDst)\n\ntype: originalDst: ns3::Ipv4Address" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnreachHeader_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnreachHeader_Deserialize, METH_VARARGS|METH_KEYWORDS, "Deserialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
     {(char *) "GetAlignment", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnreachHeader_GetAlignment, METH_NOARGS, "GetAlignment()\n\n" },
-    {(char *) "GetSalvage", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnreachHeader_GetSalvage, METH_NOARGS, "GetSalvage()\n\n" },
-    {(char *) "GetUnreachNode", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnreachHeader_GetUnreachNode, METH_NOARGS, "GetUnreachNode()\n\n" },
-    {(char *) "SetSalvage", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnreachHeader_SetSalvage, METH_KEYWORDS|METH_VARARGS, "SetSalvage(salvage)\n\ntype: salvage: uint8_t" },
     {(char *) "GetErrorDst", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnreachHeader_GetErrorDst, METH_NOARGS, "GetErrorDst()\n\n" },
+    {(char *) "GetErrorSrc", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnreachHeader_GetErrorSrc, METH_NOARGS, "GetErrorSrc()\n\n" },
     {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnreachHeader_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
+    {(char *) "GetOriginalDst", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnreachHeader_GetOriginalDst, METH_NOARGS, "GetOriginalDst()\n\n" },
+    {(char *) "GetSalvage", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnreachHeader_GetSalvage, METH_NOARGS, "GetSalvage()\n\n" },
     {(char *) "GetSerializedSize", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnreachHeader_GetSerializedSize, METH_NOARGS, "GetSerializedSize()\n\n" },
-    {(char *) "SetUnreachNode", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnreachHeader_SetUnreachNode, METH_KEYWORDS|METH_VARARGS, "SetUnreachNode(unreachNode)\n\ntype: unreachNode: ns3::Ipv4Address" },
-    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnreachHeader_Serialize, METH_KEYWORDS|METH_VARARGS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
-    {(char *) "SetErrorSrc", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnreachHeader_SetErrorSrc, METH_KEYWORDS|METH_VARARGS, "SetErrorSrc(errorSrcAddress)\n\ntype: errorSrcAddress: ns3::Ipv4Address" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnreachHeader_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "GetUnreachNode", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnreachHeader_GetUnreachNode, METH_NOARGS, "GetUnreachNode()\n\n" },
+    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnreachHeader_Serialize, METH_VARARGS|METH_KEYWORDS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
+    {(char *) "SetErrorDst", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnreachHeader_SetErrorDst, METH_VARARGS|METH_KEYWORDS, "SetErrorDst(errorDstAddress)\n\ntype: errorDstAddress: ns3::Ipv4Address" },
+    {(char *) "SetErrorSrc", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnreachHeader_SetErrorSrc, METH_VARARGS|METH_KEYWORDS, "SetErrorSrc(errorSrcAddress)\n\ntype: errorSrcAddress: ns3::Ipv4Address" },
+    {(char *) "SetOriginalDst", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnreachHeader_SetOriginalDst, METH_VARARGS|METH_KEYWORDS, "SetOriginalDst(originalDst)\n\ntype: originalDst: ns3::Ipv4Address" },
+    {(char *) "SetSalvage", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnreachHeader_SetSalvage, METH_VARARGS|METH_KEYWORDS, "SetSalvage(salvage)\n\ntype: salvage: uint8_t" },
+    {(char *) "SetUnreachNode", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnreachHeader_SetUnreachNode, METH_VARARGS|METH_KEYWORDS, "SetUnreachNode(unreachNode)\n\ntype: unreachNode: ns3::Ipv4Address" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnreachHeader__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -6773,7 +6773,7 @@ PyTypeObject PyNs3DsrDsrOptionRerrUnreachHeader_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "DsrOptionRerrUnreachHeader(arg0)\nDsrOptionRerrUnreachHeader()",                        /* Documentation string */
     (traverseproc)PyNs3DsrDsrOptionRerrUnreachHeader__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3DsrDsrOptionRerrUnreachHeader__tp_clear,             /* tp_clear */
@@ -6871,22 +6871,50 @@ int _wrap_PyNs3DsrDsrOptionRerrUnsupportHeader__tp_init(PyNs3DsrDsrOptionRerrUns
 
 
 PyObject *
-_wrap_PyNs3DsrDsrOptionRerrUnsupportHeader_SetUnsupported(PyNs3DsrDsrOptionRerrUnsupportHeader *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3DsrDsrOptionRerrUnsupportHeader_Deserialize(PyNs3DsrDsrOptionRerrUnsupportHeader *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    int optionType;
-    const char *keywords[] = {"optionType", NULL};
+    uint32_t retval;
+    PyNs3BufferIterator *start;
+    const char *keywords[] = {"start", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &optionType)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
         return NULL;
     }
-    if (optionType > 0xffff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SetUnsupported(optionType);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    retval = self->obj->Deserialize(*((PyNs3BufferIterator *) start)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionRerrUnsupportHeader_GetAlignment(PyNs3DsrDsrOptionRerrUnsupportHeader *self)
+{
+    PyObject *py_retval;
+    PyNs3DsrDsrOptionHeaderAlignment *py_Alignment;
+    
+    ns3::dsr::DsrOptionHeader::Alignment retval = self->obj->GetAlignment();
+    py_Alignment = PyObject_New(PyNs3DsrDsrOptionHeaderAlignment, &PyNs3DsrDsrOptionHeaderAlignment_Type);
+    py_Alignment->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Alignment->obj = new ns3::dsr::DsrOptionHeader::Alignment(retval);
+    PyNs3DsrDsrOptionHeaderAlignment_wrapper_registry[(void *) py_Alignment->obj] = (PyObject *) py_Alignment;
+    py_retval = Py_BuildValue((char *) "N", py_Alignment);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionRerrUnsupportHeader_GetErrorDst(PyNs3DsrDsrOptionRerrUnsupportHeader *self)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4Address *py_Ipv4Address;
+    
+    ns3::Ipv4Address retval = self->obj->GetErrorDst();
+    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
+    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
+    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
+    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
     return py_retval;
 }
 
@@ -6908,17 +6936,40 @@ _wrap_PyNs3DsrDsrOptionRerrUnsupportHeader_GetErrorSrc(PyNs3DsrDsrOptionRerrUnsu
 
 
 PyObject *
-_wrap_PyNs3DsrDsrOptionRerrUnsupportHeader_Deserialize(PyNs3DsrDsrOptionRerrUnsupportHeader *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3DsrDsrOptionRerrUnsupportHeader_GetInstanceTypeId(PyNs3DsrDsrOptionRerrUnsupportHeader *self)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = self->obj->GetInstanceTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionRerrUnsupportHeader_GetSalvage(PyNs3DsrDsrOptionRerrUnsupportHeader *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    
+    retval = self->obj->GetSalvage();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionRerrUnsupportHeader_GetSerializedSize(PyNs3DsrDsrOptionRerrUnsupportHeader *self)
 {
     PyObject *py_retval;
     uint32_t retval;
-    PyNs3BufferIterator *start;
-    const char *keywords[] = {"start", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
-        return NULL;
-    }
-    retval = self->obj->Deserialize(*((PyNs3BufferIterator *) start)->obj);
+    retval = self->obj->GetSerializedSize();
     py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
@@ -6941,22 +6992,6 @@ _wrap_PyNs3DsrDsrOptionRerrUnsupportHeader_GetTypeId(void)
 
 
 PyObject *
-_wrap_PyNs3DsrDsrOptionRerrUnsupportHeader_GetAlignment(PyNs3DsrDsrOptionRerrUnsupportHeader *self)
-{
-    PyObject *py_retval;
-    PyNs3DsrDsrOptionHeaderAlignment *py_Alignment;
-    
-    ns3::dsr::DsrOptionHeader::Alignment retval = self->obj->GetAlignment();
-    py_Alignment = PyObject_New(PyNs3DsrDsrOptionHeaderAlignment, &PyNs3DsrDsrOptionHeaderAlignment_Type);
-    py_Alignment->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Alignment->obj = new ns3::dsr::DsrOptionHeader::Alignment(retval);
-    PyNs3DsrDsrOptionHeaderAlignment_wrapper_registry[(void *) py_Alignment->obj] = (PyObject *) py_Alignment;
-    py_retval = Py_BuildValue((char *) "N", py_Alignment);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3DsrDsrOptionRerrUnsupportHeader_GetUnsupported(PyNs3DsrDsrOptionRerrUnsupportHeader *self)
 {
     PyObject *py_retval;
@@ -6969,13 +7004,18 @@ _wrap_PyNs3DsrDsrOptionRerrUnsupportHeader_GetUnsupported(PyNs3DsrDsrOptionRerrU
 
 
 PyObject *
-_wrap_PyNs3DsrDsrOptionRerrUnsupportHeader_GetSalvage(PyNs3DsrDsrOptionRerrUnsupportHeader *self)
+_wrap_PyNs3DsrDsrOptionRerrUnsupportHeader_Serialize(PyNs3DsrDsrOptionRerrUnsupportHeader *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    uint8_t retval;
+    PyNs3BufferIterator *start;
+    const char *keywords[] = {"start", NULL};
     
-    retval = self->obj->GetSalvage();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
+        return NULL;
+    }
+    self->obj->Serialize(*((PyNs3BufferIterator *) start)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -6991,6 +7031,23 @@ _wrap_PyNs3DsrDsrOptionRerrUnsupportHeader_SetErrorDst(PyNs3DsrDsrOptionRerrUnsu
         return NULL;
     }
     self->obj->SetErrorDst(*((PyNs3Ipv4Address *) errorDstAddress)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionRerrUnsupportHeader_SetErrorSrc(PyNs3DsrDsrOptionRerrUnsupportHeader *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4Address *errorSrcAddress;
+    const char *keywords[] = {"errorSrcAddress", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &errorSrcAddress)) {
+        return NULL;
+    }
+    self->obj->SetErrorSrc(*((PyNs3Ipv4Address *) errorSrcAddress)->obj);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -7019,77 +7076,20 @@ _wrap_PyNs3DsrDsrOptionRerrUnsupportHeader_SetSalvage(PyNs3DsrDsrOptionRerrUnsup
 
 
 PyObject *
-_wrap_PyNs3DsrDsrOptionRerrUnsupportHeader_GetErrorDst(PyNs3DsrDsrOptionRerrUnsupportHeader *self)
+_wrap_PyNs3DsrDsrOptionRerrUnsupportHeader_SetUnsupported(PyNs3DsrDsrOptionRerrUnsupportHeader *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3Ipv4Address *py_Ipv4Address;
+    int optionType;
+    const char *keywords[] = {"optionType", NULL};
     
-    ns3::Ipv4Address retval = self->obj->GetErrorDst();
-    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
-    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
-    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
-    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionRerrUnsupportHeader_GetInstanceTypeId(PyNs3DsrDsrOptionRerrUnsupportHeader *self)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = self->obj->GetInstanceTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionRerrUnsupportHeader_GetSerializedSize(PyNs3DsrDsrOptionRerrUnsupportHeader *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetSerializedSize();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionRerrUnsupportHeader_Serialize(PyNs3DsrDsrOptionRerrUnsupportHeader *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3BufferIterator *start;
-    const char *keywords[] = {"start", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &optionType)) {
         return NULL;
     }
-    self->obj->Serialize(*((PyNs3BufferIterator *) start)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionRerrUnsupportHeader_SetErrorSrc(PyNs3DsrDsrOptionRerrUnsupportHeader *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Ipv4Address *errorSrcAddress;
-    const char *keywords[] = {"errorSrcAddress", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &errorSrcAddress)) {
+    if (optionType > 0xffff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
         return NULL;
     }
-    self->obj->SetErrorSrc(*((PyNs3Ipv4Address *) errorSrcAddress)->obj);
+    self->obj->SetUnsupported(optionType);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -7111,20 +7111,20 @@ _wrap_PyNs3DsrDsrOptionRerrUnsupportHeader__copy__(PyNs3DsrDsrOptionRerrUnsuppor
 }
 
 static PyMethodDef PyNs3DsrDsrOptionRerrUnsupportHeader_methods[] = {
-    {(char *) "SetUnsupported", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnsupportHeader_SetUnsupported, METH_KEYWORDS|METH_VARARGS, "SetUnsupported(optionType)\n\ntype: optionType: uint16_t" },
-    {(char *) "GetErrorSrc", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnsupportHeader_GetErrorSrc, METH_NOARGS, "GetErrorSrc()\n\n" },
-    {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnsupportHeader_Deserialize, METH_KEYWORDS|METH_VARARGS, "Deserialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnsupportHeader_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnsupportHeader_Deserialize, METH_VARARGS|METH_KEYWORDS, "Deserialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
     {(char *) "GetAlignment", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnsupportHeader_GetAlignment, METH_NOARGS, "GetAlignment()\n\n" },
-    {(char *) "GetUnsupported", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnsupportHeader_GetUnsupported, METH_NOARGS, "GetUnsupported()\n\n" },
-    {(char *) "GetSalvage", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnsupportHeader_GetSalvage, METH_NOARGS, "GetSalvage()\n\n" },
-    {(char *) "SetErrorDst", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnsupportHeader_SetErrorDst, METH_KEYWORDS|METH_VARARGS, "SetErrorDst(errorDstAddress)\n\ntype: errorDstAddress: ns3::Ipv4Address" },
-    {(char *) "SetSalvage", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnsupportHeader_SetSalvage, METH_KEYWORDS|METH_VARARGS, "SetSalvage(salvage)\n\ntype: salvage: uint8_t" },
     {(char *) "GetErrorDst", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnsupportHeader_GetErrorDst, METH_NOARGS, "GetErrorDst()\n\n" },
+    {(char *) "GetErrorSrc", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnsupportHeader_GetErrorSrc, METH_NOARGS, "GetErrorSrc()\n\n" },
     {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnsupportHeader_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
+    {(char *) "GetSalvage", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnsupportHeader_GetSalvage, METH_NOARGS, "GetSalvage()\n\n" },
     {(char *) "GetSerializedSize", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnsupportHeader_GetSerializedSize, METH_NOARGS, "GetSerializedSize()\n\n" },
-    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnsupportHeader_Serialize, METH_KEYWORDS|METH_VARARGS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
-    {(char *) "SetErrorSrc", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnsupportHeader_SetErrorSrc, METH_KEYWORDS|METH_VARARGS, "SetErrorSrc(errorSrcAddress)\n\ntype: errorSrcAddress: ns3::Ipv4Address" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnsupportHeader_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "GetUnsupported", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnsupportHeader_GetUnsupported, METH_NOARGS, "GetUnsupported()\n\n" },
+    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnsupportHeader_Serialize, METH_VARARGS|METH_KEYWORDS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
+    {(char *) "SetErrorDst", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnsupportHeader_SetErrorDst, METH_VARARGS|METH_KEYWORDS, "SetErrorDst(errorDstAddress)\n\ntype: errorDstAddress: ns3::Ipv4Address" },
+    {(char *) "SetErrorSrc", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnsupportHeader_SetErrorSrc, METH_VARARGS|METH_KEYWORDS, "SetErrorSrc(errorSrcAddress)\n\ntype: errorSrcAddress: ns3::Ipv4Address" },
+    {(char *) "SetSalvage", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnsupportHeader_SetSalvage, METH_VARARGS|METH_KEYWORDS, "SetSalvage(salvage)\n\ntype: salvage: uint8_t" },
+    {(char *) "SetUnsupported", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnsupportHeader_SetUnsupported, METH_VARARGS|METH_KEYWORDS, "SetUnsupported(optionType)\n\ntype: optionType: uint16_t" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerrUnsupportHeader__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -7221,7 +7221,7 @@ PyTypeObject PyNs3DsrDsrOptionRerrUnsupportHeader_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "DsrOptionRerrUnsupportHeader(arg0)\nDsrOptionRerrUnsupportHeader()",                        /* Documentation string */
     (traverseproc)PyNs3DsrDsrOptionRerrUnsupportHeader__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3DsrDsrOptionRerrUnsupportHeader__tp_clear,             /* tp_clear */
@@ -7319,40 +7319,6 @@ int _wrap_PyNs3DsrDsrOptionRrepHeader__tp_init(PyNs3DsrDsrOptionRrepHeader *self
 
 
 PyObject *
-_wrap_PyNs3DsrDsrOptionRrepHeader_Serialize(PyNs3DsrDsrOptionRrepHeader *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3BufferIterator *start;
-    const char *keywords[] = {"start", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
-        return NULL;
-    }
-    self->obj->Serialize(*((PyNs3BufferIterator *) start)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionRrepHeader_SetNodesAddress(PyNs3DsrDsrOptionRrepHeader *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    std::vector< ns3::Ipv4Address > ipv4Address_value;
-    const char *keywords[] = {"ipv4Address", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O&", (char **) keywords, _wrap_convert_py2c__std__vector__lt___ns3__Ipv4Address___gt__, &ipv4Address_value)) {
-        return NULL;
-    }
-    self->obj->SetNodesAddress(ipv4Address_value);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3DsrDsrOptionRrepHeader_Deserialize(PyNs3DsrDsrOptionRrepHeader *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -7365,42 +7331,6 @@ _wrap_PyNs3DsrDsrOptionRrepHeader_Deserialize(PyNs3DsrDsrOptionRrepHeader *self,
     }
     retval = self->obj->Deserialize(*((PyNs3BufferIterator *) start)->obj);
     py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionRrepHeader_SetNumberAddress(PyNs3DsrDsrOptionRrepHeader *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int n;
-    const char *keywords[] = {"n", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &n)) {
-        return NULL;
-    }
-    if (n > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SetNumberAddress(n);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionRrepHeader_GetNodesAddress(PyNs3DsrDsrOptionRrepHeader *self)
-{
-    PyObject *py_retval;
-    std::vector< ns3::Ipv4Address > retval;
-    Pystd__vector__lt___ns3__Ipv4Address___gt__ *py_std__vector__lt___ns3__Ipv4Address___gt__;
-    
-    retval = self->obj->GetNodesAddress();
-    py_std__vector__lt___ns3__Ipv4Address___gt__ = PyObject_New(Pystd__vector__lt___ns3__Ipv4Address___gt__, &Pystd__vector__lt___ns3__Ipv4Address___gt___Type);
-    py_std__vector__lt___ns3__Ipv4Address___gt__->obj = new std::vector< ns3::Ipv4Address >(retval);
-    py_retval = Py_BuildValue((char *) "N", py_std__vector__lt___ns3__Ipv4Address___gt__);
     return py_retval;
 }
 
@@ -7422,22 +7352,17 @@ _wrap_PyNs3DsrDsrOptionRrepHeader_GetAlignment(PyNs3DsrDsrOptionRrepHeader *self
 
 
 PyObject *
-_wrap_PyNs3DsrDsrOptionRrepHeader_GetTargetAddress(PyNs3DsrDsrOptionRrepHeader *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3DsrDsrOptionRrepHeader_GetInstanceTypeId(PyNs3DsrDsrOptionRrepHeader *self)
 {
     PyObject *py_retval;
-    std::vector< ns3::Ipv4Address > ipv4Address_value;
-    const char *keywords[] = {"ipv4Address", NULL};
-    PyNs3Ipv4Address *py_Ipv4Address;
+    PyNs3TypeId *py_TypeId;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O&", (char **) keywords, _wrap_convert_py2c__std__vector__lt___ns3__Ipv4Address___gt__, &ipv4Address_value)) {
-        return NULL;
-    }
-    ns3::Ipv4Address retval = self->obj->GetTargetAddress(ipv4Address_value);
-    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
-    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
-    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
-    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
+    ns3::TypeId retval = self->obj->GetInstanceTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
     return py_retval;
 }
 
@@ -7468,17 +7393,16 @@ _wrap_PyNs3DsrDsrOptionRrepHeader_GetNodeAddress(PyNs3DsrDsrOptionRrepHeader *se
 
 
 PyObject *
-_wrap_PyNs3DsrDsrOptionRrepHeader_GetInstanceTypeId(PyNs3DsrDsrOptionRrepHeader *self)
+_wrap_PyNs3DsrDsrOptionRrepHeader_GetNodesAddress(PyNs3DsrDsrOptionRrepHeader *self)
 {
     PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
+    std::vector< ns3::Ipv4Address > retval;
+    Pystd__vector__lt___ns3__Ipv4Address___gt__ *py_std__vector__lt___ns3__Ipv4Address___gt__;
     
-    ns3::TypeId retval = self->obj->GetInstanceTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    retval = self->obj->GetNodesAddress();
+    py_std__vector__lt___ns3__Ipv4Address___gt__ = PyObject_New(Pystd__vector__lt___ns3__Ipv4Address___gt__, &Pystd__vector__lt___ns3__Ipv4Address___gt___Type);
+    py_std__vector__lt___ns3__Ipv4Address___gt__->obj = new std::vector< ns3::Ipv4Address >(retval);
+    py_retval = Py_BuildValue((char *) "N", py_std__vector__lt___ns3__Ipv4Address___gt__);
     return py_retval;
 }
 
@@ -7496,6 +7420,27 @@ _wrap_PyNs3DsrDsrOptionRrepHeader_GetSerializedSize(PyNs3DsrDsrOptionRrepHeader 
 
 
 PyObject *
+_wrap_PyNs3DsrDsrOptionRrepHeader_GetTargetAddress(PyNs3DsrDsrOptionRrepHeader *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    std::vector< ns3::Ipv4Address > ipv4Address_value;
+    const char *keywords[] = {"ipv4Address", NULL};
+    PyNs3Ipv4Address *py_Ipv4Address;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O&", (char **) keywords, _wrap_convert_py2c__std__vector__lt___ns3__Ipv4Address___gt__, &ipv4Address_value)) {
+        return NULL;
+    }
+    ns3::Ipv4Address retval = self->obj->GetTargetAddress(ipv4Address_value);
+    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
+    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
+    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
+    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3DsrDsrOptionRrepHeader_GetTypeId(void)
 {
     PyObject *py_retval;
@@ -7507,6 +7452,23 @@ _wrap_PyNs3DsrDsrOptionRrepHeader_GetTypeId(void)
     py_TypeId->obj = new ns3::TypeId(retval);
     PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
     py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionRrepHeader_Serialize(PyNs3DsrDsrOptionRrepHeader *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3BufferIterator *start;
+    const char *keywords[] = {"start", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
+        return NULL;
+    }
+    self->obj->Serialize(*((PyNs3BufferIterator *) start)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -7533,6 +7495,44 @@ _wrap_PyNs3DsrDsrOptionRrepHeader_SetNodeAddress(PyNs3DsrDsrOptionRrepHeader *se
 }
 
 
+PyObject *
+_wrap_PyNs3DsrDsrOptionRrepHeader_SetNodesAddress(PyNs3DsrDsrOptionRrepHeader *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    std::vector< ns3::Ipv4Address > ipv4Address_value;
+    const char *keywords[] = {"ipv4Address", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O&", (char **) keywords, _wrap_convert_py2c__std__vector__lt___ns3__Ipv4Address___gt__, &ipv4Address_value)) {
+        return NULL;
+    }
+    self->obj->SetNodesAddress(ipv4Address_value);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionRrepHeader_SetNumberAddress(PyNs3DsrDsrOptionRrepHeader *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int n;
+    const char *keywords[] = {"n", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &n)) {
+        return NULL;
+    }
+    if (n > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SetNumberAddress(n);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
 static PyObject*
 _wrap_PyNs3DsrDsrOptionRrepHeader__copy__(PyNs3DsrDsrOptionRrepHeader *self)
 {
@@ -7548,18 +7548,18 @@ _wrap_PyNs3DsrDsrOptionRrepHeader__copy__(PyNs3DsrDsrOptionRrepHeader *self)
 }
 
 static PyMethodDef PyNs3DsrDsrOptionRrepHeader_methods[] = {
-    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3DsrDsrOptionRrepHeader_Serialize, METH_KEYWORDS|METH_VARARGS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
-    {(char *) "SetNodesAddress", (PyCFunction) _wrap_PyNs3DsrDsrOptionRrepHeader_SetNodesAddress, METH_KEYWORDS|METH_VARARGS, "SetNodesAddress(ipv4Address)\n\ntype: ipv4Address: std::vector< ns3::Ipv4Address >" },
-    {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3DsrDsrOptionRrepHeader_Deserialize, METH_KEYWORDS|METH_VARARGS, "Deserialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
-    {(char *) "SetNumberAddress", (PyCFunction) _wrap_PyNs3DsrDsrOptionRrepHeader_SetNumberAddress, METH_KEYWORDS|METH_VARARGS, "SetNumberAddress(n)\n\ntype: n: uint8_t" },
-    {(char *) "GetNodesAddress", (PyCFunction) _wrap_PyNs3DsrDsrOptionRrepHeader_GetNodesAddress, METH_NOARGS, "GetNodesAddress()\n\n" },
+    {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3DsrDsrOptionRrepHeader_Deserialize, METH_VARARGS|METH_KEYWORDS, "Deserialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
     {(char *) "GetAlignment", (PyCFunction) _wrap_PyNs3DsrDsrOptionRrepHeader_GetAlignment, METH_NOARGS, "GetAlignment()\n\n" },
-    {(char *) "GetTargetAddress", (PyCFunction) _wrap_PyNs3DsrDsrOptionRrepHeader_GetTargetAddress, METH_KEYWORDS|METH_VARARGS, "GetTargetAddress(ipv4Address)\n\ntype: ipv4Address: std::vector< ns3::Ipv4Address >" },
-    {(char *) "GetNodeAddress", (PyCFunction) _wrap_PyNs3DsrDsrOptionRrepHeader_GetNodeAddress, METH_KEYWORDS|METH_VARARGS, "GetNodeAddress(index)\n\ntype: index: uint8_t" },
     {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionRrepHeader_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
+    {(char *) "GetNodeAddress", (PyCFunction) _wrap_PyNs3DsrDsrOptionRrepHeader_GetNodeAddress, METH_VARARGS|METH_KEYWORDS, "GetNodeAddress(index)\n\ntype: index: uint8_t" },
+    {(char *) "GetNodesAddress", (PyCFunction) _wrap_PyNs3DsrDsrOptionRrepHeader_GetNodesAddress, METH_NOARGS, "GetNodesAddress()\n\n" },
     {(char *) "GetSerializedSize", (PyCFunction) _wrap_PyNs3DsrDsrOptionRrepHeader_GetSerializedSize, METH_NOARGS, "GetSerializedSize()\n\n" },
+    {(char *) "GetTargetAddress", (PyCFunction) _wrap_PyNs3DsrDsrOptionRrepHeader_GetTargetAddress, METH_VARARGS|METH_KEYWORDS, "GetTargetAddress(ipv4Address)\n\ntype: ipv4Address: std::vector< ns3::Ipv4Address >" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionRrepHeader_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "SetNodeAddress", (PyCFunction) _wrap_PyNs3DsrDsrOptionRrepHeader_SetNodeAddress, METH_KEYWORDS|METH_VARARGS, "SetNodeAddress(index, addr)\n\ntype: index: uint8_t\ntype: addr: ns3::Ipv4Address" },
+    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3DsrDsrOptionRrepHeader_Serialize, METH_VARARGS|METH_KEYWORDS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
+    {(char *) "SetNodeAddress", (PyCFunction) _wrap_PyNs3DsrDsrOptionRrepHeader_SetNodeAddress, METH_VARARGS|METH_KEYWORDS, "SetNodeAddress(index, addr)\n\ntype: index: uint8_t\ntype: addr: ns3::Ipv4Address" },
+    {(char *) "SetNodesAddress", (PyCFunction) _wrap_PyNs3DsrDsrOptionRrepHeader_SetNodesAddress, METH_VARARGS|METH_KEYWORDS, "SetNodesAddress(ipv4Address)\n\ntype: ipv4Address: std::vector< ns3::Ipv4Address >" },
+    {(char *) "SetNumberAddress", (PyCFunction) _wrap_PyNs3DsrDsrOptionRrepHeader_SetNumberAddress, METH_VARARGS|METH_KEYWORDS, "SetNumberAddress(n)\n\ntype: n: uint8_t" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3DsrDsrOptionRrepHeader__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -7656,7 +7656,7 @@ PyTypeObject PyNs3DsrDsrOptionRrepHeader_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "DsrOptionRrepHeader(arg0)\nDsrOptionRrepHeader()",                        /* Documentation string */
     (traverseproc)PyNs3DsrDsrOptionRrepHeader__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3DsrDsrOptionRrepHeader__tp_clear,             /* tp_clear */
@@ -7754,33 +7754,16 @@ int _wrap_PyNs3DsrDsrOptionRreqHeader__tp_init(PyNs3DsrDsrOptionRreqHeader *self
 
 
 PyObject *
-_wrap_PyNs3DsrDsrOptionRreqHeader_Serialize(PyNs3DsrDsrOptionRreqHeader *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3DsrDsrOptionRreqHeader_AddNodeAddress(PyNs3DsrDsrOptionRreqHeader *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3BufferIterator *start;
-    const char *keywords[] = {"start", NULL};
+    PyNs3Ipv4Address *ipv4;
+    const char *keywords[] = {"ipv4", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &ipv4)) {
         return NULL;
     }
-    self->obj->Serialize(*((PyNs3BufferIterator *) start)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionRreqHeader_SetNodesAddress(PyNs3DsrDsrOptionRreqHeader *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    std::vector< ns3::Ipv4Address > ipv4Address_value;
-    const char *keywords[] = {"ipv4Address", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O&", (char **) keywords, _wrap_convert_py2c__std__vector__lt___ns3__Ipv4Address___gt__, &ipv4Address_value)) {
-        return NULL;
-    }
-    self->obj->SetNodesAddress(ipv4Address_value);
+    self->obj->AddNodeAddress(*((PyNs3Ipv4Address *) ipv4)->obj);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -7805,39 +7788,6 @@ _wrap_PyNs3DsrDsrOptionRreqHeader_Deserialize(PyNs3DsrDsrOptionRreqHeader *self,
 
 
 PyObject *
-_wrap_PyNs3DsrDsrOptionRreqHeader_SetNumberAddress(PyNs3DsrDsrOptionRreqHeader *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int n;
-    const char *keywords[] = {"n", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &n)) {
-        return NULL;
-    }
-    if (n > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SetNumberAddress(n);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionRreqHeader_GetNodesNumber(PyNs3DsrDsrOptionRreqHeader *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetNodesNumber();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3DsrDsrOptionRreqHeader_GetAlignment(PyNs3DsrDsrOptionRreqHeader *self)
 {
     PyObject *py_retval;
@@ -7849,23 +7799,6 @@ _wrap_PyNs3DsrDsrOptionRreqHeader_GetAlignment(PyNs3DsrDsrOptionRreqHeader *self
     py_Alignment->obj = new ns3::dsr::DsrOptionHeader::Alignment(retval);
     PyNs3DsrDsrOptionHeaderAlignment_wrapper_registry[(void *) py_Alignment->obj] = (PyObject *) py_Alignment;
     py_retval = Py_BuildValue((char *) "N", py_Alignment);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionRreqHeader_SetTarget(PyNs3DsrDsrOptionRreqHeader *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Ipv4Address *target;
-    const char *keywords[] = {"target", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &target)) {
-        return NULL;
-    }
-    self->obj->SetTarget(*((PyNs3Ipv4Address *) target)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
     return py_retval;
 }
 
@@ -7883,18 +7816,17 @@ _wrap_PyNs3DsrDsrOptionRreqHeader_GetId(PyNs3DsrDsrOptionRreqHeader *self)
 
 
 PyObject *
-_wrap_PyNs3DsrDsrOptionRreqHeader_AddNodeAddress(PyNs3DsrDsrOptionRreqHeader *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3DsrDsrOptionRreqHeader_GetInstanceTypeId(PyNs3DsrDsrOptionRreqHeader *self)
 {
     PyObject *py_retval;
-    PyNs3Ipv4Address *ipv4;
-    const char *keywords[] = {"ipv4", NULL};
+    PyNs3TypeId *py_TypeId;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &ipv4)) {
-        return NULL;
-    }
-    self->obj->AddNodeAddress(*((PyNs3Ipv4Address *) ipv4)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    ns3::TypeId retval = self->obj->GetInstanceTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
     return py_retval;
 }
 
@@ -7925,17 +7857,28 @@ _wrap_PyNs3DsrDsrOptionRreqHeader_GetNodeAddress(PyNs3DsrDsrOptionRreqHeader *se
 
 
 PyObject *
-_wrap_PyNs3DsrDsrOptionRreqHeader_GetInstanceTypeId(PyNs3DsrDsrOptionRreqHeader *self)
+_wrap_PyNs3DsrDsrOptionRreqHeader_GetNodesAddresses(PyNs3DsrDsrOptionRreqHeader *self)
 {
     PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
+    std::vector< ns3::Ipv4Address > retval;
+    Pystd__vector__lt___ns3__Ipv4Address___gt__ *py_std__vector__lt___ns3__Ipv4Address___gt__;
     
-    ns3::TypeId retval = self->obj->GetInstanceTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    retval = self->obj->GetNodesAddresses();
+    py_std__vector__lt___ns3__Ipv4Address___gt__ = PyObject_New(Pystd__vector__lt___ns3__Ipv4Address___gt__, &Pystd__vector__lt___ns3__Ipv4Address___gt___Type);
+    py_std__vector__lt___ns3__Ipv4Address___gt__->obj = new std::vector< ns3::Ipv4Address >(retval);
+    py_retval = Py_BuildValue((char *) "N", py_std__vector__lt___ns3__Ipv4Address___gt__);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionRreqHeader_GetNodesNumber(PyNs3DsrDsrOptionRreqHeader *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetNodesNumber();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
 
@@ -7948,6 +7891,55 @@ _wrap_PyNs3DsrDsrOptionRreqHeader_GetSerializedSize(PyNs3DsrDsrOptionRreqHeader 
     
     retval = self->obj->GetSerializedSize();
     py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionRreqHeader_GetTarget(PyNs3DsrDsrOptionRreqHeader *self)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4Address *py_Ipv4Address;
+    
+    ns3::Ipv4Address retval = self->obj->GetTarget();
+    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
+    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
+    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
+    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionRreqHeader_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::dsr::DsrOptionRreqHeader::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionRreqHeader_Serialize(PyNs3DsrDsrOptionRreqHeader *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3BufferIterator *start;
+    const char *keywords[] = {"start", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
+        return NULL;
+    }
+    self->obj->Serialize(*((PyNs3BufferIterator *) start)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -7974,53 +7966,6 @@ _wrap_PyNs3DsrDsrOptionRreqHeader_SetId(PyNs3DsrDsrOptionRreqHeader *self, PyObj
 
 
 PyObject *
-_wrap_PyNs3DsrDsrOptionRreqHeader_GetTarget(PyNs3DsrDsrOptionRreqHeader *self)
-{
-    PyObject *py_retval;
-    PyNs3Ipv4Address *py_Ipv4Address;
-    
-    ns3::Ipv4Address retval = self->obj->GetTarget();
-    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
-    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
-    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
-    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionRreqHeader_GetNodesAddresses(PyNs3DsrDsrOptionRreqHeader *self)
-{
-    PyObject *py_retval;
-    std::vector< ns3::Ipv4Address > retval;
-    Pystd__vector__lt___ns3__Ipv4Address___gt__ *py_std__vector__lt___ns3__Ipv4Address___gt__;
-    
-    retval = self->obj->GetNodesAddresses();
-    py_std__vector__lt___ns3__Ipv4Address___gt__ = PyObject_New(Pystd__vector__lt___ns3__Ipv4Address___gt__, &Pystd__vector__lt___ns3__Ipv4Address___gt___Type);
-    py_std__vector__lt___ns3__Ipv4Address___gt__->obj = new std::vector< ns3::Ipv4Address >(retval);
-    py_retval = Py_BuildValue((char *) "N", py_std__vector__lt___ns3__Ipv4Address___gt__);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionRreqHeader_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::dsr::DsrOptionRreqHeader::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3DsrDsrOptionRreqHeader_SetNodeAddress(PyNs3DsrDsrOptionRreqHeader *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -8042,6 +7987,61 @@ _wrap_PyNs3DsrDsrOptionRreqHeader_SetNodeAddress(PyNs3DsrDsrOptionRreqHeader *se
 }
 
 
+PyObject *
+_wrap_PyNs3DsrDsrOptionRreqHeader_SetNodesAddress(PyNs3DsrDsrOptionRreqHeader *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    std::vector< ns3::Ipv4Address > ipv4Address_value;
+    const char *keywords[] = {"ipv4Address", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O&", (char **) keywords, _wrap_convert_py2c__std__vector__lt___ns3__Ipv4Address___gt__, &ipv4Address_value)) {
+        return NULL;
+    }
+    self->obj->SetNodesAddress(ipv4Address_value);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionRreqHeader_SetNumberAddress(PyNs3DsrDsrOptionRreqHeader *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int n;
+    const char *keywords[] = {"n", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &n)) {
+        return NULL;
+    }
+    if (n > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SetNumberAddress(n);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionRreqHeader_SetTarget(PyNs3DsrDsrOptionRreqHeader *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4Address *target;
+    const char *keywords[] = {"target", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &target)) {
+        return NULL;
+    }
+    self->obj->SetTarget(*((PyNs3Ipv4Address *) target)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
 static PyObject*
 _wrap_PyNs3DsrDsrOptionRreqHeader__copy__(PyNs3DsrDsrOptionRreqHeader *self)
 {
@@ -8057,23 +8057,23 @@ _wrap_PyNs3DsrDsrOptionRreqHeader__copy__(PyNs3DsrDsrOptionRreqHeader *self)
 }
 
 static PyMethodDef PyNs3DsrDsrOptionRreqHeader_methods[] = {
-    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3DsrDsrOptionRreqHeader_Serialize, METH_KEYWORDS|METH_VARARGS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
-    {(char *) "SetNodesAddress", (PyCFunction) _wrap_PyNs3DsrDsrOptionRreqHeader_SetNodesAddress, METH_KEYWORDS|METH_VARARGS, "SetNodesAddress(ipv4Address)\n\ntype: ipv4Address: std::vector< ns3::Ipv4Address >" },
-    {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3DsrDsrOptionRreqHeader_Deserialize, METH_KEYWORDS|METH_VARARGS, "Deserialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
-    {(char *) "SetNumberAddress", (PyCFunction) _wrap_PyNs3DsrDsrOptionRreqHeader_SetNumberAddress, METH_KEYWORDS|METH_VARARGS, "SetNumberAddress(n)\n\ntype: n: uint8_t" },
-    {(char *) "GetNodesNumber", (PyCFunction) _wrap_PyNs3DsrDsrOptionRreqHeader_GetNodesNumber, METH_NOARGS, "GetNodesNumber()\n\n" },
+    {(char *) "AddNodeAddress", (PyCFunction) _wrap_PyNs3DsrDsrOptionRreqHeader_AddNodeAddress, METH_VARARGS|METH_KEYWORDS, "AddNodeAddress(ipv4)\n\ntype: ipv4: ns3::Ipv4Address" },
+    {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3DsrDsrOptionRreqHeader_Deserialize, METH_VARARGS|METH_KEYWORDS, "Deserialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
     {(char *) "GetAlignment", (PyCFunction) _wrap_PyNs3DsrDsrOptionRreqHeader_GetAlignment, METH_NOARGS, "GetAlignment()\n\n" },
-    {(char *) "SetTarget", (PyCFunction) _wrap_PyNs3DsrDsrOptionRreqHeader_SetTarget, METH_KEYWORDS|METH_VARARGS, "SetTarget(target)\n\ntype: target: ns3::Ipv4Address" },
     {(char *) "GetId", (PyCFunction) _wrap_PyNs3DsrDsrOptionRreqHeader_GetId, METH_NOARGS, "GetId()\n\n" },
-    {(char *) "AddNodeAddress", (PyCFunction) _wrap_PyNs3DsrDsrOptionRreqHeader_AddNodeAddress, METH_KEYWORDS|METH_VARARGS, "AddNodeAddress(ipv4)\n\ntype: ipv4: ns3::Ipv4Address" },
-    {(char *) "GetNodeAddress", (PyCFunction) _wrap_PyNs3DsrDsrOptionRreqHeader_GetNodeAddress, METH_KEYWORDS|METH_VARARGS, "GetNodeAddress(index)\n\ntype: index: uint8_t" },
     {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionRreqHeader_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
-    {(char *) "GetSerializedSize", (PyCFunction) _wrap_PyNs3DsrDsrOptionRreqHeader_GetSerializedSize, METH_NOARGS, "GetSerializedSize()\n\n" },
-    {(char *) "SetId", (PyCFunction) _wrap_PyNs3DsrDsrOptionRreqHeader_SetId, METH_KEYWORDS|METH_VARARGS, "SetId(identification)\n\ntype: identification: uint16_t" },
-    {(char *) "GetTarget", (PyCFunction) _wrap_PyNs3DsrDsrOptionRreqHeader_GetTarget, METH_NOARGS, "GetTarget()\n\n" },
+    {(char *) "GetNodeAddress", (PyCFunction) _wrap_PyNs3DsrDsrOptionRreqHeader_GetNodeAddress, METH_VARARGS|METH_KEYWORDS, "GetNodeAddress(index)\n\ntype: index: uint8_t" },
     {(char *) "GetNodesAddresses", (PyCFunction) _wrap_PyNs3DsrDsrOptionRreqHeader_GetNodesAddresses, METH_NOARGS, "GetNodesAddresses()\n\n" },
+    {(char *) "GetNodesNumber", (PyCFunction) _wrap_PyNs3DsrDsrOptionRreqHeader_GetNodesNumber, METH_NOARGS, "GetNodesNumber()\n\n" },
+    {(char *) "GetSerializedSize", (PyCFunction) _wrap_PyNs3DsrDsrOptionRreqHeader_GetSerializedSize, METH_NOARGS, "GetSerializedSize()\n\n" },
+    {(char *) "GetTarget", (PyCFunction) _wrap_PyNs3DsrDsrOptionRreqHeader_GetTarget, METH_NOARGS, "GetTarget()\n\n" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionRreqHeader_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "SetNodeAddress", (PyCFunction) _wrap_PyNs3DsrDsrOptionRreqHeader_SetNodeAddress, METH_KEYWORDS|METH_VARARGS, "SetNodeAddress(index, addr)\n\ntype: index: uint8_t\ntype: addr: ns3::Ipv4Address" },
+    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3DsrDsrOptionRreqHeader_Serialize, METH_VARARGS|METH_KEYWORDS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
+    {(char *) "SetId", (PyCFunction) _wrap_PyNs3DsrDsrOptionRreqHeader_SetId, METH_VARARGS|METH_KEYWORDS, "SetId(identification)\n\ntype: identification: uint16_t" },
+    {(char *) "SetNodeAddress", (PyCFunction) _wrap_PyNs3DsrDsrOptionRreqHeader_SetNodeAddress, METH_VARARGS|METH_KEYWORDS, "SetNodeAddress(index, addr)\n\ntype: index: uint8_t\ntype: addr: ns3::Ipv4Address" },
+    {(char *) "SetNodesAddress", (PyCFunction) _wrap_PyNs3DsrDsrOptionRreqHeader_SetNodesAddress, METH_VARARGS|METH_KEYWORDS, "SetNodesAddress(ipv4Address)\n\ntype: ipv4Address: std::vector< ns3::Ipv4Address >" },
+    {(char *) "SetNumberAddress", (PyCFunction) _wrap_PyNs3DsrDsrOptionRreqHeader_SetNumberAddress, METH_VARARGS|METH_KEYWORDS, "SetNumberAddress(n)\n\ntype: n: uint8_t" },
+    {(char *) "SetTarget", (PyCFunction) _wrap_PyNs3DsrDsrOptionRreqHeader_SetTarget, METH_VARARGS|METH_KEYWORDS, "SetTarget(target)\n\ntype: target: ns3::Ipv4Address" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3DsrDsrOptionRreqHeader__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -8170,7 +8170,7 @@ PyTypeObject PyNs3DsrDsrOptionRreqHeader_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "DsrOptionRreqHeader(arg0)\nDsrOptionRreqHeader()",                        /* Documentation string */
     (traverseproc)PyNs3DsrDsrOptionRreqHeader__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3DsrDsrOptionRreqHeader__tp_clear,             /* tp_clear */
@@ -8268,40 +8268,6 @@ int _wrap_PyNs3DsrDsrOptionSRHeader__tp_init(PyNs3DsrDsrOptionSRHeader *self, Py
 
 
 PyObject *
-_wrap_PyNs3DsrDsrOptionSRHeader_Serialize(PyNs3DsrDsrOptionSRHeader *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3BufferIterator *start;
-    const char *keywords[] = {"start", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
-        return NULL;
-    }
-    self->obj->Serialize(*((PyNs3BufferIterator *) start)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionSRHeader_SetNodesAddress(PyNs3DsrDsrOptionSRHeader *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    std::vector< ns3::Ipv4Address > ipv4Address_value;
-    const char *keywords[] = {"ipv4Address", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O&", (char **) keywords, _wrap_convert_py2c__std__vector__lt___ns3__Ipv4Address___gt__, &ipv4Address_value)) {
-        return NULL;
-    }
-    self->obj->SetNodesAddress(ipv4Address_value);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3DsrDsrOptionSRHeader_Deserialize(PyNs3DsrDsrOptionSRHeader *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -8314,42 +8280,6 @@ _wrap_PyNs3DsrDsrOptionSRHeader_Deserialize(PyNs3DsrDsrOptionSRHeader *self, PyO
     }
     retval = self->obj->Deserialize(*((PyNs3BufferIterator *) start)->obj);
     py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionSRHeader_SetNumberAddress(PyNs3DsrDsrOptionSRHeader *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int n;
-    const char *keywords[] = {"n", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &n)) {
-        return NULL;
-    }
-    if (n > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SetNumberAddress(n);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionSRHeader_GetNodesAddress(PyNs3DsrDsrOptionSRHeader *self)
-{
-    PyObject *py_retval;
-    std::vector< ns3::Ipv4Address > retval;
-    Pystd__vector__lt___ns3__Ipv4Address___gt__ *py_std__vector__lt___ns3__Ipv4Address___gt__;
-    
-    retval = self->obj->GetNodesAddress();
-    py_std__vector__lt___ns3__Ipv4Address___gt__ = PyObject_New(Pystd__vector__lt___ns3__Ipv4Address___gt__, &Pystd__vector__lt___ns3__Ipv4Address___gt___Type);
-    py_std__vector__lt___ns3__Ipv4Address___gt__->obj = new std::vector< ns3::Ipv4Address >(retval);
-    py_retval = Py_BuildValue((char *) "N", py_std__vector__lt___ns3__Ipv4Address___gt__);
     return py_retval;
 }
 
@@ -8371,46 +8301,17 @@ _wrap_PyNs3DsrDsrOptionSRHeader_GetAlignment(PyNs3DsrDsrOptionSRHeader *self)
 
 
 PyObject *
-_wrap_PyNs3DsrDsrOptionSRHeader_GetSalvage(PyNs3DsrDsrOptionSRHeader *self)
+_wrap_PyNs3DsrDsrOptionSRHeader_GetInstanceTypeId(PyNs3DsrDsrOptionSRHeader *self)
 {
     PyObject *py_retval;
-    uint8_t retval;
+    PyNs3TypeId *py_TypeId;
     
-    retval = self->obj->GetSalvage();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionSRHeader_SetSalvage(PyNs3DsrDsrOptionSRHeader *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int salvage;
-    const char *keywords[] = {"salvage", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &salvage)) {
-        return NULL;
-    }
-    if (salvage > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SetSalvage(salvage);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionSRHeader_GetNodeListSize(PyNs3DsrDsrOptionSRHeader *self)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    
-    retval = self->obj->GetNodeListSize();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    ns3::TypeId retval = self->obj->GetInstanceTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
     return py_retval;
 }
 
@@ -8441,29 +8342,40 @@ _wrap_PyNs3DsrDsrOptionSRHeader_GetNodeAddress(PyNs3DsrDsrOptionSRHeader *self, 
 
 
 PyObject *
-_wrap_PyNs3DsrDsrOptionSRHeader_GetInstanceTypeId(PyNs3DsrDsrOptionSRHeader *self)
+_wrap_PyNs3DsrDsrOptionSRHeader_GetNodeListSize(PyNs3DsrDsrOptionSRHeader *self)
 {
     PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
+    uint8_t retval;
     
-    ns3::TypeId retval = self->obj->GetInstanceTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    retval = self->obj->GetNodeListSize();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3DsrDsrOptionSRHeader_GetSerializedSize(PyNs3DsrDsrOptionSRHeader *self)
+_wrap_PyNs3DsrDsrOptionSRHeader_GetNodesAddress(PyNs3DsrDsrOptionSRHeader *self)
 {
     PyObject *py_retval;
-    uint32_t retval;
+    std::vector< ns3::Ipv4Address > retval;
+    Pystd__vector__lt___ns3__Ipv4Address___gt__ *py_std__vector__lt___ns3__Ipv4Address___gt__;
     
-    retval = self->obj->GetSerializedSize();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    retval = self->obj->GetNodesAddress();
+    py_std__vector__lt___ns3__Ipv4Address___gt__ = PyObject_New(Pystd__vector__lt___ns3__Ipv4Address___gt__, &Pystd__vector__lt___ns3__Ipv4Address___gt___Type);
+    py_std__vector__lt___ns3__Ipv4Address___gt__->obj = new std::vector< ns3::Ipv4Address >(retval);
+    py_retval = Py_BuildValue((char *) "N", py_std__vector__lt___ns3__Ipv4Address___gt__);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionSRHeader_GetSalvage(PyNs3DsrDsrOptionSRHeader *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    
+    retval = self->obj->GetSalvage();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
     return py_retval;
 }
 
@@ -8476,6 +8388,18 @@ _wrap_PyNs3DsrDsrOptionSRHeader_GetSegmentsLeft(PyNs3DsrDsrOptionSRHeader *self)
     
     retval = self->obj->GetSegmentsLeft();
     py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionSRHeader_GetSerializedSize(PyNs3DsrDsrOptionSRHeader *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetSerializedSize();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
 
@@ -8497,20 +8421,16 @@ _wrap_PyNs3DsrDsrOptionSRHeader_GetTypeId(void)
 
 
 PyObject *
-_wrap_PyNs3DsrDsrOptionSRHeader_SetSegmentsLeft(PyNs3DsrDsrOptionSRHeader *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3DsrDsrOptionSRHeader_Serialize(PyNs3DsrDsrOptionSRHeader *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    int segmentsLeft;
-    const char *keywords[] = {"segmentsLeft", NULL};
+    PyNs3BufferIterator *start;
+    const char *keywords[] = {"start", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &segmentsLeft)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
         return NULL;
     }
-    if (segmentsLeft > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SetSegmentsLeft(segmentsLeft);
+    self->obj->Serialize(*((PyNs3BufferIterator *) start)->obj);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -8539,6 +8459,86 @@ _wrap_PyNs3DsrDsrOptionSRHeader_SetNodeAddress(PyNs3DsrDsrOptionSRHeader *self, 
 }
 
 
+PyObject *
+_wrap_PyNs3DsrDsrOptionSRHeader_SetNodesAddress(PyNs3DsrDsrOptionSRHeader *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    std::vector< ns3::Ipv4Address > ipv4Address_value;
+    const char *keywords[] = {"ipv4Address", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O&", (char **) keywords, _wrap_convert_py2c__std__vector__lt___ns3__Ipv4Address___gt__, &ipv4Address_value)) {
+        return NULL;
+    }
+    self->obj->SetNodesAddress(ipv4Address_value);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionSRHeader_SetNumberAddress(PyNs3DsrDsrOptionSRHeader *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int n;
+    const char *keywords[] = {"n", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &n)) {
+        return NULL;
+    }
+    if (n > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SetNumberAddress(n);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionSRHeader_SetSalvage(PyNs3DsrDsrOptionSRHeader *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int salvage;
+    const char *keywords[] = {"salvage", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &salvage)) {
+        return NULL;
+    }
+    if (salvage > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SetSalvage(salvage);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionSRHeader_SetSegmentsLeft(PyNs3DsrDsrOptionSRHeader *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int segmentsLeft;
+    const char *keywords[] = {"segmentsLeft", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &segmentsLeft)) {
+        return NULL;
+    }
+    if (segmentsLeft > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SetSegmentsLeft(segmentsLeft);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
 static PyObject*
 _wrap_PyNs3DsrDsrOptionSRHeader__copy__(PyNs3DsrDsrOptionSRHeader *self)
 {
@@ -8554,22 +8554,22 @@ _wrap_PyNs3DsrDsrOptionSRHeader__copy__(PyNs3DsrDsrOptionSRHeader *self)
 }
 
 static PyMethodDef PyNs3DsrDsrOptionSRHeader_methods[] = {
-    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3DsrDsrOptionSRHeader_Serialize, METH_KEYWORDS|METH_VARARGS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
-    {(char *) "SetNodesAddress", (PyCFunction) _wrap_PyNs3DsrDsrOptionSRHeader_SetNodesAddress, METH_KEYWORDS|METH_VARARGS, "SetNodesAddress(ipv4Address)\n\ntype: ipv4Address: std::vector< ns3::Ipv4Address >" },
-    {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3DsrDsrOptionSRHeader_Deserialize, METH_KEYWORDS|METH_VARARGS, "Deserialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
-    {(char *) "SetNumberAddress", (PyCFunction) _wrap_PyNs3DsrDsrOptionSRHeader_SetNumberAddress, METH_KEYWORDS|METH_VARARGS, "SetNumberAddress(n)\n\ntype: n: uint8_t" },
-    {(char *) "GetNodesAddress", (PyCFunction) _wrap_PyNs3DsrDsrOptionSRHeader_GetNodesAddress, METH_NOARGS, "GetNodesAddress()\n\n" },
+    {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3DsrDsrOptionSRHeader_Deserialize, METH_VARARGS|METH_KEYWORDS, "Deserialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
     {(char *) "GetAlignment", (PyCFunction) _wrap_PyNs3DsrDsrOptionSRHeader_GetAlignment, METH_NOARGS, "GetAlignment()\n\n" },
-    {(char *) "GetSalvage", (PyCFunction) _wrap_PyNs3DsrDsrOptionSRHeader_GetSalvage, METH_NOARGS, "GetSalvage()\n\n" },
-    {(char *) "SetSalvage", (PyCFunction) _wrap_PyNs3DsrDsrOptionSRHeader_SetSalvage, METH_KEYWORDS|METH_VARARGS, "SetSalvage(salvage)\n\ntype: salvage: uint8_t" },
-    {(char *) "GetNodeListSize", (PyCFunction) _wrap_PyNs3DsrDsrOptionSRHeader_GetNodeListSize, METH_NOARGS, "GetNodeListSize()\n\n" },
-    {(char *) "GetNodeAddress", (PyCFunction) _wrap_PyNs3DsrDsrOptionSRHeader_GetNodeAddress, METH_KEYWORDS|METH_VARARGS, "GetNodeAddress(index)\n\ntype: index: uint8_t" },
     {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionSRHeader_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
-    {(char *) "GetSerializedSize", (PyCFunction) _wrap_PyNs3DsrDsrOptionSRHeader_GetSerializedSize, METH_NOARGS, "GetSerializedSize()\n\n" },
+    {(char *) "GetNodeAddress", (PyCFunction) _wrap_PyNs3DsrDsrOptionSRHeader_GetNodeAddress, METH_VARARGS|METH_KEYWORDS, "GetNodeAddress(index)\n\ntype: index: uint8_t" },
+    {(char *) "GetNodeListSize", (PyCFunction) _wrap_PyNs3DsrDsrOptionSRHeader_GetNodeListSize, METH_NOARGS, "GetNodeListSize()\n\n" },
+    {(char *) "GetNodesAddress", (PyCFunction) _wrap_PyNs3DsrDsrOptionSRHeader_GetNodesAddress, METH_NOARGS, "GetNodesAddress()\n\n" },
+    {(char *) "GetSalvage", (PyCFunction) _wrap_PyNs3DsrDsrOptionSRHeader_GetSalvage, METH_NOARGS, "GetSalvage()\n\n" },
     {(char *) "GetSegmentsLeft", (PyCFunction) _wrap_PyNs3DsrDsrOptionSRHeader_GetSegmentsLeft, METH_NOARGS, "GetSegmentsLeft()\n\n" },
+    {(char *) "GetSerializedSize", (PyCFunction) _wrap_PyNs3DsrDsrOptionSRHeader_GetSerializedSize, METH_NOARGS, "GetSerializedSize()\n\n" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionSRHeader_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "SetSegmentsLeft", (PyCFunction) _wrap_PyNs3DsrDsrOptionSRHeader_SetSegmentsLeft, METH_KEYWORDS|METH_VARARGS, "SetSegmentsLeft(segmentsLeft)\n\ntype: segmentsLeft: uint8_t" },
-    {(char *) "SetNodeAddress", (PyCFunction) _wrap_PyNs3DsrDsrOptionSRHeader_SetNodeAddress, METH_KEYWORDS|METH_VARARGS, "SetNodeAddress(index, addr)\n\ntype: index: uint8_t\ntype: addr: ns3::Ipv4Address" },
+    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3DsrDsrOptionSRHeader_Serialize, METH_VARARGS|METH_KEYWORDS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
+    {(char *) "SetNodeAddress", (PyCFunction) _wrap_PyNs3DsrDsrOptionSRHeader_SetNodeAddress, METH_VARARGS|METH_KEYWORDS, "SetNodeAddress(index, addr)\n\ntype: index: uint8_t\ntype: addr: ns3::Ipv4Address" },
+    {(char *) "SetNodesAddress", (PyCFunction) _wrap_PyNs3DsrDsrOptionSRHeader_SetNodesAddress, METH_VARARGS|METH_KEYWORDS, "SetNodesAddress(ipv4Address)\n\ntype: ipv4Address: std::vector< ns3::Ipv4Address >" },
+    {(char *) "SetNumberAddress", (PyCFunction) _wrap_PyNs3DsrDsrOptionSRHeader_SetNumberAddress, METH_VARARGS|METH_KEYWORDS, "SetNumberAddress(n)\n\ntype: n: uint8_t" },
+    {(char *) "SetSalvage", (PyCFunction) _wrap_PyNs3DsrDsrOptionSRHeader_SetSalvage, METH_VARARGS|METH_KEYWORDS, "SetSalvage(salvage)\n\ntype: salvage: uint8_t" },
+    {(char *) "SetSegmentsLeft", (PyCFunction) _wrap_PyNs3DsrDsrOptionSRHeader_SetSegmentsLeft, METH_VARARGS|METH_KEYWORDS, "SetSegmentsLeft(segmentsLeft)\n\ntype: segmentsLeft: uint8_t" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3DsrDsrOptionSRHeader__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -8677,7 +8677,7 @@ PyTypeObject PyNs3DsrDsrOptionSRHeader_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "DsrOptionSRHeader(arg0)\nDsrOptionSRHeader()",                        /* Documentation string */
     (traverseproc)PyNs3DsrDsrOptionSRHeader__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3DsrDsrOptionSRHeader__tp_clear,             /* tp_clear */
@@ -8710,16 +8710,16 @@ PyTypeObject PyNs3DsrDsrOptionSRHeader_Type = {
 
 
 PyObject *
-PyNs3DsrDsrOptions__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3DsrDsrOptions *self)
+PyNs3DsrDsrOptions__PythonHelper::_wrap_DoDispose(PyNs3DsrDsrOptions *self)
 {
     PyObject *py_retval;
     PyNs3DsrDsrOptions__PythonHelper *helper = dynamic_cast< PyNs3DsrDsrOptions__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -8758,16 +8758,16 @@ PyNs3DsrDsrOptions__PythonHelper::_wrap_NotifyNewAggregate(PyNs3DsrDsrOptions *s
 }
 
 PyObject *
-PyNs3DsrDsrOptions__PythonHelper::_wrap_DoDispose(PyNs3DsrDsrOptions *self)
+PyNs3DsrDsrOptions__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3DsrDsrOptions *self)
 {
     PyObject *py_retval;
     PyNs3DsrDsrOptions__PythonHelper *helper = dynamic_cast< PyNs3DsrDsrOptions__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -9347,23 +9347,285 @@ int _wrap_PyNs3DsrDsrOptions__tp_init(PyNs3DsrDsrOptions *self, PyObject *args, 
 
 
 PyObject *
-_wrap_PyNs3DsrDsrOptions_SearchNextHop(PyNs3DsrDsrOptions *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3DsrDsrOptions_CheckDuplicates(PyNs3DsrDsrOptions *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
+    bool retval;
     PyNs3Ipv4Address *ipv4Address;
     std::vector< ns3::Ipv4Address > vec_value;
     const char *keywords[] = {"ipv4Address", "vec", NULL};
-    PyNs3Ipv4Address *py_Ipv4Address;
     
     if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O&", (char **) keywords, &PyNs3Ipv4Address_Type, &ipv4Address, _wrap_convert_py2c__std__vector__lt___ns3__Ipv4Address___gt__, &vec_value)) {
         return NULL;
     }
-    ns3::Ipv4Address retval = self->obj->SearchNextHop(*((PyNs3Ipv4Address *) ipv4Address)->obj, vec_value);
-    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
-    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
-    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
-    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
+    retval = self->obj->CheckDuplicates(*((PyNs3Ipv4Address *) ipv4Address)->obj, vec_value);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptions_ContainAddressAfter(PyNs3DsrDsrOptions *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3Ipv4Address *ipv4Address;
+    PyNs3Ipv4Address *destAddress;
+    std::vector< ns3::Ipv4Address > nodeList_value;
+    const char *keywords[] = {"ipv4Address", "destAddress", "nodeList", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!O&", (char **) keywords, &PyNs3Ipv4Address_Type, &ipv4Address, &PyNs3Ipv4Address_Type, &destAddress, _wrap_convert_py2c__std__vector__lt___ns3__Ipv4Address___gt__, &nodeList_value)) {
+        return NULL;
+    }
+    retval = self->obj->ContainAddressAfter(*((PyNs3Ipv4Address *) ipv4Address)->obj, *((PyNs3Ipv4Address *) destAddress)->obj, nodeList_value);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptions_CutRoute(PyNs3DsrDsrOptions *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4Address *ipv4Address;
+    std::vector< ns3::Ipv4Address > nodeList_value;
+    const char *keywords[] = {"ipv4Address", "nodeList", NULL};
+    std::vector< ns3::Ipv4Address > retval;
+    Pystd__vector__lt___ns3__Ipv4Address___gt__ *py_std__vector__lt___ns3__Ipv4Address___gt__;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O&", (char **) keywords, &PyNs3Ipv4Address_Type, &ipv4Address, _wrap_convert_py2c__std__vector__lt___ns3__Ipv4Address___gt__, &nodeList_value)) {
+        return NULL;
+    }
+    retval = self->obj->CutRoute(*((PyNs3Ipv4Address *) ipv4Address)->obj, nodeList_value);
+    py_std__vector__lt___ns3__Ipv4Address___gt__ = PyObject_New(Pystd__vector__lt___ns3__Ipv4Address___gt__, &Pystd__vector__lt___ns3__Ipv4Address___gt___Type);
+    py_std__vector__lt___ns3__Ipv4Address___gt__->obj = new std::vector< ns3::Ipv4Address >(retval);
+    py_retval = Py_BuildValue((char *) "N", py_std__vector__lt___ns3__Ipv4Address___gt__);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptions_GetIDfromIP(PyNs3DsrDsrOptions *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    PyNs3Ipv4Address *address;
+    const char *keywords[] = {"address", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &address)) {
+        return NULL;
+    }
+    retval = self->obj->GetIDfromIP(*((PyNs3Ipv4Address *) address)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptions_GetNode(PyNs3DsrDsrOptions *self)
+{
+    PyObject *py_retval;
+    ns3::Ptr< ns3::Node > retval;
+    PyNs3Node *py_Node;
+    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
+    PyTypeObject *wrapper_type = 0;
+    
+    retval = self->obj->GetNode();
+    if (!(const_cast<ns3::Node *> (ns3::PeekPointer (retval)))) {
+        Py_INCREF(Py_None);
+        return Py_None;
+    }
+    if (typeid((*const_cast<ns3::Node *> (ns3::PeekPointer (retval)))).name() == typeid(PyNs3Node__PythonHelper).name())
+    {
+        py_Node = reinterpret_cast< PyNs3Node* >(reinterpret_cast< PyNs3Node__PythonHelper* >(const_cast<ns3::Node *> (ns3::PeekPointer (retval)))->m_pyself);
+        py_Node->obj = const_cast<ns3::Node *> (ns3::PeekPointer (retval));
+        Py_INCREF(py_Node);
+    } else {
+        wrapper_lookup_iter = PyNs3ObjectBase_wrapper_registry.find((void *) const_cast<ns3::Node *> (ns3::PeekPointer (retval)));
+        if (wrapper_lookup_iter == PyNs3ObjectBase_wrapper_registry.end()) {
+            py_Node = NULL;
+        } else {
+            py_Node = (PyNs3Node *) wrapper_lookup_iter->second;
+            Py_INCREF(py_Node);
+        }
+    
+        if (py_Node == NULL) {
+            wrapper_type = PyNs3SimpleRefCount__Ns3Object_Ns3ObjectBase_Ns3ObjectDeleter__typeid_map.lookup_wrapper(typeid((*const_cast<ns3::Node *> (ns3::PeekPointer (retval)))), &PyNs3Node_Type);
+            py_Node = PyObject_GC_New(PyNs3Node, wrapper_type);
+            py_Node->inst_dict = NULL;
+    
+            py_Node->inst_dict = NULL;
+            py_Node->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+            const_cast<ns3::Node *> (ns3::PeekPointer (retval))->Ref();
+            py_Node->obj = const_cast<ns3::Node *> (ns3::PeekPointer (retval));
+            PyNs3ObjectBase_wrapper_registry[(void *) py_Node->obj] = (PyObject *) py_Node;
+        }
+    }
+    py_retval = Py_BuildValue((char *) "N", py_Node);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptions_GetNodeWithAddress(PyNs3DsrDsrOptions *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    ns3::Ptr< ns3::Node > retval;
+    PyNs3Ipv4Address *ipv4Address;
+    const char *keywords[] = {"ipv4Address", NULL};
+    PyNs3Node *py_Node;
+    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
+    PyTypeObject *wrapper_type = 0;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &ipv4Address)) {
+        return NULL;
+    }
+    retval = self->obj->GetNodeWithAddress(*((PyNs3Ipv4Address *) ipv4Address)->obj);
+    if (!(const_cast<ns3::Node *> (ns3::PeekPointer (retval)))) {
+        Py_INCREF(Py_None);
+        return Py_None;
+    }
+    if (typeid((*const_cast<ns3::Node *> (ns3::PeekPointer (retval)))).name() == typeid(PyNs3Node__PythonHelper).name())
+    {
+        py_Node = reinterpret_cast< PyNs3Node* >(reinterpret_cast< PyNs3Node__PythonHelper* >(const_cast<ns3::Node *> (ns3::PeekPointer (retval)))->m_pyself);
+        py_Node->obj = const_cast<ns3::Node *> (ns3::PeekPointer (retval));
+        Py_INCREF(py_Node);
+    } else {
+        wrapper_lookup_iter = PyNs3ObjectBase_wrapper_registry.find((void *) const_cast<ns3::Node *> (ns3::PeekPointer (retval)));
+        if (wrapper_lookup_iter == PyNs3ObjectBase_wrapper_registry.end()) {
+            py_Node = NULL;
+        } else {
+            py_Node = (PyNs3Node *) wrapper_lookup_iter->second;
+            Py_INCREF(py_Node);
+        }
+    
+        if (py_Node == NULL) {
+            wrapper_type = PyNs3SimpleRefCount__Ns3Object_Ns3ObjectBase_Ns3ObjectDeleter__typeid_map.lookup_wrapper(typeid((*const_cast<ns3::Node *> (ns3::PeekPointer (retval)))), &PyNs3Node_Type);
+            py_Node = PyObject_GC_New(PyNs3Node, wrapper_type);
+            py_Node->inst_dict = NULL;
+    
+            py_Node->inst_dict = NULL;
+            py_Node->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+            const_cast<ns3::Node *> (ns3::PeekPointer (retval))->Ref();
+            py_Node->obj = const_cast<ns3::Node *> (ns3::PeekPointer (retval));
+            PyNs3ObjectBase_wrapper_registry[(void *) py_Node->obj] = (PyObject *) py_Node;
+        }
+    }
+    py_retval = Py_BuildValue((char *) "N", py_Node);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptions_GetOptionNumber(PyNs3DsrDsrOptions *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    
+    retval = self->obj->GetOptionNumber();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptions_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::dsr::DsrOptions::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptions_IfDuplicates(PyNs3DsrDsrOptions *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    std::vector< ns3::Ipv4Address > vec_value;
+    std::vector< ns3::Ipv4Address > vec2_value;
+    const char *keywords[] = {"vec", "vec2", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O&O&", (char **) keywords, _wrap_convert_py2c__std__vector__lt___ns3__Ipv4Address___gt__, &vec_value, _wrap_convert_py2c__std__vector__lt___ns3__Ipv4Address___gt__, &vec2_value)) {
+        return NULL;
+    }
+    retval = self->obj->IfDuplicates(vec_value, vec2_value);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptions_PrintVector(PyNs3DsrDsrOptions *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    std::vector< ns3::Ipv4Address > vec_value;
+    const char *keywords[] = {"vec", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O&", (char **) keywords, _wrap_convert_py2c__std__vector__lt___ns3__Ipv4Address___gt__, &vec_value)) {
+        return NULL;
+    }
+    self->obj->PrintVector(vec_value);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptions_Process(PyNs3DsrDsrOptions *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    PyNs3Packet *packet;
+    ns3::Packet *packet_ptr;
+    PyNs3Packet *dsrP;
+    ns3::Packet *dsrP_ptr;
+    PyNs3Ipv4Address *ipv4Address;
+    PyNs3Ipv4Address *source;
+    PyNs3Ipv4Header *ipv4Header;
+    int protocol;
+    bool isPromisc;
+    PyObject *py_isPromisc;
+    PyNs3Ipv4Address *promiscSource;
+    const char *keywords[] = {"packet", "dsrP", "ipv4Address", "source", "ipv4Header", "protocol", "isPromisc", "promiscSource", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!O!O!O!iOO!", (char **) keywords, &PyNs3Packet_Type, &packet, &PyNs3Packet_Type, &dsrP, &PyNs3Ipv4Address_Type, &ipv4Address, &PyNs3Ipv4Address_Type, &source, &PyNs3Ipv4Header_Type, &ipv4Header, &protocol, &py_isPromisc, &PyNs3Ipv4Address_Type, &promiscSource)) {
+        return NULL;
+    }
+    packet_ptr = (packet ? packet->obj : NULL);
+    dsrP_ptr = (dsrP ? dsrP->obj : NULL);
+    if (protocol > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    isPromisc = PyObject_IsTrue(py_isPromisc);
+    retval = self->obj->Process(ns3::Ptr< ns3::Packet  > (packet_ptr), ns3::Ptr< ns3::Packet  > (dsrP_ptr), *((PyNs3Ipv4Address *) ipv4Address)->obj, *((PyNs3Ipv4Address *) source)->obj, *((PyNs3Ipv4Header *) ipv4Header)->obj, protocol, isPromisc, *((PyNs3Ipv4Address *) promiscSource)->obj);
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptions_RemoveDuplicates(PyNs3DsrDsrOptions *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    std::vector< ns3::Ipv4Address > vec_value;
+    const char *keywords[] = {"vec", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O&", (char **) keywords, _wrap_convert_py2c__std__vector__lt___ns3__Ipv4Address___gt__, &vec_value)) {
+        return NULL;
+    }
+    self->obj->RemoveDuplicates(vec_value);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -9381,6 +9643,72 @@ _wrap_PyNs3DsrDsrOptions_ReverseRoutes(PyNs3DsrDsrOptions *self, PyObject *args,
     }
     retval = self->obj->ReverseRoutes(vec_value);
     py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptions_ReverseSearchNextHop(PyNs3DsrDsrOptions *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4Address *ipv4Address;
+    std::vector< ns3::Ipv4Address > vec_value;
+    const char *keywords[] = {"ipv4Address", "vec", NULL};
+    PyNs3Ipv4Address *py_Ipv4Address;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O&", (char **) keywords, &PyNs3Ipv4Address_Type, &ipv4Address, _wrap_convert_py2c__std__vector__lt___ns3__Ipv4Address___gt__, &vec_value)) {
+        return NULL;
+    }
+    ns3::Ipv4Address retval = self->obj->ReverseSearchNextHop(*((PyNs3Ipv4Address *) ipv4Address)->obj, vec_value);
+    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
+    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
+    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
+    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptions_ReverseSearchNextTwoHop(PyNs3DsrDsrOptions *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4Address *ipv4Address;
+    std::vector< ns3::Ipv4Address > vec_value;
+    const char *keywords[] = {"ipv4Address", "vec", NULL};
+    PyNs3Ipv4Address *py_Ipv4Address;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O&", (char **) keywords, &PyNs3Ipv4Address_Type, &ipv4Address, _wrap_convert_py2c__std__vector__lt___ns3__Ipv4Address___gt__, &vec_value)) {
+        return NULL;
+    }
+    ns3::Ipv4Address retval = self->obj->ReverseSearchNextTwoHop(*((PyNs3Ipv4Address *) ipv4Address)->obj, vec_value);
+    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
+    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
+    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
+    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptions_SearchNextHop(PyNs3DsrDsrOptions *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4Address *ipv4Address;
+    std::vector< ns3::Ipv4Address > vec_value;
+    const char *keywords[] = {"ipv4Address", "vec", NULL};
+    PyNs3Ipv4Address *py_Ipv4Address;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O&", (char **) keywords, &PyNs3Ipv4Address_Type, &ipv4Address, _wrap_convert_py2c__std__vector__lt___ns3__Ipv4Address___gt__, &vec_value)) {
+        return NULL;
+    }
+    ns3::Ipv4Address retval = self->obj->SearchNextHop(*((PyNs3Ipv4Address *) ipv4Address)->obj, vec_value);
+    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
+    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
+    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
+    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
     return py_retval;
 }
 
@@ -9446,357 +9774,29 @@ _wrap_PyNs3DsrDsrOptions_SetRoute(PyNs3DsrDsrOptions *self, PyObject *args, PyOb
     return py_retval;
 }
 
-
-PyObject *
-_wrap_PyNs3DsrDsrOptions_ReverseSearchNextHop(PyNs3DsrDsrOptions *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Ipv4Address *ipv4Address;
-    std::vector< ns3::Ipv4Address > vec_value;
-    const char *keywords[] = {"ipv4Address", "vec", NULL};
-    PyNs3Ipv4Address *py_Ipv4Address;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O&", (char **) keywords, &PyNs3Ipv4Address_Type, &ipv4Address, _wrap_convert_py2c__std__vector__lt___ns3__Ipv4Address___gt__, &vec_value)) {
-        return NULL;
-    }
-    ns3::Ipv4Address retval = self->obj->ReverseSearchNextHop(*((PyNs3Ipv4Address *) ipv4Address)->obj, vec_value);
-    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
-    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
-    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
-    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptions_CutRoute(PyNs3DsrDsrOptions *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Ipv4Address *ipv4Address;
-    std::vector< ns3::Ipv4Address > nodeList_value;
-    const char *keywords[] = {"ipv4Address", "nodeList", NULL};
-    std::vector< ns3::Ipv4Address > retval;
-    Pystd__vector__lt___ns3__Ipv4Address___gt__ *py_std__vector__lt___ns3__Ipv4Address___gt__;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O&", (char **) keywords, &PyNs3Ipv4Address_Type, &ipv4Address, _wrap_convert_py2c__std__vector__lt___ns3__Ipv4Address___gt__, &nodeList_value)) {
-        return NULL;
-    }
-    retval = self->obj->CutRoute(*((PyNs3Ipv4Address *) ipv4Address)->obj, nodeList_value);
-    py_std__vector__lt___ns3__Ipv4Address___gt__ = PyObject_New(Pystd__vector__lt___ns3__Ipv4Address___gt__, &Pystd__vector__lt___ns3__Ipv4Address___gt___Type);
-    py_std__vector__lt___ns3__Ipv4Address___gt__->obj = new std::vector< ns3::Ipv4Address >(retval);
-    py_retval = Py_BuildValue((char *) "N", py_std__vector__lt___ns3__Ipv4Address___gt__);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptions_Process(PyNs3DsrDsrOptions *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    PyNs3Packet *packet;
-    ns3::Packet *packet_ptr;
-    PyNs3Packet *dsrP;
-    ns3::Packet *dsrP_ptr;
-    PyNs3Ipv4Address *ipv4Address;
-    PyNs3Ipv4Address *source;
-    PyNs3Ipv4Header *ipv4Header;
-    int protocol;
-    bool isPromisc;
-    PyObject *py_isPromisc;
-    PyNs3Ipv4Address *promiscSource;
-    const char *keywords[] = {"packet", "dsrP", "ipv4Address", "source", "ipv4Header", "protocol", "isPromisc", "promiscSource", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!O!O!O!iOO!", (char **) keywords, &PyNs3Packet_Type, &packet, &PyNs3Packet_Type, &dsrP, &PyNs3Ipv4Address_Type, &ipv4Address, &PyNs3Ipv4Address_Type, &source, &PyNs3Ipv4Header_Type, &ipv4Header, &protocol, &py_isPromisc, &PyNs3Ipv4Address_Type, &promiscSource)) {
-        return NULL;
-    }
-    packet_ptr = (packet ? packet->obj : NULL);
-    dsrP_ptr = (dsrP ? dsrP->obj : NULL);
-    if (protocol > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    isPromisc = PyObject_IsTrue(py_isPromisc);
-    retval = self->obj->Process(ns3::Ptr< ns3::Packet  > (packet_ptr), ns3::Ptr< ns3::Packet  > (dsrP_ptr), *((PyNs3Ipv4Address *) ipv4Address)->obj, *((PyNs3Ipv4Address *) source)->obj, *((PyNs3Ipv4Header *) ipv4Header)->obj, protocol, isPromisc, *((PyNs3Ipv4Address *) promiscSource)->obj);
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptions_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::dsr::DsrOptions::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptions_PrintVector(PyNs3DsrDsrOptions *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    std::vector< ns3::Ipv4Address > vec_value;
-    const char *keywords[] = {"vec", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O&", (char **) keywords, _wrap_convert_py2c__std__vector__lt___ns3__Ipv4Address___gt__, &vec_value)) {
-        return NULL;
-    }
-    self->obj->PrintVector(vec_value);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptions_ReverseSearchNextTwoHop(PyNs3DsrDsrOptions *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Ipv4Address *ipv4Address;
-    std::vector< ns3::Ipv4Address > vec_value;
-    const char *keywords[] = {"ipv4Address", "vec", NULL};
-    PyNs3Ipv4Address *py_Ipv4Address;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O&", (char **) keywords, &PyNs3Ipv4Address_Type, &ipv4Address, _wrap_convert_py2c__std__vector__lt___ns3__Ipv4Address___gt__, &vec_value)) {
-        return NULL;
-    }
-    ns3::Ipv4Address retval = self->obj->ReverseSearchNextTwoHop(*((PyNs3Ipv4Address *) ipv4Address)->obj, vec_value);
-    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
-    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
-    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
-    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptions_GetNodeWithAddress(PyNs3DsrDsrOptions *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    ns3::Ptr< ns3::Node > retval;
-    PyNs3Ipv4Address *ipv4Address;
-    const char *keywords[] = {"ipv4Address", NULL};
-    PyNs3Node *py_Node;
-    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
-    PyTypeObject *wrapper_type = 0;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &ipv4Address)) {
-        return NULL;
-    }
-    retval = self->obj->GetNodeWithAddress(*((PyNs3Ipv4Address *) ipv4Address)->obj);
-    if (!(const_cast<ns3::Node *> (ns3::PeekPointer (retval)))) {
-        Py_INCREF(Py_None);
-        return Py_None;
-    }
-    if (typeid((*const_cast<ns3::Node *> (ns3::PeekPointer (retval)))).name() == typeid(PyNs3Node__PythonHelper).name())
-    {
-        py_Node = reinterpret_cast< PyNs3Node* >(reinterpret_cast< PyNs3Node__PythonHelper* >(const_cast<ns3::Node *> (ns3::PeekPointer (retval)))->m_pyself);
-        py_Node->obj = const_cast<ns3::Node *> (ns3::PeekPointer (retval));
-        Py_INCREF(py_Node);
-    } else {
-        wrapper_lookup_iter = PyNs3ObjectBase_wrapper_registry.find((void *) const_cast<ns3::Node *> (ns3::PeekPointer (retval)));
-        if (wrapper_lookup_iter == PyNs3ObjectBase_wrapper_registry.end()) {
-            py_Node = NULL;
-        } else {
-            py_Node = (PyNs3Node *) wrapper_lookup_iter->second;
-            Py_INCREF(py_Node);
-        }
-    
-        if (py_Node == NULL) {
-            wrapper_type = PyNs3SimpleRefCount__Ns3Object_Ns3ObjectBase_Ns3ObjectDeleter__typeid_map.lookup_wrapper(typeid((*const_cast<ns3::Node *> (ns3::PeekPointer (retval)))), &PyNs3Node_Type);
-            py_Node = PyObject_GC_New(PyNs3Node, wrapper_type);
-            py_Node->inst_dict = NULL;
-    
-            py_Node->inst_dict = NULL;
-            py_Node->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-            const_cast<ns3::Node *> (ns3::PeekPointer (retval))->Ref();
-            py_Node->obj = const_cast<ns3::Node *> (ns3::PeekPointer (retval));
-            PyNs3ObjectBase_wrapper_registry[(void *) py_Node->obj] = (PyObject *) py_Node;
-        }
-    }
-    py_retval = Py_BuildValue((char *) "N", py_Node);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptions_CheckDuplicates(PyNs3DsrDsrOptions *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3Ipv4Address *ipv4Address;
-    std::vector< ns3::Ipv4Address > vec_value;
-    const char *keywords[] = {"ipv4Address", "vec", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O&", (char **) keywords, &PyNs3Ipv4Address_Type, &ipv4Address, _wrap_convert_py2c__std__vector__lt___ns3__Ipv4Address___gt__, &vec_value)) {
-        return NULL;
-    }
-    retval = self->obj->CheckDuplicates(*((PyNs3Ipv4Address *) ipv4Address)->obj, vec_value);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptions_IfDuplicates(PyNs3DsrDsrOptions *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    std::vector< ns3::Ipv4Address > vec_value;
-    std::vector< ns3::Ipv4Address > vec2_value;
-    const char *keywords[] = {"vec", "vec2", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O&O&", (char **) keywords, _wrap_convert_py2c__std__vector__lt___ns3__Ipv4Address___gt__, &vec_value, _wrap_convert_py2c__std__vector__lt___ns3__Ipv4Address___gt__, &vec2_value)) {
-        return NULL;
-    }
-    retval = self->obj->IfDuplicates(vec_value, vec2_value);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptions_GetOptionNumber(PyNs3DsrDsrOptions *self)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    
-    retval = self->obj->GetOptionNumber();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptions_RemoveDuplicates(PyNs3DsrDsrOptions *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    std::vector< ns3::Ipv4Address > vec_value;
-    const char *keywords[] = {"vec", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O&", (char **) keywords, _wrap_convert_py2c__std__vector__lt___ns3__Ipv4Address___gt__, &vec_value)) {
-        return NULL;
-    }
-    self->obj->RemoveDuplicates(vec_value);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptions_GetIDfromIP(PyNs3DsrDsrOptions *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    PyNs3Ipv4Address *address;
-    const char *keywords[] = {"address", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &address)) {
-        return NULL;
-    }
-    retval = self->obj->GetIDfromIP(*((PyNs3Ipv4Address *) address)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptions_ContainAddressAfter(PyNs3DsrDsrOptions *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3Ipv4Address *ipv4Address;
-    PyNs3Ipv4Address *destAddress;
-    std::vector< ns3::Ipv4Address > nodeList_value;
-    const char *keywords[] = {"ipv4Address", "destAddress", "nodeList", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!O&", (char **) keywords, &PyNs3Ipv4Address_Type, &ipv4Address, &PyNs3Ipv4Address_Type, &destAddress, _wrap_convert_py2c__std__vector__lt___ns3__Ipv4Address___gt__, &nodeList_value)) {
-        return NULL;
-    }
-    retval = self->obj->ContainAddressAfter(*((PyNs3Ipv4Address *) ipv4Address)->obj, *((PyNs3Ipv4Address *) destAddress)->obj, nodeList_value);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptions_GetNode(PyNs3DsrDsrOptions *self)
-{
-    PyObject *py_retval;
-    ns3::Ptr< ns3::Node > retval;
-    PyNs3Node *py_Node;
-    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
-    PyTypeObject *wrapper_type = 0;
-    
-    retval = self->obj->GetNode();
-    if (!(const_cast<ns3::Node *> (ns3::PeekPointer (retval)))) {
-        Py_INCREF(Py_None);
-        return Py_None;
-    }
-    if (typeid((*const_cast<ns3::Node *> (ns3::PeekPointer (retval)))).name() == typeid(PyNs3Node__PythonHelper).name())
-    {
-        py_Node = reinterpret_cast< PyNs3Node* >(reinterpret_cast< PyNs3Node__PythonHelper* >(const_cast<ns3::Node *> (ns3::PeekPointer (retval)))->m_pyself);
-        py_Node->obj = const_cast<ns3::Node *> (ns3::PeekPointer (retval));
-        Py_INCREF(py_Node);
-    } else {
-        wrapper_lookup_iter = PyNs3ObjectBase_wrapper_registry.find((void *) const_cast<ns3::Node *> (ns3::PeekPointer (retval)));
-        if (wrapper_lookup_iter == PyNs3ObjectBase_wrapper_registry.end()) {
-            py_Node = NULL;
-        } else {
-            py_Node = (PyNs3Node *) wrapper_lookup_iter->second;
-            Py_INCREF(py_Node);
-        }
-    
-        if (py_Node == NULL) {
-            wrapper_type = PyNs3SimpleRefCount__Ns3Object_Ns3ObjectBase_Ns3ObjectDeleter__typeid_map.lookup_wrapper(typeid((*const_cast<ns3::Node *> (ns3::PeekPointer (retval)))), &PyNs3Node_Type);
-            py_Node = PyObject_GC_New(PyNs3Node, wrapper_type);
-            py_Node->inst_dict = NULL;
-    
-            py_Node->inst_dict = NULL;
-            py_Node->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-            const_cast<ns3::Node *> (ns3::PeekPointer (retval))->Ref();
-            py_Node->obj = const_cast<ns3::Node *> (ns3::PeekPointer (retval));
-            PyNs3ObjectBase_wrapper_registry[(void *) py_Node->obj] = (PyObject *) py_Node;
-        }
-    }
-    py_retval = Py_BuildValue((char *) "N", py_Node);
-    return py_retval;
-}
-
 static PyMethodDef PyNs3DsrDsrOptions_methods[] = {
-    {(char *) "SearchNextHop", (PyCFunction) _wrap_PyNs3DsrDsrOptions_SearchNextHop, METH_KEYWORDS|METH_VARARGS, "SearchNextHop(ipv4Address, vec)\n\ntype: ipv4Address: ns3::Ipv4Address\ntype: vec: std::vector< ns3::Ipv4Address > &" },
-    {(char *) "ReverseRoutes", (PyCFunction) _wrap_PyNs3DsrDsrOptions_ReverseRoutes, METH_KEYWORDS|METH_VARARGS, "ReverseRoutes(vec)\n\ntype: vec: std::vector< ns3::Ipv4Address > &" },
-    {(char *) "SetNode", (PyCFunction) _wrap_PyNs3DsrDsrOptions_SetNode, METH_KEYWORDS|METH_VARARGS, "SetNode(node)\n\ntype: node: ns3::Ptr< ns3::Node >" },
-    {(char *) "SetRoute", (PyCFunction) _wrap_PyNs3DsrDsrOptions_SetRoute, METH_KEYWORDS|METH_VARARGS, "SetRoute(nextHop, srcAddress)\n\ntype: nextHop: ns3::Ipv4Address\ntype: srcAddress: ns3::Ipv4Address" },
-    {(char *) "ReverseSearchNextHop", (PyCFunction) _wrap_PyNs3DsrDsrOptions_ReverseSearchNextHop, METH_KEYWORDS|METH_VARARGS, "ReverseSearchNextHop(ipv4Address, vec)\n\ntype: ipv4Address: ns3::Ipv4Address\ntype: vec: std::vector< ns3::Ipv4Address > &" },
-    {(char *) "CutRoute", (PyCFunction) _wrap_PyNs3DsrDsrOptions_CutRoute, METH_KEYWORDS|METH_VARARGS, "CutRoute(ipv4Address, nodeList)\n\ntype: ipv4Address: ns3::Ipv4Address\ntype: nodeList: std::vector< ns3::Ipv4Address > &" },
-    {(char *) "Process", (PyCFunction) _wrap_PyNs3DsrDsrOptions_Process, METH_KEYWORDS|METH_VARARGS, "Process(packet, dsrP, ipv4Address, source, ipv4Header, protocol, isPromisc, promiscSource)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: dsrP: ns3::Ptr< ns3::Packet >\ntype: ipv4Address: ns3::Ipv4Address\ntype: source: ns3::Ipv4Address\ntype: ipv4Header: ns3::Ipv4Header const &\ntype: protocol: uint8_t\ntype: isPromisc: bool &\ntype: promiscSource: ns3::Ipv4Address" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptions_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "PrintVector", (PyCFunction) _wrap_PyNs3DsrDsrOptions_PrintVector, METH_KEYWORDS|METH_VARARGS, "PrintVector(vec)\n\ntype: vec: std::vector< ns3::Ipv4Address > &" },
-    {(char *) "ReverseSearchNextTwoHop", (PyCFunction) _wrap_PyNs3DsrDsrOptions_ReverseSearchNextTwoHop, METH_KEYWORDS|METH_VARARGS, "ReverseSearchNextTwoHop(ipv4Address, vec)\n\ntype: ipv4Address: ns3::Ipv4Address\ntype: vec: std::vector< ns3::Ipv4Address > &" },
-    {(char *) "GetNodeWithAddress", (PyCFunction) _wrap_PyNs3DsrDsrOptions_GetNodeWithAddress, METH_KEYWORDS|METH_VARARGS, "GetNodeWithAddress(ipv4Address)\n\ntype: ipv4Address: ns3::Ipv4Address" },
-    {(char *) "CheckDuplicates", (PyCFunction) _wrap_PyNs3DsrDsrOptions_CheckDuplicates, METH_KEYWORDS|METH_VARARGS, "CheckDuplicates(ipv4Address, vec)\n\ntype: ipv4Address: ns3::Ipv4Address\ntype: vec: std::vector< ns3::Ipv4Address > &" },
-    {(char *) "IfDuplicates", (PyCFunction) _wrap_PyNs3DsrDsrOptions_IfDuplicates, METH_KEYWORDS|METH_VARARGS, "IfDuplicates(vec, vec2)\n\ntype: vec: std::vector< ns3::Ipv4Address > &\ntype: vec2: std::vector< ns3::Ipv4Address > &" },
-    {(char *) "GetOptionNumber", (PyCFunction) _wrap_PyNs3DsrDsrOptions_GetOptionNumber, METH_NOARGS, "GetOptionNumber()\n\n" },
-    {(char *) "RemoveDuplicates", (PyCFunction) _wrap_PyNs3DsrDsrOptions_RemoveDuplicates, METH_KEYWORDS|METH_VARARGS, "RemoveDuplicates(vec)\n\ntype: vec: std::vector< ns3::Ipv4Address > &" },
-    {(char *) "GetIDfromIP", (PyCFunction) _wrap_PyNs3DsrDsrOptions_GetIDfromIP, METH_KEYWORDS|METH_VARARGS, "GetIDfromIP(address)\n\ntype: address: ns3::Ipv4Address" },
-    {(char *) "ContainAddressAfter", (PyCFunction) _wrap_PyNs3DsrDsrOptions_ContainAddressAfter, METH_KEYWORDS|METH_VARARGS, "ContainAddressAfter(ipv4Address, destAddress, nodeList)\n\ntype: ipv4Address: ns3::Ipv4Address\ntype: destAddress: ns3::Ipv4Address\ntype: nodeList: std::vector< ns3::Ipv4Address > &" },
+    {(char *) "CheckDuplicates", (PyCFunction) _wrap_PyNs3DsrDsrOptions_CheckDuplicates, METH_VARARGS|METH_KEYWORDS, "CheckDuplicates(ipv4Address, vec)\n\ntype: ipv4Address: ns3::Ipv4Address\ntype: vec: std::vector< ns3::Ipv4Address > &" },
+    {(char *) "ContainAddressAfter", (PyCFunction) _wrap_PyNs3DsrDsrOptions_ContainAddressAfter, METH_VARARGS|METH_KEYWORDS, "ContainAddressAfter(ipv4Address, destAddress, nodeList)\n\ntype: ipv4Address: ns3::Ipv4Address\ntype: destAddress: ns3::Ipv4Address\ntype: nodeList: std::vector< ns3::Ipv4Address > &" },
+    {(char *) "CutRoute", (PyCFunction) _wrap_PyNs3DsrDsrOptions_CutRoute, METH_VARARGS|METH_KEYWORDS, "CutRoute(ipv4Address, nodeList)\n\ntype: ipv4Address: ns3::Ipv4Address\ntype: nodeList: std::vector< ns3::Ipv4Address > &" },
+    {(char *) "GetIDfromIP", (PyCFunction) _wrap_PyNs3DsrDsrOptions_GetIDfromIP, METH_VARARGS|METH_KEYWORDS, "GetIDfromIP(address)\n\ntype: address: ns3::Ipv4Address" },
     {(char *) "GetNode", (PyCFunction) _wrap_PyNs3DsrDsrOptions_GetNode, METH_NOARGS, "GetNode()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3DsrDsrOptions__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "GetNodeWithAddress", (PyCFunction) _wrap_PyNs3DsrDsrOptions_GetNodeWithAddress, METH_VARARGS|METH_KEYWORDS, "GetNodeWithAddress(ipv4Address)\n\ntype: ipv4Address: ns3::Ipv4Address" },
+    {(char *) "GetOptionNumber", (PyCFunction) _wrap_PyNs3DsrDsrOptions_GetOptionNumber, METH_NOARGS, "GetOptionNumber()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptions_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "IfDuplicates", (PyCFunction) _wrap_PyNs3DsrDsrOptions_IfDuplicates, METH_VARARGS|METH_KEYWORDS, "IfDuplicates(vec, vec2)\n\ntype: vec: std::vector< ns3::Ipv4Address > &\ntype: vec2: std::vector< ns3::Ipv4Address > &" },
+    {(char *) "PrintVector", (PyCFunction) _wrap_PyNs3DsrDsrOptions_PrintVector, METH_VARARGS|METH_KEYWORDS, "PrintVector(vec)\n\ntype: vec: std::vector< ns3::Ipv4Address > &" },
+    {(char *) "Process", (PyCFunction) _wrap_PyNs3DsrDsrOptions_Process, METH_VARARGS|METH_KEYWORDS, "Process(packet, dsrP, ipv4Address, source, ipv4Header, protocol, isPromisc, promiscSource)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: dsrP: ns3::Ptr< ns3::Packet >\ntype: ipv4Address: ns3::Ipv4Address\ntype: source: ns3::Ipv4Address\ntype: ipv4Header: ns3::Ipv4Header const &\ntype: protocol: uint8_t\ntype: isPromisc: bool &\ntype: promiscSource: ns3::Ipv4Address" },
+    {(char *) "RemoveDuplicates", (PyCFunction) _wrap_PyNs3DsrDsrOptions_RemoveDuplicates, METH_VARARGS|METH_KEYWORDS, "RemoveDuplicates(vec)\n\ntype: vec: std::vector< ns3::Ipv4Address > &" },
+    {(char *) "ReverseRoutes", (PyCFunction) _wrap_PyNs3DsrDsrOptions_ReverseRoutes, METH_VARARGS|METH_KEYWORDS, "ReverseRoutes(vec)\n\ntype: vec: std::vector< ns3::Ipv4Address > &" },
+    {(char *) "ReverseSearchNextHop", (PyCFunction) _wrap_PyNs3DsrDsrOptions_ReverseSearchNextHop, METH_VARARGS|METH_KEYWORDS, "ReverseSearchNextHop(ipv4Address, vec)\n\ntype: ipv4Address: ns3::Ipv4Address\ntype: vec: std::vector< ns3::Ipv4Address > &" },
+    {(char *) "ReverseSearchNextTwoHop", (PyCFunction) _wrap_PyNs3DsrDsrOptions_ReverseSearchNextTwoHop, METH_VARARGS|METH_KEYWORDS, "ReverseSearchNextTwoHop(ipv4Address, vec)\n\ntype: ipv4Address: ns3::Ipv4Address\ntype: vec: std::vector< ns3::Ipv4Address > &" },
+    {(char *) "SearchNextHop", (PyCFunction) _wrap_PyNs3DsrDsrOptions_SearchNextHop, METH_VARARGS|METH_KEYWORDS, "SearchNextHop(ipv4Address, vec)\n\ntype: ipv4Address: ns3::Ipv4Address\ntype: vec: std::vector< ns3::Ipv4Address > &" },
+    {(char *) "SetNode", (PyCFunction) _wrap_PyNs3DsrDsrOptions_SetNode, METH_VARARGS|METH_KEYWORDS, "SetNode(node)\n\ntype: node: ns3::Ptr< ns3::Node >" },
+    {(char *) "SetRoute", (PyCFunction) _wrap_PyNs3DsrDsrOptions_SetRoute, METH_VARARGS|METH_KEYWORDS, "SetRoute(nextHop, srcAddress)\n\ntype: nextHop: ns3::Ipv4Address\ntype: srcAddress: ns3::Ipv4Address" },
+    {(char *) "DoDispose", (PyCFunction) PyNs3DsrDsrOptions__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3DsrDsrOptions__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3DsrDsrOptions__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3DsrDsrOptions__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3DsrDsrOptions__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 
@@ -9895,7 +9895,7 @@ PyTypeObject PyNs3DsrDsrOptions_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "DsrOptions(arg0)\nDsrOptions()",                        /* Documentation string */
     (traverseproc)PyNs3DsrDsrOptions__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3DsrDsrOptions__tp_clear,             /* tp_clear */
@@ -10045,133 +10045,33 @@ int _wrap_PyNs3DsrDsrPassiveBuffEntry__tp_init(PyNs3DsrDsrPassiveBuffEntry *self
 
 
 PyObject *
-_wrap_PyNs3DsrDsrPassiveBuffEntry_SetFragmentOffset(PyNs3DsrDsrPassiveBuffEntry *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3DsrDsrPassiveBuffEntry_GetDestination(PyNs3DsrDsrPassiveBuffEntry *self)
 {
     PyObject *py_retval;
-    int f;
-    const char *keywords[] = {"f", NULL};
+    PyNs3Ipv4Address *py_Ipv4Address;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &f)) {
-        return NULL;
-    }
-    if (f > 0xffff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SetFragmentOffset(f);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    ns3::Ipv4Address retval = self->obj->GetDestination();
+    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
+    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
+    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
+    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3DsrDsrPassiveBuffEntry_SetPacket(PyNs3DsrDsrPassiveBuffEntry *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3DsrDsrPassiveBuffEntry_GetExpireTime(PyNs3DsrDsrPassiveBuffEntry *self)
 {
     PyObject *py_retval;
-    PyNs3Packet *p;
-    ns3::Packet *p_ptr;
-    const char *keywords[] = {"p", NULL};
+    PyNs3Time *py_Time;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Packet_Type, &p)) {
-        return NULL;
-    }
-    p_ptr = (p ? p->obj : NULL);
-    self->obj->SetPacket(ns3::Ptr< ns3::Packet  > (p_ptr));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrPassiveBuffEntry_SetSegsLeft(PyNs3DsrDsrPassiveBuffEntry *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int seg;
-    const char *keywords[] = {"seg", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &seg)) {
-        return NULL;
-    }
-    if (seg > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SetSegsLeft(seg);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrPassiveBuffEntry_SetNextHop(PyNs3DsrDsrPassiveBuffEntry *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Ipv4Address *n;
-    const char *keywords[] = {"n", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &n)) {
-        return NULL;
-    }
-    self->obj->SetNextHop(*((PyNs3Ipv4Address *) n)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrPassiveBuffEntry_GetSegsLeft(PyNs3DsrDsrPassiveBuffEntry *self)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    
-    retval = self->obj->GetSegsLeft();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrPassiveBuffEntry_SetProtocol(PyNs3DsrDsrPassiveBuffEntry *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int p;
-    const char *keywords[] = {"p", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &p)) {
-        return NULL;
-    }
-    if (p > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SetProtocol(p);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrPassiveBuffEntry_SetIdentification(PyNs3DsrDsrPassiveBuffEntry *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int i;
-    const char *keywords[] = {"i", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &i)) {
-        return NULL;
-    }
-    if (i > 0xffff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SetIdentification(i);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    ns3::Time retval = self->obj->GetExpireTime();
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
     return py_retval;
 }
 
@@ -10184,23 +10084,6 @@ _wrap_PyNs3DsrDsrPassiveBuffEntry_GetFragmentOffset(PyNs3DsrDsrPassiveBuffEntry 
     
     retval = self->obj->GetFragmentOffset();
     py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrPassiveBuffEntry_SetDestination(PyNs3DsrDsrPassiveBuffEntry *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Ipv4Address *d;
-    const char *keywords[] = {"d", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &d)) {
-        return NULL;
-    }
-    self->obj->SetDestination(*((PyNs3Ipv4Address *) d)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
     return py_retval;
 }
 
@@ -10229,18 +10112,6 @@ _wrap_PyNs3DsrDsrPassiveBuffEntry_GetNextHop(PyNs3DsrDsrPassiveBuffEntry *self)
     py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
     PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
     py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrPassiveBuffEntry_GetProtocol(PyNs3DsrDsrPassiveBuffEntry *self)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    
-    retval = self->obj->GetProtocol();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
     return py_retval;
 }
 
@@ -10282,6 +10153,63 @@ _wrap_PyNs3DsrDsrPassiveBuffEntry_GetPacket(PyNs3DsrDsrPassiveBuffEntry *self)
 
 
 PyObject *
+_wrap_PyNs3DsrDsrPassiveBuffEntry_GetProtocol(PyNs3DsrDsrPassiveBuffEntry *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    
+    retval = self->obj->GetProtocol();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrPassiveBuffEntry_GetSegsLeft(PyNs3DsrDsrPassiveBuffEntry *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    
+    retval = self->obj->GetSegsLeft();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrPassiveBuffEntry_GetSource(PyNs3DsrDsrPassiveBuffEntry *self)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4Address *py_Ipv4Address;
+    
+    ns3::Ipv4Address retval = self->obj->GetSource();
+    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
+    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
+    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
+    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrPassiveBuffEntry_SetDestination(PyNs3DsrDsrPassiveBuffEntry *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4Address *d;
+    const char *keywords[] = {"d", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &d)) {
+        return NULL;
+    }
+    self->obj->SetDestination(*((PyNs3Ipv4Address *) d)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3DsrDsrPassiveBuffEntry_SetExpireTime(PyNs3DsrDsrPassiveBuffEntry *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -10299,49 +10227,121 @@ _wrap_PyNs3DsrDsrPassiveBuffEntry_SetExpireTime(PyNs3DsrDsrPassiveBuffEntry *sel
 
 
 PyObject *
-_wrap_PyNs3DsrDsrPassiveBuffEntry_GetDestination(PyNs3DsrDsrPassiveBuffEntry *self)
+_wrap_PyNs3DsrDsrPassiveBuffEntry_SetFragmentOffset(PyNs3DsrDsrPassiveBuffEntry *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3Ipv4Address *py_Ipv4Address;
+    int f;
+    const char *keywords[] = {"f", NULL};
     
-    ns3::Ipv4Address retval = self->obj->GetDestination();
-    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
-    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
-    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
-    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &f)) {
+        return NULL;
+    }
+    if (f > 0xffff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SetFragmentOffset(f);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3DsrDsrPassiveBuffEntry_GetExpireTime(PyNs3DsrDsrPassiveBuffEntry *self)
+_wrap_PyNs3DsrDsrPassiveBuffEntry_SetIdentification(PyNs3DsrDsrPassiveBuffEntry *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3Time *py_Time;
+    int i;
+    const char *keywords[] = {"i", NULL};
     
-    ns3::Time retval = self->obj->GetExpireTime();
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &i)) {
+        return NULL;
+    }
+    if (i > 0xffff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SetIdentification(i);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3DsrDsrPassiveBuffEntry_GetSource(PyNs3DsrDsrPassiveBuffEntry *self)
+_wrap_PyNs3DsrDsrPassiveBuffEntry_SetNextHop(PyNs3DsrDsrPassiveBuffEntry *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3Ipv4Address *py_Ipv4Address;
+    PyNs3Ipv4Address *n;
+    const char *keywords[] = {"n", NULL};
     
-    ns3::Ipv4Address retval = self->obj->GetSource();
-    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
-    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
-    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
-    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &n)) {
+        return NULL;
+    }
+    self->obj->SetNextHop(*((PyNs3Ipv4Address *) n)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrPassiveBuffEntry_SetPacket(PyNs3DsrDsrPassiveBuffEntry *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Packet *p;
+    ns3::Packet *p_ptr;
+    const char *keywords[] = {"p", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Packet_Type, &p)) {
+        return NULL;
+    }
+    p_ptr = (p ? p->obj : NULL);
+    self->obj->SetPacket(ns3::Ptr< ns3::Packet  > (p_ptr));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrPassiveBuffEntry_SetProtocol(PyNs3DsrDsrPassiveBuffEntry *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int p;
+    const char *keywords[] = {"p", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &p)) {
+        return NULL;
+    }
+    if (p > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SetProtocol(p);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrPassiveBuffEntry_SetSegsLeft(PyNs3DsrDsrPassiveBuffEntry *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int seg;
+    const char *keywords[] = {"seg", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &seg)) {
+        return NULL;
+    }
+    if (seg > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SetSegsLeft(seg);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -10376,24 +10376,24 @@ _wrap_PyNs3DsrDsrPassiveBuffEntry__copy__(PyNs3DsrDsrPassiveBuffEntry *self)
 }
 
 static PyMethodDef PyNs3DsrDsrPassiveBuffEntry_methods[] = {
-    {(char *) "SetFragmentOffset", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffEntry_SetFragmentOffset, METH_KEYWORDS|METH_VARARGS, "SetFragmentOffset(f)\n\ntype: f: uint16_t" },
-    {(char *) "SetPacket", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffEntry_SetPacket, METH_KEYWORDS|METH_VARARGS, "SetPacket(p)\n\ntype: p: ns3::Ptr< ns3::Packet const >" },
-    {(char *) "SetSegsLeft", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffEntry_SetSegsLeft, METH_KEYWORDS|METH_VARARGS, "SetSegsLeft(seg)\n\ntype: seg: uint8_t" },
-    {(char *) "SetNextHop", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffEntry_SetNextHop, METH_KEYWORDS|METH_VARARGS, "SetNextHop(n)\n\ntype: n: ns3::Ipv4Address" },
-    {(char *) "GetSegsLeft", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffEntry_GetSegsLeft, METH_NOARGS, "GetSegsLeft()\n\n" },
-    {(char *) "SetProtocol", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffEntry_SetProtocol, METH_KEYWORDS|METH_VARARGS, "SetProtocol(p)\n\ntype: p: uint8_t" },
-    {(char *) "SetIdentification", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffEntry_SetIdentification, METH_KEYWORDS|METH_VARARGS, "SetIdentification(i)\n\ntype: i: uint16_t" },
-    {(char *) "GetFragmentOffset", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffEntry_GetFragmentOffset, METH_NOARGS, "GetFragmentOffset()\n\n" },
-    {(char *) "SetDestination", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffEntry_SetDestination, METH_KEYWORDS|METH_VARARGS, "SetDestination(d)\n\ntype: d: ns3::Ipv4Address" },
-    {(char *) "GetIdentification", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffEntry_GetIdentification, METH_NOARGS, "GetIdentification()\n\n" },
-    {(char *) "GetNextHop", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffEntry_GetNextHop, METH_NOARGS, "GetNextHop()\n\n" },
-    {(char *) "GetProtocol", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffEntry_GetProtocol, METH_NOARGS, "GetProtocol()\n\n" },
-    {(char *) "GetPacket", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffEntry_GetPacket, METH_NOARGS, "GetPacket()\n\n" },
-    {(char *) "SetExpireTime", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffEntry_SetExpireTime, METH_KEYWORDS|METH_VARARGS, "SetExpireTime(exp)\n\ntype: exp: ns3::Time" },
     {(char *) "GetDestination", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffEntry_GetDestination, METH_NOARGS, "GetDestination()\n\n" },
     {(char *) "GetExpireTime", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffEntry_GetExpireTime, METH_NOARGS, "GetExpireTime()\n\n" },
+    {(char *) "GetFragmentOffset", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffEntry_GetFragmentOffset, METH_NOARGS, "GetFragmentOffset()\n\n" },
+    {(char *) "GetIdentification", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffEntry_GetIdentification, METH_NOARGS, "GetIdentification()\n\n" },
+    {(char *) "GetNextHop", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffEntry_GetNextHop, METH_NOARGS, "GetNextHop()\n\n" },
+    {(char *) "GetPacket", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffEntry_GetPacket, METH_NOARGS, "GetPacket()\n\n" },
+    {(char *) "GetProtocol", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffEntry_GetProtocol, METH_NOARGS, "GetProtocol()\n\n" },
+    {(char *) "GetSegsLeft", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffEntry_GetSegsLeft, METH_NOARGS, "GetSegsLeft()\n\n" },
     {(char *) "GetSource", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffEntry_GetSource, METH_NOARGS, "GetSource()\n\n" },
-    {(char *) "SetSource", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffEntry_SetSource, METH_KEYWORDS|METH_VARARGS, "SetSource(s)\n\ntype: s: ns3::Ipv4Address" },
+    {(char *) "SetDestination", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffEntry_SetDestination, METH_VARARGS|METH_KEYWORDS, "SetDestination(d)\n\ntype: d: ns3::Ipv4Address" },
+    {(char *) "SetExpireTime", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffEntry_SetExpireTime, METH_VARARGS|METH_KEYWORDS, "SetExpireTime(exp)\n\ntype: exp: ns3::Time" },
+    {(char *) "SetFragmentOffset", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffEntry_SetFragmentOffset, METH_VARARGS|METH_KEYWORDS, "SetFragmentOffset(f)\n\ntype: f: uint16_t" },
+    {(char *) "SetIdentification", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffEntry_SetIdentification, METH_VARARGS|METH_KEYWORDS, "SetIdentification(i)\n\ntype: i: uint16_t" },
+    {(char *) "SetNextHop", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffEntry_SetNextHop, METH_VARARGS|METH_KEYWORDS, "SetNextHop(n)\n\ntype: n: ns3::Ipv4Address" },
+    {(char *) "SetPacket", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffEntry_SetPacket, METH_VARARGS|METH_KEYWORDS, "SetPacket(p)\n\ntype: p: ns3::Ptr< ns3::Packet const >" },
+    {(char *) "SetProtocol", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffEntry_SetProtocol, METH_VARARGS|METH_KEYWORDS, "SetProtocol(p)\n\ntype: p: uint8_t" },
+    {(char *) "SetSegsLeft", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffEntry_SetSegsLeft, METH_VARARGS|METH_KEYWORDS, "SetSegsLeft(seg)\n\ntype: seg: uint8_t" },
+    {(char *) "SetSource", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffEntry_SetSource, METH_VARARGS|METH_KEYWORDS, "SetSource(s)\n\ntype: s: ns3::Ipv4Address" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffEntry__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -10580,29 +10580,18 @@ int _wrap_PyNs3DsrDsrPassiveBuffer__tp_init(PyNs3DsrDsrPassiveBuffer *self, PyOb
 
 
 PyObject *
-_wrap_PyNs3DsrDsrPassiveBuffer_GetPassiveBufferTimeout(PyNs3DsrDsrPassiveBuffer *self)
+_wrap_PyNs3DsrDsrPassiveBuffer_AllEqual(PyNs3DsrDsrPassiveBuffer *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3Time *py_Time;
+    bool retval;
+    PyNs3DsrDsrPassiveBuffEntry *entry;
+    const char *keywords[] = {"entry", NULL};
     
-    ns3::Time retval = self->obj->GetPassiveBufferTimeout();
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrPassiveBuffer_GetMaxQueueLen(PyNs3DsrDsrPassiveBuffer *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetMaxQueueLen();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3DsrDsrPassiveBuffEntry_Type, &entry)) {
+        return NULL;
+    }
+    retval = self->obj->AllEqual(*((PyNs3DsrDsrPassiveBuffEntry *) entry)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
@@ -10621,6 +10610,80 @@ _wrap_PyNs3DsrDsrPassiveBuffer_Dequeue(PyNs3DsrDsrPassiveBuffer *self, PyObject 
     }
     retval = self->obj->Dequeue(*((PyNs3Ipv4Address *) dst)->obj, *((PyNs3DsrDsrPassiveBuffEntry *) entry)->obj);
     py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrPassiveBuffer_Enqueue(PyNs3DsrDsrPassiveBuffer *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3DsrDsrPassiveBuffEntry *entry;
+    const char *keywords[] = {"entry", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3DsrDsrPassiveBuffEntry_Type, &entry)) {
+        return NULL;
+    }
+    retval = self->obj->Enqueue(*((PyNs3DsrDsrPassiveBuffEntry *) entry)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrPassiveBuffer_Find(PyNs3DsrDsrPassiveBuffer *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3Ipv4Address *dst;
+    const char *keywords[] = {"dst", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &dst)) {
+        return NULL;
+    }
+    retval = self->obj->Find(*((PyNs3Ipv4Address *) dst)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrPassiveBuffer_GetMaxQueueLen(PyNs3DsrDsrPassiveBuffer *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetMaxQueueLen();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrPassiveBuffer_GetPassiveBufferTimeout(PyNs3DsrDsrPassiveBuffer *self)
+{
+    PyObject *py_retval;
+    PyNs3Time *py_Time;
+    
+    ns3::Time retval = self->obj->GetPassiveBufferTimeout();
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrPassiveBuffer_GetSize(PyNs3DsrDsrPassiveBuffer *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetSize();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
 
@@ -10659,35 +10722,6 @@ _wrap_PyNs3DsrDsrPassiveBuffer_SetMaxQueueLen(PyNs3DsrDsrPassiveBuffer *self, Py
 
 
 PyObject *
-_wrap_PyNs3DsrDsrPassiveBuffer_GetSize(PyNs3DsrDsrPassiveBuffer *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetSize();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrPassiveBuffer_Enqueue(PyNs3DsrDsrPassiveBuffer *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3DsrDsrPassiveBuffEntry *entry;
-    const char *keywords[] = {"entry", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3DsrDsrPassiveBuffEntry_Type, &entry)) {
-        return NULL;
-    }
-    retval = self->obj->Enqueue(*((PyNs3DsrDsrPassiveBuffEntry *) entry)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3DsrDsrPassiveBuffer_SetPassiveBufferTimeout(PyNs3DsrDsrPassiveBuffer *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -10700,40 +10734,6 @@ _wrap_PyNs3DsrDsrPassiveBuffer_SetPassiveBufferTimeout(PyNs3DsrDsrPassiveBuffer 
     self->obj->SetPassiveBufferTimeout(*((PyNs3Time *) t)->obj);
     Py_INCREF(Py_None);
     py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrPassiveBuffer_AllEqual(PyNs3DsrDsrPassiveBuffer *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3DsrDsrPassiveBuffEntry *entry;
-    const char *keywords[] = {"entry", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3DsrDsrPassiveBuffEntry_Type, &entry)) {
-        return NULL;
-    }
-    retval = self->obj->AllEqual(*((PyNs3DsrDsrPassiveBuffEntry *) entry)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrPassiveBuffer_Find(PyNs3DsrDsrPassiveBuffer *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3Ipv4Address *dst;
-    const char *keywords[] = {"dst", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &dst)) {
-        return NULL;
-    }
-    retval = self->obj->Find(*((PyNs3Ipv4Address *) dst)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
@@ -10754,16 +10754,16 @@ _wrap_PyNs3DsrDsrPassiveBuffer__copy__(PyNs3DsrDsrPassiveBuffer *self)
 }
 
 static PyMethodDef PyNs3DsrDsrPassiveBuffer_methods[] = {
-    {(char *) "GetPassiveBufferTimeout", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffer_GetPassiveBufferTimeout, METH_NOARGS, "GetPassiveBufferTimeout()\n\n" },
+    {(char *) "AllEqual", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffer_AllEqual, METH_VARARGS|METH_KEYWORDS, "AllEqual(entry)\n\ntype: entry: ns3::dsr::DsrPassiveBuffEntry &" },
+    {(char *) "Dequeue", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffer_Dequeue, METH_VARARGS|METH_KEYWORDS, "Dequeue(dst, entry)\n\ntype: dst: ns3::Ipv4Address\ntype: entry: ns3::dsr::DsrPassiveBuffEntry &" },
+    {(char *) "Enqueue", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffer_Enqueue, METH_VARARGS|METH_KEYWORDS, "Enqueue(entry)\n\ntype: entry: ns3::dsr::DsrPassiveBuffEntry &" },
+    {(char *) "Find", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffer_Find, METH_VARARGS|METH_KEYWORDS, "Find(dst)\n\ntype: dst: ns3::Ipv4Address" },
     {(char *) "GetMaxQueueLen", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffer_GetMaxQueueLen, METH_NOARGS, "GetMaxQueueLen()\n\n" },
-    {(char *) "Dequeue", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffer_Dequeue, METH_KEYWORDS|METH_VARARGS, "Dequeue(dst, entry)\n\ntype: dst: ns3::Ipv4Address\ntype: entry: ns3::dsr::DsrPassiveBuffEntry &" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffer_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "SetMaxQueueLen", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffer_SetMaxQueueLen, METH_KEYWORDS|METH_VARARGS, "SetMaxQueueLen(len)\n\ntype: len: uint32_t" },
+    {(char *) "GetPassiveBufferTimeout", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffer_GetPassiveBufferTimeout, METH_NOARGS, "GetPassiveBufferTimeout()\n\n" },
     {(char *) "GetSize", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffer_GetSize, METH_NOARGS, "GetSize()\n\n" },
-    {(char *) "Enqueue", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffer_Enqueue, METH_KEYWORDS|METH_VARARGS, "Enqueue(entry)\n\ntype: entry: ns3::dsr::DsrPassiveBuffEntry &" },
-    {(char *) "SetPassiveBufferTimeout", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffer_SetPassiveBufferTimeout, METH_KEYWORDS|METH_VARARGS, "SetPassiveBufferTimeout(t)\n\ntype: t: ns3::Time" },
-    {(char *) "AllEqual", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffer_AllEqual, METH_KEYWORDS|METH_VARARGS, "AllEqual(entry)\n\ntype: entry: ns3::dsr::DsrPassiveBuffEntry &" },
-    {(char *) "Find", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffer_Find, METH_KEYWORDS|METH_VARARGS, "Find(dst)\n\ntype: dst: ns3::Ipv4Address" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffer_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "SetMaxQueueLen", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffer_SetMaxQueueLen, METH_VARARGS|METH_KEYWORDS, "SetMaxQueueLen(len)\n\ntype: len: uint32_t" },
+    {(char *) "SetPassiveBufferTimeout", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffer_SetPassiveBufferTimeout, METH_VARARGS|METH_KEYWORDS, "SetPassiveBufferTimeout(t)\n\ntype: t: ns3::Time" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3DsrDsrPassiveBuffer__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -10860,7 +10860,7 @@ PyTypeObject PyNs3DsrDsrPassiveBuffer_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "DsrPassiveBuffer(arg0)\nDsrPassiveBuffer()",                        /* Documentation string */
     (traverseproc)PyNs3DsrDsrPassiveBuffer__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3DsrDsrPassiveBuffer__tp_clear,             /* tp_clear */
@@ -10971,73 +10971,6 @@ int _wrap_PyNs3DsrDsrReceivedRreqEntry__tp_init(PyNs3DsrDsrReceivedRreqEntry *se
 
 
 PyObject *
-_wrap_PyNs3DsrDsrReceivedRreqEntry_SetIdentification(PyNs3DsrDsrReceivedRreqEntry *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int i;
-    const char *keywords[] = {"i", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &i)) {
-        return NULL;
-    }
-    if (i > 0xffff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SetIdentification(i);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrReceivedRreqEntry_SetDestination(PyNs3DsrDsrReceivedRreqEntry *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Ipv4Address *d;
-    const char *keywords[] = {"d", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &d)) {
-        return NULL;
-    }
-    self->obj->SetDestination(*((PyNs3Ipv4Address *) d)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrReceivedRreqEntry_GetIdentification(PyNs3DsrDsrReceivedRreqEntry *self)
-{
-    PyObject *py_retval;
-    uint16_t retval;
-    
-    retval = self->obj->GetIdentification();
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrReceivedRreqEntry_SetExpireTime(PyNs3DsrDsrReceivedRreqEntry *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Time *exp;
-    const char *keywords[] = {"exp", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Time_Type, &exp)) {
-        return NULL;
-    }
-    self->obj->SetExpireTime(*((PyNs3Time *) exp)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3DsrDsrReceivedRreqEntry_GetDestination(PyNs3DsrDsrReceivedRreqEntry *self)
 {
     PyObject *py_retval;
@@ -11070,6 +11003,18 @@ _wrap_PyNs3DsrDsrReceivedRreqEntry_GetExpireTime(PyNs3DsrDsrReceivedRreqEntry *s
 
 
 PyObject *
+_wrap_PyNs3DsrDsrReceivedRreqEntry_GetIdentification(PyNs3DsrDsrReceivedRreqEntry *self)
+{
+    PyObject *py_retval;
+    uint16_t retval;
+    
+    retval = self->obj->GetIdentification();
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3DsrDsrReceivedRreqEntry_GetSource(PyNs3DsrDsrReceivedRreqEntry *self)
 {
     PyObject *py_retval;
@@ -11081,6 +11026,61 @@ _wrap_PyNs3DsrDsrReceivedRreqEntry_GetSource(PyNs3DsrDsrReceivedRreqEntry *self)
     py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
     PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
     py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrReceivedRreqEntry_SetDestination(PyNs3DsrDsrReceivedRreqEntry *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4Address *d;
+    const char *keywords[] = {"d", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &d)) {
+        return NULL;
+    }
+    self->obj->SetDestination(*((PyNs3Ipv4Address *) d)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrReceivedRreqEntry_SetExpireTime(PyNs3DsrDsrReceivedRreqEntry *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Time *exp;
+    const char *keywords[] = {"exp", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Time_Type, &exp)) {
+        return NULL;
+    }
+    self->obj->SetExpireTime(*((PyNs3Time *) exp)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrReceivedRreqEntry_SetIdentification(PyNs3DsrDsrReceivedRreqEntry *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int i;
+    const char *keywords[] = {"i", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &i)) {
+        return NULL;
+    }
+    if (i > 0xffff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SetIdentification(i);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -11115,14 +11115,14 @@ _wrap_PyNs3DsrDsrReceivedRreqEntry__copy__(PyNs3DsrDsrReceivedRreqEntry *self)
 }
 
 static PyMethodDef PyNs3DsrDsrReceivedRreqEntry_methods[] = {
-    {(char *) "SetIdentification", (PyCFunction) _wrap_PyNs3DsrDsrReceivedRreqEntry_SetIdentification, METH_KEYWORDS|METH_VARARGS, "SetIdentification(i)\n\ntype: i: uint16_t" },
-    {(char *) "SetDestination", (PyCFunction) _wrap_PyNs3DsrDsrReceivedRreqEntry_SetDestination, METH_KEYWORDS|METH_VARARGS, "SetDestination(d)\n\ntype: d: ns3::Ipv4Address" },
-    {(char *) "GetIdentification", (PyCFunction) _wrap_PyNs3DsrDsrReceivedRreqEntry_GetIdentification, METH_NOARGS, "GetIdentification()\n\n" },
-    {(char *) "SetExpireTime", (PyCFunction) _wrap_PyNs3DsrDsrReceivedRreqEntry_SetExpireTime, METH_KEYWORDS|METH_VARARGS, "SetExpireTime(exp)\n\ntype: exp: ns3::Time" },
     {(char *) "GetDestination", (PyCFunction) _wrap_PyNs3DsrDsrReceivedRreqEntry_GetDestination, METH_NOARGS, "GetDestination()\n\n" },
     {(char *) "GetExpireTime", (PyCFunction) _wrap_PyNs3DsrDsrReceivedRreqEntry_GetExpireTime, METH_NOARGS, "GetExpireTime()\n\n" },
+    {(char *) "GetIdentification", (PyCFunction) _wrap_PyNs3DsrDsrReceivedRreqEntry_GetIdentification, METH_NOARGS, "GetIdentification()\n\n" },
     {(char *) "GetSource", (PyCFunction) _wrap_PyNs3DsrDsrReceivedRreqEntry_GetSource, METH_NOARGS, "GetSource()\n\n" },
-    {(char *) "SetSource", (PyCFunction) _wrap_PyNs3DsrDsrReceivedRreqEntry_SetSource, METH_KEYWORDS|METH_VARARGS, "SetSource(s)\n\ntype: s: ns3::Ipv4Address" },
+    {(char *) "SetDestination", (PyCFunction) _wrap_PyNs3DsrDsrReceivedRreqEntry_SetDestination, METH_VARARGS|METH_KEYWORDS, "SetDestination(d)\n\ntype: d: ns3::Ipv4Address" },
+    {(char *) "SetExpireTime", (PyCFunction) _wrap_PyNs3DsrDsrReceivedRreqEntry_SetExpireTime, METH_VARARGS|METH_KEYWORDS, "SetExpireTime(exp)\n\ntype: exp: ns3::Time" },
+    {(char *) "SetIdentification", (PyCFunction) _wrap_PyNs3DsrDsrReceivedRreqEntry_SetIdentification, METH_VARARGS|METH_KEYWORDS, "SetIdentification(i)\n\ntype: i: uint16_t" },
+    {(char *) "SetSource", (PyCFunction) _wrap_PyNs3DsrDsrReceivedRreqEntry_SetSource, METH_VARARGS|METH_KEYWORDS, "SetSource(s)\n\ntype: s: ns3::Ipv4Address" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3DsrDsrReceivedRreqEntry__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -11340,9 +11340,9 @@ static int _wrap_PyNs3DsrDsrRouteCache__set_m_ntimer(PyNs3DsrDsrRouteCache *self
 }
 static PyGetSetDef PyNs3DsrDsrRouteCache__getsets[] = {
     {
-        (char*) "m_ntimer", /* attribute name */
-        (getter) _wrap_PyNs3DsrDsrRouteCache__get_m_ntimer, /* C function to get the attribute */
-        (setter) _wrap_PyNs3DsrDsrRouteCache__set_m_ntimer, /* C function to set the attribute */
+        (char*) "m_arp", /* attribute name */
+        (getter) _wrap_PyNs3DsrDsrRouteCache__get_m_arp, /* C function to get the attribute */
+        (setter) _wrap_PyNs3DsrDsrRouteCache__set_m_arp, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -11361,9 +11361,9 @@ static PyGetSetDef PyNs3DsrDsrRouteCache__getsets[] = {
         NULL /* optional additional data for getter and setter */
     },
     {
-        (char*) "m_arp", /* attribute name */
-        (getter) _wrap_PyNs3DsrDsrRouteCache__get_m_arp, /* C function to get the attribute */
-        (setter) _wrap_PyNs3DsrDsrRouteCache__set_m_arp, /* C function to set the attribute */
+        (char*) "m_ntimer", /* attribute name */
+        (getter) _wrap_PyNs3DsrDsrRouteCache__get_m_ntimer, /* C function to get the attribute */
+        (setter) _wrap_PyNs3DsrDsrRouteCache__set_m_ntimer, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -11440,6 +11440,675 @@ int _wrap_PyNs3DsrDsrRouteCache__tp_init(PyNs3DsrDsrRouteCache *self, PyObject *
 
 
 PyObject *
+_wrap_PyNs3DsrDsrRouteCache_AddArpCache(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3ArpCache *arg0;
+    ns3::ArpCache *arg0_ptr;
+    const char *keywords[] = {"arg0", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3ArpCache_Type, &arg0)) {
+        return NULL;
+    }
+    arg0_ptr = (arg0 ? arg0->obj : NULL);
+    self->obj->AddArpCache(ns3::Ptr< ns3::ArpCache  > (arg0_ptr));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouteCache_AddNeighbor(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    std::vector< ns3::Ipv4Address > nodeList_value;
+    PyNs3Ipv4Address *ownAddress;
+    PyNs3Time *expire;
+    const char *keywords[] = {"nodeList", "ownAddress", "expire", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O&O!O!", (char **) keywords, _wrap_convert_py2c__std__vector__lt___ns3__Ipv4Address___gt__, &nodeList_value, &PyNs3Ipv4Address_Type, &ownAddress, &PyNs3Time_Type, &expire)) {
+        return NULL;
+    }
+    self->obj->AddNeighbor(nodeList_value, *((PyNs3Ipv4Address *) ownAddress)->obj, *((PyNs3Time *) expire)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouteCache_AddRoute(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3DsrDsrRouteCacheEntry *rt;
+    const char *keywords[] = {"rt", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3DsrDsrRouteCacheEntry_Type, &rt)) {
+        return NULL;
+    }
+    retval = self->obj->AddRoute(*((PyNs3DsrDsrRouteCacheEntry *) rt)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouteCache_AddRoute_Link(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    std::vector< ns3::Ipv4Address > nodelist_value;
+    PyNs3Ipv4Address *node;
+    const char *keywords[] = {"nodelist", "node", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O&O!", (char **) keywords, _wrap_convert_py2c__std__vector__lt___ns3__Ipv4Address___gt__, &nodelist_value, &PyNs3Ipv4Address_Type, &node)) {
+        return NULL;
+    }
+    retval = self->obj->AddRoute_Link(nodelist_value, *((PyNs3Ipv4Address *) node)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouteCache_CheckUniqueAckId(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    uint16_t retval;
+    PyNs3Ipv4Address *nextHop;
+    const char *keywords[] = {"nextHop", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &nextHop)) {
+        return NULL;
+    }
+    retval = self->obj->CheckUniqueAckId(*((PyNs3Ipv4Address *) nextHop)->obj);
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouteCache_Clear(PyNs3DsrDsrRouteCache *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->Clear();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouteCache_ClearMac(PyNs3DsrDsrRouteCache *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->ClearMac();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouteCache_DelArpCache(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3ArpCache *arg0;
+    ns3::ArpCache *arg0_ptr;
+    const char *keywords[] = {"arg0", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3ArpCache_Type, &arg0)) {
+        return NULL;
+    }
+    arg0_ptr = (arg0 ? arg0->obj : NULL);
+    self->obj->DelArpCache(ns3::Ptr< ns3::ArpCache  > (arg0_ptr));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouteCache_DeleteAllRoutesIncludeLink(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4Address *errorSrc;
+    PyNs3Ipv4Address *unreachNode;
+    PyNs3Ipv4Address *node;
+    const char *keywords[] = {"errorSrc", "unreachNode", "node", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!O!", (char **) keywords, &PyNs3Ipv4Address_Type, &errorSrc, &PyNs3Ipv4Address_Type, &unreachNode, &PyNs3Ipv4Address_Type, &node)) {
+        return NULL;
+    }
+    self->obj->DeleteAllRoutesIncludeLink(*((PyNs3Ipv4Address *) errorSrc)->obj, *((PyNs3Ipv4Address *) unreachNode)->obj, *((PyNs3Ipv4Address *) node)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouteCache_DeleteRoute(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3Ipv4Address *dst;
+    const char *keywords[] = {"dst", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &dst)) {
+        return NULL;
+    }
+    retval = self->obj->DeleteRoute(*((PyNs3Ipv4Address *) dst)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouteCache_FindSameRoute(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3DsrDsrRouteCacheEntry *rt;
+    std::list< ns3::dsr::DsrRouteCacheEntry > rtVector_value;
+    const char *keywords[] = {"rt", "rtVector", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O&", (char **) keywords, &PyNs3DsrDsrRouteCacheEntry_Type, &rt, _wrap_convert_py2c__std__list__lt___ns3__dsr__DsrRouteCacheEntry___gt__, &rtVector_value)) {
+        return NULL;
+    }
+    retval = self->obj->FindSameRoute(*((PyNs3DsrDsrRouteCacheEntry *) rt)->obj, rtVector_value);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouteCache_GetAckSize(PyNs3DsrDsrRouteCache *self)
+{
+    PyObject *py_retval;
+    uint16_t retval;
+    
+    retval = self->obj->GetAckSize();
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouteCache_GetBadLinkLifetime(PyNs3DsrDsrRouteCache *self)
+{
+    PyObject *py_retval;
+    PyNs3Time *py_Time;
+    
+    ns3::Time retval = self->obj->GetBadLinkLifetime();
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouteCache_GetCacheTimeout(PyNs3DsrDsrRouteCache *self)
+{
+    PyObject *py_retval;
+    PyNs3Time *py_Time;
+    
+    ns3::Time retval = self->obj->GetCacheTimeout();
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouteCache_GetExpireTime(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4Address *addr;
+    const char *keywords[] = {"addr", NULL};
+    PyNs3Time *py_Time;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &addr)) {
+        return NULL;
+    }
+    ns3::Time retval = self->obj->GetExpireTime(*((PyNs3Ipv4Address *) addr)->obj);
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouteCache_GetInitStability(PyNs3DsrDsrRouteCache *self)
+{
+    PyObject *py_retval;
+    PyNs3Time *py_Time;
+    
+    ns3::Time retval = self->obj->GetInitStability();
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouteCache_GetMaxCacheLen(PyNs3DsrDsrRouteCache *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetMaxCacheLen();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouteCache_GetMaxEntriesEachDst(PyNs3DsrDsrRouteCache *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetMaxEntriesEachDst();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouteCache_GetMinLifeTime(PyNs3DsrDsrRouteCache *self)
+{
+    PyObject *py_retval;
+    PyNs3Time *py_Time;
+    
+    ns3::Time retval = self->obj->GetMinLifeTime();
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouteCache_GetStabilityDecrFactor(PyNs3DsrDsrRouteCache *self)
+{
+    PyObject *py_retval;
+    uint64_t retval;
+    
+    retval = self->obj->GetStabilityDecrFactor();
+    py_retval = Py_BuildValue((char *) "K", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouteCache_GetStabilityIncrFactor(PyNs3DsrDsrRouteCache *self)
+{
+    PyObject *py_retval;
+    uint64_t retval;
+    
+    retval = self->obj->GetStabilityIncrFactor();
+    py_retval = Py_BuildValue((char *) "K", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouteCache_GetSubRoute(PyNs3DsrDsrRouteCache *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->GetSubRoute();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouteCache_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::dsr::DsrRouteCache::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouteCache_GetUseExtends(PyNs3DsrDsrRouteCache *self)
+{
+    PyObject *py_retval;
+    PyNs3Time *py_Time;
+    
+    ns3::Time retval = self->obj->GetUseExtends();
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouteCache_IsLinkCache(PyNs3DsrDsrRouteCache *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->IsLinkCache();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouteCache_IsNeighbor(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3Ipv4Address *addr;
+    const char *keywords[] = {"addr", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &addr)) {
+        return NULL;
+    }
+    retval = self->obj->IsNeighbor(*((PyNs3Ipv4Address *) addr)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouteCache_LookupMacAddress(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4Address *addr;
+    const char *keywords[] = {"addr", NULL};
+    PyNs3Mac48Address *py_Mac48Address;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &addr)) {
+        return NULL;
+    }
+    ns3::Mac48Address retval = self->obj->LookupMacAddress(*((PyNs3Ipv4Address *) addr)->obj);
+    py_Mac48Address = PyObject_New(PyNs3Mac48Address, &PyNs3Mac48Address_Type);
+    py_Mac48Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Mac48Address->obj = new ns3::Mac48Address(retval);
+    PyNs3Mac48Address_wrapper_registry[(void *) py_Mac48Address->obj] = (PyObject *) py_Mac48Address;
+    py_retval = Py_BuildValue((char *) "N", py_Mac48Address);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouteCache_LookupRoute(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3Ipv4Address *id;
+    PyNs3DsrDsrRouteCacheEntry *rt;
+    const char *keywords[] = {"id", "rt", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3Ipv4Address_Type, &id, &PyNs3DsrDsrRouteCacheEntry_Type, &rt)) {
+        return NULL;
+    }
+    retval = self->obj->LookupRoute(*((PyNs3Ipv4Address *) id)->obj, *((PyNs3DsrDsrRouteCacheEntry *) rt)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouteCache_PrintRouteVector(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    std::list< ns3::dsr::DsrRouteCacheEntry > route_value;
+    const char *keywords[] = {"route", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O&", (char **) keywords, _wrap_convert_py2c__std__list__lt___ns3__dsr__DsrRouteCacheEntry___gt__, &route_value)) {
+        return NULL;
+    }
+    self->obj->PrintRouteVector(route_value);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouteCache_PrintVector(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    std::vector< ns3::Ipv4Address > vec_value;
+    const char *keywords[] = {"vec", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O&", (char **) keywords, _wrap_convert_py2c__std__vector__lt___ns3__Ipv4Address___gt__, &vec_value)) {
+        return NULL;
+    }
+    self->obj->PrintVector(vec_value);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouteCache_ProcessTxError(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3WifiMacHeader *hdr;
+    const char *keywords[] = {"hdr", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3WifiMacHeader_Type, &hdr)) {
+        return NULL;
+    }
+    self->obj->ProcessTxError(*((PyNs3WifiMacHeader *) hdr)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouteCache_Purge(PyNs3DsrDsrRouteCache *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->Purge();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouteCache_PurgeLinkNode(PyNs3DsrDsrRouteCache *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->PurgeLinkNode();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouteCache_PurgeMac(PyNs3DsrDsrRouteCache *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->PurgeMac();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouteCache_RebuildBestRouteTable(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4Address *source;
+    const char *keywords[] = {"source", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &source)) {
+        return NULL;
+    }
+    self->obj->RebuildBestRouteTable(*((PyNs3Ipv4Address *) source)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouteCache_RemoveLastEntry(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    std::list< ns3::dsr::DsrRouteCacheEntry > rtVector_value;
+    const char *keywords[] = {"rtVector", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O&", (char **) keywords, _wrap_convert_py2c__std__list__lt___ns3__dsr__DsrRouteCacheEntry___gt__, &rtVector_value)) {
+        return NULL;
+    }
+    self->obj->RemoveLastEntry(rtVector_value);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouteCache_ScheduleTimer(PyNs3DsrDsrRouteCache *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->ScheduleTimer();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouteCache_SetBadLinkLifetime(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Time *t;
+    const char *keywords[] = {"t", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Time_Type, &t)) {
+        return NULL;
+    }
+    self->obj->SetBadLinkLifetime(*((PyNs3Time *) t)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouteCache_SetCacheTimeout(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Time *t;
+    const char *keywords[] = {"t", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Time_Type, &t)) {
+        return NULL;
+    }
+    self->obj->SetCacheTimeout(*((PyNs3Time *) t)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouteCache_SetCacheType(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    const char *type;
+    Py_ssize_t type_len;
+    const char *keywords[] = {"type", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#", (char **) keywords, &type, &type_len)) {
+        return NULL;
+    }
+    self->obj->SetCacheType(std::string(type, type_len));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouteCache_SetCallback(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyObject *cb;
+    ns3::Ptr<PythonCallbackImpl27> cb_cb_impl;
+    const char *keywords[] = {"cb", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &cb)) {
+        return NULL;
+    }
+    if (!PyCallable_Check(cb)) {
+        PyErr_SetString(PyExc_TypeError, "parameter 'cb' must be callbale");
+        return NULL;
+    }
+    cb_cb_impl = ns3::Create<PythonCallbackImpl27> (cb);
+    self->obj->SetCallback(ns3::Callback<void, ns3::Ipv4Address, unsigned char, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty> (cb_cb_impl));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouteCache_SetInitStability(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Time *initStability;
+    const char *keywords[] = {"initStability", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Time_Type, &initStability)) {
+        return NULL;
+    }
+    self->obj->SetInitStability(*((PyNs3Time *) initStability)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3DsrDsrRouteCache_SetMaxCacheLen(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -11491,439 +12160,6 @@ _wrap_PyNs3DsrDsrRouteCache_SetMinLifeTime(PyNs3DsrDsrRouteCache *self, PyObject
 
 
 PyObject *
-_wrap_PyNs3DsrDsrRouteCache_GetStabilityDecrFactor(PyNs3DsrDsrRouteCache *self)
-{
-    PyObject *py_retval;
-    uint64_t retval;
-    
-    retval = self->obj->GetStabilityDecrFactor();
-    py_retval = Py_BuildValue((char *) "K", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouteCache_FindSameRoute(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3DsrDsrRouteCacheEntry *rt;
-    std::list< ns3::dsr::DsrRouteCacheEntry > rtVector_value;
-    const char *keywords[] = {"rt", "rtVector", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O&", (char **) keywords, &PyNs3DsrDsrRouteCacheEntry_Type, &rt, _wrap_convert_py2c__std__list__lt___ns3__dsr__DsrRouteCacheEntry___gt__, &rtVector_value)) {
-        return NULL;
-    }
-    retval = self->obj->FindSameRoute(*((PyNs3DsrDsrRouteCacheEntry *) rt)->obj, rtVector_value);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouteCache_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::dsr::DsrRouteCache::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouteCache_RemoveLastEntry(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    std::list< ns3::dsr::DsrRouteCacheEntry > rtVector_value;
-    const char *keywords[] = {"rtVector", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O&", (char **) keywords, _wrap_convert_py2c__std__list__lt___ns3__dsr__DsrRouteCacheEntry___gt__, &rtVector_value)) {
-        return NULL;
-    }
-    self->obj->RemoveLastEntry(rtVector_value);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouteCache_IsLinkCache(PyNs3DsrDsrRouteCache *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->IsLinkCache();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouteCache_PurgeMac(PyNs3DsrDsrRouteCache *self)
-{
-    PyObject *py_retval;
-    
-    self->obj->PurgeMac();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouteCache_DeleteRoute(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3Ipv4Address *dst;
-    const char *keywords[] = {"dst", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &dst)) {
-        return NULL;
-    }
-    retval = self->obj->DeleteRoute(*((PyNs3Ipv4Address *) dst)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouteCache_CheckUniqueAckId(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    uint16_t retval;
-    PyNs3Ipv4Address *nextHop;
-    const char *keywords[] = {"nextHop", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &nextHop)) {
-        return NULL;
-    }
-    retval = self->obj->CheckUniqueAckId(*((PyNs3Ipv4Address *) nextHop)->obj);
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouteCache_PrintVector(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    std::vector< ns3::Ipv4Address > vec_value;
-    const char *keywords[] = {"vec", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O&", (char **) keywords, _wrap_convert_py2c__std__vector__lt___ns3__Ipv4Address___gt__, &vec_value)) {
-        return NULL;
-    }
-    self->obj->PrintVector(vec_value);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouteCache_GetCacheTimeout(PyNs3DsrDsrRouteCache *self)
-{
-    PyObject *py_retval;
-    PyNs3Time *py_Time;
-    
-    ns3::Time retval = self->obj->GetCacheTimeout();
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouteCache_GetExpireTime(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Ipv4Address *addr;
-    const char *keywords[] = {"addr", NULL};
-    PyNs3Time *py_Time;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &addr)) {
-        return NULL;
-    }
-    ns3::Time retval = self->obj->GetExpireTime(*((PyNs3Ipv4Address *) addr)->obj);
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouteCache_LookupMacAddress(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Ipv4Address *addr;
-    const char *keywords[] = {"addr", NULL};
-    PyNs3Mac48Address *py_Mac48Address;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &addr)) {
-        return NULL;
-    }
-    ns3::Mac48Address retval = self->obj->LookupMacAddress(*((PyNs3Ipv4Address *) addr)->obj);
-    py_Mac48Address = PyObject_New(PyNs3Mac48Address, &PyNs3Mac48Address_Type);
-    py_Mac48Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Mac48Address->obj = new ns3::Mac48Address(retval);
-    PyNs3Mac48Address_wrapper_registry[(void *) py_Mac48Address->obj] = (PyObject *) py_Mac48Address;
-    py_retval = Py_BuildValue((char *) "N", py_Mac48Address);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouteCache_UpdateRouteEntry(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3Ipv4Address *dst;
-    const char *keywords[] = {"dst", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &dst)) {
-        return NULL;
-    }
-    retval = self->obj->UpdateRouteEntry(*((PyNs3Ipv4Address *) dst)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouteCache_AddArpCache(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3ArpCache *arg0;
-    ns3::ArpCache *arg0_ptr;
-    const char *keywords[] = {"arg0", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3ArpCache_Type, &arg0)) {
-        return NULL;
-    }
-    arg0_ptr = (arg0 ? arg0->obj : NULL);
-    self->obj->AddArpCache(ns3::Ptr< ns3::ArpCache  > (arg0_ptr));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouteCache_GetSubRoute(PyNs3DsrDsrRouteCache *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->GetSubRoute();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouteCache_PrintRouteVector(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    std::list< ns3::dsr::DsrRouteCacheEntry > route_value;
-    const char *keywords[] = {"route", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O&", (char **) keywords, _wrap_convert_py2c__std__list__lt___ns3__dsr__DsrRouteCacheEntry___gt__, &route_value)) {
-        return NULL;
-    }
-    self->obj->PrintRouteVector(route_value);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouteCache_GetBadLinkLifetime(PyNs3DsrDsrRouteCache *self)
-{
-    PyObject *py_retval;
-    PyNs3Time *py_Time;
-    
-    ns3::Time retval = self->obj->GetBadLinkLifetime();
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouteCache_SetInitStability(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Time *initStability;
-    const char *keywords[] = {"initStability", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Time_Type, &initStability)) {
-        return NULL;
-    }
-    self->obj->SetInitStability(*((PyNs3Time *) initStability)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouteCache_PurgeLinkNode(PyNs3DsrDsrRouteCache *self)
-{
-    PyObject *py_retval;
-    
-    self->obj->PurgeLinkNode();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouteCache_GetInitStability(PyNs3DsrDsrRouteCache *self)
-{
-    PyObject *py_retval;
-    PyNs3Time *py_Time;
-    
-    ns3::Time retval = self->obj->GetInitStability();
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouteCache_GetMinLifeTime(PyNs3DsrDsrRouteCache *self)
-{
-    PyObject *py_retval;
-    PyNs3Time *py_Time;
-    
-    ns3::Time retval = self->obj->GetMinLifeTime();
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouteCache_ScheduleTimer(PyNs3DsrDsrRouteCache *self)
-{
-    PyObject *py_retval;
-    
-    self->obj->ScheduleTimer();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouteCache_SetUseExtends(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Time *useExtends;
-    const char *keywords[] = {"useExtends", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Time_Type, &useExtends)) {
-        return NULL;
-    }
-    self->obj->SetUseExtends(*((PyNs3Time *) useExtends)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouteCache_AddRoute_Link(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    std::vector< ns3::Ipv4Address > nodelist_value;
-    PyNs3Ipv4Address *node;
-    const char *keywords[] = {"nodelist", "node", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O&O!", (char **) keywords, _wrap_convert_py2c__std__vector__lt___ns3__Ipv4Address___gt__, &nodelist_value, &PyNs3Ipv4Address_Type, &node)) {
-        return NULL;
-    }
-    retval = self->obj->AddRoute_Link(nodelist_value, *((PyNs3Ipv4Address *) node)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouteCache_AddRoute(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3DsrDsrRouteCacheEntry *rt;
-    const char *keywords[] = {"rt", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3DsrDsrRouteCacheEntry_Type, &rt)) {
-        return NULL;
-    }
-    retval = self->obj->AddRoute(*((PyNs3DsrDsrRouteCacheEntry *) rt)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouteCache_DeleteAllRoutesIncludeLink(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Ipv4Address *errorSrc;
-    PyNs3Ipv4Address *unreachNode;
-    PyNs3Ipv4Address *node;
-    const char *keywords[] = {"errorSrc", "unreachNode", "node", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!O!", (char **) keywords, &PyNs3Ipv4Address_Type, &errorSrc, &PyNs3Ipv4Address_Type, &unreachNode, &PyNs3Ipv4Address_Type, &node)) {
-        return NULL;
-    }
-    self->obj->DeleteAllRoutesIncludeLink(*((PyNs3Ipv4Address *) errorSrc)->obj, *((PyNs3Ipv4Address *) unreachNode)->obj, *((PyNs3Ipv4Address *) node)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouteCache_GetMaxCacheLen(PyNs3DsrDsrRouteCache *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetMaxCacheLen();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3DsrDsrRouteCache_SetStabilityDecrFactor(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -11934,155 +12170,6 @@ _wrap_PyNs3DsrDsrRouteCache_SetStabilityDecrFactor(PyNs3DsrDsrRouteCache *self, 
         return NULL;
     }
     self->obj->SetStabilityDecrFactor(decrFactor);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouteCache_AddNeighbor(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    std::vector< ns3::Ipv4Address > nodeList_value;
-    PyNs3Ipv4Address *ownAddress;
-    PyNs3Time *expire;
-    const char *keywords[] = {"nodeList", "ownAddress", "expire", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O&O!O!", (char **) keywords, _wrap_convert_py2c__std__vector__lt___ns3__Ipv4Address___gt__, &nodeList_value, &PyNs3Ipv4Address_Type, &ownAddress, &PyNs3Time_Type, &expire)) {
-        return NULL;
-    }
-    self->obj->AddNeighbor(nodeList_value, *((PyNs3Ipv4Address *) ownAddress)->obj, *((PyNs3Time *) expire)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouteCache_SetBadLinkLifetime(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Time *t;
-    const char *keywords[] = {"t", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Time_Type, &t)) {
-        return NULL;
-    }
-    self->obj->SetBadLinkLifetime(*((PyNs3Time *) t)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouteCache_Clear(PyNs3DsrDsrRouteCache *self)
-{
-    PyObject *py_retval;
-    
-    self->obj->Clear();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouteCache_GetStabilityIncrFactor(PyNs3DsrDsrRouteCache *self)
-{
-    PyObject *py_retval;
-    uint64_t retval;
-    
-    retval = self->obj->GetStabilityIncrFactor();
-    py_retval = Py_BuildValue((char *) "K", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouteCache_GetAckSize(PyNs3DsrDsrRouteCache *self)
-{
-    PyObject *py_retval;
-    uint16_t retval;
-    
-    retval = self->obj->GetAckSize();
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouteCache_Purge(PyNs3DsrDsrRouteCache *self)
-{
-    PyObject *py_retval;
-    
-    self->obj->Purge();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouteCache_UseExtends(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    std::vector< ns3::Ipv4Address > rt_value;
-    const char *keywords[] = {"rt", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O&", (char **) keywords, _wrap_convert_py2c__std__vector__lt___ns3__Ipv4Address___gt__, &rt_value)) {
-        return NULL;
-    }
-    self->obj->UseExtends(rt_value);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouteCache_GetMaxEntriesEachDst(PyNs3DsrDsrRouteCache *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetMaxEntriesEachDst();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouteCache_SetSubRoute(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool subRoute;
-    PyObject *py_subRoute;
-    const char *keywords[] = {"subRoute", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &py_subRoute)) {
-        return NULL;
-    }
-    subRoute = (bool) PyObject_IsTrue(py_subRoute);
-    self->obj->SetSubRoute(subRoute);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouteCache_RebuildBestRouteTable(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Ipv4Address *source;
-    const char *keywords[] = {"source", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &source)) {
-        return NULL;
-    }
-    self->obj->RebuildBestRouteTable(*((PyNs3Ipv4Address *) source)->obj);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -12107,16 +12194,18 @@ _wrap_PyNs3DsrDsrRouteCache_SetStabilityIncrFactor(PyNs3DsrDsrRouteCache *self, 
 
 
 PyObject *
-_wrap_PyNs3DsrDsrRouteCache_SetCacheTimeout(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3DsrDsrRouteCache_SetSubRoute(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3Time *t;
-    const char *keywords[] = {"t", NULL};
+    bool subRoute;
+    PyObject *py_subRoute;
+    const char *keywords[] = {"subRoute", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Time_Type, &t)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &py_subRoute)) {
         return NULL;
     }
-    self->obj->SetCacheTimeout(*((PyNs3Time *) t)->obj);
+    subRoute = (bool) PyObject_IsTrue(py_subRoute);
+    self->obj->SetSubRoute(subRoute);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -12124,95 +12213,16 @@ _wrap_PyNs3DsrDsrRouteCache_SetCacheTimeout(PyNs3DsrDsrRouteCache *self, PyObjec
 
 
 PyObject *
-_wrap_PyNs3DsrDsrRouteCache_SetCacheType(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3DsrDsrRouteCache_SetUseExtends(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    const char *type;
-    Py_ssize_t type_len;
-    const char *keywords[] = {"type", NULL};
+    PyNs3Time *useExtends;
+    const char *keywords[] = {"useExtends", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#", (char **) keywords, &type, &type_len)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Time_Type, &useExtends)) {
         return NULL;
     }
-    self->obj->SetCacheType(std::string(type, type_len));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouteCache_UpdateNetGraph(PyNs3DsrDsrRouteCache *self)
-{
-    PyObject *py_retval;
-    
-    self->obj->UpdateNetGraph();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouteCache_ClearMac(PyNs3DsrDsrRouteCache *self)
-{
-    PyObject *py_retval;
-    
-    self->obj->ClearMac();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouteCache_IsNeighbor(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3Ipv4Address *addr;
-    const char *keywords[] = {"addr", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &addr)) {
-        return NULL;
-    }
-    retval = self->obj->IsNeighbor(*((PyNs3Ipv4Address *) addr)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouteCache_LookupRoute(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3Ipv4Address *id;
-    PyNs3DsrDsrRouteCacheEntry *rt;
-    const char *keywords[] = {"id", "rt", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3Ipv4Address_Type, &id, &PyNs3DsrDsrRouteCacheEntry_Type, &rt)) {
-        return NULL;
-    }
-    retval = self->obj->LookupRoute(*((PyNs3Ipv4Address *) id)->obj, *((PyNs3DsrDsrRouteCacheEntry *) rt)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouteCache_DelArpCache(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3ArpCache *arg0;
-    ns3::ArpCache *arg0_ptr;
-    const char *keywords[] = {"arg0", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3ArpCache_Type, &arg0)) {
-        return NULL;
-    }
-    arg0_ptr = (arg0 ? arg0->obj : NULL);
-    self->obj->DelArpCache(ns3::Ptr< ns3::ArpCache  > (arg0_ptr));
+    self->obj->SetUseExtends(*((PyNs3Time *) useExtends)->obj);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -12238,16 +12248,11 @@ _wrap_PyNs3DsrDsrRouteCache_UpdateNeighbor(PyNs3DsrDsrRouteCache *self, PyObject
 
 
 PyObject *
-_wrap_PyNs3DsrDsrRouteCache_ProcessTxError(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3DsrDsrRouteCache_UpdateNetGraph(PyNs3DsrDsrRouteCache *self)
 {
     PyObject *py_retval;
-    PyNs3WifiMacHeader *hdr;
-    const char *keywords[] = {"hdr", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3WifiMacHeader_Type, &hdr)) {
-        return NULL;
-    }
-    self->obj->ProcessTxError(*((PyNs3WifiMacHeader *) hdr)->obj);
+    self->obj->UpdateNetGraph();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -12255,40 +12260,35 @@ _wrap_PyNs3DsrDsrRouteCache_ProcessTxError(PyNs3DsrDsrRouteCache *self, PyObject
 
 
 PyObject *
-_wrap_PyNs3DsrDsrRouteCache_SetCallback(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3DsrDsrRouteCache_UpdateRouteEntry(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyObject *cb;
-    ns3::Ptr<PythonCallbackImpl27> cb_cb_impl;
-    const char *keywords[] = {"cb", NULL};
+    bool retval;
+    PyNs3Ipv4Address *dst;
+    const char *keywords[] = {"dst", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &cb)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &dst)) {
         return NULL;
     }
-    if (!PyCallable_Check(cb)) {
-        PyErr_SetString(PyExc_TypeError, "parameter 'cb' must be callbale");
-        return NULL;
-    }
-    cb_cb_impl = ns3::Create<PythonCallbackImpl27> (cb);
-    self->obj->SetCallback(ns3::Callback<void, ns3::Ipv4Address, unsigned char, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty> (cb_cb_impl));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    retval = self->obj->UpdateRouteEntry(*((PyNs3Ipv4Address *) dst)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3DsrDsrRouteCache_GetUseExtends(PyNs3DsrDsrRouteCache *self)
+_wrap_PyNs3DsrDsrRouteCache_UseExtends(PyNs3DsrDsrRouteCache *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3Time *py_Time;
+    std::vector< ns3::Ipv4Address > rt_value;
+    const char *keywords[] = {"rt", NULL};
     
-    ns3::Time retval = self->obj->GetUseExtends();
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O&", (char **) keywords, _wrap_convert_py2c__std__vector__lt___ns3__Ipv4Address___gt__, &rt_value)) {
+        return NULL;
+    }
+    self->obj->UseExtends(rt_value);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -12309,59 +12309,59 @@ _wrap_PyNs3DsrDsrRouteCache__copy__(PyNs3DsrDsrRouteCache *self)
 }
 
 static PyMethodDef PyNs3DsrDsrRouteCache_methods[] = {
-    {(char *) "SetMaxCacheLen", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_SetMaxCacheLen, METH_KEYWORDS|METH_VARARGS, "SetMaxCacheLen(len)\n\ntype: len: uint32_t" },
-    {(char *) "SetMaxEntriesEachDst", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_SetMaxEntriesEachDst, METH_KEYWORDS|METH_VARARGS, "SetMaxEntriesEachDst(entries)\n\ntype: entries: uint32_t" },
-    {(char *) "SetMinLifeTime", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_SetMinLifeTime, METH_KEYWORDS|METH_VARARGS, "SetMinLifeTime(minLifeTime)\n\ntype: minLifeTime: ns3::Time" },
-    {(char *) "GetStabilityDecrFactor", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_GetStabilityDecrFactor, METH_NOARGS, "GetStabilityDecrFactor()\n\n" },
-    {(char *) "FindSameRoute", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_FindSameRoute, METH_KEYWORDS|METH_VARARGS, "FindSameRoute(rt, rtVector)\n\ntype: rt: ns3::dsr::DsrRouteCacheEntry &\ntype: rtVector: std::list< ns3::dsr::DsrRouteCacheEntry > &" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "RemoveLastEntry", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_RemoveLastEntry, METH_KEYWORDS|METH_VARARGS, "RemoveLastEntry(rtVector)\n\ntype: rtVector: std::list< ns3::dsr::DsrRouteCacheEntry > &" },
-    {(char *) "IsLinkCache", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_IsLinkCache, METH_NOARGS, "IsLinkCache()\n\n" },
-    {(char *) "PurgeMac", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_PurgeMac, METH_NOARGS, "PurgeMac()\n\n" },
-    {(char *) "DeleteRoute", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_DeleteRoute, METH_KEYWORDS|METH_VARARGS, "DeleteRoute(dst)\n\ntype: dst: ns3::Ipv4Address" },
-    {(char *) "CheckUniqueAckId", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_CheckUniqueAckId, METH_KEYWORDS|METH_VARARGS, "CheckUniqueAckId(nextHop)\n\ntype: nextHop: ns3::Ipv4Address" },
-    {(char *) "PrintVector", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_PrintVector, METH_KEYWORDS|METH_VARARGS, "PrintVector(vec)\n\ntype: vec: std::vector< ns3::Ipv4Address > &" },
-    {(char *) "GetCacheTimeout", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_GetCacheTimeout, METH_NOARGS, "GetCacheTimeout()\n\n" },
-    {(char *) "GetExpireTime", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_GetExpireTime, METH_KEYWORDS|METH_VARARGS, "GetExpireTime(addr)\n\ntype: addr: ns3::Ipv4Address" },
-    {(char *) "LookupMacAddress", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_LookupMacAddress, METH_KEYWORDS|METH_VARARGS, "LookupMacAddress(addr)\n\ntype: addr: ns3::Ipv4Address" },
-    {(char *) "UpdateRouteEntry", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_UpdateRouteEntry, METH_KEYWORDS|METH_VARARGS, "UpdateRouteEntry(dst)\n\ntype: dst: ns3::Ipv4Address" },
-    {(char *) "AddArpCache", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_AddArpCache, METH_KEYWORDS|METH_VARARGS, "AddArpCache(arg0)\n\ntype: arg0: ns3::Ptr< ns3::ArpCache >" },
-    {(char *) "GetSubRoute", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_GetSubRoute, METH_NOARGS, "GetSubRoute()\n\n" },
-    {(char *) "PrintRouteVector", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_PrintRouteVector, METH_KEYWORDS|METH_VARARGS, "PrintRouteVector(route)\n\ntype: route: std::list< ns3::dsr::DsrRouteCacheEntry >" },
-    {(char *) "GetBadLinkLifetime", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_GetBadLinkLifetime, METH_NOARGS, "GetBadLinkLifetime()\n\n" },
-    {(char *) "SetInitStability", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_SetInitStability, METH_KEYWORDS|METH_VARARGS, "SetInitStability(initStability)\n\ntype: initStability: ns3::Time" },
-    {(char *) "PurgeLinkNode", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_PurgeLinkNode, METH_NOARGS, "PurgeLinkNode()\n\n" },
-    {(char *) "GetInitStability", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_GetInitStability, METH_NOARGS, "GetInitStability()\n\n" },
-    {(char *) "GetMinLifeTime", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_GetMinLifeTime, METH_NOARGS, "GetMinLifeTime()\n\n" },
-    {(char *) "ScheduleTimer", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_ScheduleTimer, METH_NOARGS, "ScheduleTimer()\n\n" },
-    {(char *) "SetUseExtends", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_SetUseExtends, METH_KEYWORDS|METH_VARARGS, "SetUseExtends(useExtends)\n\ntype: useExtends: ns3::Time" },
-    {(char *) "AddRoute_Link", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_AddRoute_Link, METH_KEYWORDS|METH_VARARGS, "AddRoute_Link(nodelist, node)\n\ntype: nodelist: std::vector< ns3::Ipv4Address >\ntype: node: ns3::Ipv4Address" },
-    {(char *) "AddRoute", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_AddRoute, METH_KEYWORDS|METH_VARARGS, "AddRoute(rt)\n\ntype: rt: ns3::dsr::DsrRouteCacheEntry &" },
-    {(char *) "DeleteAllRoutesIncludeLink", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_DeleteAllRoutesIncludeLink, METH_KEYWORDS|METH_VARARGS, "DeleteAllRoutesIncludeLink(errorSrc, unreachNode, node)\n\ntype: errorSrc: ns3::Ipv4Address\ntype: unreachNode: ns3::Ipv4Address\ntype: node: ns3::Ipv4Address" },
-    {(char *) "GetMaxCacheLen", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_GetMaxCacheLen, METH_NOARGS, "GetMaxCacheLen()\n\n" },
-    {(char *) "SetStabilityDecrFactor", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_SetStabilityDecrFactor, METH_KEYWORDS|METH_VARARGS, "SetStabilityDecrFactor(decrFactor)\n\ntype: decrFactor: uint64_t" },
-    {(char *) "AddNeighbor", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_AddNeighbor, METH_KEYWORDS|METH_VARARGS, "AddNeighbor(nodeList, ownAddress, expire)\n\ntype: nodeList: std::vector< ns3::Ipv4Address >\ntype: ownAddress: ns3::Ipv4Address\ntype: expire: ns3::Time" },
-    {(char *) "SetBadLinkLifetime", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_SetBadLinkLifetime, METH_KEYWORDS|METH_VARARGS, "SetBadLinkLifetime(t)\n\ntype: t: ns3::Time" },
+    {(char *) "AddArpCache", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_AddArpCache, METH_VARARGS|METH_KEYWORDS, "AddArpCache(arg0)\n\ntype: arg0: ns3::Ptr< ns3::ArpCache >" },
+    {(char *) "AddNeighbor", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_AddNeighbor, METH_VARARGS|METH_KEYWORDS, "AddNeighbor(nodeList, ownAddress, expire)\n\ntype: nodeList: std::vector< ns3::Ipv4Address >\ntype: ownAddress: ns3::Ipv4Address\ntype: expire: ns3::Time" },
+    {(char *) "AddRoute", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_AddRoute, METH_VARARGS|METH_KEYWORDS, "AddRoute(rt)\n\ntype: rt: ns3::dsr::DsrRouteCacheEntry &" },
+    {(char *) "AddRoute_Link", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_AddRoute_Link, METH_VARARGS|METH_KEYWORDS, "AddRoute_Link(nodelist, node)\n\ntype: nodelist: std::vector< ns3::Ipv4Address >\ntype: node: ns3::Ipv4Address" },
+    {(char *) "CheckUniqueAckId", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_CheckUniqueAckId, METH_VARARGS|METH_KEYWORDS, "CheckUniqueAckId(nextHop)\n\ntype: nextHop: ns3::Ipv4Address" },
     {(char *) "Clear", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_Clear, METH_NOARGS, "Clear()\n\n" },
-    {(char *) "GetStabilityIncrFactor", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_GetStabilityIncrFactor, METH_NOARGS, "GetStabilityIncrFactor()\n\n" },
-    {(char *) "GetAckSize", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_GetAckSize, METH_NOARGS, "GetAckSize()\n\n" },
-    {(char *) "Purge", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_Purge, METH_NOARGS, "Purge()\n\n" },
-    {(char *) "UseExtends", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_UseExtends, METH_KEYWORDS|METH_VARARGS, "UseExtends(rt)\n\ntype: rt: std::vector< ns3::Ipv4Address >" },
-    {(char *) "GetMaxEntriesEachDst", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_GetMaxEntriesEachDst, METH_NOARGS, "GetMaxEntriesEachDst()\n\n" },
-    {(char *) "SetSubRoute", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_SetSubRoute, METH_KEYWORDS|METH_VARARGS, "SetSubRoute(subRoute)\n\ntype: subRoute: bool" },
-    {(char *) "RebuildBestRouteTable", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_RebuildBestRouteTable, METH_KEYWORDS|METH_VARARGS, "RebuildBestRouteTable(source)\n\ntype: source: ns3::Ipv4Address" },
-    {(char *) "SetStabilityIncrFactor", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_SetStabilityIncrFactor, METH_KEYWORDS|METH_VARARGS, "SetStabilityIncrFactor(incrFactor)\n\ntype: incrFactor: uint64_t" },
-    {(char *) "SetCacheTimeout", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_SetCacheTimeout, METH_KEYWORDS|METH_VARARGS, "SetCacheTimeout(t)\n\ntype: t: ns3::Time" },
-    {(char *) "SetCacheType", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_SetCacheType, METH_KEYWORDS|METH_VARARGS, "SetCacheType(type)\n\ntype: type: std::string" },
-    {(char *) "UpdateNetGraph", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_UpdateNetGraph, METH_NOARGS, "UpdateNetGraph()\n\n" },
     {(char *) "ClearMac", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_ClearMac, METH_NOARGS, "ClearMac()\n\n" },
-    {(char *) "IsNeighbor", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_IsNeighbor, METH_KEYWORDS|METH_VARARGS, "IsNeighbor(addr)\n\ntype: addr: ns3::Ipv4Address" },
-    {(char *) "LookupRoute", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_LookupRoute, METH_KEYWORDS|METH_VARARGS, "LookupRoute(id, rt)\n\ntype: id: ns3::Ipv4Address\ntype: rt: ns3::dsr::DsrRouteCacheEntry &" },
-    {(char *) "DelArpCache", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_DelArpCache, METH_KEYWORDS|METH_VARARGS, "DelArpCache(arg0)\n\ntype: arg0: ns3::Ptr< ns3::ArpCache >" },
-    {(char *) "UpdateNeighbor", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_UpdateNeighbor, METH_KEYWORDS|METH_VARARGS, "UpdateNeighbor(nodeList, expire)\n\ntype: nodeList: std::vector< ns3::Ipv4Address >\ntype: expire: ns3::Time" },
-    {(char *) "ProcessTxError", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_ProcessTxError, METH_KEYWORDS|METH_VARARGS, "ProcessTxError(hdr)\n\ntype: hdr: ns3::WifiMacHeader const &" },
-    {(char *) "SetCallback", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_SetCallback, METH_KEYWORDS|METH_VARARGS, "SetCallback(cb)\n\ntype: cb: ns3::Callback< void, ns3::Ipv4Address, unsigned char, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty >" },
+    {(char *) "DelArpCache", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_DelArpCache, METH_VARARGS|METH_KEYWORDS, "DelArpCache(arg0)\n\ntype: arg0: ns3::Ptr< ns3::ArpCache >" },
+    {(char *) "DeleteAllRoutesIncludeLink", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_DeleteAllRoutesIncludeLink, METH_VARARGS|METH_KEYWORDS, "DeleteAllRoutesIncludeLink(errorSrc, unreachNode, node)\n\ntype: errorSrc: ns3::Ipv4Address\ntype: unreachNode: ns3::Ipv4Address\ntype: node: ns3::Ipv4Address" },
+    {(char *) "DeleteRoute", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_DeleteRoute, METH_VARARGS|METH_KEYWORDS, "DeleteRoute(dst)\n\ntype: dst: ns3::Ipv4Address" },
+    {(char *) "FindSameRoute", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_FindSameRoute, METH_VARARGS|METH_KEYWORDS, "FindSameRoute(rt, rtVector)\n\ntype: rt: ns3::dsr::DsrRouteCacheEntry &\ntype: rtVector: std::list< ns3::dsr::DsrRouteCacheEntry > &" },
+    {(char *) "GetAckSize", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_GetAckSize, METH_NOARGS, "GetAckSize()\n\n" },
+    {(char *) "GetBadLinkLifetime", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_GetBadLinkLifetime, METH_NOARGS, "GetBadLinkLifetime()\n\n" },
+    {(char *) "GetCacheTimeout", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_GetCacheTimeout, METH_NOARGS, "GetCacheTimeout()\n\n" },
+    {(char *) "GetExpireTime", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_GetExpireTime, METH_VARARGS|METH_KEYWORDS, "GetExpireTime(addr)\n\ntype: addr: ns3::Ipv4Address" },
+    {(char *) "GetInitStability", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_GetInitStability, METH_NOARGS, "GetInitStability()\n\n" },
+    {(char *) "GetMaxCacheLen", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_GetMaxCacheLen, METH_NOARGS, "GetMaxCacheLen()\n\n" },
+    {(char *) "GetMaxEntriesEachDst", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_GetMaxEntriesEachDst, METH_NOARGS, "GetMaxEntriesEachDst()\n\n" },
+    {(char *) "GetMinLifeTime", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_GetMinLifeTime, METH_NOARGS, "GetMinLifeTime()\n\n" },
+    {(char *) "GetStabilityDecrFactor", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_GetStabilityDecrFactor, METH_NOARGS, "GetStabilityDecrFactor()\n\n" },
+    {(char *) "GetStabilityIncrFactor", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_GetStabilityIncrFactor, METH_NOARGS, "GetStabilityIncrFactor()\n\n" },
+    {(char *) "GetSubRoute", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_GetSubRoute, METH_NOARGS, "GetSubRoute()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
     {(char *) "GetUseExtends", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_GetUseExtends, METH_NOARGS, "GetUseExtends()\n\n" },
+    {(char *) "IsLinkCache", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_IsLinkCache, METH_NOARGS, "IsLinkCache()\n\n" },
+    {(char *) "IsNeighbor", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_IsNeighbor, METH_VARARGS|METH_KEYWORDS, "IsNeighbor(addr)\n\ntype: addr: ns3::Ipv4Address" },
+    {(char *) "LookupMacAddress", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_LookupMacAddress, METH_VARARGS|METH_KEYWORDS, "LookupMacAddress(addr)\n\ntype: addr: ns3::Ipv4Address" },
+    {(char *) "LookupRoute", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_LookupRoute, METH_VARARGS|METH_KEYWORDS, "LookupRoute(id, rt)\n\ntype: id: ns3::Ipv4Address\ntype: rt: ns3::dsr::DsrRouteCacheEntry &" },
+    {(char *) "PrintRouteVector", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_PrintRouteVector, METH_VARARGS|METH_KEYWORDS, "PrintRouteVector(route)\n\ntype: route: std::list< ns3::dsr::DsrRouteCacheEntry >" },
+    {(char *) "PrintVector", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_PrintVector, METH_VARARGS|METH_KEYWORDS, "PrintVector(vec)\n\ntype: vec: std::vector< ns3::Ipv4Address > &" },
+    {(char *) "ProcessTxError", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_ProcessTxError, METH_VARARGS|METH_KEYWORDS, "ProcessTxError(hdr)\n\ntype: hdr: ns3::WifiMacHeader const &" },
+    {(char *) "Purge", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_Purge, METH_NOARGS, "Purge()\n\n" },
+    {(char *) "PurgeLinkNode", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_PurgeLinkNode, METH_NOARGS, "PurgeLinkNode()\n\n" },
+    {(char *) "PurgeMac", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_PurgeMac, METH_NOARGS, "PurgeMac()\n\n" },
+    {(char *) "RebuildBestRouteTable", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_RebuildBestRouteTable, METH_VARARGS|METH_KEYWORDS, "RebuildBestRouteTable(source)\n\ntype: source: ns3::Ipv4Address" },
+    {(char *) "RemoveLastEntry", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_RemoveLastEntry, METH_VARARGS|METH_KEYWORDS, "RemoveLastEntry(rtVector)\n\ntype: rtVector: std::list< ns3::dsr::DsrRouteCacheEntry > &" },
+    {(char *) "ScheduleTimer", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_ScheduleTimer, METH_NOARGS, "ScheduleTimer()\n\n" },
+    {(char *) "SetBadLinkLifetime", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_SetBadLinkLifetime, METH_VARARGS|METH_KEYWORDS, "SetBadLinkLifetime(t)\n\ntype: t: ns3::Time" },
+    {(char *) "SetCacheTimeout", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_SetCacheTimeout, METH_VARARGS|METH_KEYWORDS, "SetCacheTimeout(t)\n\ntype: t: ns3::Time" },
+    {(char *) "SetCacheType", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_SetCacheType, METH_VARARGS|METH_KEYWORDS, "SetCacheType(type)\n\ntype: type: std::string" },
+    {(char *) "SetCallback", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_SetCallback, METH_VARARGS|METH_KEYWORDS, "SetCallback(cb)\n\ntype: cb: ns3::Callback< void, ns3::Ipv4Address, unsigned char, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty >" },
+    {(char *) "SetInitStability", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_SetInitStability, METH_VARARGS|METH_KEYWORDS, "SetInitStability(initStability)\n\ntype: initStability: ns3::Time" },
+    {(char *) "SetMaxCacheLen", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_SetMaxCacheLen, METH_VARARGS|METH_KEYWORDS, "SetMaxCacheLen(len)\n\ntype: len: uint32_t" },
+    {(char *) "SetMaxEntriesEachDst", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_SetMaxEntriesEachDst, METH_VARARGS|METH_KEYWORDS, "SetMaxEntriesEachDst(entries)\n\ntype: entries: uint32_t" },
+    {(char *) "SetMinLifeTime", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_SetMinLifeTime, METH_VARARGS|METH_KEYWORDS, "SetMinLifeTime(minLifeTime)\n\ntype: minLifeTime: ns3::Time" },
+    {(char *) "SetStabilityDecrFactor", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_SetStabilityDecrFactor, METH_VARARGS|METH_KEYWORDS, "SetStabilityDecrFactor(decrFactor)\n\ntype: decrFactor: uint64_t" },
+    {(char *) "SetStabilityIncrFactor", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_SetStabilityIncrFactor, METH_VARARGS|METH_KEYWORDS, "SetStabilityIncrFactor(incrFactor)\n\ntype: incrFactor: uint64_t" },
+    {(char *) "SetSubRoute", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_SetSubRoute, METH_VARARGS|METH_KEYWORDS, "SetSubRoute(subRoute)\n\ntype: subRoute: bool" },
+    {(char *) "SetUseExtends", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_SetUseExtends, METH_VARARGS|METH_KEYWORDS, "SetUseExtends(useExtends)\n\ntype: useExtends: ns3::Time" },
+    {(char *) "UpdateNeighbor", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_UpdateNeighbor, METH_VARARGS|METH_KEYWORDS, "UpdateNeighbor(nodeList, expire)\n\ntype: nodeList: std::vector< ns3::Ipv4Address >\ntype: expire: ns3::Time" },
+    {(char *) "UpdateNetGraph", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_UpdateNetGraph, METH_NOARGS, "UpdateNetGraph()\n\n" },
+    {(char *) "UpdateRouteEntry", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_UpdateRouteEntry, METH_VARARGS|METH_KEYWORDS, "UpdateRouteEntry(dst)\n\ntype: dst: ns3::Ipv4Address" },
+    {(char *) "UseExtends", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache_UseExtends, METH_VARARGS|METH_KEYWORDS, "UseExtends(rt)\n\ntype: rt: std::vector< ns3::Ipv4Address >" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3DsrDsrRouteCache__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -12458,7 +12458,7 @@ PyTypeObject PyNs3DsrDsrRouteCache_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "DsrRouteCache(arg0)\nDsrRouteCache()",                        /* Documentation string */
     (traverseproc)PyNs3DsrDsrRouteCache__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3DsrDsrRouteCache__tp_clear,             /* tp_clear */
@@ -12598,13 +12598,6 @@ static PyGetSetDef PyNs3DsrDsrRouteCacheNeighbor__getsets[] = {
         NULL /* optional additional data for getter and setter */
     },
     {
-        (char*) "m_neighborAddress", /* attribute name */
-        (getter) _wrap_PyNs3DsrDsrRouteCacheNeighbor__get_m_neighborAddress, /* C function to get the attribute */
-        (setter) _wrap_PyNs3DsrDsrRouteCacheNeighbor__set_m_neighborAddress, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
         (char*) "m_expireTime", /* attribute name */
         (getter) _wrap_PyNs3DsrDsrRouteCacheNeighbor__get_m_expireTime, /* C function to get the attribute */
         (setter) _wrap_PyNs3DsrDsrRouteCacheNeighbor__set_m_expireTime, /* C function to set the attribute */
@@ -12615,6 +12608,13 @@ static PyGetSetDef PyNs3DsrDsrRouteCacheNeighbor__getsets[] = {
         (char*) "m_hardwareAddress", /* attribute name */
         (getter) _wrap_PyNs3DsrDsrRouteCacheNeighbor__get_m_hardwareAddress, /* C function to get the attribute */
         (setter) _wrap_PyNs3DsrDsrRouteCacheNeighbor__set_m_hardwareAddress, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "m_neighborAddress", /* attribute name */
+        (getter) _wrap_PyNs3DsrDsrRouteCacheNeighbor__get_m_neighborAddress, /* C function to get the attribute */
+        (setter) _wrap_PyNs3DsrDsrRouteCacheNeighbor__set_m_neighborAddress, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -12910,115 +12910,17 @@ int _wrap_PyNs3DsrDsrRouteCacheEntry__tp_init(PyNs3DsrDsrRouteCacheEntry *self, 
 
 
 PyObject *
-_wrap_PyNs3DsrDsrRouteCacheEntry_Invalidate(PyNs3DsrDsrRouteCacheEntry *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3DsrDsrRouteCacheEntry_GetBlacklistTimeout(PyNs3DsrDsrRouteCacheEntry *self)
 {
     PyObject *py_retval;
-    PyNs3Time *badLinkLifetime;
-    const char *keywords[] = {"badLinkLifetime", NULL};
+    PyNs3Time *py_Time;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Time_Type, &badLinkLifetime)) {
-        return NULL;
-    }
-    self->obj->Invalidate(*((PyNs3Time *) badLinkLifetime)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouteCacheEntry_IsUnidirectional(PyNs3DsrDsrRouteCacheEntry *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->IsUnidirectional();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouteCacheEntry_SetUnidirectional(PyNs3DsrDsrRouteCacheEntry *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool u;
-    PyObject *py_u;
-    const char *keywords[] = {"u", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &py_u)) {
-        return NULL;
-    }
-    u = (bool) PyObject_IsTrue(py_u);
-    self->obj->SetUnidirectional(u);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouteCacheEntry_SetDestination(PyNs3DsrDsrRouteCacheEntry *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Ipv4Address *d;
-    const char *keywords[] = {"d", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &d)) {
-        return NULL;
-    }
-    self->obj->SetDestination(*((PyNs3Ipv4Address *) d)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouteCacheEntry_GetVector(PyNs3DsrDsrRouteCacheEntry *self)
-{
-    PyObject *py_retval;
-    ns3::dsr::DsrRouteCacheEntry::IP_VECTOR retval;
-    Pyns3__dsr__DsrRouteCacheEntry__IP_VECTOR *py_ns3__dsr__DsrRouteCacheEntry__IP_VECTOR;
-    
-    retval = self->obj->GetVector();
-    py_ns3__dsr__DsrRouteCacheEntry__IP_VECTOR = PyObject_New(Pyns3__dsr__DsrRouteCacheEntry__IP_VECTOR, &Pyns3__dsr__DsrRouteCacheEntry__IP_VECTOR_Type);
-    py_ns3__dsr__DsrRouteCacheEntry__IP_VECTOR->obj = new ns3::dsr::DsrRouteCacheEntry::IP_VECTOR(retval);
-    py_retval = Py_BuildValue((char *) "N", py_ns3__dsr__DsrRouteCacheEntry__IP_VECTOR);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouteCacheEntry_SetBlacklistTimeout(PyNs3DsrDsrRouteCacheEntry *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Time *t;
-    const char *keywords[] = {"t", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Time_Type, &t)) {
-        return NULL;
-    }
-    self->obj->SetBlacklistTimeout(*((PyNs3Time *) t)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouteCacheEntry_SetExpireTime(PyNs3DsrDsrRouteCacheEntry *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Time *exp;
-    const char *keywords[] = {"exp", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Time_Type, &exp)) {
-        return NULL;
-    }
-    self->obj->SetExpireTime(*((PyNs3Time *) exp)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    ns3::Time retval = self->obj->GetBlacklistTimeout();
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
     return py_retval;
 }
 
@@ -13056,6 +12958,120 @@ _wrap_PyNs3DsrDsrRouteCacheEntry_GetExpireTime(PyNs3DsrDsrRouteCacheEntry *self)
 
 
 PyObject *
+_wrap_PyNs3DsrDsrRouteCacheEntry_GetVector(PyNs3DsrDsrRouteCacheEntry *self)
+{
+    PyObject *py_retval;
+    ns3::dsr::DsrRouteCacheEntry::IP_VECTOR retval;
+    Pyns3__dsr__DsrRouteCacheEntry__IP_VECTOR *py_ns3__dsr__DsrRouteCacheEntry__IP_VECTOR;
+    
+    retval = self->obj->GetVector();
+    py_ns3__dsr__DsrRouteCacheEntry__IP_VECTOR = PyObject_New(Pyns3__dsr__DsrRouteCacheEntry__IP_VECTOR, &Pyns3__dsr__DsrRouteCacheEntry__IP_VECTOR_Type);
+    py_ns3__dsr__DsrRouteCacheEntry__IP_VECTOR->obj = new ns3::dsr::DsrRouteCacheEntry::IP_VECTOR(retval);
+    py_retval = Py_BuildValue((char *) "N", py_ns3__dsr__DsrRouteCacheEntry__IP_VECTOR);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouteCacheEntry_Invalidate(PyNs3DsrDsrRouteCacheEntry *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Time *badLinkLifetime;
+    const char *keywords[] = {"badLinkLifetime", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Time_Type, &badLinkLifetime)) {
+        return NULL;
+    }
+    self->obj->Invalidate(*((PyNs3Time *) badLinkLifetime)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouteCacheEntry_IsUnidirectional(PyNs3DsrDsrRouteCacheEntry *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->IsUnidirectional();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouteCacheEntry_SetBlacklistTimeout(PyNs3DsrDsrRouteCacheEntry *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Time *t;
+    const char *keywords[] = {"t", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Time_Type, &t)) {
+        return NULL;
+    }
+    self->obj->SetBlacklistTimeout(*((PyNs3Time *) t)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouteCacheEntry_SetDestination(PyNs3DsrDsrRouteCacheEntry *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4Address *d;
+    const char *keywords[] = {"d", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &d)) {
+        return NULL;
+    }
+    self->obj->SetDestination(*((PyNs3Ipv4Address *) d)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouteCacheEntry_SetExpireTime(PyNs3DsrDsrRouteCacheEntry *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Time *exp;
+    const char *keywords[] = {"exp", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Time_Type, &exp)) {
+        return NULL;
+    }
+    self->obj->SetExpireTime(*((PyNs3Time *) exp)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouteCacheEntry_SetUnidirectional(PyNs3DsrDsrRouteCacheEntry *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool u;
+    PyObject *py_u;
+    const char *keywords[] = {"u", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &py_u)) {
+        return NULL;
+    }
+    u = (bool) PyObject_IsTrue(py_u);
+    self->obj->SetUnidirectional(u);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3DsrDsrRouteCacheEntry_SetVector(PyNs3DsrDsrRouteCacheEntry *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -13068,22 +13084,6 @@ _wrap_PyNs3DsrDsrRouteCacheEntry_SetVector(PyNs3DsrDsrRouteCacheEntry *self, PyO
     self->obj->SetVector(v_value);
     Py_INCREF(Py_None);
     py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouteCacheEntry_GetBlacklistTimeout(PyNs3DsrDsrRouteCacheEntry *self)
-{
-    PyObject *py_retval;
-    PyNs3Time *py_Time;
-    
-    ns3::Time retval = self->obj->GetBlacklistTimeout();
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
     return py_retval;
 }
 
@@ -13101,17 +13101,17 @@ _wrap_PyNs3DsrDsrRouteCacheEntry__copy__(PyNs3DsrDsrRouteCacheEntry *self)
 }
 
 static PyMethodDef PyNs3DsrDsrRouteCacheEntry_methods[] = {
-    {(char *) "Invalidate", (PyCFunction) _wrap_PyNs3DsrDsrRouteCacheEntry_Invalidate, METH_KEYWORDS|METH_VARARGS, "Invalidate(badLinkLifetime)\n\ntype: badLinkLifetime: ns3::Time" },
-    {(char *) "IsUnidirectional", (PyCFunction) _wrap_PyNs3DsrDsrRouteCacheEntry_IsUnidirectional, METH_NOARGS, "IsUnidirectional()\n\n" },
-    {(char *) "SetUnidirectional", (PyCFunction) _wrap_PyNs3DsrDsrRouteCacheEntry_SetUnidirectional, METH_KEYWORDS|METH_VARARGS, "SetUnidirectional(u)\n\ntype: u: bool" },
-    {(char *) "SetDestination", (PyCFunction) _wrap_PyNs3DsrDsrRouteCacheEntry_SetDestination, METH_KEYWORDS|METH_VARARGS, "SetDestination(d)\n\ntype: d: ns3::Ipv4Address" },
-    {(char *) "GetVector", (PyCFunction) _wrap_PyNs3DsrDsrRouteCacheEntry_GetVector, METH_NOARGS, "GetVector()\n\n" },
-    {(char *) "SetBlacklistTimeout", (PyCFunction) _wrap_PyNs3DsrDsrRouteCacheEntry_SetBlacklistTimeout, METH_KEYWORDS|METH_VARARGS, "SetBlacklistTimeout(t)\n\ntype: t: ns3::Time" },
-    {(char *) "SetExpireTime", (PyCFunction) _wrap_PyNs3DsrDsrRouteCacheEntry_SetExpireTime, METH_KEYWORDS|METH_VARARGS, "SetExpireTime(exp)\n\ntype: exp: ns3::Time" },
+    {(char *) "GetBlacklistTimeout", (PyCFunction) _wrap_PyNs3DsrDsrRouteCacheEntry_GetBlacklistTimeout, METH_NOARGS, "GetBlacklistTimeout()\n\n" },
     {(char *) "GetDestination", (PyCFunction) _wrap_PyNs3DsrDsrRouteCacheEntry_GetDestination, METH_NOARGS, "GetDestination()\n\n" },
     {(char *) "GetExpireTime", (PyCFunction) _wrap_PyNs3DsrDsrRouteCacheEntry_GetExpireTime, METH_NOARGS, "GetExpireTime()\n\n" },
-    {(char *) "SetVector", (PyCFunction) _wrap_PyNs3DsrDsrRouteCacheEntry_SetVector, METH_KEYWORDS|METH_VARARGS, "SetVector(v)\n\ntype: v: std::vector< ns3::Ipv4Address >" },
-    {(char *) "GetBlacklistTimeout", (PyCFunction) _wrap_PyNs3DsrDsrRouteCacheEntry_GetBlacklistTimeout, METH_NOARGS, "GetBlacklistTimeout()\n\n" },
+    {(char *) "GetVector", (PyCFunction) _wrap_PyNs3DsrDsrRouteCacheEntry_GetVector, METH_NOARGS, "GetVector()\n\n" },
+    {(char *) "Invalidate", (PyCFunction) _wrap_PyNs3DsrDsrRouteCacheEntry_Invalidate, METH_VARARGS|METH_KEYWORDS, "Invalidate(badLinkLifetime)\n\ntype: badLinkLifetime: ns3::Time" },
+    {(char *) "IsUnidirectional", (PyCFunction) _wrap_PyNs3DsrDsrRouteCacheEntry_IsUnidirectional, METH_NOARGS, "IsUnidirectional()\n\n" },
+    {(char *) "SetBlacklistTimeout", (PyCFunction) _wrap_PyNs3DsrDsrRouteCacheEntry_SetBlacklistTimeout, METH_VARARGS|METH_KEYWORDS, "SetBlacklistTimeout(t)\n\ntype: t: ns3::Time" },
+    {(char *) "SetDestination", (PyCFunction) _wrap_PyNs3DsrDsrRouteCacheEntry_SetDestination, METH_VARARGS|METH_KEYWORDS, "SetDestination(d)\n\ntype: d: ns3::Ipv4Address" },
+    {(char *) "SetExpireTime", (PyCFunction) _wrap_PyNs3DsrDsrRouteCacheEntry_SetExpireTime, METH_VARARGS|METH_KEYWORDS, "SetExpireTime(exp)\n\ntype: exp: ns3::Time" },
+    {(char *) "SetUnidirectional", (PyCFunction) _wrap_PyNs3DsrDsrRouteCacheEntry_SetUnidirectional, METH_VARARGS|METH_KEYWORDS, "SetUnidirectional(u)\n\ntype: u: bool" },
+    {(char *) "SetVector", (PyCFunction) _wrap_PyNs3DsrDsrRouteCacheEntry_SetVector, METH_VARARGS|METH_KEYWORDS, "SetVector(v)\n\ntype: v: std::vector< ns3::Ipv4Address >" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3DsrDsrRouteCacheEntry__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -13365,6 +13365,133 @@ int _wrap_PyNs3DsrDsrRouting__tp_init(PyNs3DsrDsrRouting *self, PyObject *args, 
 
 
 PyObject *
+_wrap_PyNs3DsrDsrRouting_AddRoute(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3DsrDsrRouteCacheEntry *rt;
+    const char *keywords[] = {"rt", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3DsrDsrRouteCacheEntry_Type, &rt)) {
+        return NULL;
+    }
+    retval = self->obj->AddRoute(*((PyNs3DsrDsrRouteCacheEntry *) rt)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouting_AddRoute_Link(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    std::vector< ns3::Ipv4Address > nodelist_value;
+    PyNs3Ipv4Address *source;
+    const char *keywords[] = {"nodelist", "source", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O&O!", (char **) keywords, _wrap_convert_py2c__std__vector__lt___ns3__Ipv4Address___gt__, &nodelist_value, &PyNs3Ipv4Address_Type, &source)) {
+        return NULL;
+    }
+    retval = self->obj->AddRoute_Link(nodelist_value, *((PyNs3Ipv4Address *) source)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouting_AssignStreams(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int64_t retval;
+    int64_t stream;
+    const char *keywords[] = {"stream", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "L", (char **) keywords, &stream)) {
+        return NULL;
+    }
+    retval = self->obj->AssignStreams(stream);
+    py_retval = Py_BuildValue((char *) "L", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouting_CallCancelPacketTimer(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int ackId;
+    PyNs3Ipv4Header *ipv4Header;
+    PyNs3Ipv4Address *realSrc;
+    PyNs3Ipv4Address *realDst;
+    const char *keywords[] = {"ackId", "ipv4Header", "realSrc", "realDst", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "iO!O!O!", (char **) keywords, &ackId, &PyNs3Ipv4Header_Type, &ipv4Header, &PyNs3Ipv4Address_Type, &realSrc, &PyNs3Ipv4Address_Type, &realDst)) {
+        return NULL;
+    }
+    if (ackId > 0xffff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->CallCancelPacketTimer(ackId, *((PyNs3Ipv4Header *) ipv4Header)->obj, *((PyNs3Ipv4Address *) realSrc)->obj, *((PyNs3Ipv4Address *) realDst)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouting_CancelLinkPacketTimer(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3DsrDsrMaintainBuffEntry *mb;
+    const char *keywords[] = {"mb", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3DsrDsrMaintainBuffEntry_Type, &mb)) {
+        return NULL;
+    }
+    self->obj->CancelLinkPacketTimer(*((PyNs3DsrDsrMaintainBuffEntry *) mb)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouting_CancelNetworkPacketTimer(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3DsrDsrMaintainBuffEntry *mb;
+    const char *keywords[] = {"mb", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3DsrDsrMaintainBuffEntry_Type, &mb)) {
+        return NULL;
+    }
+    self->obj->CancelNetworkPacketTimer(*((PyNs3DsrDsrMaintainBuffEntry *) mb)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouting_CancelPacketAllTimer(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3DsrDsrMaintainBuffEntry *mb;
+    const char *keywords[] = {"mb", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3DsrDsrMaintainBuffEntry_Type, &mb)) {
+        return NULL;
+    }
+    self->obj->CancelPacketAllTimer(*((PyNs3DsrDsrMaintainBuffEntry *) mb)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3DsrDsrRouting_CancelPacketTimerNextHop(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -13387,143 +13514,18 @@ _wrap_PyNs3DsrDsrRouting_CancelPacketTimerNextHop(PyNs3DsrDsrRouting *self, PyOb
 
 
 PyObject *
-_wrap_PyNs3DsrDsrRouting_CancelRreqTimer(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3DsrDsrRouting_CancelPassivePacketTimer(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3Ipv4Address *dst;
-    bool isRemove;
-    PyObject *py_isRemove;
-    const char *keywords[] = {"dst", "isRemove", NULL};
+    PyNs3DsrDsrMaintainBuffEntry *mb;
+    const char *keywords[] = {"mb", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O", (char **) keywords, &PyNs3Ipv4Address_Type, &dst, &py_isRemove)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3DsrDsrMaintainBuffEntry_Type, &mb)) {
         return NULL;
     }
-    isRemove = (bool) PyObject_IsTrue(py_isRemove);
-    self->obj->CancelRreqTimer(*((PyNs3Ipv4Address *) dst)->obj, isRemove);
+    self->obj->CancelPassivePacketTimer(*((PyNs3DsrDsrMaintainBuffEntry *) mb)->obj);
     Py_INCREF(Py_None);
     py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouting_GetPassiveBuffer(PyNs3DsrDsrRouting *self)
-{
-    PyObject *py_retval;
-    ns3::Ptr< ns3::dsr::DsrPassiveBuffer > retval;
-    PyNs3DsrDsrPassiveBuffer *py_DsrPassiveBuffer;
-    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
-    PyTypeObject *wrapper_type = 0;
-    
-    retval = self->obj->GetPassiveBuffer();
-    if (!(const_cast<ns3::dsr::DsrPassiveBuffer *> (ns3::PeekPointer (retval)))) {
-        Py_INCREF(Py_None);
-        return Py_None;
-    }
-    wrapper_lookup_iter = PyNs3ObjectBase_wrapper_registry.find((void *) const_cast<ns3::dsr::DsrPassiveBuffer *> (ns3::PeekPointer (retval)));
-    if (wrapper_lookup_iter == PyNs3ObjectBase_wrapper_registry.end()) {
-        py_DsrPassiveBuffer = NULL;
-    } else {
-        py_DsrPassiveBuffer = (PyNs3DsrDsrPassiveBuffer *) wrapper_lookup_iter->second;
-        Py_INCREF(py_DsrPassiveBuffer);
-    }
-    
-    if (py_DsrPassiveBuffer == NULL) {
-        wrapper_type = PyNs3SimpleRefCount__Ns3Object_Ns3ObjectBase_Ns3ObjectDeleter__typeid_map.lookup_wrapper(typeid((*const_cast<ns3::dsr::DsrPassiveBuffer *> (ns3::PeekPointer (retval)))), &PyNs3DsrDsrPassiveBuffer_Type);
-        py_DsrPassiveBuffer = PyObject_GC_New(PyNs3DsrDsrPassiveBuffer, wrapper_type);
-        py_DsrPassiveBuffer->inst_dict = NULL;
-    
-        py_DsrPassiveBuffer->inst_dict = NULL;
-        py_DsrPassiveBuffer->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-        const_cast<ns3::dsr::DsrPassiveBuffer *> (ns3::PeekPointer (retval))->Ref();
-        py_DsrPassiveBuffer->obj = const_cast<ns3::dsr::DsrPassiveBuffer *> (ns3::PeekPointer (retval));
-        PyNs3ObjectBase_wrapper_registry[(void *) py_DsrPassiveBuffer->obj] = (PyObject *) py_DsrPassiveBuffer;
-    }
-    py_retval = Py_BuildValue((char *) "N", py_DsrPassiveBuffer);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouting_PassiveEntryCheck(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3Packet *packet;
-    ns3::Packet *packet_ptr;
-    PyNs3Ipv4Address *source;
-    PyNs3Ipv4Address *destination;
-    int segsLeft;
-    int fragmentOffset;
-    int identification;
-    bool saveEntry;
-    PyObject *py_saveEntry;
-    const char *keywords[] = {"packet", "source", "destination", "segsLeft", "fragmentOffset", "identification", "saveEntry", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!O!iiiO", (char **) keywords, &PyNs3Packet_Type, &packet, &PyNs3Ipv4Address_Type, &source, &PyNs3Ipv4Address_Type, &destination, &segsLeft, &fragmentOffset, &identification, &py_saveEntry)) {
-        return NULL;
-    }
-    packet_ptr = (packet ? packet->obj : NULL);
-    if (segsLeft > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    if (fragmentOffset > 0xffff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    if (identification > 0xffff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    saveEntry = (bool) PyObject_IsTrue(py_saveEntry);
-    retval = self->obj->PassiveEntryCheck(ns3::Ptr< ns3::Packet  > (packet_ptr), *((PyNs3Ipv4Address *) source)->obj, *((PyNs3Ipv4Address *) destination)->obj, segsLeft, fragmentOffset, identification, saveEntry);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouting_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::dsr::DsrRouting::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouting_PrintVector(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    std::vector< ns3::Ipv4Address > vec_value;
-    const char *keywords[] = {"vec", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O&", (char **) keywords, _wrap_convert_py2c__std__vector__lt___ns3__Ipv4Address___gt__, &vec_value)) {
-        return NULL;
-    }
-    self->obj->PrintVector(vec_value);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouting_IsLinkCache(PyNs3DsrDsrRouting *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->IsLinkCache();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
@@ -13555,24 +13557,307 @@ _wrap_PyNs3DsrDsrRouting_CancelPassiveTimer(PyNs3DsrDsrRouting *self, PyObject *
 
 
 PyObject *
-_wrap_PyNs3DsrDsrRouting_SendInitialRequest(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3DsrDsrRouting_CancelRreqTimer(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3Ipv4Address *source;
-    PyNs3Ipv4Address *destination;
-    int protocol;
-    const char *keywords[] = {"source", "destination", "protocol", NULL};
+    PyNs3Ipv4Address *dst;
+    bool isRemove;
+    PyObject *py_isRemove;
+    const char *keywords[] = {"dst", "isRemove", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!i", (char **) keywords, &PyNs3Ipv4Address_Type, &source, &PyNs3Ipv4Address_Type, &destination, &protocol)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O", (char **) keywords, &PyNs3Ipv4Address_Type, &dst, &py_isRemove)) {
+        return NULL;
+    }
+    isRemove = (bool) PyObject_IsTrue(py_isRemove);
+    self->obj->CancelRreqTimer(*((PyNs3Ipv4Address *) dst)->obj, isRemove);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouting_CheckSendBuffer(PyNs3DsrDsrRouting *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->CheckSendBuffer();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouting_DeleteAllRoutesIncludeLink(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4Address *errorSrc;
+    PyNs3Ipv4Address *unreachNode;
+    PyNs3Ipv4Address *node;
+    const char *keywords[] = {"errorSrc", "unreachNode", "node", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!O!", (char **) keywords, &PyNs3Ipv4Address_Type, &errorSrc, &PyNs3Ipv4Address_Type, &unreachNode, &PyNs3Ipv4Address_Type, &node)) {
+        return NULL;
+    }
+    self->obj->DeleteAllRoutesIncludeLink(*((PyNs3Ipv4Address *) errorSrc)->obj, *((PyNs3Ipv4Address *) unreachNode)->obj, *((PyNs3Ipv4Address *) node)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouting_FindSourceEntry(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3Ipv4Address *src;
+    PyNs3Ipv4Address *dst;
+    int id;
+    const char *keywords[] = {"src", "dst", "id", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!i", (char **) keywords, &PyNs3Ipv4Address_Type, &src, &PyNs3Ipv4Address_Type, &dst, &id)) {
+        return NULL;
+    }
+    if (id > 0xffff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    retval = self->obj->FindSourceEntry(*((PyNs3Ipv4Address *) src)->obj, *((PyNs3Ipv4Address *) dst)->obj, id);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouting_ForwardErrPacket(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3DsrDsrOptionRerrUnreachHeader *rerr;
+    PyNs3DsrDsrOptionSRHeader *sourceRoute;
+    PyNs3Ipv4Address *nextHop;
+    int protocol;
+    PyNs3Ipv4Route *route;
+    ns3::Ipv4Route *route_ptr;
+    const char *keywords[] = {"rerr", "sourceRoute", "nextHop", "protocol", "route", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!O!iO!", (char **) keywords, &PyNs3DsrDsrOptionRerrUnreachHeader_Type, &rerr, &PyNs3DsrDsrOptionSRHeader_Type, &sourceRoute, &PyNs3Ipv4Address_Type, &nextHop, &protocol, &PyNs3Ipv4Route_Type, &route)) {
         return NULL;
     }
     if (protocol > 0xff) {
         PyErr_SetString(PyExc_ValueError, "Out of range");
         return NULL;
     }
-    self->obj->SendInitialRequest(*((PyNs3Ipv4Address *) source)->obj, *((PyNs3Ipv4Address *) destination)->obj, protocol);
+    route_ptr = (route ? route->obj : NULL);
+    self->obj->ForwardErrPacket(*((PyNs3DsrDsrOptionRerrUnreachHeader *) rerr)->obj, *((PyNs3DsrDsrOptionSRHeader *) sourceRoute)->obj, *((PyNs3Ipv4Address *) nextHop)->obj, protocol, ns3::Ptr< ns3::Ipv4Route  > (route_ptr));
     Py_INCREF(Py_None);
     py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouting_ForwardPacket(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Packet *packet;
+    ns3::Packet *packet_ptr;
+    PyNs3DsrDsrOptionSRHeader *sourceRoute;
+    PyNs3Ipv4Header *ipv4Header;
+    PyNs3Ipv4Address *source;
+    PyNs3Ipv4Address *destination;
+    PyNs3Ipv4Address *targetAddress;
+    int protocol;
+    PyNs3Ipv4Route *route;
+    ns3::Ipv4Route *route_ptr;
+    const char *keywords[] = {"packet", "sourceRoute", "ipv4Header", "source", "destination", "targetAddress", "protocol", "route", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!O!O!O!O!iO!", (char **) keywords, &PyNs3Packet_Type, &packet, &PyNs3DsrDsrOptionSRHeader_Type, &sourceRoute, &PyNs3Ipv4Header_Type, &ipv4Header, &PyNs3Ipv4Address_Type, &source, &PyNs3Ipv4Address_Type, &destination, &PyNs3Ipv4Address_Type, &targetAddress, &protocol, &PyNs3Ipv4Route_Type, &route)) {
+        return NULL;
+    }
+    packet_ptr = (packet ? packet->obj : NULL);
+    if (protocol > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    route_ptr = (route ? route->obj : NULL);
+    self->obj->ForwardPacket(ns3::Ptr< ns3::Packet  > (packet_ptr), *((PyNs3DsrDsrOptionSRHeader *) sourceRoute)->obj, *((PyNs3Ipv4Header *) ipv4Header)->obj, *((PyNs3Ipv4Address *) source)->obj, *((PyNs3Ipv4Address *) destination)->obj, *((PyNs3Ipv4Address *) targetAddress)->obj, protocol, ns3::Ptr< ns3::Ipv4Route  > (route_ptr));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouting_GetElementsFromContext(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    const char *context;
+    Py_ssize_t context_len;
+    const char *keywords[] = {"context", NULL};
+    std::vector< std::string > retval;
+    Pystd__vector__lt___std__string___gt__ *py_std__vector__lt___std__string___gt__;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#", (char **) keywords, &context, &context_len)) {
+        return NULL;
+    }
+    retval = self->obj->GetElementsFromContext(std::string(context, context_len));
+    py_std__vector__lt___std__string___gt__ = PyObject_New(Pystd__vector__lt___std__string___gt__, &Pystd__vector__lt___std__string___gt___Type);
+    py_std__vector__lt___std__string___gt__->obj = new std::vector< std::string >(retval);
+    py_retval = Py_BuildValue((char *) "N", py_std__vector__lt___std__string___gt__);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouting_GetIDfromIP(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    uint16_t retval;
+    PyNs3Ipv4Address *address;
+    const char *keywords[] = {"address", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &address)) {
+        return NULL;
+    }
+    retval = self->obj->GetIDfromIP(*((PyNs3Ipv4Address *) address)->obj);
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouting_GetIPfromID(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int id;
+    const char *keywords[] = {"id", NULL};
+    PyNs3Ipv4Address *py_Ipv4Address;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &id)) {
+        return NULL;
+    }
+    if (id > 0xffff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    ns3::Ipv4Address retval = self->obj->GetIPfromID(id);
+    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
+    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
+    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
+    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouting_GetIPfromMAC(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Mac48Address *address;
+    const char *keywords[] = {"address", NULL};
+    PyNs3Ipv4Address *py_Ipv4Address;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Mac48Address_Type, &address)) {
+        return NULL;
+    }
+    ns3::Ipv4Address retval = self->obj->GetIPfromMAC(*((PyNs3Mac48Address *) address)->obj);
+    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
+    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
+    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
+    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouting_GetNetDeviceFromContext(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    ns3::Ptr< ns3::NetDevice > retval;
+    const char *context;
+    Py_ssize_t context_len;
+    const char *keywords[] = {"context", NULL};
+    PyNs3NetDevice *py_NetDevice;
+    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
+    PyTypeObject *wrapper_type = 0;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#", (char **) keywords, &context, &context_len)) {
+        return NULL;
+    }
+    retval = self->obj->GetNetDeviceFromContext(std::string(context, context_len));
+    if (!(const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval)))) {
+        Py_INCREF(Py_None);
+        return Py_None;
+    }
+    wrapper_lookup_iter = PyNs3ObjectBase_wrapper_registry.find((void *) const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval)));
+    if (wrapper_lookup_iter == PyNs3ObjectBase_wrapper_registry.end()) {
+        py_NetDevice = NULL;
+    } else {
+        py_NetDevice = (PyNs3NetDevice *) wrapper_lookup_iter->second;
+        Py_INCREF(py_NetDevice);
+    }
+    
+    if (py_NetDevice == NULL) {
+        wrapper_type = PyNs3SimpleRefCount__Ns3Object_Ns3ObjectBase_Ns3ObjectDeleter__typeid_map.lookup_wrapper(typeid((*const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval)))), &PyNs3NetDevice_Type);
+        py_NetDevice = PyObject_GC_New(PyNs3NetDevice, wrapper_type);
+        py_NetDevice->inst_dict = NULL;
+    
+        py_NetDevice->inst_dict = NULL;
+        py_NetDevice->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+        const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval))->Ref();
+        py_NetDevice->obj = const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval));
+        PyNs3ObjectBase_wrapper_registry[(void *) py_NetDevice->obj] = (PyObject *) py_NetDevice;
+    }
+    py_retval = Py_BuildValue((char *) "N", py_NetDevice);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouting_GetNode(PyNs3DsrDsrRouting *self)
+{
+    PyObject *py_retval;
+    ns3::Ptr< ns3::Node > retval;
+    PyNs3Node *py_Node;
+    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
+    PyTypeObject *wrapper_type = 0;
+    
+    retval = self->obj->GetNode();
+    if (!(const_cast<ns3::Node *> (ns3::PeekPointer (retval)))) {
+        Py_INCREF(Py_None);
+        return Py_None;
+    }
+    if (typeid((*const_cast<ns3::Node *> (ns3::PeekPointer (retval)))).name() == typeid(PyNs3Node__PythonHelper).name())
+    {
+        py_Node = reinterpret_cast< PyNs3Node* >(reinterpret_cast< PyNs3Node__PythonHelper* >(const_cast<ns3::Node *> (ns3::PeekPointer (retval)))->m_pyself);
+        py_Node->obj = const_cast<ns3::Node *> (ns3::PeekPointer (retval));
+        Py_INCREF(py_Node);
+    } else {
+        wrapper_lookup_iter = PyNs3ObjectBase_wrapper_registry.find((void *) const_cast<ns3::Node *> (ns3::PeekPointer (retval)));
+        if (wrapper_lookup_iter == PyNs3ObjectBase_wrapper_registry.end()) {
+            py_Node = NULL;
+        } else {
+            py_Node = (PyNs3Node *) wrapper_lookup_iter->second;
+            Py_INCREF(py_Node);
+        }
+    
+        if (py_Node == NULL) {
+            wrapper_type = PyNs3SimpleRefCount__Ns3Object_Ns3ObjectBase_Ns3ObjectDeleter__typeid_map.lookup_wrapper(typeid((*const_cast<ns3::Node *> (ns3::PeekPointer (retval)))), &PyNs3Node_Type);
+            py_Node = PyObject_GC_New(PyNs3Node, wrapper_type);
+            py_Node->inst_dict = NULL;
+    
+            py_Node->inst_dict = NULL;
+            py_Node->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+            const_cast<ns3::Node *> (ns3::PeekPointer (retval))->Ref();
+            py_Node->obj = const_cast<ns3::Node *> (ns3::PeekPointer (retval));
+            PyNs3ObjectBase_wrapper_registry[(void *) py_Node->obj] = (PyObject *) py_Node;
+        }
+    }
+    py_retval = Py_BuildValue((char *) "N", py_Node);
     return py_retval;
 }
 
@@ -13628,511 +13913,6 @@ _wrap_PyNs3DsrDsrRouting_GetNodeWithAddress(PyNs3DsrDsrRouting *self, PyObject *
 
 
 PyObject *
-_wrap_PyNs3DsrDsrRouting_SetNode(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Node *node;
-    ns3::Node *node_ptr;
-    const char *keywords[] = {"node", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Node_Type, &node)) {
-        return NULL;
-    }
-    node_ptr = (node ? node->obj : NULL);
-    self->obj->SetNode(ns3::Ptr< ns3::Node  > (node_ptr));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouting_SearchNextHop(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Ipv4Address *ipv4Address;
-    std::vector< ns3::Ipv4Address > vec_value;
-    const char *keywords[] = {"ipv4Address", "vec", NULL};
-    PyNs3Ipv4Address *py_Ipv4Address;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O&", (char **) keywords, &PyNs3Ipv4Address_Type, &ipv4Address, _wrap_convert_py2c__std__vector__lt___ns3__Ipv4Address___gt__, &vec_value)) {
-        return NULL;
-    }
-    ns3::Ipv4Address retval = self->obj->SearchNextHop(*((PyNs3Ipv4Address *) ipv4Address)->obj, vec_value);
-    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
-    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
-    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
-    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouting_Scheduler(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int priority;
-    const char *keywords[] = {"priority", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &priority)) {
-        return NULL;
-    }
-    self->obj->Scheduler(priority);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouting_NetworkScheduleTimerExpire(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3DsrDsrMaintainBuffEntry *mb;
-    int protocol;
-    const char *keywords[] = {"mb", "protocol", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!i", (char **) keywords, &PyNs3DsrDsrMaintainBuffEntry_Type, &mb, &protocol)) {
-        return NULL;
-    }
-    if (protocol > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->NetworkScheduleTimerExpire(*((PyNs3DsrDsrMaintainBuffEntry *) mb)->obj, protocol);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouting_CancelPassivePacketTimer(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3DsrDsrMaintainBuffEntry *mb;
-    const char *keywords[] = {"mb", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3DsrDsrMaintainBuffEntry_Type, &mb)) {
-        return NULL;
-    }
-    self->obj->CancelPassivePacketTimer(*((PyNs3DsrDsrMaintainBuffEntry *) mb)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouting_GetIDfromIP(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    uint16_t retval;
-    PyNs3Ipv4Address *address;
-    const char *keywords[] = {"address", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &address)) {
-        return NULL;
-    }
-    retval = self->obj->GetIDfromIP(*((PyNs3Ipv4Address *) address)->obj);
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouting_ScheduleCachedReply(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Packet *packet;
-    ns3::Packet *packet_ptr;
-    PyNs3Ipv4Address *source;
-    PyNs3Ipv4Address *destination;
-    PyNs3Ipv4Route *route;
-    ns3::Ipv4Route *route_ptr;
-    double hops;
-    const char *keywords[] = {"packet", "source", "destination", "route", "hops", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!O!O!d", (char **) keywords, &PyNs3Packet_Type, &packet, &PyNs3Ipv4Address_Type, &source, &PyNs3Ipv4Address_Type, &destination, &PyNs3Ipv4Route_Type, &route, &hops)) {
-        return NULL;
-    }
-    packet_ptr = (packet ? packet->obj : NULL);
-    route_ptr = (route ? route->obj : NULL);
-    self->obj->ScheduleCachedReply(ns3::Ptr< ns3::Packet  > (packet_ptr), *((PyNs3Ipv4Address *) source)->obj, *((PyNs3Ipv4Address *) destination)->obj, ns3::Ptr< ns3::Ipv4Route  > (route_ptr), hops);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouting_FindSourceEntry(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3Ipv4Address *src;
-    PyNs3Ipv4Address *dst;
-    int id;
-    const char *keywords[] = {"src", "dst", "id", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!i", (char **) keywords, &PyNs3Ipv4Address_Type, &src, &PyNs3Ipv4Address_Type, &dst, &id)) {
-        return NULL;
-    }
-    if (id > 0xffff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    retval = self->obj->FindSourceEntry(*((PyNs3Ipv4Address *) src)->obj, *((PyNs3Ipv4Address *) dst)->obj, id);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouting_UpdateRouteEntry(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3Ipv4Address *dst;
-    const char *keywords[] = {"dst", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &dst)) {
-        return NULL;
-    }
-    retval = self->obj->UpdateRouteEntry(*((PyNs3Ipv4Address *) dst)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouting_GetNode(PyNs3DsrDsrRouting *self)
-{
-    PyObject *py_retval;
-    ns3::Ptr< ns3::Node > retval;
-    PyNs3Node *py_Node;
-    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
-    PyTypeObject *wrapper_type = 0;
-    
-    retval = self->obj->GetNode();
-    if (!(const_cast<ns3::Node *> (ns3::PeekPointer (retval)))) {
-        Py_INCREF(Py_None);
-        return Py_None;
-    }
-    if (typeid((*const_cast<ns3::Node *> (ns3::PeekPointer (retval)))).name() == typeid(PyNs3Node__PythonHelper).name())
-    {
-        py_Node = reinterpret_cast< PyNs3Node* >(reinterpret_cast< PyNs3Node__PythonHelper* >(const_cast<ns3::Node *> (ns3::PeekPointer (retval)))->m_pyself);
-        py_Node->obj = const_cast<ns3::Node *> (ns3::PeekPointer (retval));
-        Py_INCREF(py_Node);
-    } else {
-        wrapper_lookup_iter = PyNs3ObjectBase_wrapper_registry.find((void *) const_cast<ns3::Node *> (ns3::PeekPointer (retval)));
-        if (wrapper_lookup_iter == PyNs3ObjectBase_wrapper_registry.end()) {
-            py_Node = NULL;
-        } else {
-            py_Node = (PyNs3Node *) wrapper_lookup_iter->second;
-            Py_INCREF(py_Node);
-        }
-    
-        if (py_Node == NULL) {
-            wrapper_type = PyNs3SimpleRefCount__Ns3Object_Ns3ObjectBase_Ns3ObjectDeleter__typeid_map.lookup_wrapper(typeid((*const_cast<ns3::Node *> (ns3::PeekPointer (retval)))), &PyNs3Node_Type);
-            py_Node = PyObject_GC_New(PyNs3Node, wrapper_type);
-            py_Node->inst_dict = NULL;
-    
-            py_Node->inst_dict = NULL;
-            py_Node->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-            const_cast<ns3::Node *> (ns3::PeekPointer (retval))->Ref();
-            py_Node->obj = const_cast<ns3::Node *> (ns3::PeekPointer (retval));
-            PyNs3ObjectBase_wrapper_registry[(void *) py_Node->obj] = (PyObject *) py_Node;
-        }
-    }
-    py_retval = Py_BuildValue((char *) "N", py_Node);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouting_SalvagePacket(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Packet *packet;
-    ns3::Packet *packet_ptr;
-    PyNs3Ipv4Address *source;
-    PyNs3Ipv4Address *dst;
-    int protocol;
-    const char *keywords[] = {"packet", "source", "dst", "protocol", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!O!i", (char **) keywords, &PyNs3Packet_Type, &packet, &PyNs3Ipv4Address_Type, &source, &PyNs3Ipv4Address_Type, &dst, &protocol)) {
-        return NULL;
-    }
-    packet_ptr = (packet ? packet->obj : NULL);
-    if (protocol > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SalvagePacket(ns3::Ptr< ns3::Packet  > (packet_ptr), *((PyNs3Ipv4Address *) source)->obj, *((PyNs3Ipv4Address *) dst)->obj, protocol);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouting_SendRealDown(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3DsrDsrNetworkQueueEntry *newEntry;
-    const char *keywords[] = {"newEntry", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3DsrDsrNetworkQueueEntry_Type, &newEntry)) {
-        return NULL;
-    }
-    retval = self->obj->SendRealDown(*((PyNs3DsrDsrNetworkQueueEntry *) newEntry)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouting_SendGratuitousReply(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Ipv4Address *replyTo;
-    PyNs3Ipv4Address *replyFrom;
-    std::vector< ns3::Ipv4Address > nodeList_value;
-    int protocol;
-    const char *keywords[] = {"replyTo", "replyFrom", "nodeList", "protocol", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!O&i", (char **) keywords, &PyNs3Ipv4Address_Type, &replyTo, &PyNs3Ipv4Address_Type, &replyFrom, _wrap_convert_py2c__std__vector__lt___ns3__Ipv4Address___gt__, &nodeList_value, &protocol)) {
-        return NULL;
-    }
-    if (protocol > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SendGratuitousReply(*((PyNs3Ipv4Address *) replyTo)->obj, *((PyNs3Ipv4Address *) replyFrom)->obj, nodeList_value, protocol);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouting_CancelPacketAllTimer(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3DsrDsrMaintainBuffEntry *mb;
-    const char *keywords[] = {"mb", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3DsrDsrMaintainBuffEntry_Type, &mb)) {
-        return NULL;
-    }
-    self->obj->CancelPacketAllTimer(*((PyNs3DsrDsrMaintainBuffEntry *) mb)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouting_GetPriority(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    ns3::dsr::DsrMessageType messageType;
-    const char *keywords[] = {"messageType", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &messageType)) {
-        return NULL;
-    }
-    retval = self->obj->GetPriority(messageType);
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouting_LinkScheduleTimerExpire(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3DsrDsrMaintainBuffEntry *mb;
-    int protocol;
-    const char *keywords[] = {"mb", "protocol", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!i", (char **) keywords, &PyNs3DsrDsrMaintainBuffEntry_Type, &mb, &protocol)) {
-        return NULL;
-    }
-    if (protocol > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->LinkScheduleTimerExpire(*((PyNs3DsrDsrMaintainBuffEntry *) mb)->obj, protocol);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouting_ScheduleLinkPacketRetry(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3DsrDsrMaintainBuffEntry *mb;
-    int protocol;
-    const char *keywords[] = {"mb", "protocol", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!i", (char **) keywords, &PyNs3DsrDsrMaintainBuffEntry_Type, &mb, &protocol)) {
-        return NULL;
-    }
-    if (protocol > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->ScheduleLinkPacketRetry(*((PyNs3DsrDsrMaintainBuffEntry *) mb)->obj, protocol);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouting_GetNetDeviceFromContext(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    ns3::Ptr< ns3::NetDevice > retval;
-    const char *context;
-    Py_ssize_t context_len;
-    const char *keywords[] = {"context", NULL};
-    PyNs3NetDevice *py_NetDevice;
-    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
-    PyTypeObject *wrapper_type = 0;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#", (char **) keywords, &context, &context_len)) {
-        return NULL;
-    }
-    retval = self->obj->GetNetDeviceFromContext(std::string(context, context_len));
-    if (!(const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval)))) {
-        Py_INCREF(Py_None);
-        return Py_None;
-    }
-    wrapper_lookup_iter = PyNs3ObjectBase_wrapper_registry.find((void *) const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval)));
-    if (wrapper_lookup_iter == PyNs3ObjectBase_wrapper_registry.end()) {
-        py_NetDevice = NULL;
-    } else {
-        py_NetDevice = (PyNs3NetDevice *) wrapper_lookup_iter->second;
-        Py_INCREF(py_NetDevice);
-    }
-    
-    if (py_NetDevice == NULL) {
-        wrapper_type = PyNs3SimpleRefCount__Ns3Object_Ns3ObjectBase_Ns3ObjectDeleter__typeid_map.lookup_wrapper(typeid((*const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval)))), &PyNs3NetDevice_Type);
-        py_NetDevice = PyObject_GC_New(PyNs3NetDevice, wrapper_type);
-        py_NetDevice->inst_dict = NULL;
-    
-        py_NetDevice->inst_dict = NULL;
-        py_NetDevice->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-        const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval))->Ref();
-        py_NetDevice->obj = const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval));
-        PyNs3ObjectBase_wrapper_registry[(void *) py_NetDevice->obj] = (PyObject *) py_NetDevice;
-    }
-    py_retval = Py_BuildValue((char *) "N", py_NetDevice);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouting_SetPassiveBuffer(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3DsrDsrPassiveBuffer *r;
-    ns3::dsr::DsrPassiveBuffer *r_ptr;
-    const char *keywords[] = {"r", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3DsrDsrPassiveBuffer_Type, &r)) {
-        return NULL;
-    }
-    r_ptr = (r ? r->obj : NULL);
-    self->obj->SetPassiveBuffer(ns3::Ptr< ns3::dsr::DsrPassiveBuffer  > (r_ptr));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouting_SendReply(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Packet *packet;
-    ns3::Packet *packet_ptr;
-    PyNs3Ipv4Address *source;
-    PyNs3Ipv4Address *nextHop;
-    PyNs3Ipv4Route *route;
-    ns3::Ipv4Route *route_ptr;
-    const char *keywords[] = {"packet", "source", "nextHop", "route", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!O!O!", (char **) keywords, &PyNs3Packet_Type, &packet, &PyNs3Ipv4Address_Type, &source, &PyNs3Ipv4Address_Type, &nextHop, &PyNs3Ipv4Route_Type, &route)) {
-        return NULL;
-    }
-    packet_ptr = (packet ? packet->obj : NULL);
-    route_ptr = (route ? route->obj : NULL);
-    self->obj->SendReply(ns3::Ptr< ns3::Packet  > (packet_ptr), *((PyNs3Ipv4Address *) source)->obj, *((PyNs3Ipv4Address *) nextHop)->obj, ns3::Ptr< ns3::Ipv4Route  > (route_ptr));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouting_SendErrorRequest(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3DsrDsrOptionRerrUnreachHeader *rerr;
-    int protocol;
-    const char *keywords[] = {"rerr", "protocol", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!i", (char **) keywords, &PyNs3DsrDsrOptionRerrUnreachHeader_Type, &rerr, &protocol)) {
-        return NULL;
-    }
-    if (protocol > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SendErrorRequest(*((PyNs3DsrDsrOptionRerrUnreachHeader *) rerr)->obj, protocol);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouting_ForwardErrPacket(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3DsrDsrOptionRerrUnreachHeader *rerr;
-    PyNs3DsrDsrOptionSRHeader *sourceRoute;
-    PyNs3Ipv4Address *nextHop;
-    int protocol;
-    PyNs3Ipv4Route *route;
-    ns3::Ipv4Route *route_ptr;
-    const char *keywords[] = {"rerr", "sourceRoute", "nextHop", "protocol", "route", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!O!iO!", (char **) keywords, &PyNs3DsrDsrOptionRerrUnreachHeader_Type, &rerr, &PyNs3DsrDsrOptionSRHeader_Type, &sourceRoute, &PyNs3Ipv4Address_Type, &nextHop, &protocol, &PyNs3Ipv4Route_Type, &route)) {
-        return NULL;
-    }
-    if (protocol > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    route_ptr = (route ? route->obj : NULL);
-    self->obj->ForwardErrPacket(*((PyNs3DsrDsrOptionRerrUnreachHeader *) rerr)->obj, *((PyNs3DsrDsrOptionSRHeader *) sourceRoute)->obj, *((PyNs3Ipv4Address *) nextHop)->obj, protocol, ns3::Ptr< ns3::Ipv4Route  > (route_ptr));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3DsrDsrRouting_GetOption(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -14183,247 +13963,67 @@ _wrap_PyNs3DsrDsrRouting_GetOption(PyNs3DsrDsrRouting *self, PyObject *args, PyO
 
 
 PyObject *
-_wrap_PyNs3DsrDsrRouting_AddRoute_Link(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3DsrDsrRouting_GetPassiveBuffer(PyNs3DsrDsrRouting *self)
 {
     PyObject *py_retval;
-    bool retval;
-    std::vector< ns3::Ipv4Address > nodelist_value;
-    PyNs3Ipv4Address *source;
-    const char *keywords[] = {"nodelist", "source", NULL};
+    ns3::Ptr< ns3::dsr::DsrPassiveBuffer > retval;
+    PyNs3DsrDsrPassiveBuffer *py_DsrPassiveBuffer;
+    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
+    PyTypeObject *wrapper_type = 0;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O&O!", (char **) keywords, _wrap_convert_py2c__std__vector__lt___ns3__Ipv4Address___gt__, &nodelist_value, &PyNs3Ipv4Address_Type, &source)) {
-        return NULL;
+    retval = self->obj->GetPassiveBuffer();
+    if (!(const_cast<ns3::dsr::DsrPassiveBuffer *> (ns3::PeekPointer (retval)))) {
+        Py_INCREF(Py_None);
+        return Py_None;
     }
-    retval = self->obj->AddRoute_Link(nodelist_value, *((PyNs3Ipv4Address *) source)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    wrapper_lookup_iter = PyNs3ObjectBase_wrapper_registry.find((void *) const_cast<ns3::dsr::DsrPassiveBuffer *> (ns3::PeekPointer (retval)));
+    if (wrapper_lookup_iter == PyNs3ObjectBase_wrapper_registry.end()) {
+        py_DsrPassiveBuffer = NULL;
+    } else {
+        py_DsrPassiveBuffer = (PyNs3DsrDsrPassiveBuffer *) wrapper_lookup_iter->second;
+        Py_INCREF(py_DsrPassiveBuffer);
+    }
+    
+    if (py_DsrPassiveBuffer == NULL) {
+        wrapper_type = PyNs3SimpleRefCount__Ns3Object_Ns3ObjectBase_Ns3ObjectDeleter__typeid_map.lookup_wrapper(typeid((*const_cast<ns3::dsr::DsrPassiveBuffer *> (ns3::PeekPointer (retval)))), &PyNs3DsrDsrPassiveBuffer_Type);
+        py_DsrPassiveBuffer = PyObject_GC_New(PyNs3DsrDsrPassiveBuffer, wrapper_type);
+        py_DsrPassiveBuffer->inst_dict = NULL;
+    
+        py_DsrPassiveBuffer->inst_dict = NULL;
+        py_DsrPassiveBuffer->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+        const_cast<ns3::dsr::DsrPassiveBuffer *> (ns3::PeekPointer (retval))->Ref();
+        py_DsrPassiveBuffer->obj = const_cast<ns3::dsr::DsrPassiveBuffer *> (ns3::PeekPointer (retval));
+        PyNs3ObjectBase_wrapper_registry[(void *) py_DsrPassiveBuffer->obj] = (PyObject *) py_DsrPassiveBuffer;
+    }
+    py_retval = Py_BuildValue((char *) "N", py_DsrPassiveBuffer);
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3DsrDsrRouting_AddRoute(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3DsrDsrRouting_GetPriority(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    bool retval;
-    PyNs3DsrDsrRouteCacheEntry *rt;
-    const char *keywords[] = {"rt", NULL};
+    uint32_t retval;
+    ns3::dsr::DsrMessageType messageType;
+    const char *keywords[] = {"messageType", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3DsrDsrRouteCacheEntry_Type, &rt)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &messageType)) {
         return NULL;
     }
-    retval = self->obj->AddRoute(*((PyNs3DsrDsrRouteCacheEntry *) rt)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    retval = self->obj->GetPriority(messageType);
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3DsrDsrRouting_DeleteAllRoutesIncludeLink(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3DsrDsrRouting_GetProtocolNumber(PyNs3DsrDsrRouting *self)
 {
     PyObject *py_retval;
-    PyNs3Ipv4Address *errorSrc;
-    PyNs3Ipv4Address *unreachNode;
-    PyNs3Ipv4Address *node;
-    const char *keywords[] = {"errorSrc", "unreachNode", "node", NULL};
+    int retval;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!O!", (char **) keywords, &PyNs3Ipv4Address_Type, &errorSrc, &PyNs3Ipv4Address_Type, &unreachNode, &PyNs3Ipv4Address_Type, &node)) {
-        return NULL;
-    }
-    self->obj->DeleteAllRoutesIncludeLink(*((PyNs3Ipv4Address *) errorSrc)->obj, *((PyNs3Ipv4Address *) unreachNode)->obj, *((PyNs3Ipv4Address *) node)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouting_SetRequestTable(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3DsrDsrRreqTable *r;
-    ns3::dsr::DsrRreqTable *r_ptr;
-    const char *keywords[] = {"r", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3DsrDsrRreqTable_Type, &r)) {
-        return NULL;
-    }
-    r_ptr = (r ? r->obj : NULL);
-    self->obj->SetRequestTable(ns3::Ptr< ns3::dsr::DsrRreqTable  > (r_ptr));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouting_SendPacketFromBuffer(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3DsrDsrOptionSRHeader *sourceRoute;
-    PyNs3Ipv4Address *nextHop;
-    int protocol;
-    const char *keywords[] = {"sourceRoute", "nextHop", "protocol", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!i", (char **) keywords, &PyNs3DsrDsrOptionSRHeader_Type, &sourceRoute, &PyNs3Ipv4Address_Type, &nextHop, &protocol)) {
-        return NULL;
-    }
-    if (protocol > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SendPacketFromBuffer(*((PyNs3DsrDsrOptionSRHeader *) sourceRoute)->obj, *((PyNs3Ipv4Address *) nextHop)->obj, protocol);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouting_Insert(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3DsrDsrOptions *option;
-    ns3::dsr::DsrOptions *option_ptr;
-    const char *keywords[] = {"option", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3DsrDsrOptions_Type, &option)) {
-        return NULL;
-    }
-    option_ptr = (option ? option->obj : NULL);
-    self->obj->Insert(ns3::Ptr< ns3::dsr::DsrOptions  > (option_ptr));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouting_SendUnreachError(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Ipv4Address *unreachNode;
-    PyNs3Ipv4Address *destination;
-    PyNs3Ipv4Address *originalDst;
-    int salvage;
-    int protocol;
-    const char *keywords[] = {"unreachNode", "destination", "originalDst", "salvage", "protocol", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!O!ii", (char **) keywords, &PyNs3Ipv4Address_Type, &unreachNode, &PyNs3Ipv4Address_Type, &destination, &PyNs3Ipv4Address_Type, &originalDst, &salvage, &protocol)) {
-        return NULL;
-    }
-    if (salvage > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    if (protocol > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SendUnreachError(*((PyNs3Ipv4Address *) unreachNode)->obj, *((PyNs3Ipv4Address *) destination)->obj, *((PyNs3Ipv4Address *) originalDst)->obj, salvage, protocol);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouting_ScheduleInitialReply(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Packet *packet;
-    ns3::Packet *packet_ptr;
-    PyNs3Ipv4Address *source;
-    PyNs3Ipv4Address *nextHop;
-    PyNs3Ipv4Route *route;
-    ns3::Ipv4Route *route_ptr;
-    const char *keywords[] = {"packet", "source", "nextHop", "route", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!O!O!", (char **) keywords, &PyNs3Packet_Type, &packet, &PyNs3Ipv4Address_Type, &source, &PyNs3Ipv4Address_Type, &nextHop, &PyNs3Ipv4Route_Type, &route)) {
-        return NULL;
-    }
-    packet_ptr = (packet ? packet->obj : NULL);
-    route_ptr = (route ? route->obj : NULL);
-    self->obj->ScheduleInitialReply(ns3::Ptr< ns3::Packet  > (packet_ptr), *((PyNs3Ipv4Address *) source)->obj, *((PyNs3Ipv4Address *) nextHop)->obj, ns3::Ptr< ns3::Ipv4Route  > (route_ptr));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouting_PassiveScheduleTimerExpire(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3DsrDsrMaintainBuffEntry *mb;
-    int protocol;
-    const char *keywords[] = {"mb", "protocol", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!i", (char **) keywords, &PyNs3DsrDsrMaintainBuffEntry_Type, &mb, &protocol)) {
-        return NULL;
-    }
-    if (protocol > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->PassiveScheduleTimerExpire(*((PyNs3DsrDsrMaintainBuffEntry *) mb)->obj, protocol);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouting_SchedulePassivePacketRetry(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3DsrDsrMaintainBuffEntry *mb;
-    int protocol;
-    const char *keywords[] = {"mb", "protocol", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!i", (char **) keywords, &PyNs3DsrDsrMaintainBuffEntry_Type, &mb, &protocol)) {
-        return NULL;
-    }
-    if (protocol > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SchedulePassivePacketRetry(*((PyNs3DsrDsrMaintainBuffEntry *) mb)->obj, protocol);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouting_IncreaseRetransTimer(PyNs3DsrDsrRouting *self)
-{
-    PyObject *py_retval;
-    
-    self->obj->IncreaseRetransTimer();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouting_Receive(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    ns3::IpL4Protocol::RxStatus retval;
-    PyNs3Packet *p;
-    ns3::Packet *p_ptr;
-    PyNs3Ipv4Header *header;
-    PyNs3Ipv4Interface *incomingInterface;
-    ns3::Ipv4Interface *incomingInterface_ptr;
-    const char *keywords[] = {"p", "header", "incomingInterface", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!O!", (char **) keywords, &PyNs3Packet_Type, &p, &PyNs3Ipv4Header_Type, &header, &PyNs3Ipv4Interface_Type, &incomingInterface)) {
-        return NULL;
-    }
-    p_ptr = (p ? p->obj : NULL);
-    incomingInterface_ptr = (incomingInterface ? incomingInterface->obj : NULL);
-    retval = self->obj->Receive(ns3::Ptr< ns3::Packet  > (p_ptr), *((PyNs3Ipv4Header *) header)->obj, ns3::Ptr< ns3::Ipv4Interface  > (incomingInterface_ptr));
+    retval = self->obj->GetProtocolNumber();
     py_retval = Py_BuildValue((char *) "i", retval);
     return py_retval;
 }
@@ -14468,6 +14068,312 @@ _wrap_PyNs3DsrDsrRouting_GetRequestTable(PyNs3DsrDsrRouting *self)
 
 
 PyObject *
+_wrap_PyNs3DsrDsrRouting_GetRouteCache(PyNs3DsrDsrRouting *self)
+{
+    PyObject *py_retval;
+    ns3::Ptr< ns3::dsr::DsrRouteCache > retval;
+    PyNs3DsrDsrRouteCache *py_DsrRouteCache;
+    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
+    PyTypeObject *wrapper_type = 0;
+    
+    retval = self->obj->GetRouteCache();
+    if (!(const_cast<ns3::dsr::DsrRouteCache *> (ns3::PeekPointer (retval)))) {
+        Py_INCREF(Py_None);
+        return Py_None;
+    }
+    wrapper_lookup_iter = PyNs3ObjectBase_wrapper_registry.find((void *) const_cast<ns3::dsr::DsrRouteCache *> (ns3::PeekPointer (retval)));
+    if (wrapper_lookup_iter == PyNs3ObjectBase_wrapper_registry.end()) {
+        py_DsrRouteCache = NULL;
+    } else {
+        py_DsrRouteCache = (PyNs3DsrDsrRouteCache *) wrapper_lookup_iter->second;
+        Py_INCREF(py_DsrRouteCache);
+    }
+    
+    if (py_DsrRouteCache == NULL) {
+        wrapper_type = PyNs3SimpleRefCount__Ns3Object_Ns3ObjectBase_Ns3ObjectDeleter__typeid_map.lookup_wrapper(typeid((*const_cast<ns3::dsr::DsrRouteCache *> (ns3::PeekPointer (retval)))), &PyNs3DsrDsrRouteCache_Type);
+        py_DsrRouteCache = PyObject_GC_New(PyNs3DsrDsrRouteCache, wrapper_type);
+        py_DsrRouteCache->inst_dict = NULL;
+    
+        py_DsrRouteCache->inst_dict = NULL;
+        py_DsrRouteCache->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+        const_cast<ns3::dsr::DsrRouteCache *> (ns3::PeekPointer (retval))->Ref();
+        py_DsrRouteCache->obj = const_cast<ns3::dsr::DsrRouteCache *> (ns3::PeekPointer (retval));
+        PyNs3ObjectBase_wrapper_registry[(void *) py_DsrRouteCache->obj] = (PyObject *) py_DsrRouteCache;
+    }
+    py_retval = Py_BuildValue((char *) "N", py_DsrRouteCache);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouting_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::dsr::DsrRouting::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouting_IncreaseRetransTimer(PyNs3DsrDsrRouting *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->IncreaseRetransTimer();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouting_Insert(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3DsrDsrOptions *option;
+    ns3::dsr::DsrOptions *option_ptr;
+    const char *keywords[] = {"option", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3DsrDsrOptions_Type, &option)) {
+        return NULL;
+    }
+    option_ptr = (option ? option->obj : NULL);
+    self->obj->Insert(ns3::Ptr< ns3::dsr::DsrOptions  > (option_ptr));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouting_IsLinkCache(PyNs3DsrDsrRouting *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->IsLinkCache();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouting_LinkScheduleTimerExpire(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3DsrDsrMaintainBuffEntry *mb;
+    int protocol;
+    const char *keywords[] = {"mb", "protocol", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!i", (char **) keywords, &PyNs3DsrDsrMaintainBuffEntry_Type, &mb, &protocol)) {
+        return NULL;
+    }
+    if (protocol > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->LinkScheduleTimerExpire(*((PyNs3DsrDsrMaintainBuffEntry *) mb)->obj, protocol);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouting_LookupRoute(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3Ipv4Address *id;
+    PyNs3DsrDsrRouteCacheEntry *rt;
+    const char *keywords[] = {"id", "rt", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3Ipv4Address_Type, &id, &PyNs3DsrDsrRouteCacheEntry_Type, &rt)) {
+        return NULL;
+    }
+    retval = self->obj->LookupRoute(*((PyNs3Ipv4Address *) id)->obj, *((PyNs3DsrDsrRouteCacheEntry *) rt)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouting_NetworkScheduleTimerExpire(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3DsrDsrMaintainBuffEntry *mb;
+    int protocol;
+    const char *keywords[] = {"mb", "protocol", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!i", (char **) keywords, &PyNs3DsrDsrMaintainBuffEntry_Type, &mb, &protocol)) {
+        return NULL;
+    }
+    if (protocol > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->NetworkScheduleTimerExpire(*((PyNs3DsrDsrMaintainBuffEntry *) mb)->obj, protocol);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouting_PacketNewRoute(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Packet *packet;
+    ns3::Packet *packet_ptr;
+    PyNs3Ipv4Address *source;
+    PyNs3Ipv4Address *destination;
+    int protocol;
+    const char *keywords[] = {"packet", "source", "destination", "protocol", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!O!i", (char **) keywords, &PyNs3Packet_Type, &packet, &PyNs3Ipv4Address_Type, &source, &PyNs3Ipv4Address_Type, &destination, &protocol)) {
+        return NULL;
+    }
+    packet_ptr = (packet ? packet->obj : NULL);
+    if (protocol > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->PacketNewRoute(ns3::Ptr< ns3::Packet  > (packet_ptr), *((PyNs3Ipv4Address *) source)->obj, *((PyNs3Ipv4Address *) destination)->obj, protocol);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouting_PassiveEntryCheck(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3Packet *packet;
+    ns3::Packet *packet_ptr;
+    PyNs3Ipv4Address *source;
+    PyNs3Ipv4Address *destination;
+    int segsLeft;
+    int fragmentOffset;
+    int identification;
+    bool saveEntry;
+    PyObject *py_saveEntry;
+    const char *keywords[] = {"packet", "source", "destination", "segsLeft", "fragmentOffset", "identification", "saveEntry", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!O!iiiO", (char **) keywords, &PyNs3Packet_Type, &packet, &PyNs3Ipv4Address_Type, &source, &PyNs3Ipv4Address_Type, &destination, &segsLeft, &fragmentOffset, &identification, &py_saveEntry)) {
+        return NULL;
+    }
+    packet_ptr = (packet ? packet->obj : NULL);
+    if (segsLeft > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    if (fragmentOffset > 0xffff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    if (identification > 0xffff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    saveEntry = (bool) PyObject_IsTrue(py_saveEntry);
+    retval = self->obj->PassiveEntryCheck(ns3::Ptr< ns3::Packet  > (packet_ptr), *((PyNs3Ipv4Address *) source)->obj, *((PyNs3Ipv4Address *) destination)->obj, segsLeft, fragmentOffset, identification, saveEntry);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouting_PassiveScheduleTimerExpire(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3DsrDsrMaintainBuffEntry *mb;
+    int protocol;
+    const char *keywords[] = {"mb", "protocol", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!i", (char **) keywords, &PyNs3DsrDsrMaintainBuffEntry_Type, &mb, &protocol)) {
+        return NULL;
+    }
+    if (protocol > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->PassiveScheduleTimerExpire(*((PyNs3DsrDsrMaintainBuffEntry *) mb)->obj, protocol);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouting_PrintVector(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    std::vector< ns3::Ipv4Address > vec_value;
+    const char *keywords[] = {"vec", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O&", (char **) keywords, _wrap_convert_py2c__std__vector__lt___ns3__Ipv4Address___gt__, &vec_value)) {
+        return NULL;
+    }
+    self->obj->PrintVector(vec_value);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouting_PriorityScheduler(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int priority;
+    bool continueWithFirst;
+    PyObject *py_continueWithFirst;
+    const char *keywords[] = {"priority", "continueWithFirst", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "IO", (char **) keywords, &priority, &py_continueWithFirst)) {
+        return NULL;
+    }
+    continueWithFirst = (bool) PyObject_IsTrue(py_continueWithFirst);
+    self->obj->PriorityScheduler(priority, continueWithFirst);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouting_Receive(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    ns3::IpL4Protocol::RxStatus retval;
+    PyNs3Packet *p;
+    ns3::Packet *p_ptr;
+    PyNs3Ipv4Header *header;
+    PyNs3Ipv4Interface *incomingInterface;
+    ns3::Ipv4Interface *incomingInterface_ptr;
+    const char *keywords[] = {"p", "header", "incomingInterface", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!O!", (char **) keywords, &PyNs3Packet_Type, &p, &PyNs3Ipv4Header_Type, &header, &PyNs3Ipv4Interface_Type, &incomingInterface)) {
+        return NULL;
+    }
+    p_ptr = (p ? p->obj : NULL);
+    incomingInterface_ptr = (incomingInterface ? incomingInterface->obj : NULL);
+    retval = self->obj->Receive(ns3::Ptr< ns3::Packet  > (p_ptr), *((PyNs3Ipv4Header *) header)->obj, ns3::Ptr< ns3::Ipv4Interface  > (incomingInterface_ptr));
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3DsrDsrRouting_RouteRequestTimerExpire(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -14494,16 +14400,25 @@ _wrap_PyNs3DsrDsrRouting_RouteRequestTimerExpire(PyNs3DsrDsrRouting *self, PyObj
 
 
 PyObject *
-_wrap_PyNs3DsrDsrRouting_CancelLinkPacketTimer(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3DsrDsrRouting_SalvagePacket(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3DsrDsrMaintainBuffEntry *mb;
-    const char *keywords[] = {"mb", NULL};
+    PyNs3Packet *packet;
+    ns3::Packet *packet_ptr;
+    PyNs3Ipv4Address *source;
+    PyNs3Ipv4Address *dst;
+    int protocol;
+    const char *keywords[] = {"packet", "source", "dst", "protocol", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3DsrDsrMaintainBuffEntry_Type, &mb)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!O!i", (char **) keywords, &PyNs3Packet_Type, &packet, &PyNs3Ipv4Address_Type, &source, &PyNs3Ipv4Address_Type, &dst, &protocol)) {
         return NULL;
     }
-    self->obj->CancelLinkPacketTimer(*((PyNs3DsrDsrMaintainBuffEntry *) mb)->obj);
+    packet_ptr = (packet ? packet->obj : NULL);
+    if (protocol > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SalvagePacket(ns3::Ptr< ns3::Packet  > (packet_ptr), *((PyNs3Ipv4Address *) source)->obj, *((PyNs3Ipv4Address *) dst)->obj, protocol);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -14511,18 +14426,89 @@ _wrap_PyNs3DsrDsrRouting_CancelLinkPacketTimer(PyNs3DsrDsrRouting *self, PyObjec
 
 
 PyObject *
-_wrap_PyNs3DsrDsrRouting_SetRouteCache(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3DsrDsrRouting_ScheduleCachedReply(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3DsrDsrRouteCache *r;
-    ns3::dsr::DsrRouteCache *r_ptr;
-    const char *keywords[] = {"r", NULL};
+    PyNs3Packet *packet;
+    ns3::Packet *packet_ptr;
+    PyNs3Ipv4Address *source;
+    PyNs3Ipv4Address *destination;
+    PyNs3Ipv4Route *route;
+    ns3::Ipv4Route *route_ptr;
+    double hops;
+    const char *keywords[] = {"packet", "source", "destination", "route", "hops", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3DsrDsrRouteCache_Type, &r)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!O!O!d", (char **) keywords, &PyNs3Packet_Type, &packet, &PyNs3Ipv4Address_Type, &source, &PyNs3Ipv4Address_Type, &destination, &PyNs3Ipv4Route_Type, &route, &hops)) {
         return NULL;
     }
-    r_ptr = (r ? r->obj : NULL);
-    self->obj->SetRouteCache(ns3::Ptr< ns3::dsr::DsrRouteCache  > (r_ptr));
+    packet_ptr = (packet ? packet->obj : NULL);
+    route_ptr = (route ? route->obj : NULL);
+    self->obj->ScheduleCachedReply(ns3::Ptr< ns3::Packet  > (packet_ptr), *((PyNs3Ipv4Address *) source)->obj, *((PyNs3Ipv4Address *) destination)->obj, ns3::Ptr< ns3::Ipv4Route  > (route_ptr), hops);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouting_ScheduleInitialReply(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Packet *packet;
+    ns3::Packet *packet_ptr;
+    PyNs3Ipv4Address *source;
+    PyNs3Ipv4Address *nextHop;
+    PyNs3Ipv4Route *route;
+    ns3::Ipv4Route *route_ptr;
+    const char *keywords[] = {"packet", "source", "nextHop", "route", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!O!O!", (char **) keywords, &PyNs3Packet_Type, &packet, &PyNs3Ipv4Address_Type, &source, &PyNs3Ipv4Address_Type, &nextHop, &PyNs3Ipv4Route_Type, &route)) {
+        return NULL;
+    }
+    packet_ptr = (packet ? packet->obj : NULL);
+    route_ptr = (route ? route->obj : NULL);
+    self->obj->ScheduleInitialReply(ns3::Ptr< ns3::Packet  > (packet_ptr), *((PyNs3Ipv4Address *) source)->obj, *((PyNs3Ipv4Address *) nextHop)->obj, ns3::Ptr< ns3::Ipv4Route  > (route_ptr));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouting_ScheduleInterRequest(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Packet *packet;
+    ns3::Packet *packet_ptr;
+    const char *keywords[] = {"packet", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Packet_Type, &packet)) {
+        return NULL;
+    }
+    packet_ptr = (packet ? packet->obj : NULL);
+    self->obj->ScheduleInterRequest(ns3::Ptr< ns3::Packet  > (packet_ptr));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouting_ScheduleLinkPacketRetry(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3DsrDsrMaintainBuffEntry *mb;
+    int protocol;
+    const char *keywords[] = {"mb", "protocol", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!i", (char **) keywords, &PyNs3DsrDsrMaintainBuffEntry_Type, &mb, &protocol)) {
+        return NULL;
+    }
+    if (protocol > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->ScheduleLinkPacketRetry(*((PyNs3DsrDsrMaintainBuffEntry *) mb)->obj, protocol);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -14555,42 +14541,86 @@ _wrap_PyNs3DsrDsrRouting_ScheduleNetworkPacketRetry(PyNs3DsrDsrRouting *self, Py
 
 
 PyObject *
-_wrap_PyNs3DsrDsrRouting_GetElementsFromContext(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3DsrDsrRouting_SchedulePassivePacketRetry(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    const char *context;
-    Py_ssize_t context_len;
-    const char *keywords[] = {"context", NULL};
-    std::vector< std::string > retval;
-    Pystd__vector__lt___std__string___gt__ *py_std__vector__lt___std__string___gt__;
+    PyNs3DsrDsrMaintainBuffEntry *mb;
+    int protocol;
+    const char *keywords[] = {"mb", "protocol", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#", (char **) keywords, &context, &context_len)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!i", (char **) keywords, &PyNs3DsrDsrMaintainBuffEntry_Type, &mb, &protocol)) {
         return NULL;
     }
-    retval = self->obj->GetElementsFromContext(std::string(context, context_len));
-    py_std__vector__lt___std__string___gt__ = PyObject_New(Pystd__vector__lt___std__string___gt__, &Pystd__vector__lt___std__string___gt___Type);
-    py_std__vector__lt___std__string___gt__->obj = new std::vector< std::string >(retval);
-    py_retval = Py_BuildValue((char *) "N", py_std__vector__lt___std__string___gt__);
+    if (protocol > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SchedulePassivePacketRetry(*((PyNs3DsrDsrMaintainBuffEntry *) mb)->obj, protocol);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3DsrDsrRouting_GetIPfromID(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3DsrDsrRouting_ScheduleRreqRetry(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    int id;
-    const char *keywords[] = {"id", NULL};
-    PyNs3Ipv4Address *py_Ipv4Address;
+    PyNs3Packet *packet;
+    ns3::Packet *packet_ptr;
+    std::vector< ns3::Ipv4Address > address_value;
+    bool nonProp;
+    PyObject *py_nonProp;
+    unsigned int requestId;
+    int protocol;
+    const char *keywords[] = {"packet", "address", "nonProp", "requestId", "protocol", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &id)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O&OIi", (char **) keywords, &PyNs3Packet_Type, &packet, _wrap_convert_py2c__std__vector__lt___ns3__Ipv4Address___gt__, &address_value, &py_nonProp, &requestId, &protocol)) {
         return NULL;
     }
-    if (id > 0xffff) {
+    packet_ptr = (packet ? packet->obj : NULL);
+    nonProp = (bool) PyObject_IsTrue(py_nonProp);
+    if (protocol > 0xff) {
         PyErr_SetString(PyExc_ValueError, "Out of range");
         return NULL;
     }
-    ns3::Ipv4Address retval = self->obj->GetIPfromID(id);
+    self->obj->ScheduleRreqRetry(ns3::Ptr< ns3::Packet  > (packet_ptr), address_value, nonProp, requestId, protocol);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouting_Scheduler(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int priority;
+    const char *keywords[] = {"priority", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &priority)) {
+        return NULL;
+    }
+    self->obj->Scheduler(priority);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouting_SearchNextHop(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4Address *ipv4Address;
+    std::vector< ns3::Ipv4Address > vec_value;
+    const char *keywords[] = {"ipv4Address", "vec", NULL};
+    PyNs3Ipv4Address *py_Ipv4Address;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O&", (char **) keywords, &PyNs3Ipv4Address_Type, &ipv4Address, _wrap_convert_py2c__std__vector__lt___ns3__Ipv4Address___gt__, &vec_value)) {
+        return NULL;
+    }
+    ns3::Ipv4Address retval = self->obj->SearchNextHop(*((PyNs3Ipv4Address *) ipv4Address)->obj, vec_value);
     py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
     py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
     py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
@@ -14630,18 +14660,112 @@ _wrap_PyNs3DsrDsrRouting_Send(PyNs3DsrDsrRouting *self, PyObject *args, PyObject
 
 
 PyObject *
-_wrap_PyNs3DsrDsrRouting_ScheduleInterRequest(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3DsrDsrRouting_SendAck(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3Packet *packet;
-    ns3::Packet *packet_ptr;
-    const char *keywords[] = {"packet", NULL};
+    int ackId;
+    PyNs3Ipv4Address *destination;
+    PyNs3Ipv4Address *realSrc;
+    PyNs3Ipv4Address *realDst;
+    int protocol;
+    PyNs3Ipv4Route *route;
+    ns3::Ipv4Route *route_ptr;
+    const char *keywords[] = {"ackId", "destination", "realSrc", "realDst", "protocol", "route", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Packet_Type, &packet)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "iO!O!O!iO!", (char **) keywords, &ackId, &PyNs3Ipv4Address_Type, &destination, &PyNs3Ipv4Address_Type, &realSrc, &PyNs3Ipv4Address_Type, &realDst, &protocol, &PyNs3Ipv4Route_Type, &route)) {
         return NULL;
     }
-    packet_ptr = (packet ? packet->obj : NULL);
-    self->obj->ScheduleInterRequest(ns3::Ptr< ns3::Packet  > (packet_ptr));
+    if (ackId > 0xffff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    if (protocol > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    route_ptr = (route ? route->obj : NULL);
+    self->obj->SendAck(ackId, *((PyNs3Ipv4Address *) destination)->obj, *((PyNs3Ipv4Address *) realSrc)->obj, *((PyNs3Ipv4Address *) realDst)->obj, protocol, ns3::Ptr< ns3::Ipv4Route  > (route_ptr));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouting_SendBuffTimerExpire(PyNs3DsrDsrRouting *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->SendBuffTimerExpire();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouting_SendErrorRequest(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3DsrDsrOptionRerrUnreachHeader *rerr;
+    int protocol;
+    const char *keywords[] = {"rerr", "protocol", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!i", (char **) keywords, &PyNs3DsrDsrOptionRerrUnreachHeader_Type, &rerr, &protocol)) {
+        return NULL;
+    }
+    if (protocol > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SendErrorRequest(*((PyNs3DsrDsrOptionRerrUnreachHeader *) rerr)->obj, protocol);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouting_SendGratuitousReply(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4Address *replyTo;
+    PyNs3Ipv4Address *replyFrom;
+    std::vector< ns3::Ipv4Address > nodeList_value;
+    int protocol;
+    const char *keywords[] = {"replyTo", "replyFrom", "nodeList", "protocol", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!O&i", (char **) keywords, &PyNs3Ipv4Address_Type, &replyTo, &PyNs3Ipv4Address_Type, &replyFrom, _wrap_convert_py2c__std__vector__lt___ns3__Ipv4Address___gt__, &nodeList_value, &protocol)) {
+        return NULL;
+    }
+    if (protocol > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SendGratuitousReply(*((PyNs3Ipv4Address *) replyTo)->obj, *((PyNs3Ipv4Address *) replyFrom)->obj, nodeList_value, protocol);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouting_SendInitialRequest(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4Address *source;
+    PyNs3Ipv4Address *destination;
+    int protocol;
+    const char *keywords[] = {"source", "destination", "protocol", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!i", (char **) keywords, &PyNs3Ipv4Address_Type, &source, &PyNs3Ipv4Address_Type, &destination, &protocol)) {
+        return NULL;
+    }
+    if (protocol > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SendInitialRequest(*((PyNs3Ipv4Address *) source)->obj, *((PyNs3Ipv4Address *) destination)->obj, protocol);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -14675,6 +14799,70 @@ _wrap_PyNs3DsrDsrRouting_SendPacket(PyNs3DsrDsrRouting *self, PyObject *args, Py
 
 
 PyObject *
+_wrap_PyNs3DsrDsrRouting_SendPacketFromBuffer(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3DsrDsrOptionSRHeader *sourceRoute;
+    PyNs3Ipv4Address *nextHop;
+    int protocol;
+    const char *keywords[] = {"sourceRoute", "nextHop", "protocol", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!i", (char **) keywords, &PyNs3DsrDsrOptionSRHeader_Type, &sourceRoute, &PyNs3Ipv4Address_Type, &nextHop, &protocol)) {
+        return NULL;
+    }
+    if (protocol > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SendPacketFromBuffer(*((PyNs3DsrDsrOptionSRHeader *) sourceRoute)->obj, *((PyNs3Ipv4Address *) nextHop)->obj, protocol);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouting_SendRealDown(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3DsrDsrNetworkQueueEntry *newEntry;
+    const char *keywords[] = {"newEntry", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3DsrDsrNetworkQueueEntry_Type, &newEntry)) {
+        return NULL;
+    }
+    retval = self->obj->SendRealDown(*((PyNs3DsrDsrNetworkQueueEntry *) newEntry)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouting_SendReply(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Packet *packet;
+    ns3::Packet *packet_ptr;
+    PyNs3Ipv4Address *source;
+    PyNs3Ipv4Address *nextHop;
+    PyNs3Ipv4Route *route;
+    ns3::Ipv4Route *route_ptr;
+    const char *keywords[] = {"packet", "source", "nextHop", "route", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!O!O!", (char **) keywords, &PyNs3Packet_Type, &packet, &PyNs3Ipv4Address_Type, &source, &PyNs3Ipv4Address_Type, &nextHop, &PyNs3Ipv4Route_Type, &route)) {
+        return NULL;
+    }
+    packet_ptr = (packet ? packet->obj : NULL);
+    route_ptr = (route ? route->obj : NULL);
+    self->obj->SendReply(ns3::Ptr< ns3::Packet  > (packet_ptr), *((PyNs3Ipv4Address *) source)->obj, *((PyNs3Ipv4Address *) nextHop)->obj, ns3::Ptr< ns3::Ipv4Route  > (route_ptr));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3DsrDsrRouting_SendRequest(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -14695,31 +14883,28 @@ _wrap_PyNs3DsrDsrRouting_SendRequest(PyNs3DsrDsrRouting *self, PyObject *args, P
 
 
 PyObject *
-_wrap_PyNs3DsrDsrRouting_ForwardPacket(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3DsrDsrRouting_SendUnreachError(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3Packet *packet;
-    ns3::Packet *packet_ptr;
-    PyNs3DsrDsrOptionSRHeader *sourceRoute;
-    PyNs3Ipv4Header *ipv4Header;
-    PyNs3Ipv4Address *source;
+    PyNs3Ipv4Address *unreachNode;
     PyNs3Ipv4Address *destination;
-    PyNs3Ipv4Address *targetAddress;
+    PyNs3Ipv4Address *originalDst;
+    int salvage;
     int protocol;
-    PyNs3Ipv4Route *route;
-    ns3::Ipv4Route *route_ptr;
-    const char *keywords[] = {"packet", "sourceRoute", "ipv4Header", "source", "destination", "targetAddress", "protocol", "route", NULL};
+    const char *keywords[] = {"unreachNode", "destination", "originalDst", "salvage", "protocol", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!O!O!O!O!iO!", (char **) keywords, &PyNs3Packet_Type, &packet, &PyNs3DsrDsrOptionSRHeader_Type, &sourceRoute, &PyNs3Ipv4Header_Type, &ipv4Header, &PyNs3Ipv4Address_Type, &source, &PyNs3Ipv4Address_Type, &destination, &PyNs3Ipv4Address_Type, &targetAddress, &protocol, &PyNs3Ipv4Route_Type, &route)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!O!ii", (char **) keywords, &PyNs3Ipv4Address_Type, &unreachNode, &PyNs3Ipv4Address_Type, &destination, &PyNs3Ipv4Address_Type, &originalDst, &salvage, &protocol)) {
         return NULL;
     }
-    packet_ptr = (packet ? packet->obj : NULL);
+    if (salvage > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
     if (protocol > 0xff) {
         PyErr_SetString(PyExc_ValueError, "Out of range");
         return NULL;
     }
-    route_ptr = (route ? route->obj : NULL);
-    self->obj->ForwardPacket(ns3::Ptr< ns3::Packet  > (packet_ptr), *((PyNs3DsrDsrOptionSRHeader *) sourceRoute)->obj, *((PyNs3Ipv4Header *) ipv4Header)->obj, *((PyNs3Ipv4Address *) source)->obj, *((PyNs3Ipv4Address *) destination)->obj, *((PyNs3Ipv4Address *) targetAddress)->obj, protocol, ns3::Ptr< ns3::Ipv4Route  > (route_ptr));
+    self->obj->SendUnreachError(*((PyNs3Ipv4Address *) unreachNode)->obj, *((PyNs3Ipv4Address *) destination)->obj, *((PyNs3Ipv4Address *) originalDst)->obj, salvage, protocol);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -14727,40 +14912,22 @@ _wrap_PyNs3DsrDsrRouting_ForwardPacket(PyNs3DsrDsrRouting *self, PyObject *args,
 
 
 PyObject *
-_wrap_PyNs3DsrDsrRouting_CheckSendBuffer(PyNs3DsrDsrRouting *self)
+_wrap_PyNs3DsrDsrRouting_SetDownTarget(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
+    PyObject *callback;
+    ns3::Ptr<PythonCallbackImpl8> callback_cb_impl;
+    const char *keywords[] = {"callback", NULL};
     
-    self->obj->CheckSendBuffer();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouting_ScheduleRreqRetry(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Packet *packet;
-    ns3::Packet *packet_ptr;
-    std::vector< ns3::Ipv4Address > address_value;
-    bool nonProp;
-    PyObject *py_nonProp;
-    unsigned int requestId;
-    int protocol;
-    const char *keywords[] = {"packet", "address", "nonProp", "requestId", "protocol", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O&OIi", (char **) keywords, &PyNs3Packet_Type, &packet, _wrap_convert_py2c__std__vector__lt___ns3__Ipv4Address___gt__, &address_value, &py_nonProp, &requestId, &protocol)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &callback)) {
         return NULL;
     }
-    packet_ptr = (packet ? packet->obj : NULL);
-    nonProp = (bool) PyObject_IsTrue(py_nonProp);
-    if (protocol > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
+    if (!PyCallable_Check(callback)) {
+        PyErr_SetString(PyExc_TypeError, "parameter 'callback' must be callbale");
         return NULL;
     }
-    self->obj->ScheduleRreqRetry(ns3::Ptr< ns3::Packet  > (packet_ptr), address_value, nonProp, requestId, protocol);
+    callback_cb_impl = ns3::Create<PythonCallbackImpl8> (callback);
+    self->obj->SetDownTarget(ns3::Callback<void, ns3::Ptr<ns3::Packet>, ns3::Ipv4Address, ns3::Ipv4Address, unsigned char, ns3::Ptr<ns3::Ipv4Route>, ns3::empty, ns3::empty, ns3::empty, ns3::empty> (callback_cb_impl));
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -14769,11 +14936,18 @@ _wrap_PyNs3DsrDsrRouting_ScheduleRreqRetry(PyNs3DsrDsrRouting *self, PyObject *a
 
 
 PyObject *
-_wrap_PyNs3DsrDsrRouting_SendBuffTimerExpire(PyNs3DsrDsrRouting *self)
+_wrap_PyNs3DsrDsrRouting_SetNode(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
+    PyNs3Node *node;
+    ns3::Node *node_ptr;
+    const char *keywords[] = {"node", NULL};
     
-    self->obj->SendBuffTimerExpire();
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Node_Type, &node)) {
+        return NULL;
+    }
+    node_ptr = (node ? node->obj : NULL);
+    self->obj->SetNode(ns3::Ptr< ns3::Node  > (node_ptr));
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -14781,39 +14955,39 @@ _wrap_PyNs3DsrDsrRouting_SendBuffTimerExpire(PyNs3DsrDsrRouting *self)
 
 
 PyObject *
-_wrap_PyNs3DsrDsrRouting_GetRouteCache(PyNs3DsrDsrRouting *self)
+_wrap_PyNs3DsrDsrRouting_SetPassiveBuffer(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    ns3::Ptr< ns3::dsr::DsrRouteCache > retval;
-    PyNs3DsrDsrRouteCache *py_DsrRouteCache;
-    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
-    PyTypeObject *wrapper_type = 0;
+    PyNs3DsrDsrPassiveBuffer *r;
+    ns3::dsr::DsrPassiveBuffer *r_ptr;
+    const char *keywords[] = {"r", NULL};
     
-    retval = self->obj->GetRouteCache();
-    if (!(const_cast<ns3::dsr::DsrRouteCache *> (ns3::PeekPointer (retval)))) {
-        Py_INCREF(Py_None);
-        return Py_None;
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3DsrDsrPassiveBuffer_Type, &r)) {
+        return NULL;
     }
-    wrapper_lookup_iter = PyNs3ObjectBase_wrapper_registry.find((void *) const_cast<ns3::dsr::DsrRouteCache *> (ns3::PeekPointer (retval)));
-    if (wrapper_lookup_iter == PyNs3ObjectBase_wrapper_registry.end()) {
-        py_DsrRouteCache = NULL;
-    } else {
-        py_DsrRouteCache = (PyNs3DsrDsrRouteCache *) wrapper_lookup_iter->second;
-        Py_INCREF(py_DsrRouteCache);
-    }
+    r_ptr = (r ? r->obj : NULL);
+    self->obj->SetPassiveBuffer(ns3::Ptr< ns3::dsr::DsrPassiveBuffer  > (r_ptr));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRouting_SetRequestTable(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3DsrDsrRreqTable *r;
+    ns3::dsr::DsrRreqTable *r_ptr;
+    const char *keywords[] = {"r", NULL};
     
-    if (py_DsrRouteCache == NULL) {
-        wrapper_type = PyNs3SimpleRefCount__Ns3Object_Ns3ObjectBase_Ns3ObjectDeleter__typeid_map.lookup_wrapper(typeid((*const_cast<ns3::dsr::DsrRouteCache *> (ns3::PeekPointer (retval)))), &PyNs3DsrDsrRouteCache_Type);
-        py_DsrRouteCache = PyObject_GC_New(PyNs3DsrDsrRouteCache, wrapper_type);
-        py_DsrRouteCache->inst_dict = NULL;
-    
-        py_DsrRouteCache->inst_dict = NULL;
-        py_DsrRouteCache->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-        const_cast<ns3::dsr::DsrRouteCache *> (ns3::PeekPointer (retval))->Ref();
-        py_DsrRouteCache->obj = const_cast<ns3::dsr::DsrRouteCache *> (ns3::PeekPointer (retval));
-        PyNs3ObjectBase_wrapper_registry[(void *) py_DsrRouteCache->obj] = (PyObject *) py_DsrRouteCache;
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3DsrDsrRreqTable_Type, &r)) {
+        return NULL;
     }
-    py_retval = Py_BuildValue((char *) "N", py_DsrRouteCache);
+    r_ptr = (r ? r->obj : NULL);
+    self->obj->SetRequestTable(ns3::Ptr< ns3::dsr::DsrRreqTable  > (r_ptr));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -14861,30 +15035,36 @@ _wrap_PyNs3DsrDsrRouting_SetRoute(PyNs3DsrDsrRouting *self, PyObject *args, PyOb
 
 
 PyObject *
-_wrap_PyNs3DsrDsrRouting_GetProtocolNumber(PyNs3DsrDsrRouting *self)
+_wrap_PyNs3DsrDsrRouting_SetRouteCache(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    int retval;
+    PyNs3DsrDsrRouteCache *r;
+    ns3::dsr::DsrRouteCache *r_ptr;
+    const char *keywords[] = {"r", NULL};
     
-    retval = self->obj->GetProtocolNumber();
-    py_retval = Py_BuildValue((char *) "i", retval);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3DsrDsrRouteCache_Type, &r)) {
+        return NULL;
+    }
+    r_ptr = (r ? r->obj : NULL);
+    self->obj->SetRouteCache(ns3::Ptr< ns3::dsr::DsrRouteCache  > (r_ptr));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3DsrDsrRouting_LookupRoute(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3DsrDsrRouting_UpdateRouteEntry(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
     bool retval;
-    PyNs3Ipv4Address *id;
-    PyNs3DsrDsrRouteCacheEntry *rt;
-    const char *keywords[] = {"id", "rt", NULL};
+    PyNs3Ipv4Address *dst;
+    const char *keywords[] = {"dst", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3Ipv4Address_Type, &id, &PyNs3DsrDsrRouteCacheEntry_Type, &rt)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &dst)) {
         return NULL;
     }
-    retval = self->obj->LookupRoute(*((PyNs3Ipv4Address *) id)->obj, *((PyNs3DsrDsrRouteCacheEntry *) rt)->obj);
+    retval = self->obj->UpdateRouteEntry(*((PyNs3Ipv4Address *) dst)->obj);
     py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
@@ -14907,186 +15087,6 @@ _wrap_PyNs3DsrDsrRouting_UseExtends(PyNs3DsrDsrRouting *self, PyObject *args, Py
 }
 
 
-PyObject *
-_wrap_PyNs3DsrDsrRouting_CancelNetworkPacketTimer(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3DsrDsrMaintainBuffEntry *mb;
-    const char *keywords[] = {"mb", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3DsrDsrMaintainBuffEntry_Type, &mb)) {
-        return NULL;
-    }
-    self->obj->CancelNetworkPacketTimer(*((PyNs3DsrDsrMaintainBuffEntry *) mb)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouting_CallCancelPacketTimer(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int ackId;
-    PyNs3Ipv4Header *ipv4Header;
-    PyNs3Ipv4Address *realSrc;
-    PyNs3Ipv4Address *realDst;
-    const char *keywords[] = {"ackId", "ipv4Header", "realSrc", "realDst", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "iO!O!O!", (char **) keywords, &ackId, &PyNs3Ipv4Header_Type, &ipv4Header, &PyNs3Ipv4Address_Type, &realSrc, &PyNs3Ipv4Address_Type, &realDst)) {
-        return NULL;
-    }
-    if (ackId > 0xffff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->CallCancelPacketTimer(ackId, *((PyNs3Ipv4Header *) ipv4Header)->obj, *((PyNs3Ipv4Address *) realSrc)->obj, *((PyNs3Ipv4Address *) realDst)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouting_PriorityScheduler(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int priority;
-    bool continueWithFirst;
-    PyObject *py_continueWithFirst;
-    const char *keywords[] = {"priority", "continueWithFirst", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "IO", (char **) keywords, &priority, &py_continueWithFirst)) {
-        return NULL;
-    }
-    continueWithFirst = (bool) PyObject_IsTrue(py_continueWithFirst);
-    self->obj->PriorityScheduler(priority, continueWithFirst);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouting_AssignStreams(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int64_t retval;
-    int64_t stream;
-    const char *keywords[] = {"stream", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "L", (char **) keywords, &stream)) {
-        return NULL;
-    }
-    retval = self->obj->AssignStreams(stream);
-    py_retval = Py_BuildValue((char *) "L", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouting_SendAck(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int ackId;
-    PyNs3Ipv4Address *destination;
-    PyNs3Ipv4Address *realSrc;
-    PyNs3Ipv4Address *realDst;
-    int protocol;
-    PyNs3Ipv4Route *route;
-    ns3::Ipv4Route *route_ptr;
-    const char *keywords[] = {"ackId", "destination", "realSrc", "realDst", "protocol", "route", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "iO!O!O!iO!", (char **) keywords, &ackId, &PyNs3Ipv4Address_Type, &destination, &PyNs3Ipv4Address_Type, &realSrc, &PyNs3Ipv4Address_Type, &realDst, &protocol, &PyNs3Ipv4Route_Type, &route)) {
-        return NULL;
-    }
-    if (ackId > 0xffff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    if (protocol > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    route_ptr = (route ? route->obj : NULL);
-    self->obj->SendAck(ackId, *((PyNs3Ipv4Address *) destination)->obj, *((PyNs3Ipv4Address *) realSrc)->obj, *((PyNs3Ipv4Address *) realDst)->obj, protocol, ns3::Ptr< ns3::Ipv4Route  > (route_ptr));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouting_SetDownTarget(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyObject *callback;
-    ns3::Ptr<PythonCallbackImpl8> callback_cb_impl;
-    const char *keywords[] = {"callback", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &callback)) {
-        return NULL;
-    }
-    if (!PyCallable_Check(callback)) {
-        PyErr_SetString(PyExc_TypeError, "parameter 'callback' must be callbale");
-        return NULL;
-    }
-    callback_cb_impl = ns3::Create<PythonCallbackImpl8> (callback);
-    self->obj->SetDownTarget(ns3::Callback<void, ns3::Ptr<ns3::Packet>, ns3::Ipv4Address, ns3::Ipv4Address, unsigned char, ns3::Ptr<ns3::Ipv4Route>, ns3::empty, ns3::empty, ns3::empty, ns3::empty> (callback_cb_impl));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouting_PacketNewRoute(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Packet *packet;
-    ns3::Packet *packet_ptr;
-    PyNs3Ipv4Address *source;
-    PyNs3Ipv4Address *destination;
-    int protocol;
-    const char *keywords[] = {"packet", "source", "destination", "protocol", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!O!i", (char **) keywords, &PyNs3Packet_Type, &packet, &PyNs3Ipv4Address_Type, &source, &PyNs3Ipv4Address_Type, &destination, &protocol)) {
-        return NULL;
-    }
-    packet_ptr = (packet ? packet->obj : NULL);
-    if (protocol > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->PacketNewRoute(ns3::Ptr< ns3::Packet  > (packet_ptr), *((PyNs3Ipv4Address *) source)->obj, *((PyNs3Ipv4Address *) destination)->obj, protocol);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRouting_GetIPfromMAC(PyNs3DsrDsrRouting *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Mac48Address *address;
-    const char *keywords[] = {"address", NULL};
-    PyNs3Ipv4Address *py_Ipv4Address;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Mac48Address_Type, &address)) {
-        return NULL;
-    }
-    ns3::Ipv4Address retval = self->obj->GetIPfromMAC(*((PyNs3Mac48Address *) address)->obj);
-    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
-    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
-    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
-    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3DsrDsrRouting__copy__(PyNs3DsrDsrRouting *self)
 {
@@ -15103,79 +15103,79 @@ _wrap_PyNs3DsrDsrRouting__copy__(PyNs3DsrDsrRouting *self)
 }
 
 static PyMethodDef PyNs3DsrDsrRouting_methods[] = {
-    {(char *) "CancelPacketTimerNextHop", (PyCFunction) _wrap_PyNs3DsrDsrRouting_CancelPacketTimerNextHop, METH_KEYWORDS|METH_VARARGS, "CancelPacketTimerNextHop(nextHop, protocol)\n\ntype: nextHop: ns3::Ipv4Address\ntype: protocol: uint8_t" },
-    {(char *) "CancelRreqTimer", (PyCFunction) _wrap_PyNs3DsrDsrRouting_CancelRreqTimer, METH_KEYWORDS|METH_VARARGS, "CancelRreqTimer(dst, isRemove)\n\ntype: dst: ns3::Ipv4Address\ntype: isRemove: bool" },
-    {(char *) "GetPassiveBuffer", (PyCFunction) _wrap_PyNs3DsrDsrRouting_GetPassiveBuffer, METH_NOARGS, "GetPassiveBuffer()\n\n" },
-    {(char *) "PassiveEntryCheck", (PyCFunction) _wrap_PyNs3DsrDsrRouting_PassiveEntryCheck, METH_KEYWORDS|METH_VARARGS, "PassiveEntryCheck(packet, source, destination, segsLeft, fragmentOffset, identification, saveEntry)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: source: ns3::Ipv4Address\ntype: destination: ns3::Ipv4Address\ntype: segsLeft: uint8_t\ntype: fragmentOffset: uint16_t\ntype: identification: uint16_t\ntype: saveEntry: bool" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DsrDsrRouting_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "PrintVector", (PyCFunction) _wrap_PyNs3DsrDsrRouting_PrintVector, METH_KEYWORDS|METH_VARARGS, "PrintVector(vec)\n\ntype: vec: std::vector< ns3::Ipv4Address > &" },
-    {(char *) "IsLinkCache", (PyCFunction) _wrap_PyNs3DsrDsrRouting_IsLinkCache, METH_NOARGS, "IsLinkCache()\n\n" },
-    {(char *) "CancelPassiveTimer", (PyCFunction) _wrap_PyNs3DsrDsrRouting_CancelPassiveTimer, METH_KEYWORDS|METH_VARARGS, "CancelPassiveTimer(packet, source, destination, segsLeft)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: source: ns3::Ipv4Address\ntype: destination: ns3::Ipv4Address\ntype: segsLeft: uint8_t" },
-    {(char *) "SendInitialRequest", (PyCFunction) _wrap_PyNs3DsrDsrRouting_SendInitialRequest, METH_KEYWORDS|METH_VARARGS, "SendInitialRequest(source, destination, protocol)\n\ntype: source: ns3::Ipv4Address\ntype: destination: ns3::Ipv4Address\ntype: protocol: uint8_t" },
-    {(char *) "GetNodeWithAddress", (PyCFunction) _wrap_PyNs3DsrDsrRouting_GetNodeWithAddress, METH_KEYWORDS|METH_VARARGS, "GetNodeWithAddress(ipv4Address)\n\ntype: ipv4Address: ns3::Ipv4Address" },
-    {(char *) "SetNode", (PyCFunction) _wrap_PyNs3DsrDsrRouting_SetNode, METH_KEYWORDS|METH_VARARGS, "SetNode(node)\n\ntype: node: ns3::Ptr< ns3::Node >" },
-    {(char *) "SearchNextHop", (PyCFunction) _wrap_PyNs3DsrDsrRouting_SearchNextHop, METH_KEYWORDS|METH_VARARGS, "SearchNextHop(ipv4Address, vec)\n\ntype: ipv4Address: ns3::Ipv4Address\ntype: vec: std::vector< ns3::Ipv4Address > &" },
-    {(char *) "Scheduler", (PyCFunction) _wrap_PyNs3DsrDsrRouting_Scheduler, METH_KEYWORDS|METH_VARARGS, "Scheduler(priority)\n\ntype: priority: uint32_t" },
-    {(char *) "NetworkScheduleTimerExpire", (PyCFunction) _wrap_PyNs3DsrDsrRouting_NetworkScheduleTimerExpire, METH_KEYWORDS|METH_VARARGS, "NetworkScheduleTimerExpire(mb, protocol)\n\ntype: mb: ns3::dsr::DsrMaintainBuffEntry &\ntype: protocol: uint8_t" },
-    {(char *) "CancelPassivePacketTimer", (PyCFunction) _wrap_PyNs3DsrDsrRouting_CancelPassivePacketTimer, METH_KEYWORDS|METH_VARARGS, "CancelPassivePacketTimer(mb)\n\ntype: mb: ns3::dsr::DsrMaintainBuffEntry &" },
-    {(char *) "GetIDfromIP", (PyCFunction) _wrap_PyNs3DsrDsrRouting_GetIDfromIP, METH_KEYWORDS|METH_VARARGS, "GetIDfromIP(address)\n\ntype: address: ns3::Ipv4Address" },
-    {(char *) "ScheduleCachedReply", (PyCFunction) _wrap_PyNs3DsrDsrRouting_ScheduleCachedReply, METH_KEYWORDS|METH_VARARGS, "ScheduleCachedReply(packet, source, destination, route, hops)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: source: ns3::Ipv4Address\ntype: destination: ns3::Ipv4Address\ntype: route: ns3::Ptr< ns3::Ipv4Route >\ntype: hops: double" },
-    {(char *) "FindSourceEntry", (PyCFunction) _wrap_PyNs3DsrDsrRouting_FindSourceEntry, METH_KEYWORDS|METH_VARARGS, "FindSourceEntry(src, dst, id)\n\ntype: src: ns3::Ipv4Address\ntype: dst: ns3::Ipv4Address\ntype: id: uint16_t" },
-    {(char *) "UpdateRouteEntry", (PyCFunction) _wrap_PyNs3DsrDsrRouting_UpdateRouteEntry, METH_KEYWORDS|METH_VARARGS, "UpdateRouteEntry(dst)\n\ntype: dst: ns3::Ipv4Address" },
-    {(char *) "GetNode", (PyCFunction) _wrap_PyNs3DsrDsrRouting_GetNode, METH_NOARGS, "GetNode()\n\n" },
-    {(char *) "SalvagePacket", (PyCFunction) _wrap_PyNs3DsrDsrRouting_SalvagePacket, METH_KEYWORDS|METH_VARARGS, "SalvagePacket(packet, source, dst, protocol)\n\ntype: packet: ns3::Ptr< ns3::Packet const >\ntype: source: ns3::Ipv4Address\ntype: dst: ns3::Ipv4Address\ntype: protocol: uint8_t" },
-    {(char *) "SendRealDown", (PyCFunction) _wrap_PyNs3DsrDsrRouting_SendRealDown, METH_KEYWORDS|METH_VARARGS, "SendRealDown(newEntry)\n\ntype: newEntry: ns3::dsr::DsrNetworkQueueEntry &" },
-    {(char *) "SendGratuitousReply", (PyCFunction) _wrap_PyNs3DsrDsrRouting_SendGratuitousReply, METH_KEYWORDS|METH_VARARGS, "SendGratuitousReply(replyTo, replyFrom, nodeList, protocol)\n\ntype: replyTo: ns3::Ipv4Address\ntype: replyFrom: ns3::Ipv4Address\ntype: nodeList: std::vector< ns3::Ipv4Address > &\ntype: protocol: uint8_t" },
-    {(char *) "CancelPacketAllTimer", (PyCFunction) _wrap_PyNs3DsrDsrRouting_CancelPacketAllTimer, METH_KEYWORDS|METH_VARARGS, "CancelPacketAllTimer(mb)\n\ntype: mb: ns3::dsr::DsrMaintainBuffEntry &" },
-    {(char *) "GetPriority", (PyCFunction) _wrap_PyNs3DsrDsrRouting_GetPriority, METH_KEYWORDS|METH_VARARGS, "GetPriority(messageType)\n\ntype: messageType: ns3::dsr::DsrMessageType" },
-    {(char *) "LinkScheduleTimerExpire", (PyCFunction) _wrap_PyNs3DsrDsrRouting_LinkScheduleTimerExpire, METH_KEYWORDS|METH_VARARGS, "LinkScheduleTimerExpire(mb, protocol)\n\ntype: mb: ns3::dsr::DsrMaintainBuffEntry &\ntype: protocol: uint8_t" },
-    {(char *) "ScheduleLinkPacketRetry", (PyCFunction) _wrap_PyNs3DsrDsrRouting_ScheduleLinkPacketRetry, METH_KEYWORDS|METH_VARARGS, "ScheduleLinkPacketRetry(mb, protocol)\n\ntype: mb: ns3::dsr::DsrMaintainBuffEntry &\ntype: protocol: uint8_t" },
-    {(char *) "GetNetDeviceFromContext", (PyCFunction) _wrap_PyNs3DsrDsrRouting_GetNetDeviceFromContext, METH_KEYWORDS|METH_VARARGS, "GetNetDeviceFromContext(context)\n\ntype: context: std::string" },
-    {(char *) "SetPassiveBuffer", (PyCFunction) _wrap_PyNs3DsrDsrRouting_SetPassiveBuffer, METH_KEYWORDS|METH_VARARGS, "SetPassiveBuffer(r)\n\ntype: r: ns3::Ptr< ns3::dsr::DsrPassiveBuffer >" },
-    {(char *) "SendReply", (PyCFunction) _wrap_PyNs3DsrDsrRouting_SendReply, METH_KEYWORDS|METH_VARARGS, "SendReply(packet, source, nextHop, route)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: source: ns3::Ipv4Address\ntype: nextHop: ns3::Ipv4Address\ntype: route: ns3::Ptr< ns3::Ipv4Route >" },
-    {(char *) "SendErrorRequest", (PyCFunction) _wrap_PyNs3DsrDsrRouting_SendErrorRequest, METH_KEYWORDS|METH_VARARGS, "SendErrorRequest(rerr, protocol)\n\ntype: rerr: ns3::dsr::DsrOptionRerrUnreachHeader &\ntype: protocol: uint8_t" },
-    {(char *) "ForwardErrPacket", (PyCFunction) _wrap_PyNs3DsrDsrRouting_ForwardErrPacket, METH_KEYWORDS|METH_VARARGS, "ForwardErrPacket(rerr, sourceRoute, nextHop, protocol, route)\n\ntype: rerr: ns3::dsr::DsrOptionRerrUnreachHeader &\ntype: sourceRoute: ns3::dsr::DsrOptionSRHeader &\ntype: nextHop: ns3::Ipv4Address\ntype: protocol: uint8_t\ntype: route: ns3::Ptr< ns3::Ipv4Route >" },
-    {(char *) "GetOption", (PyCFunction) _wrap_PyNs3DsrDsrRouting_GetOption, METH_KEYWORDS|METH_VARARGS, "GetOption(optionNumber)\n\ntype: optionNumber: int" },
-    {(char *) "AddRoute_Link", (PyCFunction) _wrap_PyNs3DsrDsrRouting_AddRoute_Link, METH_KEYWORDS|METH_VARARGS, "AddRoute_Link(nodelist, source)\n\ntype: nodelist: std::vector< ns3::Ipv4Address >\ntype: source: ns3::Ipv4Address" },
-    {(char *) "AddRoute", (PyCFunction) _wrap_PyNs3DsrDsrRouting_AddRoute, METH_KEYWORDS|METH_VARARGS, "AddRoute(rt)\n\ntype: rt: ns3::dsr::DsrRouteCacheEntry &" },
-    {(char *) "DeleteAllRoutesIncludeLink", (PyCFunction) _wrap_PyNs3DsrDsrRouting_DeleteAllRoutesIncludeLink, METH_KEYWORDS|METH_VARARGS, "DeleteAllRoutesIncludeLink(errorSrc, unreachNode, node)\n\ntype: errorSrc: ns3::Ipv4Address\ntype: unreachNode: ns3::Ipv4Address\ntype: node: ns3::Ipv4Address" },
-    {(char *) "SetRequestTable", (PyCFunction) _wrap_PyNs3DsrDsrRouting_SetRequestTable, METH_KEYWORDS|METH_VARARGS, "SetRequestTable(r)\n\ntype: r: ns3::Ptr< ns3::dsr::DsrRreqTable >" },
-    {(char *) "SendPacketFromBuffer", (PyCFunction) _wrap_PyNs3DsrDsrRouting_SendPacketFromBuffer, METH_KEYWORDS|METH_VARARGS, "SendPacketFromBuffer(sourceRoute, nextHop, protocol)\n\ntype: sourceRoute: ns3::dsr::DsrOptionSRHeader const &\ntype: nextHop: ns3::Ipv4Address\ntype: protocol: uint8_t" },
-    {(char *) "Insert", (PyCFunction) _wrap_PyNs3DsrDsrRouting_Insert, METH_KEYWORDS|METH_VARARGS, "Insert(option)\n\ntype: option: ns3::Ptr< ns3::dsr::DsrOptions >" },
-    {(char *) "SendUnreachError", (PyCFunction) _wrap_PyNs3DsrDsrRouting_SendUnreachError, METH_KEYWORDS|METH_VARARGS, "SendUnreachError(unreachNode, destination, originalDst, salvage, protocol)\n\ntype: unreachNode: ns3::Ipv4Address\ntype: destination: ns3::Ipv4Address\ntype: originalDst: ns3::Ipv4Address\ntype: salvage: uint8_t\ntype: protocol: uint8_t" },
-    {(char *) "ScheduleInitialReply", (PyCFunction) _wrap_PyNs3DsrDsrRouting_ScheduleInitialReply, METH_KEYWORDS|METH_VARARGS, "ScheduleInitialReply(packet, source, nextHop, route)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: source: ns3::Ipv4Address\ntype: nextHop: ns3::Ipv4Address\ntype: route: ns3::Ptr< ns3::Ipv4Route >" },
-    {(char *) "PassiveScheduleTimerExpire", (PyCFunction) _wrap_PyNs3DsrDsrRouting_PassiveScheduleTimerExpire, METH_KEYWORDS|METH_VARARGS, "PassiveScheduleTimerExpire(mb, protocol)\n\ntype: mb: ns3::dsr::DsrMaintainBuffEntry &\ntype: protocol: uint8_t" },
-    {(char *) "SchedulePassivePacketRetry", (PyCFunction) _wrap_PyNs3DsrDsrRouting_SchedulePassivePacketRetry, METH_KEYWORDS|METH_VARARGS, "SchedulePassivePacketRetry(mb, protocol)\n\ntype: mb: ns3::dsr::DsrMaintainBuffEntry &\ntype: protocol: uint8_t" },
-    {(char *) "IncreaseRetransTimer", (PyCFunction) _wrap_PyNs3DsrDsrRouting_IncreaseRetransTimer, METH_NOARGS, "IncreaseRetransTimer()\n\n" },
-    {(char *) "Receive", (PyCFunction) _wrap_PyNs3DsrDsrRouting_Receive, METH_KEYWORDS|METH_VARARGS, "Receive(p, header, incomingInterface)\n\ntype: p: ns3::Ptr< ns3::Packet >\ntype: header: ns3::Ipv4Header const &\ntype: incomingInterface: ns3::Ptr< ns3::Ipv4Interface >" },
-    {(char *) "GetRequestTable", (PyCFunction) _wrap_PyNs3DsrDsrRouting_GetRequestTable, METH_NOARGS, "GetRequestTable()\n\n" },
-    {(char *) "RouteRequestTimerExpire", (PyCFunction) _wrap_PyNs3DsrDsrRouting_RouteRequestTimerExpire, METH_KEYWORDS|METH_VARARGS, "RouteRequestTimerExpire(packet, address, requestId, protocol)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: address: std::vector< ns3::Ipv4Address >\ntype: requestId: uint32_t\ntype: protocol: uint8_t" },
-    {(char *) "CancelLinkPacketTimer", (PyCFunction) _wrap_PyNs3DsrDsrRouting_CancelLinkPacketTimer, METH_KEYWORDS|METH_VARARGS, "CancelLinkPacketTimer(mb)\n\ntype: mb: ns3::dsr::DsrMaintainBuffEntry &" },
-    {(char *) "SetRouteCache", (PyCFunction) _wrap_PyNs3DsrDsrRouting_SetRouteCache, METH_KEYWORDS|METH_VARARGS, "SetRouteCache(r)\n\ntype: r: ns3::Ptr< ns3::dsr::DsrRouteCache >" },
-    {(char *) "ScheduleNetworkPacketRetry", (PyCFunction) _wrap_PyNs3DsrDsrRouting_ScheduleNetworkPacketRetry, METH_KEYWORDS|METH_VARARGS, "ScheduleNetworkPacketRetry(mb, isFirst, protocol)\n\ntype: mb: ns3::dsr::DsrMaintainBuffEntry &\ntype: isFirst: bool\ntype: protocol: uint8_t" },
-    {(char *) "GetElementsFromContext", (PyCFunction) _wrap_PyNs3DsrDsrRouting_GetElementsFromContext, METH_KEYWORDS|METH_VARARGS, "GetElementsFromContext(context)\n\ntype: context: std::string" },
-    {(char *) "GetIPfromID", (PyCFunction) _wrap_PyNs3DsrDsrRouting_GetIPfromID, METH_KEYWORDS|METH_VARARGS, "GetIPfromID(id)\n\ntype: id: uint16_t" },
-    {(char *) "Send", (PyCFunction) _wrap_PyNs3DsrDsrRouting_Send, METH_KEYWORDS|METH_VARARGS, "Send(packet, source, destination, protocol, route)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: source: ns3::Ipv4Address\ntype: destination: ns3::Ipv4Address\ntype: protocol: uint8_t\ntype: route: ns3::Ptr< ns3::Ipv4Route >" },
-    {(char *) "ScheduleInterRequest", (PyCFunction) _wrap_PyNs3DsrDsrRouting_ScheduleInterRequest, METH_KEYWORDS|METH_VARARGS, "ScheduleInterRequest(packet)\n\ntype: packet: ns3::Ptr< ns3::Packet >" },
-    {(char *) "SendPacket", (PyCFunction) _wrap_PyNs3DsrDsrRouting_SendPacket, METH_KEYWORDS|METH_VARARGS, "SendPacket(packet, source, nextHop, protocol)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: source: ns3::Ipv4Address\ntype: nextHop: ns3::Ipv4Address\ntype: protocol: uint8_t" },
-    {(char *) "SendRequest", (PyCFunction) _wrap_PyNs3DsrDsrRouting_SendRequest, METH_KEYWORDS|METH_VARARGS, "SendRequest(packet, source)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: source: ns3::Ipv4Address" },
-    {(char *) "ForwardPacket", (PyCFunction) _wrap_PyNs3DsrDsrRouting_ForwardPacket, METH_KEYWORDS|METH_VARARGS, "ForwardPacket(packet, sourceRoute, ipv4Header, source, destination, targetAddress, protocol, route)\n\ntype: packet: ns3::Ptr< ns3::Packet const >\ntype: sourceRoute: ns3::dsr::DsrOptionSRHeader &\ntype: ipv4Header: ns3::Ipv4Header const &\ntype: source: ns3::Ipv4Address\ntype: destination: ns3::Ipv4Address\ntype: targetAddress: ns3::Ipv4Address\ntype: protocol: uint8_t\ntype: route: ns3::Ptr< ns3::Ipv4Route >" },
+    {(char *) "AddRoute", (PyCFunction) _wrap_PyNs3DsrDsrRouting_AddRoute, METH_VARARGS|METH_KEYWORDS, "AddRoute(rt)\n\ntype: rt: ns3::dsr::DsrRouteCacheEntry &" },
+    {(char *) "AddRoute_Link", (PyCFunction) _wrap_PyNs3DsrDsrRouting_AddRoute_Link, METH_VARARGS|METH_KEYWORDS, "AddRoute_Link(nodelist, source)\n\ntype: nodelist: std::vector< ns3::Ipv4Address >\ntype: source: ns3::Ipv4Address" },
+    {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3DsrDsrRouting_AssignStreams, METH_VARARGS|METH_KEYWORDS, "AssignStreams(stream)\n\ntype: stream: int64_t" },
+    {(char *) "CallCancelPacketTimer", (PyCFunction) _wrap_PyNs3DsrDsrRouting_CallCancelPacketTimer, METH_VARARGS|METH_KEYWORDS, "CallCancelPacketTimer(ackId, ipv4Header, realSrc, realDst)\n\ntype: ackId: uint16_t\ntype: ipv4Header: ns3::Ipv4Header const &\ntype: realSrc: ns3::Ipv4Address\ntype: realDst: ns3::Ipv4Address" },
+    {(char *) "CancelLinkPacketTimer", (PyCFunction) _wrap_PyNs3DsrDsrRouting_CancelLinkPacketTimer, METH_VARARGS|METH_KEYWORDS, "CancelLinkPacketTimer(mb)\n\ntype: mb: ns3::dsr::DsrMaintainBuffEntry &" },
+    {(char *) "CancelNetworkPacketTimer", (PyCFunction) _wrap_PyNs3DsrDsrRouting_CancelNetworkPacketTimer, METH_VARARGS|METH_KEYWORDS, "CancelNetworkPacketTimer(mb)\n\ntype: mb: ns3::dsr::DsrMaintainBuffEntry &" },
+    {(char *) "CancelPacketAllTimer", (PyCFunction) _wrap_PyNs3DsrDsrRouting_CancelPacketAllTimer, METH_VARARGS|METH_KEYWORDS, "CancelPacketAllTimer(mb)\n\ntype: mb: ns3::dsr::DsrMaintainBuffEntry &" },
+    {(char *) "CancelPacketTimerNextHop", (PyCFunction) _wrap_PyNs3DsrDsrRouting_CancelPacketTimerNextHop, METH_VARARGS|METH_KEYWORDS, "CancelPacketTimerNextHop(nextHop, protocol)\n\ntype: nextHop: ns3::Ipv4Address\ntype: protocol: uint8_t" },
+    {(char *) "CancelPassivePacketTimer", (PyCFunction) _wrap_PyNs3DsrDsrRouting_CancelPassivePacketTimer, METH_VARARGS|METH_KEYWORDS, "CancelPassivePacketTimer(mb)\n\ntype: mb: ns3::dsr::DsrMaintainBuffEntry &" },
+    {(char *) "CancelPassiveTimer", (PyCFunction) _wrap_PyNs3DsrDsrRouting_CancelPassiveTimer, METH_VARARGS|METH_KEYWORDS, "CancelPassiveTimer(packet, source, destination, segsLeft)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: source: ns3::Ipv4Address\ntype: destination: ns3::Ipv4Address\ntype: segsLeft: uint8_t" },
+    {(char *) "CancelRreqTimer", (PyCFunction) _wrap_PyNs3DsrDsrRouting_CancelRreqTimer, METH_VARARGS|METH_KEYWORDS, "CancelRreqTimer(dst, isRemove)\n\ntype: dst: ns3::Ipv4Address\ntype: isRemove: bool" },
     {(char *) "CheckSendBuffer", (PyCFunction) _wrap_PyNs3DsrDsrRouting_CheckSendBuffer, METH_NOARGS, "CheckSendBuffer()\n\n" },
-    {(char *) "ScheduleRreqRetry", (PyCFunction) _wrap_PyNs3DsrDsrRouting_ScheduleRreqRetry, METH_KEYWORDS|METH_VARARGS, "ScheduleRreqRetry(packet, address, nonProp, requestId, protocol)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: address: std::vector< ns3::Ipv4Address >\ntype: nonProp: bool\ntype: requestId: uint32_t\ntype: protocol: uint8_t" },
-    {(char *) "SendBuffTimerExpire", (PyCFunction) _wrap_PyNs3DsrDsrRouting_SendBuffTimerExpire, METH_NOARGS, "SendBuffTimerExpire()\n\n" },
-    {(char *) "GetRouteCache", (PyCFunction) _wrap_PyNs3DsrDsrRouting_GetRouteCache, METH_NOARGS, "GetRouteCache()\n\n" },
-    {(char *) "SetRoute", (PyCFunction) _wrap_PyNs3DsrDsrRouting_SetRoute, METH_KEYWORDS|METH_VARARGS, "SetRoute(nextHop, srcAddress)\n\ntype: nextHop: ns3::Ipv4Address\ntype: srcAddress: ns3::Ipv4Address" },
+    {(char *) "DeleteAllRoutesIncludeLink", (PyCFunction) _wrap_PyNs3DsrDsrRouting_DeleteAllRoutesIncludeLink, METH_VARARGS|METH_KEYWORDS, "DeleteAllRoutesIncludeLink(errorSrc, unreachNode, node)\n\ntype: errorSrc: ns3::Ipv4Address\ntype: unreachNode: ns3::Ipv4Address\ntype: node: ns3::Ipv4Address" },
+    {(char *) "FindSourceEntry", (PyCFunction) _wrap_PyNs3DsrDsrRouting_FindSourceEntry, METH_VARARGS|METH_KEYWORDS, "FindSourceEntry(src, dst, id)\n\ntype: src: ns3::Ipv4Address\ntype: dst: ns3::Ipv4Address\ntype: id: uint16_t" },
+    {(char *) "ForwardErrPacket", (PyCFunction) _wrap_PyNs3DsrDsrRouting_ForwardErrPacket, METH_VARARGS|METH_KEYWORDS, "ForwardErrPacket(rerr, sourceRoute, nextHop, protocol, route)\n\ntype: rerr: ns3::dsr::DsrOptionRerrUnreachHeader &\ntype: sourceRoute: ns3::dsr::DsrOptionSRHeader &\ntype: nextHop: ns3::Ipv4Address\ntype: protocol: uint8_t\ntype: route: ns3::Ptr< ns3::Ipv4Route >" },
+    {(char *) "ForwardPacket", (PyCFunction) _wrap_PyNs3DsrDsrRouting_ForwardPacket, METH_VARARGS|METH_KEYWORDS, "ForwardPacket(packet, sourceRoute, ipv4Header, source, destination, targetAddress, protocol, route)\n\ntype: packet: ns3::Ptr< ns3::Packet const >\ntype: sourceRoute: ns3::dsr::DsrOptionSRHeader &\ntype: ipv4Header: ns3::Ipv4Header const &\ntype: source: ns3::Ipv4Address\ntype: destination: ns3::Ipv4Address\ntype: targetAddress: ns3::Ipv4Address\ntype: protocol: uint8_t\ntype: route: ns3::Ptr< ns3::Ipv4Route >" },
+    {(char *) "GetElementsFromContext", (PyCFunction) _wrap_PyNs3DsrDsrRouting_GetElementsFromContext, METH_VARARGS|METH_KEYWORDS, "GetElementsFromContext(context)\n\ntype: context: std::string" },
+    {(char *) "GetIDfromIP", (PyCFunction) _wrap_PyNs3DsrDsrRouting_GetIDfromIP, METH_VARARGS|METH_KEYWORDS, "GetIDfromIP(address)\n\ntype: address: ns3::Ipv4Address" },
+    {(char *) "GetIPfromID", (PyCFunction) _wrap_PyNs3DsrDsrRouting_GetIPfromID, METH_VARARGS|METH_KEYWORDS, "GetIPfromID(id)\n\ntype: id: uint16_t" },
+    {(char *) "GetIPfromMAC", (PyCFunction) _wrap_PyNs3DsrDsrRouting_GetIPfromMAC, METH_VARARGS|METH_KEYWORDS, "GetIPfromMAC(address)\n\ntype: address: ns3::Mac48Address" },
+    {(char *) "GetNetDeviceFromContext", (PyCFunction) _wrap_PyNs3DsrDsrRouting_GetNetDeviceFromContext, METH_VARARGS|METH_KEYWORDS, "GetNetDeviceFromContext(context)\n\ntype: context: std::string" },
+    {(char *) "GetNode", (PyCFunction) _wrap_PyNs3DsrDsrRouting_GetNode, METH_NOARGS, "GetNode()\n\n" },
+    {(char *) "GetNodeWithAddress", (PyCFunction) _wrap_PyNs3DsrDsrRouting_GetNodeWithAddress, METH_VARARGS|METH_KEYWORDS, "GetNodeWithAddress(ipv4Address)\n\ntype: ipv4Address: ns3::Ipv4Address" },
+    {(char *) "GetOption", (PyCFunction) _wrap_PyNs3DsrDsrRouting_GetOption, METH_VARARGS|METH_KEYWORDS, "GetOption(optionNumber)\n\ntype: optionNumber: int" },
+    {(char *) "GetPassiveBuffer", (PyCFunction) _wrap_PyNs3DsrDsrRouting_GetPassiveBuffer, METH_NOARGS, "GetPassiveBuffer()\n\n" },
+    {(char *) "GetPriority", (PyCFunction) _wrap_PyNs3DsrDsrRouting_GetPriority, METH_VARARGS|METH_KEYWORDS, "GetPriority(messageType)\n\ntype: messageType: ns3::dsr::DsrMessageType" },
     {(char *) "GetProtocolNumber", (PyCFunction) _wrap_PyNs3DsrDsrRouting_GetProtocolNumber, METH_NOARGS, "GetProtocolNumber()\n\n" },
-    {(char *) "LookupRoute", (PyCFunction) _wrap_PyNs3DsrDsrRouting_LookupRoute, METH_KEYWORDS|METH_VARARGS, "LookupRoute(id, rt)\n\ntype: id: ns3::Ipv4Address\ntype: rt: ns3::dsr::DsrRouteCacheEntry &" },
-    {(char *) "UseExtends", (PyCFunction) _wrap_PyNs3DsrDsrRouting_UseExtends, METH_KEYWORDS|METH_VARARGS, "UseExtends(rt)\n\ntype: rt: std::vector< ns3::Ipv4Address >" },
-    {(char *) "CancelNetworkPacketTimer", (PyCFunction) _wrap_PyNs3DsrDsrRouting_CancelNetworkPacketTimer, METH_KEYWORDS|METH_VARARGS, "CancelNetworkPacketTimer(mb)\n\ntype: mb: ns3::dsr::DsrMaintainBuffEntry &" },
-    {(char *) "CallCancelPacketTimer", (PyCFunction) _wrap_PyNs3DsrDsrRouting_CallCancelPacketTimer, METH_KEYWORDS|METH_VARARGS, "CallCancelPacketTimer(ackId, ipv4Header, realSrc, realDst)\n\ntype: ackId: uint16_t\ntype: ipv4Header: ns3::Ipv4Header const &\ntype: realSrc: ns3::Ipv4Address\ntype: realDst: ns3::Ipv4Address" },
-    {(char *) "PriorityScheduler", (PyCFunction) _wrap_PyNs3DsrDsrRouting_PriorityScheduler, METH_KEYWORDS|METH_VARARGS, "PriorityScheduler(priority, continueWithFirst)\n\ntype: priority: uint32_t\ntype: continueWithFirst: bool" },
-    {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3DsrDsrRouting_AssignStreams, METH_KEYWORDS|METH_VARARGS, "AssignStreams(stream)\n\ntype: stream: int64_t" },
-    {(char *) "SendAck", (PyCFunction) _wrap_PyNs3DsrDsrRouting_SendAck, METH_KEYWORDS|METH_VARARGS, "SendAck(ackId, destination, realSrc, realDst, protocol, route)\n\ntype: ackId: uint16_t\ntype: destination: ns3::Ipv4Address\ntype: realSrc: ns3::Ipv4Address\ntype: realDst: ns3::Ipv4Address\ntype: protocol: uint8_t\ntype: route: ns3::Ptr< ns3::Ipv4Route >" },
-    {(char *) "SetDownTarget", (PyCFunction) _wrap_PyNs3DsrDsrRouting_SetDownTarget, METH_KEYWORDS|METH_VARARGS, "SetDownTarget(callback)\n\ntype: callback: ns3::Callback< void, ns3::Ptr< ns3::Packet >, ns3::Ipv4Address, ns3::Ipv4Address, unsigned char, ns3::Ptr< ns3::Ipv4Route >, ns3::empty, ns3::empty, ns3::empty, ns3::empty >" },
-    {(char *) "PacketNewRoute", (PyCFunction) _wrap_PyNs3DsrDsrRouting_PacketNewRoute, METH_KEYWORDS|METH_VARARGS, "PacketNewRoute(packet, source, destination, protocol)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: source: ns3::Ipv4Address\ntype: destination: ns3::Ipv4Address\ntype: protocol: uint8_t" },
-    {(char *) "GetIPfromMAC", (PyCFunction) _wrap_PyNs3DsrDsrRouting_GetIPfromMAC, METH_KEYWORDS|METH_VARARGS, "GetIPfromMAC(address)\n\ntype: address: ns3::Mac48Address" },
+    {(char *) "GetRequestTable", (PyCFunction) _wrap_PyNs3DsrDsrRouting_GetRequestTable, METH_NOARGS, "GetRequestTable()\n\n" },
+    {(char *) "GetRouteCache", (PyCFunction) _wrap_PyNs3DsrDsrRouting_GetRouteCache, METH_NOARGS, "GetRouteCache()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DsrDsrRouting_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "IncreaseRetransTimer", (PyCFunction) _wrap_PyNs3DsrDsrRouting_IncreaseRetransTimer, METH_NOARGS, "IncreaseRetransTimer()\n\n" },
+    {(char *) "Insert", (PyCFunction) _wrap_PyNs3DsrDsrRouting_Insert, METH_VARARGS|METH_KEYWORDS, "Insert(option)\n\ntype: option: ns3::Ptr< ns3::dsr::DsrOptions >" },
+    {(char *) "IsLinkCache", (PyCFunction) _wrap_PyNs3DsrDsrRouting_IsLinkCache, METH_NOARGS, "IsLinkCache()\n\n" },
+    {(char *) "LinkScheduleTimerExpire", (PyCFunction) _wrap_PyNs3DsrDsrRouting_LinkScheduleTimerExpire, METH_VARARGS|METH_KEYWORDS, "LinkScheduleTimerExpire(mb, protocol)\n\ntype: mb: ns3::dsr::DsrMaintainBuffEntry &\ntype: protocol: uint8_t" },
+    {(char *) "LookupRoute", (PyCFunction) _wrap_PyNs3DsrDsrRouting_LookupRoute, METH_VARARGS|METH_KEYWORDS, "LookupRoute(id, rt)\n\ntype: id: ns3::Ipv4Address\ntype: rt: ns3::dsr::DsrRouteCacheEntry &" },
+    {(char *) "NetworkScheduleTimerExpire", (PyCFunction) _wrap_PyNs3DsrDsrRouting_NetworkScheduleTimerExpire, METH_VARARGS|METH_KEYWORDS, "NetworkScheduleTimerExpire(mb, protocol)\n\ntype: mb: ns3::dsr::DsrMaintainBuffEntry &\ntype: protocol: uint8_t" },
+    {(char *) "PacketNewRoute", (PyCFunction) _wrap_PyNs3DsrDsrRouting_PacketNewRoute, METH_VARARGS|METH_KEYWORDS, "PacketNewRoute(packet, source, destination, protocol)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: source: ns3::Ipv4Address\ntype: destination: ns3::Ipv4Address\ntype: protocol: uint8_t" },
+    {(char *) "PassiveEntryCheck", (PyCFunction) _wrap_PyNs3DsrDsrRouting_PassiveEntryCheck, METH_VARARGS|METH_KEYWORDS, "PassiveEntryCheck(packet, source, destination, segsLeft, fragmentOffset, identification, saveEntry)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: source: ns3::Ipv4Address\ntype: destination: ns3::Ipv4Address\ntype: segsLeft: uint8_t\ntype: fragmentOffset: uint16_t\ntype: identification: uint16_t\ntype: saveEntry: bool" },
+    {(char *) "PassiveScheduleTimerExpire", (PyCFunction) _wrap_PyNs3DsrDsrRouting_PassiveScheduleTimerExpire, METH_VARARGS|METH_KEYWORDS, "PassiveScheduleTimerExpire(mb, protocol)\n\ntype: mb: ns3::dsr::DsrMaintainBuffEntry &\ntype: protocol: uint8_t" },
+    {(char *) "PrintVector", (PyCFunction) _wrap_PyNs3DsrDsrRouting_PrintVector, METH_VARARGS|METH_KEYWORDS, "PrintVector(vec)\n\ntype: vec: std::vector< ns3::Ipv4Address > &" },
+    {(char *) "PriorityScheduler", (PyCFunction) _wrap_PyNs3DsrDsrRouting_PriorityScheduler, METH_VARARGS|METH_KEYWORDS, "PriorityScheduler(priority, continueWithFirst)\n\ntype: priority: uint32_t\ntype: continueWithFirst: bool" },
+    {(char *) "Receive", (PyCFunction) _wrap_PyNs3DsrDsrRouting_Receive, METH_VARARGS|METH_KEYWORDS, "Receive(p, header, incomingInterface)\n\ntype: p: ns3::Ptr< ns3::Packet >\ntype: header: ns3::Ipv4Header const &\ntype: incomingInterface: ns3::Ptr< ns3::Ipv4Interface >" },
+    {(char *) "RouteRequestTimerExpire", (PyCFunction) _wrap_PyNs3DsrDsrRouting_RouteRequestTimerExpire, METH_VARARGS|METH_KEYWORDS, "RouteRequestTimerExpire(packet, address, requestId, protocol)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: address: std::vector< ns3::Ipv4Address >\ntype: requestId: uint32_t\ntype: protocol: uint8_t" },
+    {(char *) "SalvagePacket", (PyCFunction) _wrap_PyNs3DsrDsrRouting_SalvagePacket, METH_VARARGS|METH_KEYWORDS, "SalvagePacket(packet, source, dst, protocol)\n\ntype: packet: ns3::Ptr< ns3::Packet const >\ntype: source: ns3::Ipv4Address\ntype: dst: ns3::Ipv4Address\ntype: protocol: uint8_t" },
+    {(char *) "ScheduleCachedReply", (PyCFunction) _wrap_PyNs3DsrDsrRouting_ScheduleCachedReply, METH_VARARGS|METH_KEYWORDS, "ScheduleCachedReply(packet, source, destination, route, hops)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: source: ns3::Ipv4Address\ntype: destination: ns3::Ipv4Address\ntype: route: ns3::Ptr< ns3::Ipv4Route >\ntype: hops: double" },
+    {(char *) "ScheduleInitialReply", (PyCFunction) _wrap_PyNs3DsrDsrRouting_ScheduleInitialReply, METH_VARARGS|METH_KEYWORDS, "ScheduleInitialReply(packet, source, nextHop, route)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: source: ns3::Ipv4Address\ntype: nextHop: ns3::Ipv4Address\ntype: route: ns3::Ptr< ns3::Ipv4Route >" },
+    {(char *) "ScheduleInterRequest", (PyCFunction) _wrap_PyNs3DsrDsrRouting_ScheduleInterRequest, METH_VARARGS|METH_KEYWORDS, "ScheduleInterRequest(packet)\n\ntype: packet: ns3::Ptr< ns3::Packet >" },
+    {(char *) "ScheduleLinkPacketRetry", (PyCFunction) _wrap_PyNs3DsrDsrRouting_ScheduleLinkPacketRetry, METH_VARARGS|METH_KEYWORDS, "ScheduleLinkPacketRetry(mb, protocol)\n\ntype: mb: ns3::dsr::DsrMaintainBuffEntry &\ntype: protocol: uint8_t" },
+    {(char *) "ScheduleNetworkPacketRetry", (PyCFunction) _wrap_PyNs3DsrDsrRouting_ScheduleNetworkPacketRetry, METH_VARARGS|METH_KEYWORDS, "ScheduleNetworkPacketRetry(mb, isFirst, protocol)\n\ntype: mb: ns3::dsr::DsrMaintainBuffEntry &\ntype: isFirst: bool\ntype: protocol: uint8_t" },
+    {(char *) "SchedulePassivePacketRetry", (PyCFunction) _wrap_PyNs3DsrDsrRouting_SchedulePassivePacketRetry, METH_VARARGS|METH_KEYWORDS, "SchedulePassivePacketRetry(mb, protocol)\n\ntype: mb: ns3::dsr::DsrMaintainBuffEntry &\ntype: protocol: uint8_t" },
+    {(char *) "ScheduleRreqRetry", (PyCFunction) _wrap_PyNs3DsrDsrRouting_ScheduleRreqRetry, METH_VARARGS|METH_KEYWORDS, "ScheduleRreqRetry(packet, address, nonProp, requestId, protocol)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: address: std::vector< ns3::Ipv4Address >\ntype: nonProp: bool\ntype: requestId: uint32_t\ntype: protocol: uint8_t" },
+    {(char *) "Scheduler", (PyCFunction) _wrap_PyNs3DsrDsrRouting_Scheduler, METH_VARARGS|METH_KEYWORDS, "Scheduler(priority)\n\ntype: priority: uint32_t" },
+    {(char *) "SearchNextHop", (PyCFunction) _wrap_PyNs3DsrDsrRouting_SearchNextHop, METH_VARARGS|METH_KEYWORDS, "SearchNextHop(ipv4Address, vec)\n\ntype: ipv4Address: ns3::Ipv4Address\ntype: vec: std::vector< ns3::Ipv4Address > &" },
+    {(char *) "Send", (PyCFunction) _wrap_PyNs3DsrDsrRouting_Send, METH_VARARGS|METH_KEYWORDS, "Send(packet, source, destination, protocol, route)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: source: ns3::Ipv4Address\ntype: destination: ns3::Ipv4Address\ntype: protocol: uint8_t\ntype: route: ns3::Ptr< ns3::Ipv4Route >" },
+    {(char *) "SendAck", (PyCFunction) _wrap_PyNs3DsrDsrRouting_SendAck, METH_VARARGS|METH_KEYWORDS, "SendAck(ackId, destination, realSrc, realDst, protocol, route)\n\ntype: ackId: uint16_t\ntype: destination: ns3::Ipv4Address\ntype: realSrc: ns3::Ipv4Address\ntype: realDst: ns3::Ipv4Address\ntype: protocol: uint8_t\ntype: route: ns3::Ptr< ns3::Ipv4Route >" },
+    {(char *) "SendBuffTimerExpire", (PyCFunction) _wrap_PyNs3DsrDsrRouting_SendBuffTimerExpire, METH_NOARGS, "SendBuffTimerExpire()\n\n" },
+    {(char *) "SendErrorRequest", (PyCFunction) _wrap_PyNs3DsrDsrRouting_SendErrorRequest, METH_VARARGS|METH_KEYWORDS, "SendErrorRequest(rerr, protocol)\n\ntype: rerr: ns3::dsr::DsrOptionRerrUnreachHeader &\ntype: protocol: uint8_t" },
+    {(char *) "SendGratuitousReply", (PyCFunction) _wrap_PyNs3DsrDsrRouting_SendGratuitousReply, METH_VARARGS|METH_KEYWORDS, "SendGratuitousReply(replyTo, replyFrom, nodeList, protocol)\n\ntype: replyTo: ns3::Ipv4Address\ntype: replyFrom: ns3::Ipv4Address\ntype: nodeList: std::vector< ns3::Ipv4Address > &\ntype: protocol: uint8_t" },
+    {(char *) "SendInitialRequest", (PyCFunction) _wrap_PyNs3DsrDsrRouting_SendInitialRequest, METH_VARARGS|METH_KEYWORDS, "SendInitialRequest(source, destination, protocol)\n\ntype: source: ns3::Ipv4Address\ntype: destination: ns3::Ipv4Address\ntype: protocol: uint8_t" },
+    {(char *) "SendPacket", (PyCFunction) _wrap_PyNs3DsrDsrRouting_SendPacket, METH_VARARGS|METH_KEYWORDS, "SendPacket(packet, source, nextHop, protocol)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: source: ns3::Ipv4Address\ntype: nextHop: ns3::Ipv4Address\ntype: protocol: uint8_t" },
+    {(char *) "SendPacketFromBuffer", (PyCFunction) _wrap_PyNs3DsrDsrRouting_SendPacketFromBuffer, METH_VARARGS|METH_KEYWORDS, "SendPacketFromBuffer(sourceRoute, nextHop, protocol)\n\ntype: sourceRoute: ns3::dsr::DsrOptionSRHeader const &\ntype: nextHop: ns3::Ipv4Address\ntype: protocol: uint8_t" },
+    {(char *) "SendRealDown", (PyCFunction) _wrap_PyNs3DsrDsrRouting_SendRealDown, METH_VARARGS|METH_KEYWORDS, "SendRealDown(newEntry)\n\ntype: newEntry: ns3::dsr::DsrNetworkQueueEntry &" },
+    {(char *) "SendReply", (PyCFunction) _wrap_PyNs3DsrDsrRouting_SendReply, METH_VARARGS|METH_KEYWORDS, "SendReply(packet, source, nextHop, route)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: source: ns3::Ipv4Address\ntype: nextHop: ns3::Ipv4Address\ntype: route: ns3::Ptr< ns3::Ipv4Route >" },
+    {(char *) "SendRequest", (PyCFunction) _wrap_PyNs3DsrDsrRouting_SendRequest, METH_VARARGS|METH_KEYWORDS, "SendRequest(packet, source)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: source: ns3::Ipv4Address" },
+    {(char *) "SendUnreachError", (PyCFunction) _wrap_PyNs3DsrDsrRouting_SendUnreachError, METH_VARARGS|METH_KEYWORDS, "SendUnreachError(unreachNode, destination, originalDst, salvage, protocol)\n\ntype: unreachNode: ns3::Ipv4Address\ntype: destination: ns3::Ipv4Address\ntype: originalDst: ns3::Ipv4Address\ntype: salvage: uint8_t\ntype: protocol: uint8_t" },
+    {(char *) "SetDownTarget", (PyCFunction) _wrap_PyNs3DsrDsrRouting_SetDownTarget, METH_VARARGS|METH_KEYWORDS, "SetDownTarget(callback)\n\ntype: callback: ns3::Callback< void, ns3::Ptr< ns3::Packet >, ns3::Ipv4Address, ns3::Ipv4Address, unsigned char, ns3::Ptr< ns3::Ipv4Route >, ns3::empty, ns3::empty, ns3::empty, ns3::empty >" },
+    {(char *) "SetNode", (PyCFunction) _wrap_PyNs3DsrDsrRouting_SetNode, METH_VARARGS|METH_KEYWORDS, "SetNode(node)\n\ntype: node: ns3::Ptr< ns3::Node >" },
+    {(char *) "SetPassiveBuffer", (PyCFunction) _wrap_PyNs3DsrDsrRouting_SetPassiveBuffer, METH_VARARGS|METH_KEYWORDS, "SetPassiveBuffer(r)\n\ntype: r: ns3::Ptr< ns3::dsr::DsrPassiveBuffer >" },
+    {(char *) "SetRequestTable", (PyCFunction) _wrap_PyNs3DsrDsrRouting_SetRequestTable, METH_VARARGS|METH_KEYWORDS, "SetRequestTable(r)\n\ntype: r: ns3::Ptr< ns3::dsr::DsrRreqTable >" },
+    {(char *) "SetRoute", (PyCFunction) _wrap_PyNs3DsrDsrRouting_SetRoute, METH_VARARGS|METH_KEYWORDS, "SetRoute(nextHop, srcAddress)\n\ntype: nextHop: ns3::Ipv4Address\ntype: srcAddress: ns3::Ipv4Address" },
+    {(char *) "SetRouteCache", (PyCFunction) _wrap_PyNs3DsrDsrRouting_SetRouteCache, METH_VARARGS|METH_KEYWORDS, "SetRouteCache(r)\n\ntype: r: ns3::Ptr< ns3::dsr::DsrRouteCache >" },
+    {(char *) "UpdateRouteEntry", (PyCFunction) _wrap_PyNs3DsrDsrRouting_UpdateRouteEntry, METH_VARARGS|METH_KEYWORDS, "UpdateRouteEntry(dst)\n\ntype: dst: ns3::Ipv4Address" },
+    {(char *) "UseExtends", (PyCFunction) _wrap_PyNs3DsrDsrRouting_UseExtends, METH_VARARGS|METH_KEYWORDS, "UseExtends(rt)\n\ntype: rt: std::vector< ns3::Ipv4Address >" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3DsrDsrRouting__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -15272,7 +15272,7 @@ PyTypeObject PyNs3DsrDsrRouting_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "DsrRouting(arg0)\nDsrRouting()",                        /* Documentation string */
     (traverseproc)PyNs3DsrDsrRouting__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3DsrDsrRouting__tp_clear,             /* tp_clear */
@@ -15370,6 +15370,39 @@ int _wrap_PyNs3DsrDsrRoutingHeader__tp_init(PyNs3DsrDsrRoutingHeader *self, PyOb
 
 
 PyObject *
+_wrap_PyNs3DsrDsrRoutingHeader_Deserialize(PyNs3DsrDsrRoutingHeader *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    PyNs3BufferIterator *start;
+    const char *keywords[] = {"start", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
+        return NULL;
+    }
+    retval = self->obj->Deserialize(*((PyNs3BufferIterator *) start)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRoutingHeader_GetInstanceTypeId(PyNs3DsrDsrRoutingHeader *self)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = self->obj->GetInstanceTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3DsrDsrRoutingHeader_GetSerializedSize(PyNs3DsrDsrRoutingHeader *self)
 {
     PyObject *py_retval;
@@ -15413,85 +15446,36 @@ _wrap_PyNs3DsrDsrRoutingHeader_Serialize(PyNs3DsrDsrRoutingHeader *self, PyObjec
     return py_retval;
 }
 
-
 PyObject *
-_wrap_PyNs3DsrDsrRoutingHeader_Deserialize(PyNs3DsrDsrRoutingHeader *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3DsrDsrRoutingHeader_GetDestId(PyNs3DsrDsrRoutingHeader *self)
 {
     PyObject *py_retval;
-    uint32_t retval;
-    PyNs3BufferIterator *start;
-    const char *keywords[] = {"start", NULL};
+    uint16_t retval;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
-        return NULL;
-    }
-    retval = self->obj->Deserialize(*((PyNs3BufferIterator *) start)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRoutingHeader_GetInstanceTypeId(PyNs3DsrDsrRoutingHeader *self)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = self->obj->GetInstanceTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    retval = self->obj->GetDestId();
+    py_retval = Py_BuildValue((char *) "i", retval);
     return py_retval;
 }
 
 PyObject *
-_wrap_PyNs3DsrDsrRoutingHeader_GetDsrOptionsOffset(PyNs3DsrDsrRoutingHeader *self)
+_wrap_PyNs3DsrDsrRoutingHeader_GetMessageType(PyNs3DsrDsrRoutingHeader *self)
 {
     PyObject *py_retval;
-    uint32_t retval;
+    uint8_t retval;
     
-    retval = self->obj->GetDsrOptionsOffset();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    retval = self->obj->GetMessageType();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
     return py_retval;
 }
 
 PyObject *
-_wrap_PyNs3DsrDsrRoutingHeader_SetMessageType(PyNs3DsrDsrRoutingHeader *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3DsrDsrRoutingHeader_GetNextHeader(PyNs3DsrDsrRoutingHeader *self)
 {
     PyObject *py_retval;
-    int messageType;
-    const char *keywords[] = {"messageType", NULL};
+    uint8_t retval;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &messageType)) {
-        return NULL;
-    }
-    if (messageType > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SetMessageType(messageType);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject *
-_wrap_PyNs3DsrDsrRoutingHeader_SetAttribute(PyNs3DsrDsrRoutingHeader *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    const char *name;
-    Py_ssize_t name_len;
-    PyNs3AttributeValue *value;
-    const char *keywords[] = {"name", "value", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3AttributeValue_Type, &value)) {
-        return NULL;
-    }
-    self->obj->SetAttribute(std::string(name, name_len), *((PyNs3AttributeValue *) value)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    retval = self->obj->GetNextHeader();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
     return py_retval;
 }
 
@@ -15507,20 +15491,13 @@ _wrap_PyNs3DsrDsrRoutingHeader_GetPayloadLength(PyNs3DsrDsrRoutingHeader *self)
 }
 
 PyObject *
-_wrap_PyNs3DsrDsrRoutingHeader_GetAttribute(PyNs3DsrDsrRoutingHeader *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3DsrDsrRoutingHeader_GetSourceId(PyNs3DsrDsrRoutingHeader *self)
 {
     PyObject *py_retval;
-    const char *name;
-    Py_ssize_t name_len;
-    PyNs3AttributeValue *value;
-    const char *keywords[] = {"name", "value", NULL};
+    uint16_t retval;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3AttributeValue_Type, &value)) {
-        return NULL;
-    }
-    self->obj->GetAttribute(std::string(name, name_len), *((PyNs3AttributeValue *) value)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    retval = self->obj->GetSourceId();
+    py_retval = Py_BuildValue((char *) "i", retval);
     return py_retval;
 }
 
@@ -15545,73 +15522,22 @@ _wrap_PyNs3DsrDsrRoutingHeader_SetDestId(PyNs3DsrDsrRoutingHeader *self, PyObjec
 }
 
 PyObject *
-_wrap_PyNs3DsrDsrRoutingHeader_TraceDisconnect(PyNs3DsrDsrRoutingHeader *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3DsrDsrRoutingHeader_SetMessageType(PyNs3DsrDsrRoutingHeader *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    bool retval;
-    const char *name;
-    Py_ssize_t name_len;
-    const char *context;
-    Py_ssize_t context_len;
-    PyNs3CallbackBase *cb;
-    const char *keywords[] = {"name", "context", "cb", NULL};
+    int messageType;
+    const char *keywords[] = {"messageType", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#s#O!", (char **) keywords, &name, &name_len, &context, &context_len, &PyNs3CallbackBase_Type, &cb)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &messageType)) {
         return NULL;
     }
-    retval = self->obj->TraceDisconnect(std::string(name, name_len), std::string(context, context_len), *((PyNs3CallbackBase *) cb)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-PyObject *
-_wrap_PyNs3DsrDsrRoutingHeader_SetAttributeFailSafe(PyNs3DsrDsrRoutingHeader *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    const char *name;
-    Py_ssize_t name_len;
-    PyNs3AttributeValue *value;
-    const char *keywords[] = {"name", "value", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3AttributeValue_Type, &value)) {
+    if (messageType > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
         return NULL;
     }
-    retval = self->obj->SetAttributeFailSafe(std::string(name, name_len), *((PyNs3AttributeValue *) value)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-PyObject *
-_wrap_PyNs3DsrDsrRoutingHeader_GetDsrOptionBuffer(PyNs3DsrDsrRoutingHeader *self)
-{
-    PyObject *py_retval;
-    PyNs3Buffer *py_Buffer;
-    
-    ns3::Buffer retval = self->obj->GetDsrOptionBuffer();
-    py_Buffer = PyObject_New(PyNs3Buffer, &PyNs3Buffer_Type);
-    py_Buffer->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Buffer->obj = new ns3::Buffer(retval);
-    PyNs3Buffer_wrapper_registry[(void *) py_Buffer->obj] = (PyObject *) py_Buffer;
-    py_retval = Py_BuildValue((char *) "N", py_Buffer);
-    return py_retval;
-}
-
-PyObject *
-_wrap_PyNs3DsrDsrRoutingHeader_TraceDisconnectWithoutContext(PyNs3DsrDsrRoutingHeader *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    const char *name;
-    Py_ssize_t name_len;
-    PyNs3CallbackBase *cb;
-    const char *keywords[] = {"name", "cb", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3CallbackBase_Type, &cb)) {
-        return NULL;
-    }
-    retval = self->obj->TraceDisconnectWithoutContext(std::string(name, name_len), *((PyNs3CallbackBase *) cb)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    self->obj->SetMessageType(messageType);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -15632,6 +15558,160 @@ _wrap_PyNs3DsrDsrRoutingHeader_SetNextHeader(PyNs3DsrDsrRoutingHeader *self, PyO
     self->obj->SetNextHeader(protocol);
     Py_INCREF(Py_None);
     py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject *
+_wrap_PyNs3DsrDsrRoutingHeader_SetPayloadLength(PyNs3DsrDsrRoutingHeader *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int length;
+    const char *keywords[] = {"length", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &length)) {
+        return NULL;
+    }
+    if (length > 0xffff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SetPayloadLength(length);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject *
+_wrap_PyNs3DsrDsrRoutingHeader_SetSourceId(PyNs3DsrDsrRoutingHeader *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int sourceId;
+    const char *keywords[] = {"sourceId", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &sourceId)) {
+        return NULL;
+    }
+    if (sourceId > 0xffff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SetSourceId(sourceId);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject *
+_wrap_PyNs3DsrDsrRoutingHeader_AddDsrOption(PyNs3DsrDsrRoutingHeader *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3DsrDsrOptionHeader *option;
+    const char *keywords[] = {"option", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3DsrDsrOptionHeader_Type, &option)) {
+        return NULL;
+    }
+    self->obj->AddDsrOption(*((PyNs3DsrDsrOptionHeader *) option)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject *
+_wrap_PyNs3DsrDsrRoutingHeader_GetDsrOptionBuffer(PyNs3DsrDsrRoutingHeader *self)
+{
+    PyObject *py_retval;
+    PyNs3Buffer *py_Buffer;
+    
+    ns3::Buffer retval = self->obj->GetDsrOptionBuffer();
+    py_Buffer = PyObject_New(PyNs3Buffer, &PyNs3Buffer_Type);
+    py_Buffer->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Buffer->obj = new ns3::Buffer(retval);
+    PyNs3Buffer_wrapper_registry[(void *) py_Buffer->obj] = (PyObject *) py_Buffer;
+    py_retval = Py_BuildValue((char *) "N", py_Buffer);
+    return py_retval;
+}
+
+PyObject *
+_wrap_PyNs3DsrDsrRoutingHeader_GetDsrOptionsOffset(PyNs3DsrDsrRoutingHeader *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetDsrOptionsOffset();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+PyObject *
+_wrap_PyNs3DsrDsrRoutingHeader_GetAttribute(PyNs3DsrDsrRoutingHeader *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    const char *name;
+    Py_ssize_t name_len;
+    PyNs3AttributeValue *value;
+    const char *keywords[] = {"name", "value", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3AttributeValue_Type, &value)) {
+        return NULL;
+    }
+    self->obj->GetAttribute(std::string(name, name_len), *((PyNs3AttributeValue *) value)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject *
+_wrap_PyNs3DsrDsrRoutingHeader_GetAttributeFailSafe(PyNs3DsrDsrRoutingHeader *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    const char *name;
+    Py_ssize_t name_len;
+    PyNs3AttributeValue *value;
+    const char *keywords[] = {"name", "value", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3AttributeValue_Type, &value)) {
+        return NULL;
+    }
+    retval = self->obj->GetAttributeFailSafe(std::string(name, name_len), *((PyNs3AttributeValue *) value)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+PyObject *
+_wrap_PyNs3DsrDsrRoutingHeader_SetAttribute(PyNs3DsrDsrRoutingHeader *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    const char *name;
+    Py_ssize_t name_len;
+    PyNs3AttributeValue *value;
+    const char *keywords[] = {"name", "value", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3AttributeValue_Type, &value)) {
+        return NULL;
+    }
+    self->obj->SetAttribute(std::string(name, name_len), *((PyNs3AttributeValue *) value)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject *
+_wrap_PyNs3DsrDsrRoutingHeader_SetAttributeFailSafe(PyNs3DsrDsrRoutingHeader *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    const char *name;
+    Py_ssize_t name_len;
+    PyNs3AttributeValue *value;
+    const char *keywords[] = {"name", "value", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3AttributeValue_Type, &value)) {
+        return NULL;
+    }
+    retval = self->obj->SetAttributeFailSafe(std::string(name, name_len), *((PyNs3AttributeValue *) value)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
@@ -15674,120 +15754,40 @@ _wrap_PyNs3DsrDsrRoutingHeader_TraceConnectWithoutContext(PyNs3DsrDsrRoutingHead
 }
 
 PyObject *
-_wrap_PyNs3DsrDsrRoutingHeader_SetPayloadLength(PyNs3DsrDsrRoutingHeader *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int length;
-    const char *keywords[] = {"length", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &length)) {
-        return NULL;
-    }
-    if (length > 0xffff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SetPayloadLength(length);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject *
-_wrap_PyNs3DsrDsrRoutingHeader_AddDsrOption(PyNs3DsrDsrRoutingHeader *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3DsrDsrOptionHeader *option;
-    const char *keywords[] = {"option", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3DsrDsrOptionHeader_Type, &option)) {
-        return NULL;
-    }
-    self->obj->AddDsrOption(*((PyNs3DsrDsrOptionHeader *) option)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject *
-_wrap_PyNs3DsrDsrRoutingHeader_SetSourceId(PyNs3DsrDsrRoutingHeader *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int sourceId;
-    const char *keywords[] = {"sourceId", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &sourceId)) {
-        return NULL;
-    }
-    if (sourceId > 0xffff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SetSourceId(sourceId);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject *
-_wrap_PyNs3DsrDsrRoutingHeader_GetAttributeFailSafe(PyNs3DsrDsrRoutingHeader *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3DsrDsrRoutingHeader_TraceDisconnect(PyNs3DsrDsrRoutingHeader *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
     bool retval;
     const char *name;
     Py_ssize_t name_len;
-    PyNs3AttributeValue *value;
-    const char *keywords[] = {"name", "value", NULL};
+    const char *context;
+    Py_ssize_t context_len;
+    PyNs3CallbackBase *cb;
+    const char *keywords[] = {"name", "context", "cb", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3AttributeValue_Type, &value)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#s#O!", (char **) keywords, &name, &name_len, &context, &context_len, &PyNs3CallbackBase_Type, &cb)) {
         return NULL;
     }
-    retval = self->obj->GetAttributeFailSafe(std::string(name, name_len), *((PyNs3AttributeValue *) value)->obj);
+    retval = self->obj->TraceDisconnect(std::string(name, name_len), std::string(context, context_len), *((PyNs3CallbackBase *) cb)->obj);
     py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
 PyObject *
-_wrap_PyNs3DsrDsrRoutingHeader_GetNextHeader(PyNs3DsrDsrRoutingHeader *self)
+_wrap_PyNs3DsrDsrRoutingHeader_TraceDisconnectWithoutContext(PyNs3DsrDsrRoutingHeader *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    uint8_t retval;
+    bool retval;
+    const char *name;
+    Py_ssize_t name_len;
+    PyNs3CallbackBase *cb;
+    const char *keywords[] = {"name", "cb", NULL};
     
-    retval = self->obj->GetNextHeader();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-PyObject *
-_wrap_PyNs3DsrDsrRoutingHeader_GetDestId(PyNs3DsrDsrRoutingHeader *self)
-{
-    PyObject *py_retval;
-    uint16_t retval;
-    
-    retval = self->obj->GetDestId();
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-PyObject *
-_wrap_PyNs3DsrDsrRoutingHeader_GetSourceId(PyNs3DsrDsrRoutingHeader *self)
-{
-    PyObject *py_retval;
-    uint16_t retval;
-    
-    retval = self->obj->GetSourceId();
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-PyObject *
-_wrap_PyNs3DsrDsrRoutingHeader_GetMessageType(PyNs3DsrDsrRoutingHeader *self)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    
-    retval = self->obj->GetMessageType();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3CallbackBase_Type, &cb)) {
+        return NULL;
+    }
+    retval = self->obj->TraceDisconnectWithoutContext(std::string(name, name_len), *((PyNs3CallbackBase *) cb)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
@@ -15807,32 +15807,32 @@ _wrap_PyNs3DsrDsrRoutingHeader__copy__(PyNs3DsrDsrRoutingHeader *self)
 }
 
 static PyMethodDef PyNs3DsrDsrRoutingHeader_methods[] = {
+    {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3DsrDsrRoutingHeader_Deserialize, METH_VARARGS|METH_KEYWORDS, "Deserialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
+    {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3DsrDsrRoutingHeader_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
     {(char *) "GetSerializedSize", (PyCFunction) _wrap_PyNs3DsrDsrRoutingHeader_GetSerializedSize, METH_NOARGS, "GetSerializedSize()\n\n" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DsrDsrRoutingHeader_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3DsrDsrRoutingHeader_Serialize, METH_KEYWORDS|METH_VARARGS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
-    {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3DsrDsrRoutingHeader_Deserialize, METH_KEYWORDS|METH_VARARGS, "Deserialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
-    {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3DsrDsrRoutingHeader_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
-    {(char *) "GetDsrOptionsOffset", (PyCFunction) _wrap_PyNs3DsrDsrRoutingHeader_GetDsrOptionsOffset, METH_NOARGS, "GetDsrOptionsOffset()\n\n" },
-    {(char *) "SetMessageType", (PyCFunction) _wrap_PyNs3DsrDsrRoutingHeader_SetMessageType, METH_KEYWORDS|METH_VARARGS, "SetMessageType(messageType)\n\ntype: messageType: uint8_t" },
-    {(char *) "SetAttribute", (PyCFunction) _wrap_PyNs3DsrDsrRoutingHeader_SetAttribute, METH_KEYWORDS|METH_VARARGS, "SetAttribute(name, value)\n\ntype: name: std::string\ntype: value: ns3::AttributeValue const &" },
-    {(char *) "GetPayloadLength", (PyCFunction) _wrap_PyNs3DsrDsrRoutingHeader_GetPayloadLength, METH_NOARGS, "GetPayloadLength()\n\n" },
-    {(char *) "GetAttribute", (PyCFunction) _wrap_PyNs3DsrDsrRoutingHeader_GetAttribute, METH_KEYWORDS|METH_VARARGS, "GetAttribute(name, value)\n\ntype: name: std::string\ntype: value: ns3::AttributeValue &" },
-    {(char *) "SetDestId", (PyCFunction) _wrap_PyNs3DsrDsrRoutingHeader_SetDestId, METH_KEYWORDS|METH_VARARGS, "SetDestId(destId)\n\ntype: destId: uint16_t" },
-    {(char *) "TraceDisconnect", (PyCFunction) _wrap_PyNs3DsrDsrRoutingHeader_TraceDisconnect, METH_KEYWORDS|METH_VARARGS, "TraceDisconnect(name, context, cb)\n\ntype: name: std::string\ntype: context: std::string\ntype: cb: ns3::CallbackBase const &" },
-    {(char *) "SetAttributeFailSafe", (PyCFunction) _wrap_PyNs3DsrDsrRoutingHeader_SetAttributeFailSafe, METH_KEYWORDS|METH_VARARGS, "SetAttributeFailSafe(name, value)\n\ntype: name: std::string\ntype: value: ns3::AttributeValue const &" },
-    {(char *) "GetDsrOptionBuffer", (PyCFunction) _wrap_PyNs3DsrDsrRoutingHeader_GetDsrOptionBuffer, METH_NOARGS, "GetDsrOptionBuffer()\n\n" },
-    {(char *) "TraceDisconnectWithoutContext", (PyCFunction) _wrap_PyNs3DsrDsrRoutingHeader_TraceDisconnectWithoutContext, METH_KEYWORDS|METH_VARARGS, "TraceDisconnectWithoutContext(name, cb)\n\ntype: name: std::string\ntype: cb: ns3::CallbackBase const &" },
-    {(char *) "SetNextHeader", (PyCFunction) _wrap_PyNs3DsrDsrRoutingHeader_SetNextHeader, METH_KEYWORDS|METH_VARARGS, "SetNextHeader(protocol)\n\ntype: protocol: uint8_t" },
-    {(char *) "TraceConnect", (PyCFunction) _wrap_PyNs3DsrDsrRoutingHeader_TraceConnect, METH_KEYWORDS|METH_VARARGS, "TraceConnect(name, context, cb)\n\ntype: name: std::string\ntype: context: std::string\ntype: cb: ns3::CallbackBase const &" },
-    {(char *) "TraceConnectWithoutContext", (PyCFunction) _wrap_PyNs3DsrDsrRoutingHeader_TraceConnectWithoutContext, METH_KEYWORDS|METH_VARARGS, "TraceConnectWithoutContext(name, cb)\n\ntype: name: std::string\ntype: cb: ns3::CallbackBase const &" },
-    {(char *) "SetPayloadLength", (PyCFunction) _wrap_PyNs3DsrDsrRoutingHeader_SetPayloadLength, METH_KEYWORDS|METH_VARARGS, "SetPayloadLength(length)\n\ntype: length: uint16_t" },
-    {(char *) "AddDsrOption", (PyCFunction) _wrap_PyNs3DsrDsrRoutingHeader_AddDsrOption, METH_KEYWORDS|METH_VARARGS, "AddDsrOption(option)\n\ntype: option: ns3::dsr::DsrOptionHeader const &" },
-    {(char *) "SetSourceId", (PyCFunction) _wrap_PyNs3DsrDsrRoutingHeader_SetSourceId, METH_KEYWORDS|METH_VARARGS, "SetSourceId(sourceId)\n\ntype: sourceId: uint16_t" },
-    {(char *) "GetAttributeFailSafe", (PyCFunction) _wrap_PyNs3DsrDsrRoutingHeader_GetAttributeFailSafe, METH_KEYWORDS|METH_VARARGS, "GetAttributeFailSafe(name, value)\n\ntype: name: std::string\ntype: value: ns3::AttributeValue &" },
-    {(char *) "GetNextHeader", (PyCFunction) _wrap_PyNs3DsrDsrRoutingHeader_GetNextHeader, METH_NOARGS, "GetNextHeader()\n\n" },
+    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3DsrDsrRoutingHeader_Serialize, METH_VARARGS|METH_KEYWORDS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
     {(char *) "GetDestId", (PyCFunction) _wrap_PyNs3DsrDsrRoutingHeader_GetDestId, METH_NOARGS, "GetDestId()\n\n" },
-    {(char *) "GetSourceId", (PyCFunction) _wrap_PyNs3DsrDsrRoutingHeader_GetSourceId, METH_NOARGS, "GetSourceId()\n\n" },
     {(char *) "GetMessageType", (PyCFunction) _wrap_PyNs3DsrDsrRoutingHeader_GetMessageType, METH_NOARGS, "GetMessageType()\n\n" },
+    {(char *) "GetNextHeader", (PyCFunction) _wrap_PyNs3DsrDsrRoutingHeader_GetNextHeader, METH_NOARGS, "GetNextHeader()\n\n" },
+    {(char *) "GetPayloadLength", (PyCFunction) _wrap_PyNs3DsrDsrRoutingHeader_GetPayloadLength, METH_NOARGS, "GetPayloadLength()\n\n" },
+    {(char *) "GetSourceId", (PyCFunction) _wrap_PyNs3DsrDsrRoutingHeader_GetSourceId, METH_NOARGS, "GetSourceId()\n\n" },
+    {(char *) "SetDestId", (PyCFunction) _wrap_PyNs3DsrDsrRoutingHeader_SetDestId, METH_VARARGS|METH_KEYWORDS, "SetDestId(destId)\n\ntype: destId: uint16_t" },
+    {(char *) "SetMessageType", (PyCFunction) _wrap_PyNs3DsrDsrRoutingHeader_SetMessageType, METH_VARARGS|METH_KEYWORDS, "SetMessageType(messageType)\n\ntype: messageType: uint8_t" },
+    {(char *) "SetNextHeader", (PyCFunction) _wrap_PyNs3DsrDsrRoutingHeader_SetNextHeader, METH_VARARGS|METH_KEYWORDS, "SetNextHeader(protocol)\n\ntype: protocol: uint8_t" },
+    {(char *) "SetPayloadLength", (PyCFunction) _wrap_PyNs3DsrDsrRoutingHeader_SetPayloadLength, METH_VARARGS|METH_KEYWORDS, "SetPayloadLength(length)\n\ntype: length: uint16_t" },
+    {(char *) "SetSourceId", (PyCFunction) _wrap_PyNs3DsrDsrRoutingHeader_SetSourceId, METH_VARARGS|METH_KEYWORDS, "SetSourceId(sourceId)\n\ntype: sourceId: uint16_t" },
+    {(char *) "AddDsrOption", (PyCFunction) _wrap_PyNs3DsrDsrRoutingHeader_AddDsrOption, METH_VARARGS|METH_KEYWORDS, "AddDsrOption(option)\n\ntype: option: ns3::dsr::DsrOptionHeader const &" },
+    {(char *) "GetDsrOptionBuffer", (PyCFunction) _wrap_PyNs3DsrDsrRoutingHeader_GetDsrOptionBuffer, METH_NOARGS, "GetDsrOptionBuffer()\n\n" },
+    {(char *) "GetDsrOptionsOffset", (PyCFunction) _wrap_PyNs3DsrDsrRoutingHeader_GetDsrOptionsOffset, METH_NOARGS, "GetDsrOptionsOffset()\n\n" },
+    {(char *) "GetAttribute", (PyCFunction) _wrap_PyNs3DsrDsrRoutingHeader_GetAttribute, METH_VARARGS|METH_KEYWORDS, "GetAttribute(name, value)\n\ntype: name: std::string\ntype: value: ns3::AttributeValue &" },
+    {(char *) "GetAttributeFailSafe", (PyCFunction) _wrap_PyNs3DsrDsrRoutingHeader_GetAttributeFailSafe, METH_VARARGS|METH_KEYWORDS, "GetAttributeFailSafe(name, value)\n\ntype: name: std::string\ntype: value: ns3::AttributeValue &" },
+    {(char *) "SetAttribute", (PyCFunction) _wrap_PyNs3DsrDsrRoutingHeader_SetAttribute, METH_VARARGS|METH_KEYWORDS, "SetAttribute(name, value)\n\ntype: name: std::string\ntype: value: ns3::AttributeValue const &" },
+    {(char *) "SetAttributeFailSafe", (PyCFunction) _wrap_PyNs3DsrDsrRoutingHeader_SetAttributeFailSafe, METH_VARARGS|METH_KEYWORDS, "SetAttributeFailSafe(name, value)\n\ntype: name: std::string\ntype: value: ns3::AttributeValue const &" },
+    {(char *) "TraceConnect", (PyCFunction) _wrap_PyNs3DsrDsrRoutingHeader_TraceConnect, METH_VARARGS|METH_KEYWORDS, "TraceConnect(name, context, cb)\n\ntype: name: std::string\ntype: context: std::string\ntype: cb: ns3::CallbackBase const &" },
+    {(char *) "TraceConnectWithoutContext", (PyCFunction) _wrap_PyNs3DsrDsrRoutingHeader_TraceConnectWithoutContext, METH_VARARGS|METH_KEYWORDS, "TraceConnectWithoutContext(name, cb)\n\ntype: name: std::string\ntype: cb: ns3::CallbackBase const &" },
+    {(char *) "TraceDisconnect", (PyCFunction) _wrap_PyNs3DsrDsrRoutingHeader_TraceDisconnect, METH_VARARGS|METH_KEYWORDS, "TraceDisconnect(name, context, cb)\n\ntype: name: std::string\ntype: context: std::string\ntype: cb: ns3::CallbackBase const &" },
+    {(char *) "TraceDisconnectWithoutContext", (PyCFunction) _wrap_PyNs3DsrDsrRoutingHeader_TraceDisconnectWithoutContext, METH_VARARGS|METH_KEYWORDS, "TraceDisconnectWithoutContext(name, cb)\n\ntype: name: std::string\ntype: cb: ns3::CallbackBase const &" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3DsrDsrRoutingHeader__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -15940,7 +15940,7 @@ PyTypeObject PyNs3DsrDsrRoutingHeader_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "DsrRoutingHeader(arg0)\nDsrRoutingHeader()",                        /* Documentation string */
     (traverseproc)PyNs3DsrDsrRoutingHeader__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3DsrDsrRoutingHeader__tp_clear,             /* tp_clear */
@@ -16042,59 +16042,6 @@ int _wrap_PyNs3DsrDsrRreqTable__tp_init(PyNs3DsrDsrRreqTable *self, PyObject *ar
 
 
 PyObject *
-_wrap_PyNs3DsrDsrRreqTable_Invalidate(PyNs3DsrDsrRreqTable *self)
-{
-    PyObject *py_retval;
-    
-    self->obj->Invalidate();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRreqTable_GetRreqSize(PyNs3DsrDsrRreqTable *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetRreqSize();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRreqTable_RemoveLeastExpire(PyNs3DsrDsrRreqTable *self)
-{
-    PyObject *py_retval;
-    
-    self->obj->RemoveLeastExpire();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRreqTable_SetInitHopLimit(PyNs3DsrDsrRreqTable *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int hl;
-    const char *keywords[] = {"hl", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &hl)) {
-        return NULL;
-    }
-    self->obj->SetInitHopLimit(hl);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3DsrDsrRreqTable_CheckUniqueRreqId(PyNs3DsrDsrRreqTable *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -16112,52 +16059,6 @@ _wrap_PyNs3DsrDsrRreqTable_CheckUniqueRreqId(PyNs3DsrDsrRreqTable *self, PyObjec
 
 
 PyObject *
-_wrap_PyNs3DsrDsrRreqTable_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::dsr::DsrRreqTable::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRreqTable_GetRreqTableSize(PyNs3DsrDsrRreqTable *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetRreqTableSize();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRreqTable_MarkLinkAsUnidirectional(PyNs3DsrDsrRreqTable *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3Ipv4Address *neighbor;
-    PyNs3Time *blacklistTimeout;
-    const char *keywords[] = {"neighbor", "blacklistTimeout", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3Ipv4Address_Type, &neighbor, &PyNs3Time_Type, &blacklistTimeout)) {
-        return NULL;
-    }
-    retval = self->obj->MarkLinkAsUnidirectional(*((PyNs3Ipv4Address *) neighbor)->obj, *((PyNs3Time *) blacklistTimeout)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3DsrDsrRreqTable_FindAndUpdate(PyNs3DsrDsrRreqTable *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -16168,115 +16069,6 @@ _wrap_PyNs3DsrDsrRreqTable_FindAndUpdate(PyNs3DsrDsrRreqTable *self, PyObject *a
         return NULL;
     }
     self->obj->FindAndUpdate(*((PyNs3Ipv4Address *) dst)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRreqTable_GetInitHopLimit(PyNs3DsrDsrRreqTable *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetInitHopLimit();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRreqTable_GetUniqueRreqIdSize(PyNs3DsrDsrRreqTable *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetUniqueRreqIdSize();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRreqTable_RemoveRreqEntry(PyNs3DsrDsrRreqTable *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Ipv4Address *dst;
-    const char *keywords[] = {"dst", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &dst)) {
-        return NULL;
-    }
-    self->obj->RemoveRreqEntry(*((PyNs3Ipv4Address *) dst)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRreqTable_SetRreqTableSize(PyNs3DsrDsrRreqTable *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int rt;
-    const char *keywords[] = {"rt", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &rt)) {
-        return NULL;
-    }
-    self->obj->SetRreqTableSize(rt);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRreqTable_GetRreqCnt(PyNs3DsrDsrRreqTable *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    PyNs3Ipv4Address *dst;
-    const char *keywords[] = {"dst", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &dst)) {
-        return NULL;
-    }
-    retval = self->obj->GetRreqCnt(*((PyNs3Ipv4Address *) dst)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRreqTable_SetUniqueRreqIdSize(PyNs3DsrDsrRreqTable *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int uid;
-    const char *keywords[] = {"uid", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &uid)) {
-        return NULL;
-    }
-    self->obj->SetUniqueRreqIdSize(uid);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrRreqTable_SetRreqIdSize(PyNs3DsrDsrRreqTable *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int id;
-    const char *keywords[] = {"id", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &id)) {
-        return NULL;
-    }
-    self->obj->SetRreqIdSize(id);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -16307,13 +16099,30 @@ _wrap_PyNs3DsrDsrRreqTable_FindSourceEntry(PyNs3DsrDsrRreqTable *self, PyObject 
 
 
 PyObject *
-_wrap_PyNs3DsrDsrRreqTable_PurgeNeighbor(PyNs3DsrDsrRreqTable *self)
+_wrap_PyNs3DsrDsrRreqTable_GetInitHopLimit(PyNs3DsrDsrRreqTable *self)
 {
     PyObject *py_retval;
+    uint32_t retval;
     
-    self->obj->PurgeNeighbor();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    retval = self->obj->GetInitHopLimit();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRreqTable_GetRreqCnt(PyNs3DsrDsrRreqTable *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    PyNs3Ipv4Address *dst;
+    const char *keywords[] = {"dst", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &dst)) {
+        return NULL;
+    }
+    retval = self->obj->GetRreqCnt(*((PyNs3Ipv4Address *) dst)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
 
@@ -16326,6 +16135,197 @@ _wrap_PyNs3DsrDsrRreqTable_GetRreqIdSize(PyNs3DsrDsrRreqTable *self)
     
     retval = self->obj->GetRreqIdSize();
     py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRreqTable_GetRreqSize(PyNs3DsrDsrRreqTable *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetRreqSize();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRreqTable_GetRreqTableSize(PyNs3DsrDsrRreqTable *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetRreqTableSize();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRreqTable_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::dsr::DsrRreqTable::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRreqTable_GetUniqueRreqIdSize(PyNs3DsrDsrRreqTable *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetUniqueRreqIdSize();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRreqTable_Invalidate(PyNs3DsrDsrRreqTable *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->Invalidate();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRreqTable_MarkLinkAsUnidirectional(PyNs3DsrDsrRreqTable *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    bool retval;
+    PyNs3Ipv4Address *neighbor;
+    PyNs3Time *blacklistTimeout;
+    const char *keywords[] = {"neighbor", "blacklistTimeout", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3Ipv4Address_Type, &neighbor, &PyNs3Time_Type, &blacklistTimeout)) {
+        return NULL;
+    }
+    retval = self->obj->MarkLinkAsUnidirectional(*((PyNs3Ipv4Address *) neighbor)->obj, *((PyNs3Time *) blacklistTimeout)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRreqTable_PurgeNeighbor(PyNs3DsrDsrRreqTable *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->PurgeNeighbor();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRreqTable_RemoveLeastExpire(PyNs3DsrDsrRreqTable *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->RemoveLeastExpire();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRreqTable_RemoveRreqEntry(PyNs3DsrDsrRreqTable *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4Address *dst;
+    const char *keywords[] = {"dst", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &dst)) {
+        return NULL;
+    }
+    self->obj->RemoveRreqEntry(*((PyNs3Ipv4Address *) dst)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRreqTable_SetInitHopLimit(PyNs3DsrDsrRreqTable *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int hl;
+    const char *keywords[] = {"hl", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &hl)) {
+        return NULL;
+    }
+    self->obj->SetInitHopLimit(hl);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRreqTable_SetRreqIdSize(PyNs3DsrDsrRreqTable *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int id;
+    const char *keywords[] = {"id", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &id)) {
+        return NULL;
+    }
+    self->obj->SetRreqIdSize(id);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRreqTable_SetRreqTableSize(PyNs3DsrDsrRreqTable *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int rt;
+    const char *keywords[] = {"rt", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &rt)) {
+        return NULL;
+    }
+    self->obj->SetRreqTableSize(rt);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrRreqTable_SetUniqueRreqIdSize(PyNs3DsrDsrRreqTable *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int uid;
+    const char *keywords[] = {"uid", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &uid)) {
+        return NULL;
+    }
+    self->obj->SetUniqueRreqIdSize(uid);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -16346,25 +16346,25 @@ _wrap_PyNs3DsrDsrRreqTable__copy__(PyNs3DsrDsrRreqTable *self)
 }
 
 static PyMethodDef PyNs3DsrDsrRreqTable_methods[] = {
-    {(char *) "Invalidate", (PyCFunction) _wrap_PyNs3DsrDsrRreqTable_Invalidate, METH_NOARGS, "Invalidate()\n\n" },
-    {(char *) "GetRreqSize", (PyCFunction) _wrap_PyNs3DsrDsrRreqTable_GetRreqSize, METH_NOARGS, "GetRreqSize()\n\n" },
-    {(char *) "RemoveLeastExpire", (PyCFunction) _wrap_PyNs3DsrDsrRreqTable_RemoveLeastExpire, METH_NOARGS, "RemoveLeastExpire()\n\n" },
-    {(char *) "SetInitHopLimit", (PyCFunction) _wrap_PyNs3DsrDsrRreqTable_SetInitHopLimit, METH_KEYWORDS|METH_VARARGS, "SetInitHopLimit(hl)\n\ntype: hl: uint32_t" },
-    {(char *) "CheckUniqueRreqId", (PyCFunction) _wrap_PyNs3DsrDsrRreqTable_CheckUniqueRreqId, METH_KEYWORDS|METH_VARARGS, "CheckUniqueRreqId(dst)\n\ntype: dst: ns3::Ipv4Address" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DsrDsrRreqTable_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "GetRreqTableSize", (PyCFunction) _wrap_PyNs3DsrDsrRreqTable_GetRreqTableSize, METH_NOARGS, "GetRreqTableSize()\n\n" },
-    {(char *) "MarkLinkAsUnidirectional", (PyCFunction) _wrap_PyNs3DsrDsrRreqTable_MarkLinkAsUnidirectional, METH_KEYWORDS|METH_VARARGS, "MarkLinkAsUnidirectional(neighbor, blacklistTimeout)\n\ntype: neighbor: ns3::Ipv4Address\ntype: blacklistTimeout: ns3::Time" },
-    {(char *) "FindAndUpdate", (PyCFunction) _wrap_PyNs3DsrDsrRreqTable_FindAndUpdate, METH_KEYWORDS|METH_VARARGS, "FindAndUpdate(dst)\n\ntype: dst: ns3::Ipv4Address" },
+    {(char *) "CheckUniqueRreqId", (PyCFunction) _wrap_PyNs3DsrDsrRreqTable_CheckUniqueRreqId, METH_VARARGS|METH_KEYWORDS, "CheckUniqueRreqId(dst)\n\ntype: dst: ns3::Ipv4Address" },
+    {(char *) "FindAndUpdate", (PyCFunction) _wrap_PyNs3DsrDsrRreqTable_FindAndUpdate, METH_VARARGS|METH_KEYWORDS, "FindAndUpdate(dst)\n\ntype: dst: ns3::Ipv4Address" },
+    {(char *) "FindSourceEntry", (PyCFunction) _wrap_PyNs3DsrDsrRreqTable_FindSourceEntry, METH_VARARGS|METH_KEYWORDS, "FindSourceEntry(src, dst, id)\n\ntype: src: ns3::Ipv4Address\ntype: dst: ns3::Ipv4Address\ntype: id: uint16_t" },
     {(char *) "GetInitHopLimit", (PyCFunction) _wrap_PyNs3DsrDsrRreqTable_GetInitHopLimit, METH_NOARGS, "GetInitHopLimit()\n\n" },
-    {(char *) "GetUniqueRreqIdSize", (PyCFunction) _wrap_PyNs3DsrDsrRreqTable_GetUniqueRreqIdSize, METH_NOARGS, "GetUniqueRreqIdSize()\n\n" },
-    {(char *) "RemoveRreqEntry", (PyCFunction) _wrap_PyNs3DsrDsrRreqTable_RemoveRreqEntry, METH_KEYWORDS|METH_VARARGS, "RemoveRreqEntry(dst)\n\ntype: dst: ns3::Ipv4Address" },
-    {(char *) "SetRreqTableSize", (PyCFunction) _wrap_PyNs3DsrDsrRreqTable_SetRreqTableSize, METH_KEYWORDS|METH_VARARGS, "SetRreqTableSize(rt)\n\ntype: rt: uint32_t" },
-    {(char *) "GetRreqCnt", (PyCFunction) _wrap_PyNs3DsrDsrRreqTable_GetRreqCnt, METH_KEYWORDS|METH_VARARGS, "GetRreqCnt(dst)\n\ntype: dst: ns3::Ipv4Address" },
-    {(char *) "SetUniqueRreqIdSize", (PyCFunction) _wrap_PyNs3DsrDsrRreqTable_SetUniqueRreqIdSize, METH_KEYWORDS|METH_VARARGS, "SetUniqueRreqIdSize(uid)\n\ntype: uid: uint32_t" },
-    {(char *) "SetRreqIdSize", (PyCFunction) _wrap_PyNs3DsrDsrRreqTable_SetRreqIdSize, METH_KEYWORDS|METH_VARARGS, "SetRreqIdSize(id)\n\ntype: id: uint32_t" },
-    {(char *) "FindSourceEntry", (PyCFunction) _wrap_PyNs3DsrDsrRreqTable_FindSourceEntry, METH_KEYWORDS|METH_VARARGS, "FindSourceEntry(src, dst, id)\n\ntype: src: ns3::Ipv4Address\ntype: dst: ns3::Ipv4Address\ntype: id: uint16_t" },
-    {(char *) "PurgeNeighbor", (PyCFunction) _wrap_PyNs3DsrDsrRreqTable_PurgeNeighbor, METH_NOARGS, "PurgeNeighbor()\n\n" },
+    {(char *) "GetRreqCnt", (PyCFunction) _wrap_PyNs3DsrDsrRreqTable_GetRreqCnt, METH_VARARGS|METH_KEYWORDS, "GetRreqCnt(dst)\n\ntype: dst: ns3::Ipv4Address" },
     {(char *) "GetRreqIdSize", (PyCFunction) _wrap_PyNs3DsrDsrRreqTable_GetRreqIdSize, METH_NOARGS, "GetRreqIdSize()\n\n" },
+    {(char *) "GetRreqSize", (PyCFunction) _wrap_PyNs3DsrDsrRreqTable_GetRreqSize, METH_NOARGS, "GetRreqSize()\n\n" },
+    {(char *) "GetRreqTableSize", (PyCFunction) _wrap_PyNs3DsrDsrRreqTable_GetRreqTableSize, METH_NOARGS, "GetRreqTableSize()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DsrDsrRreqTable_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "GetUniqueRreqIdSize", (PyCFunction) _wrap_PyNs3DsrDsrRreqTable_GetUniqueRreqIdSize, METH_NOARGS, "GetUniqueRreqIdSize()\n\n" },
+    {(char *) "Invalidate", (PyCFunction) _wrap_PyNs3DsrDsrRreqTable_Invalidate, METH_NOARGS, "Invalidate()\n\n" },
+    {(char *) "MarkLinkAsUnidirectional", (PyCFunction) _wrap_PyNs3DsrDsrRreqTable_MarkLinkAsUnidirectional, METH_VARARGS|METH_KEYWORDS, "MarkLinkAsUnidirectional(neighbor, blacklistTimeout)\n\ntype: neighbor: ns3::Ipv4Address\ntype: blacklistTimeout: ns3::Time" },
+    {(char *) "PurgeNeighbor", (PyCFunction) _wrap_PyNs3DsrDsrRreqTable_PurgeNeighbor, METH_NOARGS, "PurgeNeighbor()\n\n" },
+    {(char *) "RemoveLeastExpire", (PyCFunction) _wrap_PyNs3DsrDsrRreqTable_RemoveLeastExpire, METH_NOARGS, "RemoveLeastExpire()\n\n" },
+    {(char *) "RemoveRreqEntry", (PyCFunction) _wrap_PyNs3DsrDsrRreqTable_RemoveRreqEntry, METH_VARARGS|METH_KEYWORDS, "RemoveRreqEntry(dst)\n\ntype: dst: ns3::Ipv4Address" },
+    {(char *) "SetInitHopLimit", (PyCFunction) _wrap_PyNs3DsrDsrRreqTable_SetInitHopLimit, METH_VARARGS|METH_KEYWORDS, "SetInitHopLimit(hl)\n\ntype: hl: uint32_t" },
+    {(char *) "SetRreqIdSize", (PyCFunction) _wrap_PyNs3DsrDsrRreqTable_SetRreqIdSize, METH_VARARGS|METH_KEYWORDS, "SetRreqIdSize(id)\n\ntype: id: uint32_t" },
+    {(char *) "SetRreqTableSize", (PyCFunction) _wrap_PyNs3DsrDsrRreqTable_SetRreqTableSize, METH_VARARGS|METH_KEYWORDS, "SetRreqTableSize(rt)\n\ntype: rt: uint32_t" },
+    {(char *) "SetUniqueRreqIdSize", (PyCFunction) _wrap_PyNs3DsrDsrRreqTable_SetUniqueRreqIdSize, METH_VARARGS|METH_KEYWORDS, "SetUniqueRreqIdSize(uid)\n\ntype: uid: uint32_t" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3DsrDsrRreqTable__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -16461,7 +16461,7 @@ PyTypeObject PyNs3DsrDsrRreqTable_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "DsrRreqTable(arg0)\nDsrRreqTable()",                        /* Documentation string */
     (traverseproc)PyNs3DsrDsrRreqTable__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3DsrDsrRreqTable__tp_clear,             /* tp_clear */
@@ -16576,70 +16576,33 @@ int _wrap_PyNs3DsrDsrSendBuffEntry__tp_init(PyNs3DsrDsrSendBuffEntry *self, PyOb
 
 
 PyObject *
-_wrap_PyNs3DsrDsrSendBuffEntry_SetPacket(PyNs3DsrDsrSendBuffEntry *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3DsrDsrSendBuffEntry_GetDestination(PyNs3DsrDsrSendBuffEntry *self)
 {
     PyObject *py_retval;
-    PyNs3Packet *p;
-    ns3::Packet *p_ptr;
-    const char *keywords[] = {"p", NULL};
+    PyNs3Ipv4Address *py_Ipv4Address;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Packet_Type, &p)) {
-        return NULL;
-    }
-    p_ptr = (p ? p->obj : NULL);
-    self->obj->SetPacket(ns3::Ptr< ns3::Packet  > (p_ptr));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    ns3::Ipv4Address retval = self->obj->GetDestination();
+    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
+    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
+    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
+    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3DsrDsrSendBuffEntry_SetProtocol(PyNs3DsrDsrSendBuffEntry *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3DsrDsrSendBuffEntry_GetExpireTime(PyNs3DsrDsrSendBuffEntry *self)
 {
     PyObject *py_retval;
-    int p;
-    const char *keywords[] = {"p", NULL};
+    PyNs3Time *py_Time;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &p)) {
-        return NULL;
-    }
-    if (p > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SetProtocol(p);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrSendBuffEntry_SetDestination(PyNs3DsrDsrSendBuffEntry *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Ipv4Address *d;
-    const char *keywords[] = {"d", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &d)) {
-        return NULL;
-    }
-    self->obj->SetDestination(*((PyNs3Ipv4Address *) d)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrSendBuffEntry_GetProtocol(PyNs3DsrDsrSendBuffEntry *self)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    
-    retval = self->obj->GetProtocol();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    ns3::Time retval = self->obj->GetExpireTime();
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
     return py_retval;
 }
 
@@ -16681,6 +16644,35 @@ _wrap_PyNs3DsrDsrSendBuffEntry_GetPacket(PyNs3DsrDsrSendBuffEntry *self)
 
 
 PyObject *
+_wrap_PyNs3DsrDsrSendBuffEntry_GetProtocol(PyNs3DsrDsrSendBuffEntry *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    
+    retval = self->obj->GetProtocol();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrSendBuffEntry_SetDestination(PyNs3DsrDsrSendBuffEntry *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4Address *d;
+    const char *keywords[] = {"d", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &d)) {
+        return NULL;
+    }
+    self->obj->SetDestination(*((PyNs3Ipv4Address *) d)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3DsrDsrSendBuffEntry_SetExpireTime(PyNs3DsrDsrSendBuffEntry *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -16698,33 +16690,41 @@ _wrap_PyNs3DsrDsrSendBuffEntry_SetExpireTime(PyNs3DsrDsrSendBuffEntry *self, PyO
 
 
 PyObject *
-_wrap_PyNs3DsrDsrSendBuffEntry_GetDestination(PyNs3DsrDsrSendBuffEntry *self)
+_wrap_PyNs3DsrDsrSendBuffEntry_SetPacket(PyNs3DsrDsrSendBuffEntry *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3Ipv4Address *py_Ipv4Address;
+    PyNs3Packet *p;
+    ns3::Packet *p_ptr;
+    const char *keywords[] = {"p", NULL};
     
-    ns3::Ipv4Address retval = self->obj->GetDestination();
-    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
-    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
-    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
-    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Packet_Type, &p)) {
+        return NULL;
+    }
+    p_ptr = (p ? p->obj : NULL);
+    self->obj->SetPacket(ns3::Ptr< ns3::Packet  > (p_ptr));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3DsrDsrSendBuffEntry_GetExpireTime(PyNs3DsrDsrSendBuffEntry *self)
+_wrap_PyNs3DsrDsrSendBuffEntry_SetProtocol(PyNs3DsrDsrSendBuffEntry *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3Time *py_Time;
+    int p;
+    const char *keywords[] = {"p", NULL};
     
-    ns3::Time retval = self->obj->GetExpireTime();
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &p)) {
+        return NULL;
+    }
+    if (p > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SetProtocol(p);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -16742,14 +16742,14 @@ _wrap_PyNs3DsrDsrSendBuffEntry__copy__(PyNs3DsrDsrSendBuffEntry *self)
 }
 
 static PyMethodDef PyNs3DsrDsrSendBuffEntry_methods[] = {
-    {(char *) "SetPacket", (PyCFunction) _wrap_PyNs3DsrDsrSendBuffEntry_SetPacket, METH_KEYWORDS|METH_VARARGS, "SetPacket(p)\n\ntype: p: ns3::Ptr< ns3::Packet const >" },
-    {(char *) "SetProtocol", (PyCFunction) _wrap_PyNs3DsrDsrSendBuffEntry_SetProtocol, METH_KEYWORDS|METH_VARARGS, "SetProtocol(p)\n\ntype: p: uint8_t" },
-    {(char *) "SetDestination", (PyCFunction) _wrap_PyNs3DsrDsrSendBuffEntry_SetDestination, METH_KEYWORDS|METH_VARARGS, "SetDestination(d)\n\ntype: d: ns3::Ipv4Address" },
-    {(char *) "GetProtocol", (PyCFunction) _wrap_PyNs3DsrDsrSendBuffEntry_GetProtocol, METH_NOARGS, "GetProtocol()\n\n" },
-    {(char *) "GetPacket", (PyCFunction) _wrap_PyNs3DsrDsrSendBuffEntry_GetPacket, METH_NOARGS, "GetPacket()\n\n" },
-    {(char *) "SetExpireTime", (PyCFunction) _wrap_PyNs3DsrDsrSendBuffEntry_SetExpireTime, METH_KEYWORDS|METH_VARARGS, "SetExpireTime(exp)\n\ntype: exp: ns3::Time" },
     {(char *) "GetDestination", (PyCFunction) _wrap_PyNs3DsrDsrSendBuffEntry_GetDestination, METH_NOARGS, "GetDestination()\n\n" },
     {(char *) "GetExpireTime", (PyCFunction) _wrap_PyNs3DsrDsrSendBuffEntry_GetExpireTime, METH_NOARGS, "GetExpireTime()\n\n" },
+    {(char *) "GetPacket", (PyCFunction) _wrap_PyNs3DsrDsrSendBuffEntry_GetPacket, METH_NOARGS, "GetPacket()\n\n" },
+    {(char *) "GetProtocol", (PyCFunction) _wrap_PyNs3DsrDsrSendBuffEntry_GetProtocol, METH_NOARGS, "GetProtocol()\n\n" },
+    {(char *) "SetDestination", (PyCFunction) _wrap_PyNs3DsrDsrSendBuffEntry_SetDestination, METH_VARARGS|METH_KEYWORDS, "SetDestination(d)\n\ntype: d: ns3::Ipv4Address" },
+    {(char *) "SetExpireTime", (PyCFunction) _wrap_PyNs3DsrDsrSendBuffEntry_SetExpireTime, METH_VARARGS|METH_KEYWORDS, "SetExpireTime(exp)\n\ntype: exp: ns3::Time" },
+    {(char *) "SetPacket", (PyCFunction) _wrap_PyNs3DsrDsrSendBuffEntry_SetPacket, METH_VARARGS|METH_KEYWORDS, "SetPacket(p)\n\ntype: p: ns3::Ptr< ns3::Packet const >" },
+    {(char *) "SetProtocol", (PyCFunction) _wrap_PyNs3DsrDsrSendBuffEntry_SetProtocol, METH_VARARGS|METH_KEYWORDS, "SetProtocol(p)\n\ntype: p: uint8_t" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3DsrDsrSendBuffEntry__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -16933,18 +16933,6 @@ int _wrap_PyNs3DsrDsrSendBuffer__tp_init(PyNs3DsrDsrSendBuffer *self, PyObject *
 
 
 PyObject *
-_wrap_PyNs3DsrDsrSendBuffer_GetMaxQueueLen(PyNs3DsrDsrSendBuffer *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetMaxQueueLen();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3DsrDsrSendBuffer_Dequeue(PyNs3DsrDsrSendBuffer *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -16958,40 +16946,6 @@ _wrap_PyNs3DsrDsrSendBuffer_Dequeue(PyNs3DsrDsrSendBuffer *self, PyObject *args,
     }
     retval = self->obj->Dequeue(*((PyNs3Ipv4Address *) dst)->obj, *((PyNs3DsrDsrSendBuffEntry *) entry)->obj);
     py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrSendBuffer_SetSendBufferTimeout(PyNs3DsrDsrSendBuffer *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Time *t;
-    const char *keywords[] = {"t", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Time_Type, &t)) {
-        return NULL;
-    }
-    self->obj->SetSendBufferTimeout(*((PyNs3Time *) t)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrSendBuffer_SetMaxQueueLen(PyNs3DsrDsrSendBuffer *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int len;
-    const char *keywords[] = {"len", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &len)) {
-        return NULL;
-    }
-    self->obj->SetMaxQueueLen(len);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
     return py_retval;
 }
 
@@ -17014,18 +16968,6 @@ _wrap_PyNs3DsrDsrSendBuffer_DropPacketWithDst(PyNs3DsrDsrSendBuffer *self, PyObj
 
 
 PyObject *
-_wrap_PyNs3DsrDsrSendBuffer_GetSize(PyNs3DsrDsrSendBuffer *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetSize();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3DsrDsrSendBuffer_Enqueue(PyNs3DsrDsrSendBuffer *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -17038,37 +16980,6 @@ _wrap_PyNs3DsrDsrSendBuffer_Enqueue(PyNs3DsrDsrSendBuffer *self, PyObject *args,
     }
     retval = self->obj->Enqueue(*((PyNs3DsrDsrSendBuffEntry *) entry)->obj);
     py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrSendBuffer_GetSendBufferTimeout(PyNs3DsrDsrSendBuffer *self)
-{
-    PyObject *py_retval;
-    PyNs3Time *py_Time;
-    
-    ns3::Time retval = self->obj->GetSendBufferTimeout();
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrSendBuffer_GetBuffer(PyNs3DsrDsrSendBuffer *self)
-{
-    PyObject *py_retval;
-    std::vector< ns3::dsr::DsrSendBuffEntry > retval;
-    Pystd__vector__lt___ns3__dsr__DsrSendBuffEntry___gt__ *py_std__vector__lt___ns3__dsr__DsrSendBuffEntry___gt__;
-    
-    retval = self->obj->GetBuffer();
-    py_std__vector__lt___ns3__dsr__DsrSendBuffEntry___gt__ = PyObject_New(Pystd__vector__lt___ns3__dsr__DsrSendBuffEntry___gt__, &Pystd__vector__lt___ns3__dsr__DsrSendBuffEntry___gt___Type);
-    py_std__vector__lt___ns3__dsr__DsrSendBuffEntry___gt__->obj = new std::vector< ns3::dsr::DsrSendBuffEntry >(retval);
-    py_retval = Py_BuildValue((char *) "N", py_std__vector__lt___ns3__dsr__DsrSendBuffEntry___gt__);
     return py_retval;
 }
 
@@ -17090,6 +17001,95 @@ _wrap_PyNs3DsrDsrSendBuffer_Find(PyNs3DsrDsrSendBuffer *self, PyObject *args, Py
 }
 
 
+PyObject *
+_wrap_PyNs3DsrDsrSendBuffer_GetBuffer(PyNs3DsrDsrSendBuffer *self)
+{
+    PyObject *py_retval;
+    std::vector< ns3::dsr::DsrSendBuffEntry > retval;
+    Pystd__vector__lt___ns3__dsr__DsrSendBuffEntry___gt__ *py_std__vector__lt___ns3__dsr__DsrSendBuffEntry___gt__;
+    
+    retval = self->obj->GetBuffer();
+    py_std__vector__lt___ns3__dsr__DsrSendBuffEntry___gt__ = PyObject_New(Pystd__vector__lt___ns3__dsr__DsrSendBuffEntry___gt__, &Pystd__vector__lt___ns3__dsr__DsrSendBuffEntry___gt___Type);
+    py_std__vector__lt___ns3__dsr__DsrSendBuffEntry___gt__->obj = new std::vector< ns3::dsr::DsrSendBuffEntry >(retval);
+    py_retval = Py_BuildValue((char *) "N", py_std__vector__lt___ns3__dsr__DsrSendBuffEntry___gt__);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrSendBuffer_GetMaxQueueLen(PyNs3DsrDsrSendBuffer *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetMaxQueueLen();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrSendBuffer_GetSendBufferTimeout(PyNs3DsrDsrSendBuffer *self)
+{
+    PyObject *py_retval;
+    PyNs3Time *py_Time;
+    
+    ns3::Time retval = self->obj->GetSendBufferTimeout();
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrSendBuffer_GetSize(PyNs3DsrDsrSendBuffer *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetSize();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrSendBuffer_SetMaxQueueLen(PyNs3DsrDsrSendBuffer *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int len;
+    const char *keywords[] = {"len", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &len)) {
+        return NULL;
+    }
+    self->obj->SetMaxQueueLen(len);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrSendBuffer_SetSendBufferTimeout(PyNs3DsrDsrSendBuffer *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Time *t;
+    const char *keywords[] = {"t", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Time_Type, &t)) {
+        return NULL;
+    }
+    self->obj->SetSendBufferTimeout(*((PyNs3Time *) t)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
 static PyObject*
 _wrap_PyNs3DsrDsrSendBuffer__copy__(PyNs3DsrDsrSendBuffer *self)
 {
@@ -17103,16 +17103,16 @@ _wrap_PyNs3DsrDsrSendBuffer__copy__(PyNs3DsrDsrSendBuffer *self)
 }
 
 static PyMethodDef PyNs3DsrDsrSendBuffer_methods[] = {
-    {(char *) "GetMaxQueueLen", (PyCFunction) _wrap_PyNs3DsrDsrSendBuffer_GetMaxQueueLen, METH_NOARGS, "GetMaxQueueLen()\n\n" },
-    {(char *) "Dequeue", (PyCFunction) _wrap_PyNs3DsrDsrSendBuffer_Dequeue, METH_KEYWORDS|METH_VARARGS, "Dequeue(dst, entry)\n\ntype: dst: ns3::Ipv4Address\ntype: entry: ns3::dsr::DsrSendBuffEntry &" },
-    {(char *) "SetSendBufferTimeout", (PyCFunction) _wrap_PyNs3DsrDsrSendBuffer_SetSendBufferTimeout, METH_KEYWORDS|METH_VARARGS, "SetSendBufferTimeout(t)\n\ntype: t: ns3::Time" },
-    {(char *) "SetMaxQueueLen", (PyCFunction) _wrap_PyNs3DsrDsrSendBuffer_SetMaxQueueLen, METH_KEYWORDS|METH_VARARGS, "SetMaxQueueLen(len)\n\ntype: len: uint32_t" },
-    {(char *) "DropPacketWithDst", (PyCFunction) _wrap_PyNs3DsrDsrSendBuffer_DropPacketWithDst, METH_KEYWORDS|METH_VARARGS, "DropPacketWithDst(dst)\n\ntype: dst: ns3::Ipv4Address" },
-    {(char *) "GetSize", (PyCFunction) _wrap_PyNs3DsrDsrSendBuffer_GetSize, METH_NOARGS, "GetSize()\n\n" },
-    {(char *) "Enqueue", (PyCFunction) _wrap_PyNs3DsrDsrSendBuffer_Enqueue, METH_KEYWORDS|METH_VARARGS, "Enqueue(entry)\n\ntype: entry: ns3::dsr::DsrSendBuffEntry &" },
-    {(char *) "GetSendBufferTimeout", (PyCFunction) _wrap_PyNs3DsrDsrSendBuffer_GetSendBufferTimeout, METH_NOARGS, "GetSendBufferTimeout()\n\n" },
+    {(char *) "Dequeue", (PyCFunction) _wrap_PyNs3DsrDsrSendBuffer_Dequeue, METH_VARARGS|METH_KEYWORDS, "Dequeue(dst, entry)\n\ntype: dst: ns3::Ipv4Address\ntype: entry: ns3::dsr::DsrSendBuffEntry &" },
+    {(char *) "DropPacketWithDst", (PyCFunction) _wrap_PyNs3DsrDsrSendBuffer_DropPacketWithDst, METH_VARARGS|METH_KEYWORDS, "DropPacketWithDst(dst)\n\ntype: dst: ns3::Ipv4Address" },
+    {(char *) "Enqueue", (PyCFunction) _wrap_PyNs3DsrDsrSendBuffer_Enqueue, METH_VARARGS|METH_KEYWORDS, "Enqueue(entry)\n\ntype: entry: ns3::dsr::DsrSendBuffEntry &" },
+    {(char *) "Find", (PyCFunction) _wrap_PyNs3DsrDsrSendBuffer_Find, METH_VARARGS|METH_KEYWORDS, "Find(dst)\n\ntype: dst: ns3::Ipv4Address" },
     {(char *) "GetBuffer", (PyCFunction) _wrap_PyNs3DsrDsrSendBuffer_GetBuffer, METH_NOARGS, "GetBuffer()\n\n" },
-    {(char *) "Find", (PyCFunction) _wrap_PyNs3DsrDsrSendBuffer_Find, METH_KEYWORDS|METH_VARARGS, "Find(dst)\n\ntype: dst: ns3::Ipv4Address" },
+    {(char *) "GetMaxQueueLen", (PyCFunction) _wrap_PyNs3DsrDsrSendBuffer_GetMaxQueueLen, METH_NOARGS, "GetMaxQueueLen()\n\n" },
+    {(char *) "GetSendBufferTimeout", (PyCFunction) _wrap_PyNs3DsrDsrSendBuffer_GetSendBufferTimeout, METH_NOARGS, "GetSendBufferTimeout()\n\n" },
+    {(char *) "GetSize", (PyCFunction) _wrap_PyNs3DsrDsrSendBuffer_GetSize, METH_NOARGS, "GetSize()\n\n" },
+    {(char *) "SetMaxQueueLen", (PyCFunction) _wrap_PyNs3DsrDsrSendBuffer_SetMaxQueueLen, METH_VARARGS|METH_KEYWORDS, "SetMaxQueueLen(len)\n\ntype: len: uint32_t" },
+    {(char *) "SetSendBufferTimeout", (PyCFunction) _wrap_PyNs3DsrDsrSendBuffer_SetSendBufferTimeout, METH_VARARGS|METH_KEYWORDS, "SetSendBufferTimeout(t)\n\ntype: t: ns3::Time" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3DsrDsrSendBuffer__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -17904,9 +17904,16 @@ static int _wrap_PyNs3DsrLinkKey__set_m_source(PyNs3DsrLinkKey *self, PyObject *
 }
 static PyGetSetDef PyNs3DsrLinkKey__getsets[] = {
     {
-        (char*) "m_source", /* attribute name */
-        (getter) _wrap_PyNs3DsrLinkKey__get_m_source, /* C function to get the attribute */
-        (setter) _wrap_PyNs3DsrLinkKey__set_m_source, /* C function to set the attribute */
+        (char*) "m_destination", /* attribute name */
+        (getter) _wrap_PyNs3DsrLinkKey__get_m_destination, /* C function to get the attribute */
+        (setter) _wrap_PyNs3DsrLinkKey__set_m_destination, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "m_nextHop", /* attribute name */
+        (getter) _wrap_PyNs3DsrLinkKey__get_m_nextHop, /* C function to get the attribute */
+        (setter) _wrap_PyNs3DsrLinkKey__set_m_nextHop, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -17918,16 +17925,9 @@ static PyGetSetDef PyNs3DsrLinkKey__getsets[] = {
         NULL /* optional additional data for getter and setter */
     },
     {
-        (char*) "m_destination", /* attribute name */
-        (getter) _wrap_PyNs3DsrLinkKey__get_m_destination, /* C function to get the attribute */
-        (setter) _wrap_PyNs3DsrLinkKey__set_m_destination, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
-        (char*) "m_nextHop", /* attribute name */
-        (getter) _wrap_PyNs3DsrLinkKey__get_m_nextHop, /* C function to get the attribute */
-        (setter) _wrap_PyNs3DsrLinkKey__set_m_nextHop, /* C function to set the attribute */
+        (char*) "m_source", /* attribute name */
+        (getter) _wrap_PyNs3DsrLinkKey__get_m_source, /* C function to get the attribute */
+        (setter) _wrap_PyNs3DsrLinkKey__set_m_source, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -18260,13 +18260,6 @@ static int _wrap_PyNs3DsrNetworkKey__set_m_source(PyNs3DsrNetworkKey *self, PyOb
 }
 static PyGetSetDef PyNs3DsrNetworkKey__getsets[] = {
     {
-        (char*) "m_ourAdd", /* attribute name */
-        (getter) _wrap_PyNs3DsrNetworkKey__get_m_ourAdd, /* C function to get the attribute */
-        (setter) _wrap_PyNs3DsrNetworkKey__set_m_ourAdd, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
         (char*) "m_ackId", /* attribute name */
         (getter) _wrap_PyNs3DsrNetworkKey__get_m_ackId, /* C function to get the attribute */
         (setter) _wrap_PyNs3DsrNetworkKey__set_m_ackId, /* C function to set the attribute */
@@ -18281,16 +18274,23 @@ static PyGetSetDef PyNs3DsrNetworkKey__getsets[] = {
         NULL /* optional additional data for getter and setter */
     },
     {
-        (char*) "m_source", /* attribute name */
-        (getter) _wrap_PyNs3DsrNetworkKey__get_m_source, /* C function to get the attribute */
-        (setter) _wrap_PyNs3DsrNetworkKey__set_m_source, /* C function to set the attribute */
+        (char*) "m_nextHop", /* attribute name */
+        (getter) _wrap_PyNs3DsrNetworkKey__get_m_nextHop, /* C function to get the attribute */
+        (setter) _wrap_PyNs3DsrNetworkKey__set_m_nextHop, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
     {
-        (char*) "m_nextHop", /* attribute name */
-        (getter) _wrap_PyNs3DsrNetworkKey__get_m_nextHop, /* C function to get the attribute */
-        (setter) _wrap_PyNs3DsrNetworkKey__set_m_nextHop, /* C function to set the attribute */
+        (char*) "m_ourAdd", /* attribute name */
+        (getter) _wrap_PyNs3DsrNetworkKey__get_m_ourAdd, /* C function to get the attribute */
+        (setter) _wrap_PyNs3DsrNetworkKey__set_m_ourAdd, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "m_source", /* attribute name */
+        (getter) _wrap_PyNs3DsrNetworkKey__get_m_source, /* C function to get the attribute */
+        (setter) _wrap_PyNs3DsrNetworkKey__set_m_source, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -18597,13 +18597,6 @@ static int _wrap_PyNs3DsrPassiveKey__set_m_source(PyNs3DsrPassiveKey *self, PyOb
 }
 static PyGetSetDef PyNs3DsrPassiveKey__getsets[] = {
     {
-        (char*) "m_segsLeft", /* attribute name */
-        (getter) _wrap_PyNs3DsrPassiveKey__get_m_segsLeft, /* C function to get the attribute */
-        (setter) _wrap_PyNs3DsrPassiveKey__set_m_segsLeft, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
         (char*) "m_ackId", /* attribute name */
         (getter) _wrap_PyNs3DsrPassiveKey__get_m_ackId, /* C function to get the attribute */
         (setter) _wrap_PyNs3DsrPassiveKey__set_m_ackId, /* C function to set the attribute */
@@ -18614,6 +18607,13 @@ static PyGetSetDef PyNs3DsrPassiveKey__getsets[] = {
         (char*) "m_destination", /* attribute name */
         (getter) _wrap_PyNs3DsrPassiveKey__get_m_destination, /* C function to get the attribute */
         (setter) _wrap_PyNs3DsrPassiveKey__set_m_destination, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "m_segsLeft", /* attribute name */
+        (getter) _wrap_PyNs3DsrPassiveKey__get_m_segsLeft, /* C function to get the attribute */
+        (setter) _wrap_PyNs3DsrPassiveKey__set_m_segsLeft, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -18868,16 +18868,16 @@ static int _wrap_PyNs3DsrRreqTableEntry__set_m_reqNo(PyNs3DsrRreqTableEntry *sel
 }
 static PyGetSetDef PyNs3DsrRreqTableEntry__getsets[] = {
     {
-        (char*) "m_reqNo", /* attribute name */
-        (getter) _wrap_PyNs3DsrRreqTableEntry__get_m_reqNo, /* C function to get the attribute */
-        (setter) _wrap_PyNs3DsrRreqTableEntry__set_m_reqNo, /* C function to set the attribute */
+        (char*) "m_expire", /* attribute name */
+        (getter) _wrap_PyNs3DsrRreqTableEntry__get_m_expire, /* C function to get the attribute */
+        (setter) _wrap_PyNs3DsrRreqTableEntry__set_m_expire, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
     {
-        (char*) "m_expire", /* attribute name */
-        (getter) _wrap_PyNs3DsrRreqTableEntry__get_m_expire, /* C function to get the attribute */
-        (setter) _wrap_PyNs3DsrRreqTableEntry__set_m_expire, /* C function to set the attribute */
+        (char*) "m_reqNo", /* attribute name */
+        (getter) _wrap_PyNs3DsrRreqTableEntry__get_m_reqNo, /* C function to get the attribute */
+        (setter) _wrap_PyNs3DsrRreqTableEntry__set_m_reqNo, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -19074,16 +19074,16 @@ PyTypeObject PyNs3DsrRreqTableEntry_Type = {
 
 
 PyObject *
-PyNs3DsrDsrOptionAck__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3DsrDsrOptionAck *self)
+PyNs3DsrDsrOptionAck__PythonHelper::_wrap_DoDispose(PyNs3DsrDsrOptionAck *self)
 {
     PyObject *py_retval;
     PyNs3DsrDsrOptionAck__PythonHelper *helper = dynamic_cast< PyNs3DsrDsrOptionAck__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -19122,16 +19122,16 @@ PyNs3DsrDsrOptionAck__PythonHelper::_wrap_NotifyNewAggregate(PyNs3DsrDsrOptionAc
 }
 
 PyObject *
-PyNs3DsrDsrOptionAck__PythonHelper::_wrap_DoDispose(PyNs3DsrDsrOptionAck *self)
+PyNs3DsrDsrOptionAck__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3DsrDsrOptionAck *self)
 {
     PyObject *py_retval;
     PyNs3DsrDsrOptionAck__PythonHelper *helper = dynamic_cast< PyNs3DsrDsrOptionAck__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -19758,6 +19758,52 @@ int _wrap_PyNs3DsrDsrOptionAck__tp_init(PyNs3DsrDsrOptionAck *self, PyObject *ar
 
 
 PyObject *
+_wrap_PyNs3DsrDsrOptionAck_GetInstanceTypeId(PyNs3DsrDsrOptionAck *self)
+{
+    PyObject *py_retval;
+    PyNs3DsrDsrOptionAck__PythonHelper *helper_class = dynamic_cast<PyNs3DsrDsrOptionAck__PythonHelper*> (self->obj);
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = (helper_class == NULL)? (self->obj->GetInstanceTypeId()) : (self->obj->ns3::dsr::DsrOptionAck::GetInstanceTypeId());
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionAck_GetOptionNumber(PyNs3DsrDsrOptionAck *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    PyNs3DsrDsrOptionAck__PythonHelper *helper_class = dynamic_cast<PyNs3DsrDsrOptionAck__PythonHelper*> (self->obj);
+    
+    retval = (helper_class == NULL)? (self->obj->GetOptionNumber()) : (self->obj->ns3::dsr::DsrOptionAck::GetOptionNumber());
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionAck_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::dsr::DsrOptionAck::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3DsrDsrOptionAck_Process(PyNs3DsrDsrOptionAck *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -19792,52 +19838,6 @@ _wrap_PyNs3DsrDsrOptionAck_Process(PyNs3DsrDsrOptionAck *self, PyObject *args, P
 }
 
 
-PyObject *
-_wrap_PyNs3DsrDsrOptionAck_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::dsr::DsrOptionAck::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionAck_GetOptionNumber(PyNs3DsrDsrOptionAck *self)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    PyNs3DsrDsrOptionAck__PythonHelper *helper_class = dynamic_cast<PyNs3DsrDsrOptionAck__PythonHelper*> (self->obj);
-    
-    retval = (helper_class == NULL)? (self->obj->GetOptionNumber()) : (self->obj->ns3::dsr::DsrOptionAck::GetOptionNumber());
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionAck_GetInstanceTypeId(PyNs3DsrDsrOptionAck *self)
-{
-    PyObject *py_retval;
-    PyNs3DsrDsrOptionAck__PythonHelper *helper_class = dynamic_cast<PyNs3DsrDsrOptionAck__PythonHelper*> (self->obj);
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = (helper_class == NULL)? (self->obj->GetInstanceTypeId()) : (self->obj->ns3::dsr::DsrOptionAck::GetInstanceTypeId());
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3DsrDsrOptionAck__copy__(PyNs3DsrDsrOptionAck *self)
 {
@@ -19854,14 +19854,14 @@ _wrap_PyNs3DsrDsrOptionAck__copy__(PyNs3DsrDsrOptionAck *self)
 }
 
 static PyMethodDef PyNs3DsrDsrOptionAck_methods[] = {
-    {(char *) "Process", (PyCFunction) _wrap_PyNs3DsrDsrOptionAck_Process, METH_KEYWORDS|METH_VARARGS, "Process(packet, dsrP, ipv4Address, source, ipv4Header, protocol, isPromisc, promiscSource)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: dsrP: ns3::Ptr< ns3::Packet >\ntype: ipv4Address: ns3::Ipv4Address\ntype: source: ns3::Ipv4Address\ntype: ipv4Header: ns3::Ipv4Header const &\ntype: protocol: uint8_t\ntype: isPromisc: bool &\ntype: promiscSource: ns3::Ipv4Address" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionAck_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "GetOptionNumber", (PyCFunction) _wrap_PyNs3DsrDsrOptionAck_GetOptionNumber, METH_NOARGS, "GetOptionNumber()\n\n" },
     {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionAck_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3DsrDsrOptionAck__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "GetOptionNumber", (PyCFunction) _wrap_PyNs3DsrDsrOptionAck_GetOptionNumber, METH_NOARGS, "GetOptionNumber()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionAck_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "Process", (PyCFunction) _wrap_PyNs3DsrDsrOptionAck_Process, METH_VARARGS|METH_KEYWORDS, "Process(packet, dsrP, ipv4Address, source, ipv4Header, protocol, isPromisc, promiscSource)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: dsrP: ns3::Ptr< ns3::Packet >\ntype: ipv4Address: ns3::Ipv4Address\ntype: source: ns3::Ipv4Address\ntype: ipv4Header: ns3::Ipv4Header const &\ntype: protocol: uint8_t\ntype: isPromisc: bool &\ntype: promiscSource: ns3::Ipv4Address" },
+    {(char *) "DoDispose", (PyCFunction) PyNs3DsrDsrOptionAck__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3DsrDsrOptionAck__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3DsrDsrOptionAck__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3DsrDsrOptionAck__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3DsrDsrOptionAck__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3DsrDsrOptionAck__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -19961,7 +19961,7 @@ PyTypeObject PyNs3DsrDsrOptionAck_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "DsrOptionAck(arg0)\nDsrOptionAck()",                        /* Documentation string */
     (traverseproc)PyNs3DsrDsrOptionAck__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3DsrDsrOptionAck__tp_clear,             /* tp_clear */
@@ -20059,6 +20059,83 @@ int _wrap_PyNs3DsrDsrOptionAckHeader__tp_init(PyNs3DsrDsrOptionAckHeader *self, 
 
 
 PyObject *
+_wrap_PyNs3DsrDsrOptionAckHeader_Deserialize(PyNs3DsrDsrOptionAckHeader *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    PyNs3BufferIterator *start;
+    const char *keywords[] = {"start", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
+        return NULL;
+    }
+    retval = self->obj->Deserialize(*((PyNs3BufferIterator *) start)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionAckHeader_GetAckId(PyNs3DsrDsrOptionAckHeader *self)
+{
+    PyObject *py_retval;
+    uint16_t retval;
+    
+    retval = self->obj->GetAckId();
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionAckHeader_GetAlignment(PyNs3DsrDsrOptionAckHeader *self)
+{
+    PyObject *py_retval;
+    PyNs3DsrDsrOptionHeaderAlignment *py_Alignment;
+    
+    ns3::dsr::DsrOptionHeader::Alignment retval = self->obj->GetAlignment();
+    py_Alignment = PyObject_New(PyNs3DsrDsrOptionHeaderAlignment, &PyNs3DsrDsrOptionHeaderAlignment_Type);
+    py_Alignment->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Alignment->obj = new ns3::dsr::DsrOptionHeader::Alignment(retval);
+    PyNs3DsrDsrOptionHeaderAlignment_wrapper_registry[(void *) py_Alignment->obj] = (PyObject *) py_Alignment;
+    py_retval = Py_BuildValue((char *) "N", py_Alignment);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionAckHeader_GetInstanceTypeId(PyNs3DsrDsrOptionAckHeader *self)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = self->obj->GetInstanceTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionAckHeader_GetRealDst(PyNs3DsrDsrOptionAckHeader *self)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4Address *py_Ipv4Address;
+    
+    ns3::Ipv4Address retval = self->obj->GetRealDst();
+    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
+    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
+    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
+    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3DsrDsrOptionAckHeader_GetRealSrc(PyNs3DsrDsrOptionAckHeader *self)
 {
     PyObject *py_retval;
@@ -20075,51 +20152,12 @@ _wrap_PyNs3DsrDsrOptionAckHeader_GetRealSrc(PyNs3DsrDsrOptionAckHeader *self)
 
 
 PyObject *
-_wrap_PyNs3DsrDsrOptionAckHeader_Serialize(PyNs3DsrDsrOptionAckHeader *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3BufferIterator *start;
-    const char *keywords[] = {"start", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
-        return NULL;
-    }
-    self->obj->Serialize(*((PyNs3BufferIterator *) start)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionAckHeader_SetRealSrc(PyNs3DsrDsrOptionAckHeader *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Ipv4Address *realSrcAddress;
-    const char *keywords[] = {"realSrcAddress", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &realSrcAddress)) {
-        return NULL;
-    }
-    self->obj->SetRealSrc(*((PyNs3Ipv4Address *) realSrcAddress)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionAckHeader_Deserialize(PyNs3DsrDsrOptionAckHeader *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3DsrDsrOptionAckHeader_GetSerializedSize(PyNs3DsrDsrOptionAckHeader *self)
 {
     PyObject *py_retval;
     uint32_t retval;
-    PyNs3BufferIterator *start;
-    const char *keywords[] = {"start", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
-        return NULL;
-    }
-    retval = self->obj->Deserialize(*((PyNs3BufferIterator *) start)->obj);
+    retval = self->obj->GetSerializedSize();
     py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
@@ -20142,29 +20180,18 @@ _wrap_PyNs3DsrDsrOptionAckHeader_GetTypeId(void)
 
 
 PyObject *
-_wrap_PyNs3DsrDsrOptionAckHeader_GetAlignment(PyNs3DsrDsrOptionAckHeader *self)
+_wrap_PyNs3DsrDsrOptionAckHeader_Serialize(PyNs3DsrDsrOptionAckHeader *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3DsrDsrOptionHeaderAlignment *py_Alignment;
+    PyNs3BufferIterator *start;
+    const char *keywords[] = {"start", NULL};
     
-    ns3::dsr::DsrOptionHeader::Alignment retval = self->obj->GetAlignment();
-    py_Alignment = PyObject_New(PyNs3DsrDsrOptionHeaderAlignment, &PyNs3DsrDsrOptionHeaderAlignment_Type);
-    py_Alignment->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Alignment->obj = new ns3::dsr::DsrOptionHeader::Alignment(retval);
-    PyNs3DsrDsrOptionHeaderAlignment_wrapper_registry[(void *) py_Alignment->obj] = (PyObject *) py_Alignment;
-    py_retval = Py_BuildValue((char *) "N", py_Alignment);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionAckHeader_GetSerializedSize(PyNs3DsrDsrOptionAckHeader *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetSerializedSize();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
+        return NULL;
+    }
+    self->obj->Serialize(*((PyNs3BufferIterator *) start)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -20191,50 +20218,6 @@ _wrap_PyNs3DsrDsrOptionAckHeader_SetAckId(PyNs3DsrDsrOptionAckHeader *self, PyOb
 
 
 PyObject *
-_wrap_PyNs3DsrDsrOptionAckHeader_GetInstanceTypeId(PyNs3DsrDsrOptionAckHeader *self)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = self->obj->GetInstanceTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionAckHeader_GetAckId(PyNs3DsrDsrOptionAckHeader *self)
-{
-    PyObject *py_retval;
-    uint16_t retval;
-    
-    retval = self->obj->GetAckId();
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionAckHeader_GetRealDst(PyNs3DsrDsrOptionAckHeader *self)
-{
-    PyObject *py_retval;
-    PyNs3Ipv4Address *py_Ipv4Address;
-    
-    ns3::Ipv4Address retval = self->obj->GetRealDst();
-    py_Ipv4Address = PyObject_New(PyNs3Ipv4Address, &PyNs3Ipv4Address_Type);
-    py_Ipv4Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Ipv4Address->obj = new ns3::Ipv4Address(retval);
-    PyNs3Ipv4Address_wrapper_registry[(void *) py_Ipv4Address->obj] = (PyObject *) py_Ipv4Address;
-    py_retval = Py_BuildValue((char *) "N", py_Ipv4Address);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3DsrDsrOptionAckHeader_SetRealDst(PyNs3DsrDsrOptionAckHeader *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -20245,6 +20228,23 @@ _wrap_PyNs3DsrDsrOptionAckHeader_SetRealDst(PyNs3DsrDsrOptionAckHeader *self, Py
         return NULL;
     }
     self->obj->SetRealDst(*((PyNs3Ipv4Address *) realDstAddress)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionAckHeader_SetRealSrc(PyNs3DsrDsrOptionAckHeader *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4Address *realSrcAddress;
+    const char *keywords[] = {"realSrcAddress", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &realSrcAddress)) {
+        return NULL;
+    }
+    self->obj->SetRealSrc(*((PyNs3Ipv4Address *) realSrcAddress)->obj);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -20266,18 +20266,18 @@ _wrap_PyNs3DsrDsrOptionAckHeader__copy__(PyNs3DsrDsrOptionAckHeader *self)
 }
 
 static PyMethodDef PyNs3DsrDsrOptionAckHeader_methods[] = {
-    {(char *) "GetRealSrc", (PyCFunction) _wrap_PyNs3DsrDsrOptionAckHeader_GetRealSrc, METH_NOARGS, "GetRealSrc()\n\n" },
-    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3DsrDsrOptionAckHeader_Serialize, METH_KEYWORDS|METH_VARARGS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
-    {(char *) "SetRealSrc", (PyCFunction) _wrap_PyNs3DsrDsrOptionAckHeader_SetRealSrc, METH_KEYWORDS|METH_VARARGS, "SetRealSrc(realSrcAddress)\n\ntype: realSrcAddress: ns3::Ipv4Address" },
-    {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3DsrDsrOptionAckHeader_Deserialize, METH_KEYWORDS|METH_VARARGS, "Deserialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionAckHeader_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "GetAlignment", (PyCFunction) _wrap_PyNs3DsrDsrOptionAckHeader_GetAlignment, METH_NOARGS, "GetAlignment()\n\n" },
-    {(char *) "GetSerializedSize", (PyCFunction) _wrap_PyNs3DsrDsrOptionAckHeader_GetSerializedSize, METH_NOARGS, "GetSerializedSize()\n\n" },
-    {(char *) "SetAckId", (PyCFunction) _wrap_PyNs3DsrDsrOptionAckHeader_SetAckId, METH_KEYWORDS|METH_VARARGS, "SetAckId(identification)\n\ntype: identification: uint16_t" },
-    {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionAckHeader_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
+    {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3DsrDsrOptionAckHeader_Deserialize, METH_VARARGS|METH_KEYWORDS, "Deserialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
     {(char *) "GetAckId", (PyCFunction) _wrap_PyNs3DsrDsrOptionAckHeader_GetAckId, METH_NOARGS, "GetAckId()\n\n" },
+    {(char *) "GetAlignment", (PyCFunction) _wrap_PyNs3DsrDsrOptionAckHeader_GetAlignment, METH_NOARGS, "GetAlignment()\n\n" },
+    {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionAckHeader_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
     {(char *) "GetRealDst", (PyCFunction) _wrap_PyNs3DsrDsrOptionAckHeader_GetRealDst, METH_NOARGS, "GetRealDst()\n\n" },
-    {(char *) "SetRealDst", (PyCFunction) _wrap_PyNs3DsrDsrOptionAckHeader_SetRealDst, METH_KEYWORDS|METH_VARARGS, "SetRealDst(realDstAddress)\n\ntype: realDstAddress: ns3::Ipv4Address" },
+    {(char *) "GetRealSrc", (PyCFunction) _wrap_PyNs3DsrDsrOptionAckHeader_GetRealSrc, METH_NOARGS, "GetRealSrc()\n\n" },
+    {(char *) "GetSerializedSize", (PyCFunction) _wrap_PyNs3DsrDsrOptionAckHeader_GetSerializedSize, METH_NOARGS, "GetSerializedSize()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionAckHeader_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3DsrDsrOptionAckHeader_Serialize, METH_VARARGS|METH_KEYWORDS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
+    {(char *) "SetAckId", (PyCFunction) _wrap_PyNs3DsrDsrOptionAckHeader_SetAckId, METH_VARARGS|METH_KEYWORDS, "SetAckId(identification)\n\ntype: identification: uint16_t" },
+    {(char *) "SetRealDst", (PyCFunction) _wrap_PyNs3DsrDsrOptionAckHeader_SetRealDst, METH_VARARGS|METH_KEYWORDS, "SetRealDst(realDstAddress)\n\ntype: realDstAddress: ns3::Ipv4Address" },
+    {(char *) "SetRealSrc", (PyCFunction) _wrap_PyNs3DsrDsrOptionAckHeader_SetRealSrc, METH_VARARGS|METH_KEYWORDS, "SetRealSrc(realSrcAddress)\n\ntype: realSrcAddress: ns3::Ipv4Address" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3DsrDsrOptionAckHeader__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -20374,7 +20374,7 @@ PyTypeObject PyNs3DsrDsrOptionAckHeader_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "DsrOptionAckHeader(arg0)\nDsrOptionAckHeader()",                        /* Documentation string */
     (traverseproc)PyNs3DsrDsrOptionAckHeader__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3DsrDsrOptionAckHeader__tp_clear,             /* tp_clear */
@@ -20407,16 +20407,16 @@ PyTypeObject PyNs3DsrDsrOptionAckHeader_Type = {
 
 
 PyObject *
-PyNs3DsrDsrOptionAckReq__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3DsrDsrOptionAckReq *self)
+PyNs3DsrDsrOptionAckReq__PythonHelper::_wrap_DoDispose(PyNs3DsrDsrOptionAckReq *self)
 {
     PyObject *py_retval;
     PyNs3DsrDsrOptionAckReq__PythonHelper *helper = dynamic_cast< PyNs3DsrDsrOptionAckReq__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -20455,16 +20455,16 @@ PyNs3DsrDsrOptionAckReq__PythonHelper::_wrap_NotifyNewAggregate(PyNs3DsrDsrOptio
 }
 
 PyObject *
-PyNs3DsrDsrOptionAckReq__PythonHelper::_wrap_DoDispose(PyNs3DsrDsrOptionAckReq *self)
+PyNs3DsrDsrOptionAckReq__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3DsrDsrOptionAckReq *self)
 {
     PyObject *py_retval;
     PyNs3DsrDsrOptionAckReq__PythonHelper *helper = dynamic_cast< PyNs3DsrDsrOptionAckReq__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -21091,6 +21091,52 @@ int _wrap_PyNs3DsrDsrOptionAckReq__tp_init(PyNs3DsrDsrOptionAckReq *self, PyObje
 
 
 PyObject *
+_wrap_PyNs3DsrDsrOptionAckReq_GetInstanceTypeId(PyNs3DsrDsrOptionAckReq *self)
+{
+    PyObject *py_retval;
+    PyNs3DsrDsrOptionAckReq__PythonHelper *helper_class = dynamic_cast<PyNs3DsrDsrOptionAckReq__PythonHelper*> (self->obj);
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = (helper_class == NULL)? (self->obj->GetInstanceTypeId()) : (self->obj->ns3::dsr::DsrOptionAckReq::GetInstanceTypeId());
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionAckReq_GetOptionNumber(PyNs3DsrDsrOptionAckReq *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    PyNs3DsrDsrOptionAckReq__PythonHelper *helper_class = dynamic_cast<PyNs3DsrDsrOptionAckReq__PythonHelper*> (self->obj);
+    
+    retval = (helper_class == NULL)? (self->obj->GetOptionNumber()) : (self->obj->ns3::dsr::DsrOptionAckReq::GetOptionNumber());
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionAckReq_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::dsr::DsrOptionAckReq::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3DsrDsrOptionAckReq_Process(PyNs3DsrDsrOptionAckReq *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -21125,52 +21171,6 @@ _wrap_PyNs3DsrDsrOptionAckReq_Process(PyNs3DsrDsrOptionAckReq *self, PyObject *a
 }
 
 
-PyObject *
-_wrap_PyNs3DsrDsrOptionAckReq_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::dsr::DsrOptionAckReq::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionAckReq_GetOptionNumber(PyNs3DsrDsrOptionAckReq *self)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    PyNs3DsrDsrOptionAckReq__PythonHelper *helper_class = dynamic_cast<PyNs3DsrDsrOptionAckReq__PythonHelper*> (self->obj);
-    
-    retval = (helper_class == NULL)? (self->obj->GetOptionNumber()) : (self->obj->ns3::dsr::DsrOptionAckReq::GetOptionNumber());
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionAckReq_GetInstanceTypeId(PyNs3DsrDsrOptionAckReq *self)
-{
-    PyObject *py_retval;
-    PyNs3DsrDsrOptionAckReq__PythonHelper *helper_class = dynamic_cast<PyNs3DsrDsrOptionAckReq__PythonHelper*> (self->obj);
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = (helper_class == NULL)? (self->obj->GetInstanceTypeId()) : (self->obj->ns3::dsr::DsrOptionAckReq::GetInstanceTypeId());
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3DsrDsrOptionAckReq__copy__(PyNs3DsrDsrOptionAckReq *self)
 {
@@ -21187,14 +21187,14 @@ _wrap_PyNs3DsrDsrOptionAckReq__copy__(PyNs3DsrDsrOptionAckReq *self)
 }
 
 static PyMethodDef PyNs3DsrDsrOptionAckReq_methods[] = {
-    {(char *) "Process", (PyCFunction) _wrap_PyNs3DsrDsrOptionAckReq_Process, METH_KEYWORDS|METH_VARARGS, "Process(packet, dsrP, ipv4Address, source, ipv4Header, protocol, isPromisc, promiscSource)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: dsrP: ns3::Ptr< ns3::Packet >\ntype: ipv4Address: ns3::Ipv4Address\ntype: source: ns3::Ipv4Address\ntype: ipv4Header: ns3::Ipv4Header const &\ntype: protocol: uint8_t\ntype: isPromisc: bool &\ntype: promiscSource: ns3::Ipv4Address" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionAckReq_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "GetOptionNumber", (PyCFunction) _wrap_PyNs3DsrDsrOptionAckReq_GetOptionNumber, METH_NOARGS, "GetOptionNumber()\n\n" },
     {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionAckReq_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3DsrDsrOptionAckReq__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "GetOptionNumber", (PyCFunction) _wrap_PyNs3DsrDsrOptionAckReq_GetOptionNumber, METH_NOARGS, "GetOptionNumber()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionAckReq_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "Process", (PyCFunction) _wrap_PyNs3DsrDsrOptionAckReq_Process, METH_VARARGS|METH_KEYWORDS, "Process(packet, dsrP, ipv4Address, source, ipv4Header, protocol, isPromisc, promiscSource)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: dsrP: ns3::Ptr< ns3::Packet >\ntype: ipv4Address: ns3::Ipv4Address\ntype: source: ns3::Ipv4Address\ntype: ipv4Header: ns3::Ipv4Header const &\ntype: protocol: uint8_t\ntype: isPromisc: bool &\ntype: promiscSource: ns3::Ipv4Address" },
+    {(char *) "DoDispose", (PyCFunction) PyNs3DsrDsrOptionAckReq__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3DsrDsrOptionAckReq__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3DsrDsrOptionAckReq__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3DsrDsrOptionAckReq__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3DsrDsrOptionAckReq__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3DsrDsrOptionAckReq__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -21294,7 +21294,7 @@ PyTypeObject PyNs3DsrDsrOptionAckReq_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "DsrOptionAckReq(arg0)\nDsrOptionAckReq()",                        /* Documentation string */
     (traverseproc)PyNs3DsrDsrOptionAckReq__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3DsrDsrOptionAckReq__tp_clear,             /* tp_clear */
@@ -21392,23 +21392,6 @@ int _wrap_PyNs3DsrDsrOptionAckReqHeader__tp_init(PyNs3DsrDsrOptionAckReqHeader *
 
 
 PyObject *
-_wrap_PyNs3DsrDsrOptionAckReqHeader_Serialize(PyNs3DsrDsrOptionAckReqHeader *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3BufferIterator *start;
-    const char *keywords[] = {"start", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
-        return NULL;
-    }
-    self->obj->Serialize(*((PyNs3BufferIterator *) start)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3DsrDsrOptionAckReqHeader_Deserialize(PyNs3DsrDsrOptionAckReqHeader *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -21420,6 +21403,62 @@ _wrap_PyNs3DsrDsrOptionAckReqHeader_Deserialize(PyNs3DsrDsrOptionAckReqHeader *s
         return NULL;
     }
     retval = self->obj->Deserialize(*((PyNs3BufferIterator *) start)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionAckReqHeader_GetAckId(PyNs3DsrDsrOptionAckReqHeader *self)
+{
+    PyObject *py_retval;
+    uint16_t retval;
+    
+    retval = self->obj->GetAckId();
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionAckReqHeader_GetAlignment(PyNs3DsrDsrOptionAckReqHeader *self)
+{
+    PyObject *py_retval;
+    PyNs3DsrDsrOptionHeaderAlignment *py_Alignment;
+    
+    ns3::dsr::DsrOptionHeader::Alignment retval = self->obj->GetAlignment();
+    py_Alignment = PyObject_New(PyNs3DsrDsrOptionHeaderAlignment, &PyNs3DsrDsrOptionHeaderAlignment_Type);
+    py_Alignment->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Alignment->obj = new ns3::dsr::DsrOptionHeader::Alignment(retval);
+    PyNs3DsrDsrOptionHeaderAlignment_wrapper_registry[(void *) py_Alignment->obj] = (PyObject *) py_Alignment;
+    py_retval = Py_BuildValue((char *) "N", py_Alignment);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionAckReqHeader_GetInstanceTypeId(PyNs3DsrDsrOptionAckReqHeader *self)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = self->obj->GetInstanceTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionAckReqHeader_GetSerializedSize(PyNs3DsrDsrOptionAckReqHeader *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetSerializedSize();
     py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
@@ -21442,29 +21481,18 @@ _wrap_PyNs3DsrDsrOptionAckReqHeader_GetTypeId(void)
 
 
 PyObject *
-_wrap_PyNs3DsrDsrOptionAckReqHeader_GetAlignment(PyNs3DsrDsrOptionAckReqHeader *self)
+_wrap_PyNs3DsrDsrOptionAckReqHeader_Serialize(PyNs3DsrDsrOptionAckReqHeader *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3DsrDsrOptionHeaderAlignment *py_Alignment;
+    PyNs3BufferIterator *start;
+    const char *keywords[] = {"start", NULL};
     
-    ns3::dsr::DsrOptionHeader::Alignment retval = self->obj->GetAlignment();
-    py_Alignment = PyObject_New(PyNs3DsrDsrOptionHeaderAlignment, &PyNs3DsrDsrOptionHeaderAlignment_Type);
-    py_Alignment->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Alignment->obj = new ns3::dsr::DsrOptionHeader::Alignment(retval);
-    PyNs3DsrDsrOptionHeaderAlignment_wrapper_registry[(void *) py_Alignment->obj] = (PyObject *) py_Alignment;
-    py_retval = Py_BuildValue((char *) "N", py_Alignment);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionAckReqHeader_GetSerializedSize(PyNs3DsrDsrOptionAckReqHeader *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetSerializedSize();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
+        return NULL;
+    }
+    self->obj->Serialize(*((PyNs3BufferIterator *) start)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -21490,34 +21518,6 @@ _wrap_PyNs3DsrDsrOptionAckReqHeader_SetAckId(PyNs3DsrDsrOptionAckReqHeader *self
 }
 
 
-PyObject *
-_wrap_PyNs3DsrDsrOptionAckReqHeader_GetInstanceTypeId(PyNs3DsrDsrOptionAckReqHeader *self)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = self->obj->GetInstanceTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionAckReqHeader_GetAckId(PyNs3DsrDsrOptionAckReqHeader *self)
-{
-    PyObject *py_retval;
-    uint16_t retval;
-    
-    retval = self->obj->GetAckId();
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3DsrDsrOptionAckReqHeader__copy__(PyNs3DsrDsrOptionAckReqHeader *self)
 {
@@ -21533,14 +21533,14 @@ _wrap_PyNs3DsrDsrOptionAckReqHeader__copy__(PyNs3DsrDsrOptionAckReqHeader *self)
 }
 
 static PyMethodDef PyNs3DsrDsrOptionAckReqHeader_methods[] = {
-    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3DsrDsrOptionAckReqHeader_Serialize, METH_KEYWORDS|METH_VARARGS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
-    {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3DsrDsrOptionAckReqHeader_Deserialize, METH_KEYWORDS|METH_VARARGS, "Deserialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionAckReqHeader_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "GetAlignment", (PyCFunction) _wrap_PyNs3DsrDsrOptionAckReqHeader_GetAlignment, METH_NOARGS, "GetAlignment()\n\n" },
-    {(char *) "GetSerializedSize", (PyCFunction) _wrap_PyNs3DsrDsrOptionAckReqHeader_GetSerializedSize, METH_NOARGS, "GetSerializedSize()\n\n" },
-    {(char *) "SetAckId", (PyCFunction) _wrap_PyNs3DsrDsrOptionAckReqHeader_SetAckId, METH_KEYWORDS|METH_VARARGS, "SetAckId(identification)\n\ntype: identification: uint16_t" },
-    {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionAckReqHeader_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
+    {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3DsrDsrOptionAckReqHeader_Deserialize, METH_VARARGS|METH_KEYWORDS, "Deserialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
     {(char *) "GetAckId", (PyCFunction) _wrap_PyNs3DsrDsrOptionAckReqHeader_GetAckId, METH_NOARGS, "GetAckId()\n\n" },
+    {(char *) "GetAlignment", (PyCFunction) _wrap_PyNs3DsrDsrOptionAckReqHeader_GetAlignment, METH_NOARGS, "GetAlignment()\n\n" },
+    {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionAckReqHeader_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
+    {(char *) "GetSerializedSize", (PyCFunction) _wrap_PyNs3DsrDsrOptionAckReqHeader_GetSerializedSize, METH_NOARGS, "GetSerializedSize()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionAckReqHeader_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3DsrDsrOptionAckReqHeader_Serialize, METH_VARARGS|METH_KEYWORDS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
+    {(char *) "SetAckId", (PyCFunction) _wrap_PyNs3DsrDsrOptionAckReqHeader_SetAckId, METH_VARARGS|METH_KEYWORDS, "SetAckId(identification)\n\ntype: identification: uint16_t" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3DsrDsrOptionAckReqHeader__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -21637,7 +21637,7 @@ PyTypeObject PyNs3DsrDsrOptionAckReqHeader_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "DsrOptionAckReqHeader(arg0)\nDsrOptionAckReqHeader()",                        /* Documentation string */
     (traverseproc)PyNs3DsrDsrOptionAckReqHeader__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3DsrDsrOptionAckReqHeader__tp_clear,             /* tp_clear */
@@ -21670,16 +21670,16 @@ PyTypeObject PyNs3DsrDsrOptionAckReqHeader_Type = {
 
 
 PyObject *
-PyNs3DsrDsrOptionPad1__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3DsrDsrOptionPad1 *self)
+PyNs3DsrDsrOptionPad1__PythonHelper::_wrap_DoDispose(PyNs3DsrDsrOptionPad1 *self)
 {
     PyObject *py_retval;
     PyNs3DsrDsrOptionPad1__PythonHelper *helper = dynamic_cast< PyNs3DsrDsrOptionPad1__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -21718,16 +21718,16 @@ PyNs3DsrDsrOptionPad1__PythonHelper::_wrap_NotifyNewAggregate(PyNs3DsrDsrOptionP
 }
 
 PyObject *
-PyNs3DsrDsrOptionPad1__PythonHelper::_wrap_DoDispose(PyNs3DsrDsrOptionPad1 *self)
+PyNs3DsrDsrOptionPad1__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3DsrDsrOptionPad1 *self)
 {
     PyObject *py_retval;
     PyNs3DsrDsrOptionPad1__PythonHelper *helper = dynamic_cast< PyNs3DsrDsrOptionPad1__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -22354,6 +22354,35 @@ int _wrap_PyNs3DsrDsrOptionPad1__tp_init(PyNs3DsrDsrOptionPad1 *self, PyObject *
 
 
 PyObject *
+_wrap_PyNs3DsrDsrOptionPad1_GetOptionNumber(PyNs3DsrDsrOptionPad1 *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    PyNs3DsrDsrOptionPad1__PythonHelper *helper_class = dynamic_cast<PyNs3DsrDsrOptionPad1__PythonHelper*> (self->obj);
+    
+    retval = (helper_class == NULL)? (self->obj->GetOptionNumber()) : (self->obj->ns3::dsr::DsrOptionPad1::GetOptionNumber());
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionPad1_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::dsr::DsrOptionPad1::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3DsrDsrOptionPad1_Process(PyNs3DsrDsrOptionPad1 *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -22388,35 +22417,6 @@ _wrap_PyNs3DsrDsrOptionPad1_Process(PyNs3DsrDsrOptionPad1 *self, PyObject *args,
 }
 
 
-PyObject *
-_wrap_PyNs3DsrDsrOptionPad1_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::dsr::DsrOptionPad1::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionPad1_GetOptionNumber(PyNs3DsrDsrOptionPad1 *self)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    PyNs3DsrDsrOptionPad1__PythonHelper *helper_class = dynamic_cast<PyNs3DsrDsrOptionPad1__PythonHelper*> (self->obj);
-    
-    retval = (helper_class == NULL)? (self->obj->GetOptionNumber()) : (self->obj->ns3::dsr::DsrOptionPad1::GetOptionNumber());
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3DsrDsrOptionPad1__copy__(PyNs3DsrDsrOptionPad1 *self)
 {
@@ -22433,13 +22433,13 @@ _wrap_PyNs3DsrDsrOptionPad1__copy__(PyNs3DsrDsrOptionPad1 *self)
 }
 
 static PyMethodDef PyNs3DsrDsrOptionPad1_methods[] = {
-    {(char *) "Process", (PyCFunction) _wrap_PyNs3DsrDsrOptionPad1_Process, METH_KEYWORDS|METH_VARARGS, "Process(packet, dsrP, ipv4Address, source, ipv4Header, protocol, isPromisc, promiscSource)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: dsrP: ns3::Ptr< ns3::Packet >\ntype: ipv4Address: ns3::Ipv4Address\ntype: source: ns3::Ipv4Address\ntype: ipv4Header: ns3::Ipv4Header const &\ntype: protocol: uint8_t\ntype: isPromisc: bool &\ntype: promiscSource: ns3::Ipv4Address" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionPad1_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
     {(char *) "GetOptionNumber", (PyCFunction) _wrap_PyNs3DsrDsrOptionPad1_GetOptionNumber, METH_NOARGS, "GetOptionNumber()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3DsrDsrOptionPad1__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionPad1_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "Process", (PyCFunction) _wrap_PyNs3DsrDsrOptionPad1_Process, METH_VARARGS|METH_KEYWORDS, "Process(packet, dsrP, ipv4Address, source, ipv4Header, protocol, isPromisc, promiscSource)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: dsrP: ns3::Ptr< ns3::Packet >\ntype: ipv4Address: ns3::Ipv4Address\ntype: source: ns3::Ipv4Address\ntype: ipv4Header: ns3::Ipv4Header const &\ntype: protocol: uint8_t\ntype: isPromisc: bool &\ntype: promiscSource: ns3::Ipv4Address" },
+    {(char *) "DoDispose", (PyCFunction) PyNs3DsrDsrOptionPad1__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3DsrDsrOptionPad1__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3DsrDsrOptionPad1__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3DsrDsrOptionPad1__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3DsrDsrOptionPad1__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3DsrDsrOptionPad1__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -22539,7 +22539,7 @@ PyTypeObject PyNs3DsrDsrOptionPad1_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "DsrOptionPad1(arg0)\nDsrOptionPad1()",                        /* Documentation string */
     (traverseproc)PyNs3DsrDsrOptionPad1__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3DsrDsrOptionPad1__tp_clear,             /* tp_clear */
@@ -22572,16 +22572,16 @@ PyTypeObject PyNs3DsrDsrOptionPad1_Type = {
 
 
 PyObject *
-PyNs3DsrDsrOptionPadn__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3DsrDsrOptionPadn *self)
+PyNs3DsrDsrOptionPadn__PythonHelper::_wrap_DoDispose(PyNs3DsrDsrOptionPadn *self)
 {
     PyObject *py_retval;
     PyNs3DsrDsrOptionPadn__PythonHelper *helper = dynamic_cast< PyNs3DsrDsrOptionPadn__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -22620,16 +22620,16 @@ PyNs3DsrDsrOptionPadn__PythonHelper::_wrap_NotifyNewAggregate(PyNs3DsrDsrOptionP
 }
 
 PyObject *
-PyNs3DsrDsrOptionPadn__PythonHelper::_wrap_DoDispose(PyNs3DsrDsrOptionPadn *self)
+PyNs3DsrDsrOptionPadn__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3DsrDsrOptionPadn *self)
 {
     PyObject *py_retval;
     PyNs3DsrDsrOptionPadn__PythonHelper *helper = dynamic_cast< PyNs3DsrDsrOptionPadn__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -23256,6 +23256,35 @@ int _wrap_PyNs3DsrDsrOptionPadn__tp_init(PyNs3DsrDsrOptionPadn *self, PyObject *
 
 
 PyObject *
+_wrap_PyNs3DsrDsrOptionPadn_GetOptionNumber(PyNs3DsrDsrOptionPadn *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    PyNs3DsrDsrOptionPadn__PythonHelper *helper_class = dynamic_cast<PyNs3DsrDsrOptionPadn__PythonHelper*> (self->obj);
+    
+    retval = (helper_class == NULL)? (self->obj->GetOptionNumber()) : (self->obj->ns3::dsr::DsrOptionPadn::GetOptionNumber());
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionPadn_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::dsr::DsrOptionPadn::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3DsrDsrOptionPadn_Process(PyNs3DsrDsrOptionPadn *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -23290,35 +23319,6 @@ _wrap_PyNs3DsrDsrOptionPadn_Process(PyNs3DsrDsrOptionPadn *self, PyObject *args,
 }
 
 
-PyObject *
-_wrap_PyNs3DsrDsrOptionPadn_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::dsr::DsrOptionPadn::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionPadn_GetOptionNumber(PyNs3DsrDsrOptionPadn *self)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    PyNs3DsrDsrOptionPadn__PythonHelper *helper_class = dynamic_cast<PyNs3DsrDsrOptionPadn__PythonHelper*> (self->obj);
-    
-    retval = (helper_class == NULL)? (self->obj->GetOptionNumber()) : (self->obj->ns3::dsr::DsrOptionPadn::GetOptionNumber());
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3DsrDsrOptionPadn__copy__(PyNs3DsrDsrOptionPadn *self)
 {
@@ -23335,13 +23335,13 @@ _wrap_PyNs3DsrDsrOptionPadn__copy__(PyNs3DsrDsrOptionPadn *self)
 }
 
 static PyMethodDef PyNs3DsrDsrOptionPadn_methods[] = {
-    {(char *) "Process", (PyCFunction) _wrap_PyNs3DsrDsrOptionPadn_Process, METH_KEYWORDS|METH_VARARGS, "Process(packet, dsrP, ipv4Address, source, ipv4Header, protocol, isPromisc, promiscSource)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: dsrP: ns3::Ptr< ns3::Packet >\ntype: ipv4Address: ns3::Ipv4Address\ntype: source: ns3::Ipv4Address\ntype: ipv4Header: ns3::Ipv4Header const &\ntype: protocol: uint8_t\ntype: isPromisc: bool &\ntype: promiscSource: ns3::Ipv4Address" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionPadn_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
     {(char *) "GetOptionNumber", (PyCFunction) _wrap_PyNs3DsrDsrOptionPadn_GetOptionNumber, METH_NOARGS, "GetOptionNumber()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3DsrDsrOptionPadn__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionPadn_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "Process", (PyCFunction) _wrap_PyNs3DsrDsrOptionPadn_Process, METH_VARARGS|METH_KEYWORDS, "Process(packet, dsrP, ipv4Address, source, ipv4Header, protocol, isPromisc, promiscSource)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: dsrP: ns3::Ptr< ns3::Packet >\ntype: ipv4Address: ns3::Ipv4Address\ntype: source: ns3::Ipv4Address\ntype: ipv4Header: ns3::Ipv4Header const &\ntype: protocol: uint8_t\ntype: isPromisc: bool &\ntype: promiscSource: ns3::Ipv4Address" },
+    {(char *) "DoDispose", (PyCFunction) PyNs3DsrDsrOptionPadn__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3DsrDsrOptionPadn__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3DsrDsrOptionPadn__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3DsrDsrOptionPadn__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3DsrDsrOptionPadn__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3DsrDsrOptionPadn__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -23441,7 +23441,7 @@ PyTypeObject PyNs3DsrDsrOptionPadn_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "DsrOptionPadn(arg0)\nDsrOptionPadn()",                        /* Documentation string */
     (traverseproc)PyNs3DsrDsrOptionPadn__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3DsrDsrOptionPadn__tp_clear,             /* tp_clear */
@@ -23474,16 +23474,16 @@ PyTypeObject PyNs3DsrDsrOptionPadn_Type = {
 
 
 PyObject *
-PyNs3DsrDsrOptionRerr__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3DsrDsrOptionRerr *self)
+PyNs3DsrDsrOptionRerr__PythonHelper::_wrap_DoDispose(PyNs3DsrDsrOptionRerr *self)
 {
     PyObject *py_retval;
     PyNs3DsrDsrOptionRerr__PythonHelper *helper = dynamic_cast< PyNs3DsrDsrOptionRerr__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -23522,16 +23522,16 @@ PyNs3DsrDsrOptionRerr__PythonHelper::_wrap_NotifyNewAggregate(PyNs3DsrDsrOptionR
 }
 
 PyObject *
-PyNs3DsrDsrOptionRerr__PythonHelper::_wrap_DoDispose(PyNs3DsrDsrOptionRerr *self)
+PyNs3DsrDsrOptionRerr__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3DsrDsrOptionRerr *self)
 {
     PyObject *py_retval;
     PyNs3DsrDsrOptionRerr__PythonHelper *helper = dynamic_cast< PyNs3DsrDsrOptionRerr__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -24158,41 +24158,6 @@ int _wrap_PyNs3DsrDsrOptionRerr__tp_init(PyNs3DsrDsrOptionRerr *self, PyObject *
 
 
 PyObject *
-_wrap_PyNs3DsrDsrOptionRerr_Process(PyNs3DsrDsrOptionRerr *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    PyNs3Packet *packet;
-    ns3::Packet *packet_ptr;
-    PyNs3Packet *dsrP;
-    ns3::Packet *dsrP_ptr;
-    PyNs3Ipv4Address *ipv4Address;
-    PyNs3Ipv4Address *source;
-    PyNs3Ipv4Header *ipv4Header;
-    int protocol;
-    bool isPromisc;
-    PyObject *py_isPromisc;
-    PyNs3Ipv4Address *promiscSource;
-    PyNs3DsrDsrOptionRerr__PythonHelper *helper_class = dynamic_cast<PyNs3DsrDsrOptionRerr__PythonHelper*> (self->obj);
-    const char *keywords[] = {"packet", "dsrP", "ipv4Address", "source", "ipv4Header", "protocol", "isPromisc", "promiscSource", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!O!O!O!iOO!", (char **) keywords, &PyNs3Packet_Type, &packet, &PyNs3Packet_Type, &dsrP, &PyNs3Ipv4Address_Type, &ipv4Address, &PyNs3Ipv4Address_Type, &source, &PyNs3Ipv4Header_Type, &ipv4Header, &protocol, &py_isPromisc, &PyNs3Ipv4Address_Type, &promiscSource)) {
-        return NULL;
-    }
-    packet_ptr = (packet ? packet->obj : NULL);
-    dsrP_ptr = (dsrP ? dsrP->obj : NULL);
-    if (protocol > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    isPromisc = PyObject_IsTrue(py_isPromisc);
-    retval = (helper_class == NULL)? (self->obj->Process(ns3::Ptr< ns3::Packet  > (packet_ptr), ns3::Ptr< ns3::Packet  > (dsrP_ptr), *((PyNs3Ipv4Address *) ipv4Address)->obj, *((PyNs3Ipv4Address *) source)->obj, *((PyNs3Ipv4Header *) ipv4Header)->obj, protocol, isPromisc, *((PyNs3Ipv4Address *) promiscSource)->obj)) : (self->obj->ns3::dsr::DsrOptionRerr::Process(ns3::Ptr< ns3::Packet  > (packet_ptr), ns3::Ptr< ns3::Packet  > (dsrP_ptr), *((PyNs3Ipv4Address *) ipv4Address)->obj, *((PyNs3Ipv4Address *) source)->obj, *((PyNs3Ipv4Header *) ipv4Header)->obj, protocol, isPromisc, *((PyNs3Ipv4Address *) promiscSource)->obj));
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3DsrDsrOptionRerr_DoSendError(PyNs3DsrDsrOptionRerr *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -24215,6 +24180,23 @@ _wrap_PyNs3DsrDsrOptionRerr_DoSendError(PyNs3DsrDsrOptionRerr *self, PyObject *a
     }
     retval = self->obj->DoSendError(ns3::Ptr< ns3::Packet  > (p_ptr), *((PyNs3DsrDsrOptionRerrUnreachHeader *) rerr)->obj, rerrSize, *((PyNs3Ipv4Address *) ipv4Address)->obj, protocol);
     py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionRerr_GetInstanceTypeId(PyNs3DsrDsrOptionRerr *self)
+{
+    PyObject *py_retval;
+    PyNs3DsrDsrOptionRerr__PythonHelper *helper_class = dynamic_cast<PyNs3DsrDsrOptionRerr__PythonHelper*> (self->obj);
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = (helper_class == NULL)? (self->obj->GetInstanceTypeId()) : (self->obj->ns3::dsr::DsrOptionRerr::GetInstanceTypeId());
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
     return py_retval;
 }
 
@@ -24249,18 +24231,36 @@ _wrap_PyNs3DsrDsrOptionRerr_GetTypeId(void)
 
 
 PyObject *
-_wrap_PyNs3DsrDsrOptionRerr_GetInstanceTypeId(PyNs3DsrDsrOptionRerr *self)
+_wrap_PyNs3DsrDsrOptionRerr_Process(PyNs3DsrDsrOptionRerr *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
+    uint8_t retval;
+    PyNs3Packet *packet;
+    ns3::Packet *packet_ptr;
+    PyNs3Packet *dsrP;
+    ns3::Packet *dsrP_ptr;
+    PyNs3Ipv4Address *ipv4Address;
+    PyNs3Ipv4Address *source;
+    PyNs3Ipv4Header *ipv4Header;
+    int protocol;
+    bool isPromisc;
+    PyObject *py_isPromisc;
+    PyNs3Ipv4Address *promiscSource;
     PyNs3DsrDsrOptionRerr__PythonHelper *helper_class = dynamic_cast<PyNs3DsrDsrOptionRerr__PythonHelper*> (self->obj);
-    PyNs3TypeId *py_TypeId;
+    const char *keywords[] = {"packet", "dsrP", "ipv4Address", "source", "ipv4Header", "protocol", "isPromisc", "promiscSource", NULL};
     
-    ns3::TypeId retval = (helper_class == NULL)? (self->obj->GetInstanceTypeId()) : (self->obj->ns3::dsr::DsrOptionRerr::GetInstanceTypeId());
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!O!O!O!iOO!", (char **) keywords, &PyNs3Packet_Type, &packet, &PyNs3Packet_Type, &dsrP, &PyNs3Ipv4Address_Type, &ipv4Address, &PyNs3Ipv4Address_Type, &source, &PyNs3Ipv4Header_Type, &ipv4Header, &protocol, &py_isPromisc, &PyNs3Ipv4Address_Type, &promiscSource)) {
+        return NULL;
+    }
+    packet_ptr = (packet ? packet->obj : NULL);
+    dsrP_ptr = (dsrP ? dsrP->obj : NULL);
+    if (protocol > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    isPromisc = PyObject_IsTrue(py_isPromisc);
+    retval = (helper_class == NULL)? (self->obj->Process(ns3::Ptr< ns3::Packet  > (packet_ptr), ns3::Ptr< ns3::Packet  > (dsrP_ptr), *((PyNs3Ipv4Address *) ipv4Address)->obj, *((PyNs3Ipv4Address *) source)->obj, *((PyNs3Ipv4Header *) ipv4Header)->obj, protocol, isPromisc, *((PyNs3Ipv4Address *) promiscSource)->obj)) : (self->obj->ns3::dsr::DsrOptionRerr::Process(ns3::Ptr< ns3::Packet  > (packet_ptr), ns3::Ptr< ns3::Packet  > (dsrP_ptr), *((PyNs3Ipv4Address *) ipv4Address)->obj, *((PyNs3Ipv4Address *) source)->obj, *((PyNs3Ipv4Header *) ipv4Header)->obj, protocol, isPromisc, *((PyNs3Ipv4Address *) promiscSource)->obj));
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
     return py_retval;
 }
 
@@ -24281,15 +24281,15 @@ _wrap_PyNs3DsrDsrOptionRerr__copy__(PyNs3DsrDsrOptionRerr *self)
 }
 
 static PyMethodDef PyNs3DsrDsrOptionRerr_methods[] = {
-    {(char *) "Process", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerr_Process, METH_KEYWORDS|METH_VARARGS, "Process(packet, dsrP, ipv4Address, source, ipv4Header, protocol, isPromisc, promiscSource)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: dsrP: ns3::Ptr< ns3::Packet >\ntype: ipv4Address: ns3::Ipv4Address\ntype: source: ns3::Ipv4Address\ntype: ipv4Header: ns3::Ipv4Header const &\ntype: protocol: uint8_t\ntype: isPromisc: bool &\ntype: promiscSource: ns3::Ipv4Address" },
-    {(char *) "DoSendError", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerr_DoSendError, METH_KEYWORDS|METH_VARARGS, "DoSendError(p, rerr, rerrSize, ipv4Address, protocol)\n\ntype: p: ns3::Ptr< ns3::Packet >\ntype: rerr: ns3::dsr::DsrOptionRerrUnreachHeader &\ntype: rerrSize: uint32_t\ntype: ipv4Address: ns3::Ipv4Address\ntype: protocol: uint8_t" },
+    {(char *) "DoSendError", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerr_DoSendError, METH_VARARGS|METH_KEYWORDS, "DoSendError(p, rerr, rerrSize, ipv4Address, protocol)\n\ntype: p: ns3::Ptr< ns3::Packet >\ntype: rerr: ns3::dsr::DsrOptionRerrUnreachHeader &\ntype: rerrSize: uint32_t\ntype: ipv4Address: ns3::Ipv4Address\ntype: protocol: uint8_t" },
+    {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerr_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
     {(char *) "GetOptionNumber", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerr_GetOptionNumber, METH_NOARGS, "GetOptionNumber()\n\n" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerr_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerr_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3DsrDsrOptionRerr__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "Process", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerr_Process, METH_VARARGS|METH_KEYWORDS, "Process(packet, dsrP, ipv4Address, source, ipv4Header, protocol, isPromisc, promiscSource)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: dsrP: ns3::Ptr< ns3::Packet >\ntype: ipv4Address: ns3::Ipv4Address\ntype: source: ns3::Ipv4Address\ntype: ipv4Header: ns3::Ipv4Header const &\ntype: protocol: uint8_t\ntype: isPromisc: bool &\ntype: promiscSource: ns3::Ipv4Address" },
+    {(char *) "DoDispose", (PyCFunction) PyNs3DsrDsrOptionRerr__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3DsrDsrOptionRerr__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3DsrDsrOptionRerr__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3DsrDsrOptionRerr__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3DsrDsrOptionRerr__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3DsrDsrOptionRerr__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -24389,7 +24389,7 @@ PyTypeObject PyNs3DsrDsrOptionRerr_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "DsrOptionRerr(arg0)\nDsrOptionRerr()",                        /* Documentation string */
     (traverseproc)PyNs3DsrDsrOptionRerr__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3DsrDsrOptionRerr__tp_clear,             /* tp_clear */
@@ -24422,16 +24422,16 @@ PyTypeObject PyNs3DsrDsrOptionRerr_Type = {
 
 
 PyObject *
-PyNs3DsrDsrOptionRrep__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3DsrDsrOptionRrep *self)
+PyNs3DsrDsrOptionRrep__PythonHelper::_wrap_DoDispose(PyNs3DsrDsrOptionRrep *self)
 {
     PyObject *py_retval;
     PyNs3DsrDsrOptionRrep__PythonHelper *helper = dynamic_cast< PyNs3DsrDsrOptionRrep__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -24470,16 +24470,16 @@ PyNs3DsrDsrOptionRrep__PythonHelper::_wrap_NotifyNewAggregate(PyNs3DsrDsrOptionR
 }
 
 PyObject *
-PyNs3DsrDsrOptionRrep__PythonHelper::_wrap_DoDispose(PyNs3DsrDsrOptionRrep *self)
+PyNs3DsrDsrOptionRrep__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3DsrDsrOptionRrep *self)
 {
     PyObject *py_retval;
     PyNs3DsrDsrOptionRrep__PythonHelper *helper = dynamic_cast< PyNs3DsrDsrOptionRrep__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -25106,6 +25106,52 @@ int _wrap_PyNs3DsrDsrOptionRrep__tp_init(PyNs3DsrDsrOptionRrep *self, PyObject *
 
 
 PyObject *
+_wrap_PyNs3DsrDsrOptionRrep_GetInstanceTypeId(PyNs3DsrDsrOptionRrep *self)
+{
+    PyObject *py_retval;
+    PyNs3DsrDsrOptionRrep__PythonHelper *helper_class = dynamic_cast<PyNs3DsrDsrOptionRrep__PythonHelper*> (self->obj);
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = (helper_class == NULL)? (self->obj->GetInstanceTypeId()) : (self->obj->ns3::dsr::DsrOptionRrep::GetInstanceTypeId());
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionRrep_GetOptionNumber(PyNs3DsrDsrOptionRrep *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    PyNs3DsrDsrOptionRrep__PythonHelper *helper_class = dynamic_cast<PyNs3DsrDsrOptionRrep__PythonHelper*> (self->obj);
+    
+    retval = (helper_class == NULL)? (self->obj->GetOptionNumber()) : (self->obj->ns3::dsr::DsrOptionRrep::GetOptionNumber());
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionRrep_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::dsr::DsrOptionRrep::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3DsrDsrOptionRrep_Process(PyNs3DsrDsrOptionRrep *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -25140,52 +25186,6 @@ _wrap_PyNs3DsrDsrOptionRrep_Process(PyNs3DsrDsrOptionRrep *self, PyObject *args,
 }
 
 
-PyObject *
-_wrap_PyNs3DsrDsrOptionRrep_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::dsr::DsrOptionRrep::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionRrep_GetOptionNumber(PyNs3DsrDsrOptionRrep *self)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    PyNs3DsrDsrOptionRrep__PythonHelper *helper_class = dynamic_cast<PyNs3DsrDsrOptionRrep__PythonHelper*> (self->obj);
-    
-    retval = (helper_class == NULL)? (self->obj->GetOptionNumber()) : (self->obj->ns3::dsr::DsrOptionRrep::GetOptionNumber());
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionRrep_GetInstanceTypeId(PyNs3DsrDsrOptionRrep *self)
-{
-    PyObject *py_retval;
-    PyNs3DsrDsrOptionRrep__PythonHelper *helper_class = dynamic_cast<PyNs3DsrDsrOptionRrep__PythonHelper*> (self->obj);
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = (helper_class == NULL)? (self->obj->GetInstanceTypeId()) : (self->obj->ns3::dsr::DsrOptionRrep::GetInstanceTypeId());
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3DsrDsrOptionRrep__copy__(PyNs3DsrDsrOptionRrep *self)
 {
@@ -25202,14 +25202,14 @@ _wrap_PyNs3DsrDsrOptionRrep__copy__(PyNs3DsrDsrOptionRrep *self)
 }
 
 static PyMethodDef PyNs3DsrDsrOptionRrep_methods[] = {
-    {(char *) "Process", (PyCFunction) _wrap_PyNs3DsrDsrOptionRrep_Process, METH_KEYWORDS|METH_VARARGS, "Process(packet, dsrP, ipv4Address, source, ipv4Header, protocol, isPromisc, promiscSource)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: dsrP: ns3::Ptr< ns3::Packet >\ntype: ipv4Address: ns3::Ipv4Address\ntype: source: ns3::Ipv4Address\ntype: ipv4Header: ns3::Ipv4Header const &\ntype: protocol: uint8_t\ntype: isPromisc: bool &\ntype: promiscSource: ns3::Ipv4Address" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionRrep_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "GetOptionNumber", (PyCFunction) _wrap_PyNs3DsrDsrOptionRrep_GetOptionNumber, METH_NOARGS, "GetOptionNumber()\n\n" },
     {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionRrep_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3DsrDsrOptionRrep__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "GetOptionNumber", (PyCFunction) _wrap_PyNs3DsrDsrOptionRrep_GetOptionNumber, METH_NOARGS, "GetOptionNumber()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionRrep_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "Process", (PyCFunction) _wrap_PyNs3DsrDsrOptionRrep_Process, METH_VARARGS|METH_KEYWORDS, "Process(packet, dsrP, ipv4Address, source, ipv4Header, protocol, isPromisc, promiscSource)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: dsrP: ns3::Ptr< ns3::Packet >\ntype: ipv4Address: ns3::Ipv4Address\ntype: source: ns3::Ipv4Address\ntype: ipv4Header: ns3::Ipv4Header const &\ntype: protocol: uint8_t\ntype: isPromisc: bool &\ntype: promiscSource: ns3::Ipv4Address" },
+    {(char *) "DoDispose", (PyCFunction) PyNs3DsrDsrOptionRrep__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3DsrDsrOptionRrep__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3DsrDsrOptionRrep__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3DsrDsrOptionRrep__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3DsrDsrOptionRrep__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3DsrDsrOptionRrep__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -25309,7 +25309,7 @@ PyTypeObject PyNs3DsrDsrOptionRrep_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "DsrOptionRrep(arg0)\nDsrOptionRrep()",                        /* Documentation string */
     (traverseproc)PyNs3DsrDsrOptionRrep__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3DsrDsrOptionRrep__tp_clear,             /* tp_clear */
@@ -25342,16 +25342,16 @@ PyTypeObject PyNs3DsrDsrOptionRrep_Type = {
 
 
 PyObject *
-PyNs3DsrDsrOptionRreq__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3DsrDsrOptionRreq *self)
+PyNs3DsrDsrOptionRreq__PythonHelper::_wrap_DoDispose(PyNs3DsrDsrOptionRreq *self)
 {
     PyObject *py_retval;
     PyNs3DsrDsrOptionRreq__PythonHelper *helper = dynamic_cast< PyNs3DsrDsrOptionRreq__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -25390,16 +25390,16 @@ PyNs3DsrDsrOptionRreq__PythonHelper::_wrap_NotifyNewAggregate(PyNs3DsrDsrOptionR
 }
 
 PyObject *
-PyNs3DsrDsrOptionRreq__PythonHelper::_wrap_DoDispose(PyNs3DsrDsrOptionRreq *self)
+PyNs3DsrDsrOptionRreq__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3DsrDsrOptionRreq *self)
 {
     PyObject *py_retval;
     PyNs3DsrDsrOptionRreq__PythonHelper *helper = dynamic_cast< PyNs3DsrDsrOptionRreq__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -26026,6 +26026,52 @@ int _wrap_PyNs3DsrDsrOptionRreq__tp_init(PyNs3DsrDsrOptionRreq *self, PyObject *
 
 
 PyObject *
+_wrap_PyNs3DsrDsrOptionRreq_GetInstanceTypeId(PyNs3DsrDsrOptionRreq *self)
+{
+    PyObject *py_retval;
+    PyNs3DsrDsrOptionRreq__PythonHelper *helper_class = dynamic_cast<PyNs3DsrDsrOptionRreq__PythonHelper*> (self->obj);
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = (helper_class == NULL)? (self->obj->GetInstanceTypeId()) : (self->obj->ns3::dsr::DsrOptionRreq::GetInstanceTypeId());
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionRreq_GetOptionNumber(PyNs3DsrDsrOptionRreq *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    PyNs3DsrDsrOptionRreq__PythonHelper *helper_class = dynamic_cast<PyNs3DsrDsrOptionRreq__PythonHelper*> (self->obj);
+    
+    retval = (helper_class == NULL)? (self->obj->GetOptionNumber()) : (self->obj->ns3::dsr::DsrOptionRreq::GetOptionNumber());
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionRreq_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::dsr::DsrOptionRreq::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3DsrDsrOptionRreq_Process(PyNs3DsrDsrOptionRreq *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -26060,52 +26106,6 @@ _wrap_PyNs3DsrDsrOptionRreq_Process(PyNs3DsrDsrOptionRreq *self, PyObject *args,
 }
 
 
-PyObject *
-_wrap_PyNs3DsrDsrOptionRreq_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::dsr::DsrOptionRreq::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionRreq_GetOptionNumber(PyNs3DsrDsrOptionRreq *self)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    PyNs3DsrDsrOptionRreq__PythonHelper *helper_class = dynamic_cast<PyNs3DsrDsrOptionRreq__PythonHelper*> (self->obj);
-    
-    retval = (helper_class == NULL)? (self->obj->GetOptionNumber()) : (self->obj->ns3::dsr::DsrOptionRreq::GetOptionNumber());
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionRreq_GetInstanceTypeId(PyNs3DsrDsrOptionRreq *self)
-{
-    PyObject *py_retval;
-    PyNs3DsrDsrOptionRreq__PythonHelper *helper_class = dynamic_cast<PyNs3DsrDsrOptionRreq__PythonHelper*> (self->obj);
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = (helper_class == NULL)? (self->obj->GetInstanceTypeId()) : (self->obj->ns3::dsr::DsrOptionRreq::GetInstanceTypeId());
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3DsrDsrOptionRreq__copy__(PyNs3DsrDsrOptionRreq *self)
 {
@@ -26122,14 +26122,14 @@ _wrap_PyNs3DsrDsrOptionRreq__copy__(PyNs3DsrDsrOptionRreq *self)
 }
 
 static PyMethodDef PyNs3DsrDsrOptionRreq_methods[] = {
-    {(char *) "Process", (PyCFunction) _wrap_PyNs3DsrDsrOptionRreq_Process, METH_KEYWORDS|METH_VARARGS, "Process(packet, dsrP, ipv4Address, source, ipv4Header, protocol, isPromisc, promiscSource)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: dsrP: ns3::Ptr< ns3::Packet >\ntype: ipv4Address: ns3::Ipv4Address\ntype: source: ns3::Ipv4Address\ntype: ipv4Header: ns3::Ipv4Header const &\ntype: protocol: uint8_t\ntype: isPromisc: bool &\ntype: promiscSource: ns3::Ipv4Address" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionRreq_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "GetOptionNumber", (PyCFunction) _wrap_PyNs3DsrDsrOptionRreq_GetOptionNumber, METH_NOARGS, "GetOptionNumber()\n\n" },
     {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionRreq_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3DsrDsrOptionRreq__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "GetOptionNumber", (PyCFunction) _wrap_PyNs3DsrDsrOptionRreq_GetOptionNumber, METH_NOARGS, "GetOptionNumber()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionRreq_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "Process", (PyCFunction) _wrap_PyNs3DsrDsrOptionRreq_Process, METH_VARARGS|METH_KEYWORDS, "Process(packet, dsrP, ipv4Address, source, ipv4Header, protocol, isPromisc, promiscSource)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: dsrP: ns3::Ptr< ns3::Packet >\ntype: ipv4Address: ns3::Ipv4Address\ntype: source: ns3::Ipv4Address\ntype: ipv4Header: ns3::Ipv4Header const &\ntype: protocol: uint8_t\ntype: isPromisc: bool &\ntype: promiscSource: ns3::Ipv4Address" },
+    {(char *) "DoDispose", (PyCFunction) PyNs3DsrDsrOptionRreq__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3DsrDsrOptionRreq__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3DsrDsrOptionRreq__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3DsrDsrOptionRreq__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3DsrDsrOptionRreq__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3DsrDsrOptionRreq__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -26229,7 +26229,7 @@ PyTypeObject PyNs3DsrDsrOptionRreq_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "DsrOptionRreq(arg0)\nDsrOptionRreq()",                        /* Documentation string */
     (traverseproc)PyNs3DsrDsrOptionRreq__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3DsrDsrOptionRreq__tp_clear,             /* tp_clear */
@@ -26262,16 +26262,16 @@ PyTypeObject PyNs3DsrDsrOptionRreq_Type = {
 
 
 PyObject *
-PyNs3DsrDsrOptionSR__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3DsrDsrOptionSR *self)
+PyNs3DsrDsrOptionSR__PythonHelper::_wrap_DoDispose(PyNs3DsrDsrOptionSR *self)
 {
     PyObject *py_retval;
     PyNs3DsrDsrOptionSR__PythonHelper *helper = dynamic_cast< PyNs3DsrDsrOptionSR__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -26310,16 +26310,16 @@ PyNs3DsrDsrOptionSR__PythonHelper::_wrap_NotifyNewAggregate(PyNs3DsrDsrOptionSR 
 }
 
 PyObject *
-PyNs3DsrDsrOptionSR__PythonHelper::_wrap_DoDispose(PyNs3DsrDsrOptionSR *self)
+PyNs3DsrDsrOptionSR__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3DsrDsrOptionSR *self)
 {
     PyObject *py_retval;
     PyNs3DsrDsrOptionSR__PythonHelper *helper = dynamic_cast< PyNs3DsrDsrOptionSR__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -26946,6 +26946,52 @@ int _wrap_PyNs3DsrDsrOptionSR__tp_init(PyNs3DsrDsrOptionSR *self, PyObject *args
 
 
 PyObject *
+_wrap_PyNs3DsrDsrOptionSR_GetInstanceTypeId(PyNs3DsrDsrOptionSR *self)
+{
+    PyObject *py_retval;
+    PyNs3DsrDsrOptionSR__PythonHelper *helper_class = dynamic_cast<PyNs3DsrDsrOptionSR__PythonHelper*> (self->obj);
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = (helper_class == NULL)? (self->obj->GetInstanceTypeId()) : (self->obj->ns3::dsr::DsrOptionSR::GetInstanceTypeId());
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionSR_GetOptionNumber(PyNs3DsrDsrOptionSR *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    PyNs3DsrDsrOptionSR__PythonHelper *helper_class = dynamic_cast<PyNs3DsrDsrOptionSR__PythonHelper*> (self->obj);
+    
+    retval = (helper_class == NULL)? (self->obj->GetOptionNumber()) : (self->obj->ns3::dsr::DsrOptionSR::GetOptionNumber());
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrDsrOptionSR_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::dsr::DsrOptionSR::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3DsrDsrOptionSR_Process(PyNs3DsrDsrOptionSR *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -26980,52 +27026,6 @@ _wrap_PyNs3DsrDsrOptionSR_Process(PyNs3DsrDsrOptionSR *self, PyObject *args, PyO
 }
 
 
-PyObject *
-_wrap_PyNs3DsrDsrOptionSR_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::dsr::DsrOptionSR::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionSR_GetOptionNumber(PyNs3DsrDsrOptionSR *self)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    PyNs3DsrDsrOptionSR__PythonHelper *helper_class = dynamic_cast<PyNs3DsrDsrOptionSR__PythonHelper*> (self->obj);
-    
-    retval = (helper_class == NULL)? (self->obj->GetOptionNumber()) : (self->obj->ns3::dsr::DsrOptionSR::GetOptionNumber());
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DsrDsrOptionSR_GetInstanceTypeId(PyNs3DsrDsrOptionSR *self)
-{
-    PyObject *py_retval;
-    PyNs3DsrDsrOptionSR__PythonHelper *helper_class = dynamic_cast<PyNs3DsrDsrOptionSR__PythonHelper*> (self->obj);
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = (helper_class == NULL)? (self->obj->GetInstanceTypeId()) : (self->obj->ns3::dsr::DsrOptionSR::GetInstanceTypeId());
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3DsrDsrOptionSR__copy__(PyNs3DsrDsrOptionSR *self)
 {
@@ -27042,14 +27042,14 @@ _wrap_PyNs3DsrDsrOptionSR__copy__(PyNs3DsrDsrOptionSR *self)
 }
 
 static PyMethodDef PyNs3DsrDsrOptionSR_methods[] = {
-    {(char *) "Process", (PyCFunction) _wrap_PyNs3DsrDsrOptionSR_Process, METH_KEYWORDS|METH_VARARGS, "Process(packet, dsrP, ipv4Address, source, ipv4Header, protocol, isPromisc, promiscSource)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: dsrP: ns3::Ptr< ns3::Packet >\ntype: ipv4Address: ns3::Ipv4Address\ntype: source: ns3::Ipv4Address\ntype: ipv4Header: ns3::Ipv4Header const &\ntype: protocol: uint8_t\ntype: isPromisc: bool &\ntype: promiscSource: ns3::Ipv4Address" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionSR_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "GetOptionNumber", (PyCFunction) _wrap_PyNs3DsrDsrOptionSR_GetOptionNumber, METH_NOARGS, "GetOptionNumber()\n\n" },
     {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionSR_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3DsrDsrOptionSR__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "GetOptionNumber", (PyCFunction) _wrap_PyNs3DsrDsrOptionSR_GetOptionNumber, METH_NOARGS, "GetOptionNumber()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DsrDsrOptionSR_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "Process", (PyCFunction) _wrap_PyNs3DsrDsrOptionSR_Process, METH_VARARGS|METH_KEYWORDS, "Process(packet, dsrP, ipv4Address, source, ipv4Header, protocol, isPromisc, promiscSource)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: dsrP: ns3::Ptr< ns3::Packet >\ntype: ipv4Address: ns3::Ipv4Address\ntype: source: ns3::Ipv4Address\ntype: ipv4Header: ns3::Ipv4Header const &\ntype: protocol: uint8_t\ntype: isPromisc: bool &\ntype: promiscSource: ns3::Ipv4Address" },
+    {(char *) "DoDispose", (PyCFunction) PyNs3DsrDsrOptionSR__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3DsrDsrOptionSR__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3DsrDsrOptionSR__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3DsrDsrOptionSR__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3DsrDsrOptionSR__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3DsrDsrOptionSR__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -27149,7 +27149,7 @@ PyTypeObject PyNs3DsrDsrOptionSR_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "DsrOptionSR(arg0)\nDsrOptionSR()",                        /* Documentation string */
     (traverseproc)PyNs3DsrDsrOptionSR__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3DsrDsrOptionSR__tp_clear,             /* tp_clear */
@@ -31374,8 +31374,8 @@ _wrap_PyNs3DsrHelper__copy__(PyNs3DsrHelper *self)
 }
 
 static PyMethodDef PyNs3DsrHelper_methods[] = {
-    {(char *) "Create", (PyCFunction) _wrap_PyNs3DsrHelper_Create, METH_KEYWORDS|METH_VARARGS, "Create(node)\n\ntype: node: ns3::Ptr< ns3::Node >" },
-    {(char *) "Set", (PyCFunction) _wrap_PyNs3DsrHelper_Set, METH_KEYWORDS|METH_VARARGS, "Set(name, value)\n\ntype: name: std::string\ntype: value: ns3::AttributeValue const &" },
+    {(char *) "Create", (PyCFunction) _wrap_PyNs3DsrHelper_Create, METH_VARARGS|METH_KEYWORDS, "Create(node)\n\ntype: node: ns3::Ptr< ns3::Node >" },
+    {(char *) "Set", (PyCFunction) _wrap_PyNs3DsrHelper_Set, METH_VARARGS|METH_KEYWORDS, "Set(name, value)\n\ntype: name: std::string\ntype: value: ns3::AttributeValue const &" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3DsrHelper__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -31554,23 +31554,6 @@ int _wrap_PyNs3DsrMainHelper__tp_init(PyNs3DsrMainHelper *self, PyObject *args, 
 
 
 PyObject *
-_wrap_PyNs3DsrMainHelper_SetDsrHelper(PyNs3DsrMainHelper *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3DsrHelper *dsrHelper;
-    const char *keywords[] = {"dsrHelper", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3DsrHelper_Type, &dsrHelper)) {
-        return NULL;
-    }
-    self->obj->SetDsrHelper(*((PyNs3DsrHelper *) dsrHelper)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3DsrMainHelper_Install(PyNs3DsrMainHelper *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -31582,6 +31565,23 @@ _wrap_PyNs3DsrMainHelper_Install(PyNs3DsrMainHelper *self, PyObject *args, PyObj
         return NULL;
     }
     self->obj->Install(*((PyNs3DsrHelper *) dsrHelper)->obj, *((PyNs3NodeContainer *) nodes)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DsrMainHelper_SetDsrHelper(PyNs3DsrMainHelper *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3DsrHelper *dsrHelper;
+    const char *keywords[] = {"dsrHelper", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3DsrHelper_Type, &dsrHelper)) {
+        return NULL;
+    }
+    self->obj->SetDsrHelper(*((PyNs3DsrHelper *) dsrHelper)->obj);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -31601,8 +31601,8 @@ _wrap_PyNs3DsrMainHelper__copy__(PyNs3DsrMainHelper *self)
 }
 
 static PyMethodDef PyNs3DsrMainHelper_methods[] = {
-    {(char *) "SetDsrHelper", (PyCFunction) _wrap_PyNs3DsrMainHelper_SetDsrHelper, METH_KEYWORDS|METH_VARARGS, "SetDsrHelper(dsrHelper)\n\ntype: dsrHelper: ns3::DsrHelper &" },
-    {(char *) "Install", (PyCFunction) _wrap_PyNs3DsrMainHelper_Install, METH_KEYWORDS|METH_VARARGS, "Install(dsrHelper, nodes)\n\ntype: dsrHelper: ns3::DsrHelper &\ntype: nodes: ns3::NodeContainer" },
+    {(char *) "Install", (PyCFunction) _wrap_PyNs3DsrMainHelper_Install, METH_VARARGS|METH_KEYWORDS, "Install(dsrHelper, nodes)\n\ntype: dsrHelper: ns3::DsrHelper &\ntype: nodes: ns3::NodeContainer" },
+    {(char *) "SetDsrHelper", (PyCFunction) _wrap_PyNs3DsrMainHelper_SetDsrHelper, METH_VARARGS|METH_KEYWORDS, "SetDsrHelper(dsrHelper)\n\ntype: dsrHelper: ns3::DsrHelper &" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3DsrMainHelper__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };

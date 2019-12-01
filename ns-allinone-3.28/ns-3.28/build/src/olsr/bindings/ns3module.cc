@@ -187,24 +187,6 @@ initolsr_TracedValueCallback(void)
 
 
 PyObject *
-_wrap_olsr_olsr_SecondsToEmf(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    double seconds;
-    const char *keywords[] = {"seconds", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "d", (char **) keywords, &seconds)) {
-        return NULL;
-    }
-    retval = ns3::olsr::SecondsToEmf(seconds);
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-PyObject * _wrap_olsr_olsr_SecondsToEmf(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs);
-
-
-PyObject *
 _wrap_olsr_olsr_EmfToSeconds(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -225,9 +207,27 @@ _wrap_olsr_olsr_EmfToSeconds(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args,
 }
 PyObject * _wrap_olsr_olsr_EmfToSeconds(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs);
 
+
+PyObject *
+_wrap_olsr_olsr_SecondsToEmf(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    double seconds;
+    const char *keywords[] = {"seconds", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "d", (char **) keywords, &seconds)) {
+        return NULL;
+    }
+    retval = ns3::olsr::SecondsToEmf(seconds);
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+PyObject * _wrap_olsr_olsr_SecondsToEmf(PyObject * PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs);
+
 static PyMethodDef olsr_olsr_functions[] = {
-    {(char *) "SecondsToEmf", (PyCFunction) _wrap_olsr_olsr_SecondsToEmf, METH_KEYWORDS|METH_VARARGS, "SecondsToEmf(seconds)\n\ntype: seconds: double" },
-    {(char *) "EmfToSeconds", (PyCFunction) _wrap_olsr_olsr_EmfToSeconds, METH_KEYWORDS|METH_VARARGS, "EmfToSeconds(emf)\n\ntype: emf: uint8_t" },
+    {(char *) "EmfToSeconds", (PyCFunction) _wrap_olsr_olsr_EmfToSeconds, METH_VARARGS|METH_KEYWORDS, "EmfToSeconds(emf)\n\ntype: emf: uint8_t" },
+    {(char *) "SecondsToEmf", (PyCFunction) _wrap_olsr_olsr_SecondsToEmf, METH_VARARGS|METH_KEYWORDS, "SecondsToEmf(seconds)\n\ntype: seconds: double" },
     {NULL, NULL, 0, NULL}
 };
 /* --- classes --- */
@@ -615,13 +615,6 @@ static int _wrap_PyNs3OlsrAssociationTuple__set_networkAddr(PyNs3OlsrAssociation
 }
 static PyGetSetDef PyNs3OlsrAssociationTuple__getsets[] = {
     {
-        (char*) "networkAddr", /* attribute name */
-        (getter) _wrap_PyNs3OlsrAssociationTuple__get_networkAddr, /* C function to get the attribute */
-        (setter) _wrap_PyNs3OlsrAssociationTuple__set_networkAddr, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
         (char*) "expirationTime", /* attribute name */
         (getter) _wrap_PyNs3OlsrAssociationTuple__get_expirationTime, /* C function to get the attribute */
         (setter) _wrap_PyNs3OlsrAssociationTuple__set_expirationTime, /* C function to set the attribute */
@@ -639,6 +632,13 @@ static PyGetSetDef PyNs3OlsrAssociationTuple__getsets[] = {
         (char*) "netmask", /* attribute name */
         (getter) _wrap_PyNs3OlsrAssociationTuple__get_netmask, /* C function to get the attribute */
         (setter) _wrap_PyNs3OlsrAssociationTuple__set_netmask, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "networkAddr", /* attribute name */
+        (getter) _wrap_PyNs3OlsrAssociationTuple__get_networkAddr, /* C function to get the attribute */
+        (setter) _wrap_PyNs3OlsrAssociationTuple__set_networkAddr, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -975,9 +975,9 @@ static int _wrap_PyNs3OlsrDuplicateTuple__set_sequenceNumber(PyNs3OlsrDuplicateT
 }
 static PyGetSetDef PyNs3OlsrDuplicateTuple__getsets[] = {
     {
-        (char*) "retransmitted", /* attribute name */
-        (getter) _wrap_PyNs3OlsrDuplicateTuple__get_retransmitted, /* C function to get the attribute */
-        (setter) _wrap_PyNs3OlsrDuplicateTuple__set_retransmitted, /* C function to set the attribute */
+        (char*) "address", /* attribute name */
+        (getter) _wrap_PyNs3OlsrDuplicateTuple__get_address, /* C function to get the attribute */
+        (setter) _wrap_PyNs3OlsrDuplicateTuple__set_address, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -996,16 +996,16 @@ static PyGetSetDef PyNs3OlsrDuplicateTuple__getsets[] = {
         NULL /* optional additional data for getter and setter */
     },
     {
-        (char*) "sequenceNumber", /* attribute name */
-        (getter) _wrap_PyNs3OlsrDuplicateTuple__get_sequenceNumber, /* C function to get the attribute */
-        (setter) _wrap_PyNs3OlsrDuplicateTuple__set_sequenceNumber, /* C function to set the attribute */
+        (char*) "retransmitted", /* attribute name */
+        (getter) _wrap_PyNs3OlsrDuplicateTuple__get_retransmitted, /* C function to get the attribute */
+        (setter) _wrap_PyNs3OlsrDuplicateTuple__set_retransmitted, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
     {
-        (char*) "address", /* attribute name */
-        (getter) _wrap_PyNs3OlsrDuplicateTuple__get_address, /* C function to get the attribute */
-        (setter) _wrap_PyNs3OlsrDuplicateTuple__set_address, /* C function to set the attribute */
+        (char*) "sequenceNumber", /* attribute name */
+        (getter) _wrap_PyNs3OlsrDuplicateTuple__get_sequenceNumber, /* C function to get the attribute */
+        (setter) _wrap_PyNs3OlsrDuplicateTuple__set_sequenceNumber, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -1646,13 +1646,6 @@ static int _wrap_PyNs3OlsrLinkTuple__set_time(PyNs3OlsrLinkTuple *self, PyObject
 }
 static PyGetSetDef PyNs3OlsrLinkTuple__getsets[] = {
     {
-        (char*) "neighborIfaceAddr", /* attribute name */
-        (getter) _wrap_PyNs3OlsrLinkTuple__get_neighborIfaceAddr, /* C function to get the attribute */
-        (setter) _wrap_PyNs3OlsrLinkTuple__set_neighborIfaceAddr, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
         (char*) "asymTime", /* attribute name */
         (getter) _wrap_PyNs3OlsrLinkTuple__get_asymTime, /* C function to get the attribute */
         (setter) _wrap_PyNs3OlsrLinkTuple__set_asymTime, /* C function to set the attribute */
@@ -1660,16 +1653,23 @@ static PyGetSetDef PyNs3OlsrLinkTuple__getsets[] = {
         NULL /* optional additional data for getter and setter */
     },
     {
-        (char*) "symTime", /* attribute name */
-        (getter) _wrap_PyNs3OlsrLinkTuple__get_symTime, /* C function to get the attribute */
-        (setter) _wrap_PyNs3OlsrLinkTuple__set_symTime, /* C function to set the attribute */
+        (char*) "localIfaceAddr", /* attribute name */
+        (getter) _wrap_PyNs3OlsrLinkTuple__get_localIfaceAddr, /* C function to get the attribute */
+        (setter) _wrap_PyNs3OlsrLinkTuple__set_localIfaceAddr, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
     {
-        (char*) "localIfaceAddr", /* attribute name */
-        (getter) _wrap_PyNs3OlsrLinkTuple__get_localIfaceAddr, /* C function to get the attribute */
-        (setter) _wrap_PyNs3OlsrLinkTuple__set_localIfaceAddr, /* C function to set the attribute */
+        (char*) "neighborIfaceAddr", /* attribute name */
+        (getter) _wrap_PyNs3OlsrLinkTuple__get_neighborIfaceAddr, /* C function to get the attribute */
+        (setter) _wrap_PyNs3OlsrLinkTuple__set_neighborIfaceAddr, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
+        (char*) "symTime", /* attribute name */
+        (getter) _wrap_PyNs3OlsrLinkTuple__get_symTime, /* C function to get the attribute */
+        (setter) _wrap_PyNs3OlsrLinkTuple__set_symTime, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -1954,18 +1954,95 @@ int _wrap_PyNs3OlsrMessageHeader__tp_init(PyNs3OlsrMessageHeader *self, PyObject
 
 
 PyObject *
-_wrap_PyNs3OlsrMessageHeader_GetVTime(PyNs3OlsrMessageHeader *self)
+_wrap_PyNs3OlsrMessageHeader_Deserialize(PyNs3OlsrMessageHeader *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3Time *py_Time;
+    uint32_t retval;
+    PyNs3BufferIterator *start;
+    const char *keywords[] = {"start", NULL};
     
-    ns3::Time retval = self->obj->GetVTime();
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
+        return NULL;
+    }
+    retval = self->obj->Deserialize(*((PyNs3BufferIterator *) start)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
+}
+
+
+
+PyObject *
+_wrap_PyNs3OlsrMessageHeader_GetHello__0(PyNs3OlsrMessageHeader *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    const char *keywords[] = {NULL};
+    PyNs3OlsrMessageHeaderHello *py_Hello;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "", (char **) keywords)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    ns3::olsr::MessageHeader::Hello & retval = self->obj->GetHello();
+    py_Hello = PyObject_New(PyNs3OlsrMessageHeaderHello, &PyNs3OlsrMessageHeaderHello_Type);
+    py_Hello->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Hello->obj = new ns3::olsr::MessageHeader::Hello(retval);
+    PyNs3OlsrMessageHeaderHello_wrapper_registry[(void *) py_Hello->obj] = (PyObject *) py_Hello;
+    py_retval = Py_BuildValue((char *) "N", py_Hello);
+    return py_retval;
+}
+
+PyObject *
+_wrap_PyNs3OlsrMessageHeader_GetHello__1(PyNs3OlsrMessageHeader *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    const char *keywords[] = {NULL};
+    PyNs3OlsrMessageHeaderHello *py_Hello;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "", (char **) keywords)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    ns3::olsr::MessageHeader::Hello const & retval = self->obj->GetHello();
+    py_Hello = PyObject_New(PyNs3OlsrMessageHeaderHello, &PyNs3OlsrMessageHeaderHello_Type);
+    py_Hello->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Hello->obj = new ns3::olsr::MessageHeader::Hello(retval);
+    PyNs3OlsrMessageHeaderHello_wrapper_registry[(void *) py_Hello->obj] = (PyObject *) py_Hello;
+    py_retval = Py_BuildValue((char *) "N", py_Hello);
+    return py_retval;
+}
+
+PyObject * _wrap_PyNs3OlsrMessageHeader_GetHello(PyNs3OlsrMessageHeader *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject * retval;
+    PyObject *error_list;
+    PyObject *exceptions[2] = {0,};
+    retval = _wrap_PyNs3OlsrMessageHeader_GetHello__0(self, args, kwargs, &exceptions[0]);
+    if (!exceptions[0]) {
+        return retval;
+    }
+    retval = _wrap_PyNs3OlsrMessageHeader_GetHello__1(self, args, kwargs, &exceptions[1]);
+    if (!exceptions[1]) {
+        Py_DECREF(exceptions[0]);
+        return retval;
+    }
+    error_list = PyList_New(2);
+    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
+    Py_DECREF(exceptions[0]);
+    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
+    Py_DECREF(exceptions[1]);
+    PyErr_SetObject(PyExc_TypeError, error_list);
+    Py_DECREF(error_list);
+    return NULL;
 }
 
 
@@ -2046,18 +2123,29 @@ PyObject * _wrap_PyNs3OlsrMessageHeader_GetHna(PyNs3OlsrMessageHeader *self, PyO
 
 
 PyObject *
-_wrap_PyNs3OlsrMessageHeader_SetMessageType(PyNs3OlsrMessageHeader *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3OlsrMessageHeader_GetHopCount(PyNs3OlsrMessageHeader *self)
 {
     PyObject *py_retval;
-    ns3::olsr::MessageHeader::MessageType messageType;
-    const char *keywords[] = {"messageType", NULL};
+    uint8_t retval;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &messageType)) {
-        return NULL;
-    }
-    self->obj->SetMessageType(messageType);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    retval = self->obj->GetHopCount();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3OlsrMessageHeader_GetInstanceTypeId(PyNs3OlsrMessageHeader *self)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = self->obj->GetInstanceTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
     return py_retval;
 }
 
@@ -2075,18 +2163,13 @@ _wrap_PyNs3OlsrMessageHeader_GetMessageSequenceNumber(PyNs3OlsrMessageHeader *se
 
 
 PyObject *
-_wrap_PyNs3OlsrMessageHeader_Deserialize(PyNs3OlsrMessageHeader *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3OlsrMessageHeader_GetMessageType(PyNs3OlsrMessageHeader *self)
 {
     PyObject *py_retval;
-    uint32_t retval;
-    PyNs3BufferIterator *start;
-    const char *keywords[] = {"start", NULL};
+    ns3::olsr::MessageHeader::MessageType retval;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
-        return NULL;
-    }
-    retval = self->obj->Deserialize(*((PyNs3BufferIterator *) start)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    retval = self->obj->GetMessageType();
+    py_retval = Py_BuildValue((char *) "i", retval);
     return py_retval;
 }
 
@@ -2184,18 +2267,13 @@ _wrap_PyNs3OlsrMessageHeader_GetOriginatorAddress(PyNs3OlsrMessageHeader *self)
 
 
 PyObject *
-_wrap_PyNs3OlsrMessageHeader_Serialize(PyNs3OlsrMessageHeader *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3OlsrMessageHeader_GetSerializedSize(PyNs3OlsrMessageHeader *self)
 {
     PyObject *py_retval;
-    PyNs3BufferIterator *start;
-    const char *keywords[] = {"start", NULL};
+    uint32_t retval;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
-        return NULL;
-    }
-    self->obj->Serialize(*((PyNs3BufferIterator *) start)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    retval = self->obj->GetSerializedSize();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
 
@@ -2289,16 +2367,69 @@ _wrap_PyNs3OlsrMessageHeader_GetTimeToLive(PyNs3OlsrMessageHeader *self)
 
 
 PyObject *
-_wrap_PyNs3OlsrMessageHeader_SetVTime(PyNs3OlsrMessageHeader *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3OlsrMessageHeader_GetTypeId(void)
 {
     PyObject *py_retval;
-    PyNs3Time *time;
-    const char *keywords[] = {"time", NULL};
+    PyNs3TypeId *py_TypeId;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Time_Type, &time)) {
+    ns3::TypeId retval = ns3::olsr::MessageHeader::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3OlsrMessageHeader_GetVTime(PyNs3OlsrMessageHeader *self)
+{
+    PyObject *py_retval;
+    PyNs3Time *py_Time;
+    
+    ns3::Time retval = self->obj->GetVTime();
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3OlsrMessageHeader_Serialize(PyNs3OlsrMessageHeader *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3BufferIterator *start;
+    const char *keywords[] = {"start", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
         return NULL;
     }
-    self->obj->SetVTime(*((PyNs3Time *) time)->obj);
+    self->obj->Serialize(*((PyNs3BufferIterator *) start)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3OlsrMessageHeader_SetHopCount(PyNs3OlsrMessageHeader *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int hopCount;
+    const char *keywords[] = {"hopCount", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &hopCount)) {
+        return NULL;
+    }
+    if (hopCount > 0xff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SetHopCount(hopCount);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -2327,20 +2458,16 @@ _wrap_PyNs3OlsrMessageHeader_SetMessageSequenceNumber(PyNs3OlsrMessageHeader *se
 
 
 PyObject *
-_wrap_PyNs3OlsrMessageHeader_SetTimeToLive(PyNs3OlsrMessageHeader *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3OlsrMessageHeader_SetMessageType(PyNs3OlsrMessageHeader *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    int timeToLive;
-    const char *keywords[] = {"timeToLive", NULL};
+    ns3::olsr::MessageHeader::MessageType messageType;
+    const char *keywords[] = {"messageType", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &timeToLive)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &messageType)) {
         return NULL;
     }
-    if (timeToLive > 0xff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SetTimeToLive(timeToLive);
+    self->obj->SetMessageType(messageType);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -2365,48 +2492,20 @@ _wrap_PyNs3OlsrMessageHeader_SetOriginatorAddress(PyNs3OlsrMessageHeader *self, 
 
 
 PyObject *
-_wrap_PyNs3OlsrMessageHeader_GetInstanceTypeId(PyNs3OlsrMessageHeader *self)
+_wrap_PyNs3OlsrMessageHeader_SetTimeToLive(PyNs3OlsrMessageHeader *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
+    int timeToLive;
+    const char *keywords[] = {"timeToLive", NULL};
     
-    ns3::TypeId retval = self->obj->GetInstanceTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3OlsrMessageHeader_GetSerializedSize(PyNs3OlsrMessageHeader *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetSerializedSize();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3OlsrMessageHeader_SetHopCount(PyNs3OlsrMessageHeader *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int hopCount;
-    const char *keywords[] = {"hopCount", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &hopCount)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &timeToLive)) {
         return NULL;
     }
-    if (hopCount > 0xff) {
+    if (timeToLive > 0xff) {
         PyErr_SetString(PyExc_ValueError, "Out of range");
         return NULL;
     }
-    self->obj->SetHopCount(hopCount);
+    self->obj->SetTimeToLive(timeToLive);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -2414,117 +2513,18 @@ _wrap_PyNs3OlsrMessageHeader_SetHopCount(PyNs3OlsrMessageHeader *self, PyObject 
 
 
 PyObject *
-_wrap_PyNs3OlsrMessageHeader_GetMessageType(PyNs3OlsrMessageHeader *self)
+_wrap_PyNs3OlsrMessageHeader_SetVTime(PyNs3OlsrMessageHeader *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    ns3::olsr::MessageHeader::MessageType retval;
+    PyNs3Time *time;
+    const char *keywords[] = {"time", NULL};
     
-    retval = self->obj->GetMessageType();
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
-
-PyObject *
-_wrap_PyNs3OlsrMessageHeader_GetHello__0(PyNs3OlsrMessageHeader *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    const char *keywords[] = {NULL};
-    PyNs3OlsrMessageHeaderHello *py_Hello;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "", (char **) keywords)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Time_Type, &time)) {
         return NULL;
     }
-    ns3::olsr::MessageHeader::Hello & retval = self->obj->GetHello();
-    py_Hello = PyObject_New(PyNs3OlsrMessageHeaderHello, &PyNs3OlsrMessageHeaderHello_Type);
-    py_Hello->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Hello->obj = new ns3::olsr::MessageHeader::Hello(retval);
-    PyNs3OlsrMessageHeaderHello_wrapper_registry[(void *) py_Hello->obj] = (PyObject *) py_Hello;
-    py_retval = Py_BuildValue((char *) "N", py_Hello);
-    return py_retval;
-}
-
-PyObject *
-_wrap_PyNs3OlsrMessageHeader_GetHello__1(PyNs3OlsrMessageHeader *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    const char *keywords[] = {NULL};
-    PyNs3OlsrMessageHeaderHello *py_Hello;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "", (char **) keywords)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    ns3::olsr::MessageHeader::Hello const & retval = self->obj->GetHello();
-    py_Hello = PyObject_New(PyNs3OlsrMessageHeaderHello, &PyNs3OlsrMessageHeaderHello_Type);
-    py_Hello->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Hello->obj = new ns3::olsr::MessageHeader::Hello(retval);
-    PyNs3OlsrMessageHeaderHello_wrapper_registry[(void *) py_Hello->obj] = (PyObject *) py_Hello;
-    py_retval = Py_BuildValue((char *) "N", py_Hello);
-    return py_retval;
-}
-
-PyObject * _wrap_PyNs3OlsrMessageHeader_GetHello(PyNs3OlsrMessageHeader *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject * retval;
-    PyObject *error_list;
-    PyObject *exceptions[2] = {0,};
-    retval = _wrap_PyNs3OlsrMessageHeader_GetHello__0(self, args, kwargs, &exceptions[0]);
-    if (!exceptions[0]) {
-        return retval;
-    }
-    retval = _wrap_PyNs3OlsrMessageHeader_GetHello__1(self, args, kwargs, &exceptions[1]);
-    if (!exceptions[1]) {
-        Py_DECREF(exceptions[0]);
-        return retval;
-    }
-    error_list = PyList_New(2);
-    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
-    Py_DECREF(exceptions[0]);
-    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
-    Py_DECREF(exceptions[1]);
-    PyErr_SetObject(PyExc_TypeError, error_list);
-    Py_DECREF(error_list);
-    return NULL;
-}
-
-
-PyObject *
-_wrap_PyNs3OlsrMessageHeader_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::olsr::MessageHeader::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3OlsrMessageHeader_GetHopCount(PyNs3OlsrMessageHeader *self)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    
-    retval = self->obj->GetHopCount();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    self->obj->SetVTime(*((PyNs3Time *) time)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -2544,27 +2544,27 @@ _wrap_PyNs3OlsrMessageHeader__copy__(PyNs3OlsrMessageHeader *self)
 }
 
 static PyMethodDef PyNs3OlsrMessageHeader_methods[] = {
-    {(char *) "GetVTime", (PyCFunction) _wrap_PyNs3OlsrMessageHeader_GetVTime, METH_NOARGS, "GetVTime()\n\n" },
-    {(char *) "GetHna", (PyCFunction) _wrap_PyNs3OlsrMessageHeader_GetHna, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "SetMessageType", (PyCFunction) _wrap_PyNs3OlsrMessageHeader_SetMessageType, METH_KEYWORDS|METH_VARARGS, "SetMessageType(messageType)\n\ntype: messageType: ns3::olsr::MessageHeader::MessageType" },
-    {(char *) "GetMessageSequenceNumber", (PyCFunction) _wrap_PyNs3OlsrMessageHeader_GetMessageSequenceNumber, METH_NOARGS, "GetMessageSequenceNumber()\n\n" },
-    {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3OlsrMessageHeader_Deserialize, METH_KEYWORDS|METH_VARARGS, "Deserialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
-    {(char *) "GetMid", (PyCFunction) _wrap_PyNs3OlsrMessageHeader_GetMid, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "GetOriginatorAddress", (PyCFunction) _wrap_PyNs3OlsrMessageHeader_GetOriginatorAddress, METH_NOARGS, "GetOriginatorAddress()\n\n" },
-    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3OlsrMessageHeader_Serialize, METH_KEYWORDS|METH_VARARGS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
-    {(char *) "GetTc", (PyCFunction) _wrap_PyNs3OlsrMessageHeader_GetTc, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "GetTimeToLive", (PyCFunction) _wrap_PyNs3OlsrMessageHeader_GetTimeToLive, METH_NOARGS, "GetTimeToLive()\n\n" },
-    {(char *) "SetVTime", (PyCFunction) _wrap_PyNs3OlsrMessageHeader_SetVTime, METH_KEYWORDS|METH_VARARGS, "SetVTime(time)\n\ntype: time: ns3::Time" },
-    {(char *) "SetMessageSequenceNumber", (PyCFunction) _wrap_PyNs3OlsrMessageHeader_SetMessageSequenceNumber, METH_KEYWORDS|METH_VARARGS, "SetMessageSequenceNumber(messageSequenceNumber)\n\ntype: messageSequenceNumber: uint16_t" },
-    {(char *) "SetTimeToLive", (PyCFunction) _wrap_PyNs3OlsrMessageHeader_SetTimeToLive, METH_KEYWORDS|METH_VARARGS, "SetTimeToLive(timeToLive)\n\ntype: timeToLive: uint8_t" },
-    {(char *) "SetOriginatorAddress", (PyCFunction) _wrap_PyNs3OlsrMessageHeader_SetOriginatorAddress, METH_KEYWORDS|METH_VARARGS, "SetOriginatorAddress(originatorAddress)\n\ntype: originatorAddress: ns3::Ipv4Address" },
-    {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3OlsrMessageHeader_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
-    {(char *) "GetSerializedSize", (PyCFunction) _wrap_PyNs3OlsrMessageHeader_GetSerializedSize, METH_NOARGS, "GetSerializedSize()\n\n" },
-    {(char *) "SetHopCount", (PyCFunction) _wrap_PyNs3OlsrMessageHeader_SetHopCount, METH_KEYWORDS|METH_VARARGS, "SetHopCount(hopCount)\n\ntype: hopCount: uint8_t" },
-    {(char *) "GetMessageType", (PyCFunction) _wrap_PyNs3OlsrMessageHeader_GetMessageType, METH_NOARGS, "GetMessageType()\n\n" },
-    {(char *) "GetHello", (PyCFunction) _wrap_PyNs3OlsrMessageHeader_GetHello, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3OlsrMessageHeader_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3OlsrMessageHeader_Deserialize, METH_VARARGS|METH_KEYWORDS, "Deserialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
+    {(char *) "GetHello", (PyCFunction) _wrap_PyNs3OlsrMessageHeader_GetHello, METH_VARARGS|METH_KEYWORDS, NULL },
+    {(char *) "GetHna", (PyCFunction) _wrap_PyNs3OlsrMessageHeader_GetHna, METH_VARARGS|METH_KEYWORDS, NULL },
     {(char *) "GetHopCount", (PyCFunction) _wrap_PyNs3OlsrMessageHeader_GetHopCount, METH_NOARGS, "GetHopCount()\n\n" },
+    {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3OlsrMessageHeader_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
+    {(char *) "GetMessageSequenceNumber", (PyCFunction) _wrap_PyNs3OlsrMessageHeader_GetMessageSequenceNumber, METH_NOARGS, "GetMessageSequenceNumber()\n\n" },
+    {(char *) "GetMessageType", (PyCFunction) _wrap_PyNs3OlsrMessageHeader_GetMessageType, METH_NOARGS, "GetMessageType()\n\n" },
+    {(char *) "GetMid", (PyCFunction) _wrap_PyNs3OlsrMessageHeader_GetMid, METH_VARARGS|METH_KEYWORDS, NULL },
+    {(char *) "GetOriginatorAddress", (PyCFunction) _wrap_PyNs3OlsrMessageHeader_GetOriginatorAddress, METH_NOARGS, "GetOriginatorAddress()\n\n" },
+    {(char *) "GetSerializedSize", (PyCFunction) _wrap_PyNs3OlsrMessageHeader_GetSerializedSize, METH_NOARGS, "GetSerializedSize()\n\n" },
+    {(char *) "GetTc", (PyCFunction) _wrap_PyNs3OlsrMessageHeader_GetTc, METH_VARARGS|METH_KEYWORDS, NULL },
+    {(char *) "GetTimeToLive", (PyCFunction) _wrap_PyNs3OlsrMessageHeader_GetTimeToLive, METH_NOARGS, "GetTimeToLive()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3OlsrMessageHeader_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "GetVTime", (PyCFunction) _wrap_PyNs3OlsrMessageHeader_GetVTime, METH_NOARGS, "GetVTime()\n\n" },
+    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3OlsrMessageHeader_Serialize, METH_VARARGS|METH_KEYWORDS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
+    {(char *) "SetHopCount", (PyCFunction) _wrap_PyNs3OlsrMessageHeader_SetHopCount, METH_VARARGS|METH_KEYWORDS, "SetHopCount(hopCount)\n\ntype: hopCount: uint8_t" },
+    {(char *) "SetMessageSequenceNumber", (PyCFunction) _wrap_PyNs3OlsrMessageHeader_SetMessageSequenceNumber, METH_VARARGS|METH_KEYWORDS, "SetMessageSequenceNumber(messageSequenceNumber)\n\ntype: messageSequenceNumber: uint16_t" },
+    {(char *) "SetMessageType", (PyCFunction) _wrap_PyNs3OlsrMessageHeader_SetMessageType, METH_VARARGS|METH_KEYWORDS, "SetMessageType(messageType)\n\ntype: messageType: ns3::olsr::MessageHeader::MessageType" },
+    {(char *) "SetOriginatorAddress", (PyCFunction) _wrap_PyNs3OlsrMessageHeader_SetOriginatorAddress, METH_VARARGS|METH_KEYWORDS, "SetOriginatorAddress(originatorAddress)\n\ntype: originatorAddress: ns3::Ipv4Address" },
+    {(char *) "SetTimeToLive", (PyCFunction) _wrap_PyNs3OlsrMessageHeader_SetTimeToLive, METH_VARARGS|METH_KEYWORDS, "SetTimeToLive(timeToLive)\n\ntype: timeToLive: uint8_t" },
+    {(char *) "SetVTime", (PyCFunction) _wrap_PyNs3OlsrMessageHeader_SetVTime, METH_VARARGS|METH_KEYWORDS, "SetVTime(time)\n\ntype: time: ns3::Time" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3OlsrMessageHeader__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -2782,6 +2782,13 @@ static int _wrap_PyNs3OlsrMessageHeaderHello__set_willingness(PyNs3OlsrMessageHe
 }
 static PyGetSetDef PyNs3OlsrMessageHeaderHello__getsets[] = {
     {
+        (char*) "hTime", /* attribute name */
+        (getter) _wrap_PyNs3OlsrMessageHeaderHello__get_hTime, /* C function to get the attribute */
+        (setter) _wrap_PyNs3OlsrMessageHeaderHello__set_hTime, /* C function to set the attribute */
+        NULL, /* optional doc string */
+        NULL /* optional additional data for getter and setter */
+    },
+    {
         (char*) "linkMessages", /* attribute name */
         (getter) _wrap_PyNs3OlsrMessageHeaderHello__get_linkMessages, /* C function to get the attribute */
         (setter) _wrap_PyNs3OlsrMessageHeaderHello__set_linkMessages, /* C function to set the attribute */
@@ -2792,13 +2799,6 @@ static PyGetSetDef PyNs3OlsrMessageHeaderHello__getsets[] = {
         (char*) "willingness", /* attribute name */
         (getter) _wrap_PyNs3OlsrMessageHeaderHello__get_willingness, /* C function to get the attribute */
         (setter) _wrap_PyNs3OlsrMessageHeaderHello__set_willingness, /* C function to set the attribute */
-        NULL, /* optional doc string */
-        NULL /* optional additional data for getter and setter */
-    },
-    {
-        (char*) "hTime", /* attribute name */
-        (getter) _wrap_PyNs3OlsrMessageHeaderHello__get_hTime, /* C function to get the attribute */
-        (setter) _wrap_PyNs3OlsrMessageHeaderHello__set_hTime, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -2871,6 +2871,40 @@ int _wrap_PyNs3OlsrMessageHeaderHello__tp_init(PyNs3OlsrMessageHeaderHello *self
 
 
 PyObject *
+_wrap_PyNs3OlsrMessageHeaderHello_Deserialize(PyNs3OlsrMessageHeaderHello *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    PyNs3BufferIterator *start;
+    unsigned int messageSize;
+    const char *keywords[] = {"start", "messageSize", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!I", (char **) keywords, &PyNs3BufferIterator_Type, &start, &messageSize)) {
+        return NULL;
+    }
+    retval = self->obj->Deserialize(*((PyNs3BufferIterator *) start)->obj, messageSize);
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3OlsrMessageHeaderHello_GetHTime(PyNs3OlsrMessageHeaderHello *self)
+{
+    PyObject *py_retval;
+    PyNs3Time *py_Time;
+    
+    ns3::Time retval = self->obj->GetHTime();
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3OlsrMessageHeaderHello_GetSerializedSize(PyNs3OlsrMessageHeaderHello *self)
 {
     PyObject *py_retval;
@@ -2916,40 +2950,6 @@ _wrap_PyNs3OlsrMessageHeaderHello_SetHTime(PyNs3OlsrMessageHeaderHello *self, Py
 }
 
 
-PyObject *
-_wrap_PyNs3OlsrMessageHeaderHello_Deserialize(PyNs3OlsrMessageHeaderHello *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    PyNs3BufferIterator *start;
-    unsigned int messageSize;
-    const char *keywords[] = {"start", "messageSize", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!I", (char **) keywords, &PyNs3BufferIterator_Type, &start, &messageSize)) {
-        return NULL;
-    }
-    retval = self->obj->Deserialize(*((PyNs3BufferIterator *) start)->obj, messageSize);
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3OlsrMessageHeaderHello_GetHTime(PyNs3OlsrMessageHeaderHello *self)
-{
-    PyObject *py_retval;
-    PyNs3Time *py_Time;
-    
-    ns3::Time retval = self->obj->GetHTime();
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3OlsrMessageHeaderHello__copy__(PyNs3OlsrMessageHeaderHello *self)
 {
@@ -2963,11 +2963,11 @@ _wrap_PyNs3OlsrMessageHeaderHello__copy__(PyNs3OlsrMessageHeaderHello *self)
 }
 
 static PyMethodDef PyNs3OlsrMessageHeaderHello_methods[] = {
-    {(char *) "GetSerializedSize", (PyCFunction) _wrap_PyNs3OlsrMessageHeaderHello_GetSerializedSize, METH_NOARGS, "GetSerializedSize()\n\n" },
-    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3OlsrMessageHeaderHello_Serialize, METH_KEYWORDS|METH_VARARGS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
-    {(char *) "SetHTime", (PyCFunction) _wrap_PyNs3OlsrMessageHeaderHello_SetHTime, METH_KEYWORDS|METH_VARARGS, "SetHTime(time)\n\ntype: time: ns3::Time" },
-    {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3OlsrMessageHeaderHello_Deserialize, METH_KEYWORDS|METH_VARARGS, "Deserialize(start, messageSize)\n\ntype: start: ns3::Buffer::Iterator\ntype: messageSize: uint32_t" },
+    {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3OlsrMessageHeaderHello_Deserialize, METH_VARARGS|METH_KEYWORDS, "Deserialize(start, messageSize)\n\ntype: start: ns3::Buffer::Iterator\ntype: messageSize: uint32_t" },
     {(char *) "GetHTime", (PyCFunction) _wrap_PyNs3OlsrMessageHeaderHello_GetHTime, METH_NOARGS, "GetHTime()\n\n" },
+    {(char *) "GetSerializedSize", (PyCFunction) _wrap_PyNs3OlsrMessageHeaderHello_GetSerializedSize, METH_NOARGS, "GetSerializedSize()\n\n" },
+    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3OlsrMessageHeaderHello_Serialize, METH_VARARGS|METH_KEYWORDS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
+    {(char *) "SetHTime", (PyCFunction) _wrap_PyNs3OlsrMessageHeaderHello_SetHTime, METH_VARARGS|METH_KEYWORDS, "SetHTime(time)\n\ntype: time: ns3::Time" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3OlsrMessageHeaderHello__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -3131,16 +3131,16 @@ static int _wrap_PyNs3OlsrMessageHeaderHelloLinkMessage__set_neighborInterfaceAd
 }
 static PyGetSetDef PyNs3OlsrMessageHeaderHelloLinkMessage__getsets[] = {
     {
-        (char*) "neighborInterfaceAddresses", /* attribute name */
-        (getter) _wrap_PyNs3OlsrMessageHeaderHelloLinkMessage__get_neighborInterfaceAddresses, /* C function to get the attribute */
-        (setter) _wrap_PyNs3OlsrMessageHeaderHelloLinkMessage__set_neighborInterfaceAddresses, /* C function to set the attribute */
+        (char*) "linkCode", /* attribute name */
+        (getter) _wrap_PyNs3OlsrMessageHeaderHelloLinkMessage__get_linkCode, /* C function to get the attribute */
+        (setter) _wrap_PyNs3OlsrMessageHeaderHelloLinkMessage__set_linkCode, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
     {
-        (char*) "linkCode", /* attribute name */
-        (getter) _wrap_PyNs3OlsrMessageHeaderHelloLinkMessage__get_linkCode, /* C function to get the attribute */
-        (setter) _wrap_PyNs3OlsrMessageHeaderHelloLinkMessage__set_linkCode, /* C function to set the attribute */
+        (char*) "neighborInterfaceAddresses", /* attribute name */
+        (getter) _wrap_PyNs3OlsrMessageHeaderHelloLinkMessage__get_neighborInterfaceAddresses, /* C function to get the attribute */
+        (setter) _wrap_PyNs3OlsrMessageHeaderHelloLinkMessage__set_neighborInterfaceAddresses, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -3437,6 +3437,24 @@ int _wrap_PyNs3OlsrMessageHeaderHna__tp_init(PyNs3OlsrMessageHeaderHna *self, Py
 
 
 PyObject *
+_wrap_PyNs3OlsrMessageHeaderHna_Deserialize(PyNs3OlsrMessageHeaderHna *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    PyNs3BufferIterator *start;
+    unsigned int messageSize;
+    const char *keywords[] = {"start", "messageSize", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!I", (char **) keywords, &PyNs3BufferIterator_Type, &start, &messageSize)) {
+        return NULL;
+    }
+    retval = self->obj->Deserialize(*((PyNs3BufferIterator *) start)->obj, messageSize);
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3OlsrMessageHeaderHna_GetSerializedSize(PyNs3OlsrMessageHeaderHna *self)
 {
     PyObject *py_retval;
@@ -3465,24 +3483,6 @@ _wrap_PyNs3OlsrMessageHeaderHna_Serialize(PyNs3OlsrMessageHeaderHna *self, PyObj
 }
 
 
-PyObject *
-_wrap_PyNs3OlsrMessageHeaderHna_Deserialize(PyNs3OlsrMessageHeaderHna *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    PyNs3BufferIterator *start;
-    unsigned int messageSize;
-    const char *keywords[] = {"start", "messageSize", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!I", (char **) keywords, &PyNs3BufferIterator_Type, &start, &messageSize)) {
-        return NULL;
-    }
-    retval = self->obj->Deserialize(*((PyNs3BufferIterator *) start)->obj, messageSize);
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3OlsrMessageHeaderHna__copy__(PyNs3OlsrMessageHeaderHna *self)
 {
@@ -3496,9 +3496,9 @@ _wrap_PyNs3OlsrMessageHeaderHna__copy__(PyNs3OlsrMessageHeaderHna *self)
 }
 
 static PyMethodDef PyNs3OlsrMessageHeaderHna_methods[] = {
+    {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3OlsrMessageHeaderHna_Deserialize, METH_VARARGS|METH_KEYWORDS, "Deserialize(start, messageSize)\n\ntype: start: ns3::Buffer::Iterator\ntype: messageSize: uint32_t" },
     {(char *) "GetSerializedSize", (PyCFunction) _wrap_PyNs3OlsrMessageHeaderHna_GetSerializedSize, METH_NOARGS, "GetSerializedSize()\n\n" },
-    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3OlsrMessageHeaderHna_Serialize, METH_KEYWORDS|METH_VARARGS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
-    {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3OlsrMessageHeaderHna_Deserialize, METH_KEYWORDS|METH_VARARGS, "Deserialize(start, messageSize)\n\ntype: start: ns3::Buffer::Iterator\ntype: messageSize: uint32_t" },
+    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3OlsrMessageHeaderHna_Serialize, METH_VARARGS|METH_KEYWORDS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3OlsrMessageHeaderHna__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -3664,16 +3664,16 @@ static int _wrap_PyNs3OlsrMessageHeaderHnaAssociation__set_mask(PyNs3OlsrMessage
 }
 static PyGetSetDef PyNs3OlsrMessageHeaderHnaAssociation__getsets[] = {
     {
-        (char*) "mask", /* attribute name */
-        (getter) _wrap_PyNs3OlsrMessageHeaderHnaAssociation__get_mask, /* C function to get the attribute */
-        (setter) _wrap_PyNs3OlsrMessageHeaderHnaAssociation__set_mask, /* C function to set the attribute */
+        (char*) "address", /* attribute name */
+        (getter) _wrap_PyNs3OlsrMessageHeaderHnaAssociation__get_address, /* C function to get the attribute */
+        (setter) _wrap_PyNs3OlsrMessageHeaderHnaAssociation__set_address, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
     {
-        (char*) "address", /* attribute name */
-        (getter) _wrap_PyNs3OlsrMessageHeaderHnaAssociation__get_address, /* C function to get the attribute */
-        (setter) _wrap_PyNs3OlsrMessageHeaderHnaAssociation__set_address, /* C function to set the attribute */
+        (char*) "mask", /* attribute name */
+        (getter) _wrap_PyNs3OlsrMessageHeaderHnaAssociation__get_mask, /* C function to get the attribute */
+        (setter) _wrap_PyNs3OlsrMessageHeaderHnaAssociation__set_mask, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -3970,6 +3970,24 @@ int _wrap_PyNs3OlsrMessageHeaderMid__tp_init(PyNs3OlsrMessageHeaderMid *self, Py
 
 
 PyObject *
+_wrap_PyNs3OlsrMessageHeaderMid_Deserialize(PyNs3OlsrMessageHeaderMid *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    PyNs3BufferIterator *start;
+    unsigned int messageSize;
+    const char *keywords[] = {"start", "messageSize", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!I", (char **) keywords, &PyNs3BufferIterator_Type, &start, &messageSize)) {
+        return NULL;
+    }
+    retval = self->obj->Deserialize(*((PyNs3BufferIterator *) start)->obj, messageSize);
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3OlsrMessageHeaderMid_GetSerializedSize(PyNs3OlsrMessageHeaderMid *self)
 {
     PyObject *py_retval;
@@ -3998,24 +4016,6 @@ _wrap_PyNs3OlsrMessageHeaderMid_Serialize(PyNs3OlsrMessageHeaderMid *self, PyObj
 }
 
 
-PyObject *
-_wrap_PyNs3OlsrMessageHeaderMid_Deserialize(PyNs3OlsrMessageHeaderMid *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    PyNs3BufferIterator *start;
-    unsigned int messageSize;
-    const char *keywords[] = {"start", "messageSize", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!I", (char **) keywords, &PyNs3BufferIterator_Type, &start, &messageSize)) {
-        return NULL;
-    }
-    retval = self->obj->Deserialize(*((PyNs3BufferIterator *) start)->obj, messageSize);
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3OlsrMessageHeaderMid__copy__(PyNs3OlsrMessageHeaderMid *self)
 {
@@ -4029,9 +4029,9 @@ _wrap_PyNs3OlsrMessageHeaderMid__copy__(PyNs3OlsrMessageHeaderMid *self)
 }
 
 static PyMethodDef PyNs3OlsrMessageHeaderMid_methods[] = {
+    {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3OlsrMessageHeaderMid_Deserialize, METH_VARARGS|METH_KEYWORDS, "Deserialize(start, messageSize)\n\ntype: start: ns3::Buffer::Iterator\ntype: messageSize: uint32_t" },
     {(char *) "GetSerializedSize", (PyCFunction) _wrap_PyNs3OlsrMessageHeaderMid_GetSerializedSize, METH_NOARGS, "GetSerializedSize()\n\n" },
-    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3OlsrMessageHeaderMid_Serialize, METH_KEYWORDS|METH_VARARGS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
-    {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3OlsrMessageHeaderMid_Deserialize, METH_KEYWORDS|METH_VARARGS, "Deserialize(start, messageSize)\n\ntype: start: ns3::Buffer::Iterator\ntype: messageSize: uint32_t" },
+    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3OlsrMessageHeaderMid_Serialize, METH_VARARGS|METH_KEYWORDS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3OlsrMessageHeaderMid__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -4277,6 +4277,24 @@ int _wrap_PyNs3OlsrMessageHeaderTc__tp_init(PyNs3OlsrMessageHeaderTc *self, PyOb
 
 
 PyObject *
+_wrap_PyNs3OlsrMessageHeaderTc_Deserialize(PyNs3OlsrMessageHeaderTc *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    PyNs3BufferIterator *start;
+    unsigned int messageSize;
+    const char *keywords[] = {"start", "messageSize", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!I", (char **) keywords, &PyNs3BufferIterator_Type, &start, &messageSize)) {
+        return NULL;
+    }
+    retval = self->obj->Deserialize(*((PyNs3BufferIterator *) start)->obj, messageSize);
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3OlsrMessageHeaderTc_GetSerializedSize(PyNs3OlsrMessageHeaderTc *self)
 {
     PyObject *py_retval;
@@ -4305,24 +4323,6 @@ _wrap_PyNs3OlsrMessageHeaderTc_Serialize(PyNs3OlsrMessageHeaderTc *self, PyObjec
 }
 
 
-PyObject *
-_wrap_PyNs3OlsrMessageHeaderTc_Deserialize(PyNs3OlsrMessageHeaderTc *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    PyNs3BufferIterator *start;
-    unsigned int messageSize;
-    const char *keywords[] = {"start", "messageSize", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!I", (char **) keywords, &PyNs3BufferIterator_Type, &start, &messageSize)) {
-        return NULL;
-    }
-    retval = self->obj->Deserialize(*((PyNs3BufferIterator *) start)->obj, messageSize);
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3OlsrMessageHeaderTc__copy__(PyNs3OlsrMessageHeaderTc *self)
 {
@@ -4336,9 +4336,9 @@ _wrap_PyNs3OlsrMessageHeaderTc__copy__(PyNs3OlsrMessageHeaderTc *self)
 }
 
 static PyMethodDef PyNs3OlsrMessageHeaderTc_methods[] = {
+    {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3OlsrMessageHeaderTc_Deserialize, METH_VARARGS|METH_KEYWORDS, "Deserialize(start, messageSize)\n\ntype: start: ns3::Buffer::Iterator\ntype: messageSize: uint32_t" },
     {(char *) "GetSerializedSize", (PyCFunction) _wrap_PyNs3OlsrMessageHeaderTc_GetSerializedSize, METH_NOARGS, "GetSerializedSize()\n\n" },
-    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3OlsrMessageHeaderTc_Serialize, METH_KEYWORDS|METH_VARARGS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
-    {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3OlsrMessageHeaderTc_Deserialize, METH_KEYWORDS|METH_VARARGS, "Deserialize(start, messageSize)\n\ntype: start: ns3::Buffer::Iterator\ntype: messageSize: uint32_t" },
+    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3OlsrMessageHeaderTc_Serialize, METH_VARARGS|METH_KEYWORDS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3OlsrMessageHeaderTc__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -4787,16 +4787,16 @@ static int _wrap_PyNs3OlsrNeighborTuple__set_willingness(PyNs3OlsrNeighborTuple 
 }
 static PyGetSetDef PyNs3OlsrNeighborTuple__getsets[] = {
     {
-        (char*) "status", /* attribute name */
-        (getter) _wrap_PyNs3OlsrNeighborTuple__get_status, /* C function to get the attribute */
-        (setter) _wrap_PyNs3OlsrNeighborTuple__set_status, /* C function to set the attribute */
+        (char*) "neighborMainAddr", /* attribute name */
+        (getter) _wrap_PyNs3OlsrNeighborTuple__get_neighborMainAddr, /* C function to get the attribute */
+        (setter) _wrap_PyNs3OlsrNeighborTuple__set_neighborMainAddr, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
     {
-        (char*) "neighborMainAddr", /* attribute name */
-        (getter) _wrap_PyNs3OlsrNeighborTuple__get_neighborMainAddr, /* C function to get the attribute */
-        (setter) _wrap_PyNs3OlsrNeighborTuple__set_neighborMainAddr, /* C function to set the attribute */
+        (char*) "status", /* attribute name */
+        (getter) _wrap_PyNs3OlsrNeighborTuple__get_status, /* C function to get the attribute */
+        (setter) _wrap_PyNs3OlsrNeighborTuple__set_status, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -5082,7 +5082,41 @@ int _wrap_PyNs3OlsrOlsrState__tp_init(PyNs3OlsrOlsrState *self, PyObject *args, 
 
 
 PyObject *
-_wrap_PyNs3OlsrOlsrState_InsertDuplicateTuple(PyNs3OlsrOlsrState *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3OlsrOlsrState_EraseAssociation(PyNs3OlsrOlsrState *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3OlsrAssociation *tuple;
+    const char *keywords[] = {"tuple", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3OlsrAssociation_Type, &tuple)) {
+        return NULL;
+    }
+    self->obj->EraseAssociation(*((PyNs3OlsrAssociation *) tuple)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3OlsrOlsrState_EraseAssociationTuple(PyNs3OlsrOlsrState *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3OlsrAssociationTuple *tuple;
+    const char *keywords[] = {"tuple", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3OlsrAssociationTuple_Type, &tuple)) {
+        return NULL;
+    }
+    self->obj->EraseAssociationTuple(*((PyNs3OlsrAssociationTuple *) tuple)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3OlsrOlsrState_EraseDuplicateTuple(PyNs3OlsrOlsrState *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
     PyNs3OlsrDuplicateTuple *tuple;
@@ -5091,10 +5125,148 @@ _wrap_PyNs3OlsrOlsrState_InsertDuplicateTuple(PyNs3OlsrOlsrState *self, PyObject
     if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3OlsrDuplicateTuple_Type, &tuple)) {
         return NULL;
     }
-    self->obj->InsertDuplicateTuple(*((PyNs3OlsrDuplicateTuple *) tuple)->obj);
+    self->obj->EraseDuplicateTuple(*((PyNs3OlsrDuplicateTuple *) tuple)->obj);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3OlsrOlsrState_EraseIfaceAssocTuple(PyNs3OlsrOlsrState *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3OlsrIfaceAssocTuple *tuple;
+    const char *keywords[] = {"tuple", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3OlsrIfaceAssocTuple_Type, &tuple)) {
+        return NULL;
+    }
+    self->obj->EraseIfaceAssocTuple(*((PyNs3OlsrIfaceAssocTuple *) tuple)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3OlsrOlsrState_EraseLinkTuple(PyNs3OlsrOlsrState *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3OlsrLinkTuple *tuple;
+    const char *keywords[] = {"tuple", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3OlsrLinkTuple_Type, &tuple)) {
+        return NULL;
+    }
+    self->obj->EraseLinkTuple(*((PyNs3OlsrLinkTuple *) tuple)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3OlsrOlsrState_EraseMprSelectorTuple(PyNs3OlsrOlsrState *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3OlsrMprSelectorTuple *tuple;
+    const char *keywords[] = {"tuple", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3OlsrMprSelectorTuple_Type, &tuple)) {
+        return NULL;
+    }
+    self->obj->EraseMprSelectorTuple(*((PyNs3OlsrMprSelectorTuple *) tuple)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3OlsrOlsrState_EraseMprSelectorTuples(PyNs3OlsrOlsrState *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4Address *mainAddr;
+    const char *keywords[] = {"mainAddr", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &mainAddr)) {
+        return NULL;
+    }
+    self->obj->EraseMprSelectorTuples(*((PyNs3Ipv4Address *) mainAddr)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+
+PyObject *
+_wrap_PyNs3OlsrOlsrState_EraseNeighborTuple__0(PyNs3OlsrOlsrState *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    PyNs3OlsrNeighborTuple *neighborTuple;
+    const char *keywords[] = {"neighborTuple", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3OlsrNeighborTuple_Type, &neighborTuple)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    self->obj->EraseNeighborTuple(*((PyNs3OlsrNeighborTuple *) neighborTuple)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject *
+_wrap_PyNs3OlsrOlsrState_EraseNeighborTuple__1(PyNs3OlsrOlsrState *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4Address *mainAddr;
+    const char *keywords[] = {"mainAddr", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &mainAddr)) {
+        {
+            PyObject *exc_type, *traceback;
+            PyErr_Fetch(&exc_type, return_exception, &traceback);
+            Py_XDECREF(exc_type);
+            Py_XDECREF(traceback);
+        }
+        return NULL;
+    }
+    self->obj->EraseNeighborTuple(*((PyNs3Ipv4Address *) mainAddr)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject * _wrap_PyNs3OlsrOlsrState_EraseNeighborTuple(PyNs3OlsrOlsrState *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject * retval;
+    PyObject *error_list;
+    PyObject *exceptions[2] = {0,};
+    retval = _wrap_PyNs3OlsrOlsrState_EraseNeighborTuple__0(self, args, kwargs, &exceptions[0]);
+    if (!exceptions[0]) {
+        return retval;
+    }
+    retval = _wrap_PyNs3OlsrOlsrState_EraseNeighborTuple__1(self, args, kwargs, &exceptions[1]);
+    if (!exceptions[1]) {
+        Py_DECREF(exceptions[0]);
+        return retval;
+    }
+    error_list = PyList_New(2);
+    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
+    Py_DECREF(exceptions[0]);
+    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
+    Py_DECREF(exceptions[1]);
+    PyErr_SetObject(PyExc_TypeError, error_list);
+    Py_DECREF(error_list);
+    return NULL;
 }
 
 
@@ -5121,16 +5293,16 @@ _wrap_PyNs3OlsrOlsrState_EraseOlderTopologyTuples(PyNs3OlsrOlsrState *self, PyOb
 
 
 PyObject *
-_wrap_PyNs3OlsrOlsrState_EraseLinkTuple(PyNs3OlsrOlsrState *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3OlsrOlsrState_EraseTopologyTuple(PyNs3OlsrOlsrState *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3OlsrLinkTuple *tuple;
+    PyNs3OlsrTopologyTuple *tuple;
     const char *keywords[] = {"tuple", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3OlsrLinkTuple_Type, &tuple)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3OlsrTopologyTuple_Type, &tuple)) {
         return NULL;
     }
-    self->obj->EraseLinkTuple(*((PyNs3OlsrLinkTuple *) tuple)->obj);
+    self->obj->EraseTopologyTuple(*((PyNs3OlsrTopologyTuple *) tuple)->obj);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -5138,125 +5310,18 @@ _wrap_PyNs3OlsrOlsrState_EraseLinkTuple(PyNs3OlsrOlsrState *self, PyObject *args
 
 
 PyObject *
-_wrap_PyNs3OlsrOlsrState_InsertLinkTuple(PyNs3OlsrOlsrState *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3OlsrOlsrState_EraseTwoHopNeighborTuple(PyNs3OlsrOlsrState *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3OlsrLinkTuple *tuple;
-    const char *keywords[] = {"tuple", NULL};
-    PyNs3OlsrLinkTuple *py_LinkTuple;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3OlsrLinkTuple_Type, &tuple)) {
-        return NULL;
-    }
-    ns3::olsr::LinkTuple & retval = self->obj->InsertLinkTuple(*((PyNs3OlsrLinkTuple *) tuple)->obj);
-    py_LinkTuple = PyObject_New(PyNs3OlsrLinkTuple, &PyNs3OlsrLinkTuple_Type);
-    py_LinkTuple->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_LinkTuple->obj = new ns3::olsr::LinkTuple(retval);
-    PyNs3OlsrLinkTuple_wrapper_registry[(void *) py_LinkTuple->obj] = (PyObject *) py_LinkTuple;
-    py_retval = Py_BuildValue((char *) "N", py_LinkTuple);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3OlsrOlsrState_EraseMprSelectorTuples(PyNs3OlsrOlsrState *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Ipv4Address *mainAddr;
-    const char *keywords[] = {"mainAddr", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &mainAddr)) {
-        return NULL;
-    }
-    self->obj->EraseMprSelectorTuples(*((PyNs3Ipv4Address *) mainAddr)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3OlsrOlsrState_FindSymNeighborTuple(PyNs3OlsrOlsrState *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    ns3::olsr::NeighborTuple const *retval;
-    PyNs3Ipv4Address *mainAddr;
-    const char *keywords[] = {"mainAddr", NULL};
-    PyNs3OlsrNeighborTuple *py_NeighborTuple;
-    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &mainAddr)) {
-        return NULL;
-    }
-    retval = self->obj->FindSymNeighborTuple(*((PyNs3Ipv4Address *) mainAddr)->obj);
-    if (!(retval)) {
-        Py_INCREF(Py_None);
-        return Py_None;
-    }
-    wrapper_lookup_iter = PyNs3OlsrNeighborTuple_wrapper_registry.find((void *) retval);
-    if (wrapper_lookup_iter == PyNs3OlsrNeighborTuple_wrapper_registry.end()) {
-        py_NeighborTuple = NULL;
-    } else {
-        py_NeighborTuple = (PyNs3OlsrNeighborTuple *) wrapper_lookup_iter->second;
-        Py_INCREF(py_NeighborTuple);
-    }
-    
-    if (py_NeighborTuple == NULL) {
-        py_NeighborTuple = PyObject_New(PyNs3OlsrNeighborTuple, &PyNs3OlsrNeighborTuple_Type);
-        py_NeighborTuple->obj = new ns3::olsr::NeighborTuple((*retval));
-        py_NeighborTuple->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-        PyNs3OlsrNeighborTuple_wrapper_registry[(void *) py_NeighborTuple->obj] = (PyObject *) py_NeighborTuple;
-    }
-    py_retval = Py_BuildValue((char *) "N", py_NeighborTuple);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3OlsrOlsrState_FindMprAddress(PyNs3OlsrOlsrState *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    PyNs3Ipv4Address *address;
-    const char *keywords[] = {"address", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &address)) {
-        return NULL;
-    }
-    retval = self->obj->FindMprAddress(*((PyNs3Ipv4Address *) address)->obj);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3OlsrOlsrState_InsertIfaceAssocTuple(PyNs3OlsrOlsrState *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3OlsrIfaceAssocTuple *tuple;
+    PyNs3OlsrTwoHopNeighborTuple *tuple;
     const char *keywords[] = {"tuple", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3OlsrIfaceAssocTuple_Type, &tuple)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3OlsrTwoHopNeighborTuple_Type, &tuple)) {
         return NULL;
     }
-    self->obj->InsertIfaceAssocTuple(*((PyNs3OlsrIfaceAssocTuple *) tuple)->obj);
+    self->obj->EraseTwoHopNeighborTuple(*((PyNs3OlsrTwoHopNeighborTuple *) tuple)->obj);
     Py_INCREF(Py_None);
     py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3OlsrOlsrState_GetMprSet(PyNs3OlsrOlsrState *self)
-{
-    PyObject *py_retval;
-    ns3::olsr::MprSet retval;
-    Pyns3__olsr__MprSet *py_ns3__olsr__MprSet;
-    
-    retval = self->obj->GetMprSet();
-    py_ns3__olsr__MprSet = PyObject_New(Pyns3__olsr__MprSet, &Pyns3__olsr__MprSet_Type);
-    py_ns3__olsr__MprSet->obj = new ns3::olsr::MprSet(retval);
-    py_retval = Py_BuildValue((char *) "N", py_ns3__olsr__MprSet);
     return py_retval;
 }
 
@@ -5332,190 +5397,6 @@ PyObject * _wrap_PyNs3OlsrOlsrState_EraseTwoHopNeighborTuples(PyNs3OlsrOlsrState
 }
 
 
-
-PyObject *
-_wrap_PyNs3OlsrOlsrState_EraseNeighborTuple__0(PyNs3OlsrOlsrState *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    PyNs3OlsrNeighborTuple *neighborTuple;
-    const char *keywords[] = {"neighborTuple", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3OlsrNeighborTuple_Type, &neighborTuple)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    self->obj->EraseNeighborTuple(*((PyNs3OlsrNeighborTuple *) neighborTuple)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject *
-_wrap_PyNs3OlsrOlsrState_EraseNeighborTuple__1(PyNs3OlsrOlsrState *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
-{
-    PyObject *py_retval;
-    PyNs3Ipv4Address *mainAddr;
-    const char *keywords[] = {"mainAddr", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &mainAddr)) {
-        {
-            PyObject *exc_type, *traceback;
-            PyErr_Fetch(&exc_type, return_exception, &traceback);
-            Py_XDECREF(exc_type);
-            Py_XDECREF(traceback);
-        }
-        return NULL;
-    }
-    self->obj->EraseNeighborTuple(*((PyNs3Ipv4Address *) mainAddr)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject * _wrap_PyNs3OlsrOlsrState_EraseNeighborTuple(PyNs3OlsrOlsrState *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject * retval;
-    PyObject *error_list;
-    PyObject *exceptions[2] = {0,};
-    retval = _wrap_PyNs3OlsrOlsrState_EraseNeighborTuple__0(self, args, kwargs, &exceptions[0]);
-    if (!exceptions[0]) {
-        return retval;
-    }
-    retval = _wrap_PyNs3OlsrOlsrState_EraseNeighborTuple__1(self, args, kwargs, &exceptions[1]);
-    if (!exceptions[1]) {
-        Py_DECREF(exceptions[0]);
-        return retval;
-    }
-    error_list = PyList_New(2);
-    PyList_SET_ITEM(error_list, 0, PyObject_Str(exceptions[0]));
-    Py_DECREF(exceptions[0]);
-    PyList_SET_ITEM(error_list, 1, PyObject_Str(exceptions[1]));
-    Py_DECREF(exceptions[1]);
-    PyErr_SetObject(PyExc_TypeError, error_list);
-    Py_DECREF(error_list);
-    return NULL;
-}
-
-
-PyObject *
-_wrap_PyNs3OlsrOlsrState_EraseAssociationTuple(PyNs3OlsrOlsrState *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3OlsrAssociationTuple *tuple;
-    const char *keywords[] = {"tuple", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3OlsrAssociationTuple_Type, &tuple)) {
-        return NULL;
-    }
-    self->obj->EraseAssociationTuple(*((PyNs3OlsrAssociationTuple *) tuple)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3OlsrOlsrState_InsertAssociation(PyNs3OlsrOlsrState *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3OlsrAssociation *tuple;
-    const char *keywords[] = {"tuple", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3OlsrAssociation_Type, &tuple)) {
-        return NULL;
-    }
-    self->obj->InsertAssociation(*((PyNs3OlsrAssociation *) tuple)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3OlsrOlsrState_EraseTwoHopNeighborTuple(PyNs3OlsrOlsrState *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3OlsrTwoHopNeighborTuple *tuple;
-    const char *keywords[] = {"tuple", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3OlsrTwoHopNeighborTuple_Type, &tuple)) {
-        return NULL;
-    }
-    self->obj->EraseTwoHopNeighborTuple(*((PyNs3OlsrTwoHopNeighborTuple *) tuple)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3OlsrOlsrState_InsertAssociationTuple(PyNs3OlsrOlsrState *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3OlsrAssociationTuple *tuple;
-    const char *keywords[] = {"tuple", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3OlsrAssociationTuple_Type, &tuple)) {
-        return NULL;
-    }
-    self->obj->InsertAssociationTuple(*((PyNs3OlsrAssociationTuple *) tuple)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3OlsrOlsrState_PrintMprSelectorSet(PyNs3OlsrOlsrState *self)
-{
-    PyObject *py_retval;
-    std::string retval;
-    
-    retval = self->obj->PrintMprSelectorSet();
-    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3OlsrOlsrState_EraseMprSelectorTuple(PyNs3OlsrOlsrState *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3OlsrMprSelectorTuple *tuple;
-    const char *keywords[] = {"tuple", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3OlsrMprSelectorTuple_Type, &tuple)) {
-        return NULL;
-    }
-    self->obj->EraseMprSelectorTuple(*((PyNs3OlsrMprSelectorTuple *) tuple)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3OlsrOlsrState_EraseAssociation(PyNs3OlsrOlsrState *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3OlsrAssociation *tuple;
-    const char *keywords[] = {"tuple", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3OlsrAssociation_Type, &tuple)) {
-        return NULL;
-    }
-    self->obj->EraseAssociation(*((PyNs3OlsrAssociation *) tuple)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
 PyObject *
 _wrap_PyNs3OlsrOlsrState_FindIfaceAssocTuple(PyNs3OlsrOlsrState *self, PyObject *args, PyObject *kwargs)
 {
@@ -5554,18 +5435,18 @@ _wrap_PyNs3OlsrOlsrState_FindIfaceAssocTuple(PyNs3OlsrOlsrState *self, PyObject 
 
 
 PyObject *
-_wrap_PyNs3OlsrOlsrState_EraseDuplicateTuple(PyNs3OlsrOlsrState *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3OlsrOlsrState_FindMprAddress(PyNs3OlsrOlsrState *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3OlsrDuplicateTuple *tuple;
-    const char *keywords[] = {"tuple", NULL};
+    bool retval;
+    PyNs3Ipv4Address *address;
+    const char *keywords[] = {"address", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3OlsrDuplicateTuple_Type, &tuple)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &address)) {
         return NULL;
     }
-    self->obj->EraseDuplicateTuple(*((PyNs3OlsrDuplicateTuple *) tuple)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    retval = self->obj->FindMprAddress(*((PyNs3Ipv4Address *) address)->obj);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
@@ -5591,6 +5472,164 @@ _wrap_PyNs3OlsrOlsrState_FindNeighborInterfaces(PyNs3OlsrOlsrState *self, PyObje
 
 
 PyObject *
+_wrap_PyNs3OlsrOlsrState_FindSymNeighborTuple(PyNs3OlsrOlsrState *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    ns3::olsr::NeighborTuple const *retval;
+    PyNs3Ipv4Address *mainAddr;
+    const char *keywords[] = {"mainAddr", NULL};
+    PyNs3OlsrNeighborTuple *py_NeighborTuple;
+    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4Address_Type, &mainAddr)) {
+        return NULL;
+    }
+    retval = self->obj->FindSymNeighborTuple(*((PyNs3Ipv4Address *) mainAddr)->obj);
+    if (!(retval)) {
+        Py_INCREF(Py_None);
+        return Py_None;
+    }
+    wrapper_lookup_iter = PyNs3OlsrNeighborTuple_wrapper_registry.find((void *) retval);
+    if (wrapper_lookup_iter == PyNs3OlsrNeighborTuple_wrapper_registry.end()) {
+        py_NeighborTuple = NULL;
+    } else {
+        py_NeighborTuple = (PyNs3OlsrNeighborTuple *) wrapper_lookup_iter->second;
+        Py_INCREF(py_NeighborTuple);
+    }
+    
+    if (py_NeighborTuple == NULL) {
+        py_NeighborTuple = PyObject_New(PyNs3OlsrNeighborTuple, &PyNs3OlsrNeighborTuple_Type);
+        py_NeighborTuple->obj = new ns3::olsr::NeighborTuple((*retval));
+        py_NeighborTuple->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+        PyNs3OlsrNeighborTuple_wrapper_registry[(void *) py_NeighborTuple->obj] = (PyObject *) py_NeighborTuple;
+    }
+    py_retval = Py_BuildValue((char *) "N", py_NeighborTuple);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3OlsrOlsrState_GetMprSet(PyNs3OlsrOlsrState *self)
+{
+    PyObject *py_retval;
+    ns3::olsr::MprSet retval;
+    Pyns3__olsr__MprSet *py_ns3__olsr__MprSet;
+    
+    retval = self->obj->GetMprSet();
+    py_ns3__olsr__MprSet = PyObject_New(Pyns3__olsr__MprSet, &Pyns3__olsr__MprSet_Type);
+    py_ns3__olsr__MprSet->obj = new ns3::olsr::MprSet(retval);
+    py_retval = Py_BuildValue((char *) "N", py_ns3__olsr__MprSet);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3OlsrOlsrState_InsertAssociation(PyNs3OlsrOlsrState *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3OlsrAssociation *tuple;
+    const char *keywords[] = {"tuple", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3OlsrAssociation_Type, &tuple)) {
+        return NULL;
+    }
+    self->obj->InsertAssociation(*((PyNs3OlsrAssociation *) tuple)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3OlsrOlsrState_InsertAssociationTuple(PyNs3OlsrOlsrState *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3OlsrAssociationTuple *tuple;
+    const char *keywords[] = {"tuple", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3OlsrAssociationTuple_Type, &tuple)) {
+        return NULL;
+    }
+    self->obj->InsertAssociationTuple(*((PyNs3OlsrAssociationTuple *) tuple)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3OlsrOlsrState_InsertDuplicateTuple(PyNs3OlsrOlsrState *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3OlsrDuplicateTuple *tuple;
+    const char *keywords[] = {"tuple", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3OlsrDuplicateTuple_Type, &tuple)) {
+        return NULL;
+    }
+    self->obj->InsertDuplicateTuple(*((PyNs3OlsrDuplicateTuple *) tuple)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3OlsrOlsrState_InsertIfaceAssocTuple(PyNs3OlsrOlsrState *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3OlsrIfaceAssocTuple *tuple;
+    const char *keywords[] = {"tuple", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3OlsrIfaceAssocTuple_Type, &tuple)) {
+        return NULL;
+    }
+    self->obj->InsertIfaceAssocTuple(*((PyNs3OlsrIfaceAssocTuple *) tuple)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3OlsrOlsrState_InsertLinkTuple(PyNs3OlsrOlsrState *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3OlsrLinkTuple *tuple;
+    const char *keywords[] = {"tuple", NULL};
+    PyNs3OlsrLinkTuple *py_LinkTuple;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3OlsrLinkTuple_Type, &tuple)) {
+        return NULL;
+    }
+    ns3::olsr::LinkTuple & retval = self->obj->InsertLinkTuple(*((PyNs3OlsrLinkTuple *) tuple)->obj);
+    py_LinkTuple = PyObject_New(PyNs3OlsrLinkTuple, &PyNs3OlsrLinkTuple_Type);
+    py_LinkTuple->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_LinkTuple->obj = new ns3::olsr::LinkTuple(retval);
+    PyNs3OlsrLinkTuple_wrapper_registry[(void *) py_LinkTuple->obj] = (PyObject *) py_LinkTuple;
+    py_retval = Py_BuildValue((char *) "N", py_LinkTuple);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3OlsrOlsrState_InsertMprSelectorTuple(PyNs3OlsrOlsrState *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3OlsrMprSelectorTuple *tuple;
+    const char *keywords[] = {"tuple", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3OlsrMprSelectorTuple_Type, &tuple)) {
+        return NULL;
+    }
+    self->obj->InsertMprSelectorTuple(*((PyNs3OlsrMprSelectorTuple *) tuple)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3OlsrOlsrState_InsertNeighborTuple(PyNs3OlsrOlsrState *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -5608,16 +5647,16 @@ _wrap_PyNs3OlsrOlsrState_InsertNeighborTuple(PyNs3OlsrOlsrState *self, PyObject 
 
 
 PyObject *
-_wrap_PyNs3OlsrOlsrState_EraseIfaceAssocTuple(PyNs3OlsrOlsrState *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3OlsrOlsrState_InsertTopologyTuple(PyNs3OlsrOlsrState *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3OlsrIfaceAssocTuple *tuple;
+    PyNs3OlsrTopologyTuple *tuple;
     const char *keywords[] = {"tuple", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3OlsrIfaceAssocTuple_Type, &tuple)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3OlsrTopologyTuple_Type, &tuple)) {
         return NULL;
     }
-    self->obj->EraseIfaceAssocTuple(*((PyNs3OlsrIfaceAssocTuple *) tuple)->obj);
+    self->obj->InsertTopologyTuple(*((PyNs3OlsrTopologyTuple *) tuple)->obj);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -5642,52 +5681,13 @@ _wrap_PyNs3OlsrOlsrState_InsertTwoHopNeighborTuple(PyNs3OlsrOlsrState *self, PyO
 
 
 PyObject *
-_wrap_PyNs3OlsrOlsrState_InsertMprSelectorTuple(PyNs3OlsrOlsrState *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3OlsrOlsrState_PrintMprSelectorSet(PyNs3OlsrOlsrState *self)
 {
     PyObject *py_retval;
-    PyNs3OlsrMprSelectorTuple *tuple;
-    const char *keywords[] = {"tuple", NULL};
+    std::string retval;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3OlsrMprSelectorTuple_Type, &tuple)) {
-        return NULL;
-    }
-    self->obj->InsertMprSelectorTuple(*((PyNs3OlsrMprSelectorTuple *) tuple)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3OlsrOlsrState_EraseTopologyTuple(PyNs3OlsrOlsrState *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3OlsrTopologyTuple *tuple;
-    const char *keywords[] = {"tuple", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3OlsrTopologyTuple_Type, &tuple)) {
-        return NULL;
-    }
-    self->obj->EraseTopologyTuple(*((PyNs3OlsrTopologyTuple *) tuple)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3OlsrOlsrState_InsertTopologyTuple(PyNs3OlsrOlsrState *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3OlsrTopologyTuple *tuple;
-    const char *keywords[] = {"tuple", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3OlsrTopologyTuple_Type, &tuple)) {
-        return NULL;
-    }
-    self->obj->InsertTopologyTuple(*((PyNs3OlsrTopologyTuple *) tuple)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    retval = self->obj->PrintMprSelectorSet();
+    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
     return py_retval;
 }
 
@@ -5705,33 +5705,33 @@ _wrap_PyNs3OlsrOlsrState__copy__(PyNs3OlsrOlsrState *self)
 }
 
 static PyMethodDef PyNs3OlsrOlsrState_methods[] = {
-    {(char *) "InsertDuplicateTuple", (PyCFunction) _wrap_PyNs3OlsrOlsrState_InsertDuplicateTuple, METH_KEYWORDS|METH_VARARGS, "InsertDuplicateTuple(tuple)\n\ntype: tuple: ns3::olsr::DuplicateTuple const &" },
-    {(char *) "EraseOlderTopologyTuples", (PyCFunction) _wrap_PyNs3OlsrOlsrState_EraseOlderTopologyTuples, METH_KEYWORDS|METH_VARARGS, "EraseOlderTopologyTuples(lastAddr, ansn)\n\ntype: lastAddr: ns3::Ipv4Address const &\ntype: ansn: uint16_t" },
-    {(char *) "EraseLinkTuple", (PyCFunction) _wrap_PyNs3OlsrOlsrState_EraseLinkTuple, METH_KEYWORDS|METH_VARARGS, "EraseLinkTuple(tuple)\n\ntype: tuple: ns3::olsr::LinkTuple const &" },
-    {(char *) "InsertLinkTuple", (PyCFunction) _wrap_PyNs3OlsrOlsrState_InsertLinkTuple, METH_KEYWORDS|METH_VARARGS, "InsertLinkTuple(tuple)\n\ntype: tuple: ns3::olsr::LinkTuple const &" },
-    {(char *) "EraseMprSelectorTuples", (PyCFunction) _wrap_PyNs3OlsrOlsrState_EraseMprSelectorTuples, METH_KEYWORDS|METH_VARARGS, "EraseMprSelectorTuples(mainAddr)\n\ntype: mainAddr: ns3::Ipv4Address const &" },
-    {(char *) "FindSymNeighborTuple", (PyCFunction) _wrap_PyNs3OlsrOlsrState_FindSymNeighborTuple, METH_KEYWORDS|METH_VARARGS, "FindSymNeighborTuple(mainAddr)\n\ntype: mainAddr: ns3::Ipv4Address const &" },
-    {(char *) "FindMprAddress", (PyCFunction) _wrap_PyNs3OlsrOlsrState_FindMprAddress, METH_KEYWORDS|METH_VARARGS, "FindMprAddress(address)\n\ntype: address: ns3::Ipv4Address const &" },
-    {(char *) "InsertIfaceAssocTuple", (PyCFunction) _wrap_PyNs3OlsrOlsrState_InsertIfaceAssocTuple, METH_KEYWORDS|METH_VARARGS, "InsertIfaceAssocTuple(tuple)\n\ntype: tuple: ns3::olsr::IfaceAssocTuple const &" },
+    {(char *) "EraseAssociation", (PyCFunction) _wrap_PyNs3OlsrOlsrState_EraseAssociation, METH_VARARGS|METH_KEYWORDS, "EraseAssociation(tuple)\n\ntype: tuple: ns3::olsr::Association const &" },
+    {(char *) "EraseAssociationTuple", (PyCFunction) _wrap_PyNs3OlsrOlsrState_EraseAssociationTuple, METH_VARARGS|METH_KEYWORDS, "EraseAssociationTuple(tuple)\n\ntype: tuple: ns3::olsr::AssociationTuple const &" },
+    {(char *) "EraseDuplicateTuple", (PyCFunction) _wrap_PyNs3OlsrOlsrState_EraseDuplicateTuple, METH_VARARGS|METH_KEYWORDS, "EraseDuplicateTuple(tuple)\n\ntype: tuple: ns3::olsr::DuplicateTuple const &" },
+    {(char *) "EraseIfaceAssocTuple", (PyCFunction) _wrap_PyNs3OlsrOlsrState_EraseIfaceAssocTuple, METH_VARARGS|METH_KEYWORDS, "EraseIfaceAssocTuple(tuple)\n\ntype: tuple: ns3::olsr::IfaceAssocTuple const &" },
+    {(char *) "EraseLinkTuple", (PyCFunction) _wrap_PyNs3OlsrOlsrState_EraseLinkTuple, METH_VARARGS|METH_KEYWORDS, "EraseLinkTuple(tuple)\n\ntype: tuple: ns3::olsr::LinkTuple const &" },
+    {(char *) "EraseMprSelectorTuple", (PyCFunction) _wrap_PyNs3OlsrOlsrState_EraseMprSelectorTuple, METH_VARARGS|METH_KEYWORDS, "EraseMprSelectorTuple(tuple)\n\ntype: tuple: ns3::olsr::MprSelectorTuple const &" },
+    {(char *) "EraseMprSelectorTuples", (PyCFunction) _wrap_PyNs3OlsrOlsrState_EraseMprSelectorTuples, METH_VARARGS|METH_KEYWORDS, "EraseMprSelectorTuples(mainAddr)\n\ntype: mainAddr: ns3::Ipv4Address const &" },
+    {(char *) "EraseNeighborTuple", (PyCFunction) _wrap_PyNs3OlsrOlsrState_EraseNeighborTuple, METH_VARARGS|METH_KEYWORDS, NULL },
+    {(char *) "EraseOlderTopologyTuples", (PyCFunction) _wrap_PyNs3OlsrOlsrState_EraseOlderTopologyTuples, METH_VARARGS|METH_KEYWORDS, "EraseOlderTopologyTuples(lastAddr, ansn)\n\ntype: lastAddr: ns3::Ipv4Address const &\ntype: ansn: uint16_t" },
+    {(char *) "EraseTopologyTuple", (PyCFunction) _wrap_PyNs3OlsrOlsrState_EraseTopologyTuple, METH_VARARGS|METH_KEYWORDS, "EraseTopologyTuple(tuple)\n\ntype: tuple: ns3::olsr::TopologyTuple const &" },
+    {(char *) "EraseTwoHopNeighborTuple", (PyCFunction) _wrap_PyNs3OlsrOlsrState_EraseTwoHopNeighborTuple, METH_VARARGS|METH_KEYWORDS, "EraseTwoHopNeighborTuple(tuple)\n\ntype: tuple: ns3::olsr::TwoHopNeighborTuple const &" },
+    {(char *) "EraseTwoHopNeighborTuples", (PyCFunction) _wrap_PyNs3OlsrOlsrState_EraseTwoHopNeighborTuples, METH_VARARGS|METH_KEYWORDS, NULL },
+    {(char *) "FindIfaceAssocTuple", (PyCFunction) _wrap_PyNs3OlsrOlsrState_FindIfaceAssocTuple, METH_VARARGS|METH_KEYWORDS, "FindIfaceAssocTuple(ifaceAddr)\n\ntype: ifaceAddr: ns3::Ipv4Address const &" },
+    {(char *) "FindMprAddress", (PyCFunction) _wrap_PyNs3OlsrOlsrState_FindMprAddress, METH_VARARGS|METH_KEYWORDS, "FindMprAddress(address)\n\ntype: address: ns3::Ipv4Address const &" },
+    {(char *) "FindNeighborInterfaces", (PyCFunction) _wrap_PyNs3OlsrOlsrState_FindNeighborInterfaces, METH_VARARGS|METH_KEYWORDS, "FindNeighborInterfaces(neighborMainAddr)\n\ntype: neighborMainAddr: ns3::Ipv4Address const &" },
+    {(char *) "FindSymNeighborTuple", (PyCFunction) _wrap_PyNs3OlsrOlsrState_FindSymNeighborTuple, METH_VARARGS|METH_KEYWORDS, "FindSymNeighborTuple(mainAddr)\n\ntype: mainAddr: ns3::Ipv4Address const &" },
     {(char *) "GetMprSet", (PyCFunction) _wrap_PyNs3OlsrOlsrState_GetMprSet, METH_NOARGS, "GetMprSet()\n\n" },
-    {(char *) "EraseTwoHopNeighborTuples", (PyCFunction) _wrap_PyNs3OlsrOlsrState_EraseTwoHopNeighborTuples, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "EraseNeighborTuple", (PyCFunction) _wrap_PyNs3OlsrOlsrState_EraseNeighborTuple, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "EraseAssociationTuple", (PyCFunction) _wrap_PyNs3OlsrOlsrState_EraseAssociationTuple, METH_KEYWORDS|METH_VARARGS, "EraseAssociationTuple(tuple)\n\ntype: tuple: ns3::olsr::AssociationTuple const &" },
-    {(char *) "InsertAssociation", (PyCFunction) _wrap_PyNs3OlsrOlsrState_InsertAssociation, METH_KEYWORDS|METH_VARARGS, "InsertAssociation(tuple)\n\ntype: tuple: ns3::olsr::Association const &" },
-    {(char *) "EraseTwoHopNeighborTuple", (PyCFunction) _wrap_PyNs3OlsrOlsrState_EraseTwoHopNeighborTuple, METH_KEYWORDS|METH_VARARGS, "EraseTwoHopNeighborTuple(tuple)\n\ntype: tuple: ns3::olsr::TwoHopNeighborTuple const &" },
-    {(char *) "InsertAssociationTuple", (PyCFunction) _wrap_PyNs3OlsrOlsrState_InsertAssociationTuple, METH_KEYWORDS|METH_VARARGS, "InsertAssociationTuple(tuple)\n\ntype: tuple: ns3::olsr::AssociationTuple const &" },
+    {(char *) "InsertAssociation", (PyCFunction) _wrap_PyNs3OlsrOlsrState_InsertAssociation, METH_VARARGS|METH_KEYWORDS, "InsertAssociation(tuple)\n\ntype: tuple: ns3::olsr::Association const &" },
+    {(char *) "InsertAssociationTuple", (PyCFunction) _wrap_PyNs3OlsrOlsrState_InsertAssociationTuple, METH_VARARGS|METH_KEYWORDS, "InsertAssociationTuple(tuple)\n\ntype: tuple: ns3::olsr::AssociationTuple const &" },
+    {(char *) "InsertDuplicateTuple", (PyCFunction) _wrap_PyNs3OlsrOlsrState_InsertDuplicateTuple, METH_VARARGS|METH_KEYWORDS, "InsertDuplicateTuple(tuple)\n\ntype: tuple: ns3::olsr::DuplicateTuple const &" },
+    {(char *) "InsertIfaceAssocTuple", (PyCFunction) _wrap_PyNs3OlsrOlsrState_InsertIfaceAssocTuple, METH_VARARGS|METH_KEYWORDS, "InsertIfaceAssocTuple(tuple)\n\ntype: tuple: ns3::olsr::IfaceAssocTuple const &" },
+    {(char *) "InsertLinkTuple", (PyCFunction) _wrap_PyNs3OlsrOlsrState_InsertLinkTuple, METH_VARARGS|METH_KEYWORDS, "InsertLinkTuple(tuple)\n\ntype: tuple: ns3::olsr::LinkTuple const &" },
+    {(char *) "InsertMprSelectorTuple", (PyCFunction) _wrap_PyNs3OlsrOlsrState_InsertMprSelectorTuple, METH_VARARGS|METH_KEYWORDS, "InsertMprSelectorTuple(tuple)\n\ntype: tuple: ns3::olsr::MprSelectorTuple const &" },
+    {(char *) "InsertNeighborTuple", (PyCFunction) _wrap_PyNs3OlsrOlsrState_InsertNeighborTuple, METH_VARARGS|METH_KEYWORDS, "InsertNeighborTuple(tuple)\n\ntype: tuple: ns3::olsr::NeighborTuple const &" },
+    {(char *) "InsertTopologyTuple", (PyCFunction) _wrap_PyNs3OlsrOlsrState_InsertTopologyTuple, METH_VARARGS|METH_KEYWORDS, "InsertTopologyTuple(tuple)\n\ntype: tuple: ns3::olsr::TopologyTuple const &" },
+    {(char *) "InsertTwoHopNeighborTuple", (PyCFunction) _wrap_PyNs3OlsrOlsrState_InsertTwoHopNeighborTuple, METH_VARARGS|METH_KEYWORDS, "InsertTwoHopNeighborTuple(tuple)\n\ntype: tuple: ns3::olsr::TwoHopNeighborTuple const &" },
     {(char *) "PrintMprSelectorSet", (PyCFunction) _wrap_PyNs3OlsrOlsrState_PrintMprSelectorSet, METH_NOARGS, "PrintMprSelectorSet()\n\n" },
-    {(char *) "EraseMprSelectorTuple", (PyCFunction) _wrap_PyNs3OlsrOlsrState_EraseMprSelectorTuple, METH_KEYWORDS|METH_VARARGS, "EraseMprSelectorTuple(tuple)\n\ntype: tuple: ns3::olsr::MprSelectorTuple const &" },
-    {(char *) "EraseAssociation", (PyCFunction) _wrap_PyNs3OlsrOlsrState_EraseAssociation, METH_KEYWORDS|METH_VARARGS, "EraseAssociation(tuple)\n\ntype: tuple: ns3::olsr::Association const &" },
-    {(char *) "FindIfaceAssocTuple", (PyCFunction) _wrap_PyNs3OlsrOlsrState_FindIfaceAssocTuple, METH_KEYWORDS|METH_VARARGS, "FindIfaceAssocTuple(ifaceAddr)\n\ntype: ifaceAddr: ns3::Ipv4Address const &" },
-    {(char *) "EraseDuplicateTuple", (PyCFunction) _wrap_PyNs3OlsrOlsrState_EraseDuplicateTuple, METH_KEYWORDS|METH_VARARGS, "EraseDuplicateTuple(tuple)\n\ntype: tuple: ns3::olsr::DuplicateTuple const &" },
-    {(char *) "FindNeighborInterfaces", (PyCFunction) _wrap_PyNs3OlsrOlsrState_FindNeighborInterfaces, METH_KEYWORDS|METH_VARARGS, "FindNeighborInterfaces(neighborMainAddr)\n\ntype: neighborMainAddr: ns3::Ipv4Address const &" },
-    {(char *) "InsertNeighborTuple", (PyCFunction) _wrap_PyNs3OlsrOlsrState_InsertNeighborTuple, METH_KEYWORDS|METH_VARARGS, "InsertNeighborTuple(tuple)\n\ntype: tuple: ns3::olsr::NeighborTuple const &" },
-    {(char *) "EraseIfaceAssocTuple", (PyCFunction) _wrap_PyNs3OlsrOlsrState_EraseIfaceAssocTuple, METH_KEYWORDS|METH_VARARGS, "EraseIfaceAssocTuple(tuple)\n\ntype: tuple: ns3::olsr::IfaceAssocTuple const &" },
-    {(char *) "InsertTwoHopNeighborTuple", (PyCFunction) _wrap_PyNs3OlsrOlsrState_InsertTwoHopNeighborTuple, METH_KEYWORDS|METH_VARARGS, "InsertTwoHopNeighborTuple(tuple)\n\ntype: tuple: ns3::olsr::TwoHopNeighborTuple const &" },
-    {(char *) "InsertMprSelectorTuple", (PyCFunction) _wrap_PyNs3OlsrOlsrState_InsertMprSelectorTuple, METH_KEYWORDS|METH_VARARGS, "InsertMprSelectorTuple(tuple)\n\ntype: tuple: ns3::olsr::MprSelectorTuple const &" },
-    {(char *) "EraseTopologyTuple", (PyCFunction) _wrap_PyNs3OlsrOlsrState_EraseTopologyTuple, METH_KEYWORDS|METH_VARARGS, "EraseTopologyTuple(tuple)\n\ntype: tuple: ns3::olsr::TopologyTuple const &" },
-    {(char *) "InsertTopologyTuple", (PyCFunction) _wrap_PyNs3OlsrOlsrState_InsertTopologyTuple, METH_KEYWORDS|METH_VARARGS, "InsertTopologyTuple(tuple)\n\ntype: tuple: ns3::olsr::TopologyTuple const &" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3OlsrOlsrState__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -5909,23 +5909,6 @@ int _wrap_PyNs3OlsrPacketHeader__tp_init(PyNs3OlsrPacketHeader *self, PyObject *
 
 
 PyObject *
-_wrap_PyNs3OlsrPacketHeader_Serialize(PyNs3OlsrPacketHeader *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3BufferIterator *start;
-    const char *keywords[] = {"start", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
-        return NULL;
-    }
-    self->obj->Serialize(*((PyNs3BufferIterator *) start)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3OlsrPacketHeader_Deserialize(PyNs3OlsrPacketHeader *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -5943,6 +5926,22 @@ _wrap_PyNs3OlsrPacketHeader_Deserialize(PyNs3OlsrPacketHeader *self, PyObject *a
 
 
 PyObject *
+_wrap_PyNs3OlsrPacketHeader_GetInstanceTypeId(PyNs3OlsrPacketHeader *self)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = self->obj->GetInstanceTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3OlsrPacketHeader_GetPacketLength(PyNs3OlsrPacketHeader *self)
 {
     PyObject *py_retval;
@@ -5950,6 +5949,30 @@ _wrap_PyNs3OlsrPacketHeader_GetPacketLength(PyNs3OlsrPacketHeader *self)
     
     retval = self->obj->GetPacketLength();
     py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3OlsrPacketHeader_GetPacketSequenceNumber(PyNs3OlsrPacketHeader *self)
+{
+    PyObject *py_retval;
+    uint16_t retval;
+    
+    retval = self->obj->GetPacketSequenceNumber();
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3OlsrPacketHeader_GetSerializedSize(PyNs3OlsrPacketHeader *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetSerializedSize();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
 
@@ -5971,32 +5994,16 @@ _wrap_PyNs3OlsrPacketHeader_GetTypeId(void)
 
 
 PyObject *
-_wrap_PyNs3OlsrPacketHeader_GetPacketSequenceNumber(PyNs3OlsrPacketHeader *self)
+_wrap_PyNs3OlsrPacketHeader_Serialize(PyNs3OlsrPacketHeader *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    uint16_t retval;
+    PyNs3BufferIterator *start;
+    const char *keywords[] = {"start", NULL};
     
-    retval = self->obj->GetPacketSequenceNumber();
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3OlsrPacketHeader_SetPacketSequenceNumber(PyNs3OlsrPacketHeader *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int seqnum;
-    const char *keywords[] = {"seqnum", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &seqnum)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3BufferIterator_Type, &start)) {
         return NULL;
     }
-    if (seqnum > 0xffff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SetPacketSequenceNumber(seqnum);
+    self->obj->Serialize(*((PyNs3BufferIterator *) start)->obj);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -6025,29 +6032,22 @@ _wrap_PyNs3OlsrPacketHeader_SetPacketLength(PyNs3OlsrPacketHeader *self, PyObjec
 
 
 PyObject *
-_wrap_PyNs3OlsrPacketHeader_GetInstanceTypeId(PyNs3OlsrPacketHeader *self)
+_wrap_PyNs3OlsrPacketHeader_SetPacketSequenceNumber(PyNs3OlsrPacketHeader *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
+    int seqnum;
+    const char *keywords[] = {"seqnum", NULL};
     
-    ns3::TypeId retval = self->obj->GetInstanceTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3OlsrPacketHeader_GetSerializedSize(PyNs3OlsrPacketHeader *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetSerializedSize();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &seqnum)) {
+        return NULL;
+    }
+    if (seqnum > 0xffff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SetPacketSequenceNumber(seqnum);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -6067,15 +6067,15 @@ _wrap_PyNs3OlsrPacketHeader__copy__(PyNs3OlsrPacketHeader *self)
 }
 
 static PyMethodDef PyNs3OlsrPacketHeader_methods[] = {
-    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3OlsrPacketHeader_Serialize, METH_KEYWORDS|METH_VARARGS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
-    {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3OlsrPacketHeader_Deserialize, METH_KEYWORDS|METH_VARARGS, "Deserialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
-    {(char *) "GetPacketLength", (PyCFunction) _wrap_PyNs3OlsrPacketHeader_GetPacketLength, METH_NOARGS, "GetPacketLength()\n\n" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3OlsrPacketHeader_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "GetPacketSequenceNumber", (PyCFunction) _wrap_PyNs3OlsrPacketHeader_GetPacketSequenceNumber, METH_NOARGS, "GetPacketSequenceNumber()\n\n" },
-    {(char *) "SetPacketSequenceNumber", (PyCFunction) _wrap_PyNs3OlsrPacketHeader_SetPacketSequenceNumber, METH_KEYWORDS|METH_VARARGS, "SetPacketSequenceNumber(seqnum)\n\ntype: seqnum: uint16_t" },
-    {(char *) "SetPacketLength", (PyCFunction) _wrap_PyNs3OlsrPacketHeader_SetPacketLength, METH_KEYWORDS|METH_VARARGS, "SetPacketLength(length)\n\ntype: length: uint16_t" },
+    {(char *) "Deserialize", (PyCFunction) _wrap_PyNs3OlsrPacketHeader_Deserialize, METH_VARARGS|METH_KEYWORDS, "Deserialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
     {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3OlsrPacketHeader_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
+    {(char *) "GetPacketLength", (PyCFunction) _wrap_PyNs3OlsrPacketHeader_GetPacketLength, METH_NOARGS, "GetPacketLength()\n\n" },
+    {(char *) "GetPacketSequenceNumber", (PyCFunction) _wrap_PyNs3OlsrPacketHeader_GetPacketSequenceNumber, METH_NOARGS, "GetPacketSequenceNumber()\n\n" },
     {(char *) "GetSerializedSize", (PyCFunction) _wrap_PyNs3OlsrPacketHeader_GetSerializedSize, METH_NOARGS, "GetSerializedSize()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3OlsrPacketHeader_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "Serialize", (PyCFunction) _wrap_PyNs3OlsrPacketHeader_Serialize, METH_VARARGS|METH_KEYWORDS, "Serialize(start)\n\ntype: start: ns3::Buffer::Iterator" },
+    {(char *) "SetPacketLength", (PyCFunction) _wrap_PyNs3OlsrPacketHeader_SetPacketLength, METH_VARARGS|METH_KEYWORDS, "SetPacketLength(length)\n\ntype: length: uint16_t" },
+    {(char *) "SetPacketSequenceNumber", (PyCFunction) _wrap_PyNs3OlsrPacketHeader_SetPacketSequenceNumber, METH_VARARGS|METH_KEYWORDS, "SetPacketSequenceNumber(seqnum)\n\ntype: seqnum: uint16_t" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3OlsrPacketHeader__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -6285,17 +6285,108 @@ int _wrap_PyNs3OlsrRoutingProtocol__tp_init(PyNs3OlsrRoutingProtocol *self, PyOb
 
 
 PyObject *
-_wrap_PyNs3OlsrRoutingProtocol_RemoveHostNetworkAssociation(PyNs3OlsrRoutingProtocol *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3OlsrRoutingProtocol_GetTypeId(void)
 {
     PyObject *py_retval;
-    PyNs3Ipv4Address *networkAddr;
-    PyNs3Ipv4Mask *netmask;
-    const char *keywords[] = {"networkAddr", "netmask", NULL};
+    PyNs3TypeId *py_TypeId;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3Ipv4Address_Type, &networkAddr, &PyNs3Ipv4Mask_Type, &netmask)) {
+    ns3::TypeId retval = ns3::olsr::RoutingProtocol::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3OlsrRoutingProtocol_SetMainInterface(PyNs3OlsrRoutingProtocol *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    unsigned int interface;
+    const char *keywords[] = {"interface", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &interface)) {
         return NULL;
     }
-    self->obj->RemoveHostNetworkAssociation(*((PyNs3Ipv4Address *) networkAddr)->obj, *((PyNs3Ipv4Mask *) netmask)->obj);
+    self->obj->SetMainInterface(interface);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3OlsrRoutingProtocol_Dump(PyNs3OlsrRoutingProtocol *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->Dump();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3OlsrRoutingProtocol_GetRoutingTableEntries(PyNs3OlsrRoutingProtocol *self)
+{
+    PyObject *py_retval;
+    std::vector< ns3::olsr::RoutingTableEntry > retval;
+    Pystd__vector__lt___ns3__olsr__RoutingTableEntry___gt__ *py_std__vector__lt___ns3__olsr__RoutingTableEntry___gt__;
+    
+    retval = self->obj->GetRoutingTableEntries();
+    py_std__vector__lt___ns3__olsr__RoutingTableEntry___gt__ = PyObject_New(Pystd__vector__lt___ns3__olsr__RoutingTableEntry___gt__, &Pystd__vector__lt___ns3__olsr__RoutingTableEntry___gt___Type);
+    py_std__vector__lt___ns3__olsr__RoutingTableEntry___gt__->obj = new std::vector< ns3::olsr::RoutingTableEntry >(retval);
+    py_retval = Py_BuildValue((char *) "N", py_std__vector__lt___ns3__olsr__RoutingTableEntry___gt__);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3OlsrRoutingProtocol_AssignStreams(PyNs3OlsrRoutingProtocol *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int64_t retval;
+    int64_t stream;
+    const char *keywords[] = {"stream", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "L", (char **) keywords, &stream)) {
+        return NULL;
+    }
+    retval = self->obj->AssignStreams(stream);
+    py_retval = Py_BuildValue((char *) "L", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3OlsrRoutingProtocol_GetInterfaceExclusions(PyNs3OlsrRoutingProtocol *self)
+{
+    PyObject *py_retval;
+    std::set< unsigned int > retval;
+    Pystd__set__lt___unsigned_int___gt__ *py_std__set__lt___unsigned_int___gt__;
+    
+    retval = self->obj->GetInterfaceExclusions();
+    py_std__set__lt___unsigned_int___gt__ = PyObject_New(Pystd__set__lt___unsigned_int___gt__, &Pystd__set__lt___unsigned_int___gt___Type);
+    py_std__set__lt___unsigned_int___gt__->obj = new std::set< unsigned int >(retval);
+    py_retval = Py_BuildValue((char *) "N", py_std__set__lt___unsigned_int___gt__);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3OlsrRoutingProtocol_SetInterfaceExclusions(PyNs3OlsrRoutingProtocol *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    std::set< unsigned int > exceptions_value;
+    const char *keywords[] = {"exceptions", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O&", (char **) keywords, _wrap_convert_py2c__std__set__lt___unsigned_int___gt__, &exceptions_value)) {
+        return NULL;
+    }
+    self->obj->SetInterfaceExclusions(exceptions_value);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -6321,11 +6412,36 @@ _wrap_PyNs3OlsrRoutingProtocol_AddHostNetworkAssociation(PyNs3OlsrRoutingProtoco
 
 
 PyObject *
-_wrap_PyNs3OlsrRoutingProtocol_Dump(PyNs3OlsrRoutingProtocol *self)
+_wrap_PyNs3OlsrRoutingProtocol_RemoveHostNetworkAssociation(PyNs3OlsrRoutingProtocol *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
+    PyNs3Ipv4Address *networkAddr;
+    PyNs3Ipv4Mask *netmask;
+    const char *keywords[] = {"networkAddr", "netmask", NULL};
     
-    self->obj->Dump();
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!O!", (char **) keywords, &PyNs3Ipv4Address_Type, &networkAddr, &PyNs3Ipv4Mask_Type, &netmask)) {
+        return NULL;
+    }
+    self->obj->RemoveHostNetworkAssociation(*((PyNs3Ipv4Address *) networkAddr)->obj, *((PyNs3Ipv4Mask *) netmask)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3OlsrRoutingProtocol_SetRoutingTableAssociation(PyNs3OlsrRoutingProtocol *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Ipv4StaticRouting *routingTable;
+    ns3::Ipv4StaticRouting *routingTable_ptr;
+    const char *keywords[] = {"routingTable", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4StaticRouting_Type, &routingTable)) {
+        return NULL;
+    }
+    routingTable_ptr = (routingTable ? routingTable->obj : NULL);
+    self->obj->SetRoutingTableAssociation(ns3::Ptr< ns3::Ipv4StaticRouting  > (routingTable_ptr));
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -6370,122 +6486,6 @@ _wrap_PyNs3OlsrRoutingProtocol_GetRoutingTableAssociation(PyNs3OlsrRoutingProtoc
 }
 
 
-PyObject *
-_wrap_PyNs3OlsrRoutingProtocol_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::olsr::RoutingProtocol::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3OlsrRoutingProtocol_SetInterfaceExclusions(PyNs3OlsrRoutingProtocol *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    std::set< unsigned int > exceptions_value;
-    const char *keywords[] = {"exceptions", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O&", (char **) keywords, _wrap_convert_py2c__std__set__lt___unsigned_int___gt__, &exceptions_value)) {
-        return NULL;
-    }
-    self->obj->SetInterfaceExclusions(exceptions_value);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3OlsrRoutingProtocol_GetInterfaceExclusions(PyNs3OlsrRoutingProtocol *self)
-{
-    PyObject *py_retval;
-    std::set< unsigned int > retval;
-    Pystd__set__lt___unsigned_int___gt__ *py_std__set__lt___unsigned_int___gt__;
-    
-    retval = self->obj->GetInterfaceExclusions();
-    py_std__set__lt___unsigned_int___gt__ = PyObject_New(Pystd__set__lt___unsigned_int___gt__, &Pystd__set__lt___unsigned_int___gt___Type);
-    py_std__set__lt___unsigned_int___gt__->obj = new std::set< unsigned int >(retval);
-    py_retval = Py_BuildValue((char *) "N", py_std__set__lt___unsigned_int___gt__);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3OlsrRoutingProtocol_AssignStreams(PyNs3OlsrRoutingProtocol *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int64_t retval;
-    int64_t stream;
-    const char *keywords[] = {"stream", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "L", (char **) keywords, &stream)) {
-        return NULL;
-    }
-    retval = self->obj->AssignStreams(stream);
-    py_retval = Py_BuildValue((char *) "L", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3OlsrRoutingProtocol_SetMainInterface(PyNs3OlsrRoutingProtocol *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int interface;
-    const char *keywords[] = {"interface", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &interface)) {
-        return NULL;
-    }
-    self->obj->SetMainInterface(interface);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3OlsrRoutingProtocol_GetRoutingTableEntries(PyNs3OlsrRoutingProtocol *self)
-{
-    PyObject *py_retval;
-    std::vector< ns3::olsr::RoutingTableEntry > retval;
-    Pystd__vector__lt___ns3__olsr__RoutingTableEntry___gt__ *py_std__vector__lt___ns3__olsr__RoutingTableEntry___gt__;
-    
-    retval = self->obj->GetRoutingTableEntries();
-    py_std__vector__lt___ns3__olsr__RoutingTableEntry___gt__ = PyObject_New(Pystd__vector__lt___ns3__olsr__RoutingTableEntry___gt__, &Pystd__vector__lt___ns3__olsr__RoutingTableEntry___gt___Type);
-    py_std__vector__lt___ns3__olsr__RoutingTableEntry___gt__->obj = new std::vector< ns3::olsr::RoutingTableEntry >(retval);
-    py_retval = Py_BuildValue((char *) "N", py_std__vector__lt___ns3__olsr__RoutingTableEntry___gt__);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3OlsrRoutingProtocol_SetRoutingTableAssociation(PyNs3OlsrRoutingProtocol *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Ipv4StaticRouting *routingTable;
-    ns3::Ipv4StaticRouting *routingTable_ptr;
-    const char *keywords[] = {"routingTable", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Ipv4StaticRouting_Type, &routingTable)) {
-        return NULL;
-    }
-    routingTable_ptr = (routingTable ? routingTable->obj : NULL);
-    self->obj->SetRoutingTableAssociation(ns3::Ptr< ns3::Ipv4StaticRouting  > (routingTable_ptr));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3OlsrRoutingProtocol__copy__(PyNs3OlsrRoutingProtocol *self)
 {
@@ -6502,17 +6502,17 @@ _wrap_PyNs3OlsrRoutingProtocol__copy__(PyNs3OlsrRoutingProtocol *self)
 }
 
 static PyMethodDef PyNs3OlsrRoutingProtocol_methods[] = {
-    {(char *) "RemoveHostNetworkAssociation", (PyCFunction) _wrap_PyNs3OlsrRoutingProtocol_RemoveHostNetworkAssociation, METH_KEYWORDS|METH_VARARGS, "RemoveHostNetworkAssociation(networkAddr, netmask)\n\ntype: networkAddr: ns3::Ipv4Address\ntype: netmask: ns3::Ipv4Mask" },
-    {(char *) "AddHostNetworkAssociation", (PyCFunction) _wrap_PyNs3OlsrRoutingProtocol_AddHostNetworkAssociation, METH_KEYWORDS|METH_VARARGS, "AddHostNetworkAssociation(networkAddr, netmask)\n\ntype: networkAddr: ns3::Ipv4Address\ntype: netmask: ns3::Ipv4Mask" },
-    {(char *) "Dump", (PyCFunction) _wrap_PyNs3OlsrRoutingProtocol_Dump, METH_NOARGS, "Dump()\n\n" },
-    {(char *) "GetRoutingTableAssociation", (PyCFunction) _wrap_PyNs3OlsrRoutingProtocol_GetRoutingTableAssociation, METH_NOARGS, "GetRoutingTableAssociation()\n\n" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3OlsrRoutingProtocol_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "SetInterfaceExclusions", (PyCFunction) _wrap_PyNs3OlsrRoutingProtocol_SetInterfaceExclusions, METH_KEYWORDS|METH_VARARGS, "SetInterfaceExclusions(exceptions)\n\ntype: exceptions: std::set< unsigned int >" },
-    {(char *) "GetInterfaceExclusions", (PyCFunction) _wrap_PyNs3OlsrRoutingProtocol_GetInterfaceExclusions, METH_NOARGS, "GetInterfaceExclusions()\n\n" },
-    {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3OlsrRoutingProtocol_AssignStreams, METH_KEYWORDS|METH_VARARGS, "AssignStreams(stream)\n\ntype: stream: int64_t" },
-    {(char *) "SetMainInterface", (PyCFunction) _wrap_PyNs3OlsrRoutingProtocol_SetMainInterface, METH_KEYWORDS|METH_VARARGS, "SetMainInterface(interface)\n\ntype: interface: uint32_t" },
+    {(char *) "SetMainInterface", (PyCFunction) _wrap_PyNs3OlsrRoutingProtocol_SetMainInterface, METH_VARARGS|METH_KEYWORDS, "SetMainInterface(interface)\n\ntype: interface: uint32_t" },
+    {(char *) "Dump", (PyCFunction) _wrap_PyNs3OlsrRoutingProtocol_Dump, METH_NOARGS, "Dump()\n\n" },
     {(char *) "GetRoutingTableEntries", (PyCFunction) _wrap_PyNs3OlsrRoutingProtocol_GetRoutingTableEntries, METH_NOARGS, "GetRoutingTableEntries()\n\n" },
-    {(char *) "SetRoutingTableAssociation", (PyCFunction) _wrap_PyNs3OlsrRoutingProtocol_SetRoutingTableAssociation, METH_KEYWORDS|METH_VARARGS, "SetRoutingTableAssociation(routingTable)\n\ntype: routingTable: ns3::Ptr< ns3::Ipv4StaticRouting >" },
+    {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3OlsrRoutingProtocol_AssignStreams, METH_VARARGS|METH_KEYWORDS, "AssignStreams(stream)\n\ntype: stream: int64_t" },
+    {(char *) "GetInterfaceExclusions", (PyCFunction) _wrap_PyNs3OlsrRoutingProtocol_GetInterfaceExclusions, METH_NOARGS, "GetInterfaceExclusions()\n\n" },
+    {(char *) "SetInterfaceExclusions", (PyCFunction) _wrap_PyNs3OlsrRoutingProtocol_SetInterfaceExclusions, METH_VARARGS|METH_KEYWORDS, "SetInterfaceExclusions(exceptions)\n\ntype: exceptions: std::set< unsigned int >" },
+    {(char *) "AddHostNetworkAssociation", (PyCFunction) _wrap_PyNs3OlsrRoutingProtocol_AddHostNetworkAssociation, METH_VARARGS|METH_KEYWORDS, "AddHostNetworkAssociation(networkAddr, netmask)\n\ntype: networkAddr: ns3::Ipv4Address\ntype: netmask: ns3::Ipv4Mask" },
+    {(char *) "RemoveHostNetworkAssociation", (PyCFunction) _wrap_PyNs3OlsrRoutingProtocol_RemoveHostNetworkAssociation, METH_VARARGS|METH_KEYWORDS, "RemoveHostNetworkAssociation(networkAddr, netmask)\n\ntype: networkAddr: ns3::Ipv4Address\ntype: netmask: ns3::Ipv4Mask" },
+    {(char *) "SetRoutingTableAssociation", (PyCFunction) _wrap_PyNs3OlsrRoutingProtocol_SetRoutingTableAssociation, METH_VARARGS|METH_KEYWORDS, "SetRoutingTableAssociation(routingTable)\n\ntype: routingTable: ns3::Ptr< ns3::Ipv4StaticRouting >" },
+    {(char *) "GetRoutingTableAssociation", (PyCFunction) _wrap_PyNs3OlsrRoutingProtocol_GetRoutingTableAssociation, METH_NOARGS, "GetRoutingTableAssociation()\n\n" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3OlsrRoutingProtocol__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -6733,9 +6733,9 @@ static int _wrap_PyNs3OlsrRoutingTableEntry__set_nextAddr(PyNs3OlsrRoutingTableE
 }
 static PyGetSetDef PyNs3OlsrRoutingTableEntry__getsets[] = {
     {
-        (char*) "interface", /* attribute name */
-        (getter) _wrap_PyNs3OlsrRoutingTableEntry__get_interface, /* C function to get the attribute */
-        (setter) _wrap_PyNs3OlsrRoutingTableEntry__set_interface, /* C function to set the attribute */
+        (char*) "destAddr", /* attribute name */
+        (getter) _wrap_PyNs3OlsrRoutingTableEntry__get_destAddr, /* C function to get the attribute */
+        (setter) _wrap_PyNs3OlsrRoutingTableEntry__set_destAddr, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -6747,16 +6747,16 @@ static PyGetSetDef PyNs3OlsrRoutingTableEntry__getsets[] = {
         NULL /* optional additional data for getter and setter */
     },
     {
-        (char*) "nextAddr", /* attribute name */
-        (getter) _wrap_PyNs3OlsrRoutingTableEntry__get_nextAddr, /* C function to get the attribute */
-        (setter) _wrap_PyNs3OlsrRoutingTableEntry__set_nextAddr, /* C function to set the attribute */
+        (char*) "interface", /* attribute name */
+        (getter) _wrap_PyNs3OlsrRoutingTableEntry__get_interface, /* C function to get the attribute */
+        (setter) _wrap_PyNs3OlsrRoutingTableEntry__set_interface, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
     {
-        (char*) "destAddr", /* attribute name */
-        (getter) _wrap_PyNs3OlsrRoutingTableEntry__get_destAddr, /* C function to get the attribute */
-        (setter) _wrap_PyNs3OlsrRoutingTableEntry__set_destAddr, /* C function to set the attribute */
+        (char*) "nextAddr", /* attribute name */
+        (getter) _wrap_PyNs3OlsrRoutingTableEntry__get_nextAddr, /* C function to get the attribute */
+        (setter) _wrap_PyNs3OlsrRoutingTableEntry__set_nextAddr, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -7058,9 +7058,9 @@ static int _wrap_PyNs3OlsrTopologyTuple__set_sequenceNumber(PyNs3OlsrTopologyTup
 }
 static PyGetSetDef PyNs3OlsrTopologyTuple__getsets[] = {
     {
-        (char*) "lastAddr", /* attribute name */
-        (getter) _wrap_PyNs3OlsrTopologyTuple__get_lastAddr, /* C function to get the attribute */
-        (setter) _wrap_PyNs3OlsrTopologyTuple__set_lastAddr, /* C function to set the attribute */
+        (char*) "destAddr", /* attribute name */
+        (getter) _wrap_PyNs3OlsrTopologyTuple__get_destAddr, /* C function to get the attribute */
+        (setter) _wrap_PyNs3OlsrTopologyTuple__set_destAddr, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -7072,9 +7072,9 @@ static PyGetSetDef PyNs3OlsrTopologyTuple__getsets[] = {
         NULL /* optional additional data for getter and setter */
     },
     {
-        (char*) "destAddr", /* attribute name */
-        (getter) _wrap_PyNs3OlsrTopologyTuple__get_destAddr, /* C function to get the attribute */
-        (setter) _wrap_PyNs3OlsrTopologyTuple__set_destAddr, /* C function to set the attribute */
+        (char*) "lastAddr", /* attribute name */
+        (getter) _wrap_PyNs3OlsrTopologyTuple__get_lastAddr, /* C function to get the attribute */
+        (setter) _wrap_PyNs3OlsrTopologyTuple__set_lastAddr, /* C function to set the attribute */
         NULL, /* optional doc string */
         NULL /* optional additional data for getter and setter */
     },
@@ -12014,18 +12014,19 @@ int _wrap_PyNs3OlsrHelper__tp_init(PyNs3OlsrHelper *self, PyObject *args, PyObje
 
 
 PyObject *
-_wrap_PyNs3OlsrHelper_Set(PyNs3OlsrHelper *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3OlsrHelper_ExcludeInterface(PyNs3OlsrHelper *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    const char *name;
-    Py_ssize_t name_len;
-    PyNs3AttributeValue *value;
-    const char *keywords[] = {"name", "value", NULL};
+    PyNs3Node *node;
+    ns3::Node *node_ptr;
+    unsigned int interface;
+    const char *keywords[] = {"node", "interface", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3AttributeValue_Type, &value)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!I", (char **) keywords, &PyNs3Node_Type, &node, &interface)) {
         return NULL;
     }
-    self->obj->Set(std::string(name, name_len), *((PyNs3AttributeValue *) value)->obj);
+    node_ptr = (node ? node->obj : NULL);
+    self->obj->ExcludeInterface(ns3::Ptr< ns3::Node  > (node_ptr), interface);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -12078,19 +12079,18 @@ _wrap_PyNs3OlsrHelper_Create(PyNs3OlsrHelper *self, PyObject *args, PyObject *kw
 
 
 PyObject *
-_wrap_PyNs3OlsrHelper_ExcludeInterface(PyNs3OlsrHelper *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3OlsrHelper_Set(PyNs3OlsrHelper *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3Node *node;
-    ns3::Node *node_ptr;
-    unsigned int interface;
-    const char *keywords[] = {"node", "interface", NULL};
+    const char *name;
+    Py_ssize_t name_len;
+    PyNs3AttributeValue *value;
+    const char *keywords[] = {"name", "value", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!I", (char **) keywords, &PyNs3Node_Type, &node, &interface)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3AttributeValue_Type, &value)) {
         return NULL;
     }
-    node_ptr = (node ? node->obj : NULL);
-    self->obj->ExcludeInterface(ns3::Ptr< ns3::Node  > (node_ptr), interface);
+    self->obj->Set(std::string(name, name_len), *((PyNs3AttributeValue *) value)->obj);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -12130,10 +12130,10 @@ _wrap_PyNs3OlsrHelper__copy__(PyNs3OlsrHelper *self)
 }
 
 static PyMethodDef PyNs3OlsrHelper_methods[] = {
-    {(char *) "Set", (PyCFunction) _wrap_PyNs3OlsrHelper_Set, METH_KEYWORDS|METH_VARARGS, "Set(name, value)\n\ntype: name: std::string\ntype: value: ns3::AttributeValue const &" },
-    {(char *) "Create", (PyCFunction) _wrap_PyNs3OlsrHelper_Create, METH_KEYWORDS|METH_VARARGS, "Create(node)\n\ntype: node: ns3::Ptr< ns3::Node >" },
-    {(char *) "ExcludeInterface", (PyCFunction) _wrap_PyNs3OlsrHelper_ExcludeInterface, METH_KEYWORDS|METH_VARARGS, "ExcludeInterface(node, interface)\n\ntype: node: ns3::Ptr< ns3::Node >\ntype: interface: uint32_t" },
-    {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3OlsrHelper_AssignStreams, METH_KEYWORDS|METH_VARARGS, "AssignStreams(c, stream)\n\ntype: c: ns3::NodeContainer\ntype: stream: int64_t" },
+    {(char *) "ExcludeInterface", (PyCFunction) _wrap_PyNs3OlsrHelper_ExcludeInterface, METH_VARARGS|METH_KEYWORDS, "ExcludeInterface(node, interface)\n\ntype: node: ns3::Ptr< ns3::Node >\ntype: interface: uint32_t" },
+    {(char *) "Create", (PyCFunction) _wrap_PyNs3OlsrHelper_Create, METH_VARARGS|METH_KEYWORDS, "Create(node)\n\ntype: node: ns3::Ptr< ns3::Node >" },
+    {(char *) "Set", (PyCFunction) _wrap_PyNs3OlsrHelper_Set, METH_VARARGS|METH_KEYWORDS, "Set(name, value)\n\ntype: name: std::string\ntype: value: ns3::AttributeValue const &" },
+    {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3OlsrHelper_AssignStreams, METH_VARARGS|METH_KEYWORDS, "AssignStreams(c, stream)\n\ntype: c: ns3::NodeContainer\ntype: stream: int64_t" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3OlsrHelper__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };

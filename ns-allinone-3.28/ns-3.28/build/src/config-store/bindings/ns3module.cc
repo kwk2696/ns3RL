@@ -541,11 +541,11 @@ int _wrap_PyNs3FileConfig__tp_init(PyNs3FileConfig *self, PyObject *args, PyObje
 
 
 PyObject *
-_wrap_PyNs3FileConfig_Default(PyNs3FileConfig *self)
+_wrap_PyNs3FileConfig_Attributes(PyNs3FileConfig *self)
 {
     PyObject *py_retval;
     
-    self->obj->Default();
+    self->obj->Attributes();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -553,11 +553,11 @@ _wrap_PyNs3FileConfig_Default(PyNs3FileConfig *self)
 
 
 PyObject *
-_wrap_PyNs3FileConfig_Attributes(PyNs3FileConfig *self)
+_wrap_PyNs3FileConfig_Default(PyNs3FileConfig *self)
 {
     PyObject *py_retval;
     
-    self->obj->Attributes();
+    self->obj->Default();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -594,10 +594,10 @@ _wrap_PyNs3FileConfig_SetFilename(PyNs3FileConfig *self, PyObject *args, PyObjec
 }
 
 static PyMethodDef PyNs3FileConfig_methods[] = {
-    {(char *) "Default", (PyCFunction) _wrap_PyNs3FileConfig_Default, METH_NOARGS, "Default()\n\n" },
     {(char *) "Attributes", (PyCFunction) _wrap_PyNs3FileConfig_Attributes, METH_NOARGS, "Attributes()\n\n" },
+    {(char *) "Default", (PyCFunction) _wrap_PyNs3FileConfig_Default, METH_NOARGS, "Default()\n\n" },
     {(char *) "Global", (PyCFunction) _wrap_PyNs3FileConfig_Global, METH_NOARGS, "Global()\n\n" },
-    {(char *) "SetFilename", (PyCFunction) _wrap_PyNs3FileConfig_SetFilename, METH_KEYWORDS|METH_VARARGS, "SetFilename(filename)\n\ntype: filename: std::string" },
+    {(char *) "SetFilename", (PyCFunction) _wrap_PyNs3FileConfig_SetFilename, METH_VARARGS|METH_KEYWORDS, "SetFilename(filename)\n\ntype: filename: std::string" },
     {NULL, NULL, 0, NULL}
 };
 
@@ -795,11 +795,11 @@ int _wrap_PyNs3GtkConfigStore__tp_init(PyNs3GtkConfigStore *self, PyObject *args
 
 
 PyObject *
-_wrap_PyNs3GtkConfigStore_ConfigureDefaults(PyNs3GtkConfigStore *self)
+_wrap_PyNs3GtkConfigStore_ConfigureAttributes(PyNs3GtkConfigStore *self)
 {
     PyObject *py_retval;
     
-    self->obj->ConfigureDefaults();
+    self->obj->ConfigureAttributes();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -807,11 +807,11 @@ _wrap_PyNs3GtkConfigStore_ConfigureDefaults(PyNs3GtkConfigStore *self)
 
 
 PyObject *
-_wrap_PyNs3GtkConfigStore_ConfigureAttributes(PyNs3GtkConfigStore *self)
+_wrap_PyNs3GtkConfigStore_ConfigureDefaults(PyNs3GtkConfigStore *self)
 {
     PyObject *py_retval;
     
-    self->obj->ConfigureAttributes();
+    self->obj->ConfigureDefaults();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -831,8 +831,8 @@ _wrap_PyNs3GtkConfigStore__copy__(PyNs3GtkConfigStore *self)
 }
 
 static PyMethodDef PyNs3GtkConfigStore_methods[] = {
-    {(char *) "ConfigureDefaults", (PyCFunction) _wrap_PyNs3GtkConfigStore_ConfigureDefaults, METH_NOARGS, "ConfigureDefaults()\n\n" },
     {(char *) "ConfigureAttributes", (PyCFunction) _wrap_PyNs3GtkConfigStore_ConfigureAttributes, METH_NOARGS, "ConfigureAttributes()\n\n" },
+    {(char *) "ConfigureDefaults", (PyCFunction) _wrap_PyNs3GtkConfigStore_ConfigureDefaults, METH_NOARGS, "ConfigureDefaults()\n\n" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3GtkConfigStore__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -1210,12 +1210,12 @@ int _wrap_PyNs3NoneFileConfig__tp_init(PyNs3NoneFileConfig *self, PyObject *args
 
 
 PyObject *
-_wrap_PyNs3NoneFileConfig_Default(PyNs3NoneFileConfig *self)
+_wrap_PyNs3NoneFileConfig_Attributes(PyNs3NoneFileConfig *self)
 {
     PyObject *py_retval;
     PyNs3NoneFileConfig__PythonHelper *helper_class = dynamic_cast<PyNs3NoneFileConfig__PythonHelper*> (self->obj);
     
-    (helper_class == NULL)? (self->obj->Default()) : (self->obj->ns3::NoneFileConfig::Default());
+    (helper_class == NULL)? (self->obj->Attributes()) : (self->obj->ns3::NoneFileConfig::Attributes());
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -1223,12 +1223,12 @@ _wrap_PyNs3NoneFileConfig_Default(PyNs3NoneFileConfig *self)
 
 
 PyObject *
-_wrap_PyNs3NoneFileConfig_Attributes(PyNs3NoneFileConfig *self)
+_wrap_PyNs3NoneFileConfig_Default(PyNs3NoneFileConfig *self)
 {
     PyObject *py_retval;
     PyNs3NoneFileConfig__PythonHelper *helper_class = dynamic_cast<PyNs3NoneFileConfig__PythonHelper*> (self->obj);
     
-    (helper_class == NULL)? (self->obj->Attributes()) : (self->obj->ns3::NoneFileConfig::Attributes());
+    (helper_class == NULL)? (self->obj->Default()) : (self->obj->ns3::NoneFileConfig::Default());
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -1282,10 +1282,10 @@ _wrap_PyNs3NoneFileConfig__copy__(PyNs3NoneFileConfig *self)
 }
 
 static PyMethodDef PyNs3NoneFileConfig_methods[] = {
-    {(char *) "Default", (PyCFunction) _wrap_PyNs3NoneFileConfig_Default, METH_NOARGS, "Default()\n\n" },
     {(char *) "Attributes", (PyCFunction) _wrap_PyNs3NoneFileConfig_Attributes, METH_NOARGS, "Attributes()\n\n" },
+    {(char *) "Default", (PyCFunction) _wrap_PyNs3NoneFileConfig_Default, METH_NOARGS, "Default()\n\n" },
     {(char *) "Global", (PyCFunction) _wrap_PyNs3NoneFileConfig_Global, METH_NOARGS, "Global()\n\n" },
-    {(char *) "SetFilename", (PyCFunction) _wrap_PyNs3NoneFileConfig_SetFilename, METH_KEYWORDS|METH_VARARGS, "SetFilename(filename)\n\ntype: filename: std::string" },
+    {(char *) "SetFilename", (PyCFunction) _wrap_PyNs3NoneFileConfig_SetFilename, METH_VARARGS|METH_KEYWORDS, "SetFilename(filename)\n\ntype: filename: std::string" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3NoneFileConfig__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -1619,6 +1619,35 @@ _wrap_PyNs3ConfigStore_ConfigureAttributes(PyNs3ConfigStore *self)
 
 
 PyObject *
+_wrap_PyNs3ConfigStore_ConfigureDefaults(PyNs3ConfigStore *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->ConfigureDefaults();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3ConfigStore_GetInstanceTypeId(PyNs3ConfigStore *self)
+{
+    PyObject *py_retval;
+    PyNs3ConfigStore__PythonHelper *helper_class = dynamic_cast<PyNs3ConfigStore__PythonHelper*> (self->obj);
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = (helper_class == NULL)? (self->obj->GetInstanceTypeId()) : (self->obj->ns3::ConfigStore::GetInstanceTypeId());
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3ConfigStore_GetTypeId(void)
 {
     PyObject *py_retval;
@@ -1635,11 +1664,16 @@ _wrap_PyNs3ConfigStore_GetTypeId(void)
 
 
 PyObject *
-_wrap_PyNs3ConfigStore_ConfigureDefaults(PyNs3ConfigStore *self)
+_wrap_PyNs3ConfigStore_SetFileFormat(PyNs3ConfigStore *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
+    ns3::ConfigStore::FileFormat format;
+    const char *keywords[] = {"format", NULL};
     
-    self->obj->ConfigureDefaults();
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &format)) {
+        return NULL;
+    }
+    self->obj->SetFileFormat(format);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -1681,40 +1715,6 @@ _wrap_PyNs3ConfigStore_SetMode(PyNs3ConfigStore *self, PyObject *args, PyObject 
 }
 
 
-PyObject *
-_wrap_PyNs3ConfigStore_GetInstanceTypeId(PyNs3ConfigStore *self)
-{
-    PyObject *py_retval;
-    PyNs3ConfigStore__PythonHelper *helper_class = dynamic_cast<PyNs3ConfigStore__PythonHelper*> (self->obj);
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = (helper_class == NULL)? (self->obj->GetInstanceTypeId()) : (self->obj->ns3::ConfigStore::GetInstanceTypeId());
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3ConfigStore_SetFileFormat(PyNs3ConfigStore *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    ns3::ConfigStore::FileFormat format;
-    const char *keywords[] = {"format", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &format)) {
-        return NULL;
-    }
-    self->obj->SetFileFormat(format);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3ConfigStore__copy__(PyNs3ConfigStore *self)
 {
@@ -1731,12 +1731,12 @@ _wrap_PyNs3ConfigStore__copy__(PyNs3ConfigStore *self)
 
 static PyMethodDef PyNs3ConfigStore_methods[] = {
     {(char *) "ConfigureAttributes", (PyCFunction) _wrap_PyNs3ConfigStore_ConfigureAttributes, METH_NOARGS, "ConfigureAttributes()\n\n" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3ConfigStore_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
     {(char *) "ConfigureDefaults", (PyCFunction) _wrap_PyNs3ConfigStore_ConfigureDefaults, METH_NOARGS, "ConfigureDefaults()\n\n" },
-    {(char *) "SetFilename", (PyCFunction) _wrap_PyNs3ConfigStore_SetFilename, METH_KEYWORDS|METH_VARARGS, "SetFilename(filename)\n\ntype: filename: std::string" },
-    {(char *) "SetMode", (PyCFunction) _wrap_PyNs3ConfigStore_SetMode, METH_KEYWORDS|METH_VARARGS, "SetMode(mode)\n\ntype: mode: ns3::ConfigStore::Mode" },
     {(char *) "GetInstanceTypeId", (PyCFunction) _wrap_PyNs3ConfigStore_GetInstanceTypeId, METH_NOARGS, "GetInstanceTypeId()\n\n" },
-    {(char *) "SetFileFormat", (PyCFunction) _wrap_PyNs3ConfigStore_SetFileFormat, METH_KEYWORDS|METH_VARARGS, "SetFileFormat(format)\n\ntype: format: ns3::ConfigStore::FileFormat" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3ConfigStore_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "SetFileFormat", (PyCFunction) _wrap_PyNs3ConfigStore_SetFileFormat, METH_VARARGS|METH_KEYWORDS, "SetFileFormat(format)\n\ntype: format: ns3::ConfigStore::FileFormat" },
+    {(char *) "SetFilename", (PyCFunction) _wrap_PyNs3ConfigStore_SetFilename, METH_VARARGS|METH_KEYWORDS, "SetFilename(filename)\n\ntype: filename: std::string" },
+    {(char *) "SetMode", (PyCFunction) _wrap_PyNs3ConfigStore_SetMode, METH_VARARGS|METH_KEYWORDS, "SetMode(mode)\n\ntype: mode: ns3::ConfigStore::Mode" },
     {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3ConfigStore__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3ConfigStore__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}

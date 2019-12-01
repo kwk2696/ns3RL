@@ -584,42 +584,6 @@ int _wrap_PyNs3TopologyReaderHelper__tp_init(PyNs3TopologyReaderHelper *self, Py
 
 
 PyObject *
-_wrap_PyNs3TopologyReaderHelper_SetFileType(PyNs3TopologyReaderHelper *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    const char *fileType;
-    Py_ssize_t fileType_len;
-    const char *keywords[] = {"fileType", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#", (char **) keywords, &fileType, &fileType_len)) {
-        return NULL;
-    }
-    self->obj->SetFileType(std::string(fileType, fileType_len));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3TopologyReaderHelper_SetFileName(PyNs3TopologyReaderHelper *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    const char *fileName;
-    Py_ssize_t fileName_len;
-    const char *keywords[] = {"fileName", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#", (char **) keywords, &fileName, &fileName_len)) {
-        return NULL;
-    }
-    self->obj->SetFileName(std::string(fileName, fileName_len));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3TopologyReaderHelper_GetTopologyReader(PyNs3TopologyReaderHelper *self)
 {
     PyObject *py_retval;
@@ -664,6 +628,42 @@ _wrap_PyNs3TopologyReaderHelper_GetTopologyReader(PyNs3TopologyReaderHelper *sel
 }
 
 
+PyObject *
+_wrap_PyNs3TopologyReaderHelper_SetFileName(PyNs3TopologyReaderHelper *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    const char *fileName;
+    Py_ssize_t fileName_len;
+    const char *keywords[] = {"fileName", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#", (char **) keywords, &fileName, &fileName_len)) {
+        return NULL;
+    }
+    self->obj->SetFileName(std::string(fileName, fileName_len));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3TopologyReaderHelper_SetFileType(PyNs3TopologyReaderHelper *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    const char *fileType;
+    Py_ssize_t fileType_len;
+    const char *keywords[] = {"fileType", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#", (char **) keywords, &fileType, &fileType_len)) {
+        return NULL;
+    }
+    self->obj->SetFileType(std::string(fileType, fileType_len));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
 static PyObject*
 _wrap_PyNs3TopologyReaderHelper__copy__(PyNs3TopologyReaderHelper *self)
 {
@@ -677,9 +677,9 @@ _wrap_PyNs3TopologyReaderHelper__copy__(PyNs3TopologyReaderHelper *self)
 }
 
 static PyMethodDef PyNs3TopologyReaderHelper_methods[] = {
-    {(char *) "SetFileType", (PyCFunction) _wrap_PyNs3TopologyReaderHelper_SetFileType, METH_KEYWORDS|METH_VARARGS, "SetFileType(fileType)\n\ntype: fileType: std::string const" },
-    {(char *) "SetFileName", (PyCFunction) _wrap_PyNs3TopologyReaderHelper_SetFileName, METH_KEYWORDS|METH_VARARGS, "SetFileName(fileName)\n\ntype: fileName: std::string const" },
     {(char *) "GetTopologyReader", (PyCFunction) _wrap_PyNs3TopologyReaderHelper_GetTopologyReader, METH_NOARGS, "GetTopologyReader()\n\n" },
+    {(char *) "SetFileName", (PyCFunction) _wrap_PyNs3TopologyReaderHelper_SetFileName, METH_VARARGS|METH_KEYWORDS, "SetFileName(fileName)\n\ntype: fileName: std::string const" },
+    {(char *) "SetFileType", (PyCFunction) _wrap_PyNs3TopologyReaderHelper_SetFileType, METH_VARARGS|METH_KEYWORDS, "SetFileType(fileType)\n\ntype: fileType: std::string const" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3TopologyReaderHelper__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -792,16 +792,16 @@ PyTypeObject PyNs3TopologyReaderHelper_Type = {
 
 
 PyObject *
-PyNs3TopologyReader__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3TopologyReader *self)
+PyNs3TopologyReader__PythonHelper::_wrap_DoDispose(PyNs3TopologyReader *self)
 {
     PyObject *py_retval;
     PyNs3TopologyReader__PythonHelper *helper = dynamic_cast< PyNs3TopologyReader__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -840,16 +840,16 @@ PyNs3TopologyReader__PythonHelper::_wrap_NotifyNewAggregate(PyNs3TopologyReader 
 }
 
 PyObject *
-PyNs3TopologyReader__PythonHelper::_wrap_DoDispose(PyNs3TopologyReader *self)
+PyNs3TopologyReader__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3TopologyReader *self)
 {
     PyObject *py_retval;
     PyNs3TopologyReader__PythonHelper *helper = dynamic_cast< PyNs3TopologyReader__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -1154,6 +1154,23 @@ _wrap_PyNs3TopologyReader__tp_init(PyNs3TopologyReader *self, PyObject *args, Py
 
 
 PyObject *
+_wrap_PyNs3TopologyReader_AddLink(PyNs3TopologyReader *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3TopologyReaderLink *link;
+    const char *keywords[] = {"link", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3TopologyReaderLink_Type, &link)) {
+        return NULL;
+    }
+    self->obj->AddLink(*((PyNs3TopologyReaderLink *) link)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3TopologyReader_GetFileName(PyNs3TopologyReader *self)
 {
     PyObject *py_retval;
@@ -1161,6 +1178,34 @@ _wrap_PyNs3TopologyReader_GetFileName(PyNs3TopologyReader *self)
     
     retval = self->obj->GetFileName();
     py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3TopologyReader_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::TopologyReader::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3TopologyReader_LinksEmpty(PyNs3TopologyReader *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->LinksEmpty();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
@@ -1212,63 +1257,18 @@ _wrap_PyNs3TopologyReader_SetFileName(PyNs3TopologyReader *self, PyObject *args,
     return py_retval;
 }
 
-
-PyObject *
-_wrap_PyNs3TopologyReader_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::TopologyReader::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3TopologyReader_LinksEmpty(PyNs3TopologyReader *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->LinksEmpty();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3TopologyReader_AddLink(PyNs3TopologyReader *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3TopologyReaderLink *link;
-    const char *keywords[] = {"link", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3TopologyReaderLink_Type, &link)) {
-        return NULL;
-    }
-    self->obj->AddLink(*((PyNs3TopologyReaderLink *) link)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
 static PyMethodDef PyNs3TopologyReader_methods[] = {
+    {(char *) "AddLink", (PyCFunction) _wrap_PyNs3TopologyReader_AddLink, METH_VARARGS|METH_KEYWORDS, "AddLink(link)\n\ntype: link: ns3::TopologyReader::Link" },
     {(char *) "GetFileName", (PyCFunction) _wrap_PyNs3TopologyReader_GetFileName, METH_NOARGS, "GetFileName()\n\n" },
-    {(char *) "LinksSize", (PyCFunction) _wrap_PyNs3TopologyReader_LinksSize, METH_NOARGS, "LinksSize()\n\n" },
-    {(char *) "Read", (PyCFunction) _wrap_PyNs3TopologyReader_Read, METH_NOARGS, "Read()\n\n" },
-    {(char *) "SetFileName", (PyCFunction) _wrap_PyNs3TopologyReader_SetFileName, METH_KEYWORDS|METH_VARARGS, "SetFileName(fileName)\n\ntype: fileName: std::string const &" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3TopologyReader_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
     {(char *) "LinksEmpty", (PyCFunction) _wrap_PyNs3TopologyReader_LinksEmpty, METH_NOARGS, "LinksEmpty()\n\n" },
-    {(char *) "AddLink", (PyCFunction) _wrap_PyNs3TopologyReader_AddLink, METH_KEYWORDS|METH_VARARGS, "AddLink(link)\n\ntype: link: ns3::TopologyReader::Link" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3TopologyReader__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "LinksSize", (PyCFunction) _wrap_PyNs3TopologyReader_LinksSize, METH_NOARGS, "LinksSize()\n\n" },
+    {(char *) "Read", (PyCFunction) _wrap_PyNs3TopologyReader_Read, METH_NOARGS, "Read()\n\n" },
+    {(char *) "SetFileName", (PyCFunction) _wrap_PyNs3TopologyReader_SetFileName, METH_VARARGS|METH_KEYWORDS, "SetFileName(fileName)\n\ntype: fileName: std::string const &" },
+    {(char *) "DoDispose", (PyCFunction) PyNs3TopologyReader__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3TopologyReader__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3TopologyReader__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3TopologyReader__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3TopologyReader__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 
@@ -1367,7 +1367,7 @@ PyTypeObject PyNs3TopologyReader_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
     "TopologyReader()",                        /* Documentation string */
     (traverseproc)PyNs3TopologyReader__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3TopologyReader__tp_clear,             /* tp_clear */
@@ -1480,6 +1480,26 @@ int _wrap_PyNs3TopologyReaderLink__tp_init(PyNs3TopologyReaderLink *self, PyObje
 
 
 PyObject *
+_wrap_PyNs3TopologyReaderLink_GetAttribute(PyNs3TopologyReaderLink *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    std::string retval;
+    const char *name = NULL;
+    Py_ssize_t name_len;
+    std::string name_std;
+    const char *keywords[] = {"name", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#", (char **) keywords, &name, &name_len)) {
+        return NULL;
+    }
+    name_std = std::string(name, name_len);
+    retval = self->obj->GetAttribute(name_std);
+    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3TopologyReaderLink_GetAttributeFailSafe(PyNs3TopologyReaderLink *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -1499,38 +1519,6 @@ _wrap_PyNs3TopologyReaderLink_GetAttributeFailSafe(PyNs3TopologyReaderLink *self
     value_std = std::string(value, value_len);
     retval = self->obj->GetAttributeFailSafe(name_std, value_std);
     py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3TopologyReaderLink_GetToNodeName(PyNs3TopologyReaderLink *self)
-{
-    PyObject *py_retval;
-    std::string retval;
-    
-    retval = self->obj->GetToNodeName();
-    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3TopologyReaderLink_GetAttribute(PyNs3TopologyReaderLink *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    std::string retval;
-    const char *name = NULL;
-    Py_ssize_t name_len;
-    std::string name_std;
-    const char *keywords[] = {"name", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#", (char **) keywords, &name, &name_len)) {
-        return NULL;
-    }
-    name_std = std::string(name, name_len);
-    retval = self->obj->GetAttribute(name_std);
-    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
     return py_retval;
 }
 
@@ -1576,30 +1564,6 @@ _wrap_PyNs3TopologyReaderLink_GetFromNode(PyNs3TopologyReaderLink *self)
         }
     }
     py_retval = Py_BuildValue((char *) "N", py_Node);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3TopologyReaderLink_SetAttribute(PyNs3TopologyReaderLink *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    const char *name = NULL;
-    Py_ssize_t name_len;
-    std::string name_std;
-    const char *value = NULL;
-    Py_ssize_t value_len;
-    std::string value_std;
-    const char *keywords[] = {"name", "value", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#s#", (char **) keywords, &name, &name_len, &value, &value_len)) {
-        return NULL;
-    }
-    name_std = std::string(name, name_len);
-    value_std = std::string(value, value_len);
-    self->obj->SetAttribute(name_std, value_std);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
     return py_retval;
 }
 
@@ -1661,6 +1625,42 @@ _wrap_PyNs3TopologyReaderLink_GetToNode(PyNs3TopologyReaderLink *self)
 }
 
 
+PyObject *
+_wrap_PyNs3TopologyReaderLink_GetToNodeName(PyNs3TopologyReaderLink *self)
+{
+    PyObject *py_retval;
+    std::string retval;
+    
+    retval = self->obj->GetToNodeName();
+    py_retval = Py_BuildValue((char *) "s#", (retval).c_str(), (retval).size());
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3TopologyReaderLink_SetAttribute(PyNs3TopologyReaderLink *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    const char *name = NULL;
+    Py_ssize_t name_len;
+    std::string name_std;
+    const char *value = NULL;
+    Py_ssize_t value_len;
+    std::string value_std;
+    const char *keywords[] = {"name", "value", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#s#", (char **) keywords, &name, &name_len, &value, &value_len)) {
+        return NULL;
+    }
+    name_std = std::string(name, name_len);
+    value_std = std::string(value, value_len);
+    self->obj->SetAttribute(name_std, value_std);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
 static PyObject*
 _wrap_PyNs3TopologyReaderLink__copy__(PyNs3TopologyReaderLink *self)
 {
@@ -1674,13 +1674,13 @@ _wrap_PyNs3TopologyReaderLink__copy__(PyNs3TopologyReaderLink *self)
 }
 
 static PyMethodDef PyNs3TopologyReaderLink_methods[] = {
-    {(char *) "GetAttributeFailSafe", (PyCFunction) _wrap_PyNs3TopologyReaderLink_GetAttributeFailSafe, METH_KEYWORDS|METH_VARARGS, "GetAttributeFailSafe(name, value)\n\ntype: name: std::string const &\ntype: value: std::string &" },
-    {(char *) "GetToNodeName", (PyCFunction) _wrap_PyNs3TopologyReaderLink_GetToNodeName, METH_NOARGS, "GetToNodeName()\n\n" },
-    {(char *) "GetAttribute", (PyCFunction) _wrap_PyNs3TopologyReaderLink_GetAttribute, METH_KEYWORDS|METH_VARARGS, "GetAttribute(name)\n\ntype: name: std::string const &" },
+    {(char *) "GetAttribute", (PyCFunction) _wrap_PyNs3TopologyReaderLink_GetAttribute, METH_VARARGS|METH_KEYWORDS, "GetAttribute(name)\n\ntype: name: std::string const &" },
+    {(char *) "GetAttributeFailSafe", (PyCFunction) _wrap_PyNs3TopologyReaderLink_GetAttributeFailSafe, METH_VARARGS|METH_KEYWORDS, "GetAttributeFailSafe(name, value)\n\ntype: name: std::string const &\ntype: value: std::string &" },
     {(char *) "GetFromNode", (PyCFunction) _wrap_PyNs3TopologyReaderLink_GetFromNode, METH_NOARGS, "GetFromNode()\n\n" },
-    {(char *) "SetAttribute", (PyCFunction) _wrap_PyNs3TopologyReaderLink_SetAttribute, METH_KEYWORDS|METH_VARARGS, "SetAttribute(name, value)\n\ntype: name: std::string const &\ntype: value: std::string const &" },
     {(char *) "GetFromNodeName", (PyCFunction) _wrap_PyNs3TopologyReaderLink_GetFromNodeName, METH_NOARGS, "GetFromNodeName()\n\n" },
     {(char *) "GetToNode", (PyCFunction) _wrap_PyNs3TopologyReaderLink_GetToNode, METH_NOARGS, "GetToNode()\n\n" },
+    {(char *) "GetToNodeName", (PyCFunction) _wrap_PyNs3TopologyReaderLink_GetToNodeName, METH_NOARGS, "GetToNodeName()\n\n" },
+    {(char *) "SetAttribute", (PyCFunction) _wrap_PyNs3TopologyReaderLink_SetAttribute, METH_VARARGS|METH_KEYWORDS, "SetAttribute(name, value)\n\ntype: name: std::string const &\ntype: value: std::string const &" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3TopologyReaderLink__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -1793,16 +1793,16 @@ PyTypeObject PyNs3TopologyReaderLink_Type = {
 
 
 PyObject *
-PyNs3InetTopologyReader__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3InetTopologyReader *self)
+PyNs3InetTopologyReader__PythonHelper::_wrap_DoDispose(PyNs3InetTopologyReader *self)
 {
     PyObject *py_retval;
     PyNs3InetTopologyReader__PythonHelper *helper = dynamic_cast< PyNs3InetTopologyReader__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -1841,16 +1841,16 @@ PyNs3InetTopologyReader__PythonHelper::_wrap_NotifyNewAggregate(PyNs3InetTopolog
 }
 
 PyObject *
-PyNs3InetTopologyReader__PythonHelper::_wrap_DoDispose(PyNs3InetTopologyReader *self)
+PyNs3InetTopologyReader__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3InetTopologyReader *self)
 {
     PyObject *py_retval;
     PyNs3InetTopologyReader__PythonHelper *helper = dynamic_cast< PyNs3InetTopologyReader__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -2157,6 +2157,22 @@ _wrap_PyNs3InetTopologyReader__tp_init(PyNs3InetTopologyReader *self, PyObject *
 
 
 PyObject *
+_wrap_PyNs3InetTopologyReader_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::InetTopologyReader::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3InetTopologyReader_Read(PyNs3InetTopologyReader *self)
 {
     PyObject *py_retval;
@@ -2172,29 +2188,13 @@ _wrap_PyNs3InetTopologyReader_Read(PyNs3InetTopologyReader *self)
     return py_retval;
 }
 
-
-PyObject *
-_wrap_PyNs3InetTopologyReader_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::InetTopologyReader::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
 static PyMethodDef PyNs3InetTopologyReader_methods[] = {
-    {(char *) "Read", (PyCFunction) _wrap_PyNs3InetTopologyReader_Read, METH_NOARGS, "Read()\n\n" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3InetTopologyReader_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3InetTopologyReader__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "Read", (PyCFunction) _wrap_PyNs3InetTopologyReader_Read, METH_NOARGS, "Read()\n\n" },
+    {(char *) "DoDispose", (PyCFunction) PyNs3InetTopologyReader__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3InetTopologyReader__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3InetTopologyReader__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3InetTopologyReader__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3InetTopologyReader__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 
@@ -2293,7 +2293,7 @@ PyTypeObject PyNs3InetTopologyReader_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
     "InetTopologyReader()",                        /* Documentation string */
     (traverseproc)PyNs3InetTopologyReader__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3InetTopologyReader__tp_clear,             /* tp_clear */
@@ -2326,16 +2326,16 @@ PyTypeObject PyNs3InetTopologyReader_Type = {
 
 
 PyObject *
-PyNs3OrbisTopologyReader__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3OrbisTopologyReader *self)
+PyNs3OrbisTopologyReader__PythonHelper::_wrap_DoDispose(PyNs3OrbisTopologyReader *self)
 {
     PyObject *py_retval;
     PyNs3OrbisTopologyReader__PythonHelper *helper = dynamic_cast< PyNs3OrbisTopologyReader__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -2374,16 +2374,16 @@ PyNs3OrbisTopologyReader__PythonHelper::_wrap_NotifyNewAggregate(PyNs3OrbisTopol
 }
 
 PyObject *
-PyNs3OrbisTopologyReader__PythonHelper::_wrap_DoDispose(PyNs3OrbisTopologyReader *self)
+PyNs3OrbisTopologyReader__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3OrbisTopologyReader *self)
 {
     PyObject *py_retval;
     PyNs3OrbisTopologyReader__PythonHelper *helper = dynamic_cast< PyNs3OrbisTopologyReader__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -2690,6 +2690,22 @@ _wrap_PyNs3OrbisTopologyReader__tp_init(PyNs3OrbisTopologyReader *self, PyObject
 
 
 PyObject *
+_wrap_PyNs3OrbisTopologyReader_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::OrbisTopologyReader::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3OrbisTopologyReader_Read(PyNs3OrbisTopologyReader *self)
 {
     PyObject *py_retval;
@@ -2705,29 +2721,13 @@ _wrap_PyNs3OrbisTopologyReader_Read(PyNs3OrbisTopologyReader *self)
     return py_retval;
 }
 
-
-PyObject *
-_wrap_PyNs3OrbisTopologyReader_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::OrbisTopologyReader::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
 static PyMethodDef PyNs3OrbisTopologyReader_methods[] = {
-    {(char *) "Read", (PyCFunction) _wrap_PyNs3OrbisTopologyReader_Read, METH_NOARGS, "Read()\n\n" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3OrbisTopologyReader_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3OrbisTopologyReader__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "Read", (PyCFunction) _wrap_PyNs3OrbisTopologyReader_Read, METH_NOARGS, "Read()\n\n" },
+    {(char *) "DoDispose", (PyCFunction) PyNs3OrbisTopologyReader__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3OrbisTopologyReader__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3OrbisTopologyReader__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3OrbisTopologyReader__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3OrbisTopologyReader__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 
@@ -2826,7 +2826,7 @@ PyTypeObject PyNs3OrbisTopologyReader_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
     "OrbisTopologyReader()",                        /* Documentation string */
     (traverseproc)PyNs3OrbisTopologyReader__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3OrbisTopologyReader__tp_clear,             /* tp_clear */
@@ -2859,16 +2859,16 @@ PyTypeObject PyNs3OrbisTopologyReader_Type = {
 
 
 PyObject *
-PyNs3RocketfuelTopologyReader__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3RocketfuelTopologyReader *self)
+PyNs3RocketfuelTopologyReader__PythonHelper::_wrap_DoDispose(PyNs3RocketfuelTopologyReader *self)
 {
     PyObject *py_retval;
     PyNs3RocketfuelTopologyReader__PythonHelper *helper = dynamic_cast< PyNs3RocketfuelTopologyReader__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -2907,16 +2907,16 @@ PyNs3RocketfuelTopologyReader__PythonHelper::_wrap_NotifyNewAggregate(PyNs3Rocke
 }
 
 PyObject *
-PyNs3RocketfuelTopologyReader__PythonHelper::_wrap_DoDispose(PyNs3RocketfuelTopologyReader *self)
+PyNs3RocketfuelTopologyReader__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3RocketfuelTopologyReader *self)
 {
     PyObject *py_retval;
     PyNs3RocketfuelTopologyReader__PythonHelper *helper = dynamic_cast< PyNs3RocketfuelTopologyReader__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -3223,6 +3223,22 @@ _wrap_PyNs3RocketfuelTopologyReader__tp_init(PyNs3RocketfuelTopologyReader *self
 
 
 PyObject *
+_wrap_PyNs3RocketfuelTopologyReader_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::RocketfuelTopologyReader::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3RocketfuelTopologyReader_Read(PyNs3RocketfuelTopologyReader *self)
 {
     PyObject *py_retval;
@@ -3238,29 +3254,13 @@ _wrap_PyNs3RocketfuelTopologyReader_Read(PyNs3RocketfuelTopologyReader *self)
     return py_retval;
 }
 
-
-PyObject *
-_wrap_PyNs3RocketfuelTopologyReader_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::RocketfuelTopologyReader::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
 static PyMethodDef PyNs3RocketfuelTopologyReader_methods[] = {
-    {(char *) "Read", (PyCFunction) _wrap_PyNs3RocketfuelTopologyReader_Read, METH_NOARGS, "Read()\n\n" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3RocketfuelTopologyReader_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3RocketfuelTopologyReader__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "Read", (PyCFunction) _wrap_PyNs3RocketfuelTopologyReader_Read, METH_NOARGS, "Read()\n\n" },
+    {(char *) "DoDispose", (PyCFunction) PyNs3RocketfuelTopologyReader__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3RocketfuelTopologyReader__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3RocketfuelTopologyReader__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3RocketfuelTopologyReader__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3RocketfuelTopologyReader__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 
@@ -3359,7 +3359,7 @@ PyTypeObject PyNs3RocketfuelTopologyReader_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
     "RocketfuelTopologyReader()",                        /* Documentation string */
     (traverseproc)PyNs3RocketfuelTopologyReader__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3RocketfuelTopologyReader__tp_clear,             /* tp_clear */

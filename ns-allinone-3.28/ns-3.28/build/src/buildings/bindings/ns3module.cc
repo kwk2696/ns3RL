@@ -786,22 +786,6 @@ int _wrap_PyNs3BuildingContainer__tp_init(PyNs3BuildingContainer *self, PyObject
 }
 
 
-PyObject *
-_wrap_PyNs3BuildingContainer_GetGlobal(void)
-{
-    PyObject *py_retval;
-    PyNs3BuildingContainer *py_BuildingContainer;
-    
-    ns3::BuildingContainer retval = ns3::BuildingContainer::GetGlobal();
-    py_BuildingContainer = PyObject_New(PyNs3BuildingContainer, &PyNs3BuildingContainer_Type);
-    py_BuildingContainer->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_BuildingContainer->obj = new ns3::BuildingContainer(retval);
-    PyNs3BuildingContainer_wrapper_registry[(void *) py_BuildingContainer->obj] = (PyObject *) py_BuildingContainer;
-    py_retval = Py_BuildValue((char *) "N", py_BuildingContainer);
-    return py_retval;
-}
-
-
 
 PyObject *
 _wrap_PyNs3BuildingContainer_Add__0(PyNs3BuildingContainer *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
@@ -923,18 +907,6 @@ _wrap_PyNs3BuildingContainer_Create(PyNs3BuildingContainer *self, PyObject *args
 
 
 PyObject *
-_wrap_PyNs3BuildingContainer_GetN(PyNs3BuildingContainer *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetN();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3BuildingContainer_Get(PyNs3BuildingContainer *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -984,6 +956,34 @@ _wrap_PyNs3BuildingContainer_Get(PyNs3BuildingContainer *self, PyObject *args, P
 }
 
 
+PyObject *
+_wrap_PyNs3BuildingContainer_GetGlobal(void)
+{
+    PyObject *py_retval;
+    PyNs3BuildingContainer *py_BuildingContainer;
+    
+    ns3::BuildingContainer retval = ns3::BuildingContainer::GetGlobal();
+    py_BuildingContainer = PyObject_New(PyNs3BuildingContainer, &PyNs3BuildingContainer_Type);
+    py_BuildingContainer->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_BuildingContainer->obj = new ns3::BuildingContainer(retval);
+    PyNs3BuildingContainer_wrapper_registry[(void *) py_BuildingContainer->obj] = (PyObject *) py_BuildingContainer;
+    py_retval = Py_BuildValue((char *) "N", py_BuildingContainer);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3BuildingContainer_GetN(PyNs3BuildingContainer *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetN();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
 static PyObject*
 _wrap_PyNs3BuildingContainer__copy__(PyNs3BuildingContainer *self)
 {
@@ -997,11 +997,11 @@ _wrap_PyNs3BuildingContainer__copy__(PyNs3BuildingContainer *self)
 }
 
 static PyMethodDef PyNs3BuildingContainer_methods[] = {
-    {(char *) "GetGlobal", (PyCFunction) _wrap_PyNs3BuildingContainer_GetGlobal, METH_NOARGS|METH_STATIC, "GetGlobal()\n\n" },
     {(char *) "Add", (PyCFunction) _wrap_PyNs3BuildingContainer_Add, METH_KEYWORDS|METH_VARARGS, NULL },
     {(char *) "Create", (PyCFunction) _wrap_PyNs3BuildingContainer_Create, METH_KEYWORDS|METH_VARARGS, "Create(n)\n\ntype: n: uint32_t" },
-    {(char *) "GetN", (PyCFunction) _wrap_PyNs3BuildingContainer_GetN, METH_NOARGS, "GetN()\n\n" },
     {(char *) "Get", (PyCFunction) _wrap_PyNs3BuildingContainer_Get, METH_KEYWORDS|METH_VARARGS, "Get(i)\n\ntype: i: uint32_t" },
+    {(char *) "GetGlobal", (PyCFunction) _wrap_PyNs3BuildingContainer_GetGlobal, METH_NOARGS|METH_STATIC, "GetGlobal()\n\n" },
+    {(char *) "GetN", (PyCFunction) _wrap_PyNs3BuildingContainer_GetN, METH_NOARGS, "GetN()\n\n" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3BuildingContainer__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -1199,18 +1199,6 @@ _wrap_PyNs3BuildingList_Add(PyNs3BuildingList *PYBINDGEN_UNUSED(dummy), PyObject
 
 
 PyObject *
-_wrap_PyNs3BuildingList_GetNBuildings(void)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = ns3::BuildingList::GetNBuildings();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3BuildingList_GetBuilding(PyNs3BuildingList *PYBINDGEN_UNUSED(dummy), PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -1260,6 +1248,18 @@ _wrap_PyNs3BuildingList_GetBuilding(PyNs3BuildingList *PYBINDGEN_UNUSED(dummy), 
 }
 
 
+PyObject *
+_wrap_PyNs3BuildingList_GetNBuildings(void)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = ns3::BuildingList::GetNBuildings();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
 static PyObject*
 _wrap_PyNs3BuildingList__copy__(PyNs3BuildingList *self)
 {
@@ -1274,8 +1274,8 @@ _wrap_PyNs3BuildingList__copy__(PyNs3BuildingList *self)
 
 static PyMethodDef PyNs3BuildingList_methods[] = {
     {(char *) "Add", (PyCFunction) _wrap_PyNs3BuildingList_Add, METH_KEYWORDS|METH_VARARGS|METH_STATIC, "Add(building)\n\ntype: building: ns3::Ptr< ns3::Building >" },
-    {(char *) "GetNBuildings", (PyCFunction) _wrap_PyNs3BuildingList_GetNBuildings, METH_NOARGS|METH_STATIC, "GetNBuildings()\n\n" },
     {(char *) "GetBuilding", (PyCFunction) _wrap_PyNs3BuildingList_GetBuilding, METH_KEYWORDS|METH_VARARGS|METH_STATIC, "GetBuilding(n)\n\ntype: n: uint32_t" },
+    {(char *) "GetNBuildings", (PyCFunction) _wrap_PyNs3BuildingList_GetNBuildings, METH_NOARGS|METH_STATIC, "GetNBuildings()\n\n" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3BuildingList__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -1664,16 +1664,16 @@ PyTypeObject PyNs3BuildingsHelper_Type = {
 
 
 PyObject *
-PyNs3RandomBuildingPositionAllocator__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3RandomBuildingPositionAllocator *self)
+PyNs3RandomBuildingPositionAllocator__PythonHelper::_wrap_DoDispose(PyNs3RandomBuildingPositionAllocator *self)
 {
     PyObject *py_retval;
     PyNs3RandomBuildingPositionAllocator__PythonHelper *helper = dynamic_cast< PyNs3RandomBuildingPositionAllocator__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -1712,16 +1712,16 @@ PyNs3RandomBuildingPositionAllocator__PythonHelper::_wrap_NotifyNewAggregate(PyN
 }
 
 PyObject *
-PyNs3RandomBuildingPositionAllocator__PythonHelper::_wrap_DoDispose(PyNs3RandomBuildingPositionAllocator *self)
+PyNs3RandomBuildingPositionAllocator__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3RandomBuildingPositionAllocator *self)
 {
     PyObject *py_retval;
     PyNs3RandomBuildingPositionAllocator__PythonHelper *helper = dynamic_cast< PyNs3RandomBuildingPositionAllocator__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -2137,6 +2137,24 @@ int _wrap_PyNs3RandomBuildingPositionAllocator__tp_init(PyNs3RandomBuildingPosit
 
 
 PyObject *
+_wrap_PyNs3RandomBuildingPositionAllocator_AssignStreams(PyNs3RandomBuildingPositionAllocator *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int64_t retval;
+    int64_t stream;
+    PyNs3RandomBuildingPositionAllocator__PythonHelper *helper_class = dynamic_cast<PyNs3RandomBuildingPositionAllocator__PythonHelper*> (self->obj);
+    const char *keywords[] = {"stream", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "L", (char **) keywords, &stream)) {
+        return NULL;
+    }
+    retval = (helper_class == NULL)? (self->obj->AssignStreams(stream)) : (self->obj->ns3::RandomBuildingPositionAllocator::AssignStreams(stream));
+    py_retval = Py_BuildValue((char *) "L", retval);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3RandomBuildingPositionAllocator_GetNext(PyNs3RandomBuildingPositionAllocator *self)
 {
     PyObject *py_retval;
@@ -2169,24 +2187,6 @@ _wrap_PyNs3RandomBuildingPositionAllocator_GetTypeId(void)
 }
 
 
-PyObject *
-_wrap_PyNs3RandomBuildingPositionAllocator_AssignStreams(PyNs3RandomBuildingPositionAllocator *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int64_t retval;
-    int64_t stream;
-    PyNs3RandomBuildingPositionAllocator__PythonHelper *helper_class = dynamic_cast<PyNs3RandomBuildingPositionAllocator__PythonHelper*> (self->obj);
-    const char *keywords[] = {"stream", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "L", (char **) keywords, &stream)) {
-        return NULL;
-    }
-    retval = (helper_class == NULL)? (self->obj->AssignStreams(stream)) : (self->obj->ns3::RandomBuildingPositionAllocator::AssignStreams(stream));
-    py_retval = Py_BuildValue((char *) "L", retval);
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3RandomBuildingPositionAllocator__copy__(PyNs3RandomBuildingPositionAllocator *self)
 {
@@ -2203,13 +2203,13 @@ _wrap_PyNs3RandomBuildingPositionAllocator__copy__(PyNs3RandomBuildingPositionAl
 }
 
 static PyMethodDef PyNs3RandomBuildingPositionAllocator_methods[] = {
+    {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3RandomBuildingPositionAllocator_AssignStreams, METH_KEYWORDS|METH_VARARGS, "AssignStreams(stream)\n\ntype: stream: int64_t" },
     {(char *) "GetNext", (PyCFunction) _wrap_PyNs3RandomBuildingPositionAllocator_GetNext, METH_NOARGS, "GetNext()\n\n" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3RandomBuildingPositionAllocator_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3RandomBuildingPositionAllocator_AssignStreams, METH_KEYWORDS|METH_VARARGS, "AssignStreams(stream)\n\ntype: stream: int64_t" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3RandomBuildingPositionAllocator__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "DoDispose", (PyCFunction) PyNs3RandomBuildingPositionAllocator__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3RandomBuildingPositionAllocator__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3RandomBuildingPositionAllocator__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3RandomBuildingPositionAllocator__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3RandomBuildingPositionAllocator__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3RandomBuildingPositionAllocator__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -2309,7 +2309,7 @@ PyTypeObject PyNs3RandomBuildingPositionAllocator_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "RandomBuildingPositionAllocator(arg0)\nRandomBuildingPositionAllocator()",                        /* Documentation string */
     (traverseproc)PyNs3RandomBuildingPositionAllocator__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3RandomBuildingPositionAllocator__tp_clear,             /* tp_clear */
@@ -2342,16 +2342,16 @@ PyTypeObject PyNs3RandomBuildingPositionAllocator_Type = {
 
 
 PyObject *
-PyNs3RandomRoomPositionAllocator__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3RandomRoomPositionAllocator *self)
+PyNs3RandomRoomPositionAllocator__PythonHelper::_wrap_DoDispose(PyNs3RandomRoomPositionAllocator *self)
 {
     PyObject *py_retval;
     PyNs3RandomRoomPositionAllocator__PythonHelper *helper = dynamic_cast< PyNs3RandomRoomPositionAllocator__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -2390,16 +2390,16 @@ PyNs3RandomRoomPositionAllocator__PythonHelper::_wrap_NotifyNewAggregate(PyNs3Ra
 }
 
 PyObject *
-PyNs3RandomRoomPositionAllocator__PythonHelper::_wrap_DoDispose(PyNs3RandomRoomPositionAllocator *self)
+PyNs3RandomRoomPositionAllocator__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3RandomRoomPositionAllocator *self)
 {
     PyObject *py_retval;
     PyNs3RandomRoomPositionAllocator__PythonHelper *helper = dynamic_cast< PyNs3RandomRoomPositionAllocator__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -2815,6 +2815,24 @@ int _wrap_PyNs3RandomRoomPositionAllocator__tp_init(PyNs3RandomRoomPositionAlloc
 
 
 PyObject *
+_wrap_PyNs3RandomRoomPositionAllocator_AssignStreams(PyNs3RandomRoomPositionAllocator *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int64_t retval;
+    int64_t stream;
+    PyNs3RandomRoomPositionAllocator__PythonHelper *helper_class = dynamic_cast<PyNs3RandomRoomPositionAllocator__PythonHelper*> (self->obj);
+    const char *keywords[] = {"stream", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "L", (char **) keywords, &stream)) {
+        return NULL;
+    }
+    retval = (helper_class == NULL)? (self->obj->AssignStreams(stream)) : (self->obj->ns3::RandomRoomPositionAllocator::AssignStreams(stream));
+    py_retval = Py_BuildValue((char *) "L", retval);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3RandomRoomPositionAllocator_GetNext(PyNs3RandomRoomPositionAllocator *self)
 {
     PyObject *py_retval;
@@ -2847,24 +2865,6 @@ _wrap_PyNs3RandomRoomPositionAllocator_GetTypeId(void)
 }
 
 
-PyObject *
-_wrap_PyNs3RandomRoomPositionAllocator_AssignStreams(PyNs3RandomRoomPositionAllocator *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int64_t retval;
-    int64_t stream;
-    PyNs3RandomRoomPositionAllocator__PythonHelper *helper_class = dynamic_cast<PyNs3RandomRoomPositionAllocator__PythonHelper*> (self->obj);
-    const char *keywords[] = {"stream", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "L", (char **) keywords, &stream)) {
-        return NULL;
-    }
-    retval = (helper_class == NULL)? (self->obj->AssignStreams(stream)) : (self->obj->ns3::RandomRoomPositionAllocator::AssignStreams(stream));
-    py_retval = Py_BuildValue((char *) "L", retval);
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3RandomRoomPositionAllocator__copy__(PyNs3RandomRoomPositionAllocator *self)
 {
@@ -2881,13 +2881,13 @@ _wrap_PyNs3RandomRoomPositionAllocator__copy__(PyNs3RandomRoomPositionAllocator 
 }
 
 static PyMethodDef PyNs3RandomRoomPositionAllocator_methods[] = {
+    {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3RandomRoomPositionAllocator_AssignStreams, METH_KEYWORDS|METH_VARARGS, "AssignStreams(stream)\n\ntype: stream: int64_t" },
     {(char *) "GetNext", (PyCFunction) _wrap_PyNs3RandomRoomPositionAllocator_GetNext, METH_NOARGS, "GetNext()\n\n" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3RandomRoomPositionAllocator_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3RandomRoomPositionAllocator_AssignStreams, METH_KEYWORDS|METH_VARARGS, "AssignStreams(stream)\n\ntype: stream: int64_t" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3RandomRoomPositionAllocator__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "DoDispose", (PyCFunction) PyNs3RandomRoomPositionAllocator__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3RandomRoomPositionAllocator__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3RandomRoomPositionAllocator__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3RandomRoomPositionAllocator__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3RandomRoomPositionAllocator__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3RandomRoomPositionAllocator__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -2987,7 +2987,7 @@ PyTypeObject PyNs3RandomRoomPositionAllocator_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "RandomRoomPositionAllocator(arg0)\nRandomRoomPositionAllocator()",                        /* Documentation string */
     (traverseproc)PyNs3RandomRoomPositionAllocator__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3RandomRoomPositionAllocator__tp_clear,             /* tp_clear */
@@ -3020,16 +3020,16 @@ PyTypeObject PyNs3RandomRoomPositionAllocator_Type = {
 
 
 PyObject *
-PyNs3SameRoomPositionAllocator__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3SameRoomPositionAllocator *self)
+PyNs3SameRoomPositionAllocator__PythonHelper::_wrap_DoDispose(PyNs3SameRoomPositionAllocator *self)
 {
     PyObject *py_retval;
     PyNs3SameRoomPositionAllocator__PythonHelper *helper = dynamic_cast< PyNs3SameRoomPositionAllocator__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -3068,16 +3068,16 @@ PyNs3SameRoomPositionAllocator__PythonHelper::_wrap_NotifyNewAggregate(PyNs3Same
 }
 
 PyObject *
-PyNs3SameRoomPositionAllocator__PythonHelper::_wrap_DoDispose(PyNs3SameRoomPositionAllocator *self)
+PyNs3SameRoomPositionAllocator__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3SameRoomPositionAllocator *self)
 {
     PyObject *py_retval;
     PyNs3SameRoomPositionAllocator__PythonHelper *helper = dynamic_cast< PyNs3SameRoomPositionAllocator__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -3533,6 +3533,24 @@ int _wrap_PyNs3SameRoomPositionAllocator__tp_init(PyNs3SameRoomPositionAllocator
 
 
 PyObject *
+_wrap_PyNs3SameRoomPositionAllocator_AssignStreams(PyNs3SameRoomPositionAllocator *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int64_t retval;
+    int64_t arg0;
+    PyNs3SameRoomPositionAllocator__PythonHelper *helper_class = dynamic_cast<PyNs3SameRoomPositionAllocator__PythonHelper*> (self->obj);
+    const char *keywords[] = {"arg0", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "L", (char **) keywords, &arg0)) {
+        return NULL;
+    }
+    retval = (helper_class == NULL)? (self->obj->AssignStreams(arg0)) : (self->obj->ns3::SameRoomPositionAllocator::AssignStreams(arg0));
+    py_retval = Py_BuildValue((char *) "L", retval);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3SameRoomPositionAllocator_GetNext(PyNs3SameRoomPositionAllocator *self)
 {
     PyObject *py_retval;
@@ -3565,24 +3583,6 @@ _wrap_PyNs3SameRoomPositionAllocator_GetTypeId(void)
 }
 
 
-PyObject *
-_wrap_PyNs3SameRoomPositionAllocator_AssignStreams(PyNs3SameRoomPositionAllocator *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int64_t retval;
-    int64_t arg0;
-    PyNs3SameRoomPositionAllocator__PythonHelper *helper_class = dynamic_cast<PyNs3SameRoomPositionAllocator__PythonHelper*> (self->obj);
-    const char *keywords[] = {"arg0", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "L", (char **) keywords, &arg0)) {
-        return NULL;
-    }
-    retval = (helper_class == NULL)? (self->obj->AssignStreams(arg0)) : (self->obj->ns3::SameRoomPositionAllocator::AssignStreams(arg0));
-    py_retval = Py_BuildValue((char *) "L", retval);
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3SameRoomPositionAllocator__copy__(PyNs3SameRoomPositionAllocator *self)
 {
@@ -3599,13 +3599,13 @@ _wrap_PyNs3SameRoomPositionAllocator__copy__(PyNs3SameRoomPositionAllocator *sel
 }
 
 static PyMethodDef PyNs3SameRoomPositionAllocator_methods[] = {
+    {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3SameRoomPositionAllocator_AssignStreams, METH_KEYWORDS|METH_VARARGS, "AssignStreams(arg0)\n\ntype: arg0: int64_t" },
     {(char *) "GetNext", (PyCFunction) _wrap_PyNs3SameRoomPositionAllocator_GetNext, METH_NOARGS, "GetNext()\n\n" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3SameRoomPositionAllocator_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3SameRoomPositionAllocator_AssignStreams, METH_KEYWORDS|METH_VARARGS, "AssignStreams(arg0)\n\ntype: arg0: int64_t" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3SameRoomPositionAllocator__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "DoDispose", (PyCFunction) PyNs3SameRoomPositionAllocator__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3SameRoomPositionAllocator__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3SameRoomPositionAllocator__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3SameRoomPositionAllocator__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3SameRoomPositionAllocator__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3SameRoomPositionAllocator__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -3705,7 +3705,7 @@ PyTypeObject PyNs3SameRoomPositionAllocator_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "SameRoomPositionAllocator(arg0)\nSameRoomPositionAllocator(c)\nSameRoomPositionAllocator()",                        /* Documentation string */
     (traverseproc)PyNs3SameRoomPositionAllocator__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3SameRoomPositionAllocator__tp_clear,             /* tp_clear */
@@ -3738,22 +3738,6 @@ PyTypeObject PyNs3SameRoomPositionAllocator_Type = {
 
 
 PyObject *
-PyNs3Building__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3Building *self)
-{
-    PyObject *py_retval;
-    PyNs3Building__PythonHelper *helper = dynamic_cast< PyNs3Building__PythonHelper* >(self->obj);
-    
-    if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
-        return NULL;
-    }
-    helper->NotifyConstructionCompleted__parent_caller();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject *
 PyNs3Building__PythonHelper::_wrap_DoInitialize(PyNs3Building *self)
 {
     PyObject *py_retval;
@@ -3780,6 +3764,22 @@ PyNs3Building__PythonHelper::_wrap_NotifyNewAggregate(PyNs3Building *self)
         return NULL;
     }
     helper->NotifyNewAggregate__parent_caller();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject *
+PyNs3Building__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3Building *self)
+{
+    PyObject *py_retval;
+    PyNs3Building__PythonHelper *helper = dynamic_cast< PyNs3Building__PythonHelper* >(self->obj);
+    
+    if (helper == NULL) {
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        return NULL;
+    }
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -4147,16 +4147,12 @@ int _wrap_PyNs3Building__tp_init(PyNs3Building *self, PyObject *args, PyObject *
 
 
 PyObject *
-_wrap_PyNs3Building_SetBoundaries(PyNs3Building *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3Building_DoDispose(PyNs3Building *self)
 {
     PyObject *py_retval;
-    PyNs3Box *box;
-    const char *keywords[] = {"box", NULL};
+    PyNs3Building__PythonHelper *helper_class = dynamic_cast<PyNs3Building__PythonHelper*> (self->obj);
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Box_Type, &box)) {
-        return NULL;
-    }
-    self->obj->SetBoundaries(*((PyNs3Box *) box)->obj);
+    (helper_class == NULL)? (self->obj->DoDispose()) : (self->obj->ns3::Building::DoDispose());
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -4164,17 +4160,28 @@ _wrap_PyNs3Building_SetBoundaries(PyNs3Building *self, PyObject *args, PyObject 
 
 
 PyObject *
-_wrap_PyNs3Building_GetRoomY(PyNs3Building *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3Building_GetBoundaries(PyNs3Building *self)
 {
     PyObject *py_retval;
-    uint16_t retval;
-    PyNs3Vector3D *position;
-    const char *keywords[] = {"position", NULL};
+    PyNs3Box *py_Box;
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Vector3D_Type, &position)) {
-        return NULL;
-    }
-    retval = self->obj->GetRoomY(*((PyNs3Vector3D *) position)->obj);
+    ns3::Box retval = self->obj->GetBoundaries();
+    py_Box = PyObject_New(PyNs3Box, &PyNs3Box_Type);
+    py_Box->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Box->obj = new ns3::Box(retval);
+    PyNs3Box_wrapper_registry[(void *) py_Box->obj] = (PyObject *) py_Box;
+    py_retval = Py_BuildValue((char *) "N", py_Box);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Building_GetBuildingType(PyNs3Building *self)
+{
+    PyObject *py_retval;
+    ns3::Building::BuildingType_t retval;
+    
+    retval = self->obj->GetBuildingType();
     py_retval = Py_BuildValue((char *) "i", retval);
     return py_retval;
 }
@@ -4187,6 +4194,47 @@ _wrap_PyNs3Building_GetExtWallsType(PyNs3Building *self)
     ns3::Building::ExtWallsType_t retval;
     
     retval = self->obj->GetExtWallsType();
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Building_GetFloor(PyNs3Building *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    uint16_t retval;
+    PyNs3Vector3D *position;
+    const char *keywords[] = {"position", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Vector3D_Type, &position)) {
+        return NULL;
+    }
+    retval = self->obj->GetFloor(*((PyNs3Vector3D *) position)->obj);
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Building_GetId(PyNs3Building *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetId();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Building_GetNFloors(PyNs3Building *self)
+{
+    PyObject *py_retval;
+    uint16_t retval;
+    
+    retval = self->obj->GetNFloors();
     py_retval = Py_BuildValue((char *) "i", retval);
     return py_retval;
 }
@@ -4217,6 +4265,40 @@ _wrap_PyNs3Building_GetNRoomsY(PyNs3Building *self)
 
 
 PyObject *
+_wrap_PyNs3Building_GetRoomX(PyNs3Building *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    uint16_t retval;
+    PyNs3Vector3D *position;
+    const char *keywords[] = {"position", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Vector3D_Type, &position)) {
+        return NULL;
+    }
+    retval = self->obj->GetRoomX(*((PyNs3Vector3D *) position)->obj);
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3Building_GetRoomY(PyNs3Building *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    uint16_t retval;
+    PyNs3Vector3D *position;
+    const char *keywords[] = {"position", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Vector3D_Type, &position)) {
+        return NULL;
+    }
+    retval = self->obj->GetRoomY(*((PyNs3Vector3D *) position)->obj);
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3Building_GetTypeId(void)
 {
     PyObject *py_retval;
@@ -4228,22 +4310,6 @@ _wrap_PyNs3Building_GetTypeId(void)
     py_TypeId->obj = new ns3::TypeId(retval);
     PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
     py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Building_GetBoundaries(PyNs3Building *self)
-{
-    PyObject *py_retval;
-    PyNs3Box *py_Box;
-    
-    ns3::Box retval = self->obj->GetBoundaries();
-    py_Box = PyObject_New(PyNs3Box, &PyNs3Box_Type);
-    py_Box->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Box->obj = new ns3::Box(retval);
-    PyNs3Box_wrapper_registry[(void *) py_Box->obj] = (PyObject *) py_Box;
-    py_retval = Py_BuildValue((char *) "N", py_Box);
     return py_retval;
 }
 
@@ -4266,32 +4332,16 @@ _wrap_PyNs3Building_IsInside(PyNs3Building *self, PyObject *args, PyObject *kwar
 
 
 PyObject *
-_wrap_PyNs3Building_GetId(PyNs3Building *self)
+_wrap_PyNs3Building_SetBoundaries(PyNs3Building *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    uint32_t retval;
+    PyNs3Box *box;
+    const char *keywords[] = {"box", NULL};
     
-    retval = self->obj->GetId();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Building_SetNRoomsY(PyNs3Building *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int nroomy;
-    const char *keywords[] = {"nroomy", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &nroomy)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Box_Type, &box)) {
         return NULL;
     }
-    if (nroomy > 0xffff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SetNRoomsY(nroomy);
+    self->obj->SetBoundaries(*((PyNs3Box *) box)->obj);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -4299,70 +4349,16 @@ _wrap_PyNs3Building_SetNRoomsY(PyNs3Building *self, PyObject *args, PyObject *kw
 
 
 PyObject *
-_wrap_PyNs3Building_GetNFloors(PyNs3Building *self)
+_wrap_PyNs3Building_SetBuildingType(PyNs3Building *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    uint16_t retval;
+    ns3::Building::BuildingType_t t;
+    const char *keywords[] = {"t", NULL};
     
-    retval = self->obj->GetNFloors();
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Building_GetRoomX(PyNs3Building *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    uint16_t retval;
-    PyNs3Vector3D *position;
-    const char *keywords[] = {"position", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Vector3D_Type, &position)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &t)) {
         return NULL;
     }
-    retval = self->obj->GetRoomX(*((PyNs3Vector3D *) position)->obj);
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Building_GetBuildingType(PyNs3Building *self)
-{
-    PyObject *py_retval;
-    ns3::Building::BuildingType_t retval;
-    
-    retval = self->obj->GetBuildingType();
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Building_GetFloor(PyNs3Building *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    uint16_t retval;
-    PyNs3Vector3D *position;
-    const char *keywords[] = {"position", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Vector3D_Type, &position)) {
-        return NULL;
-    }
-    retval = self->obj->GetFloor(*((PyNs3Vector3D *) position)->obj);
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3Building_DoDispose(PyNs3Building *self)
-{
-    PyObject *py_retval;
-    PyNs3Building__PythonHelper *helper_class = dynamic_cast<PyNs3Building__PythonHelper*> (self->obj);
-    
-    (helper_class == NULL)? (self->obj->DoDispose()) : (self->obj->ns3::Building::DoDispose());
+    self->obj->SetBuildingType(t);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -4370,20 +4366,16 @@ _wrap_PyNs3Building_DoDispose(PyNs3Building *self)
 
 
 PyObject *
-_wrap_PyNs3Building_SetNRoomsX(PyNs3Building *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3Building_SetExtWallsType(PyNs3Building *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    int nroomx;
-    const char *keywords[] = {"nroomx", NULL};
+    ns3::Building::ExtWallsType_t t;
+    const char *keywords[] = {"t", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &nroomx)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &t)) {
         return NULL;
     }
-    if (nroomx > 0xffff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    self->obj->SetNRoomsX(nroomx);
+    self->obj->SetExtWallsType(t);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -4412,16 +4404,20 @@ _wrap_PyNs3Building_SetNFloors(PyNs3Building *self, PyObject *args, PyObject *kw
 
 
 PyObject *
-_wrap_PyNs3Building_SetExtWallsType(PyNs3Building *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3Building_SetNRoomsX(PyNs3Building *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    ns3::Building::ExtWallsType_t t;
-    const char *keywords[] = {"t", NULL};
+    int nroomx;
+    const char *keywords[] = {"nroomx", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &t)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &nroomx)) {
         return NULL;
     }
-    self->obj->SetExtWallsType(t);
+    if (nroomx > 0xffff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SetNRoomsX(nroomx);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -4429,16 +4425,20 @@ _wrap_PyNs3Building_SetExtWallsType(PyNs3Building *self, PyObject *args, PyObjec
 
 
 PyObject *
-_wrap_PyNs3Building_SetBuildingType(PyNs3Building *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3Building_SetNRoomsY(PyNs3Building *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    ns3::Building::BuildingType_t t;
-    const char *keywords[] = {"t", NULL};
+    int nroomy;
+    const char *keywords[] = {"nroomy", NULL};
     
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &t)) {
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &nroomy)) {
         return NULL;
     }
-    self->obj->SetBuildingType(t);
+    if (nroomy > 0xffff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    self->obj->SetNRoomsY(nroomy);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -4461,28 +4461,28 @@ _wrap_PyNs3Building__copy__(PyNs3Building *self)
 }
 
 static PyMethodDef PyNs3Building_methods[] = {
-    {(char *) "SetBoundaries", (PyCFunction) _wrap_PyNs3Building_SetBoundaries, METH_KEYWORDS|METH_VARARGS, "SetBoundaries(box)\n\ntype: box: ns3::Box" },
-    {(char *) "GetRoomY", (PyCFunction) _wrap_PyNs3Building_GetRoomY, METH_KEYWORDS|METH_VARARGS, "GetRoomY(position)\n\ntype: position: ns3::Vector3D" },
+    {(char *) "DoDispose", (PyCFunction) _wrap_PyNs3Building_DoDispose, METH_NOARGS, "DoDispose()\n\n" },
+    {(char *) "GetBoundaries", (PyCFunction) _wrap_PyNs3Building_GetBoundaries, METH_NOARGS, "GetBoundaries()\n\n" },
+    {(char *) "GetBuildingType", (PyCFunction) _wrap_PyNs3Building_GetBuildingType, METH_NOARGS, "GetBuildingType()\n\n" },
     {(char *) "GetExtWallsType", (PyCFunction) _wrap_PyNs3Building_GetExtWallsType, METH_NOARGS, "GetExtWallsType()\n\n" },
+    {(char *) "GetFloor", (PyCFunction) _wrap_PyNs3Building_GetFloor, METH_KEYWORDS|METH_VARARGS, "GetFloor(position)\n\ntype: position: ns3::Vector3D" },
+    {(char *) "GetId", (PyCFunction) _wrap_PyNs3Building_GetId, METH_NOARGS, "GetId()\n\n" },
+    {(char *) "GetNFloors", (PyCFunction) _wrap_PyNs3Building_GetNFloors, METH_NOARGS, "GetNFloors()\n\n" },
     {(char *) "GetNRoomsX", (PyCFunction) _wrap_PyNs3Building_GetNRoomsX, METH_NOARGS, "GetNRoomsX()\n\n" },
     {(char *) "GetNRoomsY", (PyCFunction) _wrap_PyNs3Building_GetNRoomsY, METH_NOARGS, "GetNRoomsY()\n\n" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3Building_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "GetBoundaries", (PyCFunction) _wrap_PyNs3Building_GetBoundaries, METH_NOARGS, "GetBoundaries()\n\n" },
-    {(char *) "IsInside", (PyCFunction) _wrap_PyNs3Building_IsInside, METH_KEYWORDS|METH_VARARGS, "IsInside(position)\n\ntype: position: ns3::Vector3D" },
-    {(char *) "GetId", (PyCFunction) _wrap_PyNs3Building_GetId, METH_NOARGS, "GetId()\n\n" },
-    {(char *) "SetNRoomsY", (PyCFunction) _wrap_PyNs3Building_SetNRoomsY, METH_KEYWORDS|METH_VARARGS, "SetNRoomsY(nroomy)\n\ntype: nroomy: uint16_t" },
-    {(char *) "GetNFloors", (PyCFunction) _wrap_PyNs3Building_GetNFloors, METH_NOARGS, "GetNFloors()\n\n" },
     {(char *) "GetRoomX", (PyCFunction) _wrap_PyNs3Building_GetRoomX, METH_KEYWORDS|METH_VARARGS, "GetRoomX(position)\n\ntype: position: ns3::Vector3D" },
-    {(char *) "GetBuildingType", (PyCFunction) _wrap_PyNs3Building_GetBuildingType, METH_NOARGS, "GetBuildingType()\n\n" },
-    {(char *) "GetFloor", (PyCFunction) _wrap_PyNs3Building_GetFloor, METH_KEYWORDS|METH_VARARGS, "GetFloor(position)\n\ntype: position: ns3::Vector3D" },
-    {(char *) "DoDispose", (PyCFunction) _wrap_PyNs3Building_DoDispose, METH_NOARGS, "DoDispose()\n\n" },
-    {(char *) "SetNRoomsX", (PyCFunction) _wrap_PyNs3Building_SetNRoomsX, METH_KEYWORDS|METH_VARARGS, "SetNRoomsX(nroomx)\n\ntype: nroomx: uint16_t" },
-    {(char *) "SetNFloors", (PyCFunction) _wrap_PyNs3Building_SetNFloors, METH_KEYWORDS|METH_VARARGS, "SetNFloors(nfloors)\n\ntype: nfloors: uint16_t" },
-    {(char *) "SetExtWallsType", (PyCFunction) _wrap_PyNs3Building_SetExtWallsType, METH_KEYWORDS|METH_VARARGS, "SetExtWallsType(t)\n\ntype: t: ns3::Building::ExtWallsType_t" },
+    {(char *) "GetRoomY", (PyCFunction) _wrap_PyNs3Building_GetRoomY, METH_KEYWORDS|METH_VARARGS, "GetRoomY(position)\n\ntype: position: ns3::Vector3D" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3Building_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "IsInside", (PyCFunction) _wrap_PyNs3Building_IsInside, METH_KEYWORDS|METH_VARARGS, "IsInside(position)\n\ntype: position: ns3::Vector3D" },
+    {(char *) "SetBoundaries", (PyCFunction) _wrap_PyNs3Building_SetBoundaries, METH_KEYWORDS|METH_VARARGS, "SetBoundaries(box)\n\ntype: box: ns3::Box" },
     {(char *) "SetBuildingType", (PyCFunction) _wrap_PyNs3Building_SetBuildingType, METH_KEYWORDS|METH_VARARGS, "SetBuildingType(t)\n\ntype: t: ns3::Building::BuildingType_t" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3Building__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "SetExtWallsType", (PyCFunction) _wrap_PyNs3Building_SetExtWallsType, METH_KEYWORDS|METH_VARARGS, "SetExtWallsType(t)\n\ntype: t: ns3::Building::ExtWallsType_t" },
+    {(char *) "SetNFloors", (PyCFunction) _wrap_PyNs3Building_SetNFloors, METH_KEYWORDS|METH_VARARGS, "SetNFloors(nfloors)\n\ntype: nfloors: uint16_t" },
+    {(char *) "SetNRoomsX", (PyCFunction) _wrap_PyNs3Building_SetNRoomsX, METH_KEYWORDS|METH_VARARGS, "SetNRoomsX(nroomx)\n\ntype: nroomx: uint16_t" },
+    {(char *) "SetNRoomsY", (PyCFunction) _wrap_PyNs3Building_SetNRoomsY, METH_KEYWORDS|METH_VARARGS, "SetNRoomsY(nroomy)\n\ntype: nroomy: uint16_t" },
     {(char *) "DoInitialize", (PyCFunction) PyNs3Building__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3Building__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3Building__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3Building__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -4582,7 +4582,7 @@ PyTypeObject PyNs3Building_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "Building(xMin, xMax, yMin, yMax, zMin, zMax)\nBuilding(arg0)\nBuilding()",                        /* Documentation string */
     (traverseproc)PyNs3Building__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3Building__tp_clear,             /* tp_clear */
@@ -4734,7 +4734,7 @@ PyTypeObject PyNs3BuildingsPropagationLossModel_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "BuildingsPropagationLossModel()",                        /* Documentation string */
     (traverseproc)PyNs3BuildingsPropagationLossModel__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3BuildingsPropagationLossModel__tp_clear,             /* tp_clear */
@@ -4767,16 +4767,16 @@ PyTypeObject PyNs3BuildingsPropagationLossModel_Type = {
 
 
 PyObject *
-PyNs3FixedRoomPositionAllocator__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3FixedRoomPositionAllocator *self)
+PyNs3FixedRoomPositionAllocator__PythonHelper::_wrap_DoDispose(PyNs3FixedRoomPositionAllocator *self)
 {
     PyObject *py_retval;
     PyNs3FixedRoomPositionAllocator__PythonHelper *helper = dynamic_cast< PyNs3FixedRoomPositionAllocator__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -4815,16 +4815,16 @@ PyNs3FixedRoomPositionAllocator__PythonHelper::_wrap_NotifyNewAggregate(PyNs3Fix
 }
 
 PyObject *
-PyNs3FixedRoomPositionAllocator__PythonHelper::_wrap_DoDispose(PyNs3FixedRoomPositionAllocator *self)
+PyNs3FixedRoomPositionAllocator__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3FixedRoomPositionAllocator *self)
 {
     PyObject *py_retval;
     PyNs3FixedRoomPositionAllocator__PythonHelper *helper = dynamic_cast< PyNs3FixedRoomPositionAllocator__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -5246,6 +5246,24 @@ int _wrap_PyNs3FixedRoomPositionAllocator__tp_init(PyNs3FixedRoomPositionAllocat
 
 
 PyObject *
+_wrap_PyNs3FixedRoomPositionAllocator_AssignStreams(PyNs3FixedRoomPositionAllocator *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int64_t retval;
+    int64_t arg0;
+    PyNs3FixedRoomPositionAllocator__PythonHelper *helper_class = dynamic_cast<PyNs3FixedRoomPositionAllocator__PythonHelper*> (self->obj);
+    const char *keywords[] = {"arg0", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "L", (char **) keywords, &arg0)) {
+        return NULL;
+    }
+    retval = (helper_class == NULL)? (self->obj->AssignStreams(arg0)) : (self->obj->ns3::FixedRoomPositionAllocator::AssignStreams(arg0));
+    py_retval = Py_BuildValue((char *) "L", retval);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3FixedRoomPositionAllocator_GetNext(PyNs3FixedRoomPositionAllocator *self)
 {
     PyObject *py_retval;
@@ -5278,24 +5296,6 @@ _wrap_PyNs3FixedRoomPositionAllocator_GetTypeId(void)
 }
 
 
-PyObject *
-_wrap_PyNs3FixedRoomPositionAllocator_AssignStreams(PyNs3FixedRoomPositionAllocator *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int64_t retval;
-    int64_t arg0;
-    PyNs3FixedRoomPositionAllocator__PythonHelper *helper_class = dynamic_cast<PyNs3FixedRoomPositionAllocator__PythonHelper*> (self->obj);
-    const char *keywords[] = {"arg0", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "L", (char **) keywords, &arg0)) {
-        return NULL;
-    }
-    retval = (helper_class == NULL)? (self->obj->AssignStreams(arg0)) : (self->obj->ns3::FixedRoomPositionAllocator::AssignStreams(arg0));
-    py_retval = Py_BuildValue((char *) "L", retval);
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3FixedRoomPositionAllocator__copy__(PyNs3FixedRoomPositionAllocator *self)
 {
@@ -5312,13 +5312,13 @@ _wrap_PyNs3FixedRoomPositionAllocator__copy__(PyNs3FixedRoomPositionAllocator *s
 }
 
 static PyMethodDef PyNs3FixedRoomPositionAllocator_methods[] = {
+    {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3FixedRoomPositionAllocator_AssignStreams, METH_KEYWORDS|METH_VARARGS, "AssignStreams(arg0)\n\ntype: arg0: int64_t" },
     {(char *) "GetNext", (PyCFunction) _wrap_PyNs3FixedRoomPositionAllocator_GetNext, METH_NOARGS, "GetNext()\n\n" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3FixedRoomPositionAllocator_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3FixedRoomPositionAllocator_AssignStreams, METH_KEYWORDS|METH_VARARGS, "AssignStreams(arg0)\n\ntype: arg0: int64_t" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3FixedRoomPositionAllocator__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "DoDispose", (PyCFunction) PyNs3FixedRoomPositionAllocator__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3FixedRoomPositionAllocator__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3FixedRoomPositionAllocator__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3FixedRoomPositionAllocator__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3FixedRoomPositionAllocator__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3FixedRoomPositionAllocator__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -5418,7 +5418,7 @@ PyTypeObject PyNs3FixedRoomPositionAllocator_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "FixedRoomPositionAllocator(x, y, z, b)\nFixedRoomPositionAllocator(arg0)",                        /* Documentation string */
     (traverseproc)PyNs3FixedRoomPositionAllocator__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3FixedRoomPositionAllocator__tp_clear,             /* tp_clear */
@@ -5541,6 +5541,22 @@ _wrap_PyNs3GridBuildingAllocator_Create(PyNs3GridBuildingAllocator *self, PyObje
 
 
 PyObject *
+_wrap_PyNs3GridBuildingAllocator_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::GridBuildingAllocator::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3GridBuildingAllocator_SetBuildingAttribute(PyNs3GridBuildingAllocator *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -5555,22 +5571,6 @@ _wrap_PyNs3GridBuildingAllocator_SetBuildingAttribute(PyNs3GridBuildingAllocator
     self->obj->SetBuildingAttribute(std::string(n, n_len), *((PyNs3AttributeValue *) v)->obj);
     Py_INCREF(Py_None);
     py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3GridBuildingAllocator_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::GridBuildingAllocator::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
     return py_retval;
 }
 
@@ -5592,8 +5592,8 @@ _wrap_PyNs3GridBuildingAllocator__copy__(PyNs3GridBuildingAllocator *self)
 
 static PyMethodDef PyNs3GridBuildingAllocator_methods[] = {
     {(char *) "Create", (PyCFunction) _wrap_PyNs3GridBuildingAllocator_Create, METH_KEYWORDS|METH_VARARGS, "Create(n)\n\ntype: n: uint32_t" },
-    {(char *) "SetBuildingAttribute", (PyCFunction) _wrap_PyNs3GridBuildingAllocator_SetBuildingAttribute, METH_KEYWORDS|METH_VARARGS, "SetBuildingAttribute(n, v)\n\ntype: n: std::string\ntype: v: ns3::AttributeValue const &" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3GridBuildingAllocator_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "SetBuildingAttribute", (PyCFunction) _wrap_PyNs3GridBuildingAllocator_SetBuildingAttribute, METH_KEYWORDS|METH_VARARGS, "SetBuildingAttribute(n, v)\n\ntype: n: std::string\ntype: v: ns3::AttributeValue const &" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3GridBuildingAllocator__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -5690,7 +5690,7 @@ PyTypeObject PyNs3GridBuildingAllocator_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "GridBuildingAllocator(arg0)\nGridBuildingAllocator()",                        /* Documentation string */
     (traverseproc)PyNs3GridBuildingAllocator__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3GridBuildingAllocator__tp_clear,             /* tp_clear */
@@ -5739,40 +5739,6 @@ _wrap_PyNs3HybridBuildingsPropagationLossModel__tp_init(PyNs3HybridBuildingsProp
 
 
 PyObject *
-_wrap_PyNs3HybridBuildingsPropagationLossModel_SetRooftopHeight(PyNs3HybridBuildingsPropagationLossModel *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    double rooftopHeight;
-    const char *keywords[] = {"rooftopHeight", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "d", (char **) keywords, &rooftopHeight)) {
-        return NULL;
-    }
-    self->obj->SetRooftopHeight(rooftopHeight);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3HybridBuildingsPropagationLossModel_SetCitySize(PyNs3HybridBuildingsPropagationLossModel *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    ns3::CitySize size;
-    const char *keywords[] = {"size", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &size)) {
-        return NULL;
-    }
-    self->obj->SetCitySize(size);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3HybridBuildingsPropagationLossModel_GetTypeId(void)
 {
     PyObject *py_retval;
@@ -5806,6 +5772,23 @@ _wrap_PyNs3HybridBuildingsPropagationLossModel_SetEnvironment(PyNs3HybridBuildin
 
 
 PyObject *
+_wrap_PyNs3HybridBuildingsPropagationLossModel_SetCitySize(PyNs3HybridBuildingsPropagationLossModel *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    ns3::CitySize size;
+    const char *keywords[] = {"size", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &size)) {
+        return NULL;
+    }
+    self->obj->SetCitySize(size);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3HybridBuildingsPropagationLossModel_SetFrequency(PyNs3HybridBuildingsPropagationLossModel *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -5821,12 +5804,29 @@ _wrap_PyNs3HybridBuildingsPropagationLossModel_SetFrequency(PyNs3HybridBuildings
     return py_retval;
 }
 
+
+PyObject *
+_wrap_PyNs3HybridBuildingsPropagationLossModel_SetRooftopHeight(PyNs3HybridBuildingsPropagationLossModel *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    double rooftopHeight;
+    const char *keywords[] = {"rooftopHeight", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "d", (char **) keywords, &rooftopHeight)) {
+        return NULL;
+    }
+    self->obj->SetRooftopHeight(rooftopHeight);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
 static PyMethodDef PyNs3HybridBuildingsPropagationLossModel_methods[] = {
-    {(char *) "SetRooftopHeight", (PyCFunction) _wrap_PyNs3HybridBuildingsPropagationLossModel_SetRooftopHeight, METH_KEYWORDS|METH_VARARGS, "SetRooftopHeight(rooftopHeight)\n\ntype: rooftopHeight: double" },
-    {(char *) "SetCitySize", (PyCFunction) _wrap_PyNs3HybridBuildingsPropagationLossModel_SetCitySize, METH_KEYWORDS|METH_VARARGS, "SetCitySize(size)\n\ntype: size: ns3::CitySize" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3HybridBuildingsPropagationLossModel_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
     {(char *) "SetEnvironment", (PyCFunction) _wrap_PyNs3HybridBuildingsPropagationLossModel_SetEnvironment, METH_KEYWORDS|METH_VARARGS, "SetEnvironment(env)\n\ntype: env: ns3::EnvironmentType" },
+    {(char *) "SetCitySize", (PyCFunction) _wrap_PyNs3HybridBuildingsPropagationLossModel_SetCitySize, METH_KEYWORDS|METH_VARARGS, "SetCitySize(size)\n\ntype: size: ns3::CitySize" },
     {(char *) "SetFrequency", (PyCFunction) _wrap_PyNs3HybridBuildingsPropagationLossModel_SetFrequency, METH_KEYWORDS|METH_VARARGS, "SetFrequency(freq)\n\ntype: freq: double" },
+    {(char *) "SetRooftopHeight", (PyCFunction) _wrap_PyNs3HybridBuildingsPropagationLossModel_SetRooftopHeight, METH_KEYWORDS|METH_VARARGS, "SetRooftopHeight(rooftopHeight)\n\ntype: rooftopHeight: double" },
     {NULL, NULL, 0, NULL}
 };
 
@@ -5922,7 +5922,7 @@ PyTypeObject PyNs3HybridBuildingsPropagationLossModel_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "HybridBuildingsPropagationLossModel()",                        /* Documentation string */
     (traverseproc)PyNs3HybridBuildingsPropagationLossModel__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3HybridBuildingsPropagationLossModel__tp_clear,             /* tp_clear */
@@ -6082,7 +6082,7 @@ PyTypeObject PyNs3ItuR1238PropagationLossModel_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "ItuR1238PropagationLossModel()",                        /* Documentation string */
     (traverseproc)PyNs3ItuR1238PropagationLossModel__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3ItuR1238PropagationLossModel__tp_clear,             /* tp_clear */
@@ -6212,6 +6212,127 @@ int _wrap_PyNs3MobilityBuildingInfo__tp_init(PyNs3MobilityBuildingInfo *self, Py
     PyErr_SetObject(PyExc_TypeError, error_list);
     Py_DECREF(error_list);
     return -1;
+}
+
+
+PyObject *
+_wrap_PyNs3MobilityBuildingInfo_GetBuilding(PyNs3MobilityBuildingInfo *self)
+{
+    PyObject *py_retval;
+    ns3::Ptr< ns3::Building > retval;
+    PyNs3Building *py_Building;
+    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
+    PyTypeObject *wrapper_type = 0;
+    
+    retval = self->obj->GetBuilding();
+    if (!(const_cast<ns3::Building *> (ns3::PeekPointer (retval)))) {
+        Py_INCREF(Py_None);
+        return Py_None;
+    }
+    if (typeid((*const_cast<ns3::Building *> (ns3::PeekPointer (retval)))).name() == typeid(PyNs3Building__PythonHelper).name())
+    {
+        py_Building = reinterpret_cast< PyNs3Building* >(reinterpret_cast< PyNs3Building__PythonHelper* >(const_cast<ns3::Building *> (ns3::PeekPointer (retval)))->m_pyself);
+        py_Building->obj = const_cast<ns3::Building *> (ns3::PeekPointer (retval));
+        Py_INCREF(py_Building);
+    } else {
+        wrapper_lookup_iter = PyNs3ObjectBase_wrapper_registry.find((void *) const_cast<ns3::Building *> (ns3::PeekPointer (retval)));
+        if (wrapper_lookup_iter == PyNs3ObjectBase_wrapper_registry.end()) {
+            py_Building = NULL;
+        } else {
+            py_Building = (PyNs3Building *) wrapper_lookup_iter->second;
+            Py_INCREF(py_Building);
+        }
+    
+        if (py_Building == NULL) {
+            wrapper_type = PyNs3SimpleRefCount__Ns3Object_Ns3ObjectBase_Ns3ObjectDeleter__typeid_map.lookup_wrapper(typeid((*const_cast<ns3::Building *> (ns3::PeekPointer (retval)))), &PyNs3Building_Type);
+            py_Building = PyObject_GC_New(PyNs3Building, wrapper_type);
+            py_Building->inst_dict = NULL;
+    
+            py_Building->inst_dict = NULL;
+            py_Building->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+            const_cast<ns3::Building *> (ns3::PeekPointer (retval))->Ref();
+            py_Building->obj = const_cast<ns3::Building *> (ns3::PeekPointer (retval));
+            PyNs3ObjectBase_wrapper_registry[(void *) py_Building->obj] = (PyObject *) py_Building;
+        }
+    }
+    py_retval = Py_BuildValue((char *) "N", py_Building);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3MobilityBuildingInfo_GetFloorNumber(PyNs3MobilityBuildingInfo *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    
+    retval = self->obj->GetFloorNumber();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3MobilityBuildingInfo_GetRoomNumberX(PyNs3MobilityBuildingInfo *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    
+    retval = self->obj->GetRoomNumberX();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3MobilityBuildingInfo_GetRoomNumberY(PyNs3MobilityBuildingInfo *self)
+{
+    PyObject *py_retval;
+    uint8_t retval;
+    
+    retval = self->obj->GetRoomNumberY();
+    py_retval = Py_BuildValue((char *) "i", (int)retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3MobilityBuildingInfo_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::MobilityBuildingInfo::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3MobilityBuildingInfo_IsIndoor(PyNs3MobilityBuildingInfo *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->IsIndoor();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3MobilityBuildingInfo_IsOutdoor(PyNs3MobilityBuildingInfo *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->IsOutdoor();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
 }
 
 
@@ -6353,34 +6474,6 @@ PyObject * _wrap_PyNs3MobilityBuildingInfo_SetIndoor(PyNs3MobilityBuildingInfo *
 
 
 PyObject *
-_wrap_PyNs3MobilityBuildingInfo_IsOutdoor(PyNs3MobilityBuildingInfo *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->IsOutdoor();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MobilityBuildingInfo_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::MobilityBuildingInfo::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3MobilityBuildingInfo_SetOutdoor(PyNs3MobilityBuildingInfo *self)
 {
     PyObject *py_retval;
@@ -6388,99 +6481,6 @@ _wrap_PyNs3MobilityBuildingInfo_SetOutdoor(PyNs3MobilityBuildingInfo *self)
     self->obj->SetOutdoor();
     Py_INCREF(Py_None);
     py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MobilityBuildingInfo_GetRoomNumberX(PyNs3MobilityBuildingInfo *self)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    
-    retval = self->obj->GetRoomNumberX();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MobilityBuildingInfo_GetRoomNumberY(PyNs3MobilityBuildingInfo *self)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    
-    retval = self->obj->GetRoomNumberY();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MobilityBuildingInfo_GetFloorNumber(PyNs3MobilityBuildingInfo *self)
-{
-    PyObject *py_retval;
-    uint8_t retval;
-    
-    retval = self->obj->GetFloorNumber();
-    py_retval = Py_BuildValue((char *) "i", (int)retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MobilityBuildingInfo_IsIndoor(PyNs3MobilityBuildingInfo *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->IsIndoor();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3MobilityBuildingInfo_GetBuilding(PyNs3MobilityBuildingInfo *self)
-{
-    PyObject *py_retval;
-    ns3::Ptr< ns3::Building > retval;
-    PyNs3Building *py_Building;
-    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
-    PyTypeObject *wrapper_type = 0;
-    
-    retval = self->obj->GetBuilding();
-    if (!(const_cast<ns3::Building *> (ns3::PeekPointer (retval)))) {
-        Py_INCREF(Py_None);
-        return Py_None;
-    }
-    if (typeid((*const_cast<ns3::Building *> (ns3::PeekPointer (retval)))).name() == typeid(PyNs3Building__PythonHelper).name())
-    {
-        py_Building = reinterpret_cast< PyNs3Building* >(reinterpret_cast< PyNs3Building__PythonHelper* >(const_cast<ns3::Building *> (ns3::PeekPointer (retval)))->m_pyself);
-        py_Building->obj = const_cast<ns3::Building *> (ns3::PeekPointer (retval));
-        Py_INCREF(py_Building);
-    } else {
-        wrapper_lookup_iter = PyNs3ObjectBase_wrapper_registry.find((void *) const_cast<ns3::Building *> (ns3::PeekPointer (retval)));
-        if (wrapper_lookup_iter == PyNs3ObjectBase_wrapper_registry.end()) {
-            py_Building = NULL;
-        } else {
-            py_Building = (PyNs3Building *) wrapper_lookup_iter->second;
-            Py_INCREF(py_Building);
-        }
-    
-        if (py_Building == NULL) {
-            wrapper_type = PyNs3SimpleRefCount__Ns3Object_Ns3ObjectBase_Ns3ObjectDeleter__typeid_map.lookup_wrapper(typeid((*const_cast<ns3::Building *> (ns3::PeekPointer (retval)))), &PyNs3Building_Type);
-            py_Building = PyObject_GC_New(PyNs3Building, wrapper_type);
-            py_Building->inst_dict = NULL;
-    
-            py_Building->inst_dict = NULL;
-            py_Building->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-            const_cast<ns3::Building *> (ns3::PeekPointer (retval))->Ref();
-            py_Building->obj = const_cast<ns3::Building *> (ns3::PeekPointer (retval));
-            PyNs3ObjectBase_wrapper_registry[(void *) py_Building->obj] = (PyObject *) py_Building;
-        }
-    }
-    py_retval = Py_BuildValue((char *) "N", py_Building);
     return py_retval;
 }
 
@@ -6501,15 +6501,15 @@ _wrap_PyNs3MobilityBuildingInfo__copy__(PyNs3MobilityBuildingInfo *self)
 }
 
 static PyMethodDef PyNs3MobilityBuildingInfo_methods[] = {
-    {(char *) "SetIndoor", (PyCFunction) _wrap_PyNs3MobilityBuildingInfo_SetIndoor, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "IsOutdoor", (PyCFunction) _wrap_PyNs3MobilityBuildingInfo_IsOutdoor, METH_NOARGS, "IsOutdoor()\n\n" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3MobilityBuildingInfo_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "SetOutdoor", (PyCFunction) _wrap_PyNs3MobilityBuildingInfo_SetOutdoor, METH_NOARGS, "SetOutdoor()\n\n" },
+    {(char *) "GetBuilding", (PyCFunction) _wrap_PyNs3MobilityBuildingInfo_GetBuilding, METH_NOARGS, "GetBuilding()\n\n" },
+    {(char *) "GetFloorNumber", (PyCFunction) _wrap_PyNs3MobilityBuildingInfo_GetFloorNumber, METH_NOARGS, "GetFloorNumber()\n\n" },
     {(char *) "GetRoomNumberX", (PyCFunction) _wrap_PyNs3MobilityBuildingInfo_GetRoomNumberX, METH_NOARGS, "GetRoomNumberX()\n\n" },
     {(char *) "GetRoomNumberY", (PyCFunction) _wrap_PyNs3MobilityBuildingInfo_GetRoomNumberY, METH_NOARGS, "GetRoomNumberY()\n\n" },
-    {(char *) "GetFloorNumber", (PyCFunction) _wrap_PyNs3MobilityBuildingInfo_GetFloorNumber, METH_NOARGS, "GetFloorNumber()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3MobilityBuildingInfo_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
     {(char *) "IsIndoor", (PyCFunction) _wrap_PyNs3MobilityBuildingInfo_IsIndoor, METH_NOARGS, "IsIndoor()\n\n" },
-    {(char *) "GetBuilding", (PyCFunction) _wrap_PyNs3MobilityBuildingInfo_GetBuilding, METH_NOARGS, "GetBuilding()\n\n" },
+    {(char *) "IsOutdoor", (PyCFunction) _wrap_PyNs3MobilityBuildingInfo_IsOutdoor, METH_NOARGS, "IsOutdoor()\n\n" },
+    {(char *) "SetIndoor", (PyCFunction) _wrap_PyNs3MobilityBuildingInfo_SetIndoor, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "SetOutdoor", (PyCFunction) _wrap_PyNs3MobilityBuildingInfo_SetOutdoor, METH_NOARGS, "SetOutdoor()\n\n" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3MobilityBuildingInfo__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -6606,7 +6606,7 @@ PyTypeObject PyNs3MobilityBuildingInfo_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "MobilityBuildingInfo(building)\nMobilityBuildingInfo(arg0)\nMobilityBuildingInfo()",                        /* Documentation string */
     (traverseproc)PyNs3MobilityBuildingInfo__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3MobilityBuildingInfo__tp_clear,             /* tp_clear */
@@ -6766,7 +6766,7 @@ PyTypeObject PyNs3OhBuildingsPropagationLossModel_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT,                      /* tp_flags */
     "OhBuildingsPropagationLossModel()",                        /* Documentation string */
     (traverseproc)PyNs3OhBuildingsPropagationLossModel__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3OhBuildingsPropagationLossModel__tp_clear,             /* tp_clear */

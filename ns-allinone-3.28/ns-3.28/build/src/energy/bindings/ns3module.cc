@@ -929,18 +929,6 @@ _wrap_PyNs3DeviceEnergyModelContainer_Clear(PyNs3DeviceEnergyModelContainer *sel
 
 
 PyObject *
-_wrap_PyNs3DeviceEnergyModelContainer_GetN(PyNs3DeviceEnergyModelContainer *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetN();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3DeviceEnergyModelContainer_Get(PyNs3DeviceEnergyModelContainer *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -990,6 +978,18 @@ _wrap_PyNs3DeviceEnergyModelContainer_Get(PyNs3DeviceEnergyModelContainer *self,
 }
 
 
+PyObject *
+_wrap_PyNs3DeviceEnergyModelContainer_GetN(PyNs3DeviceEnergyModelContainer *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetN();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
 static PyObject*
 _wrap_PyNs3DeviceEnergyModelContainer__copy__(PyNs3DeviceEnergyModelContainer *self)
 {
@@ -1005,8 +1005,8 @@ _wrap_PyNs3DeviceEnergyModelContainer__copy__(PyNs3DeviceEnergyModelContainer *s
 static PyMethodDef PyNs3DeviceEnergyModelContainer_methods[] = {
     {(char *) "Add", (PyCFunction) _wrap_PyNs3DeviceEnergyModelContainer_Add, METH_KEYWORDS|METH_VARARGS, NULL },
     {(char *) "Clear", (PyCFunction) _wrap_PyNs3DeviceEnergyModelContainer_Clear, METH_NOARGS, "Clear()\n\n" },
-    {(char *) "GetN", (PyCFunction) _wrap_PyNs3DeviceEnergyModelContainer_GetN, METH_NOARGS, "GetN()\n\n" },
     {(char *) "Get", (PyCFunction) _wrap_PyNs3DeviceEnergyModelContainer_Get, METH_KEYWORDS|METH_VARARGS, "Get(i)\n\ntype: i: uint32_t" },
+    {(char *) "GetN", (PyCFunction) _wrap_PyNs3DeviceEnergyModelContainer_GetN, METH_NOARGS, "GetN()\n\n" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3DeviceEnergyModelContainer__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -1127,25 +1127,6 @@ _wrap_PyNs3DeviceEnergyModelHelper__tp_init(void)
 }
 
 
-PyObject *
-_wrap_PyNs3DeviceEnergyModelHelper_Set(PyNs3DeviceEnergyModelHelper *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    const char *name;
-    Py_ssize_t name_len;
-    PyNs3AttributeValue *v;
-    const char *keywords[] = {"name", "v", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3AttributeValue_Type, &v)) {
-        return NULL;
-    }
-    self->obj->Set(std::string(name, name_len), *((PyNs3AttributeValue *) v)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
 
 PyObject *
 _wrap_PyNs3DeviceEnergyModelHelper_Install__0(PyNs3DeviceEnergyModelHelper *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
@@ -1229,9 +1210,28 @@ PyObject * _wrap_PyNs3DeviceEnergyModelHelper_Install(PyNs3DeviceEnergyModelHelp
     return NULL;
 }
 
+
+PyObject *
+_wrap_PyNs3DeviceEnergyModelHelper_Set(PyNs3DeviceEnergyModelHelper *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    const char *name;
+    Py_ssize_t name_len;
+    PyNs3AttributeValue *v;
+    const char *keywords[] = {"name", "v", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3AttributeValue_Type, &v)) {
+        return NULL;
+    }
+    self->obj->Set(std::string(name, name_len), *((PyNs3AttributeValue *) v)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
 static PyMethodDef PyNs3DeviceEnergyModelHelper_methods[] = {
-    {(char *) "Set", (PyCFunction) _wrap_PyNs3DeviceEnergyModelHelper_Set, METH_KEYWORDS|METH_VARARGS, "Set(name, v)\n\ntype: name: std::string\ntype: v: ns3::AttributeValue const &" },
     {(char *) "Install", (PyCFunction) _wrap_PyNs3DeviceEnergyModelHelper_Install, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "Set", (PyCFunction) _wrap_PyNs3DeviceEnergyModelHelper_Set, METH_KEYWORDS|METH_VARARGS, "Set(name, v)\n\ntype: name: std::string\ntype: v: ns3::AttributeValue const &" },
     {NULL, NULL, 0, NULL}
 };
 
@@ -1327,7 +1327,7 @@ PyTypeObject PyNs3DeviceEnergyModelHelper_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
     "DeviceEnergyModelHelper(arg0)\nDeviceEnergyModelHelper()",                        /* Documentation string */
     (traverseproc)PyNs3DeviceEnergyModelHelper__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3DeviceEnergyModelHelper__tp_clear,             /* tp_clear */
@@ -1365,25 +1365,6 @@ _wrap_PyNs3EnergyHarvesterHelper__tp_init(void)
 {
     PyErr_SetString(PyExc_TypeError, "class 'EnergyHarvesterHelper' cannot be constructed (have pure virtual methods but no helper class)");
     return -1;
-}
-
-
-PyObject *
-_wrap_PyNs3EnergyHarvesterHelper_Set(PyNs3EnergyHarvesterHelper *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    const char *name;
-    Py_ssize_t name_len;
-    PyNs3AttributeValue *v;
-    const char *keywords[] = {"name", "v", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3AttributeValue_Type, &v)) {
-        return NULL;
-    }
-    self->obj->Set(std::string(name, name_len), *((PyNs3AttributeValue *) v)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
 }
 
 
@@ -1516,9 +1497,28 @@ PyObject * _wrap_PyNs3EnergyHarvesterHelper_Install(PyNs3EnergyHarvesterHelper *
     return NULL;
 }
 
+
+PyObject *
+_wrap_PyNs3EnergyHarvesterHelper_Set(PyNs3EnergyHarvesterHelper *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    const char *name;
+    Py_ssize_t name_len;
+    PyNs3AttributeValue *v;
+    const char *keywords[] = {"name", "v", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3AttributeValue_Type, &v)) {
+        return NULL;
+    }
+    self->obj->Set(std::string(name, name_len), *((PyNs3AttributeValue *) v)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
 static PyMethodDef PyNs3EnergyHarvesterHelper_methods[] = {
-    {(char *) "Set", (PyCFunction) _wrap_PyNs3EnergyHarvesterHelper_Set, METH_KEYWORDS|METH_VARARGS, "Set(name, v)\n\ntype: name: std::string\ntype: v: ns3::AttributeValue const &" },
     {(char *) "Install", (PyCFunction) _wrap_PyNs3EnergyHarvesterHelper_Install, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "Set", (PyCFunction) _wrap_PyNs3EnergyHarvesterHelper_Set, METH_KEYWORDS|METH_VARARGS, "Set(name, v)\n\ntype: name: std::string\ntype: v: ns3::AttributeValue const &" },
     {NULL, NULL, 0, NULL}
 };
 
@@ -1614,7 +1614,7 @@ PyTypeObject PyNs3EnergyHarvesterHelper_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
     "EnergyHarvesterHelper(arg0)\nEnergyHarvesterHelper()",                        /* Documentation string */
     (traverseproc)PyNs3EnergyHarvesterHelper__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3EnergyHarvesterHelper__tp_clear,             /* tp_clear */
@@ -1652,46 +1652,6 @@ _wrap_PyNs3EnergySourceHelper__tp_init(void)
 {
     PyErr_SetString(PyExc_TypeError, "class 'EnergySourceHelper' cannot be constructed (have pure virtual methods but no helper class)");
     return -1;
-}
-
-
-PyObject *
-_wrap_PyNs3EnergySourceHelper_InstallAll(PyNs3EnergySourceHelper *self)
-{
-    PyObject *py_retval;
-    PyNs3EnergySourceContainer *py_EnergySourceContainer;
-    
-    ns3::EnergySourceContainer retval = self->obj->InstallAll();
-    py_EnergySourceContainer = PyObject_GC_New(PyNs3EnergySourceContainer, &PyNs3EnergySourceContainer_Type);
-    py_EnergySourceContainer->inst_dict = NULL;
-    
-    py_EnergySourceContainer->inst_dict = NULL;
-    py_EnergySourceContainer->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_EnergySourceContainer->obj = new ns3::EnergySourceContainer(retval);
-    py_EnergySourceContainer->obj->Ref ();
-    PyNs3ObjectBase_wrapper_registry[(void *) py_EnergySourceContainer->obj] = (PyObject *) py_EnergySourceContainer;
-    ns3::CompleteConstruct(py_EnergySourceContainer->obj);
-    py_retval = Py_BuildValue((char *) "N", py_EnergySourceContainer);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3EnergySourceHelper_Set(PyNs3EnergySourceHelper *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    const char *name;
-    Py_ssize_t name_len;
-    PyNs3AttributeValue *v;
-    const char *keywords[] = {"name", "v", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3AttributeValue_Type, &v)) {
-        return NULL;
-    }
-    self->obj->Set(std::string(name, name_len), *((PyNs3AttributeValue *) v)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
 }
 
 
@@ -1824,10 +1784,50 @@ PyObject * _wrap_PyNs3EnergySourceHelper_Install(PyNs3EnergySourceHelper *self, 
     return NULL;
 }
 
+
+PyObject *
+_wrap_PyNs3EnergySourceHelper_InstallAll(PyNs3EnergySourceHelper *self)
+{
+    PyObject *py_retval;
+    PyNs3EnergySourceContainer *py_EnergySourceContainer;
+    
+    ns3::EnergySourceContainer retval = self->obj->InstallAll();
+    py_EnergySourceContainer = PyObject_GC_New(PyNs3EnergySourceContainer, &PyNs3EnergySourceContainer_Type);
+    py_EnergySourceContainer->inst_dict = NULL;
+    
+    py_EnergySourceContainer->inst_dict = NULL;
+    py_EnergySourceContainer->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_EnergySourceContainer->obj = new ns3::EnergySourceContainer(retval);
+    py_EnergySourceContainer->obj->Ref ();
+    PyNs3ObjectBase_wrapper_registry[(void *) py_EnergySourceContainer->obj] = (PyObject *) py_EnergySourceContainer;
+    ns3::CompleteConstruct(py_EnergySourceContainer->obj);
+    py_retval = Py_BuildValue((char *) "N", py_EnergySourceContainer);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3EnergySourceHelper_Set(PyNs3EnergySourceHelper *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    const char *name;
+    Py_ssize_t name_len;
+    PyNs3AttributeValue *v;
+    const char *keywords[] = {"name", "v", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &name, &name_len, &PyNs3AttributeValue_Type, &v)) {
+        return NULL;
+    }
+    self->obj->Set(std::string(name, name_len), *((PyNs3AttributeValue *) v)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
 static PyMethodDef PyNs3EnergySourceHelper_methods[] = {
+    {(char *) "Install", (PyCFunction) _wrap_PyNs3EnergySourceHelper_Install, METH_KEYWORDS|METH_VARARGS, NULL },
     {(char *) "InstallAll", (PyCFunction) _wrap_PyNs3EnergySourceHelper_InstallAll, METH_NOARGS, "InstallAll()\n\n" },
     {(char *) "Set", (PyCFunction) _wrap_PyNs3EnergySourceHelper_Set, METH_KEYWORDS|METH_VARARGS, "Set(name, v)\n\ntype: name: std::string\ntype: v: ns3::AttributeValue const &" },
-    {(char *) "Install", (PyCFunction) _wrap_PyNs3EnergySourceHelper_Install, METH_KEYWORDS|METH_VARARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 
@@ -1923,7 +1923,7 @@ PyTypeObject PyNs3EnergySourceHelper_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
     "EnergySourceHelper(arg0)\nEnergySourceHelper()",                        /* Documentation string */
     (traverseproc)PyNs3EnergySourceHelper__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3EnergySourceHelper__tp_clear,             /* tp_clear */
@@ -2259,7 +2259,7 @@ PyTypeObject PyNs3LiIonEnergySourceHelper_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
     "LiIonEnergySourceHelper(arg0)\nLiIonEnergySourceHelper()",                        /* Documentation string */
     (traverseproc)PyNs3LiIonEnergySourceHelper__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3LiIonEnergySourceHelper__tp_clear,             /* tp_clear */
@@ -2595,7 +2595,7 @@ PyTypeObject PyNs3RvBatteryModelHelper_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
     "RvBatteryModelHelper(arg0)\nRvBatteryModelHelper()",                        /* Documentation string */
     (traverseproc)PyNs3RvBatteryModelHelper__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3RvBatteryModelHelper__tp_clear,             /* tp_clear */
@@ -2931,7 +2931,7 @@ PyTypeObject PyNs3BasicEnergyHarvesterHelper_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
     "BasicEnergyHarvesterHelper(arg0)\nBasicEnergyHarvesterHelper()",                        /* Documentation string */
     (traverseproc)PyNs3BasicEnergyHarvesterHelper__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3BasicEnergyHarvesterHelper__tp_clear,             /* tp_clear */
@@ -3267,7 +3267,7 @@ PyTypeObject PyNs3BasicEnergySourceHelper_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
     "BasicEnergySourceHelper(arg0)\nBasicEnergySourceHelper()",                        /* Documentation string */
     (traverseproc)PyNs3BasicEnergySourceHelper__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3BasicEnergySourceHelper__tp_clear,             /* tp_clear */
@@ -3300,16 +3300,16 @@ PyTypeObject PyNs3BasicEnergySourceHelper_Type = {
 
 
 PyObject *
-PyNs3DeviceEnergyModel__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3DeviceEnergyModel *self)
+PyNs3DeviceEnergyModel__PythonHelper::_wrap_DoDispose(PyNs3DeviceEnergyModel *self)
 {
     PyObject *py_retval;
     PyNs3DeviceEnergyModel__PythonHelper *helper = dynamic_cast< PyNs3DeviceEnergyModel__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -3348,16 +3348,16 @@ PyNs3DeviceEnergyModel__PythonHelper::_wrap_NotifyNewAggregate(PyNs3DeviceEnergy
 }
 
 PyObject *
-PyNs3DeviceEnergyModel__PythonHelper::_wrap_DoDispose(PyNs3DeviceEnergyModel *self)
+PyNs3DeviceEnergyModel__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3DeviceEnergyModel *self)
 {
     PyObject *py_retval;
     PyNs3DeviceEnergyModel__PythonHelper *helper = dynamic_cast< PyNs3DeviceEnergyModel__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -4035,11 +4035,16 @@ int _wrap_PyNs3DeviceEnergyModel__tp_init(PyNs3DeviceEnergyModel *self, PyObject
 
 
 PyObject *
-_wrap_PyNs3DeviceEnergyModel_HandleEnergyRecharged(PyNs3DeviceEnergyModel *self)
+_wrap_PyNs3DeviceEnergyModel_ChangeState(PyNs3DeviceEnergyModel *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
+    int newState;
+    const char *keywords[] = {"newState", NULL};
     
-    self->obj->HandleEnergyRecharged();
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &newState)) {
+        return NULL;
+    }
+    self->obj->ChangeState(newState);
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -4054,6 +4059,70 @@ _wrap_PyNs3DeviceEnergyModel_GetCurrentA(PyNs3DeviceEnergyModel *self)
     
     retval = self->obj->GetCurrentA();
     py_retval = Py_BuildValue((char *) "d", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DeviceEnergyModel_GetTotalEnergyConsumption(PyNs3DeviceEnergyModel *self)
+{
+    PyObject *py_retval;
+    double retval;
+    
+    retval = self->obj->GetTotalEnergyConsumption();
+    py_retval = Py_BuildValue((char *) "d", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DeviceEnergyModel_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::DeviceEnergyModel::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DeviceEnergyModel_HandleEnergyChanged(PyNs3DeviceEnergyModel *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->HandleEnergyChanged();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DeviceEnergyModel_HandleEnergyDepletion(PyNs3DeviceEnergyModel *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->HandleEnergyDepletion();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3DeviceEnergyModel_HandleEnergyRecharged(PyNs3DeviceEnergyModel *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->HandleEnergyRecharged();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -4076,88 +4145,19 @@ _wrap_PyNs3DeviceEnergyModel_SetEnergySource(PyNs3DeviceEnergyModel *self, PyObj
     return py_retval;
 }
 
-
-PyObject *
-_wrap_PyNs3DeviceEnergyModel_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::DeviceEnergyModel::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DeviceEnergyModel_GetTotalEnergyConsumption(PyNs3DeviceEnergyModel *self)
-{
-    PyObject *py_retval;
-    double retval;
-    
-    retval = self->obj->GetTotalEnergyConsumption();
-    py_retval = Py_BuildValue((char *) "d", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DeviceEnergyModel_HandleEnergyDepletion(PyNs3DeviceEnergyModel *self)
-{
-    PyObject *py_retval;
-    
-    self->obj->HandleEnergyDepletion();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DeviceEnergyModel_ChangeState(PyNs3DeviceEnergyModel *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int newState;
-    const char *keywords[] = {"newState", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &newState)) {
-        return NULL;
-    }
-    self->obj->ChangeState(newState);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3DeviceEnergyModel_HandleEnergyChanged(PyNs3DeviceEnergyModel *self)
-{
-    PyObject *py_retval;
-    
-    self->obj->HandleEnergyChanged();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
 static PyMethodDef PyNs3DeviceEnergyModel_methods[] = {
-    {(char *) "HandleEnergyRecharged", (PyCFunction) _wrap_PyNs3DeviceEnergyModel_HandleEnergyRecharged, METH_NOARGS, "HandleEnergyRecharged()\n\n" },
-    {(char *) "GetCurrentA", (PyCFunction) _wrap_PyNs3DeviceEnergyModel_GetCurrentA, METH_NOARGS, "GetCurrentA()\n\n" },
-    {(char *) "SetEnergySource", (PyCFunction) _wrap_PyNs3DeviceEnergyModel_SetEnergySource, METH_KEYWORDS|METH_VARARGS, "SetEnergySource(source)\n\ntype: source: ns3::Ptr< ns3::EnergySource >" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DeviceEnergyModel_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "GetTotalEnergyConsumption", (PyCFunction) _wrap_PyNs3DeviceEnergyModel_GetTotalEnergyConsumption, METH_NOARGS, "GetTotalEnergyConsumption()\n\n" },
-    {(char *) "HandleEnergyDepletion", (PyCFunction) _wrap_PyNs3DeviceEnergyModel_HandleEnergyDepletion, METH_NOARGS, "HandleEnergyDepletion()\n\n" },
     {(char *) "ChangeState", (PyCFunction) _wrap_PyNs3DeviceEnergyModel_ChangeState, METH_KEYWORDS|METH_VARARGS, "ChangeState(newState)\n\ntype: newState: int" },
+    {(char *) "GetCurrentA", (PyCFunction) _wrap_PyNs3DeviceEnergyModel_GetCurrentA, METH_NOARGS, "GetCurrentA()\n\n" },
+    {(char *) "GetTotalEnergyConsumption", (PyCFunction) _wrap_PyNs3DeviceEnergyModel_GetTotalEnergyConsumption, METH_NOARGS, "GetTotalEnergyConsumption()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3DeviceEnergyModel_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
     {(char *) "HandleEnergyChanged", (PyCFunction) _wrap_PyNs3DeviceEnergyModel_HandleEnergyChanged, METH_NOARGS, "HandleEnergyChanged()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3DeviceEnergyModel__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "HandleEnergyDepletion", (PyCFunction) _wrap_PyNs3DeviceEnergyModel_HandleEnergyDepletion, METH_NOARGS, "HandleEnergyDepletion()\n\n" },
+    {(char *) "HandleEnergyRecharged", (PyCFunction) _wrap_PyNs3DeviceEnergyModel_HandleEnergyRecharged, METH_NOARGS, "HandleEnergyRecharged()\n\n" },
+    {(char *) "SetEnergySource", (PyCFunction) _wrap_PyNs3DeviceEnergyModel_SetEnergySource, METH_KEYWORDS|METH_VARARGS, "SetEnergySource(source)\n\ntype: source: ns3::Ptr< ns3::EnergySource >" },
+    {(char *) "DoDispose", (PyCFunction) PyNs3DeviceEnergyModel__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3DeviceEnergyModel__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3DeviceEnergyModel__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3DeviceEnergyModel__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3DeviceEnergyModel__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 
@@ -4256,7 +4256,7 @@ PyTypeObject PyNs3DeviceEnergyModel_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
     "DeviceEnergyModel(arg0)\nDeviceEnergyModel()",                        /* Documentation string */
     (traverseproc)PyNs3DeviceEnergyModel__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3DeviceEnergyModel__tp_clear,             /* tp_clear */
@@ -4289,22 +4289,6 @@ PyTypeObject PyNs3DeviceEnergyModel_Type = {
 
 
 PyObject *
-PyNs3EnergyHarvester__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3EnergyHarvester *self)
-{
-    PyObject *py_retval;
-    PyNs3EnergyHarvester__PythonHelper *helper = dynamic_cast< PyNs3EnergyHarvester__PythonHelper* >(self->obj);
-    
-    if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
-        return NULL;
-    }
-    helper->NotifyConstructionCompleted__parent_caller();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject *
 PyNs3EnergyHarvester__PythonHelper::_wrap_DoInitialize(PyNs3EnergyHarvester *self)
 {
     PyObject *py_retval;
@@ -4331,6 +4315,22 @@ PyNs3EnergyHarvester__PythonHelper::_wrap_NotifyNewAggregate(PyNs3EnergyHarveste
         return NULL;
     }
     helper->NotifyNewAggregate__parent_caller();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject *
+PyNs3EnergyHarvester__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3EnergyHarvester *self)
+{
+    PyObject *py_retval;
+    PyNs3EnergyHarvester__PythonHelper *helper = dynamic_cast< PyNs3EnergyHarvester__PythonHelper* >(self->obj);
+    
+    if (helper == NULL) {
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        return NULL;
+    }
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -4707,60 +4707,6 @@ int _wrap_PyNs3EnergyHarvester__tp_init(PyNs3EnergyHarvester *self, PyObject *ar
 
 
 PyObject *
-_wrap_PyNs3EnergyHarvester_SetNode(PyNs3EnergyHarvester *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Node *node;
-    ns3::Node *node_ptr;
-    const char *keywords[] = {"node", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Node_Type, &node)) {
-        return NULL;
-    }
-    node_ptr = (node ? node->obj : NULL);
-    self->obj->SetNode(ns3::Ptr< ns3::Node  > (node_ptr));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3EnergyHarvester_SetEnergySource(PyNs3EnergyHarvester *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3EnergySource *source;
-    ns3::EnergySource *source_ptr;
-    const char *keywords[] = {"source", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3EnergySource_Type, &source)) {
-        return NULL;
-    }
-    source_ptr = (source ? source->obj : NULL);
-    self->obj->SetEnergySource(ns3::Ptr< ns3::EnergySource  > (source_ptr));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3EnergyHarvester_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::EnergyHarvester::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3EnergyHarvester_GetEnergySource(PyNs3EnergyHarvester *self)
 {
     PyObject *py_retval;
@@ -4862,6 +4808,60 @@ _wrap_PyNs3EnergyHarvester_GetPower(PyNs3EnergyHarvester *self)
 }
 
 
+PyObject *
+_wrap_PyNs3EnergyHarvester_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::EnergyHarvester::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3EnergyHarvester_SetEnergySource(PyNs3EnergyHarvester *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3EnergySource *source;
+    ns3::EnergySource *source_ptr;
+    const char *keywords[] = {"source", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3EnergySource_Type, &source)) {
+        return NULL;
+    }
+    source_ptr = (source ? source->obj : NULL);
+    self->obj->SetEnergySource(ns3::Ptr< ns3::EnergySource  > (source_ptr));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3EnergyHarvester_SetNode(PyNs3EnergyHarvester *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Node *node;
+    ns3::Node *node_ptr;
+    const char *keywords[] = {"node", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Node_Type, &node)) {
+        return NULL;
+    }
+    node_ptr = (node ? node->obj : NULL);
+    self->obj->SetNode(ns3::Ptr< ns3::Node  > (node_ptr));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
 static PyObject*
 _wrap_PyNs3EnergyHarvester__copy__(PyNs3EnergyHarvester *self)
 {
@@ -4878,15 +4878,15 @@ _wrap_PyNs3EnergyHarvester__copy__(PyNs3EnergyHarvester *self)
 }
 
 static PyMethodDef PyNs3EnergyHarvester_methods[] = {
-    {(char *) "SetNode", (PyCFunction) _wrap_PyNs3EnergyHarvester_SetNode, METH_KEYWORDS|METH_VARARGS, "SetNode(node)\n\ntype: node: ns3::Ptr< ns3::Node >" },
-    {(char *) "SetEnergySource", (PyCFunction) _wrap_PyNs3EnergyHarvester_SetEnergySource, METH_KEYWORDS|METH_VARARGS, "SetEnergySource(source)\n\ntype: source: ns3::Ptr< ns3::EnergySource >" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3EnergyHarvester_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
     {(char *) "GetEnergySource", (PyCFunction) _wrap_PyNs3EnergyHarvester_GetEnergySource, METH_NOARGS, "GetEnergySource()\n\n" },
     {(char *) "GetNode", (PyCFunction) _wrap_PyNs3EnergyHarvester_GetNode, METH_NOARGS, "GetNode()\n\n" },
     {(char *) "GetPower", (PyCFunction) _wrap_PyNs3EnergyHarvester_GetPower, METH_NOARGS, "GetPower()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3EnergyHarvester__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3EnergyHarvester_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "SetEnergySource", (PyCFunction) _wrap_PyNs3EnergyHarvester_SetEnergySource, METH_KEYWORDS|METH_VARARGS, "SetEnergySource(source)\n\ntype: source: ns3::Ptr< ns3::EnergySource >" },
+    {(char *) "SetNode", (PyCFunction) _wrap_PyNs3EnergyHarvester_SetNode, METH_KEYWORDS|METH_VARARGS, "SetNode(node)\n\ntype: node: ns3::Ptr< ns3::Node >" },
     {(char *) "DoInitialize", (PyCFunction) PyNs3EnergyHarvester__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3EnergyHarvester__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3EnergyHarvester__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3EnergyHarvester__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -4986,7 +4986,7 @@ PyTypeObject PyNs3EnergyHarvester_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
     "EnergyHarvester(arg0)\nEnergyHarvester()",                        /* Documentation string */
     (traverseproc)PyNs3EnergyHarvester__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3EnergyHarvester__tp_clear,             /* tp_clear */
@@ -5019,22 +5019,6 @@ PyTypeObject PyNs3EnergyHarvester_Type = {
 
 
 PyObject *
-PyNs3EnergyHarvesterContainer__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3EnergyHarvesterContainer *self)
-{
-    PyObject *py_retval;
-    PyNs3EnergyHarvesterContainer__PythonHelper *helper = dynamic_cast< PyNs3EnergyHarvesterContainer__PythonHelper* >(self->obj);
-    
-    if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
-        return NULL;
-    }
-    helper->NotifyConstructionCompleted__parent_caller();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject *
 PyNs3EnergyHarvesterContainer__PythonHelper::_wrap_NotifyNewAggregate(PyNs3EnergyHarvesterContainer *self)
 {
     PyObject *py_retval;
@@ -5045,6 +5029,22 @@ PyNs3EnergyHarvesterContainer__PythonHelper::_wrap_NotifyNewAggregate(PyNs3Energ
         return NULL;
     }
     helper->NotifyNewAggregate__parent_caller();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject *
+PyNs3EnergyHarvesterContainer__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3EnergyHarvesterContainer *self)
+{
+    PyObject *py_retval;
+    PyNs3EnergyHarvesterContainer__PythonHelper *helper = dynamic_cast< PyNs3EnergyHarvesterContainer__PythonHelper* >(self->obj);
+    
+    if (helper == NULL) {
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        return NULL;
+    }
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -5491,22 +5491,6 @@ int _wrap_PyNs3EnergyHarvesterContainer__tp_init(PyNs3EnergyHarvesterContainer *
 }
 
 
-PyObject *
-_wrap_PyNs3EnergyHarvesterContainer_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::EnergyHarvesterContainer::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
 
 PyObject *
 _wrap_PyNs3EnergyHarvesterContainer_Add__0(PyNs3EnergyHarvesterContainer *self, PyObject *args, PyObject *kwargs, PyObject **return_exception)
@@ -5623,18 +5607,6 @@ _wrap_PyNs3EnergyHarvesterContainer_Clear(PyNs3EnergyHarvesterContainer *self)
 
 
 PyObject *
-_wrap_PyNs3EnergyHarvesterContainer_GetN(PyNs3EnergyHarvesterContainer *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetN();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3EnergyHarvesterContainer_Get(PyNs3EnergyHarvesterContainer *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -5684,6 +5656,34 @@ _wrap_PyNs3EnergyHarvesterContainer_Get(PyNs3EnergyHarvesterContainer *self, PyO
 }
 
 
+PyObject *
+_wrap_PyNs3EnergyHarvesterContainer_GetN(PyNs3EnergyHarvesterContainer *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetN();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3EnergyHarvesterContainer_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::EnergyHarvesterContainer::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
 static PyObject*
 _wrap_PyNs3EnergyHarvesterContainer__copy__(PyNs3EnergyHarvesterContainer *self)
 {
@@ -5700,13 +5700,13 @@ _wrap_PyNs3EnergyHarvesterContainer__copy__(PyNs3EnergyHarvesterContainer *self)
 }
 
 static PyMethodDef PyNs3EnergyHarvesterContainer_methods[] = {
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3EnergyHarvesterContainer_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
     {(char *) "Add", (PyCFunction) _wrap_PyNs3EnergyHarvesterContainer_Add, METH_KEYWORDS|METH_VARARGS, NULL },
     {(char *) "Clear", (PyCFunction) _wrap_PyNs3EnergyHarvesterContainer_Clear, METH_NOARGS, "Clear()\n\n" },
-    {(char *) "GetN", (PyCFunction) _wrap_PyNs3EnergyHarvesterContainer_GetN, METH_NOARGS, "GetN()\n\n" },
     {(char *) "Get", (PyCFunction) _wrap_PyNs3EnergyHarvesterContainer_Get, METH_KEYWORDS|METH_VARARGS, "Get(i)\n\ntype: i: uint32_t" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3EnergyHarvesterContainer__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "GetN", (PyCFunction) _wrap_PyNs3EnergyHarvesterContainer_GetN, METH_NOARGS, "GetN()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3EnergyHarvesterContainer_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3EnergyHarvesterContainer__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3EnergyHarvesterContainer__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3EnergyHarvesterContainer__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -5806,7 +5806,7 @@ PyTypeObject PyNs3EnergyHarvesterContainer_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
     "EnergyHarvesterContainer(harvesterName)\nEnergyHarvesterContainer(harvester)\nEnergyHarvesterContainer(arg0)\nEnergyHarvesterContainer(a, b)\nEnergyHarvesterContainer()",                        /* Documentation string */
     (traverseproc)PyNs3EnergyHarvesterContainer__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3EnergyHarvesterContainer__tp_clear,             /* tp_clear */
@@ -5839,70 +5839,6 @@ PyTypeObject PyNs3EnergyHarvesterContainer_Type = {
 
 
 PyObject *
-PyNs3EnergySource__PythonHelper::_wrap_CalculateTotalCurrent(PyNs3EnergySource *self)
-{
-    PyObject *py_retval;
-    double retval;
-    PyNs3EnergySource__PythonHelper *helper = dynamic_cast< PyNs3EnergySource__PythonHelper* >(self->obj);
-    
-    if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method CalculateTotalCurrent of class EnergySource is protected and can only be called by a subclass");
-        return NULL;
-    }
-    retval = helper->CalculateTotalCurrent__parent_caller();
-    py_retval = Py_BuildValue((char *) "d", retval);
-    return py_retval;
-}
-
-PyObject *
-PyNs3EnergySource__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3EnergySource *self)
-{
-    PyObject *py_retval;
-    PyNs3EnergySource__PythonHelper *helper = dynamic_cast< PyNs3EnergySource__PythonHelper* >(self->obj);
-    
-    if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
-        return NULL;
-    }
-    helper->NotifyConstructionCompleted__parent_caller();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject *
-PyNs3EnergySource__PythonHelper::_wrap_DoInitialize(PyNs3EnergySource *self)
-{
-    PyObject *py_retval;
-    PyNs3EnergySource__PythonHelper *helper = dynamic_cast< PyNs3EnergySource__PythonHelper* >(self->obj);
-    
-    if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoInitialize of class Object is protected and can only be called by a subclass");
-        return NULL;
-    }
-    helper->DoInitialize__parent_caller();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject *
-PyNs3EnergySource__PythonHelper::_wrap_NotifyNewAggregate(PyNs3EnergySource *self)
-{
-    PyObject *py_retval;
-    PyNs3EnergySource__PythonHelper *helper = dynamic_cast< PyNs3EnergySource__PythonHelper* >(self->obj);
-    
-    if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyNewAggregate of class Object is protected and can only be called by a subclass");
-        return NULL;
-    }
-    helper->NotifyNewAggregate__parent_caller();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject *
 PyNs3EnergySource__PythonHelper::_wrap_BreakDeviceEnergyModelRefCycle(PyNs3EnergySource *self)
 {
     PyObject *py_retval;
@@ -5915,6 +5851,22 @@ PyNs3EnergySource__PythonHelper::_wrap_BreakDeviceEnergyModelRefCycle(PyNs3Energ
     helper->BreakDeviceEnergyModelRefCycle__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject *
+PyNs3EnergySource__PythonHelper::_wrap_CalculateTotalCurrent(PyNs3EnergySource *self)
+{
+    PyObject *py_retval;
+    double retval;
+    PyNs3EnergySource__PythonHelper *helper = dynamic_cast< PyNs3EnergySource__PythonHelper* >(self->obj);
+    
+    if (helper == NULL) {
+        PyErr_SetString(PyExc_TypeError, "Method CalculateTotalCurrent of class EnergySource is protected and can only be called by a subclass");
+        return NULL;
+    }
+    retval = helper->CalculateTotalCurrent__parent_caller();
+    py_retval = Py_BuildValue((char *) "d", retval);
     return py_retval;
 }
 
@@ -5961,6 +5913,54 @@ PyNs3EnergySource__PythonHelper::_wrap_NotifyEnergyRecharged(PyNs3EnergySource *
         return NULL;
     }
     helper->NotifyEnergyRecharged__parent_caller();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject *
+PyNs3EnergySource__PythonHelper::_wrap_DoInitialize(PyNs3EnergySource *self)
+{
+    PyObject *py_retval;
+    PyNs3EnergySource__PythonHelper *helper = dynamic_cast< PyNs3EnergySource__PythonHelper* >(self->obj);
+    
+    if (helper == NULL) {
+        PyErr_SetString(PyExc_TypeError, "Method DoInitialize of class Object is protected and can only be called by a subclass");
+        return NULL;
+    }
+    helper->DoInitialize__parent_caller();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject *
+PyNs3EnergySource__PythonHelper::_wrap_NotifyNewAggregate(PyNs3EnergySource *self)
+{
+    PyObject *py_retval;
+    PyNs3EnergySource__PythonHelper *helper = dynamic_cast< PyNs3EnergySource__PythonHelper* >(self->obj);
+    
+    if (helper == NULL) {
+        PyErr_SetString(PyExc_TypeError, "Method NotifyNewAggregate of class Object is protected and can only be called by a subclass");
+        return NULL;
+    }
+    helper->NotifyNewAggregate__parent_caller();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject *
+PyNs3EnergySource__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3EnergySource *self)
+{
+    PyObject *py_retval;
+    PyNs3EnergySource__PythonHelper *helper = dynamic_cast< PyNs3EnergySource__PythonHelper* >(self->obj);
+    
+    if (helper == NULL) {
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        return NULL;
+    }
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -6542,61 +6542,6 @@ int _wrap_PyNs3EnergySource__tp_init(PyNs3EnergySource *self, PyObject *args, Py
 
 
 PyObject *
-_wrap_PyNs3EnergySource_UpdateEnergySource(PyNs3EnergySource *self)
-{
-    PyObject *py_retval;
-    
-    self->obj->UpdateEnergySource();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3EnergySource_SetNode(PyNs3EnergySource *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Node *node;
-    ns3::Node *node_ptr;
-    const char *keywords[] = {"node", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Node_Type, &node)) {
-        return NULL;
-    }
-    node_ptr = (node ? node->obj : NULL);
-    self->obj->SetNode(ns3::Ptr< ns3::Node  > (node_ptr));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3EnergySource_GetSupplyVoltage(PyNs3EnergySource *self)
-{
-    PyObject *py_retval;
-    double retval;
-    
-    retval = self->obj->GetSupplyVoltage();
-    py_retval = Py_BuildValue((char *) "d", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3EnergySource_DisposeDeviceModels(PyNs3EnergySource *self)
-{
-    PyObject *py_retval;
-    
-    self->obj->DisposeDeviceModels();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3EnergySource_AppendDeviceEnergyModel(PyNs3EnergySource *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -6616,30 +6561,6 @@ _wrap_PyNs3EnergySource_AppendDeviceEnergyModel(PyNs3EnergySource *self, PyObjec
 
 
 PyObject *
-_wrap_PyNs3EnergySource_GetEnergyFraction(PyNs3EnergySource *self)
-{
-    PyObject *py_retval;
-    double retval;
-    
-    retval = self->obj->GetEnergyFraction();
-    py_retval = Py_BuildValue((char *) "d", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3EnergySource_InitializeDeviceModels(PyNs3EnergySource *self)
-{
-    PyObject *py_retval;
-    
-    self->obj->InitializeDeviceModels();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3EnergySource_ConnectEnergyHarvester(PyNs3EnergySource *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -6652,6 +6573,18 @@ _wrap_PyNs3EnergySource_ConnectEnergyHarvester(PyNs3EnergySource *self, PyObject
     }
     energyHarvesterPtr_ptr = (energyHarvesterPtr ? energyHarvesterPtr->obj : NULL);
     self->obj->ConnectEnergyHarvester(ns3::Ptr< ns3::EnergyHarvester  > (energyHarvesterPtr_ptr));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3EnergySource_DisposeDeviceModels(PyNs3EnergySource *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->DisposeDeviceModels();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -6738,12 +6671,12 @@ PyObject * _wrap_PyNs3EnergySource_FindDeviceEnergyModels(PyNs3EnergySource *sel
 
 
 PyObject *
-_wrap_PyNs3EnergySource_GetRemainingEnergy(PyNs3EnergySource *self)
+_wrap_PyNs3EnergySource_GetEnergyFraction(PyNs3EnergySource *self)
 {
     PyObject *py_retval;
     double retval;
     
-    retval = self->obj->GetRemainingEnergy();
+    retval = self->obj->GetEnergyFraction();
     py_retval = Py_BuildValue((char *) "d", retval);
     return py_retval;
 }
@@ -6757,22 +6690,6 @@ _wrap_PyNs3EnergySource_GetInitialEnergy(PyNs3EnergySource *self)
     
     retval = self->obj->GetInitialEnergy();
     py_retval = Py_BuildValue((char *) "d", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3EnergySource_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::EnergySource::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
     return py_retval;
 }
 
@@ -6821,28 +6738,111 @@ _wrap_PyNs3EnergySource_GetNode(PyNs3EnergySource *self)
     return py_retval;
 }
 
+
+PyObject *
+_wrap_PyNs3EnergySource_GetRemainingEnergy(PyNs3EnergySource *self)
+{
+    PyObject *py_retval;
+    double retval;
+    
+    retval = self->obj->GetRemainingEnergy();
+    py_retval = Py_BuildValue((char *) "d", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3EnergySource_GetSupplyVoltage(PyNs3EnergySource *self)
+{
+    PyObject *py_retval;
+    double retval;
+    
+    retval = self->obj->GetSupplyVoltage();
+    py_retval = Py_BuildValue((char *) "d", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3EnergySource_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::EnergySource::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3EnergySource_InitializeDeviceModels(PyNs3EnergySource *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->InitializeDeviceModels();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3EnergySource_SetNode(PyNs3EnergySource *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Node *node;
+    ns3::Node *node_ptr;
+    const char *keywords[] = {"node", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Node_Type, &node)) {
+        return NULL;
+    }
+    node_ptr = (node ? node->obj : NULL);
+    self->obj->SetNode(ns3::Ptr< ns3::Node  > (node_ptr));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3EnergySource_UpdateEnergySource(PyNs3EnergySource *self)
+{
+    PyObject *py_retval;
+    
+    self->obj->UpdateEnergySource();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
 static PyMethodDef PyNs3EnergySource_methods[] = {
-    {(char *) "UpdateEnergySource", (PyCFunction) _wrap_PyNs3EnergySource_UpdateEnergySource, METH_NOARGS, "UpdateEnergySource()\n\n" },
-    {(char *) "SetNode", (PyCFunction) _wrap_PyNs3EnergySource_SetNode, METH_KEYWORDS|METH_VARARGS, "SetNode(node)\n\ntype: node: ns3::Ptr< ns3::Node >" },
-    {(char *) "GetSupplyVoltage", (PyCFunction) _wrap_PyNs3EnergySource_GetSupplyVoltage, METH_NOARGS, "GetSupplyVoltage()\n\n" },
-    {(char *) "DisposeDeviceModels", (PyCFunction) _wrap_PyNs3EnergySource_DisposeDeviceModels, METH_NOARGS, "DisposeDeviceModels()\n\n" },
     {(char *) "AppendDeviceEnergyModel", (PyCFunction) _wrap_PyNs3EnergySource_AppendDeviceEnergyModel, METH_KEYWORDS|METH_VARARGS, "AppendDeviceEnergyModel(deviceEnergyModelPtr)\n\ntype: deviceEnergyModelPtr: ns3::Ptr< ns3::DeviceEnergyModel >" },
-    {(char *) "GetEnergyFraction", (PyCFunction) _wrap_PyNs3EnergySource_GetEnergyFraction, METH_NOARGS, "GetEnergyFraction()\n\n" },
-    {(char *) "InitializeDeviceModels", (PyCFunction) _wrap_PyNs3EnergySource_InitializeDeviceModels, METH_NOARGS, "InitializeDeviceModels()\n\n" },
     {(char *) "ConnectEnergyHarvester", (PyCFunction) _wrap_PyNs3EnergySource_ConnectEnergyHarvester, METH_KEYWORDS|METH_VARARGS, "ConnectEnergyHarvester(energyHarvesterPtr)\n\ntype: energyHarvesterPtr: ns3::Ptr< ns3::EnergyHarvester >" },
+    {(char *) "DisposeDeviceModels", (PyCFunction) _wrap_PyNs3EnergySource_DisposeDeviceModels, METH_NOARGS, "DisposeDeviceModels()\n\n" },
     {(char *) "FindDeviceEnergyModels", (PyCFunction) _wrap_PyNs3EnergySource_FindDeviceEnergyModels, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "GetRemainingEnergy", (PyCFunction) _wrap_PyNs3EnergySource_GetRemainingEnergy, METH_NOARGS, "GetRemainingEnergy()\n\n" },
+    {(char *) "GetEnergyFraction", (PyCFunction) _wrap_PyNs3EnergySource_GetEnergyFraction, METH_NOARGS, "GetEnergyFraction()\n\n" },
     {(char *) "GetInitialEnergy", (PyCFunction) _wrap_PyNs3EnergySource_GetInitialEnergy, METH_NOARGS, "GetInitialEnergy()\n\n" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3EnergySource_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
     {(char *) "GetNode", (PyCFunction) _wrap_PyNs3EnergySource_GetNode, METH_NOARGS, "GetNode()\n\n" },
-    {(char *) "CalculateTotalCurrent", (PyCFunction) PyNs3EnergySource__PythonHelper::_wrap_CalculateTotalCurrent, METH_NOARGS, NULL },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3EnergySource__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
-    {(char *) "DoInitialize", (PyCFunction) PyNs3EnergySource__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
-    {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3EnergySource__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
+    {(char *) "GetRemainingEnergy", (PyCFunction) _wrap_PyNs3EnergySource_GetRemainingEnergy, METH_NOARGS, "GetRemainingEnergy()\n\n" },
+    {(char *) "GetSupplyVoltage", (PyCFunction) _wrap_PyNs3EnergySource_GetSupplyVoltage, METH_NOARGS, "GetSupplyVoltage()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3EnergySource_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "InitializeDeviceModels", (PyCFunction) _wrap_PyNs3EnergySource_InitializeDeviceModels, METH_NOARGS, "InitializeDeviceModels()\n\n" },
+    {(char *) "SetNode", (PyCFunction) _wrap_PyNs3EnergySource_SetNode, METH_KEYWORDS|METH_VARARGS, "SetNode(node)\n\ntype: node: ns3::Ptr< ns3::Node >" },
+    {(char *) "UpdateEnergySource", (PyCFunction) _wrap_PyNs3EnergySource_UpdateEnergySource, METH_NOARGS, "UpdateEnergySource()\n\n" },
     {(char *) "BreakDeviceEnergyModelRefCycle", (PyCFunction) PyNs3EnergySource__PythonHelper::_wrap_BreakDeviceEnergyModelRefCycle, METH_NOARGS, NULL },
+    {(char *) "CalculateTotalCurrent", (PyCFunction) PyNs3EnergySource__PythonHelper::_wrap_CalculateTotalCurrent, METH_NOARGS, NULL },
     {(char *) "NotifyEnergyChanged", (PyCFunction) PyNs3EnergySource__PythonHelper::_wrap_NotifyEnergyChanged, METH_NOARGS, NULL },
     {(char *) "NotifyEnergyDrained", (PyCFunction) PyNs3EnergySource__PythonHelper::_wrap_NotifyEnergyDrained, METH_NOARGS, NULL },
     {(char *) "NotifyEnergyRecharged", (PyCFunction) PyNs3EnergySource__PythonHelper::_wrap_NotifyEnergyRecharged, METH_NOARGS, NULL },
+    {(char *) "DoInitialize", (PyCFunction) PyNs3EnergySource__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
+    {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3EnergySource__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3EnergySource__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 
@@ -6941,7 +6941,7 @@ PyTypeObject PyNs3EnergySource_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
     "EnergySource(arg0)\nEnergySource()",                        /* Documentation string */
     (traverseproc)PyNs3EnergySource__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3EnergySource__tp_clear,             /* tp_clear */
@@ -6974,22 +6974,6 @@ PyTypeObject PyNs3EnergySource_Type = {
 
 
 PyObject *
-PyNs3EnergySourceContainer__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3EnergySourceContainer *self)
-{
-    PyObject *py_retval;
-    PyNs3EnergySourceContainer__PythonHelper *helper = dynamic_cast< PyNs3EnergySourceContainer__PythonHelper* >(self->obj);
-    
-    if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
-        return NULL;
-    }
-    helper->NotifyConstructionCompleted__parent_caller();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject *
 PyNs3EnergySourceContainer__PythonHelper::_wrap_NotifyNewAggregate(PyNs3EnergySourceContainer *self)
 {
     PyObject *py_retval;
@@ -7000,6 +6984,22 @@ PyNs3EnergySourceContainer__PythonHelper::_wrap_NotifyNewAggregate(PyNs3EnergySo
         return NULL;
     }
     helper->NotifyNewAggregate__parent_caller();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject *
+PyNs3EnergySourceContainer__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3EnergySourceContainer *self)
+{
+    PyObject *py_retval;
+    PyNs3EnergySourceContainer__PythonHelper *helper = dynamic_cast< PyNs3EnergySourceContainer__PythonHelper* >(self->obj);
+    
+    if (helper == NULL) {
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        return NULL;
+    }
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -7550,34 +7550,6 @@ PyObject * _wrap_PyNs3EnergySourceContainer_Add(PyNs3EnergySourceContainer *self
 
 
 PyObject *
-_wrap_PyNs3EnergySourceContainer_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::EnergySourceContainer::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3EnergySourceContainer_GetN(PyNs3EnergySourceContainer *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetN();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3EnergySourceContainer_Get(PyNs3EnergySourceContainer *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -7627,6 +7599,34 @@ _wrap_PyNs3EnergySourceContainer_Get(PyNs3EnergySourceContainer *self, PyObject 
 }
 
 
+PyObject *
+_wrap_PyNs3EnergySourceContainer_GetN(PyNs3EnergySourceContainer *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetN();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3EnergySourceContainer_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::EnergySourceContainer::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
 static PyObject*
 _wrap_PyNs3EnergySourceContainer__copy__(PyNs3EnergySourceContainer *self)
 {
@@ -7644,11 +7644,11 @@ _wrap_PyNs3EnergySourceContainer__copy__(PyNs3EnergySourceContainer *self)
 
 static PyMethodDef PyNs3EnergySourceContainer_methods[] = {
     {(char *) "Add", (PyCFunction) _wrap_PyNs3EnergySourceContainer_Add, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3EnergySourceContainer_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "GetN", (PyCFunction) _wrap_PyNs3EnergySourceContainer_GetN, METH_NOARGS, "GetN()\n\n" },
     {(char *) "Get", (PyCFunction) _wrap_PyNs3EnergySourceContainer_Get, METH_KEYWORDS|METH_VARARGS, "Get(i)\n\ntype: i: uint32_t" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3EnergySourceContainer__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "GetN", (PyCFunction) _wrap_PyNs3EnergySourceContainer_GetN, METH_NOARGS, "GetN()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3EnergySourceContainer_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3EnergySourceContainer__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3EnergySourceContainer__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3EnergySourceContainer__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -7748,7 +7748,7 @@ PyTypeObject PyNs3EnergySourceContainer_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
     "EnergySourceContainer(sourceName)\nEnergySourceContainer(source)\nEnergySourceContainer(arg0)\nEnergySourceContainer(a, b)\nEnergySourceContainer()",                        /* Documentation string */
     (traverseproc)PyNs3EnergySourceContainer__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3EnergySourceContainer__tp_clear,             /* tp_clear */
@@ -7781,22 +7781,6 @@ PyTypeObject PyNs3EnergySourceContainer_Type = {
 
 
 PyObject *
-PyNs3LiIonEnergySource__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3LiIonEnergySource *self)
-{
-    PyObject *py_retval;
-    PyNs3LiIonEnergySource__PythonHelper *helper = dynamic_cast< PyNs3LiIonEnergySource__PythonHelper* >(self->obj);
-    
-    if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
-        return NULL;
-    }
-    helper->NotifyConstructionCompleted__parent_caller();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject *
 PyNs3LiIonEnergySource__PythonHelper::_wrap_NotifyNewAggregate(PyNs3LiIonEnergySource *self)
 {
     PyObject *py_retval;
@@ -7807,6 +7791,22 @@ PyNs3LiIonEnergySource__PythonHelper::_wrap_NotifyNewAggregate(PyNs3LiIonEnergyS
         return NULL;
     }
     helper->NotifyNewAggregate__parent_caller();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject *
+PyNs3LiIonEnergySource__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3LiIonEnergySource *self)
+{
+    PyObject *py_retval;
+    PyNs3LiIonEnergySource__PythonHelper *helper = dynamic_cast< PyNs3LiIonEnergySource__PythonHelper* >(self->obj);
+    
+    if (helper == NULL) {
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        return NULL;
+    }
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -8446,14 +8446,32 @@ int _wrap_PyNs3LiIonEnergySource__tp_init(PyNs3LiIonEnergySource *self, PyObject
 
 
 PyObject *
-_wrap_PyNs3LiIonEnergySource_UpdateEnergySource(PyNs3LiIonEnergySource *self)
+_wrap_PyNs3LiIonEnergySource_DecreaseRemainingEnergy(PyNs3LiIonEnergySource *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
+    double energyJ;
     PyNs3LiIonEnergySource__PythonHelper *helper_class = dynamic_cast<PyNs3LiIonEnergySource__PythonHelper*> (self->obj);
+    const char *keywords[] = {"energyJ", NULL};
     
-    (helper_class == NULL)? (self->obj->UpdateEnergySource()) : (self->obj->ns3::LiIonEnergySource::UpdateEnergySource());
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "d", (char **) keywords, &energyJ)) {
+        return NULL;
+    }
+    (helper_class == NULL)? (self->obj->DecreaseRemainingEnergy(energyJ)) : (self->obj->ns3::LiIonEnergySource::DecreaseRemainingEnergy(energyJ));
     Py_INCREF(Py_None);
     py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3LiIonEnergySource_GetEnergyFraction(PyNs3LiIonEnergySource *self)
+{
+    PyObject *py_retval;
+    double retval;
+    PyNs3LiIonEnergySource__PythonHelper *helper_class = dynamic_cast<PyNs3LiIonEnergySource__PythonHelper*> (self->obj);
+    
+    retval = (helper_class == NULL)? (self->obj->GetEnergyFraction()) : (self->obj->ns3::LiIonEnergySource::GetEnergyFraction());
+    py_retval = Py_BuildValue((char *) "d", retval);
     return py_retval;
 }
 
@@ -8470,6 +8488,32 @@ _wrap_PyNs3LiIonEnergySource_GetEnergyUpdateInterval(PyNs3LiIonEnergySource *sel
     py_Time->obj = new ns3::Time(retval);
     PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
     py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3LiIonEnergySource_GetInitialEnergy(PyNs3LiIonEnergySource *self)
+{
+    PyObject *py_retval;
+    double retval;
+    PyNs3LiIonEnergySource__PythonHelper *helper_class = dynamic_cast<PyNs3LiIonEnergySource__PythonHelper*> (self->obj);
+    
+    retval = (helper_class == NULL)? (self->obj->GetInitialEnergy()) : (self->obj->ns3::LiIonEnergySource::GetInitialEnergy());
+    py_retval = Py_BuildValue((char *) "d", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3LiIonEnergySource_GetRemainingEnergy(PyNs3LiIonEnergySource *self)
+{
+    PyObject *py_retval;
+    double retval;
+    PyNs3LiIonEnergySource__PythonHelper *helper_class = dynamic_cast<PyNs3LiIonEnergySource__PythonHelper*> (self->obj);
+    
+    retval = (helper_class == NULL)? (self->obj->GetRemainingEnergy()) : (self->obj->ns3::LiIonEnergySource::GetRemainingEnergy());
+    py_retval = Py_BuildValue((char *) "d", retval);
     return py_retval;
 }
 
@@ -8504,7 +8548,7 @@ _wrap_PyNs3LiIonEnergySource_GetTypeId(void)
 
 
 PyObject *
-_wrap_PyNs3LiIonEnergySource_DecreaseRemainingEnergy(PyNs3LiIonEnergySource *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3LiIonEnergySource_IncreaseRemainingEnergy(PyNs3LiIonEnergySource *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
     double energyJ;
@@ -8514,7 +8558,7 @@ _wrap_PyNs3LiIonEnergySource_DecreaseRemainingEnergy(PyNs3LiIonEnergySource *sel
     if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "d", (char **) keywords, &energyJ)) {
         return NULL;
     }
-    (helper_class == NULL)? (self->obj->DecreaseRemainingEnergy(energyJ)) : (self->obj->ns3::LiIonEnergySource::DecreaseRemainingEnergy(energyJ));
+    (helper_class == NULL)? (self->obj->IncreaseRemainingEnergy(energyJ)) : (self->obj->ns3::LiIonEnergySource::IncreaseRemainingEnergy(energyJ));
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -8522,27 +8566,28 @@ _wrap_PyNs3LiIonEnergySource_DecreaseRemainingEnergy(PyNs3LiIonEnergySource *sel
 
 
 PyObject *
-_wrap_PyNs3LiIonEnergySource_GetEnergyFraction(PyNs3LiIonEnergySource *self)
+_wrap_PyNs3LiIonEnergySource_SetEnergyUpdateInterval(PyNs3LiIonEnergySource *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    double retval;
-    PyNs3LiIonEnergySource__PythonHelper *helper_class = dynamic_cast<PyNs3LiIonEnergySource__PythonHelper*> (self->obj);
+    PyObject *interval;
+    ns3::Time interval2;
+    const char *keywords[] = {"interval", NULL};
     
-    retval = (helper_class == NULL)? (self->obj->GetEnergyFraction()) : (self->obj->ns3::LiIonEnergySource::GetEnergyFraction());
-    py_retval = Py_BuildValue((char *) "d", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3LiIonEnergySource_GetRemainingEnergy(PyNs3LiIonEnergySource *self)
-{
-    PyObject *py_retval;
-    double retval;
-    PyNs3LiIonEnergySource__PythonHelper *helper_class = dynamic_cast<PyNs3LiIonEnergySource__PythonHelper*> (self->obj);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &interval)) {
+        return NULL;
+    }
+    if (PyObject_IsInstance(interval, (PyObject*) &PyNs3Time_Type)) {
+        interval2 = *((PyNs3Time *) interval)->obj;
+    } else if (PyObject_IsInstance(interval, (PyObject*) &PyNs3TracedValue__Ns3Time_Type)) {
+        interval2 = *((PyNs3TracedValue__Ns3Time *) interval)->obj;
+    } else {
     
-    retval = (helper_class == NULL)? (self->obj->GetRemainingEnergy()) : (self->obj->ns3::LiIonEnergySource::GetRemainingEnergy());
-    py_retval = Py_BuildValue((char *) "d", retval);
+        PyErr_Format(PyExc_TypeError, "parameter must an instance of one of the types (Time, TracedValue), not %s", Py_TYPE(interval)->tp_name);
+        return NULL;
+    }
+    self->obj->SetEnergyUpdateInterval(interval2);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -8582,57 +8627,12 @@ _wrap_PyNs3LiIonEnergySource_SetInitialSupplyVoltage(PyNs3LiIonEnergySource *sel
 
 
 PyObject *
-_wrap_PyNs3LiIonEnergySource_SetEnergyUpdateInterval(PyNs3LiIonEnergySource *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3LiIonEnergySource_UpdateEnergySource(PyNs3LiIonEnergySource *self)
 {
     PyObject *py_retval;
-    PyObject *interval;
-    ns3::Time interval2;
-    const char *keywords[] = {"interval", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &interval)) {
-        return NULL;
-    }
-    if (PyObject_IsInstance(interval, (PyObject*) &PyNs3Time_Type)) {
-        interval2 = *((PyNs3Time *) interval)->obj;
-    } else if (PyObject_IsInstance(interval, (PyObject*) &PyNs3TracedValue__Ns3Time_Type)) {
-        interval2 = *((PyNs3TracedValue__Ns3Time *) interval)->obj;
-    } else {
-    
-        PyErr_Format(PyExc_TypeError, "parameter must an instance of one of the types (Time, TracedValue), not %s", Py_TYPE(interval)->tp_name);
-        return NULL;
-    }
-    self->obj->SetEnergyUpdateInterval(interval2);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3LiIonEnergySource_GetInitialEnergy(PyNs3LiIonEnergySource *self)
-{
-    PyObject *py_retval;
-    double retval;
     PyNs3LiIonEnergySource__PythonHelper *helper_class = dynamic_cast<PyNs3LiIonEnergySource__PythonHelper*> (self->obj);
     
-    retval = (helper_class == NULL)? (self->obj->GetInitialEnergy()) : (self->obj->ns3::LiIonEnergySource::GetInitialEnergy());
-    py_retval = Py_BuildValue((char *) "d", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3LiIonEnergySource_IncreaseRemainingEnergy(PyNs3LiIonEnergySource *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    double energyJ;
-    PyNs3LiIonEnergySource__PythonHelper *helper_class = dynamic_cast<PyNs3LiIonEnergySource__PythonHelper*> (self->obj);
-    const char *keywords[] = {"energyJ", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "d", (char **) keywords, &energyJ)) {
-        return NULL;
-    }
-    (helper_class == NULL)? (self->obj->IncreaseRemainingEnergy(energyJ)) : (self->obj->ns3::LiIonEnergySource::IncreaseRemainingEnergy(energyJ));
+    (helper_class == NULL)? (self->obj->UpdateEnergySource()) : (self->obj->ns3::LiIonEnergySource::UpdateEnergySource());
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -8655,20 +8655,20 @@ _wrap_PyNs3LiIonEnergySource__copy__(PyNs3LiIonEnergySource *self)
 }
 
 static PyMethodDef PyNs3LiIonEnergySource_methods[] = {
-    {(char *) "UpdateEnergySource", (PyCFunction) _wrap_PyNs3LiIonEnergySource_UpdateEnergySource, METH_NOARGS, "UpdateEnergySource()\n\n" },
-    {(char *) "GetEnergyUpdateInterval", (PyCFunction) _wrap_PyNs3LiIonEnergySource_GetEnergyUpdateInterval, METH_NOARGS, "GetEnergyUpdateInterval()\n\n" },
-    {(char *) "GetSupplyVoltage", (PyCFunction) _wrap_PyNs3LiIonEnergySource_GetSupplyVoltage, METH_NOARGS, "GetSupplyVoltage()\n\n" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3LiIonEnergySource_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
     {(char *) "DecreaseRemainingEnergy", (PyCFunction) _wrap_PyNs3LiIonEnergySource_DecreaseRemainingEnergy, METH_KEYWORDS|METH_VARARGS, "DecreaseRemainingEnergy(energyJ)\n\ntype: energyJ: double" },
     {(char *) "GetEnergyFraction", (PyCFunction) _wrap_PyNs3LiIonEnergySource_GetEnergyFraction, METH_NOARGS, "GetEnergyFraction()\n\n" },
+    {(char *) "GetEnergyUpdateInterval", (PyCFunction) _wrap_PyNs3LiIonEnergySource_GetEnergyUpdateInterval, METH_NOARGS, "GetEnergyUpdateInterval()\n\n" },
+    {(char *) "GetInitialEnergy", (PyCFunction) _wrap_PyNs3LiIonEnergySource_GetInitialEnergy, METH_NOARGS, "GetInitialEnergy()\n\n" },
     {(char *) "GetRemainingEnergy", (PyCFunction) _wrap_PyNs3LiIonEnergySource_GetRemainingEnergy, METH_NOARGS, "GetRemainingEnergy()\n\n" },
+    {(char *) "GetSupplyVoltage", (PyCFunction) _wrap_PyNs3LiIonEnergySource_GetSupplyVoltage, METH_NOARGS, "GetSupplyVoltage()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3LiIonEnergySource_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "IncreaseRemainingEnergy", (PyCFunction) _wrap_PyNs3LiIonEnergySource_IncreaseRemainingEnergy, METH_KEYWORDS|METH_VARARGS, "IncreaseRemainingEnergy(energyJ)\n\ntype: energyJ: double" },
+    {(char *) "SetEnergyUpdateInterval", (PyCFunction) _wrap_PyNs3LiIonEnergySource_SetEnergyUpdateInterval, METH_KEYWORDS|METH_VARARGS, "SetEnergyUpdateInterval(interval)\n\ntype: interval: ns3::Time" },
     {(char *) "SetInitialEnergy", (PyCFunction) _wrap_PyNs3LiIonEnergySource_SetInitialEnergy, METH_KEYWORDS|METH_VARARGS, "SetInitialEnergy(initialEnergyJ)\n\ntype: initialEnergyJ: double" },
     {(char *) "SetInitialSupplyVoltage", (PyCFunction) _wrap_PyNs3LiIonEnergySource_SetInitialSupplyVoltage, METH_KEYWORDS|METH_VARARGS, "SetInitialSupplyVoltage(supplyVoltageV)\n\ntype: supplyVoltageV: double" },
-    {(char *) "SetEnergyUpdateInterval", (PyCFunction) _wrap_PyNs3LiIonEnergySource_SetEnergyUpdateInterval, METH_KEYWORDS|METH_VARARGS, "SetEnergyUpdateInterval(interval)\n\ntype: interval: ns3::Time" },
-    {(char *) "GetInitialEnergy", (PyCFunction) _wrap_PyNs3LiIonEnergySource_GetInitialEnergy, METH_NOARGS, "GetInitialEnergy()\n\n" },
-    {(char *) "IncreaseRemainingEnergy", (PyCFunction) _wrap_PyNs3LiIonEnergySource_IncreaseRemainingEnergy, METH_KEYWORDS|METH_VARARGS, "IncreaseRemainingEnergy(energyJ)\n\ntype: energyJ: double" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3LiIonEnergySource__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "UpdateEnergySource", (PyCFunction) _wrap_PyNs3LiIonEnergySource_UpdateEnergySource, METH_NOARGS, "UpdateEnergySource()\n\n" },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3LiIonEnergySource__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3LiIonEnergySource__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3LiIonEnergySource__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -8768,7 +8768,7 @@ PyTypeObject PyNs3LiIonEnergySource_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
     "LiIonEnergySource(arg0)\nLiIonEnergySource()",                        /* Documentation string */
     (traverseproc)PyNs3LiIonEnergySource__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3LiIonEnergySource__tp_clear,             /* tp_clear */
@@ -8801,22 +8801,6 @@ PyTypeObject PyNs3LiIonEnergySource_Type = {
 
 
 PyObject *
-PyNs3RvBatteryModel__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3RvBatteryModel *self)
-{
-    PyObject *py_retval;
-    PyNs3RvBatteryModel__PythonHelper *helper = dynamic_cast< PyNs3RvBatteryModel__PythonHelper* >(self->obj);
-    
-    if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
-        return NULL;
-    }
-    helper->NotifyConstructionCompleted__parent_caller();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject *
 PyNs3RvBatteryModel__PythonHelper::_wrap_NotifyNewAggregate(PyNs3RvBatteryModel *self)
 {
     PyObject *py_retval;
@@ -8827,6 +8811,22 @@ PyNs3RvBatteryModel__PythonHelper::_wrap_NotifyNewAggregate(PyNs3RvBatteryModel 
         return NULL;
     }
     helper->NotifyNewAggregate__parent_caller();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject *
+PyNs3RvBatteryModel__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3RvBatteryModel *self)
+{
+    PyObject *py_retval;
+    PyNs3RvBatteryModel__PythonHelper *helper = dynamic_cast< PyNs3RvBatteryModel__PythonHelper* >(self->obj);
+    
+    if (helper == NULL) {
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        return NULL;
+    }
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -9376,14 +9376,91 @@ int _wrap_PyNs3RvBatteryModel__tp_init(PyNs3RvBatteryModel *self, PyObject *args
 
 
 PyObject *
-_wrap_PyNs3RvBatteryModel_UpdateEnergySource(PyNs3RvBatteryModel *self)
+_wrap_PyNs3RvBatteryModel_GetAlpha(PyNs3RvBatteryModel *self)
 {
     PyObject *py_retval;
+    double retval;
+    
+    retval = self->obj->GetAlpha();
+    py_retval = Py_BuildValue((char *) "d", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RvBatteryModel_GetBatteryLevel(PyNs3RvBatteryModel *self)
+{
+    PyObject *py_retval;
+    double retval;
+    
+    retval = self->obj->GetBatteryLevel();
+    py_retval = Py_BuildValue((char *) "d", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RvBatteryModel_GetBeta(PyNs3RvBatteryModel *self)
+{
+    PyObject *py_retval;
+    double retval;
+    
+    retval = self->obj->GetBeta();
+    py_retval = Py_BuildValue((char *) "d", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RvBatteryModel_GetCutoffVoltage(PyNs3RvBatteryModel *self)
+{
+    PyObject *py_retval;
+    double retval;
+    
+    retval = self->obj->GetCutoffVoltage();
+    py_retval = Py_BuildValue((char *) "d", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RvBatteryModel_GetEnergyFraction(PyNs3RvBatteryModel *self)
+{
+    PyObject *py_retval;
+    double retval;
     PyNs3RvBatteryModel__PythonHelper *helper_class = dynamic_cast<PyNs3RvBatteryModel__PythonHelper*> (self->obj);
     
-    (helper_class == NULL)? (self->obj->UpdateEnergySource()) : (self->obj->ns3::RvBatteryModel::UpdateEnergySource());
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    retval = (helper_class == NULL)? (self->obj->GetEnergyFraction()) : (self->obj->ns3::RvBatteryModel::GetEnergyFraction());
+    py_retval = Py_BuildValue((char *) "d", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RvBatteryModel_GetInitialEnergy(PyNs3RvBatteryModel *self)
+{
+    PyObject *py_retval;
+    double retval;
+    PyNs3RvBatteryModel__PythonHelper *helper_class = dynamic_cast<PyNs3RvBatteryModel__PythonHelper*> (self->obj);
+    
+    retval = (helper_class == NULL)? (self->obj->GetInitialEnergy()) : (self->obj->ns3::RvBatteryModel::GetInitialEnergy());
+    py_retval = Py_BuildValue((char *) "d", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RvBatteryModel_GetLifetime(PyNs3RvBatteryModel *self)
+{
+    PyObject *py_retval;
+    PyNs3Time *py_Time;
+    
+    ns3::Time retval = self->obj->GetLifetime();
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
     return py_retval;
 }
 
@@ -9396,6 +9473,127 @@ _wrap_PyNs3RvBatteryModel_GetNumOfTerms(PyNs3RvBatteryModel *self)
     
     retval = self->obj->GetNumOfTerms();
     py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RvBatteryModel_GetOpenCircuitVoltage(PyNs3RvBatteryModel *self)
+{
+    PyObject *py_retval;
+    double retval;
+    
+    retval = self->obj->GetOpenCircuitVoltage();
+    py_retval = Py_BuildValue((char *) "d", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RvBatteryModel_GetRemainingEnergy(PyNs3RvBatteryModel *self)
+{
+    PyObject *py_retval;
+    double retval;
+    PyNs3RvBatteryModel__PythonHelper *helper_class = dynamic_cast<PyNs3RvBatteryModel__PythonHelper*> (self->obj);
+    
+    retval = (helper_class == NULL)? (self->obj->GetRemainingEnergy()) : (self->obj->ns3::RvBatteryModel::GetRemainingEnergy());
+    py_retval = Py_BuildValue((char *) "d", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RvBatteryModel_GetSamplingInterval(PyNs3RvBatteryModel *self)
+{
+    PyObject *py_retval;
+    PyNs3Time *py_Time;
+    
+    ns3::Time retval = self->obj->GetSamplingInterval();
+    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
+    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Time->obj = new ns3::Time(retval);
+    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
+    py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RvBatteryModel_GetSupplyVoltage(PyNs3RvBatteryModel *self)
+{
+    PyObject *py_retval;
+    double retval;
+    PyNs3RvBatteryModel__PythonHelper *helper_class = dynamic_cast<PyNs3RvBatteryModel__PythonHelper*> (self->obj);
+    
+    retval = (helper_class == NULL)? (self->obj->GetSupplyVoltage()) : (self->obj->ns3::RvBatteryModel::GetSupplyVoltage());
+    py_retval = Py_BuildValue((char *) "d", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RvBatteryModel_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::RvBatteryModel::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RvBatteryModel_SetAlpha(PyNs3RvBatteryModel *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    double alpha;
+    const char *keywords[] = {"alpha", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "d", (char **) keywords, &alpha)) {
+        return NULL;
+    }
+    self->obj->SetAlpha(alpha);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RvBatteryModel_SetBeta(PyNs3RvBatteryModel *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    double beta;
+    const char *keywords[] = {"beta", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "d", (char **) keywords, &beta)) {
+        return NULL;
+    }
+    self->obj->SetBeta(beta);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3RvBatteryModel_SetCutoffVoltage(PyNs3RvBatteryModel *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    double voltage;
+    const char *keywords[] = {"voltage", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "d", (char **) keywords, &voltage)) {
+        return NULL;
+    }
+    self->obj->SetCutoffVoltage(voltage);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -9435,187 +9633,6 @@ _wrap_PyNs3RvBatteryModel_SetOpenCircuitVoltage(PyNs3RvBatteryModel *self, PyObj
 
 
 PyObject *
-_wrap_PyNs3RvBatteryModel_GetSupplyVoltage(PyNs3RvBatteryModel *self)
-{
-    PyObject *py_retval;
-    double retval;
-    PyNs3RvBatteryModel__PythonHelper *helper_class = dynamic_cast<PyNs3RvBatteryModel__PythonHelper*> (self->obj);
-    
-    retval = (helper_class == NULL)? (self->obj->GetSupplyVoltage()) : (self->obj->ns3::RvBatteryModel::GetSupplyVoltage());
-    py_retval = Py_BuildValue((char *) "d", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RvBatteryModel_SetBeta(PyNs3RvBatteryModel *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    double beta;
-    const char *keywords[] = {"beta", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "d", (char **) keywords, &beta)) {
-        return NULL;
-    }
-    self->obj->SetBeta(beta);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RvBatteryModel_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::RvBatteryModel::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RvBatteryModel_GetCutoffVoltage(PyNs3RvBatteryModel *self)
-{
-    PyObject *py_retval;
-    double retval;
-    
-    retval = self->obj->GetCutoffVoltage();
-    py_retval = Py_BuildValue((char *) "d", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RvBatteryModel_GetBeta(PyNs3RvBatteryModel *self)
-{
-    PyObject *py_retval;
-    double retval;
-    
-    retval = self->obj->GetBeta();
-    py_retval = Py_BuildValue((char *) "d", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RvBatteryModel_GetLifetime(PyNs3RvBatteryModel *self)
-{
-    PyObject *py_retval;
-    PyNs3Time *py_Time;
-    
-    ns3::Time retval = self->obj->GetLifetime();
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RvBatteryModel_GetEnergyFraction(PyNs3RvBatteryModel *self)
-{
-    PyObject *py_retval;
-    double retval;
-    PyNs3RvBatteryModel__PythonHelper *helper_class = dynamic_cast<PyNs3RvBatteryModel__PythonHelper*> (self->obj);
-    
-    retval = (helper_class == NULL)? (self->obj->GetEnergyFraction()) : (self->obj->ns3::RvBatteryModel::GetEnergyFraction());
-    py_retval = Py_BuildValue((char *) "d", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RvBatteryModel_GetOpenCircuitVoltage(PyNs3RvBatteryModel *self)
-{
-    PyObject *py_retval;
-    double retval;
-    
-    retval = self->obj->GetOpenCircuitVoltage();
-    py_retval = Py_BuildValue((char *) "d", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RvBatteryModel_GetBatteryLevel(PyNs3RvBatteryModel *self)
-{
-    PyObject *py_retval;
-    double retval;
-    
-    retval = self->obj->GetBatteryLevel();
-    py_retval = Py_BuildValue((char *) "d", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RvBatteryModel_GetRemainingEnergy(PyNs3RvBatteryModel *self)
-{
-    PyObject *py_retval;
-    double retval;
-    PyNs3RvBatteryModel__PythonHelper *helper_class = dynamic_cast<PyNs3RvBatteryModel__PythonHelper*> (self->obj);
-    
-    retval = (helper_class == NULL)? (self->obj->GetRemainingEnergy()) : (self->obj->ns3::RvBatteryModel::GetRemainingEnergy());
-    py_retval = Py_BuildValue((char *) "d", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RvBatteryModel_GetSamplingInterval(PyNs3RvBatteryModel *self)
-{
-    PyObject *py_retval;
-    PyNs3Time *py_Time;
-    
-    ns3::Time retval = self->obj->GetSamplingInterval();
-    py_Time = PyObject_New(PyNs3Time, &PyNs3Time_Type);
-    py_Time->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Time->obj = new ns3::Time(retval);
-    PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
-    py_retval = Py_BuildValue((char *) "N", py_Time);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RvBatteryModel_GetAlpha(PyNs3RvBatteryModel *self)
-{
-    PyObject *py_retval;
-    double retval;
-    
-    retval = self->obj->GetAlpha();
-    py_retval = Py_BuildValue((char *) "d", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RvBatteryModel_SetAlpha(PyNs3RvBatteryModel *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    double alpha;
-    const char *keywords[] = {"alpha", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "d", (char **) keywords, &alpha)) {
-        return NULL;
-    }
-    self->obj->SetAlpha(alpha);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3RvBatteryModel_SetSamplingInterval(PyNs3RvBatteryModel *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -9643,29 +9660,12 @@ _wrap_PyNs3RvBatteryModel_SetSamplingInterval(PyNs3RvBatteryModel *self, PyObjec
 
 
 PyObject *
-_wrap_PyNs3RvBatteryModel_GetInitialEnergy(PyNs3RvBatteryModel *self)
+_wrap_PyNs3RvBatteryModel_UpdateEnergySource(PyNs3RvBatteryModel *self)
 {
     PyObject *py_retval;
-    double retval;
     PyNs3RvBatteryModel__PythonHelper *helper_class = dynamic_cast<PyNs3RvBatteryModel__PythonHelper*> (self->obj);
     
-    retval = (helper_class == NULL)? (self->obj->GetInitialEnergy()) : (self->obj->ns3::RvBatteryModel::GetInitialEnergy());
-    py_retval = Py_BuildValue((char *) "d", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3RvBatteryModel_SetCutoffVoltage(PyNs3RvBatteryModel *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    double voltage;
-    const char *keywords[] = {"voltage", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "d", (char **) keywords, &voltage)) {
-        return NULL;
-    }
-    self->obj->SetCutoffVoltage(voltage);
+    (helper_class == NULL)? (self->obj->UpdateEnergySource()) : (self->obj->ns3::RvBatteryModel::UpdateEnergySource());
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -9688,28 +9688,28 @@ _wrap_PyNs3RvBatteryModel__copy__(PyNs3RvBatteryModel *self)
 }
 
 static PyMethodDef PyNs3RvBatteryModel_methods[] = {
-    {(char *) "UpdateEnergySource", (PyCFunction) _wrap_PyNs3RvBatteryModel_UpdateEnergySource, METH_NOARGS, "UpdateEnergySource()\n\n" },
-    {(char *) "GetNumOfTerms", (PyCFunction) _wrap_PyNs3RvBatteryModel_GetNumOfTerms, METH_NOARGS, "GetNumOfTerms()\n\n" },
-    {(char *) "SetNumOfTerms", (PyCFunction) _wrap_PyNs3RvBatteryModel_SetNumOfTerms, METH_KEYWORDS|METH_VARARGS, "SetNumOfTerms(num)\n\ntype: num: int" },
-    {(char *) "SetOpenCircuitVoltage", (PyCFunction) _wrap_PyNs3RvBatteryModel_SetOpenCircuitVoltage, METH_KEYWORDS|METH_VARARGS, "SetOpenCircuitVoltage(voltage)\n\ntype: voltage: double" },
-    {(char *) "GetSupplyVoltage", (PyCFunction) _wrap_PyNs3RvBatteryModel_GetSupplyVoltage, METH_NOARGS, "GetSupplyVoltage()\n\n" },
-    {(char *) "SetBeta", (PyCFunction) _wrap_PyNs3RvBatteryModel_SetBeta, METH_KEYWORDS|METH_VARARGS, "SetBeta(beta)\n\ntype: beta: double" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3RvBatteryModel_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "GetCutoffVoltage", (PyCFunction) _wrap_PyNs3RvBatteryModel_GetCutoffVoltage, METH_NOARGS, "GetCutoffVoltage()\n\n" },
-    {(char *) "GetBeta", (PyCFunction) _wrap_PyNs3RvBatteryModel_GetBeta, METH_NOARGS, "GetBeta()\n\n" },
-    {(char *) "GetLifetime", (PyCFunction) _wrap_PyNs3RvBatteryModel_GetLifetime, METH_NOARGS, "GetLifetime()\n\n" },
-    {(char *) "GetEnergyFraction", (PyCFunction) _wrap_PyNs3RvBatteryModel_GetEnergyFraction, METH_NOARGS, "GetEnergyFraction()\n\n" },
-    {(char *) "GetOpenCircuitVoltage", (PyCFunction) _wrap_PyNs3RvBatteryModel_GetOpenCircuitVoltage, METH_NOARGS, "GetOpenCircuitVoltage()\n\n" },
+    {(char *) "GetAlpha", (PyCFunction) _wrap_PyNs3RvBatteryModel_GetAlpha, METH_NOARGS, "GetAlpha()\n\n" },
     {(char *) "GetBatteryLevel", (PyCFunction) _wrap_PyNs3RvBatteryModel_GetBatteryLevel, METH_NOARGS, "GetBatteryLevel()\n\n" },
+    {(char *) "GetBeta", (PyCFunction) _wrap_PyNs3RvBatteryModel_GetBeta, METH_NOARGS, "GetBeta()\n\n" },
+    {(char *) "GetCutoffVoltage", (PyCFunction) _wrap_PyNs3RvBatteryModel_GetCutoffVoltage, METH_NOARGS, "GetCutoffVoltage()\n\n" },
+    {(char *) "GetEnergyFraction", (PyCFunction) _wrap_PyNs3RvBatteryModel_GetEnergyFraction, METH_NOARGS, "GetEnergyFraction()\n\n" },
+    {(char *) "GetInitialEnergy", (PyCFunction) _wrap_PyNs3RvBatteryModel_GetInitialEnergy, METH_NOARGS, "GetInitialEnergy()\n\n" },
+    {(char *) "GetLifetime", (PyCFunction) _wrap_PyNs3RvBatteryModel_GetLifetime, METH_NOARGS, "GetLifetime()\n\n" },
+    {(char *) "GetNumOfTerms", (PyCFunction) _wrap_PyNs3RvBatteryModel_GetNumOfTerms, METH_NOARGS, "GetNumOfTerms()\n\n" },
+    {(char *) "GetOpenCircuitVoltage", (PyCFunction) _wrap_PyNs3RvBatteryModel_GetOpenCircuitVoltage, METH_NOARGS, "GetOpenCircuitVoltage()\n\n" },
     {(char *) "GetRemainingEnergy", (PyCFunction) _wrap_PyNs3RvBatteryModel_GetRemainingEnergy, METH_NOARGS, "GetRemainingEnergy()\n\n" },
     {(char *) "GetSamplingInterval", (PyCFunction) _wrap_PyNs3RvBatteryModel_GetSamplingInterval, METH_NOARGS, "GetSamplingInterval()\n\n" },
-    {(char *) "GetAlpha", (PyCFunction) _wrap_PyNs3RvBatteryModel_GetAlpha, METH_NOARGS, "GetAlpha()\n\n" },
+    {(char *) "GetSupplyVoltage", (PyCFunction) _wrap_PyNs3RvBatteryModel_GetSupplyVoltage, METH_NOARGS, "GetSupplyVoltage()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3RvBatteryModel_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
     {(char *) "SetAlpha", (PyCFunction) _wrap_PyNs3RvBatteryModel_SetAlpha, METH_KEYWORDS|METH_VARARGS, "SetAlpha(alpha)\n\ntype: alpha: double" },
-    {(char *) "SetSamplingInterval", (PyCFunction) _wrap_PyNs3RvBatteryModel_SetSamplingInterval, METH_KEYWORDS|METH_VARARGS, "SetSamplingInterval(interval)\n\ntype: interval: ns3::Time" },
-    {(char *) "GetInitialEnergy", (PyCFunction) _wrap_PyNs3RvBatteryModel_GetInitialEnergy, METH_NOARGS, "GetInitialEnergy()\n\n" },
+    {(char *) "SetBeta", (PyCFunction) _wrap_PyNs3RvBatteryModel_SetBeta, METH_KEYWORDS|METH_VARARGS, "SetBeta(beta)\n\ntype: beta: double" },
     {(char *) "SetCutoffVoltage", (PyCFunction) _wrap_PyNs3RvBatteryModel_SetCutoffVoltage, METH_KEYWORDS|METH_VARARGS, "SetCutoffVoltage(voltage)\n\ntype: voltage: double" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3RvBatteryModel__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "SetNumOfTerms", (PyCFunction) _wrap_PyNs3RvBatteryModel_SetNumOfTerms, METH_KEYWORDS|METH_VARARGS, "SetNumOfTerms(num)\n\ntype: num: int" },
+    {(char *) "SetOpenCircuitVoltage", (PyCFunction) _wrap_PyNs3RvBatteryModel_SetOpenCircuitVoltage, METH_KEYWORDS|METH_VARARGS, "SetOpenCircuitVoltage(voltage)\n\ntype: voltage: double" },
+    {(char *) "SetSamplingInterval", (PyCFunction) _wrap_PyNs3RvBatteryModel_SetSamplingInterval, METH_KEYWORDS|METH_VARARGS, "SetSamplingInterval(interval)\n\ntype: interval: ns3::Time" },
+    {(char *) "UpdateEnergySource", (PyCFunction) _wrap_PyNs3RvBatteryModel_UpdateEnergySource, METH_NOARGS, "UpdateEnergySource()\n\n" },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3RvBatteryModel__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3RvBatteryModel__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3RvBatteryModel__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -9809,7 +9809,7 @@ PyTypeObject PyNs3RvBatteryModel_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
     "RvBatteryModel(arg0)\nRvBatteryModel()",                        /* Documentation string */
     (traverseproc)PyNs3RvBatteryModel__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3RvBatteryModel__tp_clear,             /* tp_clear */
@@ -9842,22 +9842,6 @@ PyTypeObject PyNs3RvBatteryModel_Type = {
 
 
 PyObject *
-PyNs3SimpleDeviceEnergyModel__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3SimpleDeviceEnergyModel *self)
-{
-    PyObject *py_retval;
-    PyNs3SimpleDeviceEnergyModel__PythonHelper *helper = dynamic_cast< PyNs3SimpleDeviceEnergyModel__PythonHelper* >(self->obj);
-    
-    if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
-        return NULL;
-    }
-    helper->NotifyConstructionCompleted__parent_caller();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject *
 PyNs3SimpleDeviceEnergyModel__PythonHelper::_wrap_DoInitialize(PyNs3SimpleDeviceEnergyModel *self)
 {
     PyObject *py_retval;
@@ -9884,6 +9868,22 @@ PyNs3SimpleDeviceEnergyModel__PythonHelper::_wrap_NotifyNewAggregate(PyNs3Simple
         return NULL;
     }
     helper->NotifyNewAggregate__parent_caller();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject *
+PyNs3SimpleDeviceEnergyModel__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3SimpleDeviceEnergyModel *self)
+{
+    PyObject *py_retval;
+    PyNs3SimpleDeviceEnergyModel__PythonHelper *helper = dynamic_cast< PyNs3SimpleDeviceEnergyModel__PythonHelper* >(self->obj);
+    
+    if (helper == NULL) {
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        return NULL;
+    }
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -10683,118 +10683,6 @@ int _wrap_PyNs3SimpleDeviceEnergyModel__tp_init(PyNs3SimpleDeviceEnergyModel *se
 
 
 PyObject *
-_wrap_PyNs3SimpleDeviceEnergyModel_HandleEnergyRecharged(PyNs3SimpleDeviceEnergyModel *self)
-{
-    PyObject *py_retval;
-    PyNs3SimpleDeviceEnergyModel__PythonHelper *helper_class = dynamic_cast<PyNs3SimpleDeviceEnergyModel__PythonHelper*> (self->obj);
-    
-    (helper_class == NULL)? (self->obj->HandleEnergyRecharged()) : (self->obj->ns3::SimpleDeviceEnergyModel::HandleEnergyRecharged());
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SimpleDeviceEnergyModel_HandleEnergyDepletion(PyNs3SimpleDeviceEnergyModel *self)
-{
-    PyObject *py_retval;
-    PyNs3SimpleDeviceEnergyModel__PythonHelper *helper_class = dynamic_cast<PyNs3SimpleDeviceEnergyModel__PythonHelper*> (self->obj);
-    
-    (helper_class == NULL)? (self->obj->HandleEnergyDepletion()) : (self->obj->ns3::SimpleDeviceEnergyModel::HandleEnergyDepletion());
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SimpleDeviceEnergyModel_SetEnergySource(PyNs3SimpleDeviceEnergyModel *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3EnergySource *source;
-    ns3::EnergySource *source_ptr;
-    PyNs3SimpleDeviceEnergyModel__PythonHelper *helper_class = dynamic_cast<PyNs3SimpleDeviceEnergyModel__PythonHelper*> (self->obj);
-    const char *keywords[] = {"source", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3EnergySource_Type, &source)) {
-        return NULL;
-    }
-    source_ptr = (source ? source->obj : NULL);
-    (helper_class == NULL)? (self->obj->SetEnergySource(ns3::Ptr< ns3::EnergySource  > (source_ptr))) : (self->obj->ns3::SimpleDeviceEnergyModel::SetEnergySource(ns3::Ptr< ns3::EnergySource  > (source_ptr)));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SimpleDeviceEnergyModel_GetTypeId(void)
-{
-    PyObject *py_retval;
-    PyNs3TypeId *py_TypeId;
-    
-    ns3::TypeId retval = ns3::SimpleDeviceEnergyModel::GetTypeId();
-    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
-    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_TypeId->obj = new ns3::TypeId(retval);
-    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
-    py_retval = Py_BuildValue((char *) "N", py_TypeId);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SimpleDeviceEnergyModel_SetCurrentA(PyNs3SimpleDeviceEnergyModel *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    double current;
-    const char *keywords[] = {"current", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "d", (char **) keywords, &current)) {
-        return NULL;
-    }
-    self->obj->SetCurrentA(current);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SimpleDeviceEnergyModel_GetTotalEnergyConsumption(PyNs3SimpleDeviceEnergyModel *self)
-{
-    PyObject *py_retval;
-    double retval;
-    PyNs3SimpleDeviceEnergyModel__PythonHelper *helper_class = dynamic_cast<PyNs3SimpleDeviceEnergyModel__PythonHelper*> (self->obj);
-    
-    retval = (helper_class == NULL)? (self->obj->GetTotalEnergyConsumption()) : (self->obj->ns3::SimpleDeviceEnergyModel::GetTotalEnergyConsumption());
-    py_retval = Py_BuildValue((char *) "d", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SimpleDeviceEnergyModel_SetNode(PyNs3SimpleDeviceEnergyModel *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Node *node;
-    ns3::Node *node_ptr;
-    PyNs3SimpleDeviceEnergyModel__PythonHelper *helper_class = dynamic_cast<PyNs3SimpleDeviceEnergyModel__PythonHelper*> (self->obj);
-    const char *keywords[] = {"node", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Node_Type, &node)) {
-        return NULL;
-    }
-    node_ptr = (node ? node->obj : NULL);
-    (helper_class == NULL)? (self->obj->SetNode(ns3::Ptr< ns3::Node  > (node_ptr))) : (self->obj->ns3::SimpleDeviceEnergyModel::SetNode(ns3::Ptr< ns3::Node  > (node_ptr)));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3SimpleDeviceEnergyModel_ChangeState(PyNs3SimpleDeviceEnergyModel *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -10806,19 +10694,6 @@ _wrap_PyNs3SimpleDeviceEnergyModel_ChangeState(PyNs3SimpleDeviceEnergyModel *sel
         return NULL;
     }
     (helper_class == NULL)? (self->obj->ChangeState(newState)) : (self->obj->ns3::SimpleDeviceEnergyModel::ChangeState(newState));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3SimpleDeviceEnergyModel_HandleEnergyChanged(PyNs3SimpleDeviceEnergyModel *self)
-{
-    PyObject *py_retval;
-    PyNs3SimpleDeviceEnergyModel__PythonHelper *helper_class = dynamic_cast<PyNs3SimpleDeviceEnergyModel__PythonHelper*> (self->obj);
-    
-    (helper_class == NULL)? (self->obj->HandleEnergyChanged()) : (self->obj->ns3::SimpleDeviceEnergyModel::HandleEnergyChanged());
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -10871,6 +10746,131 @@ _wrap_PyNs3SimpleDeviceEnergyModel_GetNode(PyNs3SimpleDeviceEnergyModel *self)
 }
 
 
+PyObject *
+_wrap_PyNs3SimpleDeviceEnergyModel_GetTotalEnergyConsumption(PyNs3SimpleDeviceEnergyModel *self)
+{
+    PyObject *py_retval;
+    double retval;
+    PyNs3SimpleDeviceEnergyModel__PythonHelper *helper_class = dynamic_cast<PyNs3SimpleDeviceEnergyModel__PythonHelper*> (self->obj);
+    
+    retval = (helper_class == NULL)? (self->obj->GetTotalEnergyConsumption()) : (self->obj->ns3::SimpleDeviceEnergyModel::GetTotalEnergyConsumption());
+    py_retval = Py_BuildValue((char *) "d", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SimpleDeviceEnergyModel_GetTypeId(void)
+{
+    PyObject *py_retval;
+    PyNs3TypeId *py_TypeId;
+    
+    ns3::TypeId retval = ns3::SimpleDeviceEnergyModel::GetTypeId();
+    py_TypeId = PyObject_New(PyNs3TypeId, &PyNs3TypeId_Type);
+    py_TypeId->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_TypeId->obj = new ns3::TypeId(retval);
+    PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
+    py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SimpleDeviceEnergyModel_HandleEnergyChanged(PyNs3SimpleDeviceEnergyModel *self)
+{
+    PyObject *py_retval;
+    PyNs3SimpleDeviceEnergyModel__PythonHelper *helper_class = dynamic_cast<PyNs3SimpleDeviceEnergyModel__PythonHelper*> (self->obj);
+    
+    (helper_class == NULL)? (self->obj->HandleEnergyChanged()) : (self->obj->ns3::SimpleDeviceEnergyModel::HandleEnergyChanged());
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SimpleDeviceEnergyModel_HandleEnergyDepletion(PyNs3SimpleDeviceEnergyModel *self)
+{
+    PyObject *py_retval;
+    PyNs3SimpleDeviceEnergyModel__PythonHelper *helper_class = dynamic_cast<PyNs3SimpleDeviceEnergyModel__PythonHelper*> (self->obj);
+    
+    (helper_class == NULL)? (self->obj->HandleEnergyDepletion()) : (self->obj->ns3::SimpleDeviceEnergyModel::HandleEnergyDepletion());
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SimpleDeviceEnergyModel_HandleEnergyRecharged(PyNs3SimpleDeviceEnergyModel *self)
+{
+    PyObject *py_retval;
+    PyNs3SimpleDeviceEnergyModel__PythonHelper *helper_class = dynamic_cast<PyNs3SimpleDeviceEnergyModel__PythonHelper*> (self->obj);
+    
+    (helper_class == NULL)? (self->obj->HandleEnergyRecharged()) : (self->obj->ns3::SimpleDeviceEnergyModel::HandleEnergyRecharged());
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SimpleDeviceEnergyModel_SetCurrentA(PyNs3SimpleDeviceEnergyModel *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    double current;
+    const char *keywords[] = {"current", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "d", (char **) keywords, &current)) {
+        return NULL;
+    }
+    self->obj->SetCurrentA(current);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SimpleDeviceEnergyModel_SetEnergySource(PyNs3SimpleDeviceEnergyModel *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3EnergySource *source;
+    ns3::EnergySource *source_ptr;
+    PyNs3SimpleDeviceEnergyModel__PythonHelper *helper_class = dynamic_cast<PyNs3SimpleDeviceEnergyModel__PythonHelper*> (self->obj);
+    const char *keywords[] = {"source", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3EnergySource_Type, &source)) {
+        return NULL;
+    }
+    source_ptr = (source ? source->obj : NULL);
+    (helper_class == NULL)? (self->obj->SetEnergySource(ns3::Ptr< ns3::EnergySource  > (source_ptr))) : (self->obj->ns3::SimpleDeviceEnergyModel::SetEnergySource(ns3::Ptr< ns3::EnergySource  > (source_ptr)));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3SimpleDeviceEnergyModel_SetNode(PyNs3SimpleDeviceEnergyModel *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Node *node;
+    ns3::Node *node_ptr;
+    PyNs3SimpleDeviceEnergyModel__PythonHelper *helper_class = dynamic_cast<PyNs3SimpleDeviceEnergyModel__PythonHelper*> (self->obj);
+    const char *keywords[] = {"node", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Node_Type, &node)) {
+        return NULL;
+    }
+    node_ptr = (node ? node->obj : NULL);
+    (helper_class == NULL)? (self->obj->SetNode(ns3::Ptr< ns3::Node  > (node_ptr))) : (self->obj->ns3::SimpleDeviceEnergyModel::SetNode(ns3::Ptr< ns3::Node  > (node_ptr)));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
 static PyObject*
 _wrap_PyNs3SimpleDeviceEnergyModel__copy__(PyNs3SimpleDeviceEnergyModel *self)
 {
@@ -10887,19 +10887,19 @@ _wrap_PyNs3SimpleDeviceEnergyModel__copy__(PyNs3SimpleDeviceEnergyModel *self)
 }
 
 static PyMethodDef PyNs3SimpleDeviceEnergyModel_methods[] = {
-    {(char *) "HandleEnergyRecharged", (PyCFunction) _wrap_PyNs3SimpleDeviceEnergyModel_HandleEnergyRecharged, METH_NOARGS, "HandleEnergyRecharged()\n\n" },
-    {(char *) "HandleEnergyDepletion", (PyCFunction) _wrap_PyNs3SimpleDeviceEnergyModel_HandleEnergyDepletion, METH_NOARGS, "HandleEnergyDepletion()\n\n" },
-    {(char *) "SetEnergySource", (PyCFunction) _wrap_PyNs3SimpleDeviceEnergyModel_SetEnergySource, METH_KEYWORDS|METH_VARARGS, "SetEnergySource(source)\n\ntype: source: ns3::Ptr< ns3::EnergySource >" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3SimpleDeviceEnergyModel_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "SetCurrentA", (PyCFunction) _wrap_PyNs3SimpleDeviceEnergyModel_SetCurrentA, METH_KEYWORDS|METH_VARARGS, "SetCurrentA(current)\n\ntype: current: double" },
-    {(char *) "GetTotalEnergyConsumption", (PyCFunction) _wrap_PyNs3SimpleDeviceEnergyModel_GetTotalEnergyConsumption, METH_NOARGS, "GetTotalEnergyConsumption()\n\n" },
-    {(char *) "SetNode", (PyCFunction) _wrap_PyNs3SimpleDeviceEnergyModel_SetNode, METH_KEYWORDS|METH_VARARGS, "SetNode(node)\n\ntype: node: ns3::Ptr< ns3::Node >" },
     {(char *) "ChangeState", (PyCFunction) _wrap_PyNs3SimpleDeviceEnergyModel_ChangeState, METH_KEYWORDS|METH_VARARGS, "ChangeState(newState)\n\ntype: newState: int" },
-    {(char *) "HandleEnergyChanged", (PyCFunction) _wrap_PyNs3SimpleDeviceEnergyModel_HandleEnergyChanged, METH_NOARGS, "HandleEnergyChanged()\n\n" },
     {(char *) "GetNode", (PyCFunction) _wrap_PyNs3SimpleDeviceEnergyModel_GetNode, METH_NOARGS, "GetNode()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3SimpleDeviceEnergyModel__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "GetTotalEnergyConsumption", (PyCFunction) _wrap_PyNs3SimpleDeviceEnergyModel_GetTotalEnergyConsumption, METH_NOARGS, "GetTotalEnergyConsumption()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3SimpleDeviceEnergyModel_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "HandleEnergyChanged", (PyCFunction) _wrap_PyNs3SimpleDeviceEnergyModel_HandleEnergyChanged, METH_NOARGS, "HandleEnergyChanged()\n\n" },
+    {(char *) "HandleEnergyDepletion", (PyCFunction) _wrap_PyNs3SimpleDeviceEnergyModel_HandleEnergyDepletion, METH_NOARGS, "HandleEnergyDepletion()\n\n" },
+    {(char *) "HandleEnergyRecharged", (PyCFunction) _wrap_PyNs3SimpleDeviceEnergyModel_HandleEnergyRecharged, METH_NOARGS, "HandleEnergyRecharged()\n\n" },
+    {(char *) "SetCurrentA", (PyCFunction) _wrap_PyNs3SimpleDeviceEnergyModel_SetCurrentA, METH_KEYWORDS|METH_VARARGS, "SetCurrentA(current)\n\ntype: current: double" },
+    {(char *) "SetEnergySource", (PyCFunction) _wrap_PyNs3SimpleDeviceEnergyModel_SetEnergySource, METH_KEYWORDS|METH_VARARGS, "SetEnergySource(source)\n\ntype: source: ns3::Ptr< ns3::EnergySource >" },
+    {(char *) "SetNode", (PyCFunction) _wrap_PyNs3SimpleDeviceEnergyModel_SetNode, METH_KEYWORDS|METH_VARARGS, "SetNode(node)\n\ntype: node: ns3::Ptr< ns3::Node >" },
     {(char *) "DoInitialize", (PyCFunction) PyNs3SimpleDeviceEnergyModel__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3SimpleDeviceEnergyModel__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3SimpleDeviceEnergyModel__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3SimpleDeviceEnergyModel__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -10999,7 +10999,7 @@ PyTypeObject PyNs3SimpleDeviceEnergyModel_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
     "SimpleDeviceEnergyModel(arg0)\nSimpleDeviceEnergyModel()",                        /* Documentation string */
     (traverseproc)PyNs3SimpleDeviceEnergyModel__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3SimpleDeviceEnergyModel__tp_clear,             /* tp_clear */
@@ -11032,22 +11032,6 @@ PyTypeObject PyNs3SimpleDeviceEnergyModel_Type = {
 
 
 PyObject *
-PyNs3BasicEnergyHarvester__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3BasicEnergyHarvester *self)
-{
-    PyObject *py_retval;
-    PyNs3BasicEnergyHarvester__PythonHelper *helper = dynamic_cast< PyNs3BasicEnergyHarvester__PythonHelper* >(self->obj);
-    
-    if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
-        return NULL;
-    }
-    helper->NotifyConstructionCompleted__parent_caller();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject *
 PyNs3BasicEnergyHarvester__PythonHelper::_wrap_NotifyNewAggregate(PyNs3BasicEnergyHarvester *self)
 {
     PyObject *py_retval;
@@ -11058,6 +11042,22 @@ PyNs3BasicEnergyHarvester__PythonHelper::_wrap_NotifyNewAggregate(PyNs3BasicEner
         return NULL;
     }
     helper->NotifyNewAggregate__parent_caller();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject *
+PyNs3BasicEnergyHarvester__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3BasicEnergyHarvester *self)
+{
+    PyObject *py_retval;
+    PyNs3BasicEnergyHarvester__PythonHelper *helper = dynamic_cast< PyNs3BasicEnergyHarvester__PythonHelper* >(self->obj);
+    
+    if (helper == NULL) {
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        return NULL;
+    }
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -11489,6 +11489,23 @@ int _wrap_PyNs3BasicEnergyHarvester__tp_init(PyNs3BasicEnergyHarvester *self, Py
 
 
 PyObject *
+_wrap_PyNs3BasicEnergyHarvester_AssignStreams(PyNs3BasicEnergyHarvester *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    int64_t retval;
+    int64_t stream;
+    const char *keywords[] = {"stream", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "L", (char **) keywords, &stream)) {
+        return NULL;
+    }
+    retval = self->obj->AssignStreams(stream);
+    py_retval = Py_BuildValue((char *) "L", retval);
+    return py_retval;
+}
+
+
+PyObject *
 _wrap_PyNs3BasicEnergyHarvester_GetHarvestedPowerUpdateInterval(PyNs3BasicEnergyHarvester *self)
 {
     PyObject *py_retval;
@@ -11547,23 +11564,6 @@ _wrap_PyNs3BasicEnergyHarvester_SetHarvestedPowerUpdateInterval(PyNs3BasicEnergy
 }
 
 
-PyObject *
-_wrap_PyNs3BasicEnergyHarvester_AssignStreams(PyNs3BasicEnergyHarvester *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    int64_t retval;
-    int64_t stream;
-    const char *keywords[] = {"stream", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "L", (char **) keywords, &stream)) {
-        return NULL;
-    }
-    retval = self->obj->AssignStreams(stream);
-    py_retval = Py_BuildValue((char *) "L", retval);
-    return py_retval;
-}
-
-
 static PyObject*
 _wrap_PyNs3BasicEnergyHarvester__copy__(PyNs3BasicEnergyHarvester *self)
 {
@@ -11580,12 +11580,12 @@ _wrap_PyNs3BasicEnergyHarvester__copy__(PyNs3BasicEnergyHarvester *self)
 }
 
 static PyMethodDef PyNs3BasicEnergyHarvester_methods[] = {
+    {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3BasicEnergyHarvester_AssignStreams, METH_KEYWORDS|METH_VARARGS, "AssignStreams(stream)\n\ntype: stream: int64_t" },
     {(char *) "GetHarvestedPowerUpdateInterval", (PyCFunction) _wrap_PyNs3BasicEnergyHarvester_GetHarvestedPowerUpdateInterval, METH_NOARGS, "GetHarvestedPowerUpdateInterval()\n\n" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3BasicEnergyHarvester_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
     {(char *) "SetHarvestedPowerUpdateInterval", (PyCFunction) _wrap_PyNs3BasicEnergyHarvester_SetHarvestedPowerUpdateInterval, METH_KEYWORDS|METH_VARARGS, "SetHarvestedPowerUpdateInterval(updateInterval)\n\ntype: updateInterval: ns3::Time" },
-    {(char *) "AssignStreams", (PyCFunction) _wrap_PyNs3BasicEnergyHarvester_AssignStreams, METH_KEYWORDS|METH_VARARGS, "AssignStreams(stream)\n\ntype: stream: int64_t" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3BasicEnergyHarvester__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3BasicEnergyHarvester__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3BasicEnergyHarvester__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3BasicEnergyHarvester__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -11685,7 +11685,7 @@ PyTypeObject PyNs3BasicEnergyHarvester_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
     "BasicEnergyHarvester(updateInterval)\nBasicEnergyHarvester(arg0)\nBasicEnergyHarvester()",                        /* Documentation string */
     (traverseproc)PyNs3BasicEnergyHarvester__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3BasicEnergyHarvester__tp_clear,             /* tp_clear */
@@ -11718,22 +11718,6 @@ PyTypeObject PyNs3BasicEnergyHarvester_Type = {
 
 
 PyObject *
-PyNs3BasicEnergySource__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3BasicEnergySource *self)
-{
-    PyObject *py_retval;
-    PyNs3BasicEnergySource__PythonHelper *helper = dynamic_cast< PyNs3BasicEnergySource__PythonHelper* >(self->obj);
-    
-    if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
-        return NULL;
-    }
-    helper->NotifyConstructionCompleted__parent_caller();
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-PyObject *
 PyNs3BasicEnergySource__PythonHelper::_wrap_NotifyNewAggregate(PyNs3BasicEnergySource *self)
 {
     PyObject *py_retval;
@@ -11744,6 +11728,22 @@ PyNs3BasicEnergySource__PythonHelper::_wrap_NotifyNewAggregate(PyNs3BasicEnergyS
         return NULL;
     }
     helper->NotifyNewAggregate__parent_caller();
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+PyObject *
+PyNs3BasicEnergySource__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3BasicEnergySource *self)
+{
+    PyObject *py_retval;
+    PyNs3BasicEnergySource__PythonHelper *helper = dynamic_cast< PyNs3BasicEnergySource__PythonHelper* >(self->obj);
+    
+    if (helper == NULL) {
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        return NULL;
+    }
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -12293,14 +12293,14 @@ int _wrap_PyNs3BasicEnergySource__tp_init(PyNs3BasicEnergySource *self, PyObject
 
 
 PyObject *
-_wrap_PyNs3BasicEnergySource_UpdateEnergySource(PyNs3BasicEnergySource *self)
+_wrap_PyNs3BasicEnergySource_GetEnergyFraction(PyNs3BasicEnergySource *self)
 {
     PyObject *py_retval;
+    double retval;
     PyNs3BasicEnergySource__PythonHelper *helper_class = dynamic_cast<PyNs3BasicEnergySource__PythonHelper*> (self->obj);
     
-    (helper_class == NULL)? (self->obj->UpdateEnergySource()) : (self->obj->ns3::BasicEnergySource::UpdateEnergySource());
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
+    retval = (helper_class == NULL)? (self->obj->GetEnergyFraction()) : (self->obj->ns3::BasicEnergySource::GetEnergyFraction());
+    py_retval = Py_BuildValue((char *) "d", retval);
     return py_retval;
 }
 
@@ -12317,6 +12317,32 @@ _wrap_PyNs3BasicEnergySource_GetEnergyUpdateInterval(PyNs3BasicEnergySource *sel
     py_Time->obj = new ns3::Time(retval);
     PyNs3Time_wrapper_registry[(void *) py_Time->obj] = (PyObject *) py_Time;
     py_retval = Py_BuildValue((char *) "N", py_Time);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3BasicEnergySource_GetInitialEnergy(PyNs3BasicEnergySource *self)
+{
+    PyObject *py_retval;
+    double retval;
+    PyNs3BasicEnergySource__PythonHelper *helper_class = dynamic_cast<PyNs3BasicEnergySource__PythonHelper*> (self->obj);
+    
+    retval = (helper_class == NULL)? (self->obj->GetInitialEnergy()) : (self->obj->ns3::BasicEnergySource::GetInitialEnergy());
+    py_retval = Py_BuildValue((char *) "d", retval);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3BasicEnergySource_GetRemainingEnergy(PyNs3BasicEnergySource *self)
+{
+    PyObject *py_retval;
+    double retval;
+    PyNs3BasicEnergySource__PythonHelper *helper_class = dynamic_cast<PyNs3BasicEnergySource__PythonHelper*> (self->obj);
+    
+    retval = (helper_class == NULL)? (self->obj->GetRemainingEnergy()) : (self->obj->ns3::BasicEnergySource::GetRemainingEnergy());
+    py_retval = Py_BuildValue((char *) "d", retval);
     return py_retval;
 }
 
@@ -12351,27 +12377,28 @@ _wrap_PyNs3BasicEnergySource_GetTypeId(void)
 
 
 PyObject *
-_wrap_PyNs3BasicEnergySource_GetEnergyFraction(PyNs3BasicEnergySource *self)
+_wrap_PyNs3BasicEnergySource_SetEnergyUpdateInterval(PyNs3BasicEnergySource *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    double retval;
-    PyNs3BasicEnergySource__PythonHelper *helper_class = dynamic_cast<PyNs3BasicEnergySource__PythonHelper*> (self->obj);
+    PyObject *interval;
+    ns3::Time interval2;
+    const char *keywords[] = {"interval", NULL};
     
-    retval = (helper_class == NULL)? (self->obj->GetEnergyFraction()) : (self->obj->ns3::BasicEnergySource::GetEnergyFraction());
-    py_retval = Py_BuildValue((char *) "d", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3BasicEnergySource_GetRemainingEnergy(PyNs3BasicEnergySource *self)
-{
-    PyObject *py_retval;
-    double retval;
-    PyNs3BasicEnergySource__PythonHelper *helper_class = dynamic_cast<PyNs3BasicEnergySource__PythonHelper*> (self->obj);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &interval)) {
+        return NULL;
+    }
+    if (PyObject_IsInstance(interval, (PyObject*) &PyNs3Time_Type)) {
+        interval2 = *((PyNs3Time *) interval)->obj;
+    } else if (PyObject_IsInstance(interval, (PyObject*) &PyNs3TracedValue__Ns3Time_Type)) {
+        interval2 = *((PyNs3TracedValue__Ns3Time *) interval)->obj;
+    } else {
     
-    retval = (helper_class == NULL)? (self->obj->GetRemainingEnergy()) : (self->obj->ns3::BasicEnergySource::GetRemainingEnergy());
-    py_retval = Py_BuildValue((char *) "d", retval);
+        PyErr_Format(PyExc_TypeError, "parameter must an instance of one of the types (Time, TracedValue), not %s", Py_TYPE(interval)->tp_name);
+        return NULL;
+    }
+    self->obj->SetEnergyUpdateInterval(interval2);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -12411,41 +12438,14 @@ _wrap_PyNs3BasicEnergySource_SetSupplyVoltage(PyNs3BasicEnergySource *self, PyOb
 
 
 PyObject *
-_wrap_PyNs3BasicEnergySource_SetEnergyUpdateInterval(PyNs3BasicEnergySource *self, PyObject *args, PyObject *kwargs)
+_wrap_PyNs3BasicEnergySource_UpdateEnergySource(PyNs3BasicEnergySource *self)
 {
     PyObject *py_retval;
-    PyObject *interval;
-    ns3::Time interval2;
-    const char *keywords[] = {"interval", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &interval)) {
-        return NULL;
-    }
-    if (PyObject_IsInstance(interval, (PyObject*) &PyNs3Time_Type)) {
-        interval2 = *((PyNs3Time *) interval)->obj;
-    } else if (PyObject_IsInstance(interval, (PyObject*) &PyNs3TracedValue__Ns3Time_Type)) {
-        interval2 = *((PyNs3TracedValue__Ns3Time *) interval)->obj;
-    } else {
-    
-        PyErr_Format(PyExc_TypeError, "parameter must an instance of one of the types (Time, TracedValue), not %s", Py_TYPE(interval)->tp_name);
-        return NULL;
-    }
-    self->obj->SetEnergyUpdateInterval(interval2);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3BasicEnergySource_GetInitialEnergy(PyNs3BasicEnergySource *self)
-{
-    PyObject *py_retval;
-    double retval;
     PyNs3BasicEnergySource__PythonHelper *helper_class = dynamic_cast<PyNs3BasicEnergySource__PythonHelper*> (self->obj);
     
-    retval = (helper_class == NULL)? (self->obj->GetInitialEnergy()) : (self->obj->ns3::BasicEnergySource::GetInitialEnergy());
-    py_retval = Py_BuildValue((char *) "d", retval);
+    (helper_class == NULL)? (self->obj->UpdateEnergySource()) : (self->obj->ns3::BasicEnergySource::UpdateEnergySource());
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -12466,18 +12466,18 @@ _wrap_PyNs3BasicEnergySource__copy__(PyNs3BasicEnergySource *self)
 }
 
 static PyMethodDef PyNs3BasicEnergySource_methods[] = {
-    {(char *) "UpdateEnergySource", (PyCFunction) _wrap_PyNs3BasicEnergySource_UpdateEnergySource, METH_NOARGS, "UpdateEnergySource()\n\n" },
+    {(char *) "GetEnergyFraction", (PyCFunction) _wrap_PyNs3BasicEnergySource_GetEnergyFraction, METH_NOARGS, "GetEnergyFraction()\n\n" },
     {(char *) "GetEnergyUpdateInterval", (PyCFunction) _wrap_PyNs3BasicEnergySource_GetEnergyUpdateInterval, METH_NOARGS, "GetEnergyUpdateInterval()\n\n" },
+    {(char *) "GetInitialEnergy", (PyCFunction) _wrap_PyNs3BasicEnergySource_GetInitialEnergy, METH_NOARGS, "GetInitialEnergy()\n\n" },
+    {(char *) "GetRemainingEnergy", (PyCFunction) _wrap_PyNs3BasicEnergySource_GetRemainingEnergy, METH_NOARGS, "GetRemainingEnergy()\n\n" },
     {(char *) "GetSupplyVoltage", (PyCFunction) _wrap_PyNs3BasicEnergySource_GetSupplyVoltage, METH_NOARGS, "GetSupplyVoltage()\n\n" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3BasicEnergySource_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "GetEnergyFraction", (PyCFunction) _wrap_PyNs3BasicEnergySource_GetEnergyFraction, METH_NOARGS, "GetEnergyFraction()\n\n" },
-    {(char *) "GetRemainingEnergy", (PyCFunction) _wrap_PyNs3BasicEnergySource_GetRemainingEnergy, METH_NOARGS, "GetRemainingEnergy()\n\n" },
+    {(char *) "SetEnergyUpdateInterval", (PyCFunction) _wrap_PyNs3BasicEnergySource_SetEnergyUpdateInterval, METH_KEYWORDS|METH_VARARGS, "SetEnergyUpdateInterval(interval)\n\ntype: interval: ns3::Time" },
     {(char *) "SetInitialEnergy", (PyCFunction) _wrap_PyNs3BasicEnergySource_SetInitialEnergy, METH_KEYWORDS|METH_VARARGS, "SetInitialEnergy(initialEnergyJ)\n\ntype: initialEnergyJ: double" },
     {(char *) "SetSupplyVoltage", (PyCFunction) _wrap_PyNs3BasicEnergySource_SetSupplyVoltage, METH_KEYWORDS|METH_VARARGS, "SetSupplyVoltage(supplyVoltageV)\n\ntype: supplyVoltageV: double" },
-    {(char *) "SetEnergyUpdateInterval", (PyCFunction) _wrap_PyNs3BasicEnergySource_SetEnergyUpdateInterval, METH_KEYWORDS|METH_VARARGS, "SetEnergyUpdateInterval(interval)\n\ntype: interval: ns3::Time" },
-    {(char *) "GetInitialEnergy", (PyCFunction) _wrap_PyNs3BasicEnergySource_GetInitialEnergy, METH_NOARGS, "GetInitialEnergy()\n\n" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3BasicEnergySource__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "UpdateEnergySource", (PyCFunction) _wrap_PyNs3BasicEnergySource_UpdateEnergySource, METH_NOARGS, "UpdateEnergySource()\n\n" },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3BasicEnergySource__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3BasicEnergySource__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3BasicEnergySource__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -12577,7 +12577,7 @@ PyTypeObject PyNs3BasicEnergySource_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_DEFAULT|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
     "BasicEnergySource(arg0)\nBasicEnergySource()",                        /* Documentation string */
     (traverseproc)PyNs3BasicEnergySource__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3BasicEnergySource__tp_clear,             /* tp_clear */

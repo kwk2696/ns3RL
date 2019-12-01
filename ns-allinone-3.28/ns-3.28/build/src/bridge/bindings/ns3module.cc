@@ -584,25 +584,6 @@ int _wrap_PyNs3BridgeHelper__tp_init(PyNs3BridgeHelper *self, PyObject *args, Py
 
 
 PyObject *
-_wrap_PyNs3BridgeHelper_SetDeviceAttribute(PyNs3BridgeHelper *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    const char *n1;
-    Py_ssize_t n1_len;
-    PyNs3AttributeValue *v1;
-    const char *keywords[] = {"n1", "v1", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &n1, &n1_len, &PyNs3AttributeValue_Type, &v1)) {
-        return NULL;
-    }
-    self->obj->SetDeviceAttribute(std::string(n1, n1_len), *((PyNs3AttributeValue *) v1)->obj);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3BridgeHelper_Install(PyNs3BridgeHelper *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -625,6 +606,25 @@ _wrap_PyNs3BridgeHelper_Install(PyNs3BridgeHelper *self, PyObject *args, PyObjec
 }
 
 
+PyObject *
+_wrap_PyNs3BridgeHelper_SetDeviceAttribute(PyNs3BridgeHelper *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    const char *n1;
+    Py_ssize_t n1_len;
+    PyNs3AttributeValue *v1;
+    const char *keywords[] = {"n1", "v1", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "s#O!", (char **) keywords, &n1, &n1_len, &PyNs3AttributeValue_Type, &v1)) {
+        return NULL;
+    }
+    self->obj->SetDeviceAttribute(std::string(n1, n1_len), *((PyNs3AttributeValue *) v1)->obj);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
 static PyObject*
 _wrap_PyNs3BridgeHelper__copy__(PyNs3BridgeHelper *self)
 {
@@ -638,8 +638,8 @@ _wrap_PyNs3BridgeHelper__copy__(PyNs3BridgeHelper *self)
 }
 
 static PyMethodDef PyNs3BridgeHelper_methods[] = {
-    {(char *) "SetDeviceAttribute", (PyCFunction) _wrap_PyNs3BridgeHelper_SetDeviceAttribute, METH_KEYWORDS|METH_VARARGS, "SetDeviceAttribute(n1, v1)\n\ntype: n1: std::string\ntype: v1: ns3::AttributeValue const &" },
     {(char *) "Install", (PyCFunction) _wrap_PyNs3BridgeHelper_Install, METH_KEYWORDS|METH_VARARGS, "Install(nodeName, c)\n\ntype: nodeName: std::string\ntype: c: ns3::NetDeviceContainer" },
+    {(char *) "SetDeviceAttribute", (PyCFunction) _wrap_PyNs3BridgeHelper_SetDeviceAttribute, METH_KEYWORDS|METH_VARARGS, "SetDeviceAttribute(n1, v1)\n\ntype: n1: std::string\ntype: v1: ns3::AttributeValue const &" },
     {(char *) "__copy__", (PyCFunction) _wrap_PyNs3BridgeHelper__copy__, METH_NOARGS, NULL},
     {NULL, NULL, 0, NULL}
 };
@@ -752,16 +752,16 @@ PyTypeObject PyNs3BridgeHelper_Type = {
 
 
 PyObject *
-PyNs3BridgeChannel__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3BridgeChannel *self)
+PyNs3BridgeChannel__PythonHelper::_wrap_DoDispose(PyNs3BridgeChannel *self)
 {
     PyObject *py_retval;
     PyNs3BridgeChannel__PythonHelper *helper = dynamic_cast< PyNs3BridgeChannel__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->NotifyConstructionCompleted__parent_caller();
+    helper->DoDispose__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -800,16 +800,16 @@ PyNs3BridgeChannel__PythonHelper::_wrap_NotifyNewAggregate(PyNs3BridgeChannel *s
 }
 
 PyObject *
-PyNs3BridgeChannel__PythonHelper::_wrap_DoDispose(PyNs3BridgeChannel *self)
+PyNs3BridgeChannel__PythonHelper::_wrap_NotifyConstructionCompleted(PyNs3BridgeChannel *self)
 {
     PyObject *py_retval;
     PyNs3BridgeChannel__PythonHelper *helper = dynamic_cast< PyNs3BridgeChannel__PythonHelper* >(self->obj);
     
     if (helper == NULL) {
-        PyErr_SetString(PyExc_TypeError, "Method DoDispose of class Object is protected and can only be called by a subclass");
+        PyErr_SetString(PyExc_TypeError, "Method NotifyConstructionCompleted of class ObjectBase is protected and can only be called by a subclass");
         return NULL;
     }
-    helper->DoDispose__parent_caller();
+    helper->NotifyConstructionCompleted__parent_caller();
     Py_INCREF(Py_None);
     py_retval = Py_None;
     return py_retval;
@@ -1164,19 +1164,6 @@ _wrap_PyNs3BridgeChannel__tp_init(PyNs3BridgeChannel *self, PyObject *args, PyOb
 
 
 PyObject *
-_wrap_PyNs3BridgeChannel_GetNDevices(PyNs3BridgeChannel *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    PyNs3BridgeChannel__PythonHelper *helper_class = dynamic_cast<PyNs3BridgeChannel__PythonHelper*> (self->obj);
-    
-    retval = (helper_class == NULL)? (self->obj->GetNDevices()) : (self->obj->ns3::BridgeChannel::GetNDevices());
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3BridgeChannel_GetTypeId(void)
 {
     PyObject *py_retval;
@@ -1188,6 +1175,38 @@ _wrap_PyNs3BridgeChannel_GetTypeId(void)
     py_TypeId->obj = new ns3::TypeId(retval);
     PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
     py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3BridgeChannel_AddChannel(PyNs3BridgeChannel *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3Channel *bridgedChannel;
+    ns3::Channel *bridgedChannel_ptr;
+    const char *keywords[] = {"bridgedChannel", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Channel_Type, &bridgedChannel)) {
+        return NULL;
+    }
+    bridgedChannel_ptr = (bridgedChannel ? bridgedChannel->obj : NULL);
+    self->obj->AddChannel(ns3::Ptr< ns3::Channel  > (bridgedChannel_ptr));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3BridgeChannel_GetNDevices(PyNs3BridgeChannel *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    PyNs3BridgeChannel__PythonHelper *helper_class = dynamic_cast<PyNs3BridgeChannel__PythonHelper*> (self->obj);
+    
+    retval = (helper_class == NULL)? (self->obj->GetNDevices()) : (self->obj->ns3::BridgeChannel::GetNDevices());
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
 
@@ -1235,34 +1254,15 @@ _wrap_PyNs3BridgeChannel_GetDevice(PyNs3BridgeChannel *self, PyObject *args, PyO
     return py_retval;
 }
 
-
-PyObject *
-_wrap_PyNs3BridgeChannel_AddChannel(PyNs3BridgeChannel *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3Channel *bridgedChannel;
-    ns3::Channel *bridgedChannel_ptr;
-    const char *keywords[] = {"bridgedChannel", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3Channel_Type, &bridgedChannel)) {
-        return NULL;
-    }
-    bridgedChannel_ptr = (bridgedChannel ? bridgedChannel->obj : NULL);
-    self->obj->AddChannel(ns3::Ptr< ns3::Channel  > (bridgedChannel_ptr));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
 static PyMethodDef PyNs3BridgeChannel_methods[] = {
-    {(char *) "GetNDevices", (PyCFunction) _wrap_PyNs3BridgeChannel_GetNDevices, METH_NOARGS, "GetNDevices()\n\n" },
     {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3BridgeChannel_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "GetDevice", (PyCFunction) _wrap_PyNs3BridgeChannel_GetDevice, METH_KEYWORDS|METH_VARARGS, "GetDevice(i)\n\ntype: i: uint32_t" },
     {(char *) "AddChannel", (PyCFunction) _wrap_PyNs3BridgeChannel_AddChannel, METH_KEYWORDS|METH_VARARGS, "AddChannel(bridgedChannel)\n\ntype: bridgedChannel: ns3::Ptr< ns3::Channel >" },
-    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3BridgeChannel__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
+    {(char *) "GetNDevices", (PyCFunction) _wrap_PyNs3BridgeChannel_GetNDevices, METH_NOARGS, "GetNDevices()\n\n" },
+    {(char *) "GetDevice", (PyCFunction) _wrap_PyNs3BridgeChannel_GetDevice, METH_KEYWORDS|METH_VARARGS, "GetDevice(i)\n\ntype: i: uint32_t" },
+    {(char *) "DoDispose", (PyCFunction) PyNs3BridgeChannel__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
     {(char *) "DoInitialize", (PyCFunction) PyNs3BridgeChannel__PythonHelper::_wrap_DoInitialize, METH_NOARGS, NULL },
     {(char *) "NotifyNewAggregate", (PyCFunction) PyNs3BridgeChannel__PythonHelper::_wrap_NotifyNewAggregate, METH_NOARGS, NULL },
-    {(char *) "DoDispose", (PyCFunction) PyNs3BridgeChannel__PythonHelper::_wrap_DoDispose, METH_NOARGS, NULL },
+    {(char *) "NotifyConstructionCompleted", (PyCFunction) PyNs3BridgeChannel__PythonHelper::_wrap_NotifyConstructionCompleted, METH_NOARGS, NULL },
     {NULL, NULL, 0, NULL}
 };
 
@@ -1361,7 +1361,7 @@ PyTypeObject PyNs3BridgeChannel_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_BASETYPE,                      /* tp_flags */
     "BridgeChannel()",                        /* Documentation string */
     (traverseproc)PyNs3BridgeChannel__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3BridgeChannel__tp_clear,             /* tp_clear */
@@ -1406,6 +1406,169 @@ _wrap_PyNs3BridgeNetDevice__tp_init(PyNs3BridgeNetDevice *self, PyObject *args, 
     ns3::CompleteConstruct(self->obj);
     self->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
     return 0;
+}
+
+
+PyObject *
+_wrap_PyNs3BridgeNetDevice_AddBridgePort(PyNs3BridgeNetDevice *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyNs3NetDevice *bridgePort;
+    ns3::NetDevice *bridgePort_ptr;
+    const char *keywords[] = {"bridgePort", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3NetDevice_Type, &bridgePort)) {
+        return NULL;
+    }
+    bridgePort_ptr = (bridgePort ? bridgePort->obj : NULL);
+    self->obj->AddBridgePort(ns3::Ptr< ns3::NetDevice  > (bridgePort_ptr));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3BridgeNetDevice_GetAddress(PyNs3BridgeNetDevice *self)
+{
+    PyObject *py_retval;
+    PyNs3Address *py_Address;
+    
+    ns3::Address retval = self->obj->GetAddress();
+    py_Address = PyObject_New(PyNs3Address, &PyNs3Address_Type);
+    py_Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Address->obj = new ns3::Address(retval);
+    PyNs3Address_wrapper_registry[(void *) py_Address->obj] = (PyObject *) py_Address;
+    py_retval = Py_BuildValue((char *) "N", py_Address);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3BridgeNetDevice_GetBridgePort(PyNs3BridgeNetDevice *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    ns3::Ptr< ns3::NetDevice > retval;
+    unsigned int n;
+    const char *keywords[] = {"n", NULL};
+    PyNs3NetDevice *py_NetDevice;
+    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
+    PyTypeObject *wrapper_type = 0;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &n)) {
+        return NULL;
+    }
+    retval = self->obj->GetBridgePort(n);
+    if (!(const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval)))) {
+        Py_INCREF(Py_None);
+        return Py_None;
+    }
+    wrapper_lookup_iter = PyNs3ObjectBase_wrapper_registry.find((void *) const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval)));
+    if (wrapper_lookup_iter == PyNs3ObjectBase_wrapper_registry.end()) {
+        py_NetDevice = NULL;
+    } else {
+        py_NetDevice = (PyNs3NetDevice *) wrapper_lookup_iter->second;
+        Py_INCREF(py_NetDevice);
+    }
+    
+    if (py_NetDevice == NULL) {
+        wrapper_type = PyNs3SimpleRefCount__Ns3Object_Ns3ObjectBase_Ns3ObjectDeleter__typeid_map.lookup_wrapper(typeid((*const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval)))), &PyNs3NetDevice_Type);
+        py_NetDevice = PyObject_GC_New(PyNs3NetDevice, wrapper_type);
+        py_NetDevice->inst_dict = NULL;
+    
+        py_NetDevice->inst_dict = NULL;
+        py_NetDevice->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+        const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval))->Ref();
+        py_NetDevice->obj = const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval));
+        PyNs3ObjectBase_wrapper_registry[(void *) py_NetDevice->obj] = (PyObject *) py_NetDevice;
+    }
+    py_retval = Py_BuildValue((char *) "N", py_NetDevice);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3BridgeNetDevice_GetBroadcast(PyNs3BridgeNetDevice *self)
+{
+    PyObject *py_retval;
+    PyNs3Address *py_Address;
+    
+    ns3::Address retval = self->obj->GetBroadcast();
+    py_Address = PyObject_New(PyNs3Address, &PyNs3Address_Type);
+    py_Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+    py_Address->obj = new ns3::Address(retval);
+    PyNs3Address_wrapper_registry[(void *) py_Address->obj] = (PyObject *) py_Address;
+    py_retval = Py_BuildValue((char *) "N", py_Address);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3BridgeNetDevice_GetChannel(PyNs3BridgeNetDevice *self)
+{
+    PyObject *py_retval;
+    ns3::Ptr< ns3::Channel > retval;
+    PyNs3Channel *py_Channel;
+    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
+    PyTypeObject *wrapper_type = 0;
+    
+    retval = self->obj->GetChannel();
+    if (!(const_cast<ns3::Channel *> (ns3::PeekPointer (retval)))) {
+        Py_INCREF(Py_None);
+        return Py_None;
+    }
+    if (typeid((*const_cast<ns3::Channel *> (ns3::PeekPointer (retval)))).name() == typeid(PyNs3Channel__PythonHelper).name())
+    {
+        py_Channel = reinterpret_cast< PyNs3Channel* >(reinterpret_cast< PyNs3Channel__PythonHelper* >(const_cast<ns3::Channel *> (ns3::PeekPointer (retval)))->m_pyself);
+        py_Channel->obj = const_cast<ns3::Channel *> (ns3::PeekPointer (retval));
+        Py_INCREF(py_Channel);
+    } else {
+        wrapper_lookup_iter = PyNs3ObjectBase_wrapper_registry.find((void *) const_cast<ns3::Channel *> (ns3::PeekPointer (retval)));
+        if (wrapper_lookup_iter == PyNs3ObjectBase_wrapper_registry.end()) {
+            py_Channel = NULL;
+        } else {
+            py_Channel = (PyNs3Channel *) wrapper_lookup_iter->second;
+            Py_INCREF(py_Channel);
+        }
+    
+        if (py_Channel == NULL) {
+            wrapper_type = PyNs3SimpleRefCount__Ns3Object_Ns3ObjectBase_Ns3ObjectDeleter__typeid_map.lookup_wrapper(typeid((*const_cast<ns3::Channel *> (ns3::PeekPointer (retval)))), &PyNs3Channel_Type);
+            py_Channel = PyObject_GC_New(PyNs3Channel, wrapper_type);
+            py_Channel->inst_dict = NULL;
+    
+            py_Channel->inst_dict = NULL;
+            py_Channel->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
+            const_cast<ns3::Channel *> (ns3::PeekPointer (retval))->Ref();
+            py_Channel->obj = const_cast<ns3::Channel *> (ns3::PeekPointer (retval));
+            PyNs3ObjectBase_wrapper_registry[(void *) py_Channel->obj] = (PyObject *) py_Channel;
+        }
+    }
+    py_retval = Py_BuildValue((char *) "N", py_Channel);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3BridgeNetDevice_GetIfIndex(PyNs3BridgeNetDevice *self)
+{
+    PyObject *py_retval;
+    uint32_t retval;
+    
+    retval = self->obj->GetIfIndex();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3BridgeNetDevice_GetMtu(PyNs3BridgeNetDevice *self)
+{
+    PyObject *py_retval;
+    uint16_t retval;
+    
+    retval = self->obj->GetMtu();
+    py_retval = Py_BuildValue((char *) "i", retval);
+    return py_retval;
 }
 
 
@@ -1488,13 +1651,13 @@ PyObject * _wrap_PyNs3BridgeNetDevice_GetMulticast(PyNs3BridgeNetDevice *self, P
 
 
 PyObject *
-_wrap_PyNs3BridgeNetDevice_IsPointToPoint(PyNs3BridgeNetDevice *self)
+_wrap_PyNs3BridgeNetDevice_GetNBridgePorts(PyNs3BridgeNetDevice *self)
 {
     PyObject *py_retval;
-    bool retval;
+    uint32_t retval;
     
-    retval = self->obj->IsPointToPoint();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    retval = self->obj->GetNBridgePorts();
+    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
     return py_retval;
 }
 
@@ -1511,6 +1674,78 @@ _wrap_PyNs3BridgeNetDevice_GetTypeId(void)
     py_TypeId->obj = new ns3::TypeId(retval);
     PyNs3TypeId_wrapper_registry[(void *) py_TypeId->obj] = (PyObject *) py_TypeId;
     py_retval = Py_BuildValue((char *) "N", py_TypeId);
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3BridgeNetDevice_IsBridge(PyNs3BridgeNetDevice *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->IsBridge();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3BridgeNetDevice_IsBroadcast(PyNs3BridgeNetDevice *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->IsBroadcast();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3BridgeNetDevice_IsLinkUp(PyNs3BridgeNetDevice *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->IsLinkUp();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3BridgeNetDevice_IsMulticast(PyNs3BridgeNetDevice *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->IsMulticast();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3BridgeNetDevice_IsPointToPoint(PyNs3BridgeNetDevice *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->IsPointToPoint();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3BridgeNetDevice_NeedsArp(PyNs3BridgeNetDevice *self)
+{
+    PyObject *py_retval;
+    bool retval;
+    
+    retval = self->obj->NeedsArp();
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
     return py_retval;
 }
 
@@ -1552,53 +1787,6 @@ _wrap_PyNs3BridgeNetDevice_Send(PyNs3BridgeNetDevice *self, PyObject *args, PyOb
     }
     retval = self->obj->Send(ns3::Ptr< ns3::Packet  > (packet_ptr), dest2, protocolNumber);
     py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3BridgeNetDevice_GetIfIndex(PyNs3BridgeNetDevice *self)
-{
-    PyObject *py_retval;
-    uint32_t retval;
-    
-    retval = self->obj->GetIfIndex();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3BridgeNetDevice_NeedsArp(PyNs3BridgeNetDevice *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->NeedsArp();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3BridgeNetDevice_SetPromiscReceiveCallback(PyNs3BridgeNetDevice *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyObject *cb;
-    ns3::Ptr<PythonCallbackImpl2> cb_cb_impl;
-    const char *keywords[] = {"cb", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &cb)) {
-        return NULL;
-    }
-    if (!PyCallable_Check(cb)) {
-        PyErr_SetString(PyExc_TypeError, "parameter 'cb' must be callbale");
-        return NULL;
-    }
-    cb_cb_impl = ns3::Create<PythonCallbackImpl2> (cb);
-    self->obj->SetPromiscReceiveCallback(ns3::Callback<bool, ns3::Ptr<ns3::NetDevice>, ns3::Ptr<const ns3::Packet>, unsigned short, const ns3::Address &, const ns3::Address &, ns3::NetDevice::PacketType, ns3::empty, ns3::empty, ns3::empty> (cb_cb_impl));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
     return py_retval;
 }
 
@@ -1662,149 +1850,6 @@ _wrap_PyNs3BridgeNetDevice_SendFrom(PyNs3BridgeNetDevice *self, PyObject *args, 
 
 
 PyObject *
-_wrap_PyNs3BridgeNetDevice_IsBroadcast(PyNs3BridgeNetDevice *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->IsBroadcast();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3BridgeNetDevice_GetMtu(PyNs3BridgeNetDevice *self)
-{
-    PyObject *py_retval;
-    uint16_t retval;
-    
-    retval = self->obj->GetMtu();
-    py_retval = Py_BuildValue((char *) "i", retval);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3BridgeNetDevice_IsBridge(PyNs3BridgeNetDevice *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->IsBridge();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3BridgeNetDevice_AddBridgePort(PyNs3BridgeNetDevice *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    PyNs3NetDevice *bridgePort;
-    ns3::NetDevice *bridgePort_ptr;
-    const char *keywords[] = {"bridgePort", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O!", (char **) keywords, &PyNs3NetDevice_Type, &bridgePort)) {
-        return NULL;
-    }
-    bridgePort_ptr = (bridgePort ? bridgePort->obj : NULL);
-    self->obj->AddBridgePort(ns3::Ptr< ns3::NetDevice  > (bridgePort_ptr));
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3BridgeNetDevice_GetAddress(PyNs3BridgeNetDevice *self)
-{
-    PyObject *py_retval;
-    PyNs3Address *py_Address;
-    
-    ns3::Address retval = self->obj->GetAddress();
-    py_Address = PyObject_New(PyNs3Address, &PyNs3Address_Type);
-    py_Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Address->obj = new ns3::Address(retval);
-    PyNs3Address_wrapper_registry[(void *) py_Address->obj] = (PyObject *) py_Address;
-    py_retval = Py_BuildValue((char *) "N", py_Address);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3BridgeNetDevice_IsLinkUp(PyNs3BridgeNetDevice *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->IsLinkUp();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3BridgeNetDevice_GetBridgePort(PyNs3BridgeNetDevice *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    ns3::Ptr< ns3::NetDevice > retval;
-    unsigned int n;
-    const char *keywords[] = {"n", NULL};
-    PyNs3NetDevice *py_NetDevice;
-    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
-    PyTypeObject *wrapper_type = 0;
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &n)) {
-        return NULL;
-    }
-    retval = self->obj->GetBridgePort(n);
-    if (!(const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval)))) {
-        Py_INCREF(Py_None);
-        return Py_None;
-    }
-    wrapper_lookup_iter = PyNs3ObjectBase_wrapper_registry.find((void *) const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval)));
-    if (wrapper_lookup_iter == PyNs3ObjectBase_wrapper_registry.end()) {
-        py_NetDevice = NULL;
-    } else {
-        py_NetDevice = (PyNs3NetDevice *) wrapper_lookup_iter->second;
-        Py_INCREF(py_NetDevice);
-    }
-    
-    if (py_NetDevice == NULL) {
-        wrapper_type = PyNs3SimpleRefCount__Ns3Object_Ns3ObjectBase_Ns3ObjectDeleter__typeid_map.lookup_wrapper(typeid((*const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval)))), &PyNs3NetDevice_Type);
-        py_NetDevice = PyObject_GC_New(PyNs3NetDevice, wrapper_type);
-        py_NetDevice->inst_dict = NULL;
-    
-        py_NetDevice->inst_dict = NULL;
-        py_NetDevice->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-        const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval))->Ref();
-        py_NetDevice->obj = const_cast<ns3::NetDevice *> (ns3::PeekPointer (retval));
-        PyNs3ObjectBase_wrapper_registry[(void *) py_NetDevice->obj] = (PyObject *) py_NetDevice;
-    }
-    py_retval = Py_BuildValue((char *) "N", py_NetDevice);
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3BridgeNetDevice_SetIfIndex(PyNs3BridgeNetDevice *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    unsigned int index;
-    const char *keywords[] = {"index", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &index)) {
-        return NULL;
-    }
-    self->obj->SetIfIndex(index);
-    Py_INCREF(Py_None);
-    py_retval = Py_None;
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3BridgeNetDevice_SetAddress(PyNs3BridgeNetDevice *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
@@ -1838,29 +1883,62 @@ _wrap_PyNs3BridgeNetDevice_SetAddress(PyNs3BridgeNetDevice *self, PyObject *args
 
 
 PyObject *
-_wrap_PyNs3BridgeNetDevice_GetBroadcast(PyNs3BridgeNetDevice *self)
+_wrap_PyNs3BridgeNetDevice_SetIfIndex(PyNs3BridgeNetDevice *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    PyNs3Address *py_Address;
+    unsigned int index;
+    const char *keywords[] = {"index", NULL};
     
-    ns3::Address retval = self->obj->GetBroadcast();
-    py_Address = PyObject_New(PyNs3Address, &PyNs3Address_Type);
-    py_Address->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-    py_Address->obj = new ns3::Address(retval);
-    PyNs3Address_wrapper_registry[(void *) py_Address->obj] = (PyObject *) py_Address;
-    py_retval = Py_BuildValue((char *) "N", py_Address);
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "I", (char **) keywords, &index)) {
+        return NULL;
+    }
+    self->obj->SetIfIndex(index);
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
 
 PyObject *
-_wrap_PyNs3BridgeNetDevice_GetNBridgePorts(PyNs3BridgeNetDevice *self)
+_wrap_PyNs3BridgeNetDevice_SetMtu(PyNs3BridgeNetDevice *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *py_retval;
-    uint32_t retval;
+    bool retval;
+    int mtu;
+    const char *keywords[] = {"mtu", NULL};
     
-    retval = self->obj->GetNBridgePorts();
-    py_retval = Py_BuildValue((char *) "N", PyLong_FromUnsignedLong(retval));
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &mtu)) {
+        return NULL;
+    }
+    if (mtu > 0xffff) {
+        PyErr_SetString(PyExc_ValueError, "Out of range");
+        return NULL;
+    }
+    retval = self->obj->SetMtu(mtu);
+    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
+    return py_retval;
+}
+
+
+PyObject *
+_wrap_PyNs3BridgeNetDevice_SetPromiscReceiveCallback(PyNs3BridgeNetDevice *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject *py_retval;
+    PyObject *cb;
+    ns3::Ptr<PythonCallbackImpl2> cb_cb_impl;
+    const char *keywords[] = {"cb", NULL};
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "O", (char **) keywords, &cb)) {
+        return NULL;
+    }
+    if (!PyCallable_Check(cb)) {
+        PyErr_SetString(PyExc_TypeError, "parameter 'cb' must be callbale");
+        return NULL;
+    }
+    cb_cb_impl = ns3::Create<PythonCallbackImpl2> (cb);
+    self->obj->SetPromiscReceiveCallback(ns3::Callback<bool, ns3::Ptr<ns3::NetDevice>, ns3::Ptr<const ns3::Packet>, unsigned short, const ns3::Address &, const ns3::Address &, ns3::NetDevice::PacketType, ns3::empty, ns3::empty, ns3::empty> (cb_cb_impl));
+    Py_INCREF(Py_None);
+    py_retval = Py_None;
     return py_retval;
 }
 
@@ -1889,39 +1967,6 @@ _wrap_PyNs3BridgeNetDevice_SetReceiveCallback(PyNs3BridgeNetDevice *self, PyObje
 
 
 PyObject *
-_wrap_PyNs3BridgeNetDevice_IsMulticast(PyNs3BridgeNetDevice *self)
-{
-    PyObject *py_retval;
-    bool retval;
-    
-    retval = self->obj->IsMulticast();
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
-_wrap_PyNs3BridgeNetDevice_SetMtu(PyNs3BridgeNetDevice *self, PyObject *args, PyObject *kwargs)
-{
-    PyObject *py_retval;
-    bool retval;
-    int mtu;
-    const char *keywords[] = {"mtu", NULL};
-    
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, (char *) "i", (char **) keywords, &mtu)) {
-        return NULL;
-    }
-    if (mtu > 0xffff) {
-        PyErr_SetString(PyExc_ValueError, "Out of range");
-        return NULL;
-    }
-    retval = self->obj->SetMtu(mtu);
-    py_retval = Py_BuildValue((char *) "N", PyBool_FromLong(retval));
-    return py_retval;
-}
-
-
-PyObject *
 _wrap_PyNs3BridgeNetDevice_SupportsSendFrom(PyNs3BridgeNetDevice *self)
 {
     PyObject *py_retval;
@@ -1932,76 +1977,31 @@ _wrap_PyNs3BridgeNetDevice_SupportsSendFrom(PyNs3BridgeNetDevice *self)
     return py_retval;
 }
 
-
-PyObject *
-_wrap_PyNs3BridgeNetDevice_GetChannel(PyNs3BridgeNetDevice *self)
-{
-    PyObject *py_retval;
-    ns3::Ptr< ns3::Channel > retval;
-    PyNs3Channel *py_Channel;
-    std::map<void*, PyObject*>::const_iterator wrapper_lookup_iter;
-    PyTypeObject *wrapper_type = 0;
-    
-    retval = self->obj->GetChannel();
-    if (!(const_cast<ns3::Channel *> (ns3::PeekPointer (retval)))) {
-        Py_INCREF(Py_None);
-        return Py_None;
-    }
-    if (typeid((*const_cast<ns3::Channel *> (ns3::PeekPointer (retval)))).name() == typeid(PyNs3Channel__PythonHelper).name())
-    {
-        py_Channel = reinterpret_cast< PyNs3Channel* >(reinterpret_cast< PyNs3Channel__PythonHelper* >(const_cast<ns3::Channel *> (ns3::PeekPointer (retval)))->m_pyself);
-        py_Channel->obj = const_cast<ns3::Channel *> (ns3::PeekPointer (retval));
-        Py_INCREF(py_Channel);
-    } else {
-        wrapper_lookup_iter = PyNs3ObjectBase_wrapper_registry.find((void *) const_cast<ns3::Channel *> (ns3::PeekPointer (retval)));
-        if (wrapper_lookup_iter == PyNs3ObjectBase_wrapper_registry.end()) {
-            py_Channel = NULL;
-        } else {
-            py_Channel = (PyNs3Channel *) wrapper_lookup_iter->second;
-            Py_INCREF(py_Channel);
-        }
-    
-        if (py_Channel == NULL) {
-            wrapper_type = PyNs3SimpleRefCount__Ns3Object_Ns3ObjectBase_Ns3ObjectDeleter__typeid_map.lookup_wrapper(typeid((*const_cast<ns3::Channel *> (ns3::PeekPointer (retval)))), &PyNs3Channel_Type);
-            py_Channel = PyObject_GC_New(PyNs3Channel, wrapper_type);
-            py_Channel->inst_dict = NULL;
-    
-            py_Channel->inst_dict = NULL;
-            py_Channel->flags = PYBINDGEN_WRAPPER_FLAG_NONE;
-            const_cast<ns3::Channel *> (ns3::PeekPointer (retval))->Ref();
-            py_Channel->obj = const_cast<ns3::Channel *> (ns3::PeekPointer (retval));
-            PyNs3ObjectBase_wrapper_registry[(void *) py_Channel->obj] = (PyObject *) py_Channel;
-        }
-    }
-    py_retval = Py_BuildValue((char *) "N", py_Channel);
-    return py_retval;
-}
-
 static PyMethodDef PyNs3BridgeNetDevice_methods[] = {
-    {(char *) "GetMulticast", (PyCFunction) _wrap_PyNs3BridgeNetDevice_GetMulticast, METH_KEYWORDS|METH_VARARGS, NULL },
-    {(char *) "IsPointToPoint", (PyCFunction) _wrap_PyNs3BridgeNetDevice_IsPointToPoint, METH_NOARGS, "IsPointToPoint()\n\n" },
-    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3BridgeNetDevice_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
-    {(char *) "Send", (PyCFunction) _wrap_PyNs3BridgeNetDevice_Send, METH_KEYWORDS|METH_VARARGS, "Send(packet, dest, protocolNumber)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: dest: ns3::Address const &\ntype: protocolNumber: uint16_t" },
-    {(char *) "GetIfIndex", (PyCFunction) _wrap_PyNs3BridgeNetDevice_GetIfIndex, METH_NOARGS, "GetIfIndex()\n\n" },
-    {(char *) "NeedsArp", (PyCFunction) _wrap_PyNs3BridgeNetDevice_NeedsArp, METH_NOARGS, "NeedsArp()\n\n" },
-    {(char *) "SetPromiscReceiveCallback", (PyCFunction) _wrap_PyNs3BridgeNetDevice_SetPromiscReceiveCallback, METH_KEYWORDS|METH_VARARGS, "SetPromiscReceiveCallback(cb)\n\ntype: cb: ns3::Callback< bool, ns3::Ptr< ns3::NetDevice >, ns3::Ptr< ns3::Packet const >, unsigned short, ns3::Address const &, ns3::Address const &, ns3::NetDevice::PacketType, ns3::empty, ns3::empty, ns3::empty >" },
-    {(char *) "SendFrom", (PyCFunction) _wrap_PyNs3BridgeNetDevice_SendFrom, METH_KEYWORDS|METH_VARARGS, "SendFrom(packet, source, dest, protocolNumber)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: source: ns3::Address const &\ntype: dest: ns3::Address const &\ntype: protocolNumber: uint16_t" },
-    {(char *) "IsBroadcast", (PyCFunction) _wrap_PyNs3BridgeNetDevice_IsBroadcast, METH_NOARGS, "IsBroadcast()\n\n" },
-    {(char *) "GetMtu", (PyCFunction) _wrap_PyNs3BridgeNetDevice_GetMtu, METH_NOARGS, "GetMtu()\n\n" },
-    {(char *) "IsBridge", (PyCFunction) _wrap_PyNs3BridgeNetDevice_IsBridge, METH_NOARGS, "IsBridge()\n\n" },
     {(char *) "AddBridgePort", (PyCFunction) _wrap_PyNs3BridgeNetDevice_AddBridgePort, METH_KEYWORDS|METH_VARARGS, "AddBridgePort(bridgePort)\n\ntype: bridgePort: ns3::Ptr< ns3::NetDevice >" },
     {(char *) "GetAddress", (PyCFunction) _wrap_PyNs3BridgeNetDevice_GetAddress, METH_NOARGS, "GetAddress()\n\n" },
-    {(char *) "IsLinkUp", (PyCFunction) _wrap_PyNs3BridgeNetDevice_IsLinkUp, METH_NOARGS, "IsLinkUp()\n\n" },
     {(char *) "GetBridgePort", (PyCFunction) _wrap_PyNs3BridgeNetDevice_GetBridgePort, METH_KEYWORDS|METH_VARARGS, "GetBridgePort(n)\n\ntype: n: uint32_t" },
-    {(char *) "SetIfIndex", (PyCFunction) _wrap_PyNs3BridgeNetDevice_SetIfIndex, METH_KEYWORDS|METH_VARARGS, "SetIfIndex(index)\n\ntype: index: uint32_t const" },
-    {(char *) "SetAddress", (PyCFunction) _wrap_PyNs3BridgeNetDevice_SetAddress, METH_KEYWORDS|METH_VARARGS, "SetAddress(address)\n\ntype: address: ns3::Address" },
     {(char *) "GetBroadcast", (PyCFunction) _wrap_PyNs3BridgeNetDevice_GetBroadcast, METH_NOARGS, "GetBroadcast()\n\n" },
-    {(char *) "GetNBridgePorts", (PyCFunction) _wrap_PyNs3BridgeNetDevice_GetNBridgePorts, METH_NOARGS, "GetNBridgePorts()\n\n" },
-    {(char *) "SetReceiveCallback", (PyCFunction) _wrap_PyNs3BridgeNetDevice_SetReceiveCallback, METH_KEYWORDS|METH_VARARGS, "SetReceiveCallback(cb)\n\ntype: cb: ns3::Callback< bool, ns3::Ptr< ns3::NetDevice >, ns3::Ptr< ns3::Packet const >, unsigned short, ns3::Address const &, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty >" },
-    {(char *) "IsMulticast", (PyCFunction) _wrap_PyNs3BridgeNetDevice_IsMulticast, METH_NOARGS, "IsMulticast()\n\n" },
-    {(char *) "SetMtu", (PyCFunction) _wrap_PyNs3BridgeNetDevice_SetMtu, METH_KEYWORDS|METH_VARARGS, "SetMtu(mtu)\n\ntype: mtu: uint16_t const" },
-    {(char *) "SupportsSendFrom", (PyCFunction) _wrap_PyNs3BridgeNetDevice_SupportsSendFrom, METH_NOARGS, "SupportsSendFrom()\n\n" },
     {(char *) "GetChannel", (PyCFunction) _wrap_PyNs3BridgeNetDevice_GetChannel, METH_NOARGS, "GetChannel()\n\n" },
+    {(char *) "GetIfIndex", (PyCFunction) _wrap_PyNs3BridgeNetDevice_GetIfIndex, METH_NOARGS, "GetIfIndex()\n\n" },
+    {(char *) "GetMtu", (PyCFunction) _wrap_PyNs3BridgeNetDevice_GetMtu, METH_NOARGS, "GetMtu()\n\n" },
+    {(char *) "GetMulticast", (PyCFunction) _wrap_PyNs3BridgeNetDevice_GetMulticast, METH_KEYWORDS|METH_VARARGS, NULL },
+    {(char *) "GetNBridgePorts", (PyCFunction) _wrap_PyNs3BridgeNetDevice_GetNBridgePorts, METH_NOARGS, "GetNBridgePorts()\n\n" },
+    {(char *) "GetTypeId", (PyCFunction) _wrap_PyNs3BridgeNetDevice_GetTypeId, METH_NOARGS|METH_STATIC, "GetTypeId()\n\n" },
+    {(char *) "IsBridge", (PyCFunction) _wrap_PyNs3BridgeNetDevice_IsBridge, METH_NOARGS, "IsBridge()\n\n" },
+    {(char *) "IsBroadcast", (PyCFunction) _wrap_PyNs3BridgeNetDevice_IsBroadcast, METH_NOARGS, "IsBroadcast()\n\n" },
+    {(char *) "IsLinkUp", (PyCFunction) _wrap_PyNs3BridgeNetDevice_IsLinkUp, METH_NOARGS, "IsLinkUp()\n\n" },
+    {(char *) "IsMulticast", (PyCFunction) _wrap_PyNs3BridgeNetDevice_IsMulticast, METH_NOARGS, "IsMulticast()\n\n" },
+    {(char *) "IsPointToPoint", (PyCFunction) _wrap_PyNs3BridgeNetDevice_IsPointToPoint, METH_NOARGS, "IsPointToPoint()\n\n" },
+    {(char *) "NeedsArp", (PyCFunction) _wrap_PyNs3BridgeNetDevice_NeedsArp, METH_NOARGS, "NeedsArp()\n\n" },
+    {(char *) "Send", (PyCFunction) _wrap_PyNs3BridgeNetDevice_Send, METH_KEYWORDS|METH_VARARGS, "Send(packet, dest, protocolNumber)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: dest: ns3::Address const &\ntype: protocolNumber: uint16_t" },
+    {(char *) "SendFrom", (PyCFunction) _wrap_PyNs3BridgeNetDevice_SendFrom, METH_KEYWORDS|METH_VARARGS, "SendFrom(packet, source, dest, protocolNumber)\n\ntype: packet: ns3::Ptr< ns3::Packet >\ntype: source: ns3::Address const &\ntype: dest: ns3::Address const &\ntype: protocolNumber: uint16_t" },
+    {(char *) "SetAddress", (PyCFunction) _wrap_PyNs3BridgeNetDevice_SetAddress, METH_KEYWORDS|METH_VARARGS, "SetAddress(address)\n\ntype: address: ns3::Address" },
+    {(char *) "SetIfIndex", (PyCFunction) _wrap_PyNs3BridgeNetDevice_SetIfIndex, METH_KEYWORDS|METH_VARARGS, "SetIfIndex(index)\n\ntype: index: uint32_t const" },
+    {(char *) "SetMtu", (PyCFunction) _wrap_PyNs3BridgeNetDevice_SetMtu, METH_KEYWORDS|METH_VARARGS, "SetMtu(mtu)\n\ntype: mtu: uint16_t const" },
+    {(char *) "SetPromiscReceiveCallback", (PyCFunction) _wrap_PyNs3BridgeNetDevice_SetPromiscReceiveCallback, METH_KEYWORDS|METH_VARARGS, "SetPromiscReceiveCallback(cb)\n\ntype: cb: ns3::Callback< bool, ns3::Ptr< ns3::NetDevice >, ns3::Ptr< ns3::Packet const >, unsigned short, ns3::Address const &, ns3::Address const &, ns3::NetDevice::PacketType, ns3::empty, ns3::empty, ns3::empty >" },
+    {(char *) "SetReceiveCallback", (PyCFunction) _wrap_PyNs3BridgeNetDevice_SetReceiveCallback, METH_KEYWORDS|METH_VARARGS, "SetReceiveCallback(cb)\n\ntype: cb: ns3::Callback< bool, ns3::Ptr< ns3::NetDevice >, ns3::Ptr< ns3::Packet const >, unsigned short, ns3::Address const &, ns3::empty, ns3::empty, ns3::empty, ns3::empty, ns3::empty >" },
+    {(char *) "SupportsSendFrom", (PyCFunction) _wrap_PyNs3BridgeNetDevice_SupportsSendFrom, METH_NOARGS, "SupportsSendFrom()\n\n" },
     {NULL, NULL, 0, NULL}
 };
 
@@ -2097,7 +2097,7 @@ PyTypeObject PyNs3BridgeNetDevice_Type = {
     (getattrofunc)NULL,     /* tp_getattro */
     (setattrofunc)NULL,     /* tp_setattro */
     (PyBufferProcs*)NULL,  /* tp_as_buffer */
-    Py_TPFLAGS_BASETYPE|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_GC,                      /* tp_flags */
+    Py_TPFLAGS_HAVE_GC|Py_TPFLAGS_DEFAULT|Py_TPFLAGS_BASETYPE,                      /* tp_flags */
     "BridgeNetDevice()",                        /* Documentation string */
     (traverseproc)PyNs3BridgeNetDevice__tp_traverse,     /* tp_traverse */
     (inquiry)PyNs3BridgeNetDevice__tp_clear,             /* tp_clear */

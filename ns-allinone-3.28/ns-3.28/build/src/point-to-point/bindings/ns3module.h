@@ -4,51 +4,6 @@
 #include <stddef.h>
 
 
-#if PY_VERSION_HEX < 0x020400F0
-
-#define PyEval_ThreadsInitialized() 1
-
-#define Py_CLEAR(op)				\
-        do {                            	\
-                if (op) {			\
-                        PyObject *tmp = (PyObject *)(op);	\
-                        (op) = NULL;		\
-                        Py_DECREF(tmp);		\
-                }				\
-        } while (0)
-
-
-#define Py_VISIT(op)							\
-        do { 								\
-                if (op) {						\
-                        int vret = visit((PyObject *)(op), arg);	\
-                        if (vret)					\
-                                return vret;				\
-                }							\
-        } while (0)
-
-#endif
-
-
-
-#if PY_VERSION_HEX < 0x020500F0
-
-typedef int Py_ssize_t;
-# define PY_SSIZE_T_MAX INT_MAX
-# define PY_SSIZE_T_MIN INT_MIN
-typedef inquiry lenfunc;
-typedef intargfunc ssizeargfunc;
-typedef intobjargproc ssizeobjargproc;
-
-#endif
-
-
-#ifndef PyVarObject_HEAD_INIT
-#define PyVarObject_HEAD_INIT(type, size) \
-        PyObject_HEAD_INIT(type) size,
-#endif
-
-
 #if PY_VERSION_HEX >= 0x03000000
 typedef void* cmpfunc;
 #define PyCObject_FromVoidPtr(a, b) PyCapsule_New(a, NULL, b)
@@ -2733,21 +2688,17 @@ public:
     }
 
 
-    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3PointToPointChannel *self);
-    inline void NotifyConstructionCompleted__parent_caller()
-    { ns3::ObjectBase::NotifyConstructionCompleted(); }
-
     static PyObject * _wrap_GetDelay(PyNs3PointToPointChannel *self);
     inline ns3::Time GetDelay__parent_caller()
     { return ns3::PointToPointChannel::GetDelay(); }
 
-    static PyObject * _wrap_DoInitialize(PyNs3PointToPointChannel *self);
-    inline void DoInitialize__parent_caller()
-    { ns3::Object::DoInitialize(); }
+    static PyObject * _wrap_GetDestination(PyNs3PointToPointChannel *self, PyObject *args, PyObject *kwargs);
+    inline ns3::Ptr< ns3::PointToPointNetDevice > GetDestination__parent_caller(uint32_t i)
+    { return ns3::PointToPointChannel::GetDestination(i); }
 
-    static PyObject * _wrap_NotifyNewAggregate(PyNs3PointToPointChannel *self);
-    inline void NotifyNewAggregate__parent_caller()
-    { ns3::Object::NotifyNewAggregate(); }
+    static PyObject * _wrap_GetSource(PyNs3PointToPointChannel *self, PyObject *args, PyObject *kwargs);
+    inline ns3::Ptr< ns3::PointToPointNetDevice > GetSource__parent_caller(uint32_t i)
+    { return ns3::PointToPointChannel::GetSource(i); }
 
     static PyObject * _wrap_IsInitialized(PyNs3PointToPointChannel *self);
     inline bool IsInitialized__parent_caller()
@@ -2757,13 +2708,17 @@ public:
     inline void DoDispose__parent_caller()
     { ns3::Object::DoDispose(); }
 
-    static PyObject * _wrap_GetDestination(PyNs3PointToPointChannel *self, PyObject *args, PyObject *kwargs);
-    inline ns3::Ptr< ns3::PointToPointNetDevice > GetDestination__parent_caller(uint32_t i)
-    { return ns3::PointToPointChannel::GetDestination(i); }
+    static PyObject * _wrap_DoInitialize(PyNs3PointToPointChannel *self);
+    inline void DoInitialize__parent_caller()
+    { ns3::Object::DoInitialize(); }
 
-    static PyObject * _wrap_GetSource(PyNs3PointToPointChannel *self, PyObject *args, PyObject *kwargs);
-    inline ns3::Ptr< ns3::PointToPointNetDevice > GetSource__parent_caller(uint32_t i)
-    { return ns3::PointToPointChannel::GetSource(i); }
+    static PyObject * _wrap_NotifyNewAggregate(PyNs3PointToPointChannel *self);
+    inline void NotifyNewAggregate__parent_caller()
+    { ns3::Object::NotifyNewAggregate(); }
+
+    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3PointToPointChannel *self);
+    inline void NotifyConstructionCompleted__parent_caller()
+    { ns3::ObjectBase::NotifyConstructionCompleted(); }
 
     virtual ns3::Ptr< ns3::NetDevice > GetDevice(uint32_t i) const;
 
@@ -2941,9 +2896,9 @@ public:
     }
 
 
-    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3PointToPointRemoteChannel *self);
-    inline void NotifyConstructionCompleted__parent_caller()
-    { ns3::ObjectBase::NotifyConstructionCompleted(); }
+    static PyObject * _wrap_DoDispose(PyNs3PointToPointRemoteChannel *self);
+    inline void DoDispose__parent_caller()
+    { ns3::Object::DoDispose(); }
 
     static PyObject * _wrap_DoInitialize(PyNs3PointToPointRemoteChannel *self);
     inline void DoInitialize__parent_caller()
@@ -2953,15 +2908,15 @@ public:
     inline void NotifyNewAggregate__parent_caller()
     { ns3::Object::NotifyNewAggregate(); }
 
-    static PyObject * _wrap_DoDispose(PyNs3PointToPointRemoteChannel *self);
-    inline void DoDispose__parent_caller()
-    { ns3::Object::DoDispose(); }
+    static PyObject * _wrap_NotifyConstructionCompleted(PyNs3PointToPointRemoteChannel *self);
+    inline void NotifyConstructionCompleted__parent_caller()
+    { ns3::ObjectBase::NotifyConstructionCompleted(); }
 
     virtual bool TransmitStart(ns3::Ptr< ns3::Packet const > p, ns3::Ptr< ns3::PointToPointNetDevice > src, ns3::Time txTime);
 
-    virtual uint32_t GetNDevices() const;
-
     virtual ns3::Ptr< ns3::NetDevice > GetDevice(uint32_t i) const;
+
+    virtual uint32_t GetNDevices() const;
 
     virtual ns3::TypeId GetInstanceTypeId() const;
 

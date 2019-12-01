@@ -23,7 +23,7 @@ static void PacketSinkRx (Ptr<const Packet>, const Address&);
 static void SetBackoffRL ();
 static void PrintTime () {
 	std::cout << Simulator::Now().GetSeconds() << std::endl;
-	Simulator::Schedule(Seconds(0.005), &PrintTime);
+	Simulator::Schedule(Seconds(0.003), &PrintTime);
 }
 
 void Record (float, float, float); 
@@ -166,7 +166,7 @@ main (int argc, char *argv[])
 	// LogComponentEnable ("DcfState", LOG_LEVEL_DEBUG);
 
 	uint32_t segment_size = 1024;
-	bool tracing = true;
+	bool tracing = false;
 	bool backoffon = true;
 	uint32_t sim_count = 1;	
 	while(1) {
@@ -306,7 +306,7 @@ main (int argc, char *argv[])
 		Ptr<Socket> sock = Socket::CreateSocket (wifiStaNodes.Get (i), tid);
 		
 		Ptr<ClientApp> clientApps = CreateObject <ClientApp> ();
-		clientApps->Setup (sock, serverAddress, segment_size, 0, DataRate("10Mbps"), false, ranRate.at(0));
+		clientApps->Setup (sock, serverAddress, segment_size, 0, DataRate("10Mbps"), true, ranRate.at(0));
 		wifiStaNodes.Get (i)->AddApplication (clientApps);
 		
 		clientApps->SetStartTime (Seconds (1.0));
@@ -437,7 +437,7 @@ void SetBackoffRL () {
 	} 
 	else {
 		openGymInterface->SendEnd(0);
-		Simulator::Schedule (Seconds(0.005), &SetBackoffRL);
+		Simulator::Schedule (Seconds(0.003), &SetBackoffRL);
 	}
 	
 	//** Get Action
